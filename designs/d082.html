@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,6 +23,10 @@
 }
 
 *{box-sizing:border-box}
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
 
 html{
   color-scheme:light;
@@ -114,6 +118,37 @@ a{color:inherit;text-decoration:none}
 }
 .mast-mid{display:none}
 @media(min-width:860px){.mast-mid{display:block}}
+
+.langsw{
+  display:flex;
+  flex:0 0 auto;
+  border:1px solid var(--rule);
+  border-radius:1px;
+}
+.langsw button{
+  appearance:none;
+  -webkit-appearance:none;
+  margin:0;
+  border:0;
+  border-left:1px solid var(--rule);
+  background:transparent;
+  padding:.62em .5em .62em .62em;
+  font-family:var(--sans);
+  font-size:clamp(9.5px,1.4vw,11px);
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--ink-40);
+  cursor:pointer;
+  transition:color .3s,background-color .3s;
+}
+.langsw button:first-child{border-left:0}
+.langsw button:hover{color:var(--ink)}
+.langsw button[aria-pressed="true"]{
+  background:linear-gradient(115deg,var(--gold-hi),var(--gold) 45%,var(--gold-lo));
+  color:var(--ink);
+}
 
 /* ---------- opening ---------- */
 
@@ -413,8 +448,12 @@ a{color:inherit;text-decoration:none}
 <header class="mast">
   <div class="mast-in pad">
     <span class="mast-name">Atlas Capital</span>
-    <p class="lab mast-mid">Lookbook — de collectie</p>
+    <p class="lab mast-mid"><span lang="nl">Lookbook — de collectie</span><span lang="en">Lookbook — the collection</span></p>
     <a class="btn-line" href="https://discord.gg/78Ff2GuSfW">Discord <span aria-hidden="true">&#8599;</span></a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
@@ -422,17 +461,17 @@ a{color:inherit;text-decoration:none}
 
   <!-- ================= OPENING ================= -->
   <section class="opening pad">
-    <p class="lab">Editie — Educatie</p>
-    <h1>Tien onderwerpen,<br><em>&eacute;&eacute;n lijn.</em></h1>
+    <p class="lab"><span lang="nl">Editie — Educatie</span><span lang="en">Edition — Education</span></p>
+    <h1><span lang="nl">Tien onderwerpen,<br><em>&eacute;&eacute;n lijn.</em></span><span lang="en">Ten topics,<br><em>one line.</em></span></h1>
     <div class="opening-foot">
-      <p class="seas">Een Nederlandse trading&#8209;community rond proces, discipline en uitvoering.</p>
-      <a class="btn" href="https://discord.gg/78Ff2GuSfW">Word lid <span aria-hidden="true">&#8594;</span></a>
+      <p class="seas"><span lang="nl">Een Nederlandse trading&#8209;community rond proces, discipline en uitvoering.</span><span lang="en">A Dutch trading community built on process, discipline and execution.</span></p>
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid</span><span lang="en">Join</span> <span aria-hidden="true">&#8594;</span></a>
     </div>
   </section>
 
   <!-- ================= LOOK 01 ================= -->
   <figure class="plate plate-ink" role="img" aria-label="Reusachtige letter A in goud lijnwerk">
-    <span class="plate-mark mark-light">Plaat 01</span>
+    <span class="plate-mark mark-light"><span lang="nl">Plaat 01</span><span lang="en">Plate 01</span></span>
     <span class="plate-mark rb mark-light">Atlas</span>
     <svg class="letterform" viewBox="0 0 400 300" fill="none" aria-hidden="true">
       <path d="M20 296 L200 6 L380 296" stroke="#D7B364" stroke-width="2"/>
@@ -447,47 +486,47 @@ a{color:inherit;text-decoration:none}
   <div class="caps pad">
     <div class="cap cap-l">
       <p class="lab">Look 01</p>
-      <h2>De oprichter</h2>
-      <p class="three">Ervaring &middot; lessen &middot; overdracht</p>
+      <h2><span lang="nl">De oprichter</span><span lang="en">The founder</span></h2>
+      <p class="three"><span lang="nl">Ervaring &middot; lessen &middot; overdracht</span><span lang="en">Experience &middot; lessons &middot; passing it on</span></p>
     </div>
     <div class="cap cap-r">
-      <p class="quote">&#8220;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&#8221;</p>
-      <p class="quote after">&#8220;Geen snelle&#8209;rijk&#8209;verhalen, maar echte setups, educatie en een community die samen beter wil worden.&#8221;</p>
+      <p class="quote"><span lang="nl">&#8220;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&#8221;</span><span lang="en">&#8220;I&#8217;ve been involved in trading for over 10 years now, and during that time I&#8217;ve experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons.&#8221;</span></p>
+      <p class="quote after"><span lang="nl">&#8220;Geen snelle&#8209;rijk&#8209;verhalen, maar echte setups, educatie en een community die samen beter wil worden.&#8221;</span><span lang="en">&#8220;No get-rich-quick promises, just real setups, education, and a community focused on improving together.&#8221;</span></p>
     </div>
   </div>
 
   <!-- ================= LOOK 02 ================= -->
   <figure class="plate plate-foil" role="img" aria-label="Goudfolie vlak met de merkbelofte">
-    <span class="plate-mark mark-dark">Plaat 02</span>
-    <span class="plate-mark rb mark-dark">Goud</span>
-    <p class="foil-word">Proces<br>Discipline<br>Uitvoering</p>
+    <span class="plate-mark mark-dark"><span lang="nl">Plaat 02</span><span lang="en">Plate 02</span></span>
+    <span class="plate-mark rb mark-dark"><span lang="nl">Goud</span><span lang="en">Gold</span></span>
+    <p class="foil-word"><span lang="nl">Proces<br>Discipline<br>Uitvoering</span><span lang="en">Process<br>Discipline<br>Execution</span></p>
   </figure>
 
   <div class="caps pad">
     <div class="cap cap-r">
       <p class="lab">Look 02</p>
-      <h2>De collectie</h2>
-      <p class="three">10 onderwerpen &middot; &eacute;&eacute;n curriculum</p>
+      <h2><span lang="nl">De collectie</span><span lang="en">The collection</span></h2>
+      <p class="three"><span lang="nl">10 onderwerpen &middot; &eacute;&eacute;n curriculum</span><span lang="en">10 topics &middot; one curriculum</span></p>
       <ul class="list">
-        <li><i>01</i> deviatie</li>
+        <li><i>01</i> <span lang="nl">deviatie</span><span lang="en">deviation</span></li>
         <li><i>02</i> SMT</li>
         <li><i>03</i> FVG</li>
         <li><i>04</i> IFVG</li>
         <li><i>05</i> orderblocks</li>
         <li><i>06</i> fibonacci</li>
-        <li><i>07</i> sessie&#8209;liquiditeit</li>
-        <li><i>08</i> liquiditeit</li>
-        <li><i>09</i> risicobeheer</li>
-        <li><i>10</i> tradingpsychologie</li>
+        <li><i>07</i> <span lang="nl">sessie&#8209;liquiditeit</span><span lang="en">session liquidity</span></li>
+        <li><i>08</i> <span lang="nl">liquiditeit</span><span lang="en">liquidity</span></li>
+        <li><i>09</i> <span lang="nl">risicobeheer</span><span lang="en">risk management</span></li>
+        <li><i>10</i> <span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></li>
       </ul>
-      <p class="after"><a class="btn-line" href="https://discord.gg/78Ff2GuSfW">Bekijk de educatie <span aria-hidden="true">&#8599;</span></a></p>
+      <p class="after"><a class="btn-line" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Bekijk de educatie</span><span lang="en">See the education</span> <span aria-hidden="true">&#8599;</span></a></p>
     </div>
   </div>
 
   <!-- ================= LOOK 03 ================= -->
   <figure class="plate plate-stone plate-model" role="img" aria-label="Schematische tekening van een deviatie boven een niveau en een fair value gap">
-    <span class="plate-mark mark-dark">Plaat 03</span>
-    <span class="plate-mark rb mark-dark">Schema</span>
+    <span class="plate-mark mark-dark"><span lang="nl">Plaat 03</span><span lang="en">Plate 03</span></span>
+    <span class="plate-mark rb mark-dark"><span lang="nl">Schema</span><span lang="en">Diagram</span></span>
     <svg viewBox="0 0 900 420" fill="none" aria-hidden="true">
       <!-- fine grid -->
       <g stroke="rgba(8,9,11,.07)">
@@ -496,7 +535,8 @@ a{color:inherit;text-decoration:none}
       </g>
       <!-- the level -->
       <path d="M60 122 H840" stroke="#08090B" stroke-width="1.5" stroke-dasharray="7 6"/>
-      <text x="60" y="110" fill="#4B4B49" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="3">NIVEAU</text>
+      <text x="60" y="110" fill="#4B4B49" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="3" lang="nl">NIVEAU</text>
+      <text x="60" y="110" fill="#4B4B49" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="3" lang="en">LEVEL</text>
       <!-- fvg band -->
       <rect x="470" y="196" width="330" height="52" fill="rgba(215,179,100,.4)"/>
       <rect x="470" y="196" width="330" height="52" stroke="#B9954A"/>
@@ -514,7 +554,8 @@ a{color:inherit;text-decoration:none}
       </g>
       <path d="M319 80 L392 52" stroke="#B9954A"/>
       <circle cx="319" cy="80" r="4" fill="#B9954A"/>
-      <text x="398" y="50" fill="#3d3116" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="3">DEVIATIE</text>
+      <text x="398" y="50" fill="#3d3116" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="3" lang="nl">DEVIATIE</text>
+      <text x="398" y="50" fill="#3d3116" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="3" lang="en">DEVIATION</text>
       <g stroke="#08090B" stroke-width="1.6">
         <path d="M360 132 V282"/><rect x="351" y="156" width="18" height="98" fill="#EAE6DC"/>
         <path d="M410 168 V318"/><rect x="401" y="192" width="18" height="102" fill="#EAE6DC"/>
@@ -538,18 +579,18 @@ a{color:inherit;text-decoration:none}
   <div class="caps pad">
     <div class="cap cap-l">
       <p class="lab">Look 03</p>
-      <h2>Het model</h2>
-      <p class="three">Niveau &middot; deviatie &middot; gap</p>
+      <h2><span lang="nl">Het model</span><span lang="en">The model</span></h2>
+      <p class="three"><span lang="nl">Niveau &middot; deviatie &middot; gap</span><span lang="en">Level &middot; deviation &middot; gap</span></p>
     </div>
     <div class="cap cap-c">
-      <p class="quote">Een schematische tekening — geen resultaat, geen belofte, geen prijs.</p>
+      <p class="quote"><span lang="nl">Een schematische tekening — geen resultaat, geen belofte, geen prijs.</span><span lang="en">A diagram — no result, no promise, no price.</span></p>
     </div>
   </div>
 
   <!-- ================= LOOK 04 ================= -->
   <figure class="plate plate-ink" role="img" aria-label="Wand van kanaalnamen uit de server">
-    <span class="plate-mark mark-light">Plaat 04</span>
-    <span class="plate-mark rb mark-light">15 kanalen</span>
+    <span class="plate-mark mark-light"><span lang="nl">Plaat 04</span><span lang="en">Plate 04</span></span>
+    <span class="plate-mark rb mark-light"><span lang="nl">15 kanalen</span><span lang="en">15 channels</span></span>
     <div class="wall" aria-hidden="true">
       <span class="w-lg">#nq-chart-idee&euml;n</span>
       <span class="w-md">#es-chart-idee&euml;n</span>
@@ -572,23 +613,23 @@ a{color:inherit;text-decoration:none}
   <div class="caps pad">
     <div class="cap cap-r">
       <p class="lab">Look 04</p>
-      <h2>De server</h2>
+      <h2><span lang="nl">De server</span><span lang="en">The server</span></h2>
       <p class="three">NQ &middot; ES &middot; Bitcoin &middot; altcoins</p>
       <div class="ledger">
-        <b>Thuis — nu gratis</b>
+        <b><span lang="nl">Thuis — nu gratis</span><span lang="en">Home — free right now</span></b>
         <span>#nq-chart-idee&euml;n &middot; #es-chart-idee&euml;n &middot; #bitcoin &middot; #altcoins &middot; #markt &middot; #vragen &middot; #algemeen &middot; #atlas-op-socials &middot; #ondersteuning</span>
       </div>
       <div class="ledger">
-        <b>Premium — opent later</b>
+        <b><span lang="nl">Premium — opent later</span><span lang="en">Premium — opens later</span></b>
         <span>#trade-setups &middot; #marktupdates &middot; #indicatoren &middot; #sessie-opnames &middot; #chart-idee&euml;n &middot; #premium-chat</span>
       </div>
-      <p class="after"><a class="btn-line" href="https://discord.gg/78Ff2GuSfW">Open de server <span aria-hidden="true">&#8599;</span></a></p>
+      <p class="after"><a class="btn-line" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de server</span><span lang="en">Open the server</span> <span aria-hidden="true">&#8599;</span></a></p>
     </div>
   </div>
 
   <!-- ================= LOOK 05 ================= -->
   <figure class="plate plate-arc" role="img" aria-label="Gouden boog met een markering voor live sessies">
-    <span class="plate-mark mark-dark">Plaat 05</span>
+    <span class="plate-mark mark-dark"><span lang="nl">Plaat 05</span><span lang="en">Plate 05</span></span>
     <span class="plate-mark rb mark-dark">Live</span>
     <svg viewBox="0 0 800 320" fill="none" aria-hidden="true">
       <path d="M0 300 H800" stroke="rgba(8,9,11,.25)"/>
@@ -605,43 +646,43 @@ a{color:inherit;text-decoration:none}
   <div class="caps pad">
     <div class="cap cap-l">
       <p class="lab">Look 05</p>
-      <h2>Live traden</h2>
-      <p class="three">In de server &middot; tijden daar</p>
+      <h2><span lang="nl">Live traden</span><span lang="en">Live trading</span></h2>
+      <p class="three"><span lang="nl">In de server &middot; tijden daar</span><span lang="en">In the server &middot; times there</span></p>
     </div>
     <div class="cap cap-c">
-      <p class="quote">De oprichter handelt live mee in de server. Tijden worden daar aangekondigd.</p>
-      <p class="after"><a class="btn-line" href="https://discord.gg/78Ff2GuSfW">Zit erbij <span aria-hidden="true">&#8599;</span></a></p>
+      <p class="quote"><span lang="nl">De oprichter handelt live mee in de server. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced there.</span></p>
+      <p class="after"><a class="btn-line" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Zit erbij</span><span lang="en">Sit in</span> <span aria-hidden="true">&#8599;</span></a></p>
     </div>
   </div>
 
   <!-- ================= LOOK 06 ================= -->
   <figure class="plate plate-split" role="img" aria-label="Twee vlakken: nu gratis en premium opent later">
     <div class="half half-now">
-      <p class="lab">Thuis</p>
-      <h3>Nu gratis</h3>
-      <p>Volledige toegang tot de gratis kanalen en de educatie.</p>
+      <p class="lab"><span lang="nl">Thuis</span><span lang="en">Home</span></p>
+      <h3><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></h3>
+      <p><span lang="nl">Volledige toegang tot de gratis kanalen en de educatie.</span><span lang="en">Full access to the free channels and the education.</span></p>
     </div>
     <div class="half half-later">
       <p class="lab lab-dark">Premium</p>
-      <h3>Opent later</h3>
-      <p>Prijs en datum worden in de server aangekondigd.</p>
+      <h3><span lang="nl">Opent later</span><span lang="en">Opens later</span></h3>
+      <p><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">Price and date will be announced in the server.</span></p>
     </div>
   </figure>
 
   <div class="caps pad">
     <div class="cap cap-r">
       <p class="lab">Look 06</p>
-      <h2>Toegang</h2>
-      <p class="three">Geen drempel &middot; geen prijs genoemd</p>
+      <h2><span lang="nl">Toegang</span><span lang="en">Access</span></h2>
+      <p class="three"><span lang="nl">Geen drempel &middot; geen prijs genoemd</span><span lang="en">No barrier &middot; no price named</span></p>
     </div>
   </div>
 
   <!-- ================= CLOSING ================= -->
   <section class="closing">
-    <p class="lab">Sluitbeeld</p>
-    <h2>Word <em>lid</em></h2>
-    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Open Discord <span aria-hidden="true">&#8594;</span></a>
-    <p class="sig">Atlas Capital — proces, discipline, uitvoering.</p>
+    <p class="lab"><span lang="nl">Sluitbeeld</span><span lang="en">Closing image</span></p>
+    <h2><span lang="nl">Word <em>lid</em></span><span lang="en">Join <em>us</em></span></h2>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open Discord</span><span lang="en">Open the Discord</span> <span aria-hidden="true">&#8594;</span></a>
+    <p class="sig"><span lang="nl">Atlas Capital — proces, discipline, uitvoering.</span><span lang="en">Atlas Capital — process, discipline, execution.</span></p>
   </section>
 
 </main>
@@ -650,20 +691,41 @@ a{color:inherit;text-decoration:none}
   <div class="colo-grid">
     <div>
       <p class="lab lab-strong">Atlas Capital</p>
-      <p>Nederlandse trading&#8209;community rond educatie en uitvoering.</p>
+      <p><span lang="nl">Nederlandse trading&#8209;community rond educatie en uitvoering.</span><span lang="en">Dutch trading community built on education and execution.</span></p>
     </div>
     <div>
-      <p class="lab lab-strong">Vind ons</p>
+      <p class="lab lab-strong"><span lang="nl">Vind ons</span><span lang="en">Find us</span></p>
       <p><a class="btn-line" href="https://discord.gg/78Ff2GuSfW">Discord <span aria-hidden="true">&#8599;</span></a></p>
       <p><a class="btn-line" href="https://www.tiktok.com/@atlascapitalbv">TikTok @atlascapitalbv <span aria-hidden="true">&#8599;</span></a></p>
     </div>
     <div>
-      <p class="lab lab-strong">Markten</p>
+      <p class="lab lab-strong"><span lang="nl">Markten</span><span lang="en">Markets</span></p>
       <p>NQ &middot; ES &middot; Bitcoin &middot; altcoins</p>
     </div>
   </div>
-  <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
 </footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

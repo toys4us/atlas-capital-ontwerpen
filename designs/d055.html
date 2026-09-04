@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,6 +56,28 @@ ul{list-style:none;padding:0}
   border-color:rgba(215,179,100,.4);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 6px 14px -8px #000;
 }
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.rail a.brass{margin-left:auto}
+.langsw{display:flex}
+.langsw button{
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;
+  background:linear-gradient(180deg,#22232A,#131419);color:var(--gold);
+  border:1px solid rgba(215,179,100,.4);padding:12px 11px 11px 13px;
+  line-height:1;cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+  transition:color .18s ease,background .18s ease;
+}
+.langsw button+button{border-left:none}
+.langsw button[aria-pressed="true"]{
+  background:linear-gradient(180deg,var(--gold-hi),var(--gold) 45%,var(--gold-lo));
+  color:#0A0A0C;border-color:rgba(0,0,0,.35);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 3px rgba(0,0,0,.25);
+}
+.langsw button:hover{color:var(--gold-hi)}
+.langsw button[aria-pressed="true"]:hover{color:#0A0A0C}
 
 /* ================= a drawer ================= */
 .drawer{
@@ -258,27 +280,31 @@ ul{list-style:none;padding:0}
         <rect x="3" y="24" width="38" height="12" fill="none" stroke="rgba(215,179,100,.5)" stroke-width="1.3"/>
         <path d="M17 14h10M17 30h10" stroke="#D7B364" stroke-width="2.6" stroke-linecap="round"/>
       </svg>
-      <b>Atlas Capital<i>PROCES · DISCIPLINE · UITVOERING</i></b>
+      <b>Atlas Capital<i><span lang="nl">PROCES · DISCIPLINE · UITVOERING</span><span lang="en">PROCESS · DISCIPLINE · EXECUTION</span></i></b>
     </div>
     <a class="brass" href="https://discord.gg/78Ff2GuSfW">OPEN DISCORD &rarr;</a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </header>
 
   <!-- HERO DRAWER, pulled open -->
   <section class="drawer">
     <div class="drawerhead">
-      <span class="holder">LADE 01 · INGANG</span>
-      <h2>De <em>catalogus</em> van Atlas Capital</h2>
+      <span class="holder"><span lang="nl">LADE 01 · INGANG</span><span lang="en">DRAWER 01 · WAY IN</span></span>
+      <h2><span lang="nl">De </span><span lang="en">The </span><em><span lang="nl">catalogus</span><span lang="en">catalogue</span></em><span lang="nl"> van Atlas Capital</span><span lang="en"> of Atlas Capital</span></h2>
       <span class="knob" aria-hidden="true"></span>
     </div>
     <div class="hero">
       <div class="herocard">
         <span class="tab">ATLAS CAPITAL</span>
-        <div class="eyebrow">Nederlandse trading-community</div>
-        <h1>Trek de la<br><em>open.</em></h1>
-        <p class="lead">Educatie, kanalen en live sessies — netjes gerubriceerd in Discord.</p>
+        <div class="eyebrow"><span lang="nl">Nederlandse trading-community</span><span lang="en">Dutch trading community</span></div>
+        <h1><span lang="nl">Trek de la</span><span lang="en">Pull the drawer</span><br><em>open.</em></h1>
+        <p class="lead"><span lang="nl">Educatie, kanalen en live sessies — netjes gerubriceerd in Discord.</span><span lang="en">Education, channels and live sessions — filed neatly in Discord.</span></p>
         <div class="herobtns">
-          <a class="brass" href="https://discord.gg/78Ff2GuSfW">KOM BINNEN — GRATIS</a>
-          <a class="brass brass--dark" href="#educatie">BEKIJK LADE B</a>
+          <a class="brass" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">KOM BINNEN — GRATIS</span><span lang="en">COME INSIDE — FREE</span></a>
+          <a class="brass brass--dark" href="#educatie"><span lang="nl">BEKIJK LADE B</span><span lang="en">SEE DRAWER B</span></a>
         </div>
         <span class="hole" aria-hidden="true"><i></i></span>
       </div>
@@ -290,26 +316,26 @@ ul{list-style:none;padding:0}
   <!-- LADE A — OPRICHTER -->
   <section class="drawer">
     <div class="drawerhead">
-      <span class="holder">LADE A · OPRICHTER</span>
-      <h2>Wie de kaarten <em>schreef</em></h2>
+      <span class="holder"><span lang="nl">LADE A · OPRICHTER</span><span lang="en">DRAWER A · FOUNDER</span></span>
+      <h2><span lang="nl">Wie de kaarten </span><span lang="en">Who wrote the </span><em><span lang="nl">schreef</span><span lang="en">cards</span></em></h2>
       <span class="knob" aria-hidden="true"></span>
     </div>
     <div class="drawerbody">
       <div class="cards cards--2">
         <article class="icard" style="--tx:18px">
-          <span class="tab tab--gold">A.01 · ERVARING</span>
+          <span class="tab tab--gold">A.01 · <span lang="nl">ERVARING</span><span lang="en">EXPERIENCE</span></span>
           <span class="cno">A.01</span>
-          <h3>Meer dan 10 jaar actief in trading.</h3>
-          <p>&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&rdquo;</p>
-          <span class="kw">OPRICHTER — ATLAS CAPITAL</span>
+          <h3><span lang="nl">Meer dan 10 jaar actief in trading.</span><span lang="en">More than 10 years in trading.</span></h3>
+          <p><span lang="nl">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&rdquo;</span><span lang="en">&ldquo;I&rsquo;ve been involved in trading for over 10 years now, and during that time I&rsquo;ve experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons.&rdquo;</span></p>
+          <span class="kw"><span lang="nl">OPRICHTER</span><span lang="en">FOUNDER</span> — ATLAS CAPITAL</span>
           <span class="hole" aria-hidden="true"><i></i></span>
         </article>
         <article class="icard" style="--tx:120px">
-          <span class="tab">A.02 · WAAROM</span>
+          <span class="tab">A.02 · <span lang="nl">WAAROM</span><span lang="en">WHY</span></span>
           <span class="cno">A.02</span>
-          <h3>Gebouwd om te delen.</h3>
-          <p>&ldquo;Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader.&rdquo;</p>
-          <p style="margin-top:14px">&ldquo;Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</p>
+          <h3><span lang="nl">Gebouwd om te delen.</span><span lang="en">Built to share.</span></h3>
+          <p><span lang="nl">&ldquo;Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader.&rdquo;</span><span lang="en">&ldquo;I built Atlas Capital to share that experience, bring traders together, and show how I approach the markets on a daily basis.&rdquo;</span></p>
+          <p style="margin-top:14px"><span lang="nl">&ldquo;Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</span><span lang="en">&ldquo;No get-rich-quick promises, just real setups, education, and a community focused on improving together.&rdquo;</span></p>
           <span class="hole" aria-hidden="true"><i></i></span>
         </article>
       </div>
@@ -319,25 +345,25 @@ ul{list-style:none;padding:0}
   <!-- LADE B — EDUCATIE -->
   <section class="drawer" id="educatie">
     <div class="drawerhead">
-      <span class="holder">LADE B · EDUCATIE</span>
-      <h2>Tien kaarten, <em>tien onderwerpen</em></h2>
+      <span class="holder"><span lang="nl">LADE B · EDUCATIE</span><span lang="en">DRAWER B · EDUCATION</span></span>
+      <h2><span lang="nl">Tien kaarten, </span><span lang="en">Ten cards, </span><em><span lang="nl">tien onderwerpen</span><span lang="en">ten topics</span></em></h2>
       <span class="knob" aria-hidden="true"></span>
     </div>
     <div class="drawerbody">
       <div class="cards cards--5">
-        <article class="icard" style="--tx:12px"><span class="tab tab--gold">B.01</span><span class="cno">B.01</span><h3>Deviatie</h3><span class="kw">STRUCTUUR</span><span class="hole" aria-hidden="true"><i></i></span></article>
-        <article class="icard" style="--tx:44px"><span class="tab">B.02</span><span class="cno">B.02</span><h3>SMT</h3><span class="kw">CORRELATIE</span><span class="hole" aria-hidden="true"><i></i></span></article>
-        <article class="icard" style="--tx:20px"><span class="tab">B.03</span><span class="cno">B.03</span><h3>FVG</h3><span class="kw">ONBALANS</span><span class="hole" aria-hidden="true"><i></i></span></article>
-        <article class="icard" style="--tx:56px"><span class="tab">B.04</span><span class="cno">B.04</span><h3>IFVG</h3><span class="kw">ONBALANS</span><span class="hole" aria-hidden="true"><i></i></span></article>
+        <article class="icard" style="--tx:12px"><span class="tab tab--gold">B.01</span><span class="cno">B.01</span><h3><span lang="nl">Deviatie</span><span lang="en">Deviation</span></h3><span class="kw"><span lang="nl">STRUCTUUR</span><span lang="en">STRUCTURE</span></span><span class="hole" aria-hidden="true"><i></i></span></article>
+        <article class="icard" style="--tx:44px"><span class="tab">B.02</span><span class="cno">B.02</span><h3>SMT</h3><span class="kw"><span lang="nl">CORRELATIE</span><span lang="en">CORRELATION</span></span><span class="hole" aria-hidden="true"><i></i></span></article>
+        <article class="icard" style="--tx:20px"><span class="tab">B.03</span><span class="cno">B.03</span><h3>FVG</h3><span class="kw"><span lang="nl">ONBALANS</span><span lang="en">IMBALANCE</span></span><span class="hole" aria-hidden="true"><i></i></span></article>
+        <article class="icard" style="--tx:56px"><span class="tab">B.04</span><span class="cno">B.04</span><h3>IFVG</h3><span class="kw"><span lang="nl">ONBALANS</span><span lang="en">IMBALANCE</span></span><span class="hole" aria-hidden="true"><i></i></span></article>
         <article class="icard" style="--tx:14px"><span class="tab tab--gold">B.05</span><span class="cno">B.05</span><h3>Orderblocks</h3><span class="kw">ZONES</span><span class="hole" aria-hidden="true"><i></i></span></article>
-        <article class="icard" style="--tx:50px"><span class="tab">B.06</span><span class="cno">B.06</span><h3>Fibonacci</h3><span class="kw">NIVEAUS</span><span class="hole" aria-hidden="true"><i></i></span></article>
-        <article class="icard" style="--tx:22px"><span class="tab">B.07</span><span class="cno">B.07</span><h3>Sessie-liquiditeit</h3><span class="kw">TIJD</span><span class="hole" aria-hidden="true"><i></i></span></article>
-        <article class="icard" style="--tx:60px"><span class="tab">B.08</span><span class="cno">B.08</span><h3>Liquiditeit</h3><span class="kw">ZONES</span><span class="hole" aria-hidden="true"><i></i></span></article>
-        <article class="icard" style="--tx:16px"><span class="tab tab--gold">B.09</span><span class="cno">B.09</span><h3>Risicobeheer</h3><span class="kw">DISCIPLINE</span><span class="hole" aria-hidden="true"><i></i></span></article>
-        <article class="icard" style="--tx:48px"><span class="tab">B.10</span><span class="cno">B.10</span><h3>Tradingpsychologie</h3><span class="kw">PROCES</span><span class="hole" aria-hidden="true"><i></i></span></article>
+        <article class="icard" style="--tx:50px"><span class="tab">B.06</span><span class="cno">B.06</span><h3>Fibonacci</h3><span class="kw"><span lang="nl">NIVEAUS</span><span lang="en">LEVELS</span></span><span class="hole" aria-hidden="true"><i></i></span></article>
+        <article class="icard" style="--tx:22px"><span class="tab">B.07</span><span class="cno">B.07</span><h3><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></h3><span class="kw"><span lang="nl">TIJD</span><span lang="en">TIME</span></span><span class="hole" aria-hidden="true"><i></i></span></article>
+        <article class="icard" style="--tx:60px"><span class="tab">B.08</span><span class="cno">B.08</span><h3><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></h3><span class="kw">ZONES</span><span class="hole" aria-hidden="true"><i></i></span></article>
+        <article class="icard" style="--tx:16px"><span class="tab tab--gold">B.09</span><span class="cno">B.09</span><h3><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></h3><span class="kw">DISCIPLINE</span><span class="hole" aria-hidden="true"><i></i></span></article>
+        <article class="icard" style="--tx:48px"><span class="tab">B.10</span><span class="cno">B.10</span><h3><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></h3><span class="kw"><span lang="nl">PROCES</span><span lang="en">PROCESS</span></span><span class="hole" aria-hidden="true"><i></i></span></article>
       </div>
       <div style="margin-top:clamp(22px,3vw,34px)">
-        <a class="brass" href="https://discord.gg/78Ff2GuSfW">START MET LEREN &rarr;</a>
+        <a class="brass" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">START MET LEREN</span><span lang="en">START LEARNING</span> &rarr;</a>
       </div>
     </div>
   </section>
@@ -345,17 +371,17 @@ ul{list-style:none;padding:0}
   <!-- LADE C — MODEL -->
   <section class="drawer">
     <div class="drawerhead">
-      <span class="holder">LADE C · MODEL</span>
-      <h2>Eén kaart uit de la: <em>SMT</em></h2>
+      <span class="holder"><span lang="nl">LADE C · MODEL</span><span lang="en">DRAWER C · MODEL</span></span>
+      <h2><span lang="nl">Eén kaart uit de la: </span><span lang="en">One card from the drawer: </span><em>SMT</em></h2>
       <span class="knob" aria-hidden="true"></span>
     </div>
     <div class="drawerbody">
       <article class="icard" style="--tx:24px;padding-bottom:56px">
-        <span class="tab tab--gold">C.01 · SCHEMA</span>
-        <span class="cno">C.01 — SCHEMATISCH, GEEN KOERSEN</span>
-        <h3>Twee markten, één verhaal.</h3>
+        <span class="tab tab--gold">C.01 · <span lang="nl">SCHEMA</span><span lang="en">SCHEMATIC</span></span>
+        <span class="cno">C.01 — <span lang="nl">SCHEMATISCH, GEEN KOERSEN</span><span lang="en">SCHEMATIC, NO PRICES</span></span>
+        <h3><span lang="nl">Twee markten, één verhaal.</span><span lang="en">Two markets, one story.</span></h3>
         <div class="wide" style="margin-top:18px">
-          <svg viewBox="0 0 760 300" role="img" aria-label="Schematische weergave van SMT-divergentie tussen twee markten">
+          <svg viewBox="0 0 760 300" role="img" aria-label="Schematische weergave van SMT-divergentie tussen twee markten / Schematic of SMT divergence between two markets">
             <rect x="14" y="20" width="346" height="240" fill="rgba(25,24,19,.05)" stroke="rgba(25,24,19,.28)" stroke-width="1"/>
             <rect x="400" y="20" width="346" height="240" fill="rgba(25,24,19,.05)" stroke="rgba(25,24,19,.28)" stroke-width="1"/>
 
@@ -377,14 +403,17 @@ ul{list-style:none;padding:0}
             <circle cx="586" cy="90" r="6" fill="none" stroke="#B9954A" stroke-width="2.2"/>
             <circle cx="704" cy="116" r="6" fill="#B9954A"/>
 
-            <text x="300" y="52" font-family="Georgia, serif" font-size="16" fill="#191813">hoger</text>
-            <text x="686" y="104" font-family="Georgia, serif" font-size="16" fill="#191813">lager</text>
+            <text lang="nl" x="300" y="52" font-family="Georgia, serif" font-size="16" fill="#191813">hoger</text>
+            <text lang="en" x="300" y="52" font-family="Georgia, serif" font-size="16" fill="#191813">higher</text>
+            <text lang="nl" x="686" y="104" font-family="Georgia, serif" font-size="16" fill="#191813">lager</text>
+            <text lang="en" x="686" y="104" font-family="Georgia, serif" font-size="16" fill="#191813">lower</text>
 
             <path d="M330 74 L392 74 L392 108 L416 108" fill="none" stroke="#B9954A" stroke-width="1.4" stroke-dasharray="4 4"/>
-            <text x="286" y="284" font-family="ui-monospace, monospace" font-size="11" letter-spacing="2.4" fill="#6E6A5C">SMT — DE ÉÉN VOLGT DE ANDER NIET</text>
+            <text lang="nl" x="286" y="284" font-family="ui-monospace, monospace" font-size="11" letter-spacing="2.4" fill="#6E6A5C">SMT — DE ÉÉN VOLGT DE ANDER NIET</text>
+            <text lang="en" x="286" y="284" font-family="ui-monospace, monospace" font-size="11" letter-spacing="2.4" fill="#6E6A5C">SMT — ONE DOES NOT FOLLOW THE OTHER</text>
           </svg>
         </div>
-        <p class="capt">ILLUSTRATIE VAN EEN CONCEPT — GEEN PRIJZEN, GEEN DATA, GEEN RESULTAAT.</p>
+        <p class="capt"><span lang="nl">ILLUSTRATIE VAN EEN CONCEPT — GEEN PRIJZEN, GEEN DATA, GEEN RESULTAAT.</span><span lang="en">ILLUSTRATION OF A CONCEPT — NO PRICES, NO DATA, NO RESULTS.</span></p>
         <span class="hole" aria-hidden="true"><i></i></span>
       </article>
     </div>
@@ -393,15 +422,15 @@ ul{list-style:none;padding:0}
   <!-- LADE D — KANALEN -->
   <section class="drawer">
     <div class="drawerhead">
-      <span class="holder">LADE D · KANALEN</span>
-      <h2><em>15 kanalen</em>, achter twee tabbladen</h2>
+      <span class="holder"><span lang="nl">LADE D · KANALEN</span><span lang="en">DRAWER D · CHANNELS</span></span>
+      <h2><em><span lang="nl">15 kanalen</span><span lang="en">15 channels</span></em><span lang="nl">, achter twee tabbladen</span><span lang="en">, behind two tabs</span></h2>
       <span class="knob" aria-hidden="true"></span>
     </div>
     <div class="drawerbody">
       <div class="guide" style="--tx:24px">
-        <span class="gtab on">THUIS — NU GRATIS</span>
-        <h3>Thuis</h3>
-        <p class="gnote">Vrij toegankelijk zodra je binnen bent.</p>
+        <span class="gtab on"><span lang="nl">THUIS — NU GRATIS</span><span lang="en">HOME — FREE RIGHT NOW</span></span>
+        <h3><span lang="nl">Thuis</span><span lang="en">Home</span></h3>
+        <p class="gnote"><span lang="nl">Vrij toegankelijk zodra je binnen bent.</span><span lang="en">Open to you the moment you are inside.</span></p>
         <ul class="chanlist">
           <li><s>#</s>nq-chart-ideeën<b>NQ</b></li>
           <li><s>#</s>es-chart-ideeën<b>ES</b></li>
@@ -417,9 +446,9 @@ ul{list-style:none;padding:0}
       </div>
 
       <div class="guide" style="--tx:180px;margin-top:34px">
-        <span class="gtab">PREMIUM — OPENT LATER</span>
+        <span class="gtab">PREMIUM — <span lang="nl">OPENT LATER</span><span lang="en">OPENS LATER</span></span>
         <h3>Premium</h3>
-        <p class="gnote">Nog gesloten. Prijs en datum worden in de server aangekondigd.</p>
+        <p class="gnote"><span lang="nl">Nog gesloten. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Still closed. Price and date are announced in the server.</span></p>
         <ul class="chanlist">
           <li><s>#</s>trade-setups</li>
           <li><s>#</s>marktupdates</li>
@@ -432,7 +461,7 @@ ul{list-style:none;padding:0}
       </div>
 
       <div style="margin-top:clamp(24px,3vw,36px)">
-        <a class="brass" href="https://discord.gg/78Ff2GuSfW">BEKIJK DE SERVER &rarr;</a>
+        <a class="brass" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">BEKIJK DE SERVER</span><span lang="en">SEE THE SERVER</span> &rarr;</a>
       </div>
     </div>
   </section>
@@ -440,8 +469,8 @@ ul{list-style:none;padding:0}
   <!-- LADE E — LIVE & TOEGANG -->
   <section class="drawer">
     <div class="drawerhead">
-      <span class="holder">LADE E · LIVE &amp; TOEGANG</span>
-      <h2>Wat er <em>nu</em> open ligt</h2>
+      <span class="holder"><span lang="nl">LADE E · LIVE &amp; TOEGANG</span><span lang="en">DRAWER E · LIVE &amp; ACCESS</span></span>
+      <h2><span lang="nl">Wat er </span><span lang="en">What is </span><em><span lang="nl">nu</span><span lang="en">open</span></em><span lang="nl"> open ligt</span><span lang="en"> right now</span></h2>
       <span class="knob" aria-hidden="true"></span>
     </div>
     <div class="drawerbody">
@@ -449,16 +478,16 @@ ul{list-style:none;padding:0}
         <article class="icard" style="--tx:16px">
           <span class="tab tab--gold">E.01 · LIVE</span>
           <span class="cno">E.01</span>
-          <h3><span class="dot"></span>Live meekijken</h3>
-          <p>De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
+          <h3><span class="dot"></span><span lang="nl">Live meekijken</span><span lang="en">Watch live</span></h3>
+          <p><span lang="nl">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced there.</span></p>
           <span class="kw">NQ · ES · BITCOIN · ALTCOINS</span>
           <span class="hole" aria-hidden="true"><i></i></span>
         </article>
         <article class="icard" style="--tx:132px">
-          <span class="tab">E.02 · TOEGANG</span>
+          <span class="tab">E.02 · <span lang="nl">TOEGANG</span><span lang="en">ACCESS</span></span>
           <span class="cno">E.02</span>
-          <h3>Nu gratis. Premium later.</h3>
-          <p>Je komt vandaag zonder drempel binnen bij Thuis. Premium opent later; prijs en datum worden in de server aangekondigd.</p>
+          <h3><span lang="nl">Nu gratis. Premium later.</span><span lang="en">Free right now. Premium later.</span></h3>
+          <p><span lang="nl">Je komt vandaag zonder drempel binnen bij Thuis. Premium opent later; prijs en datum worden in de server aangekondigd.</span><span lang="en">You walk into Home today with nothing in the way. Premium opens later; price and date are announced in the server.</span></p>
           <span class="hole" aria-hidden="true"><i></i></span>
         </article>
       </div>
@@ -468,8 +497,8 @@ ul{list-style:none;padding:0}
   <!-- CLOSING PLATE -->
   <section class="plateout">
     <span class="engrave">ATLAS CAPITAL</span>
-    <h2>De la staat <em>open.</em></h2>
-    <p>Toegang is nu gratis. Je vindt ons in Discord.</p>
+    <h2><span lang="nl">De la staat </span><span lang="en">The drawer is </span><em>open.</em></h2>
+    <p><span lang="nl">Toegang is nu gratis. Je vindt ons in Discord.</span><span lang="en">Access is free right now. You will find us on Discord.</span></p>
     <div class="row">
       <a class="brass brass--dark" href="https://discord.gg/78Ff2GuSfW">OPEN DISCORD &rarr;</a>
       <a class="brass brass--dark" href="https://www.tiktok.com/@atlascapitalbv">TIKTOK</a>
@@ -483,9 +512,29 @@ ul{list-style:none;padding:0}
       <a href="https://www.tiktok.com/@atlascapitalbv">TIKTOK @ATLASCAPITALBV</a>
       <span style="font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--muted)">NQ · ES · BITCOIN · ALTCOINS</span>
     </div>
-    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
   </footer>
 
 </div>
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 </body>
 </html>

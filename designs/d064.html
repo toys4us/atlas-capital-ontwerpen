@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -215,6 +215,20 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
 }
 .foot a{color:var(--gold);text-decoration:none}
 .foot a:hover{text-decoration:underline}
+/* ── LANGUAGE ──────────────────────── */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.langsw{display:flex;align-self:stretch;flex:none;border:1px solid var(--edge)}
+.langsw button{
+  font-family:inherit;font-size:10.5px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;padding:0 11px;
+  color:var(--dim);background:transparent;
+  border:0;border-right:1px solid var(--edge-soft);
+  cursor:pointer;
+}
+.langsw button:last-child{border-right:0}
+.langsw button:hover{color:var(--gold)}
+.langsw button[aria-pressed="true"]{color:var(--ink);background:var(--gold)}
 .risk{width:100%;margin:0;color:#7A7B7F;font-size:11px;line-height:1.7;letter-spacing:.01em;max-width:82ch;font-weight:300}
 </style>
 </head>
@@ -248,6 +262,10 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
       Discord
     </a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
@@ -261,23 +279,23 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
     </svg>
   </div>
   <div class="bandbody">
-    <div class="sectag"><span class="num">01</span><span class="lb">Meting</span><span class="rt">EENHEID: PROCES</span></div>
+    <div class="sectag"><span class="num">01</span><span class="lb"><span lang="nl">Meting</span><span lang="en">Measurement</span></span><span class="rt"><span lang="nl">EENHEID: PROCES</span><span lang="en">UNIT: PROCESS</span></span></div>
     <div class="duo wide">
       <div>
-        <h1>Gemeten,<br><b>niet gegokt.</b></h1>
-        <p class="lede">Proces, discipline, uitvoering — elk onderdeel heeft zijn eigen maat.</p>
+        <h1><span lang="nl">Gemeten,<br><b>niet gegokt.</b></span><span lang="en">Measured,<br><b>not guessed.</b></span></h1>
+        <p class="lede"><span lang="nl">Proces, discipline, uitvoering — elk onderdeel heeft zijn eigen maat.</span><span lang="en">Process, discipline, execution — every part has its own dimension.</span></p>
         <div class="ctas">
           <a class="btn" href="https://discord.gg/78Ff2GuSfW">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
-            Word lid van de Discord
+            <span lang="nl">Word lid van de Discord</span><span lang="en">Join on Discord</span>
           </a>
-          <a class="btn btn--o" href="#meetlat">Bekijk de meetlat</a>
+          <a class="btn btn--o" href="#meetlat"><span lang="nl">Bekijk de meetlat</span><span lang="en">See the scale</span></a>
         </div>
       </div>
 
       <!-- ═══ VERNIER CALIPER ═══ -->
       <div class="instr scrollx">
-        <svg viewBox="0 0 900 330" role="img" aria-label="Schuifmaat die meer dan tien jaar ervaring meet" style="min-width:520px">
+        <svg viewBox="0 0 900 330" role="img" style="min-width:520px"><title lang="nl">Schuifmaat die meer dan tien jaar ervaring meet</title><title lang="en">Vernier caliper measuring more than ten years of experience</title>
           <!-- beam -->
           <rect x="60" y="170" width="800" height="42" class="k1 fpp"/>
           <!-- main scale ticks along the beam -->
@@ -295,7 +313,7 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
           <!-- object being measured: the experience -->
           <rect x="82" y="86" width="236" height="68" class="fgs"/>
           <rect x="82" y="86" width="236" height="68" class="k1"/>
-          <text x="200" y="130" class="tg" font-size="28" text-anchor="middle" letter-spacing="4">10+ JAAR</text>
+          <text x="200" y="130" class="tg" font-size="28" text-anchor="middle" letter-spacing="4" lang="nl">10+ JAAR</text><text x="200" y="130" class="tg" font-size="28" text-anchor="middle" letter-spacing="4" lang="en">10+ YEARS</text>
 
           <!-- sliding jaw + slider body -->
           <path d="M340 212 V128 H318 V212 Z" class="k2 fp"/>
@@ -308,12 +326,12 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
           <path d="M332 222v22" class="k2"/>
           <text x="332" y="258" class="ts" text-anchor="middle">0</text>
           <text x="462" y="258" class="ts" text-anchor="middle">10</text>
-          <text x="352" y="196" class="ts">NONIUS</text>
+          <text x="352" y="196" class="ts" lang="nl">NONIUS</text><text x="352" y="196" class="ts" lang="en">VERNIER</text>
 
           <!-- reading leader -->
           <circle cx="332" cy="244" r="4" class="fg"/>
           <path d="M332 244 L332 286 H560" class="k1"/>
-          <text x="566" y="290" class="ts">AFLEZEN OP DE FIJNE STREEP</text>
+          <text x="566" y="290" class="ts" lang="nl">AFLEZEN OP DE FIJNE STREEP</text><text x="566" y="290" class="ts" lang="en">READ OFF THE FINE LINE</text>
 
           <!-- dimension of the object -->
           <g class="k1">
@@ -321,14 +339,14 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
             <path d="M88 68 H140"/><path class="fg" d="M82 68l12-3.6v7.2z" stroke="none"/>
             <path d="M262 68 H312"/><path class="fg" d="M318 68l-12-3.6v7.2z" stroke="none"/>
           </g>
-          <text x="200" y="73" class="tg" text-anchor="middle">ERVARING</text>
+          <text x="200" y="73" class="tg" text-anchor="middle" lang="nl">ERVARING</text><text x="200" y="73" class="tg" text-anchor="middle" lang="en">EXPERIENCE</text>
 
           <!-- depth section -->
           <path d="M860 191 H890" class="k1"/>
           <circle cx="884" cy="191" r="4" class="fg"/>
-          <text x="700" y="152" class="ts">SCHUIFMAAT — INSTRUMENT 01</text>
+          <text x="700" y="152" class="ts" lang="nl">SCHUIFMAAT — INSTRUMENT 01</text><text x="700" y="152" class="ts" lang="en">CALIPER — INSTRUMENT 01</text>
         </svg>
-        <div class="instrcap">Instrument 01 — <b>de schuifmaat</b>. Gemeten grootheid: de ervaring achter Atlas Capital.</div>
+        <div class="instrcap"><span lang="nl">Instrument 01 — <b>de schuifmaat</b>. Gemeten grootheid: de ervaring achter Atlas Capital.</span><span lang="en">Instrument 01 — <b>the caliper</b>. Measured quantity: the experience behind Atlas Capital.</span></div>
       </div>
     </div>
   </div>
@@ -351,16 +369,16 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
     </svg>
   </div>
   <div class="bandbody">
-    <div class="sectag"><span class="num">02</span><span class="lb">Meetrapport</span><span class="rt">BRON: DE OPRICHTER</span></div>
+    <div class="sectag"><span class="num">02</span><span class="lb"><span lang="nl">Meetrapport</span><span lang="en">Measurement report</span></span><span class="rt"><span lang="nl">BRON: DE OPRICHTER</span><span lang="en">SOURCE: THE FOUNDER</span></span></div>
     <div class="duo">
       <div>
-        <h2>Wat er in tien jaar gemeten is.</h2>
-        <p>"Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen."</p>
-        <p>"Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden."</p>
-        <div class="ctas"><a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW">Lees mee in de server</a></div>
+        <h2><span lang="nl">Wat er in tien jaar gemeten is.</span><span lang="en">What ten years have measured.</span></h2>
+        <p><span lang="nl">"Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen."</span><span lang="en">"I've been involved in trading for over 10 years now, and during that time I've experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons."</span></p>
+        <p><span lang="nl">"Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden."</span><span lang="en">"I built Atlas Capital to share that experience, bring traders together, and show how I approach the markets on a daily basis. No get-rich-quick promises, just real setups, education, and a community focused on improving together."</span></p>
+        <div class="ctas"><a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Lees mee in de server</span><span lang="en">Read along in the server</span></a></div>
       </div>
       <div class="instr">
-        <svg viewBox="0 0 480 320" role="img" aria-label="Wijzerinstrument met de drie principes op de schaal">
+        <svg viewBox="0 0 480 320" role="img"><title lang="nl">Wijzerinstrument met de drie principes op de schaal</title><title lang="en">Dial instrument with the three principles on the scale</title>
           <circle cx="240" cy="196" r="150" class="k1"/>
           <circle cx="240" cy="196" r="136" class="kh"/>
           <!-- graduations across a 180 degree dial -->
@@ -371,18 +389,18 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
             <path d="M90 196h26M143.6 105.6l13 18M240 86v26M336.4 105.6l-13 18M390 196h-26"/>
           </g>
           <!-- three principles at three bearings -->
-          <text x="118" y="240" class="tg" font-size="11">PROCES</text>
+          <text x="118" y="240" class="tg" font-size="11" lang="nl">PROCES</text><text x="118" y="240" class="tg" font-size="11" lang="en">PROCESS</text>
           <text x="240" y="70" class="tg" font-size="11" text-anchor="middle">DISCIPLINE</text>
-          <text x="300" y="240" class="tg" font-size="11">UITVOERING</text>
+          <text x="300" y="240" class="tg" font-size="11" lang="nl">UITVOERING</text><text x="300" y="240" class="tg" font-size="11" lang="en">EXECUTION</text>
           <!-- needle -->
           <path d="M240 196 L172 118" class="k2"/>
           <circle cx="240" cy="196" r="9" class="fg"/>
           <circle cx="240" cy="196" r="16" class="k1"/>
           <!-- tolerance arc -->
           <path d="M143.6 105.6 A150 150 0 0 1 240 86" class="k2" stroke-width="7" stroke-opacity=".35"/>
-          <text x="90" y="290" class="ts">WIJZER 01 — DE VOLGORDE STAAT VAST</text>
+          <text x="90" y="290" class="ts" lang="nl">WIJZER 01 — DE VOLGORDE STAAT VAST</text><text x="90" y="290" class="ts" lang="en">DIAL 01 — THE ORDER IS FIXED</text>
         </svg>
-        <div class="instrcap">Instrument 02 — <b>de wijzer</b>. De naald wijst altijd eerst naar het proces.</div>
+        <div class="instrcap"><span lang="nl">Instrument 02 — <b>de wijzer</b>. De naald wijst altijd eerst naar het proces.</span><span lang="en">Instrument 02 — <b>the dial</b>. The needle always points to process first.</span></div>
       </div>
     </div>
   </div>
@@ -405,76 +423,76 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
     </svg>
   </div>
   <div class="bandbody">
-    <div class="sectag"><span class="num">03</span><span class="lb">De meetlat</span><span class="rt">10 GRADATIES</span></div>
-    <h2>Tien onderwerpen, tien streepjes.</h2>
-    <p class="lede">Elke gradatie is een onderdeel van de educatie. Samen vormen ze de schaal.</p>
+    <div class="sectag"><span class="num">03</span><span class="lb"><span lang="nl">De meetlat</span><span lang="en">The scale</span></span><span class="rt"><span lang="nl">10 GRADATIES</span><span lang="en">10 GRADUATIONS</span></span></div>
+    <h2><span lang="nl">Tien onderwerpen, tien streepjes.</span><span lang="en">Ten topics, ten graduations.</span></h2>
+    <p class="lede"><span lang="nl">Elke gradatie is een onderdeel van de educatie. Samen vormen ze de schaal.</span><span lang="en">Every graduation is a part of the education. Together they form the scale.</span></p>
 
     <div class="grad">
       <div class="grow">
         <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
         <div class="gnum">01</div>
-        <div class="gmain"><span class="mob">GRADATIE 01</span><span class="nm">deviatie</span></div>
-        <div class="gdesc">Afwijking van een niveau — en wat daarna gebeurt.</div>
+        <div class="gmain"><span class="mob"><span lang="nl">GRADATIE 01</span><span lang="en">GRAD. 01</span></span><span class="nm"><span lang="nl">deviatie</span><span lang="en">deviation</span></span></div>
+        <div class="gdesc"><span lang="nl">Afwijking van een niveau — en wat daarna gebeurt.</span><span lang="en">Deviation from a level — and what happens next.</span></div>
       </div>
       <div class="grow">
         <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
         <div class="gnum">02</div>
-        <div class="gmain"><span class="mob">GRADATIE 02</span><span class="nm">SMT</span></div>
-        <div class="gdesc">Twee markten naast elkaar leggen.</div>
+        <div class="gmain"><span class="mob"><span lang="nl">GRADATIE 02</span><span lang="en">GRAD. 02</span></span><span class="nm">SMT</span></div>
+        <div class="gdesc"><span lang="nl">Twee markten naast elkaar leggen.</span><span lang="en">Laying two markets side by side.</span></div>
       </div>
       <div class="grow">
         <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
         <div class="gnum">03</div>
-        <div class="gmain"><span class="mob">GRADATIE 03</span><span class="nm">FVG</span></div>
-        <div class="gdesc">De onbalans die de prijs achterlaat.</div>
+        <div class="gmain"><span class="mob"><span lang="nl">GRADATIE 03</span><span lang="en">GRAD. 03</span></span><span class="nm">FVG</span></div>
+        <div class="gdesc"><span lang="nl">De onbalans die de prijs achterlaat.</span><span lang="en">The imbalance price leaves behind.</span></div>
       </div>
       <div class="grow">
         <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
         <div class="gnum">04</div>
-        <div class="gmain"><span class="mob">GRADATIE 04</span><span class="nm">IFVG</span></div>
-        <div class="gdesc">Diezelfde onbalans, maar omgekeerd.</div>
+        <div class="gmain"><span class="mob"><span lang="nl">GRADATIE 04</span><span lang="en">GRAD. 04</span></span><span class="nm">IFVG</span></div>
+        <div class="gdesc"><span lang="nl">Diezelfde onbalans, maar omgekeerd.</span><span lang="en">That same imbalance, inverted.</span></div>
       </div>
       <div class="grow">
         <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
         <div class="gnum">05</div>
-        <div class="gmain"><span class="mob">GRADATIE 05</span><span class="nm">orderblocks</span></div>
-        <div class="gdesc">Waar de beweging vandaan komt.</div>
+        <div class="gmain"><span class="mob"><span lang="nl">GRADATIE 05</span><span lang="en">GRAD. 05</span></span><span class="nm">orderblocks</span></div>
+        <div class="gdesc"><span lang="nl">Waar de beweging vandaan komt.</span><span lang="en">Where the move came from.</span></div>
       </div>
       <div class="grow">
         <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
         <div class="gnum">06</div>
-        <div class="gmain"><span class="mob">GRADATIE 06</span><span class="nm">fibonacci</span></div>
-        <div class="gdesc">Verhoudingen binnen een been.</div>
+        <div class="gmain"><span class="mob"><span lang="nl">GRADATIE 06</span><span lang="en">GRAD. 06</span></span><span class="nm">fibonacci</span></div>
+        <div class="gdesc"><span lang="nl">Verhoudingen binnen een been.</span><span lang="en">Ratios within a leg.</span></div>
       </div>
       <div class="grow">
         <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
         <div class="gnum">07</div>
-        <div class="gmain"><span class="mob">GRADATIE 07</span><span class="nm">sessie-liquiditeit</span></div>
-        <div class="gdesc">Wat een sessie achterlaat voor de volgende.</div>
+        <div class="gmain"><span class="mob"><span lang="nl">GRADATIE 07</span><span lang="en">GRAD. 07</span></span><span class="nm"><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></span></div>
+        <div class="gdesc"><span lang="nl">Wat een sessie achterlaat voor de volgende.</span><span lang="en">What one session leaves for the next.</span></div>
       </div>
       <div class="grow">
         <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
         <div class="gnum">08</div>
-        <div class="gmain"><span class="mob">GRADATIE 08</span><span class="nm">liquiditeit</span></div>
-        <div class="gdesc">Waar de orders liggen te wachten.</div>
+        <div class="gmain"><span class="mob"><span lang="nl">GRADATIE 08</span><span lang="en">GRAD. 08</span></span><span class="nm"><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></span></div>
+        <div class="gdesc"><span lang="nl">Waar de orders liggen te wachten.</span><span lang="en">Where the orders sit waiting.</span></div>
       </div>
       <div class="grow">
         <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
         <div class="gnum">09</div>
-        <div class="gmain"><span class="mob">GRADATIE 09</span><span class="nm">risicobeheer</span></div>
-        <div class="gdesc">De bandbreedte die je vooraf vastlegt.</div>
+        <div class="gmain"><span class="mob"><span lang="nl">GRADATIE 09</span><span lang="en">GRAD. 09</span></span><span class="nm"><span lang="nl">risicobeheer</span><span lang="en">risk management</span></span></div>
+        <div class="gdesc"><span lang="nl">De bandbreedte die je vooraf vastlegt.</span><span lang="en">The band you set before you start.</span></div>
       </div>
       <div class="grow">
         <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
         <div class="gnum">10</div>
-        <div class="gmain"><span class="mob">GRADATIE 10</span><span class="nm">tradingpsychologie</span></div>
-        <div class="gdesc">De hand die het instrument vasthoudt.</div>
+        <div class="gmain"><span class="mob"><span lang="nl">GRADATIE 10</span><span lang="en">GRAD. 10</span></span><span class="nm"><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></span></div>
+        <div class="gdesc"><span lang="nl">De hand die het instrument vasthoudt.</span><span lang="en">The hand that holds the instrument.</span></div>
       </div>
     </div>
     <div class="ctas">
       <a class="btn" href="https://discord.gg/78Ff2GuSfW">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
-        Leer de hele schaal
+        <span lang="nl">Leer de hele schaal</span><span lang="en">Learn the whole scale</span>
       </a>
     </div>
   </div>
@@ -497,11 +515,11 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
     </svg>
   </div>
   <div class="bandbody">
-    <div class="sectag"><span class="num">04</span><span class="lb">Het model</span><span class="rt">SCHEMATISCH · GEEN KOERSEN</span></div>
-    <h2>Een setup, opgemeten.</h2>
-    <p class="lede">Geen niveaus, geen uitkomsten — alleen de maten van de vorm.</p>
+    <div class="sectag"><span class="num">04</span><span class="lb"><span lang="nl">Het model</span><span lang="en">The model</span></span><span class="rt"><span lang="nl">SCHEMATISCH · GEEN KOERSEN</span><span lang="en">SCHEMATIC · NO PRICES</span></span></div>
+    <h2><span lang="nl">Een setup, opgemeten.</span><span lang="en">A setup, measured.</span></h2>
+    <p class="lede"><span lang="nl">Geen niveaus, geen uitkomsten — alleen de maten van de vorm.</span><span lang="en">No levels, no outcomes — only the dimensions of the shape.</span></p>
     <div class="instr scrollx">
-      <svg viewBox="0 0 900 500" role="img" aria-label="Schematische setup met maatvoering op de onbalans en een tolerantieband voor het risico" style="min-width:640px">
+      <svg viewBox="0 0 900 500" role="img" style="min-width:640px"><title lang="nl">Schematische setup met maatvoering op de onbalans en een tolerantieband voor het risico</title><title lang="en">Schematic setup with the imbalance dimensioned and a tolerance band for the risk</title>
         <!-- baseline rails -->
         <path d="M70 60V440" class="kh"/>
         <path d="M70 440H860" class="kh"/>
@@ -514,7 +532,7 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
         <path d="M100 128H600" class="k1" stroke-dasharray="8 5"/>
         <circle cx="250" cy="128" r="4" class="fg"/>
         <path d="M250 128 L216 86 H120" class="k1"/>
-        <text x="120" y="78" class="ts">LIQUIDITEIT — GRADATIE 08</text>
+        <text x="120" y="78" class="ts" lang="nl">LIQUIDITEIT — GRADATIE 08</text><text x="120" y="78" class="ts" lang="en">LIQUIDITY — GRAD. 08</text>
 
         <!-- candles -->
         <g class="k1" stroke-width="1.4">
@@ -537,7 +555,7 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
         <path d="M300 118 L336 114" class="k2"/>
         <circle cx="336" cy="114" r="4" class="fg"/>
         <path d="M336 114 L392 66 H600" class="k1"/>
-        <text x="606" y="70" class="ts">SWEEP — GRADATIE 07</text>
+        <text x="606" y="70" class="ts" lang="nl">SWEEP — GRADATIE 07</text><text x="606" y="70" class="ts" lang="en">SWEEP — GRAD. 07</text>
 
         <!-- FVG measured with a caliper-style dimension -->
         <rect x="356" y="226" width="230" height="54" class="fgs"/>
@@ -548,13 +566,13 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
           <path d="M586 226h42M586 280h42" class="kh"/>
         </g>
         <text x="640" y="250" class="tg">FVG</text>
-        <text x="640" y="268" class="ts">GRADATIE 03</text>
+        <text x="640" y="268" class="ts" lang="nl">GRADATIE 03</text><text x="640" y="268" class="ts" lang="en">GRAD. 03</text>
 
         <!-- orderblock with hatch -->
         <rect x="288" y="120" width="24" height="56" class="k1" fill="none" stroke-dasharray="5 4"/>
         <circle cx="288" cy="176" r="4" class="fg"/>
         <path d="M288 176 L232 208 H120" class="k1"/>
-        <text x="120" y="224" class="ts">ORDERBLOCK — GRADATIE 05</text>
+        <text x="120" y="224" class="ts" lang="nl">ORDERBLOCK — GRADATIE 05</text><text x="120" y="224" class="ts" lang="en">ORDERBLOCK — GRAD. 05</text>
 
         <!-- tolerance band = risicobeheer -->
         <rect x="640" y="330" width="200" height="46" class="k1" fill="rgba(215,179,100,.16)"/>
@@ -564,16 +582,16 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
           <path class="fg" d="M660 316l-3.6 11h7.2z" stroke="none"/>
           <path class="fg" d="M660 390l-3.6-11h7.2z" stroke="none"/>
         </g>
-        <text x="676" y="348" class="tg" font-size="11">TOLERANTIE</text>
-        <text x="676" y="366" class="ts">RISICOBEHEER — GRADATIE 09</text>
-        <text x="640" y="416" class="ts">VOORAF BEPAALD, NIET ONDERWEG</text>
+        <text x="676" y="348" class="tg" font-size="11" lang="nl">TOLERANTIE</text><text x="676" y="348" class="tg" font-size="11" lang="en">TOLERANCE</text>
+        <text x="676" y="366" class="ts" lang="nl">RISICOBEHEER — GRADATIE 09</text><text x="676" y="366" class="ts" lang="en">RISK MGMT — GRAD. 09</text>
+        <text x="640" y="416" class="ts" lang="nl">VOORAF BEPAALD, NIET ONDERWEG</text><text x="640" y="416" class="ts" lang="en">SET BEFOREHAND, NOT EN ROUTE</text>
 
         <!-- execution arrow -->
         <path d="M700 280V180" class="k2"/>
         <path class="fg" d="M700 166l-5.5 16h11z"/>
-        <text x="716" y="230" class="tg" font-size="11">UITVOERING</text>
+        <text x="716" y="230" class="tg" font-size="11" lang="nl">UITVOERING</text><text x="716" y="230" class="tg" font-size="11" lang="en">EXECUTION</text>
       </svg>
-      <div class="instrcap">Instrument 03 — <b>de opstelling</b>. Elke maat verwijst naar een gradatie van de meetlat.</div>
+      <div class="instrcap"><span lang="nl">Instrument 03 — <b>de opstelling</b>. Elke maat verwijst naar een gradatie van de meetlat.</span><span lang="en">Instrument 03 — <b>the arrangement</b>. Every dimension points to a graduation on the scale.</span></div>
     </div>
   </div>
   <div class="railcol r" aria-hidden="true">
@@ -595,10 +613,10 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
     </svg>
   </div>
   <div class="bandbody">
-    <div class="sectag"><span class="num">05</span><span class="lb">Uitlezing</span><span class="rt">15 KANALEN</span></div>
-    <h2>De stand van de server.</h2>
+    <div class="sectag"><span class="num">05</span><span class="lb"><span lang="nl">Uitlezing</span><span lang="en">Readout</span></span><span class="rt"><span lang="nl">15 KANALEN</span><span lang="en">15 CHANNELS</span></span></div>
+    <h2><span lang="nl">De stand van de server.</span><span lang="en">The reading on the server.</span></h2>
     <div class="gauge">
-      <div class="gaugetop"><span>SEGMENTEN — <b>9 OPEN</b> · 6 GERESERVEERD</span><span>TOTAAL 15</span></div>
+      <div class="gaugetop"><span><span lang="nl">SEGMENTEN — <b>9 OPEN</b> · 6 GERESERVEERD</span><span lang="en">SEGMENTS — <b>9 OPEN</b> · 6 RESERVED</span></span><span><span lang="nl">TOTAAL 15</span><span lang="en">TOTAL 15</span></span></div>
       <div class="segrow" aria-hidden="true">
         <i class="seg on"></i><i class="seg on"></i><i class="seg on"></i><i class="seg on"></i><i class="seg on"></i>
         <i class="seg on"></i><i class="seg on"></i><i class="seg on"></i><i class="seg on"></i>
@@ -607,7 +625,7 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
     </div>
     <div class="chcols">
       <div class="chbox">
-        <div class="chhd"><span class="a">Thuis — nu gratis</span><span class="b">9</span></div>
+        <div class="chhd"><span class="a"><span lang="nl">Thuis — nu gratis</span><span lang="en">Home — free right now</span></span><span class="b">9</span></div>
         <ul class="chl">
           <li><span class="mm">01</span><span>#nq-chart-ideeën</span><span class="st">open</span></li>
           <li><span class="mm">02</span><span>#es-chart-ideeën</span><span class="st">open</span></li>
@@ -621,16 +639,16 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
         </ul>
       </div>
       <div class="chbox">
-        <div class="chhd"><span class="a">Premium — opent later</span><span class="b">6</span></div>
+        <div class="chhd"><span class="a"><span lang="nl">Premium — opent later</span><span lang="en">Premium — opens later</span></span><span class="b">6</span></div>
         <ul class="chl">
-          <li><span class="mm">10</span><span>#trade-setups</span><span class="st">volgt</span></li>
-          <li><span class="mm">11</span><span>#marktupdates</span><span class="st">volgt</span></li>
-          <li><span class="mm">12</span><span>#indicatoren</span><span class="st">volgt</span></li>
-          <li><span class="mm">13</span><span>#sessie-opnames</span><span class="st">volgt</span></li>
-          <li><span class="mm">14</span><span>#chart-ideeën</span><span class="st">volgt</span></li>
-          <li><span class="mm">15</span><span>#premium-chat</span><span class="st">volgt</span></li>
+          <li><span class="mm">10</span><span>#trade-setups</span><span class="st"><span lang="nl">volgt</span><span lang="en">to follow</span></span></li>
+          <li><span class="mm">11</span><span>#marktupdates</span><span class="st"><span lang="nl">volgt</span><span lang="en">to follow</span></span></li>
+          <li><span class="mm">12</span><span>#indicatoren</span><span class="st"><span lang="nl">volgt</span><span lang="en">to follow</span></span></li>
+          <li><span class="mm">13</span><span>#sessie-opnames</span><span class="st"><span lang="nl">volgt</span><span lang="en">to follow</span></span></li>
+          <li><span class="mm">14</span><span>#chart-ideeën</span><span class="st"><span lang="nl">volgt</span><span lang="en">to follow</span></span></li>
+          <li><span class="mm">15</span><span>#premium-chat</span><span class="st"><span lang="nl">volgt</span><span lang="en">to follow</span></span></li>
         </ul>
-        <div style="padding:13px"><a class="btn btn--o" style="width:100%" href="https://discord.gg/78Ff2GuSfW">Open de server</a></div>
+        <div style="padding:13px"><a class="btn btn--o" style="width:100%" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de server</span><span lang="en">Open the server</span></a></div>
       </div>
     </div>
   </div>
@@ -653,17 +671,17 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
     </svg>
   </div>
   <div class="bandbody">
-    <div class="sectag"><span class="num">06</span><span class="lb">Uitvoering</span><span class="rt">LIVE &amp; TOEGANG</span></div>
+    <div class="sectag"><span class="num">06</span><span class="lb"><span lang="nl">Uitvoering</span><span lang="en">Execution</span></span><span class="rt"><span lang="nl">LIVE &amp; TOEGANG</span><span lang="en">LIVE &amp; ACCESS</span></span></div>
     <div class="tolgrid">
       <div>
-        <div class="livetag"><i class="blip"></i>Live in de server</div>
-        <p class="val"><b>Meekijken</b> terwijl het gebeurt</p>
-        <p>De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
-        <a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW">Zit een sessie bij</a>
+        <div class="livetag"><i class="blip"></i><span lang="nl">Live in de server</span><span lang="en">Live in the server</span></div>
+        <p class="val"><span lang="nl"><b>Meekijken</b> terwijl het gebeurt</span><span lang="en"><b>Watch</b> while it happens</span></p>
+        <p><span lang="nl">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced there.</span></p>
+        <a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Zit een sessie bij</span><span lang="en">Sit in on a session</span></a>
       </div>
       <div>
-        <h3>Markten in bereik</h3>
-        <svg viewBox="0 0 460 160" role="img" aria-label="De vier gevolgde markten op een schaal" style="width:100%;height:auto">
+        <h3><span lang="nl">Markten in bereik</span><span lang="en">Markets in range</span></h3>
+        <svg viewBox="0 0 460 160" role="img" style="width:100%;height:auto"><title lang="nl">De vier gevolgde markten op een schaal</title><title lang="en">The four markets followed, set on a scale</title>
           <path d="M30 110H430" class="k1"/>
           <g class="kh"><path d="M30 110v-8M130 110v-8M230 110v-8M330 110v-8M430 110v-8"/></g>
           <g class="k1">
@@ -681,19 +699,19 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
 
     <div class="tolgrid" style="margin-top:26px">
       <div>
-        <h3>Nu — binnen bereik</h3>
-        <p class="val">Gratis toegang</p>
-        <p>Negen kanalen, de educatie en het meekijken. Geen drempel.</p>
+        <h3><span lang="nl">Nu — binnen bereik</span><span lang="en">Now — in range</span></h3>
+        <p class="val"><span lang="nl">Gratis toegang</span><span lang="en">Free access</span></p>
+        <p><span lang="nl">Negen kanalen, de educatie en het meekijken. Geen drempel.</span><span lang="en">Nine channels, the education and watching along. No barrier.</span></p>
         <a class="btn" href="https://discord.gg/78Ff2GuSfW">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
-          Word nu lid
+          <span lang="nl">Word nu lid</span><span lang="en">Join now</span>
         </a>
       </div>
       <div>
-        <h3>Later — buiten bereik</h3>
+        <h3><span lang="nl">Later — buiten bereik</span><span lang="en">Later — out of range</span></h3>
         <p class="val">Premium</p>
-        <p>Zes extra kanalen. Prijs en datum worden in de server aangekondigd.</p>
-        <a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW">Blijf op de hoogte</a>
+        <p><span lang="nl">Zes extra kanalen. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Six more channels. Price and date are announced in the server.</span></p>
+        <a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Blijf op de hoogte</span><span lang="en">Stay posted</span></a>
       </div>
     </div>
 
@@ -704,11 +722,11 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
         <g class="k1"><path d="M20 30v-16M180 30v-16M340 30v-16M500 30v-16"/></g>
         <path d="M300 14 L292 2 H308 Z" class="fg"/>
       </svg>
-      <h2>Alles gemeten.<br><b>Nu uitvoeren.</b></h2>
+      <h2><span lang="nl">Alles gemeten.<br><b>Nu uitvoeren.</b></span><span lang="en">All measured.<br><b>Now execute.</b></span></h2>
       <div class="ctas">
         <a class="btn" href="https://discord.gg/78Ff2GuSfW">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
-          Word lid van de Discord
+          <span lang="nl">Word lid van de Discord</span><span lang="en">Join on Discord</span>
         </a>
         <a class="btn btn--o" href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
       </div>
@@ -729,10 +747,31 @@ footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
   <div class="foot">
     <a href="https://discord.gg/78Ff2GuSfW">DISCORD</a>
     <a href="https://www.tiktok.com/@atlascapitalbv">TIKTOK · @ATLASCAPITALBV</a>
-    <span style="color:var(--dim)">ATLAS CAPITAL — PROCES. DISCIPLINE. UITVOERING.</span>
-    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <span style="color:var(--dim)"><span lang="nl">ATLAS CAPITAL — PROCES. DISCIPLINE. UITVOERING.</span><span lang="en">ATLAS CAPITAL — PROCESS. DISCIPLINE. EXECUTION.</span></span>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
   </div>
 </footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

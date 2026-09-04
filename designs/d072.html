@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -234,6 +234,21 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
 .foot__links a{color:var(--gold);text-decoration:none;font-family:var(--disp);font-size:1.05rem;letter-spacing:.12em}
 .foot__links a:hover{color:var(--gold-hi)}
 .risk{margin:1.8rem 0 0;color:#77787A;font-size:.72rem;line-height:1.7;max-width:72ch;border-top:1px solid var(--line);padding-top:1rem}
+
+/* --- language --- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.langsw{display:flex;flex:none;border:1px solid var(--gline)}
+.langsw button{
+  appearance:none;-webkit-appearance:none;background:transparent;border:0;cursor:pointer;
+  font-family:var(--disp);font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);padding:.34em .6em;line-height:1.25;
+  transition:background .18s ease,color .18s ease;
+}
+.langsw button+button{border-left:1px solid var(--gline)}
+.langsw button:hover{color:var(--gold-hi)}
+.langsw button[aria-pressed="true"]{background:rgba(215,179,100,.14);color:var(--gold-hi)}
+@media (max-width:560px){.langsw button{font-size:.78rem;padding:.26em .36em;letter-spacing:.08em}}
 </style>
 </head>
 <body>
@@ -250,8 +265,12 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
       <span>Atlas Capital</span>
     </a>
     <div class="bar__spacer"></div>
-    <span class="bar__tag">Speeldag · NQ · ES · Bitcoin · Altcoins</span>
+    <span class="bar__tag"><span lang="nl">Speeldag · NQ · ES · Bitcoin · Altcoins</span><span lang="en">Matchday · NQ · ES · Bitcoin · Altcoins</span></span>
     <a class="tkt" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord</a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
@@ -260,12 +279,12 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
   <div class="board">
     <div class="board__top">
       <div class="board__title">Atlas Capital</div>
-      <span class="livechip"><span class="dot" aria-hidden="true"><b></b><i></i></span>Live sessies in de server</span>
+      <span class="livechip"><span class="dot" aria-hidden="true"><b></b><i></i></span><span lang="nl">Live sessies in de server</span><span lang="en">Live sessions in the server</span></span>
     </div>
 
     <div class="score">
       <div class="score__cell">
-        <div class="score__lbl">Proces</div>
+        <div class="score__lbl"><span lang="nl">Proces</span><span lang="en">Process</span></div>
         <div class="segs">
           <svg class="seg7" viewBox="0 0 60 100" aria-hidden="true">
             <g fill="rgba(215,179,100,.13)" stroke="rgba(215,179,100,.2)" stroke-width=".6">
@@ -319,7 +338,7 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
         </div>
       </div>
       <div class="score__cell">
-        <div class="score__lbl">Uitvoering</div>
+        <div class="score__lbl"><span lang="nl">Uitvoering</span><span lang="en">Execution</span></div>
         <div class="segs">
           <svg class="seg7" viewBox="0 0 60 100" aria-hidden="true">
             <g fill="rgba(215,179,100,.13)" stroke="rgba(215,179,100,.2)" stroke-width=".6">
@@ -347,19 +366,19 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
       </div>
     </div>
 
-    <div class="score__note">Het bord blijft leeg — wij houden geen uitslag bij</div>
+    <div class="score__note"><span lang="nl">Het bord blijft leeg — wij houden geen uitslag bij</span><span lang="en">The board stays empty — we do not keep score</span></div>
   </div>
 
   <div class="hero__copy">
     <div>
-      <span class="eyebrow">Speeldag</span>
-      <h1>Elke sessie<br>is een <em>speeldag</em></h1>
+      <span class="eyebrow"><span lang="nl">Speeldag</span><span lang="en">Matchday</span></span>
+      <h1><span lang="nl">Elke sessie<br>is een <em>speeldag</em></span><span lang="en">Every session<br>is a <em>matchday</em></span></h1>
     </div>
     <div>
-      <p class="lead">De oprichter handelt live mee in de server en legt onderweg uit wat hij ziet. Tijden worden in Discord aangekondigd.</p>
+      <p class="lead"><span lang="nl">De oprichter handelt live mee in de server en legt onderweg uit wat hij ziet. Tijden worden in Discord aangekondigd.</span><span lang="en">The founder trades live in the server and explains what he sees along the way. Times are announced in Discord.</span></p>
       <div class="hero__cta">
-        <a class="tkt" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Haal je toegang</a>
-        <a class="tkt tkt--out" href="#selectie">Bekijk de selectie</a>
+        <a class="tkt" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Haal je toegang</span><span lang="en">Get your access</span></a>
+        <a class="tkt tkt--out" href="#selectie"><span lang="nl">Bekijk de selectie</span><span lang="en">See the squad</span></a>
       </div>
     </div>
   </div>
@@ -367,7 +386,7 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
 
 <!-- ============ 01 DE COACH ============ -->
 <section class="wrap" id="coach">
-  <div class="shead"><h2>De coach</h2><span class="shead__n">01</span></div>
+  <div class="shead"><h2><span lang="nl">De coach</span><span lang="en">The coach</span></h2><span class="shead__n">01</span></div>
   <div class="coach">
     <div class="coach__portrait" aria-hidden="true">
       <svg viewBox="0 0 240 300">
@@ -381,21 +400,21 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
         <path d="M96 220 L120 252 L144 220" fill="none" stroke="rgba(215,179,100,.5)" stroke-width="1.4"/>
         <circle cx="120" cy="106" r="62" fill="none" stroke="rgba(215,179,100,.22)" stroke-width="1"/>
       </svg>
-      <span class="coach__plate">10+ jaar</span>
+      <span class="coach__plate"><span lang="nl">10+ jaar</span><span lang="en">10+ years</span></span>
     </div>
     <blockquote class="coach__quote">
-      <span class="eyebrow">Woord vooraf</span>
-      <p>Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</p>
-      <cite>Oprichter · Atlas Capital</cite>
-      <a class="tkt" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Kom naar de server</a>
+      <span class="eyebrow"><span lang="nl">Woord vooraf</span><span lang="en">Foreword</span></span>
+      <p><span lang="nl">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</span><span lang="en">I've been involved in trading for over 10 years now, and during that time I've experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons. I built Atlas Capital to share that experience, bring traders together, and show how I approach the markets on a daily basis. No get-rich-quick promises, just real setups, education, and a community focused on improving together.</span></p>
+      <cite><span lang="nl">Oprichter · Atlas Capital</span><span lang="en">Founder · Atlas Capital</span></cite>
+      <a class="tkt" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Kom naar de server</span><span lang="en">Come to the server</span></a>
     </blockquote>
   </div>
 </section>
 
 <!-- ============ 02 FIXTURES ============ -->
 <section class="wrap" id="programma">
-  <div class="shead"><h2>Speelschema</h2><span class="shead__n">02</span></div>
-  <p class="snote">De handelsdag in drie sessies. Er staan bewust geen tijden op deze pagina — die worden in de server aangekondigd.</p>
+  <div class="shead"><h2><span lang="nl">Speelschema</span><span lang="en">Fixtures</span></h2><span class="shead__n">02</span></div>
+  <p class="snote"><span lang="nl">De handelsdag in drie sessies. Er staan bewust geen tijden op deze pagina — die worden in de server aangekondigd.</span><span lang="en">The trading day in three sessions. There are deliberately no times on this page — those are announced in the server.</span></p>
   <div class="fixtures">
     <div class="fx">
       <svg class="fx__mark" viewBox="0 0 34 34" aria-hidden="true">
@@ -404,10 +423,10 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
         <path d="M17 2 V32" stroke="rgba(215,179,100,.5)" stroke-width="1"/>
       </svg>
       <div>
-        <div class="fx__name">Azië</div>
+        <div class="fx__name"><span lang="nl">Azië</span><span lang="en">Asia</span></div>
         <div class="fx__sub">Bitcoin · Altcoins</div>
       </div>
-      <div class="fx__when">Tijd in de server</div>
+      <div class="fx__when"><span lang="nl">Tijd in de server</span><span lang="en">Time in the server</span></div>
     </div>
     <div class="fx">
       <svg class="fx__mark" viewBox="0 0 34 34" aria-hidden="true">
@@ -416,10 +435,10 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
         <path d="M2 17 H32" stroke="rgba(215,179,100,.5)" stroke-width="1"/>
       </svg>
       <div>
-        <div class="fx__name">Londen</div>
+        <div class="fx__name"><span lang="nl">Londen</span><span lang="en">London</span></div>
         <div class="fx__sub">NQ · ES · Bitcoin</div>
       </div>
-      <div class="fx__when">Tijd in de server</div>
+      <div class="fx__when"><span lang="nl">Tijd in de server</span><span lang="en">Time in the server</span></div>
     </div>
     <div class="fx">
       <svg class="fx__mark" viewBox="0 0 34 34" aria-hidden="true">
@@ -431,47 +450,49 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
         <div class="fx__name">New York</div>
         <div class="fx__sub">NQ · ES</div>
       </div>
-      <div class="fx__when">Tijd in de server</div>
+      <div class="fx__when"><span lang="nl">Tijd in de server</span><span lang="en">Time in the server</span></div>
     </div>
   </div>
 </section>
 
 <!-- ============ 02 SELECTIE / SQUAD ============ -->
 <section class="wrap" id="selectie">
-  <div class="shead"><h2>De selectie</h2><span class="shead__n">03</span></div>
-  <p class="snote">Tien onderwerpen, opgesteld per linie. Dit is de educatie in de server.</p>
+  <div class="shead"><h2><span lang="nl">De selectie</span><span lang="en">The squad</span></h2><span class="shead__n">03</span></div>
+  <p class="snote"><span lang="nl">Tien onderwerpen, opgesteld per linie. Dit is de educatie in de server.</span><span lang="en">Ten topics, lined up by unit. This is the education in the server.</span></p>
   <div class="squad">
     <div class="line">
-      <h3>Structuur</h3>
-      <div class="player"><span class="player__n">01</span><span class="player__t">Deviatie</span><span class="player__p">Basis</span></div>
-      <div class="player"><span class="player__n">02</span><span class="player__t">SMT</span><span class="player__p">Vergelijk</span></div>
+      <h3><span lang="nl">Structuur</span><span lang="en">Structure</span></h3>
+      <div class="player"><span class="player__n">01</span><span class="player__t"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span><span class="player__p"><span lang="nl">Basis</span><span lang="en">Base</span></span></div>
+      <div class="player"><span class="player__n">02</span><span class="player__t">SMT</span><span class="player__p"><span lang="nl">Vergelijk</span><span lang="en">Compare</span></span></div>
       <div class="player"><span class="player__n">05</span><span class="player__t">Orderblocks</span><span class="player__p">Zone</span></div>
     </div>
     <div class="line">
-      <h3>Inefficiëntie</h3>
+      <h3><span lang="nl">Inefficiëntie</span><span lang="en">Inefficiency</span></h3>
       <div class="player"><span class="player__n">03</span><span class="player__t">FVG</span><span class="player__p">Gap</span></div>
-      <div class="player"><span class="player__n">04</span><span class="player__t">IFVG</span><span class="player__p">Omkering</span></div>
-      <div class="player"><span class="player__n">06</span><span class="player__t">Fibonacci</span><span class="player__p">Niveaus</span></div>
+      <div class="player"><span class="player__n">04</span><span class="player__t">IFVG</span><span class="player__p"><span lang="nl">Omkering</span><span lang="en">Reversal</span></span></div>
+      <div class="player"><span class="player__n">06</span><span class="player__t">Fibonacci</span><span class="player__p"><span lang="nl">Niveaus</span><span lang="en">Levels</span></span></div>
     </div>
     <div class="line">
-      <h3>Liquiditeit</h3>
-      <div class="player"><span class="player__n">07</span><span class="player__t">Sessie-liquiditeit</span><span class="player__p">Sessie</span></div>
-      <div class="player"><span class="player__n">08</span><span class="player__t">Liquiditeit</span><span class="player__p">Doel</span></div>
+      <h3><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></h3>
+      <div class="player"><span class="player__n">07</span><span class="player__t"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span><span class="player__p"><span lang="nl">Sessie</span><span lang="en">Session</span></span></div>
+      <div class="player"><span class="player__n">08</span><span class="player__t"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span><span class="player__p"><span lang="nl">Doel</span><span lang="en">Target</span></span></div>
     </div>
     <div class="line">
-      <h3>Achterin</h3>
-      <div class="player"><span class="player__n">09</span><span class="player__t">Risicobeheer</span><span class="player__p">Verdediging</span></div>
-      <div class="player"><span class="player__n">10</span><span class="player__t">Tradingpsychologie</span><span class="player__p">Hoofd</span></div>
+      <h3><span lang="nl">Achterin</span><span lang="en">At the back</span></h3>
+      <div class="player"><span class="player__n">09</span><span class="player__t"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span><span class="player__p"><span lang="nl">Verdediging</span><span lang="en">Defence</span></span></div>
+      <div class="player"><span class="player__n">10</span><span class="player__t"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span><span class="player__p"><span lang="nl">Hoofd</span><span lang="en">Head</span></span></div>
     </div>
   </div>
 </section>
 
 <!-- ============ 03 ANALYSE / TELESTRATOR ============ -->
 <section class="wrap" id="analyse">
-  <div class="shead"><h2>Analysebord</h2><span class="shead__n">04</span></div>
-  <p class="snote">Het model zoals het op het bord wordt uitgelegd. Schematisch — geen koersen, geen uitslag.</p>
+  <div class="shead"><h2><span lang="nl">Analysebord</span><span lang="en">Analysis board</span></h2><span class="shead__n">04</span></div>
+  <p class="snote"><span lang="nl">Het model zoals het op het bord wordt uitgelegd. Schematisch — geen koersen, geen uitslag.</span><span lang="en">The model as it is explained on the board. Schematic — no prices, no score.</span></p>
   <div class="tele">
-    <svg viewBox="0 0 1000 480" role="img" aria-label="Analysebord met een schematische liquidity sweep en fair value gap">
+    <svg viewBox="0 0 1000 480" role="img">
+      <title lang="nl">Analysebord met een schematische liquidity sweep en fair value gap</title>
+      <title lang="en">Analysis board with a schematic liquidity sweep and fair value gap</title>
       <rect width="1000" height="480" fill="#0A0B0E"/>
       <g stroke="rgba(255,255,255,.055)">
         <path d="M0 80 H1000 M0 160 H1000 M0 240 H1000 M0 320 H1000 M0 400 H1000"/>
@@ -481,7 +502,7 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
       <!-- liquidity pool -->
       <path d="M90 128 H460" stroke="#B9954A" stroke-width="1.6" stroke-dasharray="8 8"/>
       <rect x="90" y="112" width="370" height="18" fill="rgba(215,179,100,.1)"/>
-      <text x="94" y="104" fill="#A5A6A8" font-size="16" letter-spacing="4" font-family="'Bebas Neue',Impact,sans-serif">LIQUIDITEIT BOVEN DE HOOGTES</text>
+      <text lang="nl" x="94" y="104" fill="#A5A6A8" font-size="16" letter-spacing="4" font-family="'Bebas Neue',Impact,sans-serif">LIQUIDITEIT BOVEN DE HOOGTES</text><text lang="en" x="94" y="104" fill="#A5A6A8" font-size="16" letter-spacing="4" font-family="'Bebas Neue',Impact,sans-serif">LIQUIDITY ABOVE THE HIGHS</text>
 
       <!-- candles -->
       <g stroke-width="2.6" fill="#181A1F" stroke="#75767A">
@@ -503,7 +524,7 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
       </g>
       <!-- the gap sits here -->
       <rect x="575" y="238" width="345" height="66" fill="rgba(215,179,100,.14)" stroke="#D7B364" stroke-width="1.2"/>
-      <text x="588" y="228" fill="#E6CC8E" font-size="18" letter-spacing="5" font-family="'Bebas Neue',Impact,sans-serif">FVG — DE OPENGELATEN RUIMTE</text>
+      <text lang="nl" x="588" y="228" fill="#E6CC8E" font-size="18" letter-spacing="5" font-family="'Bebas Neue',Impact,sans-serif">FVG — DE OPENGELATEN RUIMTE</text><text lang="en" x="588" y="228" fill="#E6CC8E" font-size="18" letter-spacing="5" font-family="'Bebas Neue',Impact,sans-serif">FVG — THE SPACE LEFT OPEN</text>
 
       <g stroke-width="2.6" fill="#181A1F" stroke="#8B8C8F">
         <path d="M590 274 V404"/><rect x="580" y="292" width="20" height="96"/>
@@ -531,42 +552,42 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
       <path d="M596 372 l-20 -16 l28 -1 z" fill="#E6CC8E"/>
       <path d="M660 420 C 700 340, 720 300, 745 268" fill="none" stroke="rgba(215,179,100,.55)" stroke-width="3" stroke-linecap="round"/>
       <path d="M745 268 l-2 22 l18 -14 z" fill="#D7B364"/>
-      <text x="612" y="452" fill="#8A8B8E" font-size="16" letter-spacing="4" font-family="'Bebas Neue',Impact,sans-serif">C — TERUG IN DE ZONE</text>
-      <text x="24" y="464" fill="#5E5F62" font-size="15" letter-spacing="4" font-family="'Bebas Neue',Impact,sans-serif">SCHEMATISCH VOORBEELD · GEEN KOERSEN · GEEN RESULTAAT</text>
+      <text lang="nl" x="612" y="452" fill="#8A8B8E" font-size="16" letter-spacing="4" font-family="'Bebas Neue',Impact,sans-serif">C — TERUG IN DE ZONE</text><text lang="en" x="612" y="452" fill="#8A8B8E" font-size="16" letter-spacing="4" font-family="'Bebas Neue',Impact,sans-serif">C — BACK IN THE ZONE</text>
+      <text lang="nl" x="24" y="464" fill="#5E5F62" font-size="15" letter-spacing="4" font-family="'Bebas Neue',Impact,sans-serif">SCHEMATISCH VOORBEELD · GEEN KOERSEN · GEEN RESULTAAT</text><text lang="en" x="24" y="464" fill="#5E5F62" font-size="15" letter-spacing="4" font-family="'Bebas Neue',Impact,sans-serif">SCHEMATIC EXAMPLE · NO PRICES · NO RESULT</text>
     </svg>
     <div class="tele__legend">
-      <span><b>A</b> Sweep van liquiditeit</span>
-      <span><b>B</b> De gap blijft open</span>
-      <span><b>C</b> Reactie in de zone</span>
-      <span><b>D</b> Risico eerst, altijd</span>
+      <span><b>A</b> <span lang="nl">Sweep van liquiditeit</span><span lang="en">Sweep of liquidity</span></span>
+      <span><b>B</b> <span lang="nl">De gap blijft open</span><span lang="en">The gap stays open</span></span>
+      <span><b>C</b> <span lang="nl">Reactie in de zone</span><span lang="en">Reaction in the zone</span></span>
+      <span><b>D</b> <span lang="nl">Risico eerst, altijd</span><span lang="en">Risk first, always</span></span>
     </div>
   </div>
 </section>
 
 <!-- ============ 04 LIVE ============ -->
 <section class="wrap" id="live">
-  <div class="shead"><h2>Live verslag</h2><span class="shead__n">05</span></div>
+  <div class="shead"><h2><span lang="nl">Live verslag</span><span lang="en">Live coverage</span></h2><span class="shead__n">05</span></div>
   <div class="livepanel">
     <div>
-      <span class="livechip"><span class="dot" aria-hidden="true"><b></b><i></i></span>Live sessies vinden plaats in de server</span>
-      <h2>Kijk mee terwijl<br>de beslissing valt</h2>
-      <p class="snote" style="margin-bottom:0">Geen samenvatting achteraf. Je zit erbij terwijl er wordt gehandeld — inclusief de sessies waarin niets gebeurt.</p>
+      <span class="livechip"><span class="dot" aria-hidden="true"><b></b><i></i></span><span lang="nl">Live sessies vinden plaats in de server</span><span lang="en">Live sessions take place in the server</span></span>
+      <h2><span lang="nl">Kijk mee terwijl<br>de beslissing valt</span><span lang="en">Watch along while<br>the decision is made</span></h2>
+      <p class="snote" style="margin-bottom:0"><span lang="nl">Geen samenvatting achteraf. Je zit erbij terwijl er wordt gehandeld — inclusief de sessies waarin niets gebeurt.</span><span lang="en">No summary afterwards. You are there while the trading happens — including the sessions where nothing happens.</span></p>
     </div>
     <div>
-      <a class="tkt tkt--big" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Stem af</a>
+      <a class="tkt tkt--big" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Stem af</span><span lang="en">Tune in</span></a>
     </div>
   </div>
 </section>
 
 <!-- ============ 05 TEAMSHEET / KANALEN ============ -->
 <section class="wrap" id="kanalen">
-  <div class="shead"><h2>Opstelling</h2><span class="shead__n">06</span></div>
-  <p class="snote">Vijftien kanalen in de server, verdeeld over twee formaties.</p>
+  <div class="shead"><h2><span lang="nl">Opstelling</span><span lang="en">Line-up</span></h2><span class="shead__n">06</span></div>
+  <p class="snote"><span lang="nl">Vijftien kanalen in de server, verdeeld over twee formaties.</span><span lang="en">Fifteen channels in the server, split across two formations.</span></p>
   <div class="sheets">
     <div class="sheet">
-      <span class="eyebrow">Thuis — nu gratis</span>
-      <h3>Basisopstelling</h3>
-      <p>Direct open zodra je binnenkomt.</p>
+      <span class="eyebrow"><span lang="nl">Thuis — nu gratis</span><span lang="en">Home — free right now</span></span>
+      <h3><span lang="nl">Basisopstelling</span><span lang="en">Starting line-up</span></h3>
+      <p><span lang="nl">Direct open zodra je binnenkomt.</span><span lang="en">Open straight away when you come in.</span></p>
       <ol>
         <li>#nq-chart-ideeën</li>
         <li>#es-chart-ideeën</li>
@@ -580,9 +601,9 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
       </ol>
     </div>
     <div class="sheet sheet--away">
-      <span class="eyebrow">Premium — opent later</span>
-      <h3>Op de bank</h3>
-      <p>Datum en prijs worden in de server aangekondigd.</p>
+      <span class="eyebrow"><span lang="nl">Premium — opent later</span><span lang="en">Premium — opens later</span></span>
+      <h3><span lang="nl">Op de bank</span><span lang="en">On the bench</span></h3>
+      <p><span lang="nl">Datum en prijs worden in de server aangekondigd.</span><span lang="en">The date and the price are announced in the server.</span></p>
       <ol>
         <li>#trade-setups</li>
         <li>#marktupdates</li>
@@ -597,32 +618,32 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
 
 <!-- ============ 06 TOEGANG ============ -->
 <section class="wrap" id="toegang">
-  <div class="shead"><h2>Toegang</h2><span class="shead__n">07</span></div>
+  <div class="shead"><h2><span lang="nl">Toegang</span><span lang="en">Access</span></h2><span class="shead__n">07</span></div>
   <div class="stubs">
     <div class="stub stub--gold">
-      <span class="eyebrow">Nu</span>
-      <h3>Gratis</h3>
+      <span class="eyebrow"><span lang="nl">Nu</span><span lang="en">Now</span></span>
+      <h3><span lang="nl">Gratis</span><span lang="en">Free</span></h3>
       <ul>
-        <li>Alle Thuis-kanalen</li>
-        <li>De educatie over tien onderwerpen</li>
-        <li>Chart-ideeën voor NQ, ES, Bitcoin en altcoins</li>
-        <li>Live sessies meekijken</li>
+        <li><span lang="nl">Alle Thuis-kanalen</span><span lang="en">All Home channels</span></li>
+        <li><span lang="nl">De educatie over tien onderwerpen</span><span lang="en">The education across ten topics</span></li>
+        <li><span lang="nl">Chart-ideeën voor NQ, ES, Bitcoin en altcoins</span><span lang="en">Chart ideas for NQ, ES, Bitcoin and altcoins</span></li>
+        <li><span lang="nl">Live sessies meekijken</span><span lang="en">Watch live sessions</span></li>
       </ul>
       <div style="margin-top:auto;padding-top:1.1rem">
-        <a class="tkt" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Nu binnen</a>
+        <a class="tkt" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Nu binnen</span><span lang="en">Come in now</span></a>
       </div>
     </div>
     <div class="stub">
-      <span class="eyebrow">Later</span>
+      <span class="eyebrow"><span lang="nl">Later</span><span lang="en">Later</span></span>
       <h3>Premium</h3>
       <ul>
-        <li>Trade-setups en marktupdates</li>
-        <li>Indicatoren en sessie-opnames</li>
-        <li>Premium-chat</li>
-        <li>Aankondiging volgt in de server</li>
+        <li><span lang="nl">Trade-setups en marktupdates</span><span lang="en">Trade setups and market updates</span></li>
+        <li><span lang="nl">Indicatoren en sessie-opnames</span><span lang="en">Indicators and session recordings</span></li>
+        <li><span lang="nl">Premium-chat</span><span lang="en">Premium chat</span></li>
+        <li><span lang="nl">Aankondiging volgt in de server</span><span lang="en">The announcement follows in the server</span></li>
       </ul>
       <div style="margin-top:auto;padding-top:1.1rem">
-        <a class="tkt tkt--out" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Hoor het als eerste</a>
+        <a class="tkt tkt--out" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Hoor het als eerste</span><span lang="en">Hear it first</span></a>
       </div>
     </div>
   </div>
@@ -631,10 +652,10 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
 <!-- ============ 07 FINAL ============ -->
 <section class="wrap">
   <div class="final">
-    <span class="eyebrow">08 — Aftrap</span>
-    <h2>Neem plaats</h2>
-    <p>Gratis toegang tot de server. Proces, discipline en uitvoering — de rest is geduld.</p>
-    <a class="tkt tkt--big" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Word lid van Discord</a>
+    <span class="eyebrow"><span lang="nl">08 — Aftrap</span><span lang="en">08 — Kick-off</span></span>
+    <h2><span lang="nl">Neem plaats</span><span lang="en">Take your seat</span></h2>
+    <p><span lang="nl">Gratis toegang tot de server. Proces, discipline en uitvoering — de rest is geduld.</span><span lang="en">Free access to the server. Process, discipline and execution — the rest is patience.</span></p>
+    <a class="tkt tkt--big" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Word lid van Discord</span><span lang="en">Join on Discord</span></a>
   </div>
 </section>
 
@@ -653,13 +674,34 @@ footer{border-top:1px solid var(--line);padding:clamp(2rem,5vw,3rem) 0;margin-to
       <div class="foot__links">
         <a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord</a>
         <a href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok @atlascapitalbv</a>
-        <a href="#selectie">Selectie</a>
-        <a href="#kanalen">Opstelling</a>
+        <a href="#selectie"><span lang="nl">Selectie</span><span lang="en">Squad</span></a>
+        <a href="#kanalen"><span lang="nl">Opstelling</span><span lang="en">Line-up</span></a>
       </div>
     </div>
-    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
   </div>
 </footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

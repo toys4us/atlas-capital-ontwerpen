@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,6 +25,10 @@
   --disp:"Big Shoulders Display","Haettenschweiler","Arial Narrow",Impact,var(--sans);
   --pad:clamp(14px,3.6vw,60px);
 }
+
+/* ---------- taal / language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
 
 html{color-scheme:light;-webkit-text-size-adjust:100%}
 *{box-sizing:border-box}
@@ -118,6 +122,20 @@ a{color:inherit}
 .top__nav--go{background:var(--ink);color:var(--paper)!important}
 .top__nav--go:hover{background:var(--gold);color:var(--ink)!important}
 
+/* ---------- taalschakelaar ---------- */
+.langsw{display:flex;align-items:stretch}
+.langsw button{
+  appearance:none;-webkit-appearance:none;background:transparent;
+  border:0;border-left:3px solid var(--ink);
+  font-family:var(--sans);font-size:10px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--grey);cursor:pointer;padding:0 14px;
+}
+.langsw button:hover{background:var(--gold);color:var(--ink)}
+.langsw button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.langsw button[aria-pressed="true"]:hover{background:var(--gold);color:var(--ink)}
+.langsw button:focus-visible{outline:3px solid var(--gold-lo);outline-offset:-3px}
+
 /* ---------- feitenband ---------- */
 .facts{display:flex;flex-wrap:wrap;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
 .facts div{flex:1 1 130px;padding:14px var(--pad) 14px 0;border-right:3px solid var(--ink);min-width:0}
@@ -194,59 +212,63 @@ a{color:inherit}
 <!-- ============ KOP ============ -->
 <header class="top">
   <span class="top__n"><i aria-hidden="true"></i> Atlas Capital</span>
-  <nav class="top__nav" aria-label="Hoofdmenu">
-    <a href="#educatie">Educatie</a>
+  <nav class="top__nav" aria-label="Hoofdmenu / Main menu">
+    <a href="#educatie"><span lang="nl">Educatie</span><span lang="en">Education</span></a>
     <a href="#model">Model</a>
-    <a href="#kanalen">Kanalen</a>
+    <a href="#kanalen"><span lang="nl">Kanalen</span><span lang="en">Channels</span></a>
     <a class="top__nav--go" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Open Discord →</a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </nav>
 </header>
 
 <!-- ============ HERO ============ -->
 <section class="sec" style="padding-bottom:clamp(22px,3vw,40px)">
-  <p class="label"><b>Atlas Capital</b> <s aria-hidden="true"></s> Nederlandse trading-community op Discord</p>
-  <h1 class="block block--xl">Proces boven <span class="knock">voorspelling</span>. Tien onderwerpen, vijftien kanalen, één manier van werken.</h1>
-  <p class="block block--sm hollow" style="margin-top:clamp(16px,2.4vw,26px)">NQ · ES · Bitcoin · Altcoins · Nu gratis</p>
-  <p class="note">Geen snelle-rijk-verhalen. Structuur, educatie en een community die samen beter wil worden.</p>
-  <p style="margin:clamp(22px,3vw,34px) 0 0"><a class="cta" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Word lid op Discord <span aria-hidden="true">→</span></a></p>
+  <p class="label"><b>Atlas Capital</b> <s aria-hidden="true"></s> <span lang="nl">Nederlandse trading-community op Discord</span><span lang="en">Dutch trading community on Discord</span></p>
+  <h1 class="block block--xl"><span lang="nl">Proces boven </span><span lang="en">Process over </span><span class="knock" lang="nl">voorspelling</span><span class="knock" lang="en">prediction</span><span lang="nl">. Tien onderwerpen, vijftien kanalen, één manier van werken.</span><span lang="en">. Ten topics, fifteen channels, one single way of working.</span></h1>
+  <p class="block block--sm hollow" style="margin-top:clamp(16px,2.4vw,26px)"><span lang="nl">NQ · ES · Bitcoin · Altcoins · Nu gratis</span><span lang="en">NQ · ES · Bitcoin · Altcoins · Free right now</span></p>
+  <p class="note"><span lang="nl">Geen snelle-rijk-verhalen. Structuur, educatie en een community die samen beter wil worden.</span><span lang="en">No get-rich-quick promises. Structure, education, and a community focused on improving together.</span></p>
+  <p style="margin:clamp(22px,3vw,34px) 0 0"><a class="cta" href="https://discord.gg/78Ff2GuSfW" rel="noopener"><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span> <span aria-hidden="true">→</span></a></p>
 </section>
 
 <div class="facts">
-  <div style="padding-left:var(--pad)"><b>Gratis</b><span>toegang nu</span></div>
-  <div><b>10 onderwerpen</b><span>educatie</span></div>
-  <div><b>15 kanalen</b><span>server</span></div>
-  <div><b>10+ jaar</b><span>oprichter</span></div>
+  <div style="padding-left:var(--pad)"><b lang="nl">Gratis</b><b lang="en">Free</b><span lang="nl">toegang nu</span><span lang="en">access now</span></div>
+  <div><b lang="nl">10 onderwerpen</b><b lang="en">10 topics</b><span lang="nl">educatie</span><span lang="en">education</span></div>
+  <div><b lang="nl">15 kanalen</b><b lang="en">15 channels</b><span>server</span></div>
+  <div><b lang="nl">10+ jaar</b><b lang="en">10+ years</b><span lang="nl">oprichter</span><span lang="en">founder</span></div>
 </div>
 
 <!-- ============ OPRICHTER ============ -->
 <section class="sec sec--ink">
-  <p class="label"><b>01</b> <s aria-hidden="true"></s> De oprichter</p>
-  <p class="block">&ldquo;Meer dan <span class="knock">tien jaar</span> actief in trading. Winst, verlies, fouten, groei en vooral heel veel lessen.&rdquo;</p>
-  <p class="note" style="max-width:60ch">&ldquo;Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</p>
-  <p style="margin:clamp(22px,3vw,32px) 0 0"><a class="cta cta--paper" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Kom binnen <span aria-hidden="true">→</span></a></p>
+  <p class="label"><b>01</b> <s aria-hidden="true"></s> <span lang="nl">De oprichter</span><span lang="en">The founder</span></p>
+  <p class="block"><span lang="nl">&ldquo;Meer dan </span><span lang="en">&ldquo;I've been involved in trading for over </span><span class="knock" lang="nl">tien jaar</span><span class="knock" lang="en">10 years</span><span lang="nl"> actief in trading. Winst, verlies, fouten, groei en vooral heel veel lessen.&rdquo;</span><span lang="en"> now. Wins, losses, mistakes, growth, and a lot of lessons.&rdquo;</span></p>
+  <p class="note" style="max-width:60ch"><span lang="nl">&ldquo;Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</span><span lang="en">&ldquo;I built Atlas Capital to share that experience, bring traders together, and show how I approach the markets on a daily basis. No get-rich-quick promises, just real setups, education, and a community focused on improving together.&rdquo;</span></p>
+  <p style="margin:clamp(22px,3vw,32px) 0 0"><a class="cta cta--paper" href="https://discord.gg/78Ff2GuSfW" rel="noopener"><span lang="nl">Kom binnen</span><span lang="en">Come inside</span> <span aria-hidden="true">→</span></a></p>
 </section>
 
 <!-- ============ EDUCATIE ============ -->
 <section class="sec" id="educatie">
-  <p class="label"><b>02</b> <s aria-hidden="true"></s> Educatie · tien onderwerpen</p>
-  <h2 class="block block--sm" style="margin-bottom:clamp(20px,3vw,34px)">De hele leerlijn, in één blok</h2>
+  <p class="label"><b>02</b> <s aria-hidden="true"></s> <span lang="nl">Educatie · tien onderwerpen</span><span lang="en">Education · ten topics</span></p>
+  <h2 class="block block--sm" style="margin-bottom:clamp(20px,3vw,34px)"><span lang="nl">De hele leerlijn, in één blok</span><span lang="en">The whole curriculum, in one block</span></h2>
   <p class="mass">
-    <em>Deviatie<sup>01</sup></em><i>▪</i><em>SMT<sup>02</sup></em><i>▪</i><em>FVG<sup>03</sup></em><i>▪</i><em>IFVG<sup>04</sup></em><i>▪</i><em>Orderblocks<sup>05</sup></em><i>▪</i><em>Fibonacci<sup>06</sup></em><i>▪</i><em>Sessie-liquiditeit<sup>07</sup></em><i>▪</i><em>Liquiditeit<sup>08</sup></em><i>▪</i><em>Risicobeheer<sup>09</sup></em><i>▪</i><em>Tradingpsychologie<sup>10</sup></em>
+    <em lang="nl">Deviatie<sup>01</sup></em><em lang="en">Deviation<sup>01</sup></em><i>▪</i><em>SMT<sup>02</sup></em><i>▪</i><em>FVG<sup>03</sup></em><i>▪</i><em>IFVG<sup>04</sup></em><i>▪</i><em>Orderblocks<sup>05</sup></em><i>▪</i><em>Fibonacci<sup>06</sup></em><i>▪</i><em lang="nl">Sessie-liquiditeit<sup>07</sup></em><em lang="en">Session liquidity<sup>07</sup></em><i>▪</i><em lang="nl">Liquiditeit<sup>08</sup></em><em lang="en">Liquidity<sup>08</sup></em><i>▪</i><em lang="nl">Risicobeheer<sup>09</sup></em><em lang="en">Risk management<sup>09</sup></em><i>▪</i><em lang="nl">Tradingpsychologie<sup>10</sup></em><em lang="en">Trading psychology<sup>10</sup></em>
   </p>
-  <p class="note">Van marktstructuur tot gedrag onder druk. Alles staat nu open in de server.</p>
-  <p style="margin:clamp(22px,3vw,34px) 0 0"><a class="cta cta--gold" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Begin met leren <span aria-hidden="true">→</span></a></p>
+  <p class="note"><span lang="nl">Van marktstructuur tot gedrag onder druk. Alles staat nu open in de server.</span><span lang="en">From market structure to behaviour under pressure. All of it is open in the server now.</span></p>
+  <p style="margin:clamp(22px,3vw,34px) 0 0"><a class="cta cta--gold" href="https://discord.gg/78Ff2GuSfW" rel="noopener"><span lang="nl">Begin met leren</span><span lang="en">Start learning</span> <span aria-hidden="true">→</span></a></p>
 </section>
 
 <hr class="rule">
 
 <!-- ============ MODEL ============ -->
 <section class="sec" id="model">
-  <p class="label"><b>03</b> <s aria-hidden="true"></s> Model · sessie-liquiditeit</p>
-  <h2 class="block block--sm">Elke sessie legt zijn eigen randen neer. De volgende sessie haalt ze op.</h2>
-  <p class="note">Schema van sessie-liquiditeit. Geen prijzen, geen datums, geen uitkomsten — alleen vorm.</p>
+  <p class="label"><b>03</b> <s aria-hidden="true"></s> <span lang="nl">Model · sessie-liquiditeit</span><span lang="en">Model · session liquidity</span></p>
+  <h2 class="block block--sm"><span lang="nl">Elke sessie legt zijn eigen randen neer. De volgende sessie haalt ze op.</span><span lang="en">Every session lays down its own edges. The next session comes and takes them.</span></h2>
+  <p class="note"><span lang="nl">Schema van sessie-liquiditeit. Geen prijzen, geen datums, geen uitkomsten — alleen vorm.</span><span lang="en">A diagram of session liquidity. No prices, no dates, no outcomes — shape only.</span></p>
 
   <div class="scrollx" style="margin-top:clamp(22px,3.4vw,40px);border:3px solid var(--ink)">
-    <svg class="fig" viewBox="0 0 1000 470" role="img" aria-label="Schema van sessie-liquiditeit: drie sessies naast elkaar, waarbij een latere sessie de randen van de eerdere ophaalt">
+    <svg class="fig" viewBox="0 0 1000 470" role="img" aria-label="Schema van sessie-liquiditeit: drie sessies naast elkaar, waarbij een latere sessie de randen van de eerdere ophaalt / Diagram of session liquidity: three sessions side by side, where a later session takes the edges of the earlier one">
       <rect x="0" y="0" width="1000" height="470" fill="#FAF8F3"/>
 
       <!-- liquiditeitslijnen van sessie 1 -->
@@ -270,18 +292,25 @@ a{color:inherit}
 
       <!-- namen -->
       <g font-family="'Big Shoulders Display','Arial Narrow',Impact,sans-serif" font-weight="800" font-size="42" fill="#F4F2EC" letter-spacing="1">
-        <text x="58" y="200">AZIË</text>
-        <text x="358" y="262">LONDEN</text>
+        <text lang="nl" x="58" y="200">AZIË</text>
+        <text lang="en" x="58" y="200">ASIA</text>
+        <text lang="nl" x="358" y="262">LONDEN</text>
+        <text lang="en" x="358" y="262">LONDON</text>
         <text x="658" y="320">NEW YORK</text>
       </g>
-      <text x="358" y="86" font-family="'Big Shoulders Display','Arial Narrow',Impact,sans-serif" font-weight="800" font-size="30" fill="#08090B">OPHALEN</text>
-      <text x="658" y="258" font-family="'Big Shoulders Display','Arial Narrow',Impact,sans-serif" font-weight="800" font-size="26" fill="#08090B">OPHALEN</text>
+      <text lang="nl" x="358" y="86" font-family="'Big Shoulders Display','Arial Narrow',Impact,sans-serif" font-weight="800" font-size="30" fill="#08090B">OPHALEN</text>
+      <text lang="en" x="358" y="86" font-family="'Big Shoulders Display','Arial Narrow',Impact,sans-serif" font-weight="800" font-size="30" fill="#08090B">TAKEN</text>
+      <text lang="nl" x="658" y="258" font-family="'Big Shoulders Display','Arial Narrow',Impact,sans-serif" font-weight="800" font-size="26" fill="#08090B">OPHALEN</text>
+      <text lang="en" x="658" y="258" font-family="'Big Shoulders Display','Arial Narrow',Impact,sans-serif" font-weight="800" font-size="26" fill="#08090B">TAKEN</text>
 
       <!-- labels randen -->
       <g font-family="-apple-system,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="4" fill="#57575A">
-        <text x="40" y="76">RAND BOVEN</text>
-        <text x="40" y="264">RAND ONDER</text>
-        <text x="40" y="404">TIJD →</text>
+        <text lang="nl" x="40" y="76">RAND BOVEN</text>
+        <text lang="en" x="40" y="76">TOP EDGE</text>
+        <text lang="nl" x="40" y="264">RAND ONDER</text>
+        <text lang="en" x="40" y="264">BOTTOM EDGE</text>
+        <text lang="nl" x="40" y="404">TIJD →</text>
+        <text lang="en" x="40" y="404">TIME →</text>
       </g>
 
       <!-- tijdbalk -->
@@ -293,21 +322,24 @@ a{color:inherit}
         <rect x="954" y="410" width="6" height="22"/>
       </g>
       <g font-family="-apple-system,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="3" fill="#57575A">
-        <text x="40" y="452">EERSTE SESSIE</text>
-        <text x="337" y="452">VOLGENDE</text>
-        <text x="637" y="452">DAARNA</text>
+        <text lang="nl" x="40" y="452">EERSTE SESSIE</text>
+        <text lang="en" x="40" y="452">FIRST SESSION</text>
+        <text lang="nl" x="337" y="452">VOLGENDE</text>
+        <text lang="en" x="337" y="452">NEXT</text>
+        <text lang="nl" x="637" y="452">DAARNA</text>
+        <text lang="en" x="637" y="452">AFTER THAT</text>
       </g>
     </svg>
   </div>
-  <p class="key"><span><b>Rand</b> — hoogte of diepte van een sessie</span><span><b>Ophalen</b> — de volgende sessie neemt die rand mee</span><span><b>Schema</b> — illustratie, geen resultaat</span></p>
+  <p class="key"><span><b lang="nl">Rand</b><b lang="en">Edge</b><span lang="nl"> — hoogte of diepte van een sessie</span><span lang="en"> — the high or low of a session</span></span><span><b lang="nl">Ophalen</b><b lang="en">Taken</b><span lang="nl"> — de volgende sessie neemt die rand mee</span><span lang="en"> — the next session takes that edge</span></span><span><b lang="nl">Schema</b><b lang="en">Diagram</b><span lang="nl"> — illustratie, geen resultaat</span><span lang="en"> — illustration, not a result</span></span></p>
 </section>
 
 <hr class="rule rule--gold">
 
 <!-- ============ KANAALMUUR ============ -->
 <section class="sec sec--ink" id="kanalen">
-  <p class="label"><b>04</b> <s aria-hidden="true"></s> Kanalen · vijftien stuks</p>
-  <h2 class="block block--sm" style="margin-bottom:clamp(20px,3vw,32px)">Thuis staat open. Premium opent later.</h2>
+  <p class="label"><b>04</b> <s aria-hidden="true"></s> <span lang="nl">Kanalen · vijftien stuks</span><span lang="en">Channels · fifteen of them</span></p>
+  <h2 class="block block--sm" style="margin-bottom:clamp(20px,3vw,32px)"><span lang="nl">Thuis staat open. Premium opent later.</span><span lang="en">Home is open. Premium opens later.</span></h2>
   <div class="wall">
     <a class="chip chip--gold s4" href="https://discord.gg/78Ff2GuSfW" rel="noopener">#nq-chart-ideeën</a>
     <a class="chip s2" style="border-color:var(--paper);color:var(--paper)" href="https://discord.gg/78Ff2GuSfW" rel="noopener">#es-chart-ideeën</a>
@@ -320,7 +352,7 @@ a{color:inherit}
     <a class="chip chip--gold s2" href="https://discord.gg/78Ff2GuSfW" rel="noopener">#ondersteuning</a>
   </div>
 
-  <p class="label" style="margin-top:clamp(26px,4vw,44px)"><b>Premium</b> <s aria-hidden="true"></s> opent later · prijs en datum volgen in de server</p>
+  <p class="label" style="margin-top:clamp(26px,4vw,44px)"><b>Premium</b> <s aria-hidden="true"></s> <span lang="nl">opent later · prijs en datum volgen in de server</span><span lang="en">opens later · price and date follow in the server</span></p>
   <div class="wall">
     <span class="chip chip--dim s3">#trade-setups</span>
     <span class="chip chip--dim s1">#marktupdates</span>
@@ -329,22 +361,22 @@ a{color:inherit}
     <span class="chip chip--dim s1">#chart-ideeën</span>
     <span class="chip chip--dim s2">#premium-chat</span>
   </div>
-  <p style="margin:clamp(24px,3.4vw,38px) 0 0"><a class="cta cta--paper" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Bekijk de server <span aria-hidden="true">→</span></a></p>
+  <p style="margin:clamp(24px,3.4vw,38px) 0 0"><a class="cta cta--paper" href="https://discord.gg/78Ff2GuSfW" rel="noopener"><span lang="nl">Bekijk de server</span><span lang="en">See the server</span> <span aria-hidden="true">→</span></a></p>
 </section>
 
 <!-- ============ LIVE + TOEGANG ============ -->
 <div class="duo">
   <section id="live">
     <p class="label"><b>05</b> <s aria-hidden="true"></s> Live</p>
-    <h2 class="block block--sm">Live meekijken terwijl het gebeurt.</h2>
-    <p class="note">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
-    <p style="margin:clamp(20px,3vw,30px) 0 0"><a class="cta cta--out" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Zit erbij <span aria-hidden="true">→</span></a></p>
+    <h2 class="block block--sm"><span lang="nl">Live meekijken terwijl het gebeurt.</span><span lang="en">Watch along live while it happens.</span></h2>
+    <p class="note"><span lang="nl">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced there.</span></p>
+    <p style="margin:clamp(20px,3vw,30px) 0 0"><a class="cta cta--out" href="https://discord.gg/78Ff2GuSfW" rel="noopener"><span lang="nl">Zit erbij</span><span lang="en">Sit in</span> <span aria-hidden="true">→</span></a></p>
   </section>
   <section>
-    <p class="label"><b>06</b> <s aria-hidden="true"></s> Toegang</p>
-    <h2 class="block block--sm">Nu <span class="knock">gratis</span>. Premium opent later.</h2>
-    <p class="note">Alle thuiskanalen, de volledige educatie en live meekijken staan open. Premium is nog niet open; prijs en datum worden in de server aangekondigd.</p>
-    <p style="margin:clamp(20px,3vw,30px) 0 0"><a class="cta cta--out" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Neem een kijkje <span aria-hidden="true">→</span></a></p>
+    <p class="label"><b>06</b> <s aria-hidden="true"></s> <span lang="nl">Toegang</span><span lang="en">Access</span></p>
+    <h2 class="block block--sm"><span lang="nl">Nu </span><span lang="en">Now </span><span class="knock" lang="nl">gratis</span><span class="knock" lang="en">free</span><span lang="nl">. Premium opent later.</span><span lang="en">. Premium opens later.</span></h2>
+    <p class="note"><span lang="nl">Alle thuiskanalen, de volledige educatie en live meekijken staan open. Premium is nog niet open; prijs en datum worden in de server aangekondigd.</span><span lang="en">All home channels, the full education and watching live are open. Premium is not open yet; price and date are announced in the server.</span></p>
+    <p style="margin:clamp(20px,3vw,30px) 0 0"><a class="cta cta--out" href="https://discord.gg/78Ff2GuSfW" rel="noopener"><span lang="nl">Neem een kijkje</span><span lang="en">Take a look</span> <span aria-hidden="true">→</span></a></p>
   </section>
 </div>
 
@@ -352,18 +384,18 @@ a{color:inherit}
 
 <!-- ============ SLOT ============ -->
 <section class="sec sec--gold">
-  <p class="label"><b>07</b> <s aria-hidden="true"></s> Sluiten</p>
-  <h2 class="block block--xl">Kom binnen, kijk mee, stel je vraag.</h2>
-  <p class="note" style="max-width:44ch">De server is open. Vandaag nog.</p>
+  <p class="label"><b>07</b> <s aria-hidden="true"></s> <span lang="nl">Sluiten</span><span lang="en">Closing</span></p>
+  <h2 class="block block--xl"><span lang="nl">Kom binnen, kijk mee, stel je vraag.</span><span lang="en">Come inside, watch along, ask your question.</span></h2>
+  <p class="note" style="max-width:44ch"><span lang="nl">De server is open. Vandaag nog.</span><span lang="en">The server is open. Today.</span></p>
 </section>
-<a class="cta cta--full" href="https://discord.gg/78Ff2GuSfW" rel="noopener"><span>Word lid op Discord</span><span aria-hidden="true">→</span></a>
+<a class="cta cta--full" href="https://discord.gg/78Ff2GuSfW" rel="noopener"><span><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></span><span aria-hidden="true">→</span></a>
 
 <!-- ============ VOET ============ -->
 <footer class="foot">
   <div class="foot__g">
     <div>
       <h4>Atlas Capital</h4>
-      <p style="margin:0;font-size:13px">Proces. Discipline. Uitvoering.</p>
+      <p style="margin:0;font-size:13px"><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></p>
     </div>
     <div>
       <h4>Server</h4>
@@ -374,12 +406,33 @@ a{color:inherit}
       <a href="https://www.tiktok.com/@atlascapitalbv" rel="noopener">tiktok.com/@atlascapitalbv</a>
     </div>
     <div>
-      <h4>Markten</h4>
+      <h4><span lang="nl">Markten</span><span lang="en">Markets</span></h4>
       <p style="margin:0;font-size:13px">NQ · ES · Bitcoin · Altcoins</p>
     </div>
   </div>
-  <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
 </footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

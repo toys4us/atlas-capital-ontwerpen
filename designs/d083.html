@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,6 +24,10 @@
 }
 
 *{box-sizing:border-box}
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
 
 html{
   color-scheme:light;
@@ -120,6 +124,37 @@ a{color:inherit;text-decoration:none}
 }
 .street-mid{display:none}
 @media(min-width:880px){.street-mid{display:block}}
+
+.langsw{
+  display:flex;
+  flex:0 0 auto;
+  border:1px solid var(--rule);
+  border-radius:1px;
+}
+.langsw button{
+  appearance:none;
+  -webkit-appearance:none;
+  margin:0;
+  border:0;
+  border-left:1px solid var(--rule);
+  background:transparent;
+  padding:.62em .5em .62em .62em;
+  font-family:var(--sans);
+  font-size:clamp(9px,1.4vw,10.5px);
+  font-weight:700;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--ink-40);
+  cursor:pointer;
+  transition:color .3s,background-color .3s;
+}
+.langsw button:first-child{border-left:0}
+.langsw button:hover{color:var(--ink)}
+.langsw button[aria-pressed="true"]{
+  background:linear-gradient(118deg,var(--gold-hi),var(--gold) 46%,var(--gold-lo));
+  color:#100C03;
+}
 
 /* ---------------- awning ---------------- */
 
@@ -563,8 +598,12 @@ footer{
 <header class="street">
   <div class="wrap street-in pad">
     <span class="street-name">Atlas Capital</span>
-    <p class="tag street-mid">Etalage &mdash; nu geopend</p>
+    <p class="tag street-mid"><span lang="nl">Etalage &mdash; nu geopend</span><span lang="en">Shop window &mdash; now open</span></p>
     <a class="blink" href="https://discord.gg/78Ff2GuSfW">Discord <span aria-hidden="true">&#8599;</span></a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
@@ -577,11 +616,11 @@ footer{
     <div class="wrap pad">
 
       <div class="marquee-line">
-        <h1 class="disp">Kijk eerst.<br><span class="thin">Kom dan binnen.</span></h1>
+        <h1 class="disp"><span lang="nl">Kijk eerst.<br><span class="thin">Kom dan binnen.</span></span><span lang="en">Look first.<br><span class="thin">Then come inside.</span></span></h1>
         <div class="side">
-          <p class="tag tag--gold">Proces. Discipline. Uitvoering.</p>
-          <p class="lede">De hele etalage staat open: educatie, kanalen en live sessies.</p>
-          <a class="btn" href="https://discord.gg/78Ff2GuSfW">Naar binnen <span aria-hidden="true">&#8594;</span></a>
+          <p class="tag tag--gold"><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></p>
+          <p class="lede"><span lang="nl">De hele etalage staat open: educatie, kanalen en live sessies.</span><span lang="en">The whole window is open: education, channels and live sessions.</span></p>
+          <a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Naar binnen</span><span lang="en">Come inside</span> <span aria-hidden="true">&#8594;</span></a>
         </div>
       </div>
 
@@ -614,9 +653,10 @@ footer{
                     <path d="M334 84 V162"/><rect x="327" y="98" width="14" height="46" fill="#20190a"/>
                   </g>
                   <text x="158" y="128" fill="#D7B364" font-family="Helvetica, Arial, sans-serif" font-size="11" letter-spacing="3">FVG</text>
-                  <text x="16" y="66" fill="#A5A6A8" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="3">NIVEAU</text>
+                  <text x="16" y="66" fill="#A5A6A8" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="3" lang="nl">NIVEAU</text>
+                  <text x="16" y="66" fill="#A5A6A8" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="3" lang="en">LEVEL</text>
                 </svg>
-                <p class="plinth-cap">Object 01 &mdash; het model, schematisch</p>
+                <p class="plinth-cap"><span lang="nl">Object 01 &mdash; het model, schematisch</span><span lang="en">Object 01 &mdash; the model, schematic</span></p>
               </div>
             </div>
 
@@ -642,17 +682,17 @@ footer{
             <!-- object: the show card (founder) -->
             <div class="good g-card">
               <div class="showcard">
-                <p class="tag">De maker</p>
-                <h2>10+ jaar<br>in de markt</h2>
-                <p>&#8220;Geen snelle&#8209;rijk&#8209;verhalen, maar echte setups, educatie en een community die samen beter wil worden.&#8221;</p>
+                <p class="tag"><span lang="nl">De maker</span><span lang="en">The maker</span></p>
+                <h2><span lang="nl">10+ jaar<br>in de markt</span><span lang="en">10+ years<br>in the market</span></h2>
+                <p><span lang="nl">&#8220;Geen snelle&#8209;rijk&#8209;verhalen, maar echte setups, educatie en een community die samen beter wil worden.&#8221;</span><span lang="en">&#8220;No get-rich-quick promises, just real setups, education, and a community focused on improving together.&#8221;</span></p>
               </div>
             </div>
 
             <!-- object: the ticket -->
             <div class="good g-price">
               <div class="ticket">
-                <b>Gratis</b>
-                <span>Toegang &mdash; nu open</span>
+                <b><span lang="nl">Gratis</span><span lang="en">Free</span></b>
+                <span><span lang="nl">Toegang &mdash; nu open</span><span lang="en">Access &mdash; now open</span></span>
               </div>
             </div>
           </div>
@@ -660,8 +700,8 @@ footer{
           <!-- vinyl lettering on the glass -->
           <div class="vinyl">
             <p class="vword" aria-hidden="true"><span>A</span><span>T</span><span>L</span><span>A</span><span>S</span></p>
-            <p class="vsub"><span>Capital</span><span>Educatie &amp; community</span></p>
-            <div class="vcta"><a class="blink blink--gold" href="https://discord.gg/78Ff2GuSfW">Word lid via Discord <span aria-hidden="true">&#8599;</span></a></div>
+            <p class="vsub"><span>Capital</span><span><span lang="nl">Educatie &amp; community</span><span lang="en">Education &amp; community</span></span></p>
+            <div class="vcta"><a class="blink blink--gold" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid via Discord</span><span lang="en">Join on Discord</span> <span aria-hidden="true">&#8599;</span></a></div>
           </div>
 
           <span class="glass" aria-hidden="true"></span>
@@ -670,8 +710,8 @@ footer{
       </div>
 
       <div class="pavement">
-        <p class="note">Alles wat in de etalage staat, staat ook in de server: NQ, ES, Bitcoin en altcoins.</p>
-        <p class="tag">15 kanalen &middot; 10 onderwerpen</p>
+        <p class="note"><span lang="nl">Alles wat in de etalage staat, staat ook in de server: NQ, ES, Bitcoin en altcoins.</span><span lang="en">Everything in the window is in the server too: NQ, ES, Bitcoin and altcoins.</span></p>
+        <p class="tag"><span lang="nl">15 kanalen &middot; 10 onderwerpen</span><span lang="en">15 channels &middot; 10 topics</span></p>
       </div>
 
     </div>
@@ -681,15 +721,15 @@ footer{
   <section class="dark-band">
     <div class="wrap pad">
       <div class="band-head">
-        <h2 class="disp">De collectie<br><span class="gold">in de kast</span></h2>
-        <a class="blink blink--gold" href="https://discord.gg/78Ff2GuSfW">Bekijk de educatie <span aria-hidden="true">&#8599;</span></a>
+        <h2 class="disp"><span lang="nl">De collectie<br><span class="gold">in de kast</span></span><span lang="en">The collection<br><span class="gold">on the shelf</span></span></h2>
+        <a class="blink blink--gold" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Bekijk de educatie</span><span lang="en">See the education</span> <span aria-hidden="true">&#8599;</span></a>
       </div>
 
       <div class="shelves">
         <div class="shelf-item">
           <span class="no">01</span>
           <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><path d="M2 20H58" stroke="rgba(244,242,236,.3)" stroke-dasharray="3 4"/><path d="M30 4V30" stroke="#D7B364" stroke-width="1.6"/><rect x="25" y="14" width="10" height="14" fill="#D7B364"/></svg></span>
-          <span class="nm">deviatie</span>
+          <span class="nm"><span lang="nl">deviatie</span><span lang="en">deviation</span></span>
         </div>
         <div class="shelf-item">
           <span class="no">02</span>
@@ -719,22 +759,22 @@ footer{
         <div class="shelf-item">
           <span class="no">07</span>
           <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><path d="M4 30A26 26 0 0 1 56 30" stroke="#D7B364" stroke-width="1.6"/><path d="M30 4V30" stroke="rgba(244,242,236,.3)" stroke-dasharray="3 4"/></svg></span>
-          <span class="nm">sessie&#8209;liquiditeit</span>
+          <span class="nm"><span lang="nl">sessie&#8209;liquiditeit</span><span lang="en">session liquidity</span></span>
         </div>
         <div class="shelf-item">
           <span class="no">08</span>
           <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><path d="M4 12H56" stroke="rgba(244,242,236,.4)" stroke-dasharray="4 4"/><path d="M14 12V26M24 12V22M34 12V28M44 12V20" stroke="#D7B364" stroke-width="1.6"/></svg></span>
-          <span class="nm">liquiditeit</span>
+          <span class="nm"><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></span>
         </div>
         <div class="shelf-item">
           <span class="no">09</span>
           <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><rect x="8" y="8" width="44" height="18" stroke="rgba(244,242,236,.4)"/><rect x="8" y="8" width="16" height="18" fill="rgba(215,179,100,.6)"/></svg></span>
-          <span class="nm">risicobeheer</span>
+          <span class="nm"><span lang="nl">risicobeheer</span><span lang="en">risk management</span></span>
         </div>
         <div class="shelf-item">
           <span class="no">10</span>
           <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><path d="M4 26C12 26 12 8 20 8s8 18 16 18 8-14 16-14" stroke="#D7B364" stroke-width="1.6"/></svg></span>
-          <span class="nm">tradingpsychologie</span>
+          <span class="nm"><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></span>
         </div>
       </div>
     </div>
@@ -750,7 +790,8 @@ footer{
             <path d="M152 0V380"/><path d="M304 0V380"/><path d="M456 0V380"/><path d="M608 0V380"/>
           </g>
           <path d="M40 268 H720" stroke="#F4F2EC" stroke-dasharray="7 7" stroke-width="1.2"/>
-          <text x="40" y="256" fill="#A5A6A8" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4">LIQUIDITEIT</text>
+          <text x="40" y="256" fill="#A5A6A8" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4" lang="nl">LIQUIDITEIT</text>
+          <text x="40" y="256" fill="#A5A6A8" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4" lang="en">LIQUIDITY</text>
           <rect x="392" y="128" width="300" height="46" fill="rgba(215,179,100,.15)" stroke="rgba(215,179,100,.55)"/>
           <text x="404" y="158" fill="#D7B364" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4">FVG</text>
           <g stroke="#F4F2EC" stroke-width="1.6">
@@ -783,9 +824,9 @@ footer{
       </div>
       <div class="walllabel">
         <p class="tag tag--gold">Object 02</p>
-        <h2>Het model,<br>uitgelicht</h2>
-        <p>Een sweep onder liquiditeit, daarna terug de gap in. Een schema om te leren lezen &mdash; geen resultaat en geen belofte.</p>
-        <a class="blink" href="https://discord.gg/78Ff2GuSfW">Vraag het na in #vragen <span aria-hidden="true">&#8599;</span></a>
+        <h2><span lang="nl">Het model,<br>uitgelicht</span><span lang="en">The model,<br>on show</span></h2>
+        <p><span lang="nl">Een sweep onder liquiditeit, daarna terug de gap in. Een schema om te leren lezen &mdash; geen resultaat en geen belofte.</span><span lang="en">A sweep under liquidity, then back into the gap. A diagram to learn to read &mdash; no result and no promise.</span></p>
+        <a class="blink" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Vraag het na in #vragen</span><span lang="en">Ask about it in #vragen</span> <span aria-hidden="true">&#8599;</span></a>
       </div>
     </div>
   </section>
@@ -794,12 +835,12 @@ footer{
   <section class="dark-band">
     <div class="wrap pad">
       <div class="band-head">
-        <h2 class="disp">De rekken<br><span class="gold">15 kanalen</span></h2>
-        <p class="tag tag--light">Thuis nu gratis &middot; premium later</p>
+        <h2 class="disp"><span lang="nl">De rekken<br><span class="gold">15 kanalen</span></span><span lang="en">The racks<br><span class="gold">15 channels</span></span></h2>
+        <p class="tag tag--light"><span lang="nl">Thuis nu gratis &middot; premium later</span><span lang="en">Home free right now &middot; premium later</span></p>
       </div>
       <div class="racks">
         <div class="rack">
-          <h3>Thuis &mdash; nu gratis</h3>
+          <h3><span lang="nl">Thuis &mdash; nu gratis</span><span lang="en">Home &mdash; free right now</span></h3>
           <ul class="rail">
             <li>#nq-chart-idee&euml;n</li>
             <li>#es-chart-idee&euml;n</li>
@@ -811,10 +852,10 @@ footer{
             <li>#atlas-op-socials</li>
             <li>#ondersteuning</li>
           </ul>
-          <p class="foot"><a class="blink blink--gold" href="https://discord.gg/78Ff2GuSfW">Open de server <span aria-hidden="true">&#8599;</span></a></p>
+          <p class="foot"><a class="blink blink--gold" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de server</span><span lang="en">Open the server</span> <span aria-hidden="true">&#8599;</span></a></p>
         </div>
         <div class="rack rack--later">
-          <h3>Premium &mdash; opent later</h3>
+          <h3><span lang="nl">Premium &mdash; opent later</span><span lang="en">Premium &mdash; opens later</span></h3>
           <ul class="rail">
             <li>#trade-setups</li>
             <li>#marktupdates</li>
@@ -823,7 +864,7 @@ footer{
             <li>#chart-idee&euml;n</li>
             <li>#premium-chat</li>
           </ul>
-          <p class="foot tag tag--light">Prijs en datum worden in de server aangekondigd.</p>
+          <p class="foot tag tag--light"><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">Price and date will be announced in the server.</span></p>
         </div>
       </div>
     </div>
@@ -834,28 +875,28 @@ footer{
     <div class="doors">
       <div class="door door--open">
         <span class="opensign"><span class="dot" aria-hidden="true"></span> Open</span>
-        <h3>Live in de server</h3>
-        <p>De oprichter handelt live mee. Tijden worden in de server aangekondigd.</p>
+        <h3><span lang="nl">Live in de server</span><span lang="en">Live in the server</span></h3>
+        <p><span lang="nl">De oprichter handelt live mee. Tijden worden in de server aangekondigd.</span><span lang="en">The founder trades live. Times are announced in the server.</span></p>
       </div>
       <div class="door">
-        <p class="tag">Thuis</p>
-        <h3>Nu gratis</h3>
-        <p>Toegang tot de gratis kanalen en de educatie.</p>
+        <p class="tag"><span lang="nl">Thuis</span><span lang="en">Home</span></p>
+        <h3><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></h3>
+        <p><span lang="nl">Toegang tot de gratis kanalen en de educatie.</span><span lang="en">Access to the free channels and the education.</span></p>
       </div>
       <div class="door">
         <p class="tag">Premium</p>
-        <h3>Opent later</h3>
-        <p>Prijs en datum volgen in de server.</p>
+        <h3><span lang="nl">Opent later</span><span lang="en">Opens later</span></h3>
+        <p><span lang="nl">Prijs en datum volgen in de server.</span><span lang="en">Price and date follow in the server.</span></p>
       </div>
     </div>
   </section>
 
   <!-- ============ CLOSING ============ -->
   <section class="closing pad">
-    <p class="tag tag--lightgold">De deur staat open</p>
-    <h2 class="disp">Kom <span class="gold">binnen</span></h2>
-    <p>Proces. Discipline. Uitvoering.</p>
-    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Open Discord <span aria-hidden="true">&#8594;</span></a>
+    <p class="tag tag--lightgold"><span lang="nl">De deur staat open</span><span lang="en">The door is open</span></p>
+    <h2 class="disp"><span lang="nl">Kom <span class="gold">binnen</span></span><span lang="en">Come <span class="gold">inside</span></span></h2>
+    <p><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></p>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open Discord</span><span lang="en">Open the Discord</span> <span aria-hidden="true">&#8594;</span></a>
   </section>
 
 </main>
@@ -868,8 +909,29 @@ footer{
       <a class="blink" href="https://www.tiktok.com/@atlascapitalbv">TikTok @atlascapitalbv <span aria-hidden="true">&#8599;</span></a>
     </div>
   </div>
-  <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
 </footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

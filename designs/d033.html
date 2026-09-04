@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -241,6 +241,20 @@ footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:cla
   display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
 }
 .risk span{max-width:72ch}
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.langsw{display:inline-flex;flex:none;border:1px solid rgba(215,179,100,.42);border-radius:999px;overflow:hidden}
+.langsw button{
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--dim);background:none;border:0;padding:11px 14px;line-height:1;
+  cursor:pointer;transition:color .25s ease, background .25s ease;
+}
+.langsw button + button{border-left:1px solid rgba(215,179,100,.42)}
+.langsw button:hover{color:var(--gold-hi)}
+.langsw button[aria-pressed="true"]{color:var(--gold-hi);background:rgba(215,179,100,.12)}
 </style>
 </head>
 <body>
@@ -255,29 +269,34 @@ footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:cla
       <span>Atlas <i>Capital</i></span>
     </div>
     <nav>
-      <a href="#constellatie">Constellatie</a>
-      <a href="#waarnemer">Waarnemer</a>
+      <a href="#constellatie"><span lang="nl">Constellatie</span><span lang="en">Constellation</span></a>
+      <a href="#waarnemer"><span lang="nl">Waarnemer</span><span lang="en">Observer</span></a>
       <a href="#transit">Transit</a>
-      <a href="#register">Kanalen</a>
-      <a href="#toegang">Toegang</a>
+      <a href="#register"><span lang="nl">Kanalen</span><span lang="en">Channels</span></a>
+      <a href="#toegang"><span lang="nl">Toegang</span><span lang="en">Access</span></a>
     </nav>
     <a class="btn" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
 <!-- ============ HERO + STAR CHART ============ -->
 <div class="wrap hero">
-  <span class="eyebrow"><i></i>Kaart 033 &nbsp;·&nbsp; hemelkaart<i></i></span>
-  <h1>Tien sterren.<br>Eén <em>constellatie</em>.</h1>
-  <p class="lead">Atlas Capital is een Nederlandse trading-community. De educatie staat hierboven aan de hemel: tien onderwerpen, één figuur.</p>
+  <span class="eyebrow"><i></i><span lang="nl">Kaart 033 &nbsp;·&nbsp; hemelkaart</span><span lang="en">Chart 033 &nbsp;·&nbsp; sky map</span><i></i></span>
+  <h1><span lang="nl">Tien sterren.<br>Eén <em>constellatie</em>.</span><span lang="en">Ten stars.<br>One <em>constellation</em>.</span></h1>
+  <p class="lead"><span lang="nl">Atlas Capital is een Nederlandse trading-community. De educatie staat hierboven aan de hemel: tien onderwerpen, één figuur.</span><span lang="en">Atlas Capital is a Dutch trading community. The education is up there in the sky: ten topics, one figure.</span></p>
   <div class="cta">
-    <a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
-    <a class="btn btn--ghost btn--lg" href="#register">Bekijk de kanalen</a>
+    <a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></a>
+    <a class="btn btn--ghost btn--lg" href="#register"><span lang="nl">Bekijk de kanalen</span><span lang="en">See the channels</span></a>
   </div>
 </div>
 
 <div class="chart-holder" id="constellatie">
-  <svg viewBox="0 0 800 800" role="img" aria-label="Hemelkaart met tien sterren die de tien educatie-onderwerpen vormen">
+  <p class="vh" id="d033-lbl-sky"><span lang="nl">Hemelkaart met tien sterren die de tien educatie-onderwerpen vormen</span><span lang="en">Sky map with ten stars that form the ten education topics</span></p>
+  <svg viewBox="0 0 800 800" role="img" aria-labelledby="d033-lbl-sky">
     <defs>
       <clipPath id="g033-disc"><circle cx="400" cy="400" r="278"/></clipPath>
       <radialGradient id="g033-sky" cx="50%" cy="42%" r="62%">
@@ -445,16 +464,21 @@ footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:cla
 
     <!-- ===== labels ===== -->
     <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" letter-spacing="1.6" fill="#E6CC8E">
-      <text x="216" y="200" text-anchor="end">deviatie</text>
+      <text lang="nl" x="216" y="200" text-anchor="end">deviatie</text>
+      <text lang="en" x="216" y="200" text-anchor="end">deviation</text>
       <text x="352" y="132" text-anchor="middle">SMT</text>
       <text x="486" y="184" text-anchor="start">FVG</text>
       <text x="572" y="286" text-anchor="start">IFVG</text>
       <text x="482" y="366" text-anchor="start">orderblocks</text>
       <text x="314" y="322" text-anchor="end">fibonacci</text>
-      <text x="200" y="368" text-anchor="middle">sessie-liquiditeit</text>
-      <text x="272" y="530" text-anchor="end">liquiditeit</text>
-      <text x="420" y="620" text-anchor="middle">risicobeheer</text>
-      <text x="576" y="492" text-anchor="start">tradingpsychologie</text>
+      <text lang="nl" x="200" y="368" text-anchor="middle">sessie-liquiditeit</text>
+      <text lang="en" x="200" y="368" text-anchor="middle">session liquidity</text>
+      <text lang="nl" x="272" y="530" text-anchor="end">liquiditeit</text>
+      <text lang="en" x="272" y="530" text-anchor="end">liquidity</text>
+      <text lang="nl" x="420" y="620" text-anchor="middle">risicobeheer</text>
+      <text lang="en" x="420" y="620" text-anchor="middle">risk management</text>
+      <text lang="nl" x="576" y="492" text-anchor="start">tradingpsychologie</text>
+      <text lang="en" x="576" y="492" text-anchor="start">trading psychology</text>
     </g>
     <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" fill="#B9954A" fill-opacity=".9">
       <text x="240" y="228">&#945;</text><text x="360" y="172">&#946;</text><text x="478" y="212">&#947;</text>
@@ -476,42 +500,43 @@ footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:cla
   </svg>
 
   <p class="chart-caption">
-    Figuur &laquo;Atlas&raquo; &nbsp;·&nbsp; tien sterren, met de hand geplaatst<br>
-    Decoratieve hemelcoördinaten &nbsp;·&nbsp; geen marktgegevens
+    <span lang="nl">Figuur &laquo;Atlas&raquo; &nbsp;·&nbsp; tien sterren, met de hand geplaatst<br>
+    Decoratieve hemelcoördinaten &nbsp;·&nbsp; geen marktgegevens</span><span lang="en">Figure &laquo;Atlas&raquo; &nbsp;·&nbsp; ten stars, placed by hand<br>
+    Decorative celestial coordinates &nbsp;·&nbsp; no market data</span>
   </p>
 </div>
 
 <!-- ============ CATALOGUE ============ -->
 <section class="wrap">
   <div class="sec-top">
-    <span class="mono">Catalogus &nbsp;·&nbsp; 01</span>
-    <h2>De tien onderwerpen</h2>
-    <p>De educatie in de server, sterren van dezelfde figuur.</p>
+    <span class="mono"><span lang="nl">Catalogus &nbsp;·&nbsp; 01</span><span lang="en">Catalogue &nbsp;·&nbsp; 01</span></span>
+    <h2><span lang="nl">De tien onderwerpen</span><span lang="en">The ten topics</span></h2>
+    <p><span lang="nl">De educatie in de server, sterren van dezelfde figuur.</span><span lang="en">The education in the server, stars of the same figure.</span></p>
   </div>
 
   <div class="cat-wrap">
     <table>
-      <caption>Catalogus van de figuur Atlas &nbsp;·&nbsp; 10 onderwerpen</caption>
+      <caption><span lang="nl">Catalogus van de figuur Atlas &nbsp;·&nbsp; 10 onderwerpen</span><span lang="en">Catalogue of the figure Atlas &nbsp;·&nbsp; 10 topics</span></caption>
       <thead>
-        <tr><th>Bayer</th><th>Teken</th><th>Onderwerp</th><th>Coördinaat</th></tr>
+        <tr><th>Bayer</th><th><span lang="nl">Teken</span><span lang="en">Sign</span></th><th><span lang="nl">Onderwerp</span><span lang="en">Topic</span></th><th><span lang="nl">Coördinaat</span><span lang="en">Coordinate</span></th></tr>
       </thead>
       <tbody>
-        <tr><td class="bay">&#945;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="4.4" fill="#E6CC8E"/></svg></td><td class="nm">deviatie</td><td class="co">02u 14m &nbsp;+38°</td></tr>
-        <tr><td class="bay">&#946;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="3.6" fill="#E6CC8E"/></svg></td><td class="nm">SMT</td><td class="co">03u 06m &nbsp;+52°</td></tr>
-        <tr><td class="bay">&#947;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="5" fill="#F1E2BE"/></svg></td><td class="nm">FVG</td><td class="co">04u 22m &nbsp;+44°</td></tr>
-        <tr><td class="bay">&#948;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="3.4" fill="#E6CC8E"/></svg></td><td class="nm">IFVG</td><td class="co">05u 48m &nbsp;+27°</td></tr>
-        <tr><td class="bay">&#949;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6" fill="#F5EACC"/></svg></td><td class="nm">orderblocks</td><td class="co">06u 30m &nbsp;+11°</td></tr>
-        <tr><td class="bay">&#950;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="4.2" fill="#E6CC8E"/></svg></td><td class="nm">fibonacci</td><td class="co">07u 12m &nbsp;+19°</td></tr>
-        <tr><td class="bay">&#951;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="3.4" fill="#E6CC8E"/></svg></td><td class="nm">sessie-liquiditeit</td><td class="co">08u 04m &nbsp;&minus;06°</td></tr>
-        <tr><td class="bay">&#952;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="4" fill="#E6CC8E"/></svg></td><td class="nm">liquiditeit</td><td class="co">09u 26m &nbsp;&minus;21°</td></tr>
-        <tr><td class="bay">&#953;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="5" fill="#F1E2BE"/></svg></td><td class="nm">risicobeheer</td><td class="co">10u 40m &nbsp;&minus;34°</td></tr>
-        <tr><td class="bay">&#954;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="4" fill="#E6CC8E"/></svg></td><td class="nm">tradingpsychologie</td><td class="co">11u 58m &nbsp;&minus;18°</td></tr>
+        <tr><td class="bay">&#945;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="4.4" fill="#E6CC8E"/></svg></td><td class="nm"><span lang="nl">deviatie</span><span lang="en">deviation</span></td><td class="co"><span lang="nl">02u 14m &nbsp;+38°</span><span lang="en">02h 14m &nbsp;+38°</span></td></tr>
+        <tr><td class="bay">&#946;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="3.6" fill="#E6CC8E"/></svg></td><td class="nm">SMT</td><td class="co"><span lang="nl">03u 06m &nbsp;+52°</span><span lang="en">03h 06m &nbsp;+52°</span></td></tr>
+        <tr><td class="bay">&#947;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="5" fill="#F1E2BE"/></svg></td><td class="nm">FVG</td><td class="co"><span lang="nl">04u 22m &nbsp;+44°</span><span lang="en">04h 22m &nbsp;+44°</span></td></tr>
+        <tr><td class="bay">&#948;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="3.4" fill="#E6CC8E"/></svg></td><td class="nm">IFVG</td><td class="co"><span lang="nl">05u 48m &nbsp;+27°</span><span lang="en">05h 48m &nbsp;+27°</span></td></tr>
+        <tr><td class="bay">&#949;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6" fill="#F5EACC"/></svg></td><td class="nm">orderblocks</td><td class="co"><span lang="nl">06u 30m &nbsp;+11°</span><span lang="en">06h 30m &nbsp;+11°</span></td></tr>
+        <tr><td class="bay">&#950;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="4.2" fill="#E6CC8E"/></svg></td><td class="nm">fibonacci</td><td class="co"><span lang="nl">07u 12m &nbsp;+19°</span><span lang="en">07h 12m &nbsp;+19°</span></td></tr>
+        <tr><td class="bay">&#951;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="3.4" fill="#E6CC8E"/></svg></td><td class="nm"><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></td><td class="co"><span lang="nl">08u 04m &nbsp;&minus;06°</span><span lang="en">08h 04m &nbsp;&minus;06°</span></td></tr>
+        <tr><td class="bay">&#952;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="4" fill="#E6CC8E"/></svg></td><td class="nm"><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></td><td class="co"><span lang="nl">09u 26m &nbsp;&minus;21°</span><span lang="en">09h 26m &nbsp;&minus;21°</span></td></tr>
+        <tr><td class="bay">&#953;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="5" fill="#F1E2BE"/></svg></td><td class="nm"><span lang="nl">risicobeheer</span><span lang="en">risk management</span></td><td class="co"><span lang="nl">10u 40m &nbsp;&minus;34°</span><span lang="en">10h 40m &nbsp;&minus;34°</span></td></tr>
+        <tr><td class="bay">&#954;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="4" fill="#E6CC8E"/></svg></td><td class="nm"><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></td><td class="co"><span lang="nl">11u 58m &nbsp;&minus;18°</span><span lang="en">11h 58m &nbsp;&minus;18°</span></td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="center" style="margin-top:34px">
-    <a class="btn btn--ghost" href="https://discord.gg/78Ff2GuSfW">Leer ze in de server</a>
+    <a class="btn btn--ghost" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Leer ze in de server</span><span lang="en">Learn them in the server</span></a>
   </div>
 </section>
 
@@ -520,12 +545,13 @@ footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:cla
 <!-- ============ OBSERVER / FOUNDER ============ -->
 <section class="wrap" id="waarnemer">
   <div class="sec-top">
-    <span class="mono">Waarnemer &nbsp;·&nbsp; 02</span>
-    <h2>Aantekening van de waarnemer</h2>
+    <span class="mono"><span lang="nl">Waarnemer &nbsp;·&nbsp; 02</span><span lang="en">Observer &nbsp;·&nbsp; 02</span></span>
+    <h2><span lang="nl">Aantekening van de waarnemer</span><span lang="en">The observer&rsquo;s note</span></h2>
   </div>
 
   <div class="observer">
-    <svg viewBox="0 0 200 200" role="img" aria-label="Armillaire sfeer in lijn">
+    <p class="vh" id="d033-lbl-arm"><span lang="nl">Armillaire sfeer in lijn</span><span lang="en">Armillary sphere in line</span></p>
+    <svg viewBox="0 0 200 200" role="img" aria-labelledby="d033-lbl-arm">
       <circle cx="100" cy="100" r="86" fill="none" stroke="#B9954A" stroke-width="1"/>
       <ellipse cx="100" cy="100" rx="86" ry="30" fill="none" stroke="#B9954A" stroke-width="1"/>
       <ellipse cx="100" cy="100" rx="86" ry="30" fill="none" stroke="#B9954A" stroke-width=".7" transform="rotate(24 100 100)"/>
@@ -540,12 +566,14 @@ footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:cla
     </svg>
 
     <div>
-      <blockquote>&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</blockquote>
+      <blockquote><span lang="nl">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</span><span lang="en">&ldquo;I&rsquo;ve been involved in trading for over 10 years now, and during that time I&rsquo;ve experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons. I built Atlas Capital to share that experience, bring traders together, and show how I approach the markets on a daily basis. No get-rich-quick promises, just real setups, education, and a community focused on improving together.&rdquo;</span></blockquote>
       <div class="sig">
-        <span><b>Oprichter</b> Atlas Capital</span>
-        <span>10+ jaar actief in trading</span>
+        <span lang="nl"><b>Oprichter</b> Atlas Capital</span>
+        <span lang="en"><b>Founder</b> Atlas Capital</span>
+        <span lang="nl">10+ jaar actief in trading</span>
+        <span lang="en">10+ years in trading</span>
       </div>
-      <div style="margin-top:24px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Kom binnen in de server</a></div>
+      <div style="margin-top:24px"><a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom binnen in de server</span><span lang="en">Come inside the server</span></a></div>
     </div>
   </div>
 </section>
@@ -556,12 +584,13 @@ footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:cla
 <section class="wrap" id="transit">
   <div class="sec-top">
     <span class="mono">Transit &nbsp;·&nbsp; 03</span>
-    <h2>Een model, schematisch</h2>
-    <p>Getekend als een doorgang langs de horizon. Geen prijzen, geen resultaat.</p>
+    <h2><span lang="nl">Een model, schematisch</span><span lang="en">A model, schematic</span></h2>
+    <p><span lang="nl">Getekend als een doorgang langs de horizon. Geen prijzen, geen resultaat.</span><span lang="en">Drawn as a passage along the horizon. No prices, no results.</span></p>
   </div>
 
+  <p class="vh" id="d033-lbl-tr"><span lang="nl">Schematische tekening van een setup: liquiditeit, sweep, orderblock, FVG en uitvoering</span><span lang="en">Schematic drawing of a setup: liquidity, sweep, orderblock, FVG and execution</span></p>
   <div class="scroller">
-    <svg viewBox="0 0 900 440" role="img" aria-label="Schematische tekening van een setup: liquiditeit, sweep, orderblock, FVG en uitvoering">
+    <svg viewBox="0 0 900 440" role="img" aria-labelledby="d033-lbl-tr">
       <defs>
         <pattern id="g033-band" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
           <line x1="0" y1="0" x2="0" y2="8" stroke="#D7B364" stroke-width="1" stroke-opacity=".5"/>
@@ -640,17 +669,19 @@ footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:cla
         <path d="M666,52 L666,28 L610,28"/>
       </g>
       <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1.8" fill="#DAD9D5">
-        <text x="98" y="402" text-anchor="end">LIQUIDITEIT</text>
+        <text lang="nl" x="98" y="402" text-anchor="end">LIQUIDITEIT</text>
+        <text lang="en" x="98" y="402" text-anchor="end">LIQUIDITY</text>
         <text x="312" y="424">SWEEP</text>
         <text x="220" y="210" text-anchor="end">ORDERBLOCK</text>
-        <text x="606" y="32" text-anchor="end" fill="#E6CC8E">UITVOERING</text>
+        <text lang="nl" x="606" y="32" text-anchor="end" fill="#E6CC8E">UITVOERING</text>
+        <text lang="en" x="606" y="32" text-anchor="end" fill="#E6CC8E">EXECUTION</text>
       </g>
       <text x="694" y="203" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="3" fill="#E6CC8E">FVG</text>
     </svg>
   </div>
 
   <div class="figcap">
-    <b>Fig. 03</b><span>Schematische illustratie van een concept</span><span>Geen marktgegevens</span>
+    <b>Fig. 03</b><span lang="nl">Schematische illustratie van een concept</span><span lang="en">Schematic illustration of a concept</span><span lang="nl">Geen marktgegevens</span><span lang="en">No market data</span>
   </div>
 </section>
 
@@ -660,36 +691,38 @@ footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:cla
 <section class="wrap" id="register">
   <div class="sec-top">
     <span class="mono">Register &nbsp;·&nbsp; 04</span>
-    <h2>15 kanalen</h2>
-    <p>Negen staan nu aan de hemel. Zes komen later op.</p>
+    <h2><span lang="nl">15 kanalen</span><span lang="en">15 channels</span></h2>
+    <p><span lang="nl">Negen staan nu aan de hemel. Zes komen later op.</span><span lang="en">Nine are in the sky now. Six rise later.</span></p>
   </div>
 
   <div class="reg">
     <div>
-      <h3>Thuis <span>nu gratis · 9</span></h3>
+      <h3 lang="nl">Thuis <span>nu gratis · 9</span></h3>
+      <h3 lang="en">Home <span>free right now · 9</span></h3>
       <ul>
-        <li><b>&#9733;</b><span class="n">#nq-chart-ideeën</span><span class="mag">ZICHTBAAR</span></li>
-        <li><b>&#9733;</b><span class="n">#es-chart-ideeën</span><span class="mag">ZICHTBAAR</span></li>
-        <li><b>&#9733;</b><span class="n">#bitcoin</span><span class="mag">ZICHTBAAR</span></li>
-        <li><b>&#9733;</b><span class="n">#altcoins</span><span class="mag">ZICHTBAAR</span></li>
-        <li><b>&#9733;</b><span class="n">#markt</span><span class="mag">ZICHTBAAR</span></li>
-        <li><b>&#9733;</b><span class="n">#vragen</span><span class="mag">ZICHTBAAR</span></li>
-        <li><b>&#9733;</b><span class="n">#algemeen</span><span class="mag">ZICHTBAAR</span></li>
-        <li><b>&#9733;</b><span class="n">#atlas-op-socials</span><span class="mag">ZICHTBAAR</span></li>
-        <li><b>&#9733;</b><span class="n">#ondersteuning</span><span class="mag">ZICHTBAAR</span></li>
+        <li><b>&#9733;</b><span class="n">#nq-chart-ideeën</span><span class="mag" lang="nl">ZICHTBAAR</span><span class="mag" lang="en">VISIBLE</span></li>
+        <li><b>&#9733;</b><span class="n">#es-chart-ideeën</span><span class="mag" lang="nl">ZICHTBAAR</span><span class="mag" lang="en">VISIBLE</span></li>
+        <li><b>&#9733;</b><span class="n">#bitcoin</span><span class="mag" lang="nl">ZICHTBAAR</span><span class="mag" lang="en">VISIBLE</span></li>
+        <li><b>&#9733;</b><span class="n">#altcoins</span><span class="mag" lang="nl">ZICHTBAAR</span><span class="mag" lang="en">VISIBLE</span></li>
+        <li><b>&#9733;</b><span class="n">#markt</span><span class="mag" lang="nl">ZICHTBAAR</span><span class="mag" lang="en">VISIBLE</span></li>
+        <li><b>&#9733;</b><span class="n">#vragen</span><span class="mag" lang="nl">ZICHTBAAR</span><span class="mag" lang="en">VISIBLE</span></li>
+        <li><b>&#9733;</b><span class="n">#algemeen</span><span class="mag" lang="nl">ZICHTBAAR</span><span class="mag" lang="en">VISIBLE</span></li>
+        <li><b>&#9733;</b><span class="n">#atlas-op-socials</span><span class="mag" lang="nl">ZICHTBAAR</span><span class="mag" lang="en">VISIBLE</span></li>
+        <li><b>&#9733;</b><span class="n">#ondersteuning</span><span class="mag" lang="nl">ZICHTBAAR</span><span class="mag" lang="en">VISIBLE</span></li>
       </ul>
     </div>
     <div>
-      <h3>Premium <span>opent later · 6</span></h3>
+      <h3 lang="nl">Premium <span>opent later · 6</span></h3>
+      <h3 lang="en">Premium <span>opens later · 6</span></h3>
       <ul>
-        <li><b>&#9734;</b><span class="n">#trade-setups</span><span class="mag">ONDER DE HORIZON</span></li>
-        <li><b>&#9734;</b><span class="n">#marktupdates</span><span class="mag">ONDER DE HORIZON</span></li>
-        <li><b>&#9734;</b><span class="n">#indicatoren</span><span class="mag">ONDER DE HORIZON</span></li>
-        <li><b>&#9734;</b><span class="n">#sessie-opnames</span><span class="mag">ONDER DE HORIZON</span></li>
-        <li><b>&#9734;</b><span class="n">#chart-ideeën</span><span class="mag">ONDER DE HORIZON</span></li>
-        <li><b>&#9734;</b><span class="n">#premium-chat</span><span class="mag">ONDER DE HORIZON</span></li>
+        <li><b>&#9734;</b><span class="n">#trade-setups</span><span class="mag" lang="nl">ONDER DE HORIZON</span><span class="mag" lang="en">BELOW HORIZON</span></li>
+        <li><b>&#9734;</b><span class="n">#marktupdates</span><span class="mag" lang="nl">ONDER DE HORIZON</span><span class="mag" lang="en">BELOW HORIZON</span></li>
+        <li><b>&#9734;</b><span class="n">#indicatoren</span><span class="mag" lang="nl">ONDER DE HORIZON</span><span class="mag" lang="en">BELOW HORIZON</span></li>
+        <li><b>&#9734;</b><span class="n">#sessie-opnames</span><span class="mag" lang="nl">ONDER DE HORIZON</span><span class="mag" lang="en">BELOW HORIZON</span></li>
+        <li><b>&#9734;</b><span class="n">#chart-ideeën</span><span class="mag" lang="nl">ONDER DE HORIZON</span><span class="mag" lang="en">BELOW HORIZON</span></li>
+        <li><b>&#9734;</b><span class="n">#premium-chat</span><span class="mag" lang="nl">ONDER DE HORIZON</span><span class="mag" lang="en">BELOW HORIZON</span></li>
       </ul>
-      <div style="margin-top:26px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Open de server</a></div>
+      <div style="margin-top:26px"><a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de server</span><span lang="en">Open the server</span></a></div>
     </div>
   </div>
 </section>
@@ -697,10 +730,10 @@ footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:cla
 <!-- ============ LIVE ============ -->
 <div class="wrap">
   <div class="live">
-    <span class="mono">Waarneming &nbsp;·&nbsp; 05</span>
-    <h3 style="margin-top:18px"><span class="pulse"></span>Live traden, in de server.</h3>
-    <p>De oprichter handelt live mee en laat zien hoe hij de markten benadert. Tijden worden in Discord aangekondigd.</p>
-    <div class="cta"><a class="btn btn--ghost" href="https://discord.gg/78Ff2GuSfW">Zit een sessie mee</a></div>
+    <span class="mono"><span lang="nl">Waarneming &nbsp;·&nbsp; 05</span><span lang="en">Observation &nbsp;·&nbsp; 05</span></span>
+    <h3 style="margin-top:18px"><span class="pulse"></span><span lang="nl">Live traden, in de server.</span><span lang="en">Live trading, in the server.</span></h3>
+    <p><span lang="nl">De oprichter handelt live mee en laat zien hoe hij de markten benadert. Tijden worden in Discord aangekondigd.</span><span lang="en">The founder trades live and shows how he approaches the markets. Times are announced in Discord.</span></p>
+    <div class="cta"><a class="btn btn--ghost" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Zit een sessie mee</span><span lang="en">Sit in on a session</span></a></div>
     <p class="chart-caption" style="margin-top:24px">NQ &nbsp;·&nbsp; ES &nbsp;·&nbsp; Bitcoin &nbsp;·&nbsp; Altcoins</p>
   </div>
 </div>
@@ -708,8 +741,8 @@ footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:cla
 <!-- ============ TOEGANG ============ -->
 <section class="wrap" id="toegang">
   <div class="sec-top">
-    <span class="mono">Toegang &nbsp;·&nbsp; 06</span>
-    <h2>Boven en onder de horizon</h2>
+    <span class="mono"><span lang="nl">Toegang &nbsp;·&nbsp; 06</span><span lang="en">Access &nbsp;·&nbsp; 06</span></span>
+    <h2><span lang="nl">Boven en onder de horizon</span><span lang="en">Above and below the horizon</span></h2>
   </div>
 
   <div class="duo">
@@ -719,19 +752,19 @@ footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:cla
         <circle cx="60" cy="60" r="46" fill="none" stroke="#D7B364" stroke-opacity=".22"/>
         <circle cx="60" cy="60" r="5" fill="#D7B364"/>
       </svg>
-      <span class="chip">Nu zichtbaar</span>
-      <h3>Gratis</h3>
-      <p>De hele thuiskant van de server is op dit moment gratis: educatie, chart-ideeën, markt en community.</p>
-      <div style="margin-top:22px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Nu binnenlopen</a></div>
+      <span class="chip"><span lang="nl">Nu zichtbaar</span><span lang="en">Visible now</span></span>
+      <h3><span lang="nl">Gratis</span><span lang="en">Free</span></h3>
+      <p><span lang="nl">De hele thuiskant van de server is op dit moment gratis: educatie, chart-ideeën, markt en community.</span><span lang="en">The whole home side of the server is free right now: education, chart ideas, market and community.</span></p>
+      <div style="margin-top:22px"><a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Nu binnenlopen</span><span lang="en">Walk in now</span></a></div>
     </div>
     <div class="panel">
       <svg class="glint" width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
         <circle cx="60" cy="60" r="30" fill="none" stroke="#D7B364" stroke-opacity=".3" stroke-dasharray="4 4"/>
         <circle cx="60" cy="60" r="46" fill="none" stroke="#D7B364" stroke-opacity=".16" stroke-dasharray="4 4"/>
       </svg>
-      <span class="chip">Komt later op</span>
+      <span class="chip"><span lang="nl">Komt later op</span><span lang="en">Rises later</span></span>
       <h3>Premium</h3>
-      <p>Premium opent later. Wanneer en hoe wordt in de server aangekondigd.</p>
+      <p><span lang="nl">Premium opent later. Wanneer en hoe wordt in de server aangekondigd.</span><span lang="en">Premium opens later. When and how will be announced in the server.</span></p>
     </div>
   </div>
 </section>
@@ -741,9 +774,9 @@ footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:cla
   <svg width="46" height="46" viewBox="0 0 26 26" aria-hidden="true" style="margin-bottom:20px">
     <path d="M13,0 L15.6,10.4 L26,13 L15.6,15.6 L13,26 L10.4,15.6 L0,13 L10.4,10.4 Z" fill="#D7B364"/>
   </svg>
-  <h2>Kijk <em>omhoog</em>.</h2>
-  <p>Gratis toegang, vanaf het moment dat je binnenkomt.</p>
-  <div style="margin-top:30px"><a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a></div>
+  <h2><span lang="nl">Kijk <em>omhoog</em>.</span><span lang="en">Look <em>up</em>.</span></h2>
+  <p><span lang="nl">Gratis toegang, vanaf het moment dat je binnenkomt.</span><span lang="en">Free access, from the moment you come in.</span></p>
+  <div style="margin-top:30px"><a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></a></div>
 </div>
 
 <!-- ============ FOOTER ============ -->
@@ -752,30 +785,53 @@ footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:cla
     <div class="fg">
       <div>
         <h4>Atlas Capital</h4>
-        <p>Proces. Discipline. Uitvoering.</p>
+        <p><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></p>
       </div>
       <div>
-        <h4>Vind ons</h4>
+        <h4><span lang="nl">Vind ons</span><span lang="en">Find us</span></h4>
         <a href="https://discord.gg/78Ff2GuSfW">Discord</a>
         <a href="https://www.tiktok.com/@atlascapitalbv">TikTok · @atlascapitalbv</a>
       </div>
       <div>
-        <h4>Markten</h4>
+        <h4><span lang="nl">Markten</span><span lang="en">Markets</span></h4>
         <p>NQ · ES · Bitcoin · Altcoins</p>
       </div>
       <div>
-        <h4>Stand</h4>
+        <h4><span lang="nl">Stand</span><span lang="en">Position</span></h4>
         <p style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;line-height:2;color:var(--dim)">
-          GRATIS TOEGANG · NU<br>PREMIUM · OPENT LATER<br>10+ JAAR ERVARING
+          <span lang="nl">GRATIS TOEGANG · NU<br>PREMIUM · OPENT LATER<br>10+ JAAR ERVARING</span><span lang="en">FREE ACCESS · NOW<br>PREMIUM · OPENS LATER<br>10+ YEARS EXPERIENCE</span>
         </p>
       </div>
     </div>
     <div class="risk">
-      <span>Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span>
-      <span>KAART 033 · STERRENKAART</span>
+      <span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span>
+      <span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span>
+      <span lang="nl">KAART 033 · STERRENKAART</span>
+      <span lang="en">CHART 033 · STAR CHART</span>
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

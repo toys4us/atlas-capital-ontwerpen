@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -288,7 +288,30 @@ footer a:hover{ color:var(--gold); }
 .risk{ margin-top:clamp(26px,4vw,48px); padding-top:18px; border-top:2px solid var(--edge); color:var(--muted); max-width:72ch; font-size:0.85rem; }
 .sig{ margin-top:12px; font-family:"Anton",Impact,sans-serif; text-transform:uppercase; letter-spacing:0.22em; font-size:0.75rem; color:var(--edge); }
 
-a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-offset:4px; }
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+
+.topbar-in{ flex-wrap:wrap; justify-content:flex-end; }
+.topbar-in > .brand{ margin-right:auto; }
+.band .track span span{ padding-inline:0; }
+.langsw{ display:flex; align-items:stretch; flex:none; box-shadow:inset 0 0 0 3px var(--gold); }
+.langsw button{
+  font-family:"Anton", "Arial Narrow", Impact, sans-serif;
+  text-transform:uppercase; letter-spacing:0.1em; line-height:1;
+  font-size:clamp(0.85rem,1.3vw,1.05rem);
+  background:transparent; color:var(--gold);
+  border:0; border-radius:0; padding:0.85em 0.75em; cursor:pointer;
+  transition:background .15s linear, color .15s linear;
+}
+.langsw button + button{ box-shadow:inset 3px 0 0 var(--gold); }
+.langsw button[aria-pressed="true"]{ background:var(--gold); color:var(--ink); }
+.langsw button:hover{ background:var(--gold-hi); color:var(--ink); }
+
+/* an accessible name that follows the chosen language */
+.vh{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; }
+
+a:focus-visible, .cta:focus-visible, .langsw button:focus-visible{ outline:3px solid var(--gold-hi); outline-offset:4px; }
 </style>
 </head>
 <body>
@@ -304,6 +327,10 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
       <span class="bt">Atlas Capital<span class="bs">Proces · Discipline · Uitvoering</span></span>
     </a>
     <a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span>Discord →</span></a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
@@ -336,16 +363,16 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
   </div>
 
   <div class="wrap hero-in">
-    <span class="strap kicker"><span>Nederlandse trading-community</span></span>
+    <span class="strap kicker"><span><span lang="nl">Nederlandse trading-community</span><span lang="en">Dutch trading community</span></span></span>
     <h1 class="shout">
-      <span class="l1">Leer</span>
-      <span class="l2">de markt</span>
-      <span class="l3">lezen.</span>
+      <span class="l1"><span lang="nl">Leer</span><span lang="en">Learn</span></span>
+      <span class="l2"><span lang="nl">de markt</span><span lang="en">to read</span></span>
+      <span class="l3"><span lang="nl">lezen.</span><span lang="en">markets.</span></span>
     </h1>
-    <p class="lede">Educatie, structuur en dagelijkse markten. Geen beloftes, wel een proces.</p>
+    <p class="lede"><span lang="nl">Educatie, structuur en dagelijkse markten. Geen beloftes, wel een proces.</span><span lang="en">Education, structure and daily markets. No promises, just a process.</span></p>
     <div class="row">
-      <a class="cta pale" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span>Kom binnen op Discord</span></a>
-      <a class="cta ghost" href="#educatie"><span>10 onderwerpen</span></a>
+      <a class="cta pale" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span><span lang="nl">Kom binnen op Discord</span><span lang="en">Come inside on Discord</span></span></a>
+      <a class="cta ghost" href="#educatie"><span><span lang="nl">10 onderwerpen</span><span lang="en">10 topics</span></span></a>
     </div>
     <p class="kicker" style="color:var(--gold);">NQ · ES · Bitcoin · Altcoins</p>
   </div>
@@ -355,8 +382,8 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
 <div class="band" aria-hidden="true">
   <div class="strip">
     <div class="track">
-      <span>Proces <i>■</i> Discipline <i>■</i> Uitvoering <i>■</i> Proces <i>■</i> Discipline <i>■</i> Uitvoering <i>■</i>&nbsp;</span>
-      <span>Proces <i>■</i> Discipline <i>■</i> Uitvoering <i>■</i> Proces <i>■</i> Discipline <i>■</i> Uitvoering <i>■</i>&nbsp;</span>
+      <span><span lang="nl">Proces <i>■</i> Discipline <i>■</i> Uitvoering <i>■</i> Proces <i>■</i> Discipline <i>■</i> Uitvoering <i>■</i>&nbsp;</span><span lang="en">Process <i>■</i> Discipline <i>■</i> Execution <i>■</i> Process <i>■</i> Discipline <i>■</i> Execution <i>■</i>&nbsp;</span></span>
+      <span><span lang="nl">Proces <i>■</i> Discipline <i>■</i> Uitvoering <i>■</i> Proces <i>■</i> Discipline <i>■</i> Uitvoering <i>■</i>&nbsp;</span><span lang="en">Process <i>■</i> Discipline <i>■</i> Execution <i>■</i> Process <i>■</i> Discipline <i>■</i> Execution <i>■</i>&nbsp;</span></span>
     </div>
   </div>
 </div>
@@ -367,25 +394,29 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
     <div class="head">
       <div class="no">01</div>
       <div>
-        <h2 class="shout">Wie <em>bouwt</em> dit</h2>
-        <p class="sub">Zijn woorden, ongewijzigd overgenomen.</p>
+        <h2 class="shout"><span lang="nl">Wie <em>bouwt</em> dit</span><span lang="en">Who <em>builds</em> this</span></h2>
+        <p class="sub"><span lang="nl">Zijn woorden, ongewijzigd overgenomen.</span><span lang="en">His words, taken down unchanged.</span></p>
       </div>
     </div>
     <div class="founder">
       <div class="f-slab">
-        <span class="cap">Actief in trading</span>
-        <span class="big">10+<br>jaar</span>
-        <a class="cta pale" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span>Ontmoet hem</span></a>
+        <span class="cap"><span lang="nl">Actief in trading</span><span lang="en">Active in trading</span></span>
+        <span class="big"><span lang="nl">10+<br>jaar</span><span lang="en">10+<br>years</span></span>
+        <a class="cta pale" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span><span lang="nl">Ontmoet hem</span><span lang="en">Meet him</span></span></a>
       </div>
       <div class="f-quote">
         <blockquote>
-          Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles
+          <span lang="nl">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles
           meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik
           gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten
           dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community
-          die samen beter wil worden.
+          die samen beter wil worden.</span><span lang="en">I've been involved in trading for over 10 years now, and during that time I've experienced
+          pretty much everything: wins, losses, mistakes, growth, and a lot of lessons. I built Atlas
+          Capital to share that experience, bring traders together, and show how I approach the markets
+          on a daily basis. No get-rich-quick promises, just real setups, education, and a community
+          focused on improving together.</span>
         </blockquote>
-        <p class="who kicker"><i aria-hidden="true"></i> De oprichter</p>
+        <p class="who kicker"><i aria-hidden="true"></i> <span lang="nl">De oprichter</span><span lang="en">The founder</span></p>
       </div>
     </div>
   </div>
@@ -397,13 +428,14 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
     <div class="head">
       <div class="no">02</div>
       <div>
-        <h2 class="shout">Tien <em>onderwerpen</em>, één waaier</h2>
-        <p class="sub">De leerlijn van Atlas Capital, uitgevouwen vanuit één punt.</p>
+        <h2 class="shout"><span lang="nl">Tien <em>onderwerpen</em>, één waaier</span><span lang="en">Ten <em>topics</em>, one fan</span></h2>
+        <p class="sub"><span lang="nl">De leerlijn van Atlas Capital, uitgevouwen vanuit één punt.</span><span lang="en">The Atlas Capital curriculum, unfolded from a single point.</span></p>
       </div>
     </div>
 
     <div class="fan-scroll">
-      <svg viewBox="0 0 1000 560" role="img" aria-label="Waaier met de tien onderwerpen van de leerlijn: deviatie, SMT, FVG, IFVG, orderblocks, fibonacci, sessie-liquiditeit, liquiditeit, risicobeheer en tradingpsychologie.">
+      <span class="vh" id="d042-fan-alt"><span lang="nl">Waaier met de tien onderwerpen van de leerlijn: deviatie, SMT, FVG, IFVG, orderblocks, fibonacci, sessie-liquiditeit, liquiditeit, risicobeheer en tradingpsychologie.</span><span lang="en">A fan of the ten curriculum topics: deviation, SMT, FVG, IFVG, orderblocks, fibonacci, session liquidity, liquidity, risk management and trading psychology.</span></span>
+      <svg viewBox="0 0 1000 560" role="img" aria-labelledby="d042-fan-alt">
         <rect x="0" y="0" width="1000" height="560" fill="#08090B"/>
         <g transform="translate(70,520)">
           <!-- 10 rays -->
@@ -420,16 +452,16 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
 
           <!-- labels on the rays -->
           <g font-family="Anton, Impact, sans-serif" font-size="30" fill="#08090B" letter-spacing="1">
-            <g transform="rotate(-86)"><text x="330" y="11">DEVIATIE</text></g>
+            <g transform="rotate(-86)"><text x="330" y="11" lang="nl">DEVIATIE</text><text x="330" y="11" lang="en">DEVIATION</text></g>
             <g transform="rotate(-77)"><text x="330" y="10">SMT</text></g>
             <g transform="rotate(-68)"><text x="330" y="11">FVG</text></g>
             <g transform="rotate(-59)"><text x="330" y="10">IFVG</text></g>
             <g transform="rotate(-50)"><text x="330" y="11">ORDERBLOCKS</text></g>
             <g transform="rotate(-41)"><text x="330" y="10">FIBONACCI</text></g>
-            <g transform="rotate(-32)"><text x="330" y="11">SESSIE-LIQUIDITEIT</text></g>
-            <g transform="rotate(-24)"><text x="330" y="10">LIQUIDITEIT</text></g>
-            <g transform="rotate(-15)"><text x="330" y="11">RISICOBEHEER</text></g>
-            <g transform="rotate(-6)"><text x="330" y="10">TRADINGPSYCHOLOGIE</text></g>
+            <g transform="rotate(-32)"><text x="330" y="11" lang="nl">SESSIE-LIQUIDITEIT</text><text x="330" y="11" lang="en">SESSION LIQUIDITY</text></g>
+            <g transform="rotate(-24)"><text x="330" y="10" lang="nl">LIQUIDITEIT</text><text x="330" y="10" lang="en">LIQUIDITY</text></g>
+            <g transform="rotate(-15)"><text x="330" y="11" lang="nl">RISICOBEHEER</text><text x="330" y="11" lang="en">RISK MANAGEMENT</text></g>
+            <g transform="rotate(-6)"><text x="330" y="10" lang="nl">TRADINGPSYCHOLOGIE</text><text x="330" y="10" lang="en">TRADING PSYCHOLOGY</text></g>
           </g>
 
           <!-- the pivot -->
@@ -443,20 +475,20 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
     </div>
 
     <ul class="fan-list">
-      <li><b>01</b><span>Deviatie</span></li>
+      <li><b>01</b><span><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span></li>
       <li><b>02</b><span>SMT</span></li>
       <li><b>03</b><span>FVG</span></li>
       <li><b>04</b><span>IFVG</span></li>
       <li><b>05</b><span>Orderblocks</span></li>
       <li><b>06</b><span>Fibonacci</span></li>
-      <li><b>07</b><span>Sessie-liquiditeit</span></li>
-      <li><b>08</b><span>Liquiditeit</span></li>
-      <li><b>09</b><span>Risicobeheer</span></li>
-      <li><b>10</b><span>Tradingpsychologie</span></li>
+      <li><b>07</b><span><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span></li>
+      <li><b>08</b><span><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span></li>
+      <li><b>09</b><span><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span></li>
+      <li><b>10</b><span><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span></li>
     </ul>
 
     <p style="margin-top:clamp(22px,3vw,34px);">
-      <a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span>Begin bij 01 →</span></a>
+      <a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span><span lang="nl">Begin bij 01 →</span><span lang="en">Start at 01 →</span></span></a>
     </p>
   </div>
 </section>
@@ -477,14 +509,15 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
     <div class="head">
       <div class="no">03</div>
       <div>
-        <h2 class="shout">Eén <em>model</em>, kaal getekend</h2>
-        <p class="sub">Schematisch. Geen uitslag, geen niveau, geen datum.</p>
+        <h2 class="shout"><span lang="nl">Eén <em>model</em>, kaal getekend</span><span lang="en">One <em>model</em>, drawn bare</span></h2>
+        <p class="sub"><span lang="nl">Schematisch. Geen uitslag, geen niveau, geen datum.</span><span lang="en">Schematic. No outcome, no level, no date.</span></p>
       </div>
     </div>
 
     <div class="model">
       <div class="scroll">
-        <svg viewBox="0 0 960 460" role="img" aria-label="Schematische tekening van een liquiditeitsgreep gevolgd door een terugkeer naar een onbalanszone.">
+        <span class="vh" id="d042-model-alt"><span lang="nl">Schematische tekening van een liquiditeitsgreep gevolgd door een terugkeer naar een onbalanszone.</span><span lang="en">Schematic drawing of a liquidity grab followed by a return to an imbalance zone.</span></span>
+        <svg viewBox="0 0 960 460" role="img" aria-labelledby="d042-model-alt">
           <rect width="960" height="460" fill="#08090B"/>
           <!-- diagonal construction lines -->
           <g stroke="#2A2B30" stroke-width="2">
@@ -531,21 +564,21 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
 
           <!-- labels -->
           <g font-family="Anton, Impact, sans-serif" font-size="20" fill="#D7B364" letter-spacing="2">
-            <text x="640" y="82">LIQUIDITEIT</text>
+            <text x="640" y="82" lang="nl">LIQUIDITEIT</text><text x="640" y="82" lang="en">LIQUIDITY</text>
             <path d="M640 92 L900 92" stroke="#D7B364" stroke-width="3"/>
-            <text x="386" y="204">ONBALANS</text>
-            <text x="130" y="70">GREEP</text>
+            <text x="386" y="204" lang="nl">ONBALANS</text><text x="386" y="204" lang="en">IMBALANCE</text>
+            <text x="130" y="70" lang="nl">GREEP</text><text x="130" y="70" lang="en">GRAB</text>
             <path d="M126 78 L268 78 L268 140" stroke="#D7B364" stroke-width="3" fill="none"/>
-            <text x="556" y="336">REACTIE</text>
+            <text x="556" y="336" lang="nl">REACTIE</text><text x="556" y="336" lang="en">REACTION</text>
             <path d="M592 290 L592 322 L640 322" stroke="#D7B364" stroke-width="3" fill="none"/>
           </g>
           <rect x="0" y="440" width="960" height="20" fill="#D7B364"/>
         </svg>
       </div>
       <div class="keys">
-        <div><h4>De greep</h4><p>De markt haalt eerst de voor de hand liggende kant op.</p></div>
-        <div><h4>De onbalans</h4><p>De snelle beweging laat een vlak achter. Dat vlak is het idee.</p></div>
-        <div><h4>Het besluit</h4><p>Terug in het vlak begint het lezen. Wel of niet is allebei goed.</p></div>
+        <div><h4><span lang="nl">De greep</span><span lang="en">The grab</span></h4><p><span lang="nl">De markt haalt eerst de voor de hand liggende kant op.</span><span lang="en">The market takes the obvious side first.</span></p></div>
+        <div><h4><span lang="nl">De onbalans</span><span lang="en">The imbalance</span></h4><p><span lang="nl">De snelle beweging laat een vlak achter. Dat vlak is het idee.</span><span lang="en">The fast move leaves an area behind. That area is the idea.</span></p></div>
+        <div><h4><span lang="nl">Het besluit</span><span lang="en">The decision</span></h4><p><span lang="nl">Terug in het vlak begint het lezen. Wel of niet is allebei goed.</span><span lang="en">Back in the area the reading starts. Yes or no are both fine.</span></p></div>
       </div>
     </div>
   </div>
@@ -557,30 +590,30 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
     <div class="head">
       <div class="no">04</div>
       <div>
-        <h2 class="shout">Vijftien <em>kanalen</em></h2>
-        <p class="sub">De hele Thuis-kant staat nu open.</p>
+        <h2 class="shout"><span lang="nl">Vijftien <em>kanalen</em></span><span lang="en">Fifteen <em>channels</em></span></h2>
+        <p class="sub"><span lang="nl">De hele Thuis-kant staat nu open.</span><span lang="en">The whole Home side is open now.</span></p>
       </div>
     </div>
     <div class="ch">
       <div class="ch-block free">
-        <h3>Thuis</h3>
-        <p class="state">Nu gratis</p>
+        <h3><span lang="nl">Thuis</span><span lang="en">Home</span></h3>
+        <p class="state"><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></p>
         <ul class="ch-list">
           <li>#nq-chart-ideeën</li><li>#es-chart-ideeën</li><li>#bitcoin</li><li>#altcoins</li>
           <li>#markt</li><li>#vragen</li><li>#algemeen</li><li>#atlas-op-socials</li><li>#ondersteuning</li>
         </ul>
         <p style="margin-top:clamp(18px,2.6vw,28px);">
-          <a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span>Open de server</span></a>
+          <a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span><span lang="nl">Open de server</span><span lang="en">Open the server</span></span></a>
         </p>
       </div>
       <div class="ch-block prem">
         <h3>Premium</h3>
-        <p class="state">Opent later</p>
+        <p class="state"><span lang="nl">Opent later</span><span lang="en">Opens later</span></p>
         <ul class="ch-list">
           <li>#trade-setups</li><li>#marktupdates</li><li>#indicatoren</li>
           <li>#sessie-opnames</li><li>#chart-ideeën</li><li>#premium-chat</li>
         </ul>
-        <p class="small" style="margin-top:20px;max-width:34ch;">Prijs en datum worden in de server aangekondigd.</p>
+        <p class="small" style="margin-top:20px;max-width:34ch;"><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">Price and date are announced in the server.</span></p>
       </div>
     </div>
   </div>
@@ -592,7 +625,7 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
     <div class="head">
       <div class="no">05</div>
       <div>
-        <h2 class="shout">Live in de <em>server</em></h2>
+        <h2 class="shout"><span lang="nl">Live in de <em>server</em></span><span lang="en">Live in the <em>server</em></span></h2>
       </div>
     </div>
     <div class="live-wrap">
@@ -604,9 +637,9 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
       </svg>
       <div class="live-in">
         <span class="dotlive"><i aria-hidden="true"></i> Live</span>
-        <h3>Hij handelt mee terwijl je kijkt.</h3>
-        <p>Tijden worden in de server aangekondigd. Kom binnen, kijk mee, stel je vraag.</p>
-        <p><a class="cta ghost" style="color:var(--ink);box-shadow:inset 0 0 0 3px var(--ink);" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span>Zit erbij →</span></a></p>
+        <h3><span lang="nl">Hij handelt mee terwijl je kijkt.</span><span lang="en">He trades along while you watch.</span></h3>
+        <p><span lang="nl">Tijden worden in de server aangekondigd. Kom binnen, kijk mee, stel je vraag.</span><span lang="en">Times are announced in the server. Come in, watch along, ask your question.</span></p>
+        <p><a class="cta ghost" style="color:var(--ink);box-shadow:inset 0 0 0 3px var(--ink);" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span><span lang="nl">Zit erbij →</span><span lang="en">Sit in →</span></span></a></p>
       </div>
     </div>
   </div>
@@ -618,22 +651,22 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
     <div class="head">
       <div class="no">06</div>
       <div>
-        <h2 class="shout">Toegang</h2>
-        <p class="sub">Kort en eerlijk.</p>
+        <h2 class="shout"><span lang="nl">Toegang</span><span lang="en">Access</span></h2>
+        <p class="sub"><span lang="nl">Kort en eerlijk.</span><span lang="en">Short and honest.</span></p>
       </div>
     </div>
     <div class="acc">
       <div class="acc-card now">
-        <span class="tag">Nu</span>
-        <h3>Gratis</h3>
-        <p>Thuis staat open. Charts, markt, vragen en de community.</p>
-        <a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span>Nu binnenlopen</span></a>
+        <span class="tag"><span lang="nl">Nu</span><span lang="en">Now</span></span>
+        <h3><span lang="nl">Gratis</span><span lang="en">Free</span></h3>
+        <p><span lang="nl">Thuis staat open. Charts, markt, vragen en de community.</span><span lang="en">Home is open. Charts, market, questions and the community.</span></p>
+        <a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span><span lang="nl">Nu binnenlopen</span><span lang="en">Walk in now</span></span></a>
       </div>
       <div class="acc-card later">
-        <span class="tag">Later</span>
+        <span class="tag"><span lang="nl">Later</span><span lang="en">Later</span></span>
         <h3>Premium</h3>
-        <p>Opent later. Prijs en datum volgen in de server, nergens anders.</p>
-        <a class="cta ghost" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span>Blijf op de hoogte</span></a>
+        <p><span lang="nl">Opent later. Prijs en datum volgen in de server, nergens anders.</span><span lang="en">Opens later. Price and date follow in the server, nowhere else.</span></p>
+        <a class="cta ghost" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span><span lang="nl">Blijf op de hoogte</span><span lang="en">Stay in the loop</span></span></a>
       </div>
     </div>
   </div>
@@ -644,9 +677,9 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
   <div class="diag" aria-hidden="true"></div>
   <div class="wrap" style="position:relative;z-index:2;">
     <div class="plate">
-      <h2>Kom <em>binnen</em>. Het is open.</h2>
-      <p class="lede" style="max-width:30ch;font-weight:600;font-size:clamp(1rem,1.9vw,1.35rem);">Nederlands. Gratis. Elke dag markt.</p>
-      <a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span>Naar Discord →</span></a>
+      <h2><span lang="nl">Kom <em>binnen</em>. Het is open.</span><span lang="en">Come <em>inside</em>. It is open.</span></h2>
+      <p class="lede" style="max-width:30ch;font-weight:600;font-size:clamp(1rem,1.9vw,1.35rem);"><span lang="nl">Nederlands. Gratis. Elke dag markt.</span><span lang="en">Dutch. Free. Market every day.</span></p>
+      <a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span><span lang="nl">Naar Discord →</span><span lang="en">To Discord →</span></span></a>
     </div>
   </div>
 </section>
@@ -661,7 +694,7 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
           <path d="M12 40 L20 24 L28 40 Z" fill="#15161A"/>
         </svg>
         <h4 style="margin-top:14px;">Atlas Capital</h4>
-        <p class="small" style="margin-top:10px;max-width:30ch;">Proces. Discipline. Uitvoering.</p>
+        <p class="small" style="margin-top:10px;max-width:30ch;"><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></p>
       </div>
       <div>
         <h4>Community</h4>
@@ -671,17 +704,38 @@ a:focus-visible, .cta:focus-visible{ outline:3px solid var(--gold-hi); outline-o
         </div>
       </div>
       <div>
-        <h4>Markten</h4>
+        <h4><span lang="nl">Markten</span><span lang="en">Markets</span></h4>
         <div class="fl">
           <span class="small">NQ · ES</span>
           <span class="small">Bitcoin · altcoins</span>
         </div>
       </div>
     </div>
-    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
     <p class="sig">042 — Agitprop</p>
   </div>
 </footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

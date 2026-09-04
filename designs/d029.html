@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -309,6 +309,32 @@
     font-family:var(--mono);font-size:9.5px;line-height:1.7;letter-spacing:.05em;color:#75747A;
     max-width:80ch;
   }
+
+  /* ===== language ===== */
+  :root:not([data-lang="en"]) [lang="en"]{display:none!important}
+  :root[data-lang="en"] [lang="nl"]{display:none!important}
+  .langsw{
+    display:inline-flex;
+    align-items:stretch;
+    border:1px solid var(--ink);
+  }
+  .langsw button{
+    appearance:none;
+    -webkit-appearance:none;
+    background:transparent;
+    border:0;
+    padding:9px 10px;
+    font-family:var(--mono);
+    font-size:9px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--grey);
+    cursor:pointer;
+    transition:background .2s ease,color .2s ease;
+  }
+  .langsw button + button{border-left:1px solid var(--hair)}
+  .langsw button:hover{background:var(--gold);color:var(--ink)}
+  .langsw button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 </style>
 </head>
 <body>
@@ -344,16 +370,22 @@
       <b>Atlas Capital</b>
     </a>
     <div class="slatebits">
-      <span>Storyboard</span><span>Blad 01</span><span>Nederlands</span><span>Discord</span>
+      <span>Storyboard</span><span><span lang="nl">Blad 01</span><span lang="en">Sheet 01</span></span><span><span lang="nl">Nederlands</span><span lang="en">Dutch</span></span><span>Discord</span>
     </div>
-    <a class="cta" href="https://discord.gg/78Ff2GuSfW">Open de Discord</a>
+    <div class="btnrow" style="justify-content:flex-end;align-items:center;gap:10px">
+      <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
+      <div class="langsw" role="group" aria-label="Taal / Language">
+        <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
   </header>
 
   <div class="strip" id="top">
-    <div class="field"><span>Productie</span><b>Atlas Capital</b></div>
-    <div class="field"><span>Onderwerp</span><b>Proces · Discipline · Uitvoering</b></div>
-    <div class="field"><span>Educatie</span><b>10 onderwerpen</b></div>
-    <div class="field"><span>Locatie</span><b>15 kanalen op Discord</b></div>
+    <div class="field"><span><span lang="nl">Productie</span><span lang="en">Production</span></span><b>Atlas Capital</b></div>
+    <div class="field"><span><span lang="nl">Onderwerp</span><span lang="en">Subject</span></span><b><span lang="nl">Proces · Discipline · Uitvoering</span><span lang="en">Process · Discipline · Execution</span></b></div>
+    <div class="field"><span><span lang="nl">Educatie</span><span lang="en">Education</span></span><b><span lang="nl">10 onderwerpen</span><span lang="en">10 topics</span></b></div>
+    <div class="field"><span><span lang="nl">Locatie</span><span lang="en">Location</span></span><b><span lang="nl">15 kanalen op Discord</span><span lang="en">15 channels on Discord</span></b></div>
   </div>
 
   <div class="board">
@@ -363,7 +395,7 @@
       <div class="frame">
         <span class="fnum">01 · OPENING</span>
         <div class="win">
-          <svg viewBox="0 0 840 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Geschetste markthorizon met kaarsen en een gouden lijn">
+          <svg viewBox="0 0 840 360" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Geschetste markthorizon met kaarsen en een gouden lijn / Sketched market horizon with candles and a gold line">
             <g filter="url(#wob)" fill="none" stroke="#08090B" stroke-width="2" stroke-linecap="round">
               <!-- horizon -->
               <path d="M40 286 C 220 278, 420 292, 800 274"/>
@@ -390,44 +422,46 @@
             <g filter="url(#wob)" fill="none" stroke="#B9954A" stroke-width="1.4" opacity=".85">
               <path d="M60 128 H800" stroke-dasharray="10 9"/>
             </g>
-            <text x="62" y="118" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="13" letter-spacing="4" fill="#8C7433">NIVEAU</text>
+            <text lang="nl" x="62" y="118" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="13" letter-spacing="4" fill="#8C7433">NIVEAU</text>
+            <text lang="en" x="62" y="118" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="13" letter-spacing="4" fill="#8C7433">LEVEL</text>
           </svg>
         </div>
         <div class="cap">
-          <h1>Trading is <u>proces</u>,<br>geen gok</h1>
-          <p class="lede">Nederlandse community met educatie, live trading en een oprichter met 10+ jaar in de markt.</p>
+          <h1><span lang="nl">Trading is <u>proces</u>,<br>geen gok</span><span lang="en">Trading is <u>process</u>,<br>not luck</span></h1>
+          <p class="lede"><span lang="nl">Nederlandse community met educatie, live trading en een oprichter met 10+ jaar in de markt.</span><span lang="en">Dutch community with education, live trading and a founder with 10+ years in the market.</span></p>
           <div class="btnrow">
-            <a class="cta" href="https://discord.gg/78Ff2GuSfW">Open de Discord</a>
-            <a class="cta inv" href="#educatie">Bekijk de 10 onderwerpen</a>
+            <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
+            <a class="cta inv" href="#educatie"><span lang="nl">Bekijk de 10 onderwerpen</span><span lang="en">See the 10 topics</span></a>
           </div>
-          <p class="meta"><span>Scène 01 — opening</span><span>Toegang: nu gratis</span></p>
+          <p class="meta"><span><span lang="nl">Scène 01 — opening</span><span lang="en">Scene 01 — opening</span></span><span><span lang="nl">Toegang: nu gratis</span><span lang="en">Access: free right now</span></span></p>
         </div>
       </div>
     </div>
 
     <!-- ============ 02 HET MODEL — 4 FRAMES ============ -->
     <div class="seqhead" id="model">
-      <h2>Het model, frame voor frame</h2>
-      <p>Scène 02 — schematisch, geen koersen</p>
+      <h2><span lang="nl">Het model, frame voor frame</span><span lang="en">The model, frame by frame</span></h2>
+      <p><span lang="nl">Scène 02 — schematisch, geen koersen</span><span lang="en">Scene 02 — schematic, no prices</span></p>
     </div>
 
     <div class="f f-3">
       <div class="frame">
         <span class="fnum">02A</span>
         <div class="win tall">
-          <svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Frame A: een range met liquiditeit erboven">
+          <svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Frame A: een range met liquiditeit erboven / Frame A: a range with liquidity above it">
             <g filter="url(#wob)" fill="none" stroke="#08090B" stroke-width="1.8" stroke-linecap="round">
               <path d="M28 60 H292" stroke="#B9954A" stroke-dasharray="8 7"/>
               <path d="M28 186 H292" stroke="#B9954A" stroke-dasharray="8 7"/>
               <path d="M40 150 L70 120 L100 158 L130 108 L160 146 L190 104 L220 150 L250 118 L280 140"/>
             </g>
-            <text x="28" y="48" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="12" letter-spacing="3" fill="#8C7433">LIQUIDITEIT</text>
+            <text lang="nl" x="28" y="48" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="12" letter-spacing="3" fill="#8C7433">LIQUIDITEIT</text>
+            <text lang="en" x="28" y="48" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="12" letter-spacing="3" fill="#8C7433">LIQUIDITY</text>
             <text x="28" y="212" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="12" letter-spacing="3" fill="#8C7433">RANGE</text>
           </svg>
         </div>
         <div class="cap">
-          <h3>Er ligt iets</h3>
-          <p>Boven en onder de range verzamelt liquiditeit zich.</p>
+          <h3><span lang="nl">Er ligt iets</span><span lang="en">Something&rsquo;s there</span></h3>
+          <p><span lang="nl">Boven en onder de range verzamelt liquiditeit zich.</span><span lang="en">Liquidity gathers above and below the range.</span></p>
         </div>
       </div>
     </div>
@@ -436,7 +470,7 @@
       <div class="frame">
         <span class="fnum">02B</span>
         <div class="win tall">
-          <svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Frame B: een sweep boven het niveau">
+          <svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Frame B: een sweep boven het niveau / Frame B: a sweep above the level">
             <g filter="url(#wob)" fill="none" stroke="#08090B" stroke-width="1.8" stroke-linecap="round">
               <path d="M28 60 H292" stroke="#B9954A" stroke-dasharray="8 7"/>
               <path d="M40 150 L80 128 L120 140 L160 96 L180 34 L200 104 L240 138 L280 160"/>
@@ -449,8 +483,8 @@
           </svg>
         </div>
         <div class="cap">
-          <h3>Het wordt gepakt</h3>
-          <p>Een uitschieter door het niveau en direct terug.</p>
+          <h3><span lang="nl">Het wordt gepakt</span><span lang="en">It gets taken</span></h3>
+          <p><span lang="nl">Een uitschieter door het niveau en direct terug.</span><span lang="en">A spike through the level and straight back.</span></p>
         </div>
       </div>
     </div>
@@ -459,7 +493,7 @@
       <div class="frame">
         <span class="fnum">02C</span>
         <div class="win tall">
-          <svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Frame C: een fair value gap in de beweging">
+          <svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Frame C: een fair value gap in de beweging / Frame C: a fair value gap in the move">
             <g filter="url(#wob)" fill="none" stroke="#08090B" stroke-width="1.8" stroke-linecap="round">
               <path d="M36 70 L76 96 L116 120"/>
               <path d="M204 168 L244 190 L284 176"/>
@@ -469,12 +503,13 @@
               <path d="M116 120 L204 168"/>
             </g>
             <text x="112" y="204" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="12" letter-spacing="3" fill="#8C7433">FVG</text>
-            <text x="112" y="106" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="11" letter-spacing="2" fill="#8C7433">ONEVENWICHT</text>
+            <text lang="nl" x="112" y="106" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="11" letter-spacing="2" fill="#8C7433">ONEVENWICHT</text>
+            <text lang="en" x="112" y="106" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="11" letter-spacing="2" fill="#8C7433">IMBALANCE</text>
           </svg>
         </div>
         <div class="cap">
-          <h3>Er blijft een gat</h3>
-          <p>De beweging laat een onevenwicht achter in de prijs.</p>
+          <h3><span lang="nl">Er blijft een gat</span><span lang="en">A gap is left</span></h3>
+          <p><span lang="nl">De beweging laat een onevenwicht achter in de prijs.</span><span lang="en">The move leaves an imbalance in the price.</span></p>
         </div>
       </div>
     </div>
@@ -483,7 +518,7 @@
       <div class="frame">
         <span class="fnum">02D</span>
         <div class="win tall">
-          <svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Frame D: de hertest van de zone en de reactie">
+          <svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Frame D: de hertest van de zone en de reactie / Frame D: the retest of the zone and the reaction">
             <rect x="60" y="110" width="200" height="42" fill="rgba(215,179,100,.28)" stroke="#B9954A" stroke-width="1.4"/>
             <g filter="url(#wob)" fill="none" stroke="#08090B" stroke-width="1.8" stroke-linecap="round">
               <path d="M36 190 L80 172 L124 150 L168 128 L200 132 L232 96 L268 52"/>
@@ -493,12 +528,13 @@
               <path d="M212 128 C 236 108, 252 82, 266 58"/>
             </g>
             <path d="M266 58 l-3 -16 l-11 8 z" fill="#B9954A"/>
-            <text x="36" y="222" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="12" letter-spacing="3" fill="#8C7433">HERTEST</text>
+            <text lang="nl" x="36" y="222" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="12" letter-spacing="3" fill="#8C7433">HERTEST</text>
+            <text lang="en" x="36" y="222" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="12" letter-spacing="3" fill="#8C7433">RETEST</text>
           </svg>
         </div>
         <div class="cap">
-          <h3>Terug en verder</h3>
-          <p>De zone wordt hertest. Daar begint het plan.</p>
+          <h3><span lang="nl">Terug en verder</span><span lang="en">Back, then on</span></h3>
+          <p><span lang="nl">De zone wordt hertest. Daar begint het plan.</span><span lang="en">The zone gets retested. That is where the plan starts.</span></p>
         </div>
       </div>
     </div>
@@ -506,9 +542,9 @@
     <!-- ============ 03 DE OPRICHTER ============ -->
     <div class="f f-5">
       <div class="frame">
-        <span class="fnum">03 · DE OPRICHTER</span>
+        <span class="fnum"><span lang="nl">03 · DE OPRICHTER</span><span lang="en">03 · THE FOUNDER</span></span>
         <div class="win">
-          <svg viewBox="0 0 420 236" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Geschetst bureau met twee schermen">
+          <svg viewBox="0 0 420 236" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Geschetst bureau met twee schermen / Sketched desk with two screens">
             <g filter="url(#wob)" fill="none" stroke="#08090B" stroke-width="1.8" stroke-linecap="round">
               <rect x="46" y="44" width="150" height="96"/>
               <rect x="216" y="60" width="150" height="80"/>
@@ -525,15 +561,18 @@
           </svg>
         </div>
         <div class="cap">
-          <span class="tapehead">10+ jaar in de markt</span>
+          <span class="tapehead"><span lang="nl">10+ jaar in de markt</span><span lang="en">10+ years in the market</span></span>
           <blockquote class="q">
-            Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles
+            <span lang="nl">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles
             meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Geen
             snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil
-            worden.
+            worden.</span><span lang="en">I&rsquo;ve been involved in trading for over 10 years now, and during that time I&rsquo;ve
+            experienced pretty much everything: wins, losses, mistakes, growth, and a lot of
+            lessons. No get-rich-quick promises, just real setups, education, and a community
+            focused on improving together.</span>
           </blockquote>
-          <p class="who">De oprichter van Atlas Capital</p>
-          <p class="meta"><span>Scène 03</span><span>Zijn woorden</span></p>
+          <p class="who"><span lang="nl">De oprichter van Atlas Capital</span><span lang="en">The founder of Atlas Capital</span></p>
+          <p class="meta"><span><span lang="nl">Scène 03</span><span lang="en">Scene 03</span></span><span><span lang="nl">Zijn woorden</span><span lang="en">His words</span></span></p>
         </div>
       </div>
     </div>
@@ -541,24 +580,24 @@
     <!-- ============ 04 EDUCATIE ============ -->
     <div class="f f-7" id="educatie">
       <div class="frame">
-        <span class="fnum">04 · EDUCATIE</span>
+        <span class="fnum"><span lang="nl">04 · EDUCATIE</span><span lang="en">04 · EDUCATION</span></span>
         <div class="cap" style="padding-top:34px">
-          <h3 style="font-size:clamp(26px,3.4vw,40px);margin-bottom:14px">De opnamelijst — 10 onderwerpen</h3>
+          <h3 style="font-size:clamp(26px,3.4vw,40px);margin-bottom:14px"><span lang="nl">De opnamelijst — 10 onderwerpen</span><span lang="en">The shot list — 10 topics</span></h3>
           <ul class="shotlist">
-            <li><span class="n">01</span><span class="t">Deviatie</span><span class="mk"></span></li>
+            <li><span class="n">01</span><span class="t"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span><span class="mk"></span></li>
             <li><span class="n">02</span><span class="t">SMT</span><span class="mk"></span></li>
             <li><span class="n">03</span><span class="t">FVG</span><span class="mk"></span></li>
             <li><span class="n">04</span><span class="t">IFVG</span><span class="mk"></span></li>
             <li><span class="n">05</span><span class="t">Orderblocks</span><span class="mk"></span></li>
             <li><span class="n">06</span><span class="t">Fibonacci</span><span class="mk"></span></li>
-            <li><span class="n">07</span><span class="t">Sessie-liquiditeit</span><span class="mk"></span></li>
-            <li><span class="n">08</span><span class="t">Liquiditeit</span><span class="mk"></span></li>
-            <li><span class="n">09</span><span class="t">Risicobeheer</span><span class="mk"></span></li>
-            <li><span class="n">10</span><span class="t">Tradingpsychologie</span><span class="mk"></span></li>
+            <li><span class="n">07</span><span class="t"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span><span class="mk"></span></li>
+            <li><span class="n">08</span><span class="t"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span><span class="mk"></span></li>
+            <li><span class="n">09</span><span class="t"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span><span class="mk"></span></li>
+            <li><span class="n">10</span><span class="t"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span><span class="mk"></span></li>
           </ul>
-          <p class="meta"><span>Scène 04 — curriculum</span><span>Uitleg in de server</span></p>
+          <p class="meta"><span><span lang="nl">Scène 04 — curriculum</span><span lang="en">Scene 04 — curriculum</span></span><span><span lang="nl">Uitleg in de server</span><span lang="en">Explained in the server</span></span></p>
           <div class="btnrow" style="margin-top:16px">
-            <a class="cta inv" href="https://discord.gg/78Ff2GuSfW">Leer mee op Discord</a>
+            <a class="cta inv" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Leer mee op Discord</span><span lang="en">Learn along on Discord</span></a>
           </div>
         </div>
       </div>
@@ -567,10 +606,10 @@
     <!-- ============ 05 KANALEN ============ -->
     <div class="f f-6" id="kanalen">
       <div class="frame">
-        <span class="fnum">05 · DECOR</span>
+        <span class="fnum"><span lang="nl">05 · DECOR</span><span lang="en">05 · SET</span></span>
         <div class="cap" style="padding-top:34px">
-          <h3>Thuis — nu gratis</h3>
-          <p style="margin-bottom:12px">Negen kanalen, open voor iedereen.</p>
+          <h3><span lang="nl">Thuis — nu gratis</span><span lang="en">Home — free right now</span></h3>
+          <p style="margin-bottom:12px"><span lang="nl">Negen kanalen, open voor iedereen.</span><span lang="en">Nine channels, open to everyone.</span></p>
           <ul class="chan">
             <li>#nq-chart-ideeën</li>
             <li>#es-chart-ideeën</li>
@@ -582,7 +621,7 @@
             <li>#atlas-op-socials</li>
             <li>#ondersteuning</li>
           </ul>
-          <p class="meta"><span>Scène 05 — 15 kanalen totaal</span><span>NQ · ES · Bitcoin · altcoins</span></p>
+          <p class="meta"><span><span lang="nl">Scène 05 — 15 kanalen totaal</span><span lang="en">Scene 05 — 15 channels in total</span></span><span>NQ · ES · Bitcoin · altcoins</span></p>
         </div>
       </div>
     </div>
@@ -591,8 +630,8 @@
       <div class="frame">
         <span class="fnum">05B · LATER</span>
         <div class="cap" style="padding-top:34px">
-          <h3>Premium — opent later</h3>
-          <p style="margin-bottom:12px">Zes extra kanalen. Prijs en datum worden in de server aangekondigd.</p>
+          <h3><span lang="nl">Premium — opent later</span><span lang="en">Premium — opens later</span></h3>
+          <p style="margin-bottom:12px"><span lang="nl">Zes extra kanalen. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Six extra channels. Price and date are announced in the server.</span></p>
           <ul class="chan soon">
             <li>#trade-setups</li>
             <li>#marktupdates</li>
@@ -602,7 +641,7 @@
             <li>#premium-chat</li>
           </ul>
           <div class="btnrow" style="margin-top:16px">
-            <a class="cta" href="https://discord.gg/78Ff2GuSfW">Nu gratis binnenkomen</a>
+            <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Nu gratis binnenkomen</span><span lang="en">Come in free right now</span></a>
           </div>
         </div>
       </div>
@@ -613,7 +652,7 @@
       <div class="frame">
         <span class="fnum">06 · LIVE</span>
         <div class="win" style="aspect-ratio:21/6">
-          <svg viewBox="0 0 800 230" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Geschetste opnamelamp en golfvorm">
+          <svg viewBox="0 0 800 230" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Geschetste opnamelamp en golfvorm / Sketched recording light and waveform">
             <g filter="url(#wob)" fill="none" stroke="#08090B" stroke-width="1.8" stroke-linecap="round">
               <circle cx="86" cy="115" r="30"/>
               <path d="M126 115 H760"/>
@@ -624,10 +663,10 @@
           </svg>
         </div>
         <div class="cap">
-          <h3>Live trading in de server</h3>
-          <p>De oprichter handelt live mee. Tijden worden in de server aangekondigd.</p>
+          <h3><span lang="nl">Live trading in de server</span><span lang="en">Live trading in the server</span></h3>
+          <p><span lang="nl">De oprichter handelt live mee. Tijden worden in de server aangekondigd.</span><span lang="en">The founder trades live. Times are announced in the server.</span></p>
           <div class="btnrow" style="margin-top:14px">
-            <a class="cta inv" href="https://discord.gg/78Ff2GuSfW">Zit erbij</a>
+            <a class="cta inv" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Zit erbij</span><span lang="en">Sit in</span></a>
           </div>
         </div>
       </div>
@@ -636,13 +675,13 @@
     <!-- ============ 07 TOEGANG ============ -->
     <div class="f f-4">
       <div class="frame">
-        <span class="fnum">07 · TOEGANG</span>
+        <span class="fnum"><span lang="nl">07 · TOEGANG</span><span lang="en">07 · ACCESS</span></span>
         <div class="cap" style="padding-top:34px">
-          <h3>Nu gratis</h3>
-          <p>De hele thuisserver is open. Premium opent later; prijs en datum volgen in de server.</p>
-          <p class="meta"><span>Scène 07</span><span>Geen prijs bekend</span></p>
+          <h3><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></h3>
+          <p><span lang="nl">De hele thuisserver is open. Premium opent later; prijs en datum volgen in de server.</span><span lang="en">The whole home server is open. Premium opens later; price and date follow in the server.</span></p>
+          <p class="meta"><span><span lang="nl">Scène 07</span><span lang="en">Scene 07</span></span><span><span lang="nl">Geen prijs bekend</span><span lang="en">No price known</span></span></p>
           <div class="btnrow" style="margin-top:16px">
-            <a class="cta" href="https://discord.gg/78Ff2GuSfW">Binnenkomen</a>
+            <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Binnenkomen</span><span lang="en">Come in</span></a>
           </div>
         </div>
       </div>
@@ -650,27 +689,48 @@
 
     <!-- ============ 08 SLOT ============ -->
     <div class="closing">
-      <h2>Laatste <em>frame</em></h2>
-      <p>De server is open. Daar gebeurt de rest — educatie, markt en live trading.</p>
-      <a class="cta" href="https://discord.gg/78Ff2GuSfW">Open de Discord</a>
+      <h2><span lang="nl">Laatste <em>frame</em></span><span lang="en">Last <em>frame</em></span></h2>
+      <p><span lang="nl">De server is open. Daar gebeurt de rest — educatie, markt en live trading.</span><span lang="en">The server is open. The rest happens there — education, market and live trading.</span></p>
+      <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
     </div>
   </div>
 
   <footer>
     <div class="fgrid">
       <div class="field" style="min-width:200px">
-        <span>Productie</span><b>Atlas Capital</b>
+        <span><span lang="nl">Productie</span><span lang="en">Production</span></span><b>Atlas Capital</b>
       </div>
       <div class="flinks">
         <a href="https://discord.gg/78Ff2GuSfW">Discord</a>
         <a href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
-        <a href="#educatie">Educatie</a>
-        <a href="#kanalen">Kanalen</a>
+        <a href="#educatie"><span lang="nl">Educatie</span><span lang="en">Education</span></a>
+        <a href="#kanalen"><span lang="nl">Kanalen</span><span lang="en">Channels</span></a>
       </div>
     </div>
-    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
   </footer>
 </div>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

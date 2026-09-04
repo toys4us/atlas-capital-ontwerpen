@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -204,6 +204,20 @@
   .gfill{fill:rgba(215,179,100,.3); stroke:#A8843A; stroke-width:1}
   .wfill{fill:#FCFBF6; stroke:#08090B; stroke-width:1.4}
   .bfill{fill:#08090B; stroke:#08090B; stroke-width:1.4}
+
+  /* ---------- taal / language ---------- */
+  :root:not([data-lang="en"]) [lang="en"]{display:none!important}
+  :root[data-lang="en"] [lang="nl"]{display:none!important}
+  .langsw{display:inline-flex; border:1px solid var(--ink)}
+  .langsw button{
+    appearance:none; -webkit-appearance:none; background:transparent; border:0; cursor:pointer;
+    font-family:var(--sans); font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+    font-weight:700; color:var(--ink); padding:10px 11px; line-height:1;
+    transition:background .18s ease, color .18s ease;
+  }
+  .langsw button + button{border-left:1px solid var(--ink)}
+  .langsw button:hover{background:var(--gold); color:var(--ink)}
+  .langsw button[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
 </style>
 </head>
 <body>
@@ -211,8 +225,12 @@
 <header>
   <div class="hbar">
     <span class="wm">Atlas Capital</span>
-    <span class="micro">Catalogus · vrije toegang</span>
+    <span class="micro"><span lang="nl">Catalogus · vrije toegang</span><span lang="en">Catalogue · free admission</span></span>
     <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span>Discord</a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
@@ -220,65 +238,65 @@
 
   <!-- ================= TITLE PAGE ================= -->
   <div class="pad titlepage">
-    <p class="micro imprint">Tentoonstellingscatalogus · Nederlandse uitgave</p>
+    <p class="micro imprint"><span lang="nl">Tentoonstellingscatalogus · Nederlandse uitgave</span><span lang="en">Exhibition catalogue · English edition</span></p>
     <h1>
-      <span>Proces</span>
+      <span lang="nl">Proces</span><span lang="en">Process</span>
       <span class="it">Discipline</span>
-      <span>Uitvoering</span>
+      <span lang="nl">Uitvoering</span><span lang="en">Execution</span>
     </h1>
     <div class="rulepair"><span class="l"></span><span class="d"></span><span class="l"></span></div>
-    <p class="subtitle">Elf platen over het lezen van een markt, uitgegeven door een Nederlandse trading-community.</p>
+    <p class="subtitle"><span lang="nl">Elf platen over het lezen van een markt, uitgegeven door een Nederlandse trading-community.</span><span lang="en">Eleven plates on reading a market, published by a Dutch trading community.</span></p>
     <div class="titleacts">
-      <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span>Word lid op Discord</a>
-      <a class="cta line" href="#platen"><span class="sq"></span>Naar de platen</a>
+      <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></a>
+      <a class="cta line" href="#platen"><span class="sq"></span><span lang="nl">Naar de platen</span><span lang="en">To the plates</span></a>
     </div>
     <p class="micro" style="margin-top:34px">Atlas Capital · NQ · ES · Bitcoin · Altcoins</p>
   </div>
 
   <!-- ================= CONTENTS ================= -->
   <div class="pad contents" id="inhoud">
-    <div class="runhead"><span>Atlas Capital — Catalogus</span><span>Inhoud</span></div>
-    <h2 style="margin-top:24px">Inhoud</h2>
+    <div class="runhead"><span><span lang="nl">Atlas Capital — Catalogus</span><span lang="en">Atlas Capital — Catalogue</span></span><span><span lang="nl">Inhoud</span><span lang="en">Contents</span></span></div>
+    <h2 style="margin-top:24px"><span lang="nl">Inhoud</span><span lang="en">Contents</span></h2>
     <ol class="toc">
-      <li><a href="#voorwoord">Voorwoord</a><span class="dots"></span><span class="kind">tekst</span><span class="pn">01</span></li>
-      <li><a href="#platen">Platen I—X · de tien onderwerpen</a><span class="dots"></span><span class="kind">platen</span><span class="pn">02</span></li>
-      <li><a href="#plaat11">Plaat XI · het model</a><span class="dots"></span><span class="kind">uitvouwplaat</span><span class="pn">03</span></li>
-      <li><a href="#lijst">Lijst van kanalen</a><span class="dots"></span><span class="kind">bijlage</span><span class="pn">04</span></li>
-      <li><a href="#live">Live handelen</a><span class="dots"></span><span class="kind">notitie</span><span class="pn">05</span></li>
-      <li><a href="#toegang">Toegang</a><span class="dots"></span><span class="kind">bijlage</span><span class="pn">06</span></li>
-      <li><a href="#colofon">Colofon</a><span class="dots"></span><span class="kind">slot</span><span class="pn">07</span></li>
+      <li><a href="#voorwoord"><span lang="nl">Voorwoord</span><span lang="en">Foreword</span></a><span class="dots"></span><span class="kind"><span lang="nl">tekst</span><span lang="en">text</span></span><span class="pn">01</span></li>
+      <li><a href="#platen"><span lang="nl">Platen I—X · de tien onderwerpen</span><span lang="en">Plates I—X · the ten topics</span></a><span class="dots"></span><span class="kind"><span lang="nl">platen</span><span lang="en">plates</span></span><span class="pn">02</span></li>
+      <li><a href="#plaat11"><span lang="nl">Plaat XI · het model</span><span lang="en">Plate XI · the model</span></a><span class="dots"></span><span class="kind"><span lang="nl">uitvouwplaat</span><span lang="en">fold-out</span></span><span class="pn">03</span></li>
+      <li><a href="#lijst"><span lang="nl">Lijst van kanalen</span><span lang="en">List of channels</span></a><span class="dots"></span><span class="kind"><span lang="nl">bijlage</span><span lang="en">appendix</span></span><span class="pn">04</span></li>
+      <li><a href="#live"><span lang="nl">Live handelen</span><span lang="en">Live trading</span></a><span class="dots"></span><span class="kind"><span lang="nl">notitie</span><span lang="en">note</span></span><span class="pn">05</span></li>
+      <li><a href="#toegang"><span lang="nl">Toegang</span><span lang="en">Admission</span></a><span class="dots"></span><span class="kind"><span lang="nl">bijlage</span><span lang="en">appendix</span></span><span class="pn">06</span></li>
+      <li><a href="#colofon"><span lang="nl">Colofon</span><span lang="en">Colophon</span></a><span class="dots"></span><span class="kind"><span lang="nl">slot</span><span lang="en">end</span></span><span class="pn">07</span></li>
     </ol>
     <div class="folio">· <b>01</b> ·</div>
   </div>
 
   <!-- ================= VOORWOORD ================= -->
   <div class="pad sec" id="voorwoord">
-    <div class="runhead"><span>Voorwoord</span><span>De oprichter</span></div>
+    <div class="runhead"><span><span lang="nl">Voorwoord</span><span lang="en">Foreword</span></span><span><span lang="nl">De oprichter</span><span lang="en">The founder</span></span></div>
     <div class="sechead" style="margin-top:26px">
       <span class="n">01</span>
-      <h2>Voorwoord</h2>
-      <p class="micro g" style="margin-top:8px">Door de oprichter · 10+ jaar in de markt</p>
+      <h2><span lang="nl">Voorwoord</span><span lang="en">Foreword</span></h2>
+      <p class="micro g" style="margin-top:8px"><span lang="nl">Door de oprichter · 10+ jaar in de markt</span><span lang="en">By the founder · 10+ years in the market</span></p>
     </div>
     <div class="foreword">
-      <p class="lead">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</p>
-      <p>Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</p>
+      <p class="lead"><span lang="nl">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</span><span lang="en">I've been involved in trading for over 10 years now, and during that time I've experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons.</span></p>
+      <p><span lang="nl">Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</span><span lang="en">I built Atlas Capital to share that experience, bring traders together, and show how I approach the markets on a daily basis. No get-rich-quick promises, just real setups, education, and a community focused on improving together.</span></p>
       <div class="sig">
-        <span class="micro">Oprichter</span>
+        <span class="micro"><span lang="nl">Oprichter</span><span lang="en">Founder</span></span>
         <span style="flex:1; border-bottom:1px solid var(--hair); transform:translateY(-4px)"></span>
         <span class="micro g">Atlas Capital</span>
       </div>
-      <div style="margin-top:26px"><a class="cta line" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span>Lees verder in de server</a></div>
+      <div style="margin-top:26px"><a class="cta line" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span><span lang="nl">Lees verder in de server</span><span lang="en">Read on in the server</span></a></div>
     </div>
     <div class="folio">· <b>02</b> ·</div>
   </div>
 
   <!-- ================= PLATEN I—X ================= -->
   <div class="pad sec" id="platen">
-    <div class="runhead"><span>Platen I—X</span><span>De tien onderwerpen</span></div>
+    <div class="runhead"><span><span lang="nl">Platen I—X</span><span lang="en">Plates I—X</span></span><span><span lang="nl">De tien onderwerpen</span><span lang="en">The ten topics</span></span></div>
     <div class="sechead" style="margin-top:26px">
       <span class="n">02</span>
-      <h2>Platen I—X</h2>
-      <p class="micro" style="margin-top:8px">10 onderwerpen · gravure naar schema</p>
+      <h2><span lang="nl">Platen I—X</span><span lang="en">Plates I—X</span></h2>
+      <p class="micro" style="margin-top:8px"><span lang="nl">10 onderwerpen · gravure naar schema</span><span lang="en">10 topics · engraving after a diagram</span></p>
     </div>
 
     <div class="plates">
@@ -293,9 +311,9 @@
           <path d="M20 70 V84 M30 62 V80 M70 60 V80 M80 68 V86" class="ln2"/>
         </svg></div>
         <div>
-          <span class="t">Deviatie</span>
-          <span class="m">Uitloop voorbij een niveau, gevolgd door terugkeer.</span>
-          <span class="c">Plaat I · cat. 01</span>
+          <span class="t"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span>
+          <span class="m"><span lang="nl">Uitloop voorbij een niveau, gevolgd door terugkeer.</span><span lang="en">A run beyond a level, followed by a return.</span></span>
+          <span class="c"><span lang="nl">Plaat I · cat. 01</span><span lang="en">Plate I · cat. 01</span></span>
         </div>
       </div>
 
@@ -310,8 +328,8 @@
         </svg></div>
         <div>
           <span class="t">SMT</span>
-          <span class="m">Twee samenhangende markten die uiteenlopen.</span>
-          <span class="c">Plaat II · cat. 02</span>
+          <span class="m"><span lang="nl">Twee samenhangende markten die uiteenlopen.</span><span lang="en">Two related markets that diverge.</span></span>
+          <span class="c"><span lang="nl">Plaat II · cat. 02</span><span lang="en">Plate II · cat. 02</span></span>
         </div>
       </div>
 
@@ -326,8 +344,8 @@
         </svg></div>
         <div>
           <span class="t">FVG</span>
-          <span class="m">Onbalans die drie kaarsen open laten.</span>
-          <span class="c">Plaat III · cat. 03</span>
+          <span class="m"><span lang="nl">Onbalans die drie kaarsen open laten.</span><span lang="en">An imbalance left open by three candles.</span></span>
+          <span class="c"><span lang="nl">Plaat III · cat. 03</span><span lang="en">Plate III · cat. 03</span></span>
         </div>
       </div>
 
@@ -341,8 +359,8 @@
         </svg></div>
         <div>
           <span class="t">IFVG</span>
-          <span class="m">Dezelfde zone, van steun naar weerstand.</span>
-          <span class="c">Plaat IV · cat. 04</span>
+          <span class="m"><span lang="nl">Dezelfde zone, van steun naar weerstand.</span><span lang="en">The same zone, from support to resistance.</span></span>
+          <span class="c"><span lang="nl">Plaat IV · cat. 04</span><span lang="en">Plate IV · cat. 04</span></span>
         </div>
       </div>
 
@@ -356,8 +374,8 @@
         </svg></div>
         <div>
           <span class="t">Orderblocks</span>
-          <span class="m">Het laatste blok voor de beweging.</span>
-          <span class="c">Plaat V · cat. 05</span>
+          <span class="m"><span lang="nl">Het laatste blok voor de beweging.</span><span lang="en">The last block before the move.</span></span>
+          <span class="c"><span lang="nl">Plaat V · cat. 05</span><span lang="en">Plate V · cat. 05</span></span>
         </div>
       </div>
 
@@ -370,8 +388,8 @@
         </svg></div>
         <div>
           <span class="t">Fibonacci</span>
-          <span class="m">Verhoudingen als raster over een beweging.</span>
-          <span class="c">Plaat VI · cat. 06</span>
+          <span class="m"><span lang="nl">Verhoudingen als raster over een beweging.</span><span lang="en">Ratios as a grid over a move.</span></span>
+          <span class="c"><span lang="nl">Plaat VI · cat. 06</span><span lang="en">Plate VI · cat. 06</span></span>
         </div>
       </div>
 
@@ -384,9 +402,9 @@
           <path d="M12 82 L30 64 L44 28 L58 68 L74 42 L92 30" class="ln1"/>
         </svg></div>
         <div>
-          <span class="t">Sessie-liquiditeit</span>
-          <span class="m">Het hoogste en laagste punt van een venster.</span>
-          <span class="c">Plaat VII · cat. 07</span>
+          <span class="t"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span>
+          <span class="m"><span lang="nl">Het hoogste en laagste punt van een venster.</span><span lang="en">The highest and lowest point of a window.</span></span>
+          <span class="c"><span lang="nl">Plaat VII · cat. 07</span><span lang="en">Plate VII · cat. 07</span></span>
         </div>
       </div>
 
@@ -399,9 +417,9 @@
           <path d="M66 14 l-5 9 h10 z" fill="#A8843A"/>
         </svg></div>
         <div>
-          <span class="t">Liquiditeit</span>
-          <span class="m">De plek waar orders zich verzamelen.</span>
-          <span class="c">Plaat VIII · cat. 08</span>
+          <span class="t"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span>
+          <span class="m"><span lang="nl">De plek waar orders zich verzamelen.</span><span lang="en">The place where orders gather.</span></span>
+          <span class="c"><span lang="nl">Plaat VIII · cat. 08</span><span lang="en">Plate VIII · cat. 08</span></span>
         </div>
       </div>
 
@@ -415,9 +433,9 @@
           <rect x="44" y="26" width="12" height="58" class="gfill"/>
         </svg></div>
         <div>
-          <span class="t">Risicobeheer</span>
-          <span class="m">Wat je inzet, en waar het ophoudt.</span>
-          <span class="c">Plaat IX · cat. 09</span>
+          <span class="t"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span>
+          <span class="m"><span lang="nl">Wat je inzet, en waar het ophoudt.</span><span lang="en">What you risk, and where it stops.</span></span>
+          <span class="c"><span lang="nl">Plaat IX · cat. 09</span><span lang="en">Plate IX · cat. 09</span></span>
         </div>
       </div>
 
@@ -430,28 +448,28 @@
           <path d="M10 60 q7 -16 14 0" class="ln2"/>
         </svg></div>
         <div>
-          <span class="t">Tradingpsychologie</span>
-          <span class="m">Het gedrag dat de uitvoering bepaalt.</span>
-          <span class="c">Plaat X · cat. 10</span>
+          <span class="t"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span>
+          <span class="m"><span lang="nl">Het gedrag dat de uitvoering bepaalt.</span><span lang="en">The behaviour that decides the execution.</span></span>
+          <span class="c"><span lang="nl">Plaat X · cat. 10</span><span lang="en">Plate X · cat. 10</span></span>
         </div>
       </div>
 
     </div>
 
     <div style="margin-top:32px; display:flex; gap:14px; align-items:center; flex-wrap:wrap">
-      <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span>Alle platen in Discord</a>
-      <span class="micro">Uitgelegd, besproken, herhaald</span>
+      <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span><span lang="nl">Alle platen in Discord</span><span lang="en">All plates on Discord</span></a>
+      <span class="micro"><span lang="nl">Uitgelegd, besproken, herhaald</span><span lang="en">Explained, discussed, repeated</span></span>
     </div>
     <div class="folio">· <b>03</b> ·</div>
   </div>
 
   <!-- ================= PLAAT XI ================= -->
   <div class="pad sec" id="plaat11">
-    <div class="runhead"><span>Plaat XI</span><span>Uitvouwplaat</span></div>
+    <div class="runhead"><span><span lang="nl">Plaat XI</span><span lang="en">Plate XI</span></span><span><span lang="nl">Uitvouwplaat</span><span lang="en">Fold-out plate</span></span></div>
     <div class="sechead" style="margin-top:26px">
       <span class="n">03</span>
-      <h2>Plaat XI — Het model</h2>
-      <p class="micro" style="margin-top:8px">Schematische gravure · zonder koersen, zonder uitkomst</p>
+      <h2><span lang="nl">Plaat XI — Het model</span><span lang="en">Plate XI — The model</span></h2>
+      <p class="micro" style="margin-top:8px"><span lang="nl">Schematische gravure · zonder koersen, zonder uitkomst</span><span lang="en">Schematic engraving · no prices, no outcome</span></p>
     </div>
     <div class="plate11">
       <div class="scroller">
@@ -516,15 +534,18 @@
           <g font-family="Helvetica,Arial,sans-serif" font-size="9.5" letter-spacing="1.8" fill="#6B675E">
             <path d="M360 108 H452" stroke="#9A9689" stroke-width=".7"/>
             <circle cx="360" cy="108" r="2.6" fill="#A8843A"/>
-            <text x="458" y="105">1 · RANGE-TOP</text>
+            <text lang="nl" x="458" y="105">1 · RANGE-TOP</text>
+            <text lang="en" x="458" y="105">1 · RANGE HIGH</text>
 
             <path d="M330 62 V46 H430" stroke="#9A9689" stroke-width=".7"/>
             <circle cx="330" cy="62" r="2.6" fill="#A8843A"/>
-            <text x="436" y="49">2 · DEVIATIE</text>
+            <text lang="nl" x="436" y="49">2 · DEVIATIE</text>
+            <text lang="en" x="436" y="49">2 · DEVIATION</text>
 
             <path d="M420 222 V246 H460" stroke="#9A9689" stroke-width=".7"/>
             <circle cx="420" cy="222" r="2.6" fill="#A8843A"/>
-            <text x="466" y="249">3 · TERUG DOOR DE RANGE</text>
+            <text lang="nl" x="466" y="249">3 · TERUG DOOR DE RANGE</text>
+            <text lang="en" x="466" y="249">3 · BACK THROUGH THE RANGE</text>
 
             <path d="M628 194 H648" stroke="#9A9689" stroke-width=".7"/>
             <circle cx="628" cy="194" r="2.6" fill="#A8843A"/>
@@ -532,34 +553,36 @@
 
             <path d="M502 178 V158 H532" stroke="#9A9689" stroke-width=".7"/>
             <circle cx="502" cy="178" r="2.6" fill="#A8843A"/>
-            <text x="538" y="161">5 · INSTAPZONE</text>
+            <text lang="nl" x="538" y="161">5 · INSTAPZONE</text>
+            <text lang="en" x="538" y="161">5 · ENTRY ZONE</text>
           </g>
           <text x="46" y="46" font-family="Helvetica,Arial,sans-serif" font-size="9" letter-spacing="3" fill="#A8843A">FIG. XI</text>
-          <text x="654" y="312" text-anchor="end" font-family="Helvetica,Arial,sans-serif" font-size="8.5" letter-spacing="2.4" fill="#A5A196">SCHEMA — GEEN KOERSEN</text>
+          <text lang="nl" x="654" y="312" text-anchor="end" font-family="Helvetica,Arial,sans-serif" font-size="8.5" letter-spacing="2.4" fill="#A5A196">SCHEMA — GEEN KOERSEN</text>
+          <text lang="en" x="654" y="312" text-anchor="end" font-family="Helvetica,Arial,sans-serif" font-size="8.5" letter-spacing="2.4" fill="#A5A196">DIAGRAM — NO PRICES</text>
         </svg>
       </div>
       <div class="platecap">
-        <span class="micro g">Plaat XI</span>
-        <span style="font-size:15px">Range · deviatie · terugkeer · onbalans · instapzone</span>
+        <span class="micro g"><span lang="nl">Plaat XI</span><span lang="en">Plate XI</span></span>
+        <span style="font-size:15px"><span lang="nl">Range · deviatie · terugkeer · onbalans · instapzone</span><span lang="en">Range · deviation · return · imbalance · entry zone</span></span>
         <span class="micro">cat. 11</span>
       </div>
     </div>
-    <p style="max-width:56ch; margin-top:24px">Dit is een tekening, geen belofte. De volgorde telt, niet de uitkomst.</p>
-    <div style="margin-top:18px"><a class="cta line" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span>Bespreek plaat XI in Discord</a></div>
+    <p style="max-width:56ch; margin-top:24px"><span lang="nl">Dit is een tekening, geen belofte. De volgorde telt, niet de uitkomst.</span><span lang="en">This is a drawing, not a promise. The order matters, not the outcome.</span></p>
+    <div style="margin-top:18px"><a class="cta line" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span><span lang="nl">Bespreek plaat XI in Discord</span><span lang="en">Discuss plate XI on Discord</span></a></div>
     <div class="folio">· <b>04</b> ·</div>
   </div>
 
   <!-- ================= LIJST VAN KANALEN ================= -->
   <div class="pad sec" id="lijst">
-    <div class="runhead"><span>Bijlage A</span><span>Lijst van kanalen</span></div>
+    <div class="runhead"><span><span lang="nl">Bijlage A</span><span lang="en">Appendix A</span></span><span><span lang="nl">Lijst van kanalen</span><span lang="en">List of channels</span></span></div>
     <div class="sechead" style="margin-top:26px">
       <span class="n">04</span>
-      <h2>Lijst van kanalen</h2>
-      <p class="micro" style="margin-top:8px">15 kanalen · thuis en premium</p>
+      <h2><span lang="nl">Lijst van kanalen</span><span lang="en">List of channels</span></h2>
+      <p class="micro" style="margin-top:8px"><span lang="nl">15 kanalen · thuis en premium</span><span lang="en">15 channels · home and premium</span></p>
     </div>
     <div class="appendix">
       <div class="grp">
-        <h3>Thuis</h3>
+        <h3><span lang="nl">Thuis</span><span lang="en">Home</span></h3>
         <hr class="gold">
         <ul class="list">
           <li>#nq-chart-ideeën<span class="ln"></span><span class="st">open</span></li>
@@ -584,7 +607,7 @@
           <li>#chart-ideeën<span class="ln"></span><span class="st">later</span></li>
           <li>#premium-chat<span class="ln"></span><span class="st">later</span></li>
         </ul>
-        <div style="margin-top:20px"><a class="cta line" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span>Open de lijst</a></div>
+        <div style="margin-top:20px"><a class="cta line" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span><span lang="nl">Open de lijst</span><span lang="en">Open the list</span></a></div>
       </div>
     </div>
     <div class="folio">· <b>05</b> ·</div>
@@ -592,38 +615,38 @@
 
   <!-- ================= LIVE ================= -->
   <div class="pad sec" id="live">
-    <div class="runhead"><span>Notitie</span><span>Live handelen</span></div>
+    <div class="runhead"><span><span lang="nl">Notitie</span><span lang="en">Note</span></span><span><span lang="nl">Live handelen</span><span lang="en">Live trading</span></span></div>
     <div class="sechead" style="margin-top:26px">
       <span class="n">05</span>
-      <h2>Live handelen</h2>
+      <h2><span lang="nl">Live handelen</span><span lang="en">Live trading</span></h2>
     </div>
     <div class="noteblock">
-      <p style="margin:0; max-width:52ch; font-size:19px">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
+      <p style="margin:0; max-width:52ch; font-size:19px"><span lang="nl">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced there.</span></p>
       <p class="micro" style="margin-top:14px">NQ · ES · Bitcoin · Altcoins</p>
-      <div style="margin-top:20px"><a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span>Kijk mee</a></div>
+      <div style="margin-top:20px"><a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span><span lang="nl">Kijk mee</span><span lang="en">Watch along</span></a></div>
     </div>
     <div class="folio">· <b>06</b> ·</div>
   </div>
 
   <!-- ================= TOEGANG ================= -->
   <div class="pad sec" id="toegang">
-    <div class="runhead"><span>Bijlage B</span><span>Toegang</span></div>
+    <div class="runhead"><span><span lang="nl">Bijlage B</span><span lang="en">Appendix B</span></span><span><span lang="nl">Toegang</span><span lang="en">Admission</span></span></div>
     <div class="sechead" style="margin-top:26px">
       <span class="n">06</span>
-      <h2>Toegang</h2>
+      <h2><span lang="nl">Toegang</span><span lang="en">Admission</span></h2>
     </div>
     <div class="duo">
       <div class="card open">
-        <span class="badge on">Nu open</span>
-        <h3>Gratis</h3>
-        <p style="margin:0 0 18px; max-width:30ch">Alle thuiskanalen, de educatie en de community.</p>
-        <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span>Word lid</a>
+        <span class="badge on"><span lang="nl">Nu open</span><span lang="en">Now open</span></span>
+        <h3><span lang="nl">Gratis</span><span lang="en">Free</span></h3>
+        <p style="margin:0 0 18px; max-width:30ch"><span lang="nl">Alle thuiskanalen, de educatie en de community.</span><span lang="en">All the home channels, the education and the community.</span></p>
+        <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span><span lang="nl">Word lid</span><span lang="en">Join</span></a>
       </div>
       <div class="card">
-        <span class="badge">Opent later</span>
+        <span class="badge"><span lang="nl">Opent later</span><span lang="en">Opens later</span></span>
         <h3>Premium</h3>
-        <p style="margin:0 0 18px; max-width:30ch">Aankondiging volgt in de server.</p>
-        <a class="cta line" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span>Blijf op de hoogte</a>
+        <p style="margin:0 0 18px; max-width:30ch"><span lang="nl">Aankondiging volgt in de server.</span><span lang="en">The announcement follows in the server.</span></p>
+        <a class="cta line" href="https://discord.gg/78Ff2GuSfW"><span class="sq"></span><span lang="nl">Blijf op de hoogte</span><span lang="en">Stay up to date</span></a>
       </div>
     </div>
     <div class="folio">· <b>07</b> ·</div>
@@ -631,26 +654,48 @@
 
   <!-- ================= COLOFON ================= -->
   <div class="colophon" id="colofon">
-    <span class="micro" style="color:#8B8981">07 · Colofon</span>
-    <h2>De catalogus sluit.<br><em>De server niet.</em></h2>
-    <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="sq" style="background:#08090B"></span>Word lid op Discord</a>
+    <span class="micro" style="color:#8B8981"><span lang="nl">07 · Colofon</span><span lang="en">07 · Colophon</span></span>
+    <h2><span lang="nl">De catalogus sluit.<br><em>De server niet.</em></span><span lang="en">The catalogue closes.<br><em>The server does not.</em></span></h2>
+    <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="sq" style="background:#08090B"></span><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></a>
     <div class="cgrid">
       <div>
-        <p class="micro" style="color:#8B8981">Uitgave</p>
-        <p style="margin:8px 0 0">Atlas Capital<br>Proces. Discipline. Uitvoering.</p>
+        <p class="micro" style="color:#8B8981"><span lang="nl">Uitgave</span><span lang="en">Publication</span></p>
+        <p style="margin:8px 0 0">Atlas Capital<br><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></p>
       </div>
       <div>
-        <p class="micro" style="color:#8B8981">Adres</p>
+        <p class="micro" style="color:#8B8981"><span lang="nl">Adres</span><span lang="en">Address</span></p>
         <p style="margin:8px 0 0"><a href="https://discord.gg/78Ff2GuSfW">Discord</a><br><a href="https://www.tiktok.com/@atlascapitalbv">TikTok · @atlascapitalbv</a></p>
       </div>
       <div>
-        <p class="micro" style="color:#8B8981">Inhoud</p>
-        <p style="margin:8px 0 0"><a href="#platen">Platen I—X</a><br><a href="#plaat11">Plaat XI</a> · <a href="#lijst">Kanalen</a></p>
+        <p class="micro" style="color:#8B8981"><span lang="nl">Inhoud</span><span lang="en">Contents</span></p>
+        <p style="margin:8px 0 0"><a href="#platen"><span lang="nl">Platen I—X</span><span lang="en">Plates I—X</span></a><br><a href="#plaat11"><span lang="nl">Plaat XI</span><span lang="en">Plate XI</span></a> · <a href="#lijst"><span lang="nl">Kanalen</span><span lang="en">Channels</span></a></p>
       </div>
     </div>
-    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
   </div>
 
 </div>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -106,6 +106,28 @@ p:last-child{ margin-bottom:0; }
   box-shadow:0 1px 0 rgba(255,255,255,.8);
 }
 .btn-line:hover{ border-color:var(--gold-lo); color:var(--gold-dk); }
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+
+.langsw{ display:inline-flex; }
+.langsw button{
+  appearance:none; -webkit-appearance:none; cursor:pointer;
+  font-family:var(--sans); font-weight:700;
+  font-size:12px; letter-spacing:.18em; text-transform:uppercase; line-height:1;
+  padding:1em 1.05em;
+  color:var(--dim);
+  border:1px solid rgba(40,32,18,.3);
+  background:linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,.06));
+  box-shadow:0 1px 0 rgba(255,255,255,.8);
+}
+.langsw button + button{ border-left:0; }
+.langsw button:hover{ color:var(--gold-dk); }
+.langsw button[aria-pressed="true"]{
+  color:var(--gold-dk);
+  background:linear-gradient(180deg, rgba(215,179,100,.34), rgba(215,179,100,.12));
+}
 
 /* ---------- architrave header ---------- */
 .architrave{
@@ -301,7 +323,13 @@ footer{
         </svg>
         <b class="inc">Atlas Capital</b>
       </div>
-      <a class="btn btn-line" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-line" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></a>
+        <div class="langsw" role="group" aria-label="Taal / Language">
+          <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -311,16 +339,16 @@ footer{
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <p class="caps">Nederlandse tradingcommunity</p>
-        <h1 class="inc">Het proces,<br>in reliëf.</h1>
+        <p class="caps"><span lang="nl">Nederlandse tradingcommunity</span><span lang="en">Dutch trading community</span></p>
+        <h1 class="inc"><span lang="nl">Het proces,<br>in reliëf.</span><span lang="en">The process,<br>in relief.</span></h1>
       </div>
       <div>
-        <p class="hero-line">Educatie over NQ, ES, Bitcoin en altcoins. Van waarneming tot uitvoering, in één band.</p>
+        <p class="hero-line"><span lang="nl">Educatie over NQ, ES, Bitcoin en altcoins. Van waarneming tot uitvoering, in één band.</span><span lang="en">Education on NQ, ES, Bitcoin and altcoins. From observation to execution, in one band.</span></p>
         <div class="hero-cta">
-          <a class="btn btn-solid" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
-          <a class="btn btn-line" href="#leerstof">De leerstof</a>
+          <a class="btn btn-solid" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></a>
+          <a class="btn btn-line" href="#leerstof"><span lang="nl">De leerstof</span><span lang="en">The curriculum</span></a>
         </div>
-        <div class="hero-tags"><span>Proces</span><span>Discipline</span><span>Uitvoering</span></div>
+        <div class="hero-tags"><span><span lang="nl">Proces</span><span lang="en">Process</span></span><span>Discipline</span><span><span lang="nl">Uitvoering</span><span lang="en">Execution</span></span></div>
       </div>
     </div>
   </div>
@@ -330,8 +358,9 @@ footer{
 <div class="friezeband frieze-a">
   <div class="wrap">
     <div class="friezescroll">
-      <svg viewBox="0 0 2400 300" role="img"
-           aria-label="Reliëfband: markt, liquiditeit, inefficiëntie, orderblock, risico en uitvoering, schematisch getekend">
+      <svg viewBox="0 0 2400 300" role="img">
+        <title lang="nl">Reliëfband: markt, liquiditeit, inefficiëntie, orderblock, risico en uitvoering, schematisch getekend</title>
+        <title lang="en">Relief band: market, liquidity, inefficiency, orderblock, risk and execution, drawn schematically</title>
         <defs>
           <pattern id="meander" width="40" height="24" patternUnits="userSpaceOnUse">
             <path d="M0 20 L0 4 L32 4 L32 16 L12 16 L12 10 L24 10 L24 20 L40 20"
@@ -409,16 +438,21 @@ footer{
 
         <g font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="16"
            letter-spacing="5" fill="#7B7566" text-anchor="middle">
-          <text x="200"  y="258">MARKT</text>
-          <text x="600"  y="258">LIQUIDITEIT</text>
-          <text x="1000" y="258">INEFFICIËNTIE</text>
+          <text lang="nl" x="200"  y="258">MARKT</text>
+          <text lang="en" x="200"  y="258">MARKET</text>
+          <text lang="nl" x="600"  y="258">LIQUIDITEIT</text>
+          <text lang="en" x="600"  y="258">LIQUIDITY</text>
+          <text lang="nl" x="1000" y="258">INEFFICIËNTIE</text>
+          <text lang="en" x="1000" y="258">INEFFICIENCY</text>
           <text x="1400" y="258">ORDERBLOCK</text>
-          <text x="1800" y="258">RISICO</text>
-          <text x="2200" y="258">UITVOERING</text>
+          <text lang="nl" x="1800" y="258">RISICO</text>
+          <text lang="en" x="1800" y="258">RISK</text>
+          <text lang="nl" x="2200" y="258">UITVOERING</text>
+          <text lang="en" x="2200" y="258">EXECUTION</text>
         </g>
       </svg>
     </div>
-    <p class="hint">Fries I · lees van links naar rechts &rarr;</p>
+    <p class="hint"><span lang="nl">Fries I · lees van links naar rechts</span><span lang="en">Frieze I · read from left to right</span> &rarr;</p>
   </div>
 </div>
 <div class="plinth"></div>
@@ -428,31 +462,31 @@ footer{
   <div class="wrap">
     <div class="metopes">
       <article class="metope">
-        <p class="caps"><span class="n">01</span>De oprichter</p>
+        <p class="caps"><span class="n">01</span><span lang="nl">De oprichter</span><span lang="en">The founder</span></p>
         <p class="numeral inc">10+</p>
-        <p class="caps" style="color:var(--dim)">Jaar actief in trading</p>
-        <p>Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</p>
-        <p>Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</p>
+        <p class="caps" style="color:var(--dim)"><span lang="nl">Jaar actief in trading</span><span lang="en">Years active in trading</span></p>
+        <p><span lang="nl">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</span><span lang="en">I've been involved in trading for over 10 years now, and during that time I've experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons.</span></p>
+        <p><span lang="nl">Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</span><span lang="en">No get-rich-quick promises, just real setups, education, and a community focused on improving together.</span></p>
       </article>
 
       <article class="metope">
         <p class="caps"><span class="n">02</span>Live</p>
-        <h3 class="inc">Meekijken terwijl het gebeurt</h3>
-        <p>De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
+        <h3 class="inc"><span lang="nl">Meekijken terwijl het gebeurt</span><span lang="en">Watching while it happens</span></h3>
+        <p><span lang="nl">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced there.</span></p>
         <svg viewBox="0 0 260 90" fill="none" aria-hidden="true" style="width:100%;height:auto;margin-top:14px">
           <path d="M8 74 C 54 74, 60 20, 108 20 C 156 20, 164 66, 210 66 C 236 66, 244 40, 254 32"
                 stroke="#B9954A" stroke-width="2"/>
           <circle cx="254" cy="32" r="6" fill="#B9954A"/>
         </svg>
-        <p class="cta"><a class="btn btn-line" href="https://discord.gg/78Ff2GuSfW">Zit erbij</a></p>
+        <p class="cta"><a class="btn btn-line" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Zit erbij</span><span lang="en">Sit in</span></a></p>
       </article>
 
       <article class="metope">
-        <p class="caps"><span class="n">03</span>Toegang</p>
-        <h3 class="inc">Nu gratis</h3>
-        <p>Alle huidige kanalen, de educatie en de chart-ideeën zijn vandaag al open.</p>
-        <p>Premium opent later. Prijs en datum worden in de server aangekondigd.</p>
-        <p class="cta"><a class="btn btn-solid" href="https://discord.gg/78Ff2GuSfW">Neem nu deel</a></p>
+        <p class="caps"><span class="n">03</span><span lang="nl">Toegang</span><span lang="en">Access</span></p>
+        <h3 class="inc"><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></h3>
+        <p><span lang="nl">Alle huidige kanalen, de educatie en de chart-ideeën zijn vandaag al open.</span><span lang="en">All the current channels, the education and the chart ideas are open today.</span></p>
+        <p><span lang="nl">Premium opent later. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Premium opens later. Price and date will be announced in the server.</span></p>
+        <p class="cta"><a class="btn btn-solid" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Neem nu deel</span><span lang="en">Join now</span></a></p>
       </article>
     </div>
   </div>
@@ -461,14 +495,15 @@ footer{
 <!-- ================= THE MODEL PLAQUE ================= -->
 <div class="plaque-wrap">
   <div class="wrap">
-    <p class="caps"><span class="n">04</span>Het model</p>
-    <h2 class="inc" style="margin-bottom:clamp(16px,2.4vw,26px)">Terug naar het blok, daarna pas handelen.</h2>
+    <p class="caps"><span class="n">04</span><span lang="nl">Het model</span><span lang="en">The model</span></p>
+    <h2 class="inc" style="margin-bottom:clamp(16px,2.4vw,26px)"><span lang="nl">Terug naar het blok, daarna pas handelen.</span><span lang="en">Back to the block, only then trade.</span></h2>
 
     <div class="plaque">
       <div class="bead"></div>
       <div class="scroller">
-        <svg viewBox="0 0 900 380" fill="none" role="img"
-             aria-label="Schematische tekening van een orderblock: verplaatsing, terugtest van het blok en uitvoering">
+        <svg viewBox="0 0 900 380" fill="none" role="img">
+          <title lang="nl">Schematische tekening van een orderblock: verplaatsing, terugtest van het blok en uitvoering</title>
+          <title lang="en">Schematic drawing of an orderblock: displacement, retest of the block and execution</title>
           <g stroke="#191713" stroke-opacity=".10" stroke-width="1">
             <line x1="40" y1="70"  x2="860" y2="70"/>
             <line x1="40" y1="150" x2="860" y2="150"/>
@@ -493,31 +528,36 @@ footer{
           <!-- retest marker -->
           <circle cx="660" cy="214" r="8" fill="#F7F5EE" stroke="#B9954A" stroke-width="1.8"/>
           <line x1="660" y1="204" x2="660" y2="120" stroke="#B9954A" stroke-width="1"/>
-          <text x="660" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif"
+          <text lang="nl" x="660" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif"
                 font-size="13" letter-spacing="3.4" fill="#8A6E2A" text-anchor="middle">TERUGTEST</text>
+          <text lang="en" x="660" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif"
+                font-size="13" letter-spacing="3.4" fill="#8A6E2A" text-anchor="middle">RETEST</text>
 
           <!-- execution -->
           <path d="M846 258 v 76" stroke="#B9954A" stroke-width="1.6"/>
           <path d="M846 344 l -7 -14 l 14 0 z" fill="#B9954A"/>
-          <text x="846" y="368" font-family="-apple-system, Segoe UI, Arial, sans-serif"
+          <text lang="nl" x="846" y="368" font-family="-apple-system, Segoe UI, Arial, sans-serif"
                 font-size="13" letter-spacing="3.4" fill="#8A6E2A" text-anchor="end">UITVOERING</text>
+          <text lang="en" x="846" y="368" font-family="-apple-system, Segoe UI, Arial, sans-serif"
+                font-size="13" letter-spacing="3.4" fill="#8A6E2A" text-anchor="end">EXECUTION</text>
         </svg>
       </div>
       <div class="bead" style="transform:scaleY(-1)"></div>
     </div>
-    <p class="cap">Schematisch. Zonder prijzen, niveaus of resultaten — alleen de vorm van het model.</p>
+    <p class="cap"><span lang="nl">Schematisch. Zonder prijzen, niveaus of resultaten — alleen de vorm van het model.</span><span lang="en">Schematic. No prices, levels or results — just the shape of the model.</span></p>
   </div>
 </div>
 
 <!-- ================= FRIEZE II — THE CURRICULUM ================= -->
 <div class="wrap" id="leerstof">
-  <p class="caps"><span class="n">05</span>Leerstof · 10 onderwerpen</p>
+  <p class="caps"><span class="n">05</span><span lang="nl">Leerstof · 10 onderwerpen</span><span lang="en">Curriculum · 10 topics</span></p>
 </div>
 <div class="friezeband frieze-b">
   <div class="wrap">
     <div class="friezescroll">
-      <svg viewBox="0 0 2400 260" role="img"
-           aria-label="Reliëfband met de tien onderwerpen van de leerstof, elk schematisch getekend">
+      <svg viewBox="0 0 2400 260" role="img">
+        <title lang="nl">Reliëfband met de tien onderwerpen van de leerstof, elk schematisch getekend</title>
+        <title lang="en">Relief band with the ten topics of the curriculum, each drawn schematically</title>
         <defs>
           <pattern id="meander2" width="40" height="24" patternUnits="userSpaceOnUse">
             <path d="M0 20 L0 4 L32 4 L32 16 L12 16 L12 10 L24 10 L24 20 L40 20"
@@ -617,20 +657,25 @@ footer{
 
         <g font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="15"
            letter-spacing="4" fill="#5A554A" text-anchor="middle">
-          <text x="120"  y="218">DEVIATIE</text>
+          <text lang="nl" x="120"  y="218">DEVIATIE</text>
+          <text lang="en" x="120"  y="218">DEVIATION</text>
           <text x="360"  y="218">SMT</text>
           <text x="600"  y="218">FVG</text>
           <text x="840"  y="218">IFVG</text>
           <text x="1080" y="218">ORDERBLOCKS</text>
           <text x="1320" y="218">FIBONACCI</text>
-          <text x="1560" y="218">SESSIE-LIQUIDITEIT</text>
-          <text x="1800" y="218">LIQUIDITEIT</text>
-          <text x="2040" y="218">RISICOBEHEER</text>
-          <text x="2280" y="218">TRADINGPSYCHOLOGIE</text>
+          <text lang="nl" x="1560" y="218">SESSIE-LIQUIDITEIT</text>
+          <text lang="en" x="1560" y="218">SESSION LIQUIDITY</text>
+          <text lang="nl" x="1800" y="218">LIQUIDITEIT</text>
+          <text lang="en" x="1800" y="218">LIQUIDITY</text>
+          <text lang="nl" x="2040" y="218">RISICOBEHEER</text>
+          <text lang="en" x="2040" y="218">RISK MANAGEMENT</text>
+          <text lang="nl" x="2280" y="218">TRADINGPSYCHOLOGIE</text>
+          <text lang="en" x="2280" y="218">TRADING PSYCHOLOGY</text>
         </g>
       </svg>
     </div>
-    <p class="hint">Fries II · de tien onderwerpen &rarr;</p>
+    <p class="hint"><span lang="nl">Fries II · de tien onderwerpen</span><span lang="en">Frieze II · the ten topics</span> &rarr;</p>
   </div>
 </div>
 <div class="plinth"></div>
@@ -640,23 +685,23 @@ footer{
   <div class="wrap">
     <div class="metopes">
       <article class="metope">
-        <p class="caps"><span class="n">06</span>De server · 15 kanalen</p>
-        <h3 class="inc">Thuis — nu gratis</h3>
+        <p class="caps"><span class="n">06</span><span lang="nl">De server · 15 kanalen</span><span lang="en">The server · 15 channels</span></p>
+        <h3 class="inc"><span lang="nl">Thuis — nu gratis</span><span lang="en">Home — free right now</span></h3>
         <ul class="chips" style="margin-top:14px">
           <li>#nq-chart-ideeën</li><li>#es-chart-ideeën</li><li>#bitcoin</li><li>#altcoins</li>
           <li>#markt</li><li>#vragen</li><li>#algemeen</li><li>#atlas-op-socials</li><li>#ondersteuning</li>
         </ul>
-        <p class="cta"><a class="btn btn-line" href="https://discord.gg/78Ff2GuSfW">Open de kanalen</a></p>
+        <p class="cta"><a class="btn btn-line" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de kanalen</span><span lang="en">Open the channels</span></a></p>
       </article>
 
       <article class="metope">
         <p class="caps"><span class="n">07</span>Later</p>
-        <h3 class="inc">Premium — opent later</h3>
+        <h3 class="inc"><span lang="nl">Premium — opent later</span><span lang="en">Premium — opens later</span></h3>
         <ul class="chips p" style="margin-top:14px">
           <li>#trade-setups</li><li>#marktupdates</li><li>#indicatoren</li>
           <li>#sessie-opnames</li><li>#chart-ideeën</li><li>#premium-chat</li>
         </ul>
-        <p style="margin-top:14px">Prijs en datum worden in de server aangekondigd.</p>
+        <p style="margin-top:14px"><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">Price and date will be announced in the server.</span></p>
       </article>
     </div>
   </div>
@@ -665,10 +710,10 @@ footer{
 <!-- ================= CLOSING ================= -->
 <div class="close">
   <div class="wrap">
-    <p class="caps" style="text-align:center"><span class="n">08</span>Toetreden</p>
-    <h2 class="inc">Sluit aan bij de band.</h2>
-    <p>Eén invite, geen kosten. Begin bij het begin en werk de fries af.</p>
-    <a class="btn btn-solid" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
+    <p class="caps" style="text-align:center"><span class="n">08</span><span lang="nl">Toetreden</span><span lang="en">Joining</span></p>
+    <h2 class="inc"><span lang="nl">Sluit aan bij de band.</span><span lang="en">Join the frieze.</span></h2>
+    <p><span lang="nl">Eén invite, geen kosten. Begin bij het begin en werk de fries af.</span><span lang="en">One invite, no cost. Start at the beginning and work through the frieze.</span></p>
+    <a class="btn btn-solid" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></a>
   </div>
   <div class="steps" style="margin-top:clamp(30px,5vw,60px)">
     <div class="s1"></div><div class="s2"></div><div class="s3"></div>
@@ -693,10 +738,30 @@ footer{
         <a class="lnk" href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
       </div>
     </div>
-    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
   </div>
 </footer>
 
 </div>
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 </body>
 </html>

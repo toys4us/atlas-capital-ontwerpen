@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -159,6 +159,31 @@ h1,h2{margin:0;font-weight:200;letter-spacing:-.015em}
 .mark i{
   width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block;
 }
+
+/* ------------------------------------------------------------
+   LANGUAGE — NL default, EN on request
+   ------------------------------------------------------------ */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+
+/* the switch is a third item on the header line, set in the
+   same micro caps as the wordmark; the live one is gold */
+.langsw{display:inline-flex;align-items:center;gap:calc(var(--u)*1.5)}
+.langsw button{
+  appearance:none;-webkit-appearance:none;
+  background:none;border:0;border-bottom:1px solid transparent;
+  padding:0 0 4px;
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  font-weight:600;
+  line-height:1;
+  color:var(--dim);
+  cursor:pointer;
+}
+.langsw button[aria-pressed="true"]{color:var(--gold);border-bottom-color:var(--gold)}
+.langsw button:hover{color:var(--gold)}
 
 /* ------------------------------------------------------------
    BUTTONS — a centred page needs the CTA to break the measure
@@ -379,6 +404,10 @@ h1,h2{margin:0;font-weight:200;letter-spacing:-.015em}
     <a class="bar bar--quiet" style="width:auto;padding-inline:calc(var(--u)*2.5)" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
       Discord <span class="tip" aria-hidden="true"></span>
     </a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </header>
 
   <main>
@@ -387,57 +416,57 @@ h1,h2{margin:0;font-weight:200;letter-spacing:-.015em}
     <section class="beat" id="een" aria-labelledby="t1">
       <span class="dot" style="--d:clamp(96px,26vw,168px); --x:-6vw" aria-hidden="true"></span>
       <p class="tag"><span class="n">01</span> &nbsp;Atlas Capital</p>
-      <h1 class="hero-line" id="t1">Één punt van<br>vertrek: <i>het proces.</i></h1>
-      <p class="measure">Een Nederlandse trading-community op Discord. Educatie voor NQ, ES, Bitcoin en altcoins — rustig uitgelegd, dagelijks toegepast.</p>
+      <h1 class="hero-line" id="t1"><span lang="nl">Één punt van<br>vertrek: <i>het proces.</i></span><span lang="en">One point of<br>departure: <i>the process.</i></span></h1>
+      <p class="measure"><span lang="nl">Een Nederlandse trading-community op Discord. Educatie voor NQ, ES, Bitcoin en altcoins — rustig uitgelegd, dagelijks toegepast.</span><span lang="en">A Dutch trading community on Discord. Education for NQ, ES, Bitcoin and altcoins — calmly explained, applied daily.</span></p>
       <a class="bar" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
-        Kom binnen op Discord <span class="tip" aria-hidden="true"></span>
+        <span lang="nl">Kom binnen op Discord</span><span lang="en">Come inside on Discord</span> <span class="tip" aria-hidden="true"></span>
       </a>
-      <p class="measure quiet" style="font-family:var(--sans);font-size:var(--t-micro);letter-spacing:.24em;text-transform:uppercase">Proces &nbsp;· &nbsp;Discipline &nbsp;· &nbsp;Uitvoering</p>
+      <p class="measure quiet" style="font-family:var(--sans);font-size:var(--t-micro);letter-spacing:.24em;text-transform:uppercase"><span lang="nl">Proces &nbsp;· &nbsp;Discipline &nbsp;· &nbsp;Uitvoering</span><span lang="en">Process &nbsp;· &nbsp;Discipline &nbsp;· &nbsp;Execution</span></p>
     </section>
 
     <!-- ═══════════ 02 · OPRICHTER — a small dot, far right ═══════════ -->
     <section class="beat" aria-labelledby="t2">
       <span class="dot" style="--d:9px; --x:14vw" aria-hidden="true"></span>
-      <p class="tag"><span class="n">02</span> &nbsp;De oprichter</p>
-      <h2 class="title" id="t2">Meer dan 10 jaar in de markt — en alles wat daarbij hoort.</h2>
+      <p class="tag"><span class="n">02</span> &nbsp;<span lang="nl">De oprichter</span><span lang="en">The founder</span></p>
+      <h2 class="title" id="t2"><span lang="nl">Meer dan 10 jaar in de markt — en alles wat daarbij hoort.</span><span lang="en">More than 10 years in the market — and all that brings.</span></h2>
       <blockquote class="measure" style="margin:calc(var(--u)*3) auto 0;font-style:italic">
-        &ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&rdquo;
+        <span lang="nl">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&rdquo;</span><span lang="en">&ldquo;I&rsquo;ve been involved in trading for over 10 years now, and during that time I&rsquo;ve experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons.&rdquo;</span>
       </blockquote>
-      <p class="measure">&ldquo;Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</p>
+      <p class="measure"><span lang="nl">&ldquo;Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</span><span lang="en">&ldquo;No get-rich-quick promises, just real setups, education, and a community focused on improving together.&rdquo;</span></p>
     </section>
 
     <!-- ═══════════ 03 · EDUCATIE — a medium dot, left ═══════════ -->
     <section class="beat" aria-labelledby="t3">
       <span class="dot" style="--d:34px; --x:-11vw" aria-hidden="true"></span>
-      <p class="tag"><span class="n">03</span> &nbsp;Educatie</p>
-      <h2 class="title" id="t3">10 onderwerpen. Elk onderwerp is een punt dat op zijn plek moet vallen.</h2>
+      <p class="tag"><span class="n">03</span> &nbsp;<span lang="nl">Educatie</span><span lang="en">Education</span></p>
+      <h2 class="title" id="t3"><span lang="nl">10 onderwerpen. Elk onderwerp is een punt dat op zijn plek moet vallen.</span><span lang="en">10 topics. Each one is a point that has to fall into place.</span></h2>
 
       <ol class="ten">
-        <li><span>01</span>deviatie</li>
+        <li><span>01</span><span lang="nl">deviatie</span><span lang="en">deviation</span></li>
         <li><span>02</span>SMT</li>
         <li><span>03</span>FVG</li>
         <li><span>04</span>IFVG</li>
         <li><span>05</span>orderblocks</li>
         <li><span>06</span>fibonacci</li>
-        <li><span>07</span>sessie-liquiditeit</li>
-        <li><span>08</span>liquiditeit</li>
-        <li><span>09</span>risicobeheer</li>
-        <li><span>10</span>tradingpsychologie</li>
+        <li><span>07</span><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></li>
+        <li><span>08</span><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></li>
+        <li><span>09</span><span lang="nl">risicobeheer</span><span lang="en">risk management</span></li>
+        <li><span>10</span><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></li>
       </ol>
 
       <a class="bar bar--quiet" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
-        Lees mee in de server <span class="tip" aria-hidden="true"></span>
+        <span lang="nl">Lees mee in de server</span><span lang="en">Read along in the server</span> <span class="tip" aria-hidden="true"></span>
       </a>
     </section>
 
     <!-- ═══════════ 04 · HET MODEL — drawn entirely in dots ═══════════ -->
     <section class="beat" aria-labelledby="t4">
       <span class="dot dot--ring" style="--d:22px; --x:8vw" aria-hidden="true"></span>
-      <p class="tag"><span class="n">04</span> &nbsp;Het model</p>
-      <h2 class="title" id="t4">Een gap is letterlijk een gat: een plek waar de punten ontbreken.</h2>
+      <p class="tag"><span class="n">04</span> &nbsp;<span lang="nl">Het model</span><span lang="en">The model</span></p>
+      <h2 class="title" id="t4"><span lang="nl">Een gap is letterlijk een gat: een plek waar de punten ontbreken.</span><span lang="en">A gap is literally a hole: a place where the dots are missing.</span></h2>
 
       <div class="plate">
-        <svg viewBox="0 0 880 400" role="img" aria-label="Schematische weergave in punten van een impuls, een fair value gap en een hertest">
+        <svg viewBox="0 0 880 400" role="img" aria-labelledby="t4-cap">
           <!-- ghost dot field -->
           <g fill="#1F2126">
             <circle cx="40" cy="40" r="2"/><circle cx="40" cy="120" r="2"/><circle cx="40" cy="200" r="2"/><circle cx="40" cy="280" r="2"/><circle cx="40" cy="360" r="2"/>
@@ -448,7 +477,8 @@ h1,h2{margin:0;font-weight:200;letter-spacing:-.015em}
           <g fill="#B9954A">
             <circle cx="60" cy="96" r="1.8"/><circle cx="110" cy="96" r="1.8"/><circle cx="160" cy="96" r="1.8"/><circle cx="210" cy="96" r="1.8"/><circle cx="260" cy="96" r="1.8"/><circle cx="310" cy="96" r="1.8"/><circle cx="360" cy="96" r="1.8"/><circle cx="410" cy="96" r="1.8"/><circle cx="460" cy="96" r="1.8"/><circle cx="510" cy="96" r="1.8"/><circle cx="560" cy="96" r="1.8"/><circle cx="610" cy="96" r="1.8"/><circle cx="660" cy="96" r="1.8"/><circle cx="710" cy="96" r="1.8"/><circle cx="760" cy="96" r="1.8"/><circle cx="810" cy="96" r="1.8"/>
           </g>
-          <text x="60" y="80" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2.4" fill="#B9954A">LIQUIDITEIT</text>
+          <text x="60" y="80" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2.4" fill="#B9954A" lang="nl">LIQUIDITEIT</text>
+          <text x="60" y="80" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2.4" fill="#B9954A" lang="en">LIQUIDITY</text>
 
           <!-- columns of dots: each column is a bar; taller stacks = wider range -->
           <g fill="#8B8D91">
@@ -473,7 +503,8 @@ h1,h2{margin:0;font-weight:200;letter-spacing:-.015em}
             <circle cx="384" cy="188" r="2.6"/><circle cx="834" cy="188" r="2.6"/>
             <circle cx="384" cy="250" r="2.6"/><circle cx="834" cy="250" r="2.6"/>
           </g>
-          <text x="396" y="176" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2.4" fill="#D7B364">FVG — GEEN PUNTEN</text>
+          <text x="396" y="176" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2.4" fill="#D7B364" lang="nl">FVG — GEEN PUNTEN</text>
+          <text x="396" y="176" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2.4" fill="#D7B364" lang="en">FVG — NO DOTS</text>
 
           <!-- base, then the return that stops at the gap edge -->
           <g fill="#8B8D91">
@@ -502,25 +533,26 @@ h1,h2{margin:0;font-weight:200;letter-spacing:-.015em}
           <g fill="#5C5E62">
             <circle cx="600" cy="386" r="1.6"/><circle cx="614" cy="386" r="1.6"/><circle cx="628" cy="386" r="1.6"/>
           </g>
-          <text x="642" y="390" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2.4" fill="#A5A6A8">HERTEST</text>
+          <text x="642" y="390" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2.4" fill="#A5A6A8" lang="nl">HERTEST</text>
+          <text x="642" y="390" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2.4" fill="#A5A6A8" lang="en">RETEST</text>
         </svg>
       </div>
-      <p class="cap">Schematisch. Geen prijzen, geen resultaat — alleen de vorm.</p>
+      <p class="cap" id="t4-cap"><span lang="nl">Schematisch. Geen prijzen, geen resultaat — alleen de vorm.</span><span lang="en">Schematic. No prices, no results — only the shape.</span></p>
     </section>
 
     <!-- ═══════════ 05 · KANALEN — tiny dot, centred ═══════════ -->
     <section class="beat" aria-labelledby="t5">
       <span class="dot" style="--d:5px; --x:0px" aria-hidden="true"></span>
-      <p class="tag"><span class="n">05</span> &nbsp;De server</p>
-      <h2 class="title" id="t5">15 kanalen. Je hoeft er maar één tegelijk open te hebben.</h2>
+      <p class="tag"><span class="n">05</span> &nbsp;<span lang="nl">De server</span><span lang="en">The server</span></p>
+      <h2 class="title" id="t5"><span lang="nl">15 kanalen. Je hoeft er maar één tegelijk open te hebben.</span><span lang="en">15 channels. You only need one open at a time.</span></h2>
 
       <div class="chanset" style="margin-top:calc(var(--u)*5)">
-        <h3>Thuis — nu gratis</h3>
+        <h3><span lang="nl">Thuis — nu gratis</span><span lang="en">Home — free right now</span></h3>
         <p>#nq-chart-ideeën<span class="sep">·</span>#es-chart-ideeën<span class="sep">·</span>#bitcoin<span class="sep">·</span>#altcoins<span class="sep">·</span>#markt<span class="sep">·</span>#vragen<span class="sep">·</span>#algemeen<span class="sep">·</span>#atlas-op-socials<span class="sep">·</span>#ondersteuning</p>
       </div>
 
       <div class="chanset soon">
-        <h3>Premium — opent later</h3>
+        <h3><span lang="nl">Premium — opent later</span><span lang="en">Premium — opens later</span></h3>
         <p>#trade-setups<span class="sep">·</span>#marktupdates<span class="sep">·</span>#indicatoren<span class="sep">·</span>#sessie-opnames<span class="sep">·</span>#chart-ideeën<span class="sep">·</span>#premium-chat</p>
       </div>
     </section>
@@ -529,34 +561,34 @@ h1,h2{margin:0;font-weight:200;letter-spacing:-.015em}
     <section class="beat" aria-labelledby="t6">
       <span class="dot dot--half" style="--d:52px; --x:10vw" aria-hidden="true"></span>
       <p class="tag"><span class="n">06</span> &nbsp;Live</p>
-      <h2 class="title" id="t6">De oprichter handelt live in de server en denkt daarbij hardop.</h2>
-      <p class="measure">Tijden worden in Discord aangekondigd. Meekijken kost je niets.</p>
+      <h2 class="title" id="t6"><span lang="nl">De oprichter handelt live in de server en denkt daarbij hardop.</span><span lang="en">The founder trades live in the server and thinks out loud.</span></h2>
+      <p class="measure"><span lang="nl">Tijden worden in Discord aangekondigd. Meekijken kost je niets.</span><span lang="en">Times are announced in Discord. Watching costs you nothing.</span></p>
       <a class="bar bar--quiet" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
-        Zit een sessie mee <span class="tip" aria-hidden="true"></span>
+        <span lang="nl">Zit een sessie mee</span><span lang="en">Sit in on a session</span> <span class="tip" aria-hidden="true"></span>
       </a>
     </section>
 
     <!-- ═══════════ 07 · TOEGANG — two dots, one filled one open ═══════════ -->
     <section class="beat" aria-labelledby="t7">
       <span class="dot" style="--d:14px; --x:-4vw" aria-hidden="true"></span>
-      <p class="tag"><span class="n">07</span> &nbsp;Toegang</p>
-      <h2 class="title" id="t7">Nu gratis. Premium opent later.</h2>
+      <p class="tag"><span class="n">07</span> &nbsp;<span lang="nl">Toegang</span><span lang="en">Access</span></p>
+      <h2 class="title" id="t7"><span lang="nl">Nu gratis. Premium opent later.</span><span lang="en">Free right now. Premium opens later.</span></h2>
       <dl class="access" style="margin-top:calc(var(--u)*5)">
         <div>
-          <dt>Thuis</dt>
-          <dd><em>Open en gratis.</em> Educatie, chart-ideeën, markt en vragen.</dd>
+          <dt><span lang="nl">Thuis</span><span lang="en">Home</span></dt>
+          <dd><span lang="nl"><em>Open en gratis.</em> Educatie, chart-ideeën, markt en vragen.</span><span lang="en"><em>Open and free.</em> Education, chart ideas, market and questions.</span></dd>
         </div>
         <div>
           <dt>Premium</dt>
-          <dd>Opent later. Datum en prijs worden in de server aangekondigd.</dd>
+          <dd><span lang="nl">Opent later. Datum en prijs worden in de server aangekondigd.</span><span lang="en">Opens later. Date and price are announced in the server.</span></dd>
         </div>
       </dl>
     </section>
 
     <!-- ═══════════ 08 · SLOT — the last dot is the button ═══════════ -->
     <section class="beat" aria-labelledby="t8">
-      <p class="tag"><span class="n">08</span> &nbsp;Kom binnen</p>
-      <h2 class="title" id="t8">Eén punt. Eén klik. Daarna doe je het werk.</h2>
+      <p class="tag"><span class="n">08</span> &nbsp;<span lang="nl">Kom binnen</span><span lang="en">Come inside</span></p>
+      <h2 class="title" id="t8"><span lang="nl">Eén punt. Eén klik. Daarna doe je het werk.</span><span lang="en">One point. One click. Then you do the work.</span></h2>
       <div style="margin-top:calc(var(--u)*7)">
         <a class="disc" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
           Open Discord
@@ -573,11 +605,32 @@ h1,h2{margin:0;font-weight:200;letter-spacing:-.015em}
       <a href="https://discord.gg/78Ff2GuSfW" rel="noopener">Discord</a>
       <a href="https://www.tiktok.com/@atlascapitalbv" rel="noopener">TikTok</a>
     </div>
-    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
     <p class="sig">Atlas Capital</p>
   </footer>
 
 </div>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

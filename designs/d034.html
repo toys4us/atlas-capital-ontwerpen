@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -219,6 +219,20 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
   display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
 }
 .risk span{max-width:72ch}
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.langsw{display:inline-flex;flex:none;border:1px solid var(--ink)}
+.langsw button{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-45);background:none;border:0;padding:11px 12px;line-height:1;
+  cursor:pointer;transition:background .22s ease, color .22s ease;
+}
+.langsw button + button{border-left:1px solid var(--ink)}
+.langsw button:hover{color:var(--ink)}
+.langsw button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 </style>
 </head>
 <body>
@@ -234,13 +248,17 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
       <b>Atlas <i>Capital</i></b>
     </div>
     <nav>
-      <a href="#n">N · Kaartmaker</a>
-      <a href="#no">NO · Educatie</a>
+      <a href="#n">N · <span lang="nl">Kaartmaker</span><span lang="en">Mapmaker</span></a>
+      <a href="#no">NO · <span lang="nl">Educatie</span><span lang="en">Education</span></a>
       <a href="#o">O · Model</a>
-      <a href="#zo">ZO · Kanalen</a>
-      <a href="#zw">ZW · Toegang</a>
+      <a href="#zo">ZO · <span lang="nl">Kanalen</span><span lang="en">Channels</span></a>
+      <a href="#zw">ZW · <span lang="nl">Toegang</span><span lang="en">Access</span></a>
     </nav>
     <a class="btn" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
@@ -295,20 +313,22 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
   <div class="wrap hero">
     <div class="hero-grid">
       <div>
-        <span class="bear">Blad 034 &nbsp;·&nbsp; roos &amp; koersen</span>
-        <h1 style="margin-top:20px">Zet je<br>koers<span>uit</span></h1>
-        <p class="lead">Atlas Capital is een Nederlandse trading-community. Educatie, structuur en dagelijkse voorbereiding op NQ, ES, Bitcoin en altcoins.</p>
+        <span class="bear"><span lang="nl">Blad 034 &nbsp;·&nbsp; roos &amp; koersen</span><span lang="en">Sheet 034 &nbsp;·&nbsp; rose &amp; courses</span></span>
+        <h1 style="margin-top:20px"><span lang="nl">Zet je<br>koers<span>uit</span></span><span lang="en">Set<br>your<span>course</span></span></h1>
+        <p class="lead"><span lang="nl">Atlas Capital is een Nederlandse trading-community. Educatie, structuur en dagelijkse voorbereiding op NQ, ES, Bitcoin en altcoins.</span><span lang="en">Atlas Capital is a Dutch trading community. Education, structure and daily preparation on NQ, ES, Bitcoin and altcoins.</span></p>
         <div class="cta">
-          <a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
-          <a class="btn btn--out btn--lg" href="#no">Bekijk de educatie</a>
+          <a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></a>
+          <a class="btn btn--out btn--lg" href="#no"><span lang="nl">Bekijk de educatie</span><span lang="en">See the education</span></a>
         </div>
         <div class="kv">
-          <span><b>Proces</b></span><span><b>Discipline</b></span><span><b>Uitvoering</b></span><span>Nu gratis toegang</span>
+          <span lang="nl"><b>Proces</b></span><span lang="nl"><b>Discipline</b></span><span lang="nl"><b>Uitvoering</b></span><span lang="nl">Nu gratis toegang</span>
+          <span lang="en"><b>Process</b></span><span lang="en"><b>Discipline</b></span><span lang="en"><b>Execution</b></span><span lang="en">Free access right now</span>
         </div>
       </div>
 
       <!-- ======= THE 32-POINT ROSE ======= -->
-      <svg class="rose" viewBox="0 0 1000 1000" role="img" aria-label="Kompasroos met 32 streken en gradenring">
+      <p class="vh" id="d034-lbl-rose"><span lang="nl">Kompasroos met 32 streken en gradenring</span><span lang="en">Compass rose with 32 points and a degree ring</span></p>
+      <svg class="rose" viewBox="0 0 1000 1000" role="img" aria-labelledby="d034-lbl-rose">
         <defs>
           <!-- one north-pointing kite per size; rotated into all bearings -->
           <path id="g034-maj-l" d="M500,170 L471.72,471.72 L500,500 Z"/>
@@ -503,18 +523,20 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
         <circle cx="45" cy="45" r="3.4" fill="#08090B"/>
       </svg>
       <div>
-        <span class="bear">Streek N &nbsp;·&nbsp; 000°</span>
-        <h2>De kaartmaker</h2>
+        <span class="bear"><span lang="nl">Streek N &nbsp;·&nbsp; 000°</span><span lang="en">Point N &nbsp;·&nbsp; 000°</span></span>
+        <h2><span lang="nl">De kaartmaker</span><span lang="en">The mapmaker</span></h2>
       </div>
     </div>
 
     <div class="quote-rule"></div>
-    <p class="quote">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</p>
+    <p class="quote"><span lang="nl">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</span><span lang="en">&ldquo;I&rsquo;ve been involved in trading for over 10 years now, and during that time I&rsquo;ve experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons. I built Atlas Capital to share that experience, bring traders together, and show how I approach the markets on a daily basis. No get-rich-quick promises, just real setups, education, and a community focused on improving together.&rdquo;</span></p>
     <div class="qmeta">
-      <span><b>Oprichter</b> Atlas Capital</span>
-      <span>10+ jaar actief in trading</span>
+      <span lang="nl"><b>Oprichter</b> Atlas Capital</span>
+      <span lang="en"><b>Founder</b> Atlas Capital</span>
+      <span lang="nl">10+ jaar actief in trading</span>
+      <span lang="en">10+ years in trading</span>
     </div>
-    <div style="margin-top:26px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Kom binnen in de server</a></div>
+    <div style="margin-top:26px"><a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom binnen in de server</span><span lang="en">Come inside the server</span></a></div>
   </div>
 </section>
 
@@ -532,26 +554,27 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
         <circle cx="45" cy="45" r="3.4" fill="#08090B"/>
       </svg>
       <div>
-        <span class="bear">Streek NO &nbsp;·&nbsp; 045°</span>
-        <h2>Tien streken educatie</h2>
+        <span class="bear"><span lang="nl">Streek NO &nbsp;·&nbsp; 045°</span><span lang="en">Point NO &nbsp;·&nbsp; 045°</span></span>
+        <h2><span lang="nl">Tien streken educatie</span><span lang="en">Ten points of education</span></h2>
       </div>
     </div>
 
     <ul class="fan">
-      <li><div class="hdr"><span>011°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>deviatie</b><span class="n">afwijking van de koers</span></li>
-      <li><div class="hdr"><span>045°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>SMT</b><span class="n">twee peilingen vergeleken</span></li>
-      <li><div class="hdr"><span>079°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>FVG</b><span class="n">een gat in het vaarwater</span></li>
-      <li><div class="hdr"><span>113°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>IFVG</b><span class="n">het gat omgekeerd</span></li>
-      <li><div class="hdr"><span>146°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>orderblocks</b><span class="n">ankergrond</span></li>
-      <li><div class="hdr"><span>180°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>fibonacci</b><span class="n">verdeling van de afstand</span></li>
-      <li><div class="hdr"><span>214°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>sessie-liquiditeit</b><span class="n">getij per sessie</span></li>
-      <li><div class="hdr"><span>248°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>liquiditeit</b><span class="n">waar het water staat</span></li>
-      <li><div class="hdr"><span>281°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>risicobeheer</b><span class="n">ballast en marge</span></li>
-      <li><div class="hdr"><span>315°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>tradingpsychologie</b><span class="n">de hand aan het roer</span></li>
+      <li><div class="hdr"><span>011°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b><span lang="nl">deviatie</span><span lang="en">deviation</span></b><span class="n"><span lang="nl">afwijking van de koers</span><span lang="en">a departure from the course</span></span></li>
+      <li><div class="hdr"><span>045°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>SMT</b><span class="n"><span lang="nl">twee peilingen vergeleken</span><span lang="en">two bearings compared</span></span></li>
+      <li><div class="hdr"><span>079°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>FVG</b><span class="n"><span lang="nl">een gat in het vaarwater</span><span lang="en">a gap in the channel</span></span></li>
+      <li><div class="hdr"><span>113°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>IFVG</b><span class="n"><span lang="nl">het gat omgekeerd</span><span lang="en">the gap reversed</span></span></li>
+      <li><div class="hdr"><span>146°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>orderblocks</b><span class="n"><span lang="nl">ankergrond</span><span lang="en">anchorage</span></span></li>
+      <li><div class="hdr"><span>180°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>fibonacci</b><span class="n"><span lang="nl">verdeling van de afstand</span><span lang="en">dividing the distance</span></span></li>
+      <li><div class="hdr"><span>214°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></b><span class="n"><span lang="nl">getij per sessie</span><span lang="en">tide by session</span></span></li>
+      <li><div class="hdr"><span>248°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></b><span class="n"><span lang="nl">waar het water staat</span><span lang="en">where the water stands</span></span></li>
+      <li><div class="hdr"><span>281°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b><span lang="nl">risicobeheer</span><span lang="en">risk management</span></b><span class="n"><span lang="nl">ballast en marge</span><span lang="en">ballast and margin</span></span></li>
+      <li><div class="hdr"><span>315°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></b><span class="n"><span lang="nl">de hand aan het roer</span><span lang="en">a hand on the helm</span></span></li>
     </ul>
     <div class="fan-foot">
-      <span>10 onderwerpen · educatie in de server</span>
-      <a class="btn btn--out" href="https://discord.gg/78Ff2GuSfW">Vaar mee</a>
+      <span lang="nl">10 onderwerpen · educatie in de server</span>
+      <span lang="en">10 topics · education in the server</span>
+      <a class="btn btn--out" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Vaar mee</span><span lang="en">Sail with us</span></a>
     </div>
   </div>
 </section>
@@ -570,13 +593,14 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
         <circle cx="45" cy="45" r="3.4" fill="#08090B"/>
       </svg>
       <div>
-        <span class="bear">Streek O &nbsp;·&nbsp; 090°</span>
-        <h2>Het model, uitgezet</h2>
+        <span class="bear"><span lang="nl">Streek O &nbsp;·&nbsp; 090°</span><span lang="en">Point O &nbsp;·&nbsp; 090°</span></span>
+        <h2><span lang="nl">Het model, uitgezet</span><span lang="en">The model, plotted</span></h2>
       </div>
     </div>
 
+    <p class="vh" id="d034-lbl-chart"><span lang="nl">Zeekaart-schema van een setup: liquiditeit, sweep, orderblock, FVG en uitvoering</span><span lang="en">Chart schematic of a setup: liquidity, sweep, orderblock, FVG and execution</span></p>
     <div class="scroller">
-      <svg viewBox="0 0 900 420" role="img" aria-label="Zeekaart-schema van een setup: liquiditeit, sweep, orderblock, FVG en uitvoering">
+      <svg viewBox="0 0 900 420" role="img" aria-labelledby="d034-lbl-chart">
         <defs>
           <pattern id="g034-shoal" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
             <line x1="0" y1="0" x2="0" y2="9" stroke="#B9954A" stroke-width="1.2" stroke-opacity=".7"/>
@@ -648,10 +672,12 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
           <path d="M668,68 L668,42 L612,42"/>
         </g>
         <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1.8" fill="#08090B">
-          <text x="104" y="386" text-anchor="end">LIQUIDITEIT</text>
+          <text lang="nl" x="104" y="386" text-anchor="end">LIQUIDITEIT</text>
+          <text lang="en" x="104" y="386" text-anchor="end">LIQUIDITY</text>
           <text x="332" y="408">SWEEP</text>
           <text x="230" y="202" text-anchor="end">ORDERBLOCK</text>
-          <text x="608" y="46" text-anchor="end" fill="#B9954A">UITVOERING</text>
+          <text lang="nl" x="608" y="46" text-anchor="end" fill="#B9954A">UITVOERING</text>
+          <text lang="en" x="608" y="46" text-anchor="end" fill="#B9954A">EXECUTION</text>
         </g>
         <text x="676" y="194" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="3" fill="#08090B">FVG</text>
 
@@ -667,7 +693,7 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
       </svg>
     </div>
     <div class="figcap">
-      <b>Kaartje O</b><span>Schematische illustratie van een concept</span><span>Geen prijzen, geen resultaat</span>
+      <b lang="nl">Kaartje O</b><b lang="en">Chart O</b><span lang="nl">Schematische illustratie van een concept</span><span lang="en">Schematic illustration of a concept</span><span lang="nl">Geen prijzen, geen resultaat</span><span lang="en">No prices, no results</span>
     </div>
   </div>
 </section>
@@ -686,14 +712,15 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
         <circle cx="45" cy="45" r="3.4" fill="#08090B"/>
       </svg>
       <div>
-        <span class="bear">Streek ZO &nbsp;·&nbsp; 135°</span>
-        <h2>15 kanalen</h2>
+        <span class="bear"><span lang="nl">Streek ZO &nbsp;·&nbsp; 135°</span><span lang="en">Point ZO &nbsp;·&nbsp; 135°</span></span>
+        <h2><span lang="nl">15 kanalen</span><span lang="en">15 channels</span></h2>
       </div>
     </div>
 
     <div class="manifest">
       <div>
-        <h3>Thuis <span>nu gratis · 9</span></h3>
+        <h3 lang="nl">Thuis <span>nu gratis · 9</span></h3>
+        <h3 lang="en">Home <span>free right now · 9</span></h3>
         <ul>
           <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="currentColor"/></svg><span class="n">#nq-chart-ideeën</span><span class="b">OPEN</span></li>
           <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="currentColor"/></svg><span class="n">#es-chart-ideeën</span><span class="b">OPEN</span></li>
@@ -707,7 +734,8 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
         </ul>
       </div>
       <div>
-        <h3>Premium <span>opent later · 6</span></h3>
+        <h3 lang="nl">Premium <span>opent later · 6</span></h3>
+        <h3 lang="en">Premium <span>opens later · 6</span></h3>
         <ul>
           <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span class="n">#trade-setups</span><span class="b">LATER</span></li>
           <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span class="n">#marktupdates</span><span class="b">LATER</span></li>
@@ -716,7 +744,7 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
           <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span class="n">#chart-ideeën</span><span class="b">LATER</span></li>
           <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span class="n">#premium-chat</span><span class="b">LATER</span></li>
         </ul>
-        <div style="margin-top:24px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Open de server</a></div>
+        <div style="margin-top:24px"><a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de server</span><span lang="en">Open the server</span></a></div>
       </div>
     </div>
   </div>
@@ -736,18 +764,19 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
         <circle cx="45" cy="45" r="3.4" fill="#08090B"/>
       </svg>
       <div>
-        <span class="bear">Streek Z &nbsp;·&nbsp; 180°</span>
-        <h2>Live aan het roer</h2>
+        <span class="bear"><span lang="nl">Streek Z &nbsp;·&nbsp; 180°</span><span lang="en">Point Z &nbsp;·&nbsp; 180°</span></span>
+        <h2><span lang="nl">Live aan het roer</span><span lang="en">Live at the helm</span></h2>
       </div>
     </div>
 
     <div class="live">
       <div>
-        <h3>De oprichter handelt live mee.</h3>
-        <p>Hij laat in de server zien hoe hij de markten benadert. Tijden worden daar aangekondigd.</p>
-        <div style="margin-top:24px"><a class="btn btn--out" href="https://discord.gg/78Ff2GuSfW">Zit een sessie mee</a></div>
+        <h3><span lang="nl">De oprichter handelt live mee.</span><span lang="en">The founder trades live.</span></h3>
+        <p><span lang="nl">Hij laat in de server zien hoe hij de markten benadert. Tijden worden daar aangekondigd.</span><span lang="en">In the server he shows how he approaches the markets. Times are announced there.</span></p>
+        <div style="margin-top:24px"><a class="btn btn--out" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Zit een sessie mee</span><span lang="en">Sit in on a session</span></a></div>
       </div>
-      <svg viewBox="0 0 340 190" role="img" aria-label="Markten uitgezet op streken" style="width:100%;height:auto">
+      <p class="vh" id="d034-lbl-mkt"><span lang="nl">Markten uitgezet op streken</span><span lang="en">Markets plotted on compass points</span></p>
+      <svg viewBox="0 0 340 190" role="img" aria-labelledby="d034-lbl-mkt" style="width:100%;height:auto">
         <g stroke="#CCC6B5" stroke-width="1"><path d="M0,48 H340 M0,95 H340 M0,142 H340 M85,0 V190 M170,0 V190 M255,0 V190"/></g>
         <g stroke="#08090B" stroke-width="1.2" fill="#D7B364">
           <path d="M46,142 L54,124 H38 Z"/><path d="M132,96 L140,78 H124 Z"/>
@@ -778,22 +807,22 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
         <circle cx="45" cy="45" r="3.4" fill="#08090B"/>
       </svg>
       <div>
-        <span class="bear">Streek ZW &nbsp;·&nbsp; 225°</span>
-        <h2>Toegang</h2>
+        <span class="bear"><span lang="nl">Streek ZW &nbsp;·&nbsp; 225°</span><span lang="en">Point ZW &nbsp;·&nbsp; 225°</span></span>
+        <h2><span lang="nl">Toegang</span><span lang="en">Access</span></h2>
       </div>
     </div>
 
     <div class="duo">
       <div class="card">
-        <span class="chip">Haven open</span>
-        <h3>Gratis</h3>
-        <p>De hele thuiskant van de server is nu gratis: educatie, chart-ideeën, markt en community.</p>
-        <div style="margin-top:22px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Nu binnenlopen</a></div>
+        <span class="chip"><span lang="nl">Haven open</span><span lang="en">Harbour open</span></span>
+        <h3><span lang="nl">Gratis</span><span lang="en">Free</span></h3>
+        <p><span lang="nl">De hele thuiskant van de server is nu gratis: educatie, chart-ideeën, markt en community.</span><span lang="en">The whole home side of the server is free right now: education, chart ideas, market and community.</span></p>
+        <div style="margin-top:22px"><a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Nu binnenlopen</span><span lang="en">Walk in now</span></a></div>
       </div>
       <div class="card card--soft">
-        <span class="chip chip--gold">Nog gesloten</span>
+        <span class="chip chip--gold"><span lang="nl">Nog gesloten</span><span lang="en">Still closed</span></span>
         <h3>Premium</h3>
-        <p>Premium opent later. Wanneer en hoe wordt in de server aangekondigd.</p>
+        <p><span lang="nl">Premium opent later. Wanneer en hoe wordt in de server aangekondigd.</span><span lang="en">Premium opens later. When and how will be announced in the server.</span></p>
       </div>
     </div>
   </div>
@@ -827,10 +856,10 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
     </svg>
   </div>
   <div class="wrap closing">
-    <span class="bear">Streek W &nbsp;·&nbsp; 270°</span>
-    <h2 style="margin-top:20px">Vaar <em>mee</em>.</h2>
-    <p>Gratis toegang, vanaf het moment dat je binnenkomt.</p>
-    <div style="margin-top:30px"><a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a></div>
+    <span class="bear"><span lang="nl">Streek W &nbsp;·&nbsp; 270°</span><span lang="en">Point W &nbsp;·&nbsp; 270°</span></span>
+    <h2 style="margin-top:20px"><span lang="nl">Vaar <em>mee</em>.</span><span lang="en">Sail <em>with us</em>.</span></h2>
+    <p><span lang="nl">Gratis toegang, vanaf het moment dat je binnenkomt.</span><span lang="en">Free access, from the moment you come in.</span></p>
+    <div style="margin-top:30px"><a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></a></div>
   </div>
 </div>
 
@@ -840,30 +869,53 @@ footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(3
     <div class="fg">
       <div>
         <h4>Atlas Capital</h4>
-        <p>Proces. Discipline. Uitvoering.</p>
+        <p><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></p>
       </div>
       <div>
-        <h4>Peilingen</h4>
+        <h4><span lang="nl">Peilingen</span><span lang="en">Bearings</span></h4>
         <a href="https://discord.gg/78Ff2GuSfW">Discord</a>
         <a href="https://www.tiktok.com/@atlascapitalbv">TikTok · @atlascapitalbv</a>
       </div>
       <div>
-        <h4>Vaarwater</h4>
+        <h4><span lang="nl">Vaarwater</span><span lang="en">Waters</span></h4>
         <p>NQ · ES · Bitcoin · Altcoins</p>
       </div>
       <div>
-        <h4>Stand</h4>
+        <h4><span lang="nl">Stand</span><span lang="en">Position</span></h4>
         <p style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;line-height:2;color:var(--ink-45)">
-          GRATIS TOEGANG · NU<br>PREMIUM · OPENT LATER<br>10+ JAAR ERVARING
+          <span lang="nl">GRATIS TOEGANG · NU<br>PREMIUM · OPENT LATER<br>10+ JAAR ERVARING</span><span lang="en">FREE ACCESS · NOW<br>PREMIUM · OPENS LATER<br>10+ YEARS EXPERIENCE</span>
         </p>
       </div>
     </div>
     <div class="risk">
-      <span>Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span>
-      <span>BLAD 034 · KOMPASROOS</span>
+      <span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span>
+      <span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span>
+      <span lang="nl">BLAD 034 · KOMPASROOS</span>
+      <span lang="en">SHEET 034 · COMPASS ROSE</span>
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

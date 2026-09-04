@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,6 +48,21 @@ ul{list-style:none;padding:0}
   transition:transform .2s ease;
 }
 .pin:hover{transform:rotate(0deg) translateY(-2px)}
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.top .pin{margin-left:auto}
+.langsw{display:flex;transform:rotate(-1.6deg)}
+.langsw button{
+  font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.16em;
+  background:var(--card);color:var(--muted);border:1px solid var(--line);
+  padding:11px 12px;line-height:1;cursor:pointer;
+  transition:background .2s ease,color .2s ease;
+}
+.langsw button+button{border-left:none}
+.langsw button[aria-pressed="true"]{background:var(--ink);color:var(--gold);border-color:var(--ink)}
+.langsw button:hover{color:var(--ink)}
 
 /* ---------- hero + fan ---------- */
 .hero{text-align:center;padding:clamp(6px,2vw,20px) 0 0}
@@ -225,18 +240,22 @@ ul{list-style:none;padding:0}
         <circle cx="22" cy="17" r="8.5" fill="none" stroke="#B9954A" stroke-width="1.4"/>
         <path d="M9 30h26M14 30l4 8M30 30l-4 8" fill="none" stroke="#08090B" stroke-width="1.2"/>
       </svg>
-      <b>Atlas Capital<i>PROCES · DISCIPLINE · UITVOERING</i></b>
+      <b>Atlas Capital<i><span lang="nl">PROCES · DISCIPLINE · UITVOERING</span><span lang="en">PROCESS · DISCIPLINE · EXECUTION</span></i></b>
     </div>
     <a class="pin" href="https://discord.gg/78Ff2GuSfW">OPEN DISCORD &rarr;</a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </header>
 
   <section class="hero">
-    <div class="eyebrow">Nederlandse trading-community</div>
-    <h1>Het proces,<br><em>kaart voor kaart.</em></h1>
-    <p>Educatie, kanalen en live sessies. Alles ligt op tafel in Discord.</p>
+    <div class="eyebrow"><span lang="nl">Nederlandse trading-community</span><span lang="en">Dutch trading community</span></div>
+    <h1><span lang="nl">Het proces,</span><span lang="en">The process,</span><br><em><span lang="nl">kaart voor kaart.</span><span lang="en">card by card.</span></em></h1>
+    <p><span lang="nl">Educatie, kanalen en live sessies. Alles ligt op tafel in Discord.</span><span lang="en">Education, channels and live sessions. It is all on the table in Discord.</span></p>
     <div class="heroctas">
-      <a class="btn btn--gold" href="https://discord.gg/78Ff2GuSfW">Kom binnen &mdash; gratis</a>
-      <a class="btn btn--line" href="#kaarten">Bekijk de stapel</a>
+      <a class="btn btn--gold" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom binnen &mdash; gratis</span><span lang="en">Come inside &mdash; free</span></a>
+      <a class="btn btn--line" href="#kaarten"><span lang="nl">Bekijk de stapel</span><span lang="en">See the pile</span></a>
     </div>
 
     <div class="fan" aria-hidden="true">
@@ -253,7 +272,7 @@ ul{list-style:none;padding:0}
       <div class="fc fc--gold" style="--a:0deg;--y:0px">
         <span class="corner">ATLAS</span>
         <svg viewBox="0 0 100 44"><circle cx="50" cy="18" r="11" fill="none" stroke="#0A0A0C" stroke-width="1.6"/><path d="M28 34h44M36 34l5 9M64 34l-5 9" stroke="#0A0A0C" stroke-width="1.6" fill="none"/></svg>
-        <b>Capital<span>SINDS JAREN ACTIEF</span></b>
+        <b>Capital<span lang="nl">SINDS JAREN ACTIEF</span><span lang="en">ACTIVE FOR YEARS</span></b>
       </div>
       <div class="fc" style="--a:10.5deg;--y:6px">
         <span class="corner">BTC</span>
@@ -274,16 +293,16 @@ ul{list-style:none;padding:0}
     <div class="slab" style="--r:-1.1deg">
       <span class="sheet s1"></span><span class="sheet s2"></span>
       <article class="card">
-        <span class="tab">02 &nbsp;OPRICHTER</span>
-        <div class="kicker">Wie er achter staat</div>
+        <span class="tab">02 &nbsp;<span lang="nl">OPRICHTER</span><span lang="en">FOUNDER</span></span>
+        <div class="kicker"><span lang="nl">Wie er achter staat</span><span lang="en">Who stands behind it</span></div>
         <div class="fnd">
-          <div class="years">10<sup>+</sup><small>JAAR IN DE MARKT</small></div>
+          <div class="years">10<sup>+</sup><small><span lang="nl">JAAR IN DE MARKT</span><span lang="en">YEARS IN THE MARKET</span></small></div>
           <div>
-            <blockquote>&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&rdquo;</blockquote>
-            <div class="sig">OPRICHTER — ATLAS CAPITAL</div>
+            <blockquote><span lang="nl">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&rdquo;</span><span lang="en">&ldquo;I&rsquo;ve been involved in trading for over 10 years now, and during that time I&rsquo;ve experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons.&rdquo;</span></blockquote>
+            <div class="sig"><span lang="nl">OPRICHTER</span><span lang="en">FOUNDER</span> — ATLAS CAPITAL</div>
             <div class="hr"></div>
-            <p class="small">Atlas Capital is gebouwd om die ervaring te delen en traders samen te brengen.</p>
-            <p style="margin-top:16px"><a class="btn btn--line" href="https://discord.gg/78Ff2GuSfW">Ontmoet de community</a></p>
+            <p class="small"><span lang="nl">Atlas Capital is gebouwd om die ervaring te delen en traders samen te brengen.</span><span lang="en">Atlas Capital was built to share that experience and bring traders together.</span></p>
+            <p style="margin-top:16px"><a class="btn btn--line" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Ontmoet de community</span><span lang="en">Meet the community</span></a></p>
           </div>
         </div>
       </article>
@@ -293,20 +312,20 @@ ul{list-style:none;padding:0}
     <div class="slab" style="--r:.9deg">
       <span class="sheet s1"></span><span class="sheet s2"></span>
       <article class="card">
-        <span class="tab">03 &nbsp;EDUCATIE</span>
-        <div class="kicker">10 onderwerpen</div>
-        <h2>De hele <em>leerlijn</em>, uitgespreid.</h2>
+        <span class="tab">03 &nbsp;<span lang="nl">EDUCATIE</span><span lang="en">EDUCATION</span></span>
+        <div class="kicker"><span lang="nl">10 onderwerpen</span><span lang="en">10 topics</span></div>
+        <h2><span lang="nl">De hele </span><span lang="en">The whole </span><em><span lang="nl">leerlijn</span><span lang="en">curriculum</span></em><span lang="nl">, uitgespreid.</span><span lang="en">, laid out.</span></h2>
         <div class="deck">
-          <div class="chip" style="--c:-2.4deg"><b>01</b><span>deviatie</span></div>
+          <div class="chip" style="--c:-2.4deg"><b>01</b><span lang="nl">deviatie</span><span lang="en">deviation</span></div>
           <div class="chip" style="--c:1.6deg"><b>02</b><span>SMT</span></div>
           <div class="chip" style="--c:-1.2deg"><b>03</b><span>FVG</span></div>
           <div class="chip" style="--c:2deg"><b>04</b><span>IFVG</span></div>
           <div class="chip" style="--c:-1.8deg"><b>05</b><span>orderblocks</span></div>
           <div class="chip" style="--c:1.1deg"><b>06</b><span>fibonacci</span></div>
-          <div class="chip" style="--c:-2deg"><b>07</b><span>sessie-liquiditeit</span></div>
-          <div class="chip" style="--c:1.7deg"><b>08</b><span>liquiditeit</span></div>
-          <div class="chip" style="--c:-1.4deg"><b>09</b><span>risicobeheer</span></div>
-          <div class="chip" style="--c:2.2deg"><b>10</b><span>tradingpsychologie</span></div>
+          <div class="chip" style="--c:-2deg"><b>07</b><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></div>
+          <div class="chip" style="--c:1.7deg"><b>08</b><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></div>
+          <div class="chip" style="--c:-1.4deg"><b>09</b><span lang="nl">risicobeheer</span><span lang="en">risk management</span></div>
+          <div class="chip" style="--c:2.2deg"><b>10</b><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></div>
         </div>
       </article>
     </div>
@@ -315,29 +334,33 @@ ul{list-style:none;padding:0}
     <div class="slab" style="--r:-.7deg">
       <span class="sheet s1"></span><span class="sheet s2"></span>
       <article class="card">
-        <span class="tab">04 &nbsp;HET MODEL</span>
-        <div class="kicker">Schematisch — geen koers, geen resultaat</div>
-        <h2>Zo ziet een <em>deviatie</em> eruit.</h2>
+        <span class="tab">04 &nbsp;<span lang="nl">HET MODEL</span><span lang="en">THE MODEL</span></span>
+        <div class="kicker"><span lang="nl">Schematisch — geen koers, geen resultaat</span><span lang="en">Schematic — no price, no result</span></div>
+        <h2><span lang="nl">Zo ziet een </span><span lang="en">This is what a </span><em><span lang="nl">deviatie</span><span lang="en">deviation</span></em><span lang="nl"> eruit.</span><span lang="en"> looks like.</span></h2>
         <div class="plate">
-          <svg viewBox="0 0 440 230" role="img" aria-label="Schematische weergave van een deviatie boven een range">
+          <svg viewBox="0 0 440 230" role="img" aria-label="Schematische weergave van een deviatie boven een range / Schematic of a deviation above a range">
             <rect x="20" y="70" width="400" height="80" fill="#D7B364" opacity="0.12"/>
             <path d="M20 70h400M20 150h400" stroke="#B9954A" stroke-width="1.2" stroke-dasharray="6 5"/>
             <path d="M20 132 L58 112 L84 140 L118 96 L146 128 L176 88 L208 116 L238 74 L262 96 L286 40 L302 62 L318 96 L346 128 L378 118 L414 158"
                   fill="none" stroke="#08090B" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
             <circle cx="286" cy="40" r="5" fill="none" stroke="#B9954A" stroke-width="2"/>
             <path d="M292 38h56" stroke="#B9954A" stroke-width="1" stroke-dasharray="3 4"/>
-            <text x="352" y="42" font-family="Georgia, serif" font-size="14" fill="#08090B">deviatie</text>
-            <text x="24" y="64" font-family="-apple-system, Arial" font-size="9.5" letter-spacing="2.4" fill="#6C6A63">BOVENKANT RANGE</text>
-            <text x="24" y="166" font-family="-apple-system, Arial" font-size="9.5" letter-spacing="2.4" fill="#6C6A63">ONDERKANT RANGE</text>
-            <text x="24" y="216" font-family="-apple-system, Arial" font-size="9.5" letter-spacing="2.4" fill="#6C6A63">ILLUSTRATIE — GEEN PRIJZEN</text>
+            <text lang="nl" x="352" y="42" font-family="Georgia, serif" font-size="14" fill="#08090B">deviatie</text>
+            <text lang="en" x="352" y="42" font-family="Georgia, serif" font-size="14" fill="#08090B">deviation</text>
+            <text lang="nl" x="24" y="64" font-family="-apple-system, Arial" font-size="9.5" letter-spacing="2.4" fill="#6C6A63">BOVENKANT RANGE</text>
+            <text lang="en" x="24" y="64" font-family="-apple-system, Arial" font-size="9.5" letter-spacing="2.4" fill="#6C6A63">TOP OF RANGE</text>
+            <text lang="nl" x="24" y="166" font-family="-apple-system, Arial" font-size="9.5" letter-spacing="2.4" fill="#6C6A63">ONDERKANT RANGE</text>
+            <text lang="en" x="24" y="166" font-family="-apple-system, Arial" font-size="9.5" letter-spacing="2.4" fill="#6C6A63">BOTTOM OF RANGE</text>
+            <text lang="nl" x="24" y="216" font-family="-apple-system, Arial" font-size="9.5" letter-spacing="2.4" fill="#6C6A63">ILLUSTRATIE — GEEN PRIJZEN</text>
+            <text lang="en" x="24" y="216" font-family="-apple-system, Arial" font-size="9.5" letter-spacing="2.4" fill="#6C6A63">ILLUSTRATION — NO PRICES</text>
           </svg>
         </div>
         <div class="legend">
-          <span><b>Range</b> — het gebied waarin de markt blijft hangen</span>
-          <span><b>Deviatie</b> — de uitbraak die geen stand houdt</span>
+          <span lang="nl"><b>Range</b> — het gebied waarin de markt blijft hangen</span><span lang="en"><b>Range</b> — the area the market keeps trading inside</span>
+          <span lang="nl"><b>Deviatie</b> — de uitbraak die geen stand houdt</span><span lang="en"><b>Deviation</b> — the break that does not hold</span>
         </div>
-        <p>Eén van de tien onderwerpen. De rest staat uitgewerkt in de server.</p>
-        <p style="margin-top:18px"><a class="btn btn--gold" href="https://discord.gg/78Ff2GuSfW">Bekijk de uitleg &rarr;</a></p>
+        <p><span lang="nl">Eén van de tien onderwerpen. De rest staat uitgewerkt in de server.</span><span lang="en">One of the ten topics. The rest is worked out in the server.</span></p>
+        <p style="margin-top:18px"><a class="btn btn--gold" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Bekijk de uitleg</span><span lang="en">See the explanation</span> &rarr;</a></p>
       </article>
     </div>
 
@@ -345,12 +368,12 @@ ul{list-style:none;padding:0}
     <div class="slab" style="--r:1.2deg">
       <span class="sheet s1"></span><span class="sheet s2"></span>
       <article class="card">
-        <span class="tab">05 &nbsp;KANALEN</span>
-        <div class="kicker">15 kanalen</div>
-        <h2>Elke kaart een <em>kanaal</em>.</h2>
+        <span class="tab">05 &nbsp;<span lang="nl">KANALEN</span><span lang="en">CHANNELS</span></span>
+        <div class="kicker"><span lang="nl">15 kanalen</span><span lang="en">15 channels</span></div>
+        <h2><span lang="nl">Elke kaart een </span><span lang="en">Every card a </span><em><span lang="nl">kanaal</span><span lang="en">channel</span></em>.</h2>
         <div class="slips">
           <div class="slipgrp">
-            <b>THUIS<i>NU GRATIS</i></b>
+            <b><span lang="nl">THUIS</span><span lang="en">HOME</span><i><span lang="nl">NU GRATIS</span><span lang="en">FREE RIGHT NOW</span></i></b>
             <div class="slip"><span><s>#</s> nq-chart-ideeën</span><em>NQ</em></div>
             <div class="slip"><span><s>#</s> es-chart-ideeën</span><em>ES</em></div>
             <div class="slip"><span><s>#</s> bitcoin</span><em>BTC</em></div>
@@ -362,7 +385,7 @@ ul{list-style:none;padding:0}
             <div class="slip"><span><s>#</s> ondersteuning</span><em></em></div>
           </div>
           <div class="slipgrp">
-            <b>PREMIUM<i>OPENT LATER</i></b>
+            <b>PREMIUM<i><span lang="nl">OPENT LATER</span><span lang="en">OPENS LATER</span></i></b>
             <div class="slip"><span><s>#</s> trade-setups</span><em></em></div>
             <div class="slip"><span><s>#</s> marktupdates</span><em></em></div>
             <div class="slip"><span><s>#</s> indicatoren</span><em></em></div>
@@ -370,7 +393,7 @@ ul{list-style:none;padding:0}
             <div class="slip"><span><s>#</s> chart-ideeën</span><em></em></div>
             <div class="slip"><span><s>#</s> premium-chat</span><em></em></div>
             <div class="hr"></div>
-            <p class="small">Premium opent later. Prijs en datum worden in de server aangekondigd.</p>
+            <p class="small"><span lang="nl">Premium opent later. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Premium opens later. Price and date are announced in the server.</span></p>
           </div>
         </div>
       </article>
@@ -380,20 +403,20 @@ ul{list-style:none;padding:0}
     <div class="slab" style="--r:-.9deg">
       <span class="sheet s1"></span><span class="sheet s2"></span>
       <article class="card">
-        <span class="tab">06 &nbsp;LIVE &amp; TOEGANG</span>
+        <span class="tab">06 &nbsp;LIVE &amp; <span lang="nl">TOEGANG</span><span lang="en">ACCESS</span></span>
         <div class="duo">
           <div>
             <b>LIVE</b>
-            <h3><span class="pulse"></span>Meekijken tijdens de sessie</h3>
-            <p>De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
+            <h3><span class="pulse"></span><span lang="nl">Meekijken tijdens de sessie</span><span lang="en">Watch along during the session</span></h3>
+            <p><span lang="nl">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced there.</span></p>
           </div>
           <div>
-            <b>TOEGANG</b>
-            <h3>Nu gratis, premium later</h3>
-            <p>Je komt vandaag zonder drempel binnen bij Thuis.</p>
+            <b><span lang="nl">TOEGANG</span><span lang="en">ACCESS</span></b>
+            <h3><span lang="nl">Nu gratis, premium later</span><span lang="en">Free right now, premium later</span></h3>
+            <p><span lang="nl">Je komt vandaag zonder drempel binnen bij Thuis.</span><span lang="en">You walk into Home today with nothing in the way.</span></p>
           </div>
         </div>
-        <p style="margin-top:22px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Zit een sessie bij &rarr;</a></p>
+        <p style="margin-top:22px"><a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Zit een sessie bij</span><span lang="en">Sit in on a session</span> &rarr;</a></p>
       </article>
     </div>
 
@@ -401,10 +424,10 @@ ul{list-style:none;padding:0}
     <div class="slab" style="--r:.8deg">
       <span class="sheet s1"></span><span class="sheet s2"></span>
       <article class="card card--gold">
-        <span class="tab tab--gold" style="background:#0A0A0C;color:#D7B364">08 &nbsp;KOM BINNEN</span>
-        <div class="kicker">De bovenste kaart</div>
-        <h2>Leg je eigen kaart<br>op tafel.</h2>
-        <p>Toegang is nu gratis. Je vindt ons in Discord.</p>
+        <span class="tab tab--gold" style="background:#0A0A0C;color:#D7B364">08 &nbsp;<span lang="nl">KOM BINNEN</span><span lang="en">COME INSIDE</span></span>
+        <div class="kicker"><span lang="nl">De bovenste kaart</span><span lang="en">The top card</span></div>
+        <h2><span lang="nl">Leg je eigen kaart</span><span lang="en">Put your own card</span><br><span lang="nl">op tafel.</span><span lang="en">on the table.</span></h2>
+        <p><span lang="nl">Toegang is nu gratis. Je vindt ons in Discord.</span><span lang="en">Access is free right now. You will find us on Discord.</span></p>
         <p style="margin-top:22px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Open Discord &rarr;</a></p>
       </article>
     </div>
@@ -418,9 +441,29 @@ ul{list-style:none;padding:0}
       <a href="https://www.tiktok.com/@atlascapitalbv">TIKTOK @ATLASCAPITALBV</a>
       <span style="font-size:12px;color:var(--muted)">NQ · ES · BITCOIN · ALTCOINS</span>
     </div>
-    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
   </footer>
 
 </div>
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 </body>
 </html>

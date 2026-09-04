@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -154,6 +154,29 @@ p:last-child{ margin-bottom:0; }
     inset 0 0 0 1px rgba(215,179,100,.28);
 }
 .btn-cut:hover{ color:var(--gold-hi); box-shadow:inset 0 2px 0 rgba(0,0,0,.85), inset 0 0 0 1px rgba(215,179,100,.6); }
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+
+.langsw{ display:inline-flex; gap:2px; }
+.langsw button{
+  appearance:none; -webkit-appearance:none; cursor:pointer; border:0;
+  font-family:var(--sans); font-weight:800;
+  font-size:12px; letter-spacing:.16em; text-transform:uppercase; line-height:1;
+  padding:1.05em 1.1em;
+  color:var(--dim);
+  background:linear-gradient(180deg,#0F1014,#191B20);
+  box-shadow:
+    inset 0 2px 0 rgba(0,0,0,.85),
+    inset 0 -1px 0 rgba(255,255,255,.07),
+    inset 0 0 0 1px rgba(215,179,100,.14);
+}
+.langsw button:hover{ color:var(--gold); }
+.langsw button[aria-pressed="true"]{
+  color:var(--gold);
+  box-shadow:inset 0 2px 0 rgba(0,0,0,.85), inset 0 0 0 1px rgba(215,179,100,.5);
+}
 
 /* ---------- coping course (header) ---------- */
 .coping{
@@ -314,7 +337,13 @@ footer{
       </svg>
       <b class="chisel-pale">Atlas Capital</b>
     </div>
-    <a class="btn btn-cut" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
+    <div style="display:flex;align-items:center;gap:11px;flex-wrap:wrap">
+      <a class="btn btn-cut" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></a>
+      <div class="langsw" role="group" aria-label="Taal / Language">
+        <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
   </div>
 
   <!-- ============ COURSE 1 — HERO ============ -->
@@ -323,12 +352,12 @@ footer{
       <svg class="grain" aria-hidden="true" preserveAspectRatio="none"><rect width="100%" height="100%" filter="url(#rock100)"/></svg>
       <div class="hero-grid">
         <div>
-          <p class="eyebrow">Nederlandse tradingcommunity</p>
-          <h1 class="chisel-pale">Bouw laag<br>voor laag.</h1>
-          <p class="hero-line">Educatie over NQ, ES, Bitcoin en altcoins. Nu vrij toegankelijk op Discord.</p>
+          <p class="eyebrow"><span lang="nl">Nederlandse tradingcommunity</span><span lang="en">Dutch trading community</span></p>
+          <h1 class="chisel-pale"><span lang="nl">Bouw laag<br>voor laag.</span><span lang="en">Build layer<br>by layer.</span></h1>
+          <p class="hero-line"><span lang="nl">Educatie over NQ, ES, Bitcoin en altcoins. Nu vrij toegankelijk op Discord.</span><span lang="en">Education on NQ, ES, Bitcoin and altcoins. Freely accessible on Discord right now.</span></p>
           <div class="hero-cta">
-            <a class="btn btn-solid" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
-            <a class="btn btn-cut" href="#leerstof">Bekijk de leerstof</a>
+            <a class="btn btn-solid" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></a>
+            <a class="btn btn-cut" href="#leerstof"><span lang="nl">Bekijk de leerstof</span><span lang="en">See the curriculum</span></a>
           </div>
         </div>
         <div class="hero-mark" aria-hidden="true">
@@ -354,7 +383,7 @@ footer{
   <div class="course c-3">
     <div class="block wordstone">
       <svg class="grain" aria-hidden="true" preserveAspectRatio="none"><rect width="100%" height="100%" filter="url(#rock100)"/></svg>
-      <b class="chisel">Proces</b>
+      <b class="chisel"><span lang="nl">Proces</span><span lang="en">Process</span></b>
     </div>
     <div class="block wordstone">
       <svg class="grain" aria-hidden="true" preserveAspectRatio="none"><rect width="100%" height="100%" filter="url(#rock100)"/></svg>
@@ -362,7 +391,7 @@ footer{
     </div>
     <div class="block wordstone">
       <svg class="grain" aria-hidden="true" preserveAspectRatio="none"><rect width="100%" height="100%" filter="url(#rock100)"/></svg>
-      <b class="chisel">Uitvoering</b>
+      <b class="chisel"><span lang="nl">Uitvoering</span><span lang="en">Execution</span></b>
     </div>
   </div>
 
@@ -370,25 +399,25 @@ footer{
   <div class="course c-wn">
     <div class="block">
       <svg class="grain" aria-hidden="true" preserveAspectRatio="none"><rect width="100%" height="100%" filter="url(#rock100)"/></svg>
-      <p class="title chisel"><span class="n">01</span>De oprichter</p>
+      <p class="title chisel"><span class="n">01</span><span lang="nl">De oprichter</span><span lang="en">The founder</span></p>
       <p class="numeral chisel">10+</p>
-      <p class="title" style="color:var(--dim);margin-bottom:clamp(18px,2.4vw,26px)">Jaar actief in trading</p>
-      <blockquote class="measure">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</blockquote>
-      <p class="muted measure">Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader.</p>
-      <p class="muted measure">Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</p>
+      <p class="title" style="color:var(--dim);margin-bottom:clamp(18px,2.4vw,26px)"><span lang="nl">Jaar actief in trading</span><span lang="en">Years active in trading</span></p>
+      <blockquote class="measure"><span lang="nl">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</span><span lang="en">I've been involved in trading for over 10 years now, and during that time I've experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons.</span></blockquote>
+      <p class="muted measure"><span lang="nl">Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader.</span><span lang="en">I built Atlas Capital to share that experience, bring traders together, and show how I approach the markets on a daily basis.</span></p>
+      <p class="muted measure"><span lang="nl">Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</span><span lang="en">No get-rich-quick promises, just real setups, education, and a community focused on improving together.</span></p>
     </div>
 
     <div class="block">
       <svg class="grain" aria-hidden="true" preserveAspectRatio="none"><rect width="100%" height="100%" filter="url(#rock100)"/></svg>
       <p class="title chisel"><span class="n">02</span>Live</p>
-      <h2 class="chisel-pale">Meekijken terwijl het gebeurt.</h2>
-      <p class="muted" style="margin-top:1em">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
+      <h2 class="chisel-pale"><span lang="nl">Meekijken terwijl het gebeurt.</span><span lang="en">Watching while it happens.</span></h2>
+      <p class="muted" style="margin-top:1em"><span lang="nl">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced there.</span></p>
       <svg viewBox="0 0 280 96" fill="none" aria-hidden="true" style="width:100%;height:auto;margin:18px 0">
         <path d="M8 80 C 58 80, 64 22, 116 22 C 168 22, 176 70, 226 70 C 252 70, 262 42, 272 34"
               stroke="#D7B364" stroke-width="2"/>
         <circle cx="272" cy="34" r="6" fill="#D7B364"/>
       </svg>
-      <a class="btn btn-cut" href="https://discord.gg/78Ff2GuSfW">Zit erbij</a>
+      <a class="btn btn-cut" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Zit erbij</span><span lang="en">Sit in</span></a>
     </div>
   </div>
 
@@ -396,24 +425,24 @@ footer{
   <div class="course c-1" id="leerstof">
     <div class="block">
       <svg class="grain" aria-hidden="true" preserveAspectRatio="none"><rect width="100%" height="100%" filter="url(#rock100)"/></svg>
-      <p class="title chisel"><span class="n">03</span>Leerstof · 10 onderwerpen</p>
-      <h2 class="chisel-pale">Tien stenen waar de rest op rust.</h2>
+      <p class="title chisel"><span class="n">03</span><span lang="nl">Leerstof · 10 onderwerpen</span><span lang="en">Curriculum · 10 topics</span></p>
+      <h2 class="chisel-pale"><span lang="nl">Tien stenen waar de rest op rust.</span><span lang="en">Ten stones the rest rests on.</span></h2>
 
       <div class="plates">
-        <div class="plate"><i>01</i><span>Deviatie</span></div>
+        <div class="plate"><i>01</i><span><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span></div>
         <div class="plate"><i>02</i><span>SMT</span></div>
         <div class="plate"><i>03</i><span>FVG</span></div>
         <div class="plate"><i>04</i><span>IFVG</span></div>
         <div class="plate"><i>05</i><span>Orderblocks</span></div>
         <div class="plate"><i>06</i><span>Fibonacci</span></div>
-        <div class="plate"><i>07</i><span>Sessie-liquiditeit</span></div>
-        <div class="plate"><i>08</i><span>Liquiditeit</span></div>
-        <div class="plate"><i>09</i><span>Risicobeheer</span></div>
-        <div class="plate"><i>10</i><span>Tradingpsychologie</span></div>
+        <div class="plate"><i>07</i><span><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span></div>
+        <div class="plate"><i>08</i><span><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span></div>
+        <div class="plate"><i>09</i><span><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span></div>
+        <div class="plate"><i>10</i><span><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span></div>
       </div>
 
       <p style="margin-top:clamp(20px,3vw,30px)">
-        <a class="btn btn-cut" href="https://discord.gg/78Ff2GuSfW">Leer mee op Discord</a>
+        <a class="btn btn-cut" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Leer mee op Discord</span><span lang="en">Learn with us on Discord</span></a>
       </p>
     </div>
   </div>
@@ -422,22 +451,23 @@ footer{
   <div class="course c-nw">
     <div class="block">
       <svg class="grain" aria-hidden="true" preserveAspectRatio="none"><rect width="100%" height="100%" filter="url(#rock100)"/></svg>
-      <p class="title chisel"><span class="n">04</span>Toegang</p>
-      <h3 class="chisel-pale">Gratis</h3>
-      <p class="muted" style="margin-top:.6em">Alle huidige kanalen, de educatie en de chart-ideeën. Vandaag al open.</p>
+      <p class="title chisel"><span class="n">04</span><span lang="nl">Toegang</span><span lang="en">Access</span></p>
+      <h3 class="chisel-pale"><span lang="nl">Gratis</span><span lang="en">Free</span></h3>
+      <p class="muted" style="margin-top:.6em"><span lang="nl">Alle huidige kanalen, de educatie en de chart-ideeën. Vandaag al open.</span><span lang="en">All the current channels, the education and the chart ideas. Open today.</span></p>
       <div style="height:1px;background:rgba(215,179,100,.28);margin:clamp(18px,2.6vw,26px) 0"></div>
       <h3 class="chisel-pale">Premium</h3>
-      <p class="muted" style="margin-top:.6em">Opent later. Prijs en datum worden in de server aangekondigd.</p>
+      <p class="muted" style="margin-top:.6em"><span lang="nl">Opent later. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Opens later. Price and date will be announced in the server.</span></p>
     </div>
 
     <div class="block">
       <svg class="grain" aria-hidden="true" preserveAspectRatio="none"><rect width="100%" height="100%" filter="url(#rock100)"/></svg>
-      <p class="title chisel"><span class="n">05</span>Het model</p>
-      <h2 class="chisel-pale">Twee markten, één verhaal.</h2>
+      <p class="title chisel"><span class="n">05</span><span lang="nl">Het model</span><span lang="en">The model</span></p>
+      <h2 class="chisel-pale"><span lang="nl">Twee markten, één verhaal.</span><span lang="en">Two markets, one story.</span></h2>
 
       <div class="scroller">
-        <svg viewBox="0 0 820 380" fill="none" role="img"
-             aria-label="Schematische tekening van SMT: de ene markt maakt een hogere top, de andere niet">
+        <svg viewBox="0 0 820 380" fill="none" role="img">
+          <title lang="nl">Schematische tekening van SMT: de ene markt maakt een hogere top, de andere niet</title>
+          <title lang="en">Schematic drawing of SMT: one market makes a higher high, the other does not</title>
           <defs>
             <g id="smt100" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="40,150 110,80 180,140 250,52 320,120 390,96 460,150 530,120 600,176 670,140 740,196 790,168"
@@ -473,7 +503,7 @@ footer{
           </g>
         </svg>
       </div>
-      <p class="cap">Schematisch. Zonder prijzen, niveaus of resultaten — alleen de vorm.</p>
+      <p class="cap"><span lang="nl">Schematisch. Zonder prijzen, niveaus of resultaten — alleen de vorm.</span><span lang="en">Schematic. No prices, levels or results — just the shape.</span></p>
     </div>
   </div>
 
@@ -481,26 +511,26 @@ footer{
   <div class="course c-wn">
     <div class="block">
       <svg class="grain" aria-hidden="true" preserveAspectRatio="none"><rect width="100%" height="100%" filter="url(#rock100)"/></svg>
-      <p class="title chisel"><span class="n">06</span>De server · 15 kanalen</p>
-      <h3 class="chisel-pale">Thuis — nu gratis</h3>
+      <p class="title chisel"><span class="n">06</span><span lang="nl">De server · 15 kanalen</span><span lang="en">The server · 15 channels</span></p>
+      <h3 class="chisel-pale"><span lang="nl">Thuis — nu gratis</span><span lang="en">Home — free right now</span></h3>
       <ul class="chips">
         <li>#nq-chart-ideeën</li><li>#es-chart-ideeën</li><li>#bitcoin</li><li>#altcoins</li>
         <li>#markt</li><li>#vragen</li><li>#algemeen</li><li>#atlas-op-socials</li><li>#ondersteuning</li>
       </ul>
       <p style="margin-top:clamp(18px,2.6vw,26px)">
-        <a class="btn btn-cut" href="https://discord.gg/78Ff2GuSfW">Open de kanalen</a>
+        <a class="btn btn-cut" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de kanalen</span><span lang="en">Open the channels</span></a>
       </p>
     </div>
 
     <div class="block">
       <svg class="grain" aria-hidden="true" preserveAspectRatio="none"><rect width="100%" height="100%" filter="url(#rock100)"/></svg>
       <p class="title chisel"><span class="n">07</span>Premium</p>
-      <h3 class="chisel-pale">Opent later</h3>
+      <h3 class="chisel-pale"><span lang="nl">Opent later</span><span lang="en">Opens later</span></h3>
       <ul class="chips p">
         <li>#trade-setups</li><li>#marktupdates</li><li>#indicatoren</li>
         <li>#sessie-opnames</li><li>#chart-ideeën</li><li>#premium-chat</li>
       </ul>
-      <p class="cap">Prijs en datum worden in de server aangekondigd.</p>
+      <p class="cap"><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">Price and date will be announced in the server.</span></p>
     </div>
   </div>
 
@@ -508,10 +538,10 @@ footer{
   <div class="course c-1">
     <div class="block footing">
       <svg class="grain" aria-hidden="true" preserveAspectRatio="none"><rect width="100%" height="100%" filter="url(#rock100)"/></svg>
-      <p class="title chisel" style="text-align:center"><span class="n">08</span>Toetreden</p>
-      <h2 class="chisel-pale">Leg de eerste steen.</h2>
-      <p>Eén invite, geen kosten. De rest bouw je zelf op, samen met de rest.</p>
-      <a class="btn btn-solid" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
+      <p class="title chisel" style="text-align:center"><span class="n">08</span><span lang="nl">Toetreden</span><span lang="en">Joining</span></p>
+      <h2 class="chisel-pale"><span lang="nl">Leg de eerste steen.</span><span lang="en">Lay the first stone.</span></h2>
+      <p><span lang="nl">Eén invite, geen kosten. De rest bouw je zelf op, samen met de rest.</span><span lang="en">One invite, no cost. The rest you build yourself, alongside everyone else.</span></p>
+      <a class="btn btn-solid" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></a>
     </div>
   </div>
 
@@ -533,8 +563,28 @@ footer{
       <a class="lnk" href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
     </div>
   </div>
-  <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
 </footer>
 
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 </body>
 </html>

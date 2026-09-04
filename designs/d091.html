@@ -141,20 +141,17 @@ h3{font-size:clamp(18px,2vw,22px);letter-spacing:-.01em;font-weight:600}
 }
 .bar nav a:hover{color:var(--gold);border-bottom-color:var(--gold)}
 @media(min-width:880px){.bar nav{display:flex}}
-.langsw{
-  display:flex;align-items:stretch;flex:none;
-  border:1px solid var(--line);border-radius:2px;overflow:hidden;
-  background:rgba(215,179,100,.05);
-}
+.bar .btn.sm{white-space:nowrap}
+.langsw{display:flex;align-items:center;gap:7px;flex:none}
 .langsw button{
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;line-height:1;
-  color:var(--muted);background:transparent;border:0;padding:7px 7px;
-  cursor:pointer;transition:color .18s ease,background .18s ease;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);background:none;border:0;border-bottom:1px solid transparent;
+  padding:4px 0;line-height:1.2;cursor:pointer;
+  transition:color .18s ease,border-color .18s ease;
 }
-.langsw button+button{border-left:1px solid var(--line)}
-.langsw button:hover{color:var(--gold)}
-.langsw button[aria-pressed="true"]{background:rgba(215,179,100,.16);color:var(--gold-hi)}
-.langsw button:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
+.langsw button:hover{color:var(--gold);border-bottom-color:var(--gold)}
+.langsw button[aria-pressed="true"]{color:var(--gold);border-bottom-color:var(--gold)}
+.langsw button:focus-visible{outline:2px solid var(--paper);outline-offset:3px}
 
 /* ---------- the deck ---------- */
 .deck{
