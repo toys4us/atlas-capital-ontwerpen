@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -258,7 +258,27 @@ a{ color:inherit; }
 .risk{ font-size:0.86rem; line-height:1.5; max-width:76ch; }
 .sig{ font-weight:800; letter-spacing:0.24em; text-transform:uppercase; font-size:0.72rem; color:var(--grey); }
 
-a:focus-visible, .rect:focus-visible{ outline:4px solid var(--gold-lo); outline-offset:3px; }
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+
+@media(min-width:760px){ .c-head{ grid-template-columns: 1.9fr 0.6fr 1fr auto; } }
+.cell.lang{ padding:0; background:var(--ink); }
+.langsw{ display:flex; height:100%; gap:var(--rule); background:var(--ink); }
+.langsw button{
+  flex:1 1 0; font-family:inherit; font-weight:800; line-height:1.02;
+  font-size:clamp(0.85rem,1.15vw,1rem); letter-spacing:-0.02em;
+  background:var(--paper); color:var(--ink);
+  border:0; border-radius:0; padding:0.9em 1.2em; cursor:pointer;
+  transition:background .16s linear, color .16s linear;
+}
+.langsw button[aria-pressed="true"]{ background:var(--ink); color:var(--paper); }
+.langsw button:hover{ background:var(--gold); color:var(--ink); }
+
+/* an accessible name that follows the chosen language */
+.vh{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; }
+
+a:focus-visible, .rect:focus-visible, .langsw button:focus-visible{ outline:4px solid var(--gold-lo); outline-offset:3px; }
 </style>
 </head>
 <body>
@@ -281,14 +301,21 @@ a:focus-visible, .rect:focus-visible{ outline:4px solid var(--gold-lo); outline-
         Discord<span class="arw" aria-hidden="true">→</span>
       </a>
     </div>
+    <div class="cell lang">
+      <div class="langsw" role="group" aria-label="Taal / Language">
+        <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
   </header>
 
   <!-- ======== COMPOSITION 2 — HERO ======== -->
   <section class="mond c-hero" id="top">
     <div class="cell a-hd">
-      <p class="lb">Nederlandse trading-community</p>
-      <h1 class="d1">Alles op<br>zijn eigen<br>vlak.</h1>
-      <svg class="plas" viewBox="0 0 900 150" role="img" aria-label="Neoplastische compositie van rechthoeken in inkt en goud.">
+      <p class="lb"><span lang="nl">Nederlandse trading-community</span><span lang="en">Dutch trading community</span></p>
+      <h1 class="d1"><span lang="nl">Alles op<br>zijn eigen<br>vlak.</span><span lang="en">Everything<br>on its own<br>plane.</span></h1>
+      <span class="vh" id="d045-plas-alt"><span lang="nl">Neoplastische compositie van rechthoeken in inkt en goud.</span><span lang="en">Neoplastic composition of rectangles in ink and gold.</span></span>
+      <svg class="plas" viewBox="0 0 900 150" role="img" aria-labelledby="d045-plas-alt">
         <rect x="0" y="0" width="900" height="150" fill="#F4F2EC"/>
         <g class="drift">
           <rect x="0" y="0" width="180" height="150" fill="#D7B364"/>
@@ -305,13 +332,13 @@ a:focus-visible, .rect:focus-visible{ outline:4px solid var(--gold-lo); outline-
     <div class="cell gold a-gd" aria-hidden="true"></div>
 
     <div class="cell a-ld">
-      <p class="lead">Educatie, structuur en de markten van vandaag. Geen beloftes, wel een proces.</p>
-      <p class="lb muted">Nu gratis</p>
+      <p class="lead"><span lang="nl">Educatie, structuur en de markten van vandaag. Geen beloftes, wel een proces.</span><span lang="en">Education, structure and the markets of today. No promises, just a process.</span></p>
+      <p class="lb muted"><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></p>
     </div>
 
     <div class="cell flat a-ct">
       <a class="rect gold" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
-        Kom binnen op Discord<span class="arw" aria-hidden="true">→</span>
+        <span lang="nl">Kom binnen op Discord</span><span lang="en">Come inside on Discord</span><span class="arw" aria-hidden="true">→</span>
       </a>
     </div>
 
@@ -326,51 +353,56 @@ a:focus-visible, .rect:focus-visible{ outline:4px solid var(--gold-lo); outline-
   <!-- ======== COMPOSITION 3 — FOUNDER ======== -->
   <section class="mond c-fnd">
     <div class="cell gold a-yr">
-      <p class="lb">01 — De oprichter</p>
+      <p class="lb">01 — <span lang="nl">De oprichter</span><span lang="en">The founder</span></p>
       <span class="v">10+</span>
-      <p class="lb">jaar actief in trading</p>
+      <p class="lb"><span lang="nl">jaar actief in trading</span><span lang="en">years active in trading</span></p>
     </div>
     <div class="cell a-qt">
-      <h2 class="d2">Wie dit bouwt</h2>
+      <h2 class="d2"><span lang="nl">Wie dit bouwt</span><span lang="en">Who builds this</span></h2>
       <blockquote>
-        Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles
+        <span lang="nl">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles
         meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik
         gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten
         dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community
-        die samen beter wil worden.
+        die samen beter wil worden.</span><span lang="en">I've been involved in trading for over 10 years now, and during that time I've experienced
+        pretty much everything: wins, losses, mistakes, growth, and a lot of lessons. I built Atlas
+        Capital to share that experience, bring traders together, and show how I approach the markets
+        on a daily basis. No get-rich-quick promises, just real setups, education, and a community
+        focused on improving together.</span>
       </blockquote>
-      <p class="lb muted">— De oprichter van Atlas Capital</p>
+      <p class="lb muted">— <span lang="nl">De oprichter van Atlas Capital</span><span lang="en">The founder of Atlas Capital</span></p>
     </div>
     <div class="cell ink a-cc">
-      <p class="lb" style="color:#D7B364;">Ontmoet hem</p>
-      <a class="rect gold sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">In de server<span class="arw" aria-hidden="true">→</span></a>
+      <p class="lb" style="color:#D7B364;"><span lang="nl">Ontmoet hem</span><span lang="en">Meet him</span></p>
+      <a class="rect gold sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">In de server</span><span lang="en">In the server</span><span class="arw" aria-hidden="true">→</span></a>
     </div>
   </section>
 
   <!-- ======== COMPOSITION 4 — THE TEN ======== -->
   <section class="mond c-ten" id="educatie">
     <div class="cell ink t1">
-      <p class="lb" style="color:#D7B364;">02 — Educatie</p>
-      <h2 class="d2">10 onderwerpen</h2>
-      <p class="muted">De leerlijn van Atlas Capital, elk in zijn eigen vlak.</p>
+      <p class="lb" style="color:#D7B364;">02 — <span lang="nl">Educatie</span><span lang="en">Education</span></p>
+      <h2 class="d2"><span lang="nl">10 onderwerpen</span><span lang="en">10 topics</span></h2>
+      <p class="muted"><span lang="nl">De leerlijn van Atlas Capital, elk in zijn eigen vlak.</span><span lang="en">The Atlas Capital curriculum, each in its own plane.</span></p>
     </div>
-    <a class="cell gold t2" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no">01</span><span class="nm">Deviatie</span></a>
+    <a class="cell gold t2" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no">01</span><span class="nm"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span></a>
     <a class="cell t3" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no muted">02</span><span class="nm">SMT</span></a>
     <a class="cell grey t4" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no">03</span><span class="nm">FVG</span></a>
     <a class="cell t5" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no muted">04</span><span class="nm">IFVG</span></a>
     <a class="cell goldhi t6" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no">05</span><span class="nm">Orderblocks</span></a>
     <a class="cell t7" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no muted">06</span><span class="nm">Fibonacci</span></a>
-    <a class="cell goldlo t8" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no">07</span><span class="nm">Sessie-<br>liquiditeit</span></a>
-    <a class="cell t9" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no muted">08</span><span class="nm">Liquiditeit</span></a>
-    <a class="cell gold t10" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no">09</span><span class="nm">Risicobeheer</span></a>
-    <a class="cell t11" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no muted">10</span><span class="nm">Trading-<br>psychologie</span></a>
+    <a class="cell goldlo t8" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no">07</span><span class="nm"><span lang="nl">Sessie-<br>liquiditeit</span><span lang="en">Session<br>liquidity</span></span></a>
+    <a class="cell t9" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no muted">08</span><span class="nm"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span></a>
+    <a class="cell gold t10" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no">09</span><span class="nm"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span></a>
+    <a class="cell t11" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="no muted">10</span><span class="nm"><span lang="nl">Trading-<br>psychologie</span><span lang="en">Trading<br>psychology</span></span></a>
   </section>
 
   <!-- ======== COMPOSITION 5 — MODEL ======== -->
   <section class="mond c-mod">
     <div class="cell flat">
       <div class="svgwrap">
-        <svg viewBox="0 0 920 460" role="img" aria-label="Schematische tekening: liquiditeit boven de markt, een onbalansvlak, en de terugkeer daarnaartoe.">
+        <span class="vh" id="d045-model-alt"><span lang="nl">Schematische tekening: liquiditeit boven de markt, een onbalansvlak, en de terugkeer daarnaartoe.</span><span lang="en">Schematic drawing: liquidity above the market, an imbalance plane, and the return to it.</span></span>
+        <svg viewBox="0 0 920 460" role="img" aria-labelledby="d045-model-alt">
           <rect width="920" height="460" fill="#F4F2EC"/>
 
           <!-- neoplastic rules, not a chart grid -->
@@ -431,34 +463,34 @@ a:focus-visible, .rect:focus-visible{ outline:4px solid var(--gold-lo); outline-
 
           <!-- labels, flush left in their own cells -->
           <g font-family="Archivo, Arial, sans-serif" font-weight="800" font-size="15" fill="#08090B" letter-spacing="3">
-            <text x="16" y="42">LIQUIDITEIT</text>
-            <text x="16" y="66">BOVEN DE MARKT</text>
-            <text x="372" y="200">ONBALANS</text>
-            <text x="669" y="392">VOORTZETTING</text>
-            <text x="300" y="440">GREEP</text>
+            <text x="16" y="42" lang="nl">LIQUIDITEIT</text><text x="16" y="42" lang="en">LIQUIDITY</text>
+            <text x="16" y="66" lang="nl">BOVEN DE MARKT</text><text x="16" y="66" lang="en">ABOVE THE MARKET</text>
+            <text x="372" y="200" lang="nl">ONBALANS</text><text x="372" y="200" lang="en">IMBALANCE</text>
+            <text x="669" y="392" lang="nl">VOORTZETTING</text><text x="669" y="392" lang="en">CONTINUATION</text>
+            <text x="300" y="440" lang="nl">GREEP</text><text x="300" y="440" lang="en">GRAB</text>
           </g>
         </svg>
       </div>
     </div>
     <div class="cell ink">
-      <p class="lb" style="color:#D7B364;">03 — Het model</p>
-      <h2 class="d3">Schematisch, niet historisch</h2>
+      <p class="lb" style="color:#D7B364;">03 — <span lang="nl">Het model</span><span lang="en">The model</span></p>
+      <h2 class="d3"><span lang="nl">Schematisch, niet historisch</span><span lang="en">Schematic, not historical</span></h2>
       <div class="keys">
         <div>
-          <h4>Het vlak</h4>
-          <p class="muted">Een onbalans is een gebied, geen streepje.</p>
+          <h4><span lang="nl">Het vlak</span><span lang="en">The plane</span></h4>
+          <p class="muted"><span lang="nl">Een onbalans is een gebied, geen streepje.</span><span lang="en">An imbalance is an area, not a line.</span></p>
         </div>
         <div>
-          <h4>Het vierkant</h4>
-          <p class="muted">Terug in dat gebied begint het lezen.</p>
+          <h4><span lang="nl">Het vierkant</span><span lang="en">The square</span></h4>
+          <p class="muted"><span lang="nl">Terug in dat gebied begint het lezen.</span><span lang="en">Back in that area the reading starts.</span></p>
         </div>
         <div>
-          <h4>De trap</h4>
-          <p class="muted">Wat erna komt is uitvoering. Of niets doen.</p>
+          <h4><span lang="nl">De trap</span><span lang="en">The stair</span></h4>
+          <p class="muted"><span lang="nl">Wat erna komt is uitvoering. Of niets doen.</span><span lang="en">What comes after is execution. Or doing nothing.</span></p>
         </div>
       </div>
       <p style="margin-top:auto;">
-        <a class="rect gold sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Zie het live<span class="arw" aria-hidden="true">→</span></a>
+        <a class="rect gold sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Zie het live</span><span lang="en">See it live</span><span class="arw" aria-hidden="true">→</span></a>
       </p>
     </div>
   </section>
@@ -466,9 +498,9 @@ a:focus-visible, .rect:focus-visible{ outline:4px solid var(--gold-lo); outline-
   <!-- ======== COMPOSITION 6 — CHANNELS ======== -->
   <section class="mond c-chan">
     <div class="cell a-fr">
-      <p class="lb muted">04 — De server</p>
-      <h2 class="d2">Thuis</h2>
-      <p class="lb" style="color:var(--gold-lo);">Nu gratis</p>
+      <p class="lb muted">04 — <span lang="nl">De server</span><span lang="en">The server</span></p>
+      <h2 class="d2"><span lang="nl">Thuis</span><span lang="en">Home</span></h2>
+      <p class="lb" style="color:var(--gold-lo);"><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></p>
       <ul class="chips">
         <li>#nq-chart-ideeën</li><li>#es-chart-ideeën</li><li>#bitcoin</li><li>#altcoins</li>
         <li>#markt</li><li>#vragen</li><li>#algemeen</li><li>#atlas-op-socials</li><li>#ondersteuning</li>
@@ -476,20 +508,20 @@ a:focus-visible, .rect:focus-visible{ outline:4px solid var(--gold-lo); outline-
     </div>
     <div class="cell ink a-pr">
       <p class="lb" style="color:#D7B364;">Premium</p>
-      <h3 class="d3">Opent later</h3>
+      <h3 class="d3"><span lang="nl">Opent later</span><span lang="en">Opens later</span></h3>
       <ul class="chips">
         <li>#trade-setups</li><li>#marktupdates</li><li>#indicatoren</li>
         <li>#sessie-opnames</li><li>#chart-ideeën</li><li>#premium-chat</li>
       </ul>
-      <p class="muted" style="margin-top:auto;">Prijs en datum worden in de server aangekondigd.</p>
+      <p class="muted" style="margin-top:auto;"><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">Price and date are announced in the server.</span></p>
     </div>
     <div class="cell gold a-gd">
       <p class="lb">15</p>
-      <p class="d3">kanalen</p>
+      <p class="d3"><span lang="nl">kanalen</span><span lang="en">channels</span></p>
     </div>
     <div class="cell flat a-ct">
       <a class="rect" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
-        Open de kanalen<span class="arw" aria-hidden="true">→</span>
+        <span lang="nl">Open de kanalen</span><span lang="en">Open the channels</span><span class="arw" aria-hidden="true">→</span>
       </a>
     </div>
   </section>
@@ -498,34 +530,34 @@ a:focus-visible, .rect:focus-visible{ outline:4px solid var(--gold-lo); outline-
   <section class="mond c-live">
     <div class="cell gold a-lv">
       <p class="blip"><i aria-hidden="true"></i> Live</p>
-      <h2 class="d2">Hij handelt mee<br>terwijl je kijkt.</h2>
-      <p class="lead">Tijden worden in de server aangekondigd. Kom binnen, kijk mee, stel je vraag.</p>
-      <a class="rect sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener" style="align-self:flex-start;">Zit erbij<span class="arw" aria-hidden="true">→</span></a>
+      <h2 class="d2"><span lang="nl">Hij handelt mee<br>terwijl je kijkt.</span><span lang="en">He trades along<br>while you watch.</span></h2>
+      <p class="lead"><span lang="nl">Tijden worden in de server aangekondigd. Kom binnen, kijk mee, stel je vraag.</span><span lang="en">Times are announced in the server. Come in, watch along, ask your question.</span></p>
+      <a class="rect sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener" style="align-self:flex-start;"><span lang="nl">Zit erbij</span><span lang="en">Sit in</span><span class="arw" aria-hidden="true">→</span></a>
     </div>
     <div class="cell a-nw">
-      <p class="lb muted">05 — Nu</p>
-      <h3 class="d3">Gratis</h3>
-      <p class="muted">De hele Thuis-kant staat open.</p>
-      <a class="rect sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener" style="align-self:flex-start;margin-top:auto;">Binnenlopen<span class="arw" aria-hidden="true">→</span></a>
+      <p class="lb muted">05 — <span lang="nl">Nu</span><span lang="en">Now</span></p>
+      <h3 class="d3"><span lang="nl">Gratis</span><span lang="en">Free</span></h3>
+      <p class="muted"><span lang="nl">De hele Thuis-kant staat open.</span><span lang="en">The whole Home side is open.</span></p>
+      <a class="rect sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener" style="align-self:flex-start;margin-top:auto;"><span lang="nl">Binnenlopen</span><span lang="en">Walk in</span><span class="arw" aria-hidden="true">→</span></a>
     </div>
     <div class="cell grey a-lt">
-      <p class="lb">06 — Later</p>
+      <p class="lb">06 — <span lang="nl">Later</span><span lang="en">Later</span></p>
       <h3 class="d3">Premium</h3>
-      <p>Opent later. Prijs en datum volgen in de server, nergens anders.</p>
+      <p><span lang="nl">Opent later. Prijs en datum volgen in de server, nergens anders.</span><span lang="en">Opens later. Price and date follow in the server, nowhere else.</span></p>
     </div>
   </section>
 
   <!-- ======== COMPOSITION 8 — CLOSING ======== -->
   <section class="mond c-close">
     <div class="cell ink a-cl">
-      <p class="lb" style="color:#D7B364;">07 — Kom binnen</p>
-      <h2 class="d1">Het vlak<br>is open.</h2>
-      <p class="muted lead">Gratis, Nederlands, elke dag markt. NQ, ES, Bitcoin en altcoins.</p>
+      <p class="lb" style="color:#D7B364;">07 — <span lang="nl">Kom binnen</span><span lang="en">Come inside</span></p>
+      <h2 class="d1"><span lang="nl">Het vlak<br>is open.</span><span lang="en">The plane<br>is open.</span></h2>
+      <p class="muted lead"><span lang="nl">Gratis, Nederlands, elke dag markt. NQ, ES, Bitcoin en altcoins.</span><span lang="en">Free, Dutch, market every day. NQ, ES, Bitcoin and altcoins.</span></p>
     </div>
     <div class="cell gold a-gd" aria-hidden="true"></div>
     <div class="cell flat a-bt">
       <a class="rect gold" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
-        Naar de Discord
+        <span lang="nl">Naar de Discord</span><span lang="en">To the Discord</span>
         <span class="arw" aria-hidden="true">→</span>
       </a>
     </div>
@@ -540,7 +572,7 @@ a:focus-visible, .rect:focus-visible{ outline:4px solid var(--gold-lo); outline-
         <rect x="0" y="33" width="48" height="15" fill="#08090B"/>
       </svg>
       <p class="lb">Atlas Capital</p>
-      <p class="muted">Proces. Discipline. Uitvoering.</p>
+      <p class="muted"><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></p>
     </div>
     <div class="cell ink">
       <p class="lb" style="color:#D7B364;">Community</p>
@@ -550,7 +582,7 @@ a:focus-visible, .rect:focus-visible{ outline:4px solid var(--gold-lo); outline-
       </div>
     </div>
     <div class="cell">
-      <p class="lb muted">Markten</p>
+      <p class="lb muted"><span lang="nl">Markten</span><span lang="en">Markets</span></p>
       <div class="flist">
         <span>NQ · ES</span>
         <span>Bitcoin · altcoins</span>
@@ -561,12 +593,33 @@ a:focus-visible, .rect:focus-visible{ outline:4px solid var(--gold-lo); outline-
 
   <div class="mond">
     <div class="cell">
-      <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+      <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
       <p class="sig">045 — De Stijl</p>
     </div>
   </div>
 
 </div>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,6 +50,23 @@ body{
 a{color:inherit;text-decoration:none}
 p{margin:0}
 ul{margin:0;padding:0;list-style:none}
+
+/* ---- language ----------------------------------------------------------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.langsw{display:inline-flex;border:1px solid var(--gold-lo)}
+.langsw button{
+  appearance:none;-webkit-appearance:none;
+  background:transparent;border:0;margin:0;cursor:pointer;
+  font-family:var(--mono);font-size:11px;line-height:1.5;
+  letter-spacing:.2em;text-transform:uppercase;
+  padding:10px 7px 10px 11px;color:var(--muted);
+  transition:background .16s ease,color .16s ease;
+}
+.langsw button + button{border-left:1px solid var(--gold-lo)}
+.langsw button:hover{color:var(--gold)}
+.langsw button[aria-pressed="true"]{background:var(--gold);color:var(--ink)}
 
 /* ---- the two rivers ----------------------------------------------------- */
 .band{width:100%}
@@ -152,6 +169,7 @@ ul{margin:0;padding:0;list-style:none}
 .mark .sq{width:13px;height:13px;background:linear-gradient(135deg,var(--gold-hi),var(--gold-lo))}
 .mark b{font-weight:800;letter-spacing:-.01em;font-size:15px}
 .head .btn{padding:10px 18px;font-size:11px}
+.head .R .mark{margin-right:auto}
 
 /* ---- the jump list (10 onderwerpen, huge, alternating edge) ------------- */
 .jump li{
@@ -195,10 +213,14 @@ ul{margin:0;padding:0;list-style:none}
 <!-- ================= HEADER BAND ================= -->
 <div class="band ink head">
   <div class="river">
-    <div class="L"><b>Atlas Capital</b><u>NL</u></div>
+    <div class="L"><b>Atlas Capital</b><u><span lang="nl">NL</span><span lang="en">EN</span></u></div>
     <div class="R">
       <div class="mark"><span class="sq" aria-hidden="true"></span><b>Atlas Capital</b></div>
-      <a class="btn" href="https://discord.gg/78Ff2GuSfW">Open Discord</a>
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open Discord</span><span lang="en">Open Discord</span></a>
+      <div class="langsw" role="group" aria-label="Taal / Language">
+        <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
     </div>
   </div>
 </div>
@@ -208,13 +230,13 @@ ul{margin:0;padding:0;list-style:none}
   <div class="river">
     <div class="L">
       <div class="set">
-        <b>01 — Introductie</b>
+        <b><span lang="nl">01 — Introductie</span><span lang="en">01 — Introduction</span></b>
         <u>Atlas Capital</u><br>
-        Nederlandse trading-community
+        <span lang="nl">Nederlandse trading-community</span><span lang="en">Dutch trading community</span>
       </div>
       <div class="rule"></div>
       <div class="set">
-        <b>Markten</b>
+        <b><span lang="nl">Markten</span><span lang="en">Markets</span></b>
         <ul>
           <li class="k"><span>NQ</span><span>Nasdaq futures</span></li>
           <li class="k"><span>ES</span><span>S&amp;P futures</span></li>
@@ -224,20 +246,20 @@ ul{margin:0;padding:0;list-style:none}
       </div>
       <div class="rule"></div>
       <div class="set">
-        <b>Kern</b>
-        <u>Proces.</u><br><u>Discipline.</u><br><u>Uitvoering.</u>
+        <b><span lang="nl">Kern</span><span lang="en">Core</span></b>
+        <u><span lang="nl">Proces.</span><span lang="en">Process.</span></u><br><u><span lang="nl">Discipline.</span><span lang="en">Discipline.</span></u><br><u><span lang="nl">Uitvoering.</span><span lang="en">Execution.</span></u>
       </div>
       <div class="rule"></div>
       <div class="set">
-        <b>Toegang</b>
-        Nu gratis. Premium opent later; prijs en datum in de server.
+        <b><span lang="nl">Toegang</span><span lang="en">Access</span></b>
+        <span lang="nl">Nu gratis. Premium opent later; prijs en datum in de server.</span><span lang="en">Free right now. Premium opens later; price and date in the server.</span>
       </div>
     </div>
     <div class="R">
-      <p class="seamnote gold">Educatie · Markt · Live</p>
-      <h1 class="giant m20">Leer de<br>markt<br><span class="gold">lezen.</span></h1>
-      <p class="say m32 mut">Tien onderwerpen, vijftien kanalen, één Discord. Geen ruis.</p>
-      <p class="m48"><a class="btn big-b" href="https://discord.gg/78Ff2GuSfW">Word lid via Discord</a></p>
+      <p class="seamnote gold"><span lang="nl">Educatie · Markt · Live</span><span lang="en">Education · Market · Live</span></p>
+      <h1 class="giant m20"><span lang="nl">Leer de<br>markt<br><span class="gold">lezen.</span></span><span lang="en">Learn to<br>read the<br><span class="gold">market.</span></span></h1>
+      <p class="say m32 mut"><span lang="nl">Tien onderwerpen, vijftien kanalen, één Discord. Geen ruis.</span><span lang="en">Ten topics, fifteen channels, one Discord. No noise.</span></p>
+      <p class="m48"><a class="btn big-b" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid via Discord</span><span lang="en">Join on Discord</span></a></p>
     </div>
   </div>
 </div>
@@ -247,26 +269,26 @@ ul{margin:0;padding:0;list-style:none}
   <div class="river">
     <div class="L">
       <div class="set">
-        <b>02 — De oprichter</b>
-        <u>10+ jaar in de markten</u>
+        <b><span lang="nl">02 — De oprichter</span><span lang="en">02 — The founder</span></b>
+        <u><span lang="nl">10+ jaar in de markten</span><span lang="en">10+ years in the markets</span></u>
       </div>
       <div class="rule"></div>
       <div class="set">
-        winst<br>verlies<br>fouten<br>groei<br>lessen
+        <span lang="nl">winst<br>verlies<br>fouten<br>groei<br>lessen</span><span lang="en">wins<br>losses<br>mistakes<br>growth<br>lessons</span>
       </div>
       <div class="rule"></div>
       <div class="set">
-        <b>In zijn eigen woorden</b>
-        Geen snelle-rijk-verhalen.
+        <b><span lang="nl">In zijn eigen woorden</span><span lang="en">In his own words</span></b>
+        <span lang="nl">Geen snelle-rijk-verhalen.</span><span lang="en">No get-rich-quick promises.</span>
       </div>
     </div>
     <div class="R">
-      <p class="seamnote golddk">02 — De oprichter</p>
+      <p class="seamnote golddk"><span lang="nl">02 — De oprichter</span><span lang="en">02 — The founder</span></p>
       <p class="giant m20 golddk">10+</p>
-      <p class="mid m12">jaar actief in trading</p>
-      <p class="say m32">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</p>
-      <p class="say m20">Atlas Capital heb ik gebouwd om die ervaring te delen en te laten zien hoe ik de markten dagelijks benader.</p>
-      <p class="m32"><a class="btn out" href="https://discord.gg/78Ff2GuSfW">Volg de aanpak</a></p>
+      <p class="mid m12"><span lang="nl">jaar actief in trading</span><span lang="en">years in trading</span></p>
+      <p class="say m32"><span lang="nl">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</span><span lang="en">I've been involved in trading for over 10 years now, and during that time I've experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons.</span></p>
+      <p class="say m20"><span lang="nl">Atlas Capital heb ik gebouwd om die ervaring te delen en te laten zien hoe ik de markten dagelijks benader.</span><span lang="en">I built Atlas Capital to share that experience and show how I approach the markets on a daily basis.</span></p>
+      <p class="m32"><a class="btn out" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Volg de aanpak</span><span lang="en">Follow the approach</span></a></p>
     </div>
   </div>
 </div>
@@ -276,44 +298,44 @@ ul{margin:0;padding:0;list-style:none}
   <div class="river">
     <div class="L">
       <div class="set">
-        <b>03 — Educatie</b>
-        <u>10 onderwerpen</u>
+        <b><span lang="nl">03 — Educatie</span><span lang="en">03 — Education</span></b>
+        <u><span lang="nl">10 onderwerpen</span><span lang="en">10 topics</span></u>
       </div>
       <div class="rule"></div>
       <div class="set">
         <ul>
-          <li class="k"><span>01</span><span>deviatie</span></li>
+          <li class="k"><span>01</span><span><span lang="nl">deviatie</span><span lang="en">deviation</span></span></li>
           <li class="k"><span>02</span><span>SMT</span></li>
           <li class="k"><span>03</span><span>FVG</span></li>
           <li class="k"><span>04</span><span>IFVG</span></li>
           <li class="k"><span>05</span><span>orderblocks</span></li>
           <li class="k"><span>06</span><span>fibonacci</span></li>
-          <li class="k"><span>07</span><span>sessie-liq.</span></li>
-          <li class="k"><span>08</span><span>liquiditeit</span></li>
-          <li class="k"><span>09</span><span>risicobeheer</span></li>
-          <li class="k"><span>10</span><span>psychologie</span></li>
+          <li class="k"><span>07</span><span><span lang="nl">sessie-liq.</span><span lang="en">session liq.</span></span></li>
+          <li class="k"><span>08</span><span><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></span></li>
+          <li class="k"><span>09</span><span><span lang="nl">risicobeheer</span><span lang="en">risk management</span></span></li>
+          <li class="k"><span>10</span><span><span lang="nl">psychologie</span><span lang="en">psychology</span></span></li>
         </ul>
       </div>
       <div class="rule"></div>
       <div class="set">
-        Dezelfde tien, twee gewichten.
+        <span lang="nl">Dezelfde tien, twee gewichten.</span><span lang="en">The same ten, at two weights.</span>
       </div>
     </div>
     <div class="R">
-      <p class="seamnote gold">03 — Educatie</p>
+      <p class="seamnote gold"><span lang="nl">03 — Educatie</span><span lang="en">03 — Education</span></p>
       <ul class="jump m20">
-        <li>deviatie</li>
+        <li><span lang="nl">deviatie</span><span lang="en">deviation</span></li>
         <li>SMT</li>
         <li>FVG</li>
         <li>IFVG</li>
         <li>orderblocks</li>
         <li>fibonacci</li>
-        <li>sessie-liquiditeit</li>
-        <li>liquiditeit</li>
-        <li>risicobeheer</li>
-        <li>tradingpsychologie</li>
+        <li><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></li>
+        <li><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></li>
+        <li><span lang="nl">risicobeheer</span><span lang="en">risk management</span></li>
+        <li><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></li>
       </ul>
-      <p class="m48"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Begin bij deviatie</a></p>
+      <p class="m48"><a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Begin bij deviatie</span><span lang="en">Start at deviation</span></a></p>
     </div>
   </div>
 </div>
@@ -323,27 +345,28 @@ ul{margin:0;padding:0;list-style:none}
   <div class="river">
     <div class="L">
       <div class="set">
-        <b>04 — Het model</b>
-        <u>SMT</u><br>schematisch
+        <b><span lang="nl">04 — Het model</span><span lang="en">04 — The model</span></b>
+        <u>SMT</u><br><span lang="nl">schematisch</span><span lang="en">schematic</span>
       </div>
       <div class="rule"></div>
       <div class="set">
-        <b>Legenda</b>
+        <b><span lang="nl">Legenda</span><span lang="en">Legend</span></b>
         <ul>
-          <li class="k"><span>NQ</span><span>hogere top</span></li>
-          <li class="k"><span>ES</span><span>lagere top</span></li>
+          <li class="k"><span>NQ</span><span><span lang="nl">hogere top</span><span lang="en">higher high</span></span></li>
+          <li class="k"><span>ES</span><span><span lang="nl">lagere top</span><span lang="en">lower high</span></span></li>
         </ul>
       </div>
       <div class="rule"></div>
       <div class="set">
-        Geen niveaus, geen datums, geen uitkomst. Alleen de vorm.
+        <span lang="nl">Geen niveaus, geen datums, geen uitkomst. Alleen de vorm.</span><span lang="en">No levels, no dates, no outcome. Only the shape.</span>
       </div>
     </div>
     <div class="R">
-      <p class="seamnote golddk">04 — Het model</p>
-      <h2 class="big m20">Twee markten,<br>één verhaal.</h2>
+      <p class="seamnote golddk"><span lang="nl">04 — Het model</span><span lang="en">04 — The model</span></p>
+      <h2 class="big m20"><span lang="nl">Twee markten,<br>één verhaal.</span><span lang="en">Two markets,<br>one story.</span></h2>
       <div class="scroller m32">
-        <svg viewBox="0 0 880 400" role="img" aria-label="Schematische weergave van SMT: de ene index maakt een hogere top terwijl de andere een lagere top maakt">
+        <span class="vh" id="d010-fig"><span lang="nl">Schematische weergave van SMT: de ene index maakt een hogere top terwijl de andere een lagere top maakt</span><span lang="en">Schematic view of SMT: one index makes a higher high while the other makes a lower high</span></span>
+        <svg viewBox="0 0 880 400" role="img" aria-labelledby="d010-fig">
           <g stroke="#08090B" stroke-width="1" opacity=".12">
             <path d="M0 70H880M0 140H880M0 210H880M0 280H880M0 350H880"/>
           </g>
@@ -375,13 +398,13 @@ ul{margin:0;padding:0;list-style:none}
           </g>
           <g font-family="Sora,Helvetica,Arial,sans-serif" font-size="13" font-weight="600"
              letter-spacing="2.4" fill="#08090B">
-            <text x="566" y="27">DIVERGENTIE</text>
+            <text x="566" y="27" lang="nl">DIVERGENTIE</text><text x="566" y="27" lang="en">DIVERGENCE</text>
             <text x="828" y="180">NQ</text>
             <text x="828" y="340">ES</text>
           </g>
         </svg>
       </div>
-      <p class="say m20 grey">De ene maakt een nieuwe top, de andere niet. Dat verschil is het signaal om beter te kijken.</p>
+      <p class="say m20 grey"><span lang="nl">De ene maakt een nieuwe top, de andere niet. Dat verschil is het signaal om beter te kijken.</span><span lang="en">One makes a new high, the other does not. That difference is the signal to look closer.</span></p>
     </div>
   </div>
 </div>
@@ -391,12 +414,12 @@ ul{margin:0;padding:0;list-style:none}
   <div class="river">
     <div class="L">
       <div class="set">
-        <b>05 — De server</b>
-        <u>15 kanalen</u>
+        <b><span lang="nl">05 — De server</span><span lang="en">05 — The server</span></b>
+        <u><span lang="nl">15 kanalen</span><span lang="en">15 channels</span></u>
       </div>
       <div class="rule"></div>
       <div class="set">
-        <b>Thuis — nu gratis</b>
+        <b><span lang="nl">Thuis — nu gratis</span><span lang="en">Home — free right now</span></b>
         <ul>
           <li>#nq-chart-ideeën</li>
           <li>#es-chart-ideeën</li>
@@ -411,7 +434,7 @@ ul{margin:0;padding:0;list-style:none}
       </div>
       <div class="rule"></div>
       <div class="set">
-        <b>Premium — opent later</b>
+        <b><span lang="nl">Premium — opent later</span><span lang="en">Premium — opens later</span></b>
         <ul>
           <li>#trade-setups</li>
           <li>#marktupdates</li>
@@ -423,13 +446,13 @@ ul{margin:0;padding:0;list-style:none}
       </div>
     </div>
     <div class="R">
-      <p class="seamnote gold">05 — De server</p>
-      <h2 class="giant m20"><span class="gold">15</span><br>kanalen.</h2>
+      <p class="seamnote gold"><span lang="nl">05 — De server</span><span lang="en">05 — The server</span></p>
+      <h2 class="giant m20"><span class="gold">15</span><br><span lang="nl">kanalen.</span><span lang="en">channels.</span></h2>
       <ul class="stack-lines m32">
-        <li>Thuis — nu gratis</li>
-        <li class="mut">Premium — opent later</li>
+        <li><span lang="nl">Thuis — nu gratis</span><span lang="en">Home — free right now</span></li>
+        <li class="mut"><span lang="nl">Premium — opent later</span><span lang="en">Premium — opens later</span></li>
       </ul>
-      <p class="m32"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Open de server</a></p>
+      <p class="m32"><a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de server</span><span lang="en">Open the server</span></a></p>
     </div>
   </div>
 </div>
@@ -439,30 +462,30 @@ ul{margin:0;padding:0;list-style:none}
   <div class="river">
     <div class="L">
       <div class="set">
-        <b>06 — Live</b>
-        De oprichter handelt live mee in Discord. Tijden worden daar aangekondigd.
+        <b><span lang="nl">06 — Live</span><span lang="en">06 — Live</span></b>
+        <span lang="nl">De oprichter handelt live mee in Discord. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in Discord. Times are announced there.</span>
       </div>
       <div class="rule"></div>
       <div class="set">
-        <b>07 — Toegang</b>
-        <u>Nu — gratis</u><br>
-        Alle thuis-kanalen, de educatie en de dagelijkse marktbespreking.
+        <b><span lang="nl">07 — Toegang</span><span lang="en">07 — Access</span></b>
+        <u><span lang="nl">Nu — gratis</span><span lang="en">Now — free</span></u><br>
+        <span lang="nl">Alle thuis-kanalen, de educatie en de dagelijkse marktbespreking.</span><span lang="en">All the home channels, the education and the daily market breakdown.</span>
       </div>
       <div class="rule"></div>
       <div class="set">
-        <u>Later — premium</u><br>
-        Zes extra kanalen. Prijs en datum in de server.
+        <u><span lang="nl">Later — premium</span><span lang="en">Later — premium</span></u><br>
+        <span lang="nl">Zes extra kanalen. Prijs en datum in de server.</span><span lang="en">Six more channels. Price and date in the server.</span>
       </div>
     </div>
     <div class="R">
-      <p class="seamnote golddk">06 — Live</p>
-      <h2 class="giant m20">Live<br>mee-<br>kijken.</h2>
+      <p class="seamnote golddk"><span lang="nl">06 — Live</span><span lang="en">06 — Live</span></p>
+      <h2 class="giant m20"><span lang="nl">Live<br>mee-<br>kijken.</span><span lang="en">Watch<br>it<br>live.</span></h2>
       <ul class="stack-lines m32">
-        <li>Nu — gratis</li>
-        <li class="grey">Later — premium</li>
+        <li><span lang="nl">Nu — gratis</span><span lang="en">Now — free</span></li>
+        <li class="grey"><span lang="nl">Later — premium</span><span lang="en">Later — premium</span></li>
       </ul>
-      <p class="say m20 grey">De oprichter handelt live mee in de server. Tijden worden daar aangekondigd.</p>
-      <p class="m32"><a class="btn out" href="https://discord.gg/78Ff2GuSfW">Zit erbij</a></p>
+      <p class="say m20 grey"><span lang="nl">De oprichter handelt live mee in de server. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced there.</span></p>
+      <p class="m32"><a class="btn out" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Zit erbij</span><span lang="en">Sit in</span></a></p>
     </div>
   </div>
 </div>
@@ -472,35 +495,56 @@ ul{margin:0;padding:0;list-style:none}
   <div class="river">
     <div class="L">
       <div class="set">
-        <b>08 — Word lid</b>
-        <u>Gratis toegang</u>
+        <b><span lang="nl">08 — Word lid</span><span lang="en">08 — Join</span></b>
+        <u><span lang="nl">Gratis toegang</span><span lang="en">Free access</span></u>
       </div>
       <div class="rule"></div>
       <div class="set">
-        <b>Links</b>
+        <b><span lang="nl">Links</span><span lang="en">Links</span></b>
         <a href="https://discord.gg/78Ff2GuSfW">Discord</a><br>
         <a href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
       </div>
       <div class="rule"></div>
       <div class="set">
-        Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.
+        <span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span>
       </div>
     </div>
     <div class="R">
-      <p class="seamnote gold">08 — Word lid</p>
-      <h2 class="giant m20">Proces.<br>Discipline.<br><span class="gold">Uitvoering.</span></h2>
-      <p class="m48"><a class="btn big-b" href="https://discord.gg/78Ff2GuSfW">Open Discord</a></p>
+      <p class="seamnote gold"><span lang="nl">08 — Word lid</span><span lang="en">08 — Join</span></p>
+      <h2 class="giant m20"><span lang="nl">Proces.<br>Discipline.<br><span class="gold">Uitvoering.</span></span><span lang="en">Process.<br>Discipline.<br><span class="gold">Execution.</span></span></h2>
+      <p class="m48"><a class="btn big-b" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open Discord</span><span lang="en">Open Discord</span></a></p>
       <div class="m72">
         <div class="mark"><span class="sq" aria-hidden="true"></span><b>Atlas Capital</b></div>
         <p class="seamnote mut m20">
           <a href="https://discord.gg/78Ff2GuSfW">Discord</a> &nbsp;·&nbsp;
           <a href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
         </p>
-        <p class="say m20 mut" style="font-size:12.5px;line-height:1.65">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+        <p class="say m20 mut" style="font-size:12.5px;line-height:1.65"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

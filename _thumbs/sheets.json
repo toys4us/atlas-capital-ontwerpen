@@ -1,24 +1,24 @@
 {
  "cols": 5,
  "rows": 5,
- "tw": 200,
- "th": 257,
+ "tw": 400,
+ "th": 514,
  "sheets": [
   {
    "file": "sheet0.webp",
-   "bytes": 67508
+   "bytes": 247428
   },
   {
    "file": "sheet1.webp",
-   "bytes": 72234
+   "bytes": 269270
   },
   {
    "file": "sheet2.webp",
-   "bytes": 57644
+   "bytes": 218736
   },
   {
    "file": "sheet3.webp",
-   "bytes": 60754
+   "bytes": 224222
   }
  ]
 }

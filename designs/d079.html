@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -244,6 +244,21 @@ footer{border-top:1px solid var(--line);padding:clamp(28px,4vw,54px) 0 46px;back
 .fg a.l:hover{color:var(--gold)}
 .risk{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);
   font-family:var(--mono);font-size:10.5px;line-height:1.8;color:var(--muted-2);max-width:74ch}
+
+/* ---------- taal / language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.vh{position:absolute;width:1px;height:1px;margin:0;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.langsw{display:inline-flex;flex:0 0 auto;border:1px solid var(--line-2)}
+.langsw button{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  line-height:1;padding:9px 8px;border:0;background:transparent;color:var(--muted-2);
+  cursor:pointer;transition:.16s ease;
+}
+.langsw button+button{border-left:1px solid var(--line-2)}
+.langsw button:hover{color:var(--gold)}
+.langsw button[aria-pressed="true"]{background:var(--gold);color:var(--ink)}
 </style>
 </head>
 <body>
@@ -262,22 +277,27 @@ footer{border-top:1px solid var(--line);padding:clamp(28px,4vw,54px) 0 46px;back
       <span><b>ATLAS CAPITAL</b><i>Register</i></span>
     </a>
     <a class="btn sm" style="margin-left:auto" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord</a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
 <!-- ══════════════ HERO ══════════════ -->
 <section class="hero">
   <div class="frame rail">
-    <p class="lbl g no">01 — Regel nul</p>
-    <h1>Eén <em>register.</em><br>Alles staat erin.</h1>
-    <p class="lede">Geen brochure, geen beloftes. Elke regel van wat we doen, geteld en benoemd.</p>
+    <p class="lbl g no"><span lang="nl">01 — Regel nul</span><span lang="en">01 — Line zero</span></p>
+    <h1><span lang="nl">Eén <em>register.</em><br>Alles staat erin.</span><span lang="en">One <em>register.</em><br>Everything is in it.</span></h1>
+    <p class="lede"><span lang="nl">Geen brochure, geen beloftes. Elke regel van wat we doen, geteld en benoemd.</span><span lang="en">No brochure, no promises. Every line of what we do, counted and named.</span></p>
     <div class="cta">
-      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Open de server</a>
-      <a class="btn ghost" href="#register">Naar het register</a>
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Open de server</span><span lang="en">Open the server</span></a>
+      <a class="btn ghost" href="#register"><span lang="nl">Naar het register</span><span lang="en">To the register</span></a>
     </div>
 
     <div class="gauge">
-      <svg viewBox="0 0 1000 84" preserveAspectRatio="none" role="img" aria-label="Meetlat met fijne verdelingen, waarvan enkele markeringen in goud zijn uitgelicht">
+      <span class="vh" id="fig79a"><span lang="nl">Meetlat met fijne verdelingen, waarvan enkele markeringen in goud zijn uitgelicht</span><span lang="en">A measuring rule with fine divisions, a few of its marks picked out in gold</span></span>
+      <svg viewBox="0 0 1000 84" preserveAspectRatio="none" role="img" aria-labelledby="fig79a">
         <line x1="0" y1="70" x2="1000" y2="70" stroke="#33363E" stroke-width="1"/>
         <g stroke="#33363E" stroke-width="1">
           <line x1="20" y1="70" x2="20" y2="56"/><line x1="40" y1="70" x2="40" y2="62"/>
@@ -321,8 +341,8 @@ footer{border-top:1px solid var(--line);padding:clamp(28px,4vw,54px) 0 46px;back
         </g>
       </svg>
       <div class="cap">
-        <span class="lbl">Tien merken · tien onderwerpen</span>
-        <span class="lbl">Vijftien kanalen</span>
+        <span class="lbl"><span lang="nl">Tien merken · tien onderwerpen</span><span lang="en">Ten marks · ten topics</span></span>
+        <span class="lbl"><span lang="nl">Vijftien kanalen</span><span lang="en">Fifteen channels</span></span>
       </div>
     </div>
   </div>
@@ -333,71 +353,71 @@ footer{border-top:1px solid var(--line);padding:clamp(28px,4vw,54px) 0 46px;back
   <div class="frame rail">
     <div class="reghead">
       <h2>Register</h2>
-      <span class="lbl rt">02 — Volledige opgave</span>
+      <span class="lbl rt"><span lang="nl">02 — Volledige opgave</span><span lang="en">02 — Full listing</span></span>
     </div>
 
     <div class="scroller">
       <table class="reg">
         <thead>
           <tr>
-            <th style="width:62px">Regel</th>
-            <th>Omschrijving</th>
-            <th>Soort</th>
-            <th>Markt</th>
-            <th>Kanaal</th>
-            <th>Toegang</th>
+            <th style="width:62px"><span lang="nl">Regel</span><span lang="en">Line</span></th>
+            <th><span lang="nl">Omschrijving</span><span lang="en">Description</span></th>
+            <th><span lang="nl">Soort</span><span lang="en">Type</span></th>
+            <th><span lang="nl">Markt</span><span lang="en">Market</span></th>
+            <th><span lang="nl">Kanaal</span><span lang="en">Channel</span></th>
+            <th><span lang="nl">Toegang</span><span lang="en">Access</span></th>
           </tr>
         </thead>
 
         <tbody>
-          <tr class="group"><td colspan="6"><span class="gt">I · Onderwerpen</span><span class="gn">10 regels</span></td></tr>
-          <tr><td class="c1">001</td><td class="c2">deviatie</td><td class="c3">structuur</td><td class="c4">NQ · ES</td><td class="c5">#nq-chart-ideeën</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
-          <tr><td class="c1">002</td><td class="c2">SMT</td><td class="c3">correlatie</td><td class="c4">NQ · ES</td><td class="c5">#es-chart-ideeën</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
-          <tr><td class="c1">003</td><td class="c2">FVG</td><td class="c3">inefficiëntie</td><td class="c4">Alle</td><td class="c5">#markt</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
-          <tr><td class="c1">004</td><td class="c2">IFVG</td><td class="c3">inefficiëntie</td><td class="c4">Alle</td><td class="c5">#markt</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
-          <tr><td class="c1">005</td><td class="c2">orderblocks</td><td class="c3">structuur</td><td class="c4">NQ</td><td class="c5">#nq-chart-ideeën</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
-          <tr><td class="c1">006</td><td class="c2">fibonacci</td><td class="c3">meting</td><td class="c4">BTC</td><td class="c5">#bitcoin</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
-          <tr><td class="c1">007</td><td class="c2">sessie-liquiditeit</td><td class="c3">timing</td><td class="c4">NQ · ES</td><td class="c5">#markt</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
-          <tr><td class="c1">008</td><td class="c2">liquiditeit</td><td class="c3">structuur</td><td class="c4">Altcoins</td><td class="c5">#altcoins</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
-          <tr><td class="c1">009</td><td class="c2">risicobeheer</td><td class="c3">proces</td><td class="c4">Alle</td><td class="c5">#vragen</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
-          <tr><td class="c1">010</td><td class="c2">tradingpsychologie</td><td class="c3">discipline</td><td class="c4">Alle</td><td class="c5">#algemeen</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr class="group"><td colspan="6"><span class="gt"><span lang="nl">I · Onderwerpen</span><span lang="en">I · Topics</span></span><span class="gn"><span lang="nl">10 regels</span><span lang="en">10 lines</span></span></td></tr>
+          <tr><td class="c1">001</td><td class="c2"><span lang="nl">deviatie</span><span lang="en">deviation</span></td><td class="c3"><span lang="nl">structuur</span><span lang="en">structure</span></td><td class="c4">NQ · ES</td><td class="c5">#nq-chart-ideeën</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
+          <tr><td class="c1">002</td><td class="c2">SMT</td><td class="c3"><span lang="nl">correlatie</span><span lang="en">correlation</span></td><td class="c4">NQ · ES</td><td class="c5">#es-chart-ideeën</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
+          <tr><td class="c1">003</td><td class="c2">FVG</td><td class="c3"><span lang="nl">inefficiëntie</span><span lang="en">inefficiency</span></td><td class="c4"><span lang="nl">Alle</span><span lang="en">All</span></td><td class="c5">#markt</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
+          <tr><td class="c1">004</td><td class="c2">IFVG</td><td class="c3"><span lang="nl">inefficiëntie</span><span lang="en">inefficiency</span></td><td class="c4"><span lang="nl">Alle</span><span lang="en">All</span></td><td class="c5">#markt</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
+          <tr><td class="c1">005</td><td class="c2">orderblocks</td><td class="c3"><span lang="nl">structuur</span><span lang="en">structure</span></td><td class="c4">NQ</td><td class="c5">#nq-chart-ideeën</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
+          <tr><td class="c1">006</td><td class="c2">fibonacci</td><td class="c3"><span lang="nl">meting</span><span lang="en">measurement</span></td><td class="c4">BTC</td><td class="c5">#bitcoin</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
+          <tr><td class="c1">007</td><td class="c2"><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></td><td class="c3">timing</td><td class="c4">NQ · ES</td><td class="c5">#markt</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
+          <tr><td class="c1">008</td><td class="c2"><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></td><td class="c3"><span lang="nl">structuur</span><span lang="en">structure</span></td><td class="c4">Altcoins</td><td class="c5">#altcoins</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
+          <tr><td class="c1">009</td><td class="c2"><span lang="nl">risicobeheer</span><span lang="en">risk management</span></td><td class="c3"><span lang="nl">proces</span><span lang="en">process</span></td><td class="c4"><span lang="nl">Alle</span><span lang="en">All</span></td><td class="c5">#vragen</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
+          <tr><td class="c1">010</td><td class="c2"><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></td><td class="c3">discipline</td><td class="c4"><span lang="nl">Alle</span><span lang="en">All</span></td><td class="c5">#algemeen</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
 
-          <tr class="group"><td colspan="6"><span class="gt">II · Kanalen — thuis</span><span class="gn">9 regels</span></td></tr>
-          <tr><td class="c1">011</td><td class="c2"><span class="mono">#nq-chart-ideeën</span></td><td class="c3">chart-ideeën</td><td class="c4">NQ</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
-          <tr><td class="c1">012</td><td class="c2"><span class="mono">#es-chart-ideeën</span></td><td class="c3">chart-ideeën</td><td class="c4">ES</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
-          <tr><td class="c1">013</td><td class="c2"><span class="mono">#bitcoin</span></td><td class="c3">chart-ideeën</td><td class="c4">BTC</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
-          <tr><td class="c1">014</td><td class="c2"><span class="mono">#altcoins</span></td><td class="c3">chart-ideeën</td><td class="c4">Altcoins</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
-          <tr><td class="c1">015</td><td class="c2"><span class="mono">#markt</span></td><td class="c3">marktbeeld</td><td class="c4">Alle</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
-          <tr><td class="c1">016</td><td class="c2"><span class="mono">#vragen</span></td><td class="c3">educatie</td><td class="c4">Alle</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
-          <tr><td class="c1">017</td><td class="c2"><span class="mono">#algemeen</span></td><td class="c3">community</td><td class="c4">—</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
-          <tr><td class="c1">018</td><td class="c2"><span class="mono">#atlas-op-socials</span></td><td class="c3">socials</td><td class="c4">—</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
-          <tr><td class="c1">019</td><td class="c2"><span class="mono">#ondersteuning</span></td><td class="c3">hulp</td><td class="c4">—</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
+          <tr class="group"><td colspan="6"><span class="gt"><span lang="nl">II · Kanalen — thuis</span><span lang="en">II · Channels — home</span></span><span class="gn"><span lang="nl">9 regels</span><span lang="en">9 lines</span></span></td></tr>
+          <tr><td class="c1">011</td><td class="c2"><span class="mono">#nq-chart-ideeën</span></td><td class="c3"><span lang="nl">chart-ideeën</span><span lang="en">chart ideas</span></td><td class="c4">NQ</td><td class="c5"><span lang="nl">thuis</span><span lang="en">home</span></td><td class="c6"><span class="flag now"><i></i><span lang="nl">Gratis</span><span lang="en">Free</span></span></td></tr>
+          <tr><td class="c1">012</td><td class="c2"><span class="mono">#es-chart-ideeën</span></td><td class="c3"><span lang="nl">chart-ideeën</span><span lang="en">chart ideas</span></td><td class="c4">ES</td><td class="c5"><span lang="nl">thuis</span><span lang="en">home</span></td><td class="c6"><span class="flag now"><i></i><span lang="nl">Gratis</span><span lang="en">Free</span></span></td></tr>
+          <tr><td class="c1">013</td><td class="c2"><span class="mono">#bitcoin</span></td><td class="c3"><span lang="nl">chart-ideeën</span><span lang="en">chart ideas</span></td><td class="c4">BTC</td><td class="c5"><span lang="nl">thuis</span><span lang="en">home</span></td><td class="c6"><span class="flag now"><i></i><span lang="nl">Gratis</span><span lang="en">Free</span></span></td></tr>
+          <tr><td class="c1">014</td><td class="c2"><span class="mono">#altcoins</span></td><td class="c3"><span lang="nl">chart-ideeën</span><span lang="en">chart ideas</span></td><td class="c4">Altcoins</td><td class="c5"><span lang="nl">thuis</span><span lang="en">home</span></td><td class="c6"><span class="flag now"><i></i><span lang="nl">Gratis</span><span lang="en">Free</span></span></td></tr>
+          <tr><td class="c1">015</td><td class="c2"><span class="mono">#markt</span></td><td class="c3"><span lang="nl">marktbeeld</span><span lang="en">market view</span></td><td class="c4"><span lang="nl">Alle</span><span lang="en">All</span></td><td class="c5"><span lang="nl">thuis</span><span lang="en">home</span></td><td class="c6"><span class="flag now"><i></i><span lang="nl">Gratis</span><span lang="en">Free</span></span></td></tr>
+          <tr><td class="c1">016</td><td class="c2"><span class="mono">#vragen</span></td><td class="c3"><span lang="nl">educatie</span><span lang="en">education</span></td><td class="c4"><span lang="nl">Alle</span><span lang="en">All</span></td><td class="c5"><span lang="nl">thuis</span><span lang="en">home</span></td><td class="c6"><span class="flag now"><i></i><span lang="nl">Gratis</span><span lang="en">Free</span></span></td></tr>
+          <tr><td class="c1">017</td><td class="c2"><span class="mono">#algemeen</span></td><td class="c3">community</td><td class="c4">—</td><td class="c5"><span lang="nl">thuis</span><span lang="en">home</span></td><td class="c6"><span class="flag now"><i></i><span lang="nl">Gratis</span><span lang="en">Free</span></span></td></tr>
+          <tr><td class="c1">018</td><td class="c2"><span class="mono">#atlas-op-socials</span></td><td class="c3">socials</td><td class="c4">—</td><td class="c5"><span lang="nl">thuis</span><span lang="en">home</span></td><td class="c6"><span class="flag now"><i></i><span lang="nl">Gratis</span><span lang="en">Free</span></span></td></tr>
+          <tr><td class="c1">019</td><td class="c2"><span class="mono">#ondersteuning</span></td><td class="c3"><span lang="nl">hulp</span><span lang="en">help</span></td><td class="c4">—</td><td class="c5"><span lang="nl">thuis</span><span lang="en">home</span></td><td class="c6"><span class="flag now"><i></i><span lang="nl">Gratis</span><span lang="en">Free</span></span></td></tr>
 
-          <tr class="group"><td colspan="6"><span class="gt">III · Kanalen — premium</span><span class="gn">6 regels</span></td></tr>
-          <tr><td class="c1">020</td><td class="c2"><span class="mono">#trade-setups</span></td><td class="c3">setups</td><td class="c4">Alle</td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
-          <tr><td class="c1">021</td><td class="c2"><span class="mono">#marktupdates</span></td><td class="c3">updates</td><td class="c4">Alle</td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
-          <tr><td class="c1">022</td><td class="c2"><span class="mono">#indicatoren</span></td><td class="c3">gereedschap</td><td class="c4">Alle</td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
-          <tr><td class="c1">023</td><td class="c2"><span class="mono">#sessie-opnames</span></td><td class="c3">opnames</td><td class="c4">Alle</td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
-          <tr><td class="c1">024</td><td class="c2"><span class="mono">#chart-ideeën</span></td><td class="c3">chart-ideeën</td><td class="c4">Alle</td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
+          <tr class="group"><td colspan="6"><span class="gt"><span lang="nl">III · Kanalen — premium</span><span lang="en">III · Channels — premium</span></span><span class="gn"><span lang="nl">6 regels</span><span lang="en">6 lines</span></span></td></tr>
+          <tr><td class="c1">020</td><td class="c2"><span class="mono">#trade-setups</span></td><td class="c3">setups</td><td class="c4"><span lang="nl">Alle</span><span lang="en">All</span></td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
+          <tr><td class="c1">021</td><td class="c2"><span class="mono">#marktupdates</span></td><td class="c3">updates</td><td class="c4"><span lang="nl">Alle</span><span lang="en">All</span></td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
+          <tr><td class="c1">022</td><td class="c2"><span class="mono">#indicatoren</span></td><td class="c3"><span lang="nl">gereedschap</span><span lang="en">tools</span></td><td class="c4"><span lang="nl">Alle</span><span lang="en">All</span></td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
+          <tr><td class="c1">023</td><td class="c2"><span class="mono">#sessie-opnames</span></td><td class="c3"><span lang="nl">opnames</span><span lang="en">recordings</span></td><td class="c4"><span lang="nl">Alle</span><span lang="en">All</span></td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
+          <tr><td class="c1">024</td><td class="c2"><span class="mono">#chart-ideeën</span></td><td class="c3"><span lang="nl">chart-ideeën</span><span lang="en">chart ideas</span></td><td class="c4"><span lang="nl">Alle</span><span lang="en">All</span></td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
           <tr><td class="c1">025</td><td class="c2"><span class="mono">#premium-chat</span></td><td class="c3">community</td><td class="c4">—</td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
 
-          <tr class="group"><td colspan="6"><span class="gt">IV · Markten</span><span class="gn">4 regels</span></td></tr>
-          <tr><td class="c1">026</td><td class="c2">NQ — Nasdaq futures</td><td class="c3">futures</td><td class="c4">NQ</td><td class="c5">#nq-chart-ideeën</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
-          <tr><td class="c1">027</td><td class="c2">ES — S&amp;P futures</td><td class="c3">futures</td><td class="c4">ES</td><td class="c5">#es-chart-ideeën</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
-          <tr><td class="c1">028</td><td class="c2">Bitcoin</td><td class="c3">crypto</td><td class="c4">BTC</td><td class="c5">#bitcoin</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
-          <tr><td class="c1">029</td><td class="c2">Altcoins</td><td class="c3">crypto</td><td class="c4">ALT</td><td class="c5">#altcoins</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr class="group"><td colspan="6"><span class="gt"><span lang="nl">IV · Markten</span><span lang="en">IV · Markets</span></span><span class="gn"><span lang="nl">4 regels</span><span lang="en">4 lines</span></span></td></tr>
+          <tr><td class="c1">026</td><td class="c2">NQ — Nasdaq futures</td><td class="c3">futures</td><td class="c4">NQ</td><td class="c5">#nq-chart-ideeën</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
+          <tr><td class="c1">027</td><td class="c2">ES — S&amp;P futures</td><td class="c3">futures</td><td class="c4">ES</td><td class="c5">#es-chart-ideeën</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
+          <tr><td class="c1">028</td><td class="c2">Bitcoin</td><td class="c3">crypto</td><td class="c4">BTC</td><td class="c5">#bitcoin</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
+          <tr><td class="c1">029</td><td class="c2">Altcoins</td><td class="c3">crypto</td><td class="c4">ALT</td><td class="c5">#altcoins</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
 
-          <tr class="group"><td colspan="6"><span class="gt">V · Wat er verder is</span><span class="gn">3 regels</span></td></tr>
-          <tr><td class="c1">030</td><td class="c2">Live trading door de oprichter</td><td class="c3">sessie</td><td class="c4">Alle</td><td class="c5">in de server</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
-          <tr><td class="c1">031</td><td class="c2">Educatie — 10+ jaar ervaring, gedeeld</td><td class="c3">educatie</td><td class="c4">Alle</td><td class="c5">#vragen</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
-          <tr><td class="c1">032</td><td class="c2"><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Toegang tot de server</a></td><td class="c3">toegang</td><td class="c4">—</td><td class="c5">Discord</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
+          <tr class="group"><td colspan="6"><span class="gt"><span lang="nl">V · Wat er verder is</span><span lang="en">V · What else there is</span></span><span class="gn"><span lang="nl">3 regels</span><span lang="en">3 lines</span></span></td></tr>
+          <tr><td class="c1">030</td><td class="c2"><span lang="nl">Live trading door de oprichter</span><span lang="en">Live trading by the founder</span></td><td class="c3"><span lang="nl">sessie</span><span lang="en">session</span></td><td class="c4"><span lang="nl">Alle</span><span lang="en">All</span></td><td class="c5"><span lang="nl">in de server</span><span lang="en">in the server</span></td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
+          <tr><td class="c1">031</td><td class="c2"><span lang="nl">Educatie — 10+ jaar ervaring, gedeeld</span><span lang="en">Education — 10+ years of experience, shared</span></td><td class="c3"><span lang="nl">educatie</span><span lang="en">education</span></td><td class="c4"><span lang="nl">Alle</span><span lang="en">All</span></td><td class="c5">#vragen</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Nu</span><span lang="en">Now</span></span></td></tr>
+          <tr><td class="c1">032</td><td class="c2"><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Toegang tot de server</span><span lang="en">Access to the server</span></a></td><td class="c3"><span lang="nl">toegang</span><span lang="en">access</span></td><td class="c4">—</td><td class="c5">Discord</td><td class="c6"><span class="flag now"><i></i><span lang="nl">Gratis</span><span lang="en">Free</span></span></td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="regfoot">
-      <span class="tot">Sluiting · <b>10 onderwerpen</b> · <b>15 kanalen</b> · <b>4 markten</b></span>
-      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Neem regel 032</a>
+      <span class="tot"><span lang="nl">Sluiting · <b>10 onderwerpen</b> · <b>15 kanalen</b> · <b>4 markten</b></span><span lang="en">Closing · <b>10 topics</b> · <b>15 channels</b> · <b>4 markets</b></span></span>
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Neem regel 032</span><span lang="en">Take line 032</span></a>
     </div>
   </div>
 </section>
@@ -405,18 +425,25 @@ footer{border-top:1px solid var(--line);padding:clamp(28px,4vw,54px) 0 46px;back
 <!-- ══════════════ AANTEKENING ══════════════ -->
 <section class="note">
   <div class="frame rail note-in">
-    <div class="k">03 —<br>Aantekening<br>bij regel 031</div>
+    <div class="k"><span lang="nl">03 —<br>Aantekening<br>bij regel 031</span><span lang="en">03 —<br>Note<br>to line 031</span></div>
     <div>
-      <p class="q">
+      <p class="q" lang="nl">
         Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles
         meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik
         gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten
         dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community
         die samen beter wil worden.
       </p>
+      <p class="q" lang="en">
+        I've been involved in trading for over 10 years now, and during that time I've experienced
+        pretty much everything: wins, losses, mistakes, growth, and a lot of lessons. I built Atlas
+        Capital to share that experience, bring traders together, and show how I approach the markets
+        on a daily basis. No get-rich-quick promises, just real setups, education, and a community
+        focused on improving together.
+      </p>
       <div class="yrs">
         <b>10<em>+</em></b>
-        <span class="lbl">jaar actief · oprichter van Atlas Capital</span>
+        <span class="lbl"><span lang="nl">jaar actief · oprichter van Atlas Capital</span><span lang="en">years active · founder of Atlas Capital</span></span>
       </div>
     </div>
   </div>
@@ -426,12 +453,13 @@ footer{border-top:1px solid var(--line);padding:clamp(28px,4vw,54px) 0 46px;back
 <section class="annex">
   <div class="frame rail">
     <div class="annex-head">
-      <h2>Bijlage bij regel 003 en 008</h2>
-      <span class="lbl rt">04 — Schematisch</span>
+      <h2><span lang="nl">Bijlage bij regel 003 en 008</span><span lang="en">Appendix to lines 003 and 008</span></h2>
+      <span class="lbl rt"><span lang="nl">04 — Schematisch</span><span lang="en">04 — Schematic</span></span>
     </div>
 
     <div class="plate">
-      <svg viewBox="0 0 900 380" role="img" aria-label="Schema waarin liquiditeit onder een reeks bodems wordt opgehaald en de markt terugkeert naar een openliggende zone">
+      <span class="vh" id="fig79b"><span lang="nl">Schema waarin liquiditeit onder een reeks bodems wordt opgehaald en de markt terugkeert naar een openliggende zone</span><span lang="en">Diagram in which liquidity under a run of lows is taken and the market returns to an open zone</span></span>
+      <svg viewBox="0 0 900 380" role="img" aria-labelledby="fig79b">
         <!-- register-style grid -->
         <g stroke="#22242A" stroke-width="1">
           <line x1="50" y1="50" x2="850" y2="50"/><line x1="50" y1="112" x2="850" y2="112"/>
@@ -445,7 +473,7 @@ footer{border-top:1px solid var(--line);padding:clamp(28px,4vw,54px) 0 46px;back
 
         <!-- liquidity resting under a row of lows -->
         <line x1="90" y1="268" x2="640" y2="268" stroke="#B9954A" stroke-width="1.1" stroke-dasharray="7 5"/>
-        <text x="90" y="286" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.8" fill="#A5A6A8">LIQUIDITEIT ONDER DE BODEMS</text>
+        <text x="90" y="286" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.8" fill="#A5A6A8" lang="nl">LIQUIDITEIT ONDER DE BODEMS</text><text x="90" y="286" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.8" fill="#A5A6A8" lang="en">LIQUIDITY UNDER THE LOWS</text>
 
         <!-- candles descending into the sweep, then reversing -->
         <g stroke="#EAE9E6" stroke-width="1.4">
@@ -481,7 +509,7 @@ footer{border-top:1px solid var(--line);padding:clamp(28px,4vw,54px) 0 46px;back
 
         <!-- execution mark -->
         <path d="M512 208 L512 176 M500 188 L512 176 L524 188" fill="none" stroke="#B9954A" stroke-width="1.4" stroke-linecap="round"/>
-        <text x="474" y="226" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.8" fill="#A5A6A8">UITVOERING</text>
+        <text x="474" y="226" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.8" fill="#A5A6A8" lang="nl">UITVOERING</text><text x="474" y="226" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.8" fill="#A5A6A8" lang="en">EXECUTION</text>
 
         <!-- bracket without values -->
         <line x1="800" y1="96" x2="800" y2="252" stroke="#33363E" stroke-width="1"/>
@@ -489,29 +517,29 @@ footer{border-top:1px solid var(--line);padding:clamp(28px,4vw,54px) 0 46px;back
         <line x1="794" y1="252" x2="806" y2="252" stroke="#33363E" stroke-width="1"/>
         <rect x="794" y="171" width="12" height="6" fill="#B9954A"/>
         <g font-family="ui-monospace,Menlo,monospace" font-size="9" letter-spacing="1.6" fill="#75777C">
-          <text x="814" y="100">GRENS</text>
+          <text x="814" y="100" lang="nl">GRENS</text><text x="814" y="100" lang="en">LIMIT</text>
           <text x="814" y="178">ZONE</text>
-          <text x="814" y="256">GRENS</text>
-          <text x="50" y="356">TIJD →</text>
-          <text x="760" y="356">GEEN SCHAAL</text>
+          <text x="814" y="256" lang="nl">GRENS</text><text x="814" y="256" lang="en">LIMIT</text>
+          <text x="50" y="356" lang="nl">TIJD →</text><text x="50" y="356" lang="en">TIME →</text>
+          <text x="760" y="356" lang="nl">GEEN SCHAAL</text><text x="760" y="356" lang="en">NO SCALE</text>
         </g>
       </svg>
 
       <div class="keys">
-        <div><b>Liquiditeit</b>Stops die onder een reeks bodems blijven liggen.</div>
-        <div><b>Sweep</b>Die zone wordt opgehaald, en de markt keert.</div>
-        <div><b>Open zone</b>De onafgewerkte ruimte die de beweging achterlaat.</div>
-        <div><b>Uitvoering</b>Pas een regel schrijven als alles klopt.</div>
+        <div><b><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></b><span lang="nl">Stops die onder een reeks bodems blijven liggen.</span><span lang="en">Stops left sitting under a run of lows.</span></div>
+        <div><b>Sweep</b><span lang="nl">Die zone wordt opgehaald, en de markt keert.</span><span lang="en">That zone is taken, and the market turns.</span></div>
+        <div><b>Open zone</b><span lang="nl">De onafgewerkte ruimte die de beweging achterlaat.</span><span lang="en">The unfinished space the move leaves behind.</span></div>
+        <div><b><span lang="nl">Uitvoering</span><span lang="en">Execution</span></b><span lang="nl">Pas een regel schrijven als alles klopt.</span><span lang="en">Only write a line when everything lines up.</span></div>
       </div>
     </div>
 
     <div class="live">
       <div>
-        <span class="pulse"><i></i>Live in de server</span>
-        <h3>Regel 030 gebeurt dagelijks.</h3>
-        <p>De oprichter tradet live mee. Tijden worden in de server aangekondigd.</p>
+        <span class="pulse"><i></i><span lang="nl">Live in de server</span><span lang="en">Live in the server</span></span>
+        <h3><span lang="nl">Regel 030 gebeurt dagelijks.</span><span lang="en">Line 030 happens every day.</span></h3>
+        <p><span lang="nl">De oprichter tradet live mee. Tijden worden in de server aangekondigd.</span><span lang="en">The founder trades live with you. Times are announced in the server.</span></p>
       </div>
-      <a class="btn ghost" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Kijk mee</a>
+      <a class="btn ghost" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Kijk mee</span><span lang="en">Watch along</span></a>
     </div>
   </div>
 </section>
@@ -519,11 +547,11 @@ footer{border-top:1px solid var(--line);padding:clamp(28px,4vw,54px) 0 46px;back
 <!-- ══════════════ SLUITING ══════════════ -->
 <section class="close">
   <div class="frame rail">
-    <p class="lbl g">05 — Laatste regel</p>
-    <h2>Schrijf jezelf <em>in.</em></h2>
-    <p>De hele lijst hierboven is nu gratis toegankelijk. Premium opent later; prijs en datum volgen in de server.</p>
+    <p class="lbl g"><span lang="nl">05 — Laatste regel</span><span lang="en">05 — Last line</span></p>
+    <h2><span lang="nl">Schrijf jezelf <em>in.</em></span><span lang="en">Sign yourself <em>in.</em></span></h2>
+    <p><span lang="nl">De hele lijst hierboven is nu gratis toegankelijk. Premium opent later; prijs en datum volgen in de server.</span><span lang="en">The whole list above is free to reach right now. Premium opens later; price and date follow in the server.</span></p>
     <div class="cta">
-      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Word lid op Discord</a>
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></a>
       <a class="btn ghost" href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok</a>
     </div>
   </div>
@@ -541,29 +569,50 @@ footer{border-top:1px solid var(--line);padding:clamp(28px,4vw,54px) 0 46px;back
             <line x1="2.5" y1="20" x2="29.5" y2="20" stroke="#33363E" stroke-width="1"/>
             <line x1="11" y1="2.5" x2="11" y2="29.5" stroke="#33363E" stroke-width="1"/>
           </svg>
-          <span><b>ATLAS CAPITAL</b><i>Proces · Discipline · Uitvoering</i></span>
+          <span><b>ATLAS CAPITAL</b><i><span lang="nl">Proces · Discipline · Uitvoering</span><span lang="en">Process · Discipline · Execution</span></i></span>
         </div>
         <p style="margin:0;color:var(--muted-2);font-size:13px;max-width:36ch;font-weight:300">
-          Een register telt wat er is. Meer beweren we niet.
+          <span lang="nl">Een register telt wat er is. Meer beweren we niet.</span><span lang="en">A register counts what is there. We claim nothing more.</span>
         </p>
       </div>
       <div>
-        <p class="lbl" style="margin:0 0 10px">Vindplaats</p>
+        <p class="lbl" style="margin:0 0 10px"><span lang="nl">Vindplaats</span><span lang="en">Where to find us</span></p>
         <a class="l" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord ↗</a>
         <a class="l" href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok @atlascapitalbv ↗</a>
       </div>
       <div>
-        <p class="lbl" style="margin:0 0 10px">Onderdelen</p>
+        <p class="lbl" style="margin:0 0 10px"><span lang="nl">Onderdelen</span><span lang="en">Parts</span></p>
         <a class="l" href="#register">02 · Register</a>
-        <a class="l" href="#">03 · Aantekening</a>
-        <a class="l" href="#">04 · Bijlage</a>
+        <a class="l" href="#"><span lang="nl">03 · Aantekening</span><span lang="en">03 · Note</span></a>
+        <a class="l" href="#"><span lang="nl">04 · Bijlage</span><span lang="en">04 · Appendix</span></a>
       </div>
     </div>
     <p class="risk">
-      Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.
+      <span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span>
     </p>
   </div>
 </footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

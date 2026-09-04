@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -157,6 +157,25 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
 .foot a.l:hover{color:var(--gold-hi)}
 .foot__l{display:flex;flex-wrap:wrap;gap:1.2rem}
 .risk{margin:1.8rem 0 0;color:#6A6B6D;font-size:.7rem;line-height:1.75;max-width:74ch;border-top:1px solid var(--line);padding-top:1rem;font-weight:200}
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.hd__in .wm{margin-right:auto}
+.langsw{
+  display:flex;flex:none;overflow:hidden;
+  border:1px solid var(--gline);border-radius:999px;background:rgba(215,179,100,.05);
+}
+.langsw button{
+  appearance:none;-webkit-appearance:none;background:transparent;border:0;cursor:pointer;
+  font-family:inherit;font-weight:700;font-size:.62rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);padding:.8em .8em;line-height:1;
+  transition:.2s ease;
+}
+.langsw button+button{box-shadow:inset 1px 0 0 var(--gline)}
+.langsw button:hover{color:var(--gold-hi)}
+.langsw button[aria-pressed="true"]{background:rgba(215,179,100,.16);color:var(--gold-hi)}
+@media (max-width:520px){.langsw button{font-size:.56rem;letter-spacing:.12em;padding:.75em .6em}}
 </style>
 </head>
 <body>
@@ -172,6 +191,10 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
       <span>Atlas Capital</span>
     </a>
     <a class="cta cta--solid" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span>Discord</a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
@@ -179,7 +202,9 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
 <section class="shot wrap" id="top">
   <div class="shot__tag"><i></i><b>Opening</b><i></i></div>
   <div class="shot__art">
-    <svg viewBox="0 0 720 420" role="img" aria-label="Een gouden diafragma van bogen boven een schematische reeks kaarsen">
+    <svg viewBox="0 0 720 420" role="img">
+      <title lang="nl">Een gouden diafragma van bogen boven een schematische reeks kaarsen</title>
+      <title lang="en">A golden iris of arcs above a schematic run of candles</title>
       <g class="spin" style="transform-origin:360px 190px">
         <g fill="none" stroke="#D7B364" opacity=".55">
           <path d="M360 60 A130 130 0 0 1 472.6 255" stroke-width="1.4"/>
@@ -212,20 +237,22 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
     </svg>
   </div>
   <div class="shot__caps">
-    <p class="cap cap--big">Kijk mee terwijl<br>hij handelt</p>
-    <p class="cap cap--sm">De oprichter handelt live mee in de server. Tijden worden daar aangekondigd.</p>
+    <p class="cap cap--big"><span lang="nl">Kijk mee terwijl<br>hij handelt</span><span lang="en">Watch along while<br>he trades</span></p>
+    <p class="cap cap--sm"><span lang="nl">De oprichter handelt live mee in de server. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced there.</span></p>
     <div class="caps-cta">
-      <a class="cta cta--solid cta--lg" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span>Open Discord</a>
-      <a class="cta cta--lg" href="#educatie">Wat je leert</a>
+      <a class="cta cta--solid cta--lg" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span><span lang="nl">Open Discord</span><span lang="en">Open the Discord</span></a>
+      <a class="cta cta--lg" href="#educatie"><span lang="nl">Wat je leert</span><span lang="en">What you learn</span></a>
     </div>
   </div>
 </section>
 
 <!-- ============ SHOT 01 — DRIE WOORDEN ============ -->
 <section class="shot wrap" id="woorden">
-  <div class="shot__tag"><i></i><b>01</b> Drie woorden<i></i></div>
+  <div class="shot__tag"><i></i><b>01</b> <span lang="nl">Drie woorden</span><span lang="en">Three words</span><i></i></div>
   <div class="shot__art">
-    <svg viewBox="0 0 720 300" role="img" aria-label="Drie gouden bogen die in elkaar overlopen">
+    <svg viewBox="0 0 720 300" role="img">
+      <title lang="nl">Drie gouden bogen die in elkaar overlopen</title>
+      <title lang="en">Three golden arcs running into one another</title>
       <g fill="none" stroke-linecap="round">
         <path class="drift" d="M60 240 C 160 240, 160 90, 260 90" stroke="#B9954A" stroke-width="2"/>
         <path d="M240 240 C 340 240, 340 60, 440 60" stroke="#D7B364" stroke-width="2.6"/>
@@ -238,18 +265,20 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
     </svg>
   </div>
   <div class="shot__caps">
-    <p class="cap cap--gold">Proces.</p>
+    <p class="cap cap--gold"><span lang="nl">Proces.</span><span lang="en">Process.</span></p>
     <p class="cap cap--gold">Discipline.</p>
-    <p class="cap cap--gold">Uitvoering.</p>
-    <p class="cap cap--sm">Dezelfde drie woorden, elke sessie opnieuw.</p>
+    <p class="cap cap--gold"><span lang="nl">Uitvoering.</span><span lang="en">Execution.</span></p>
+    <p class="cap cap--sm"><span lang="nl">Dezelfde drie woorden, elke sessie opnieuw.</span><span lang="en">The same three words, every session again.</span></p>
   </div>
 </section>
 
 <!-- ============ SHOT 02 — DE OPRICHTER ============ -->
 <section class="shot wrap" id="oprichter">
-  <div class="shot__tag"><i></i><b>02</b> De oprichter<i></i></div>
+  <div class="shot__tag"><i></i><b>02</b> <span lang="nl">De oprichter</span><span lang="en">The founder</span><i></i></div>
   <div class="shot__art">
-    <svg viewBox="0 0 720 340" role="img" aria-label="Lijntekening van een figuur voor een raster">
+    <svg viewBox="0 0 720 340" role="img">
+      <title lang="nl">Lijntekening van een figuur voor een raster</title>
+      <title lang="en">Line drawing of a figure in front of a grid</title>
       <g stroke="rgba(255,255,255,.06)">
         <path d="M0 60 H720 M0 120 H720 M0 180 H720 M0 240 H720 M0 300 H720"/>
       </g>
@@ -265,23 +294,25 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
     </svg>
   </div>
   <div class="shot__caps">
-    <p class="cap cap--who">Oprichter</p>
-    <p class="cap">Ik ben inmiddels al meer dan <b>10 jaar</b> actief in trading</p>
-    <p class="cap">en heb in die jaren vrijwel alles meegemaakt:</p>
-    <p class="cap">winst, verlies, fouten, groei en vooral heel veel lessen.</p>
-    <p class="cap">Atlas Capital heb ik gebouwd om die ervaring te delen.</p>
-    <p class="cap">Geen snelle-rijk-verhalen, maar echte setups en educatie.</p>
+    <p class="cap cap--who"><span lang="nl">Oprichter</span><span lang="en">Founder</span></p>
+    <p class="cap"><span lang="nl">Ik ben inmiddels al meer dan <b>10 jaar</b> actief in trading</span><span lang="en">I've been involved in trading for over <b>10 years</b> now,</span></p>
+    <p class="cap"><span lang="nl">en heb in die jaren vrijwel alles meegemaakt:</span><span lang="en">and during that time I've experienced pretty much everything:</span></p>
+    <p class="cap"><span lang="nl">winst, verlies, fouten, groei en vooral heel veel lessen.</span><span lang="en">wins, losses, mistakes, growth, and a lot of lessons.</span></p>
+    <p class="cap"><span lang="nl">Atlas Capital heb ik gebouwd om die ervaring te delen.</span><span lang="en">I built Atlas Capital to share that experience.</span></p>
+    <p class="cap"><span lang="nl">Geen snelle-rijk-verhalen, maar echte setups en educatie.</span><span lang="en">No get-rich-quick promises, just real setups, education.</span></p>
     <div class="caps-cta">
-      <a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span>Kom naar de server</a>
+      <a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span><span lang="nl">Kom naar de server</span><span lang="en">Come to the server</span></a>
     </div>
   </div>
 </section>
 
 <!-- ============ SHOT 03 — EDUCATIE ============ -->
 <section class="shot wrap" id="educatie">
-  <div class="shot__tag"><i></i><b>03</b> Educatie<i></i></div>
+  <div class="shot__tag"><i></i><b>03</b> <span lang="nl">Educatie</span><span lang="en">Education</span><i></i></div>
   <div class="shot__art">
-    <svg viewBox="0 0 720 220" role="img" aria-label="Tien punten verbonden door een gouden lijn">
+    <svg viewBox="0 0 720 220" role="img">
+      <title lang="nl">Tien punten verbonden door een gouden lijn</title>
+      <title lang="en">Ten points joined by a golden line</title>
       <path d="M40 150 H680" stroke="rgba(215,179,100,.3)" stroke-width="1.4"/>
       <g fill="#0A0B0D" stroke="#D7B364" stroke-width="2">
         <circle cx="40" cy="150" r="8"/><circle cx="111" cy="150" r="8"/><circle cx="182" cy="150" r="8"/>
@@ -303,27 +334,29 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
     </svg>
   </div>
   <div class="shot__caps">
-    <p class="cap">Tien onderwerpen, van structuur tot je eigen hoofd.</p>
+    <p class="cap"><span lang="nl">Tien onderwerpen, van structuur tot je eigen hoofd.</span><span lang="en">Ten topics, from structure to your own head.</span></p>
     <div class="topics">
-      <span class="topic"><b>01</b>Deviatie</span>
+      <span class="topic"><b>01</b><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span>
       <span class="topic"><b>02</b>SMT</span>
       <span class="topic"><b>03</b>FVG</span>
       <span class="topic"><b>04</b>IFVG</span>
       <span class="topic"><b>05</b>Orderblocks</span>
       <span class="topic"><b>06</b>Fibonacci</span>
-      <span class="topic"><b>07</b>Sessie-liquiditeit</span>
-      <span class="topic"><b>08</b>Liquiditeit</span>
-      <span class="topic"><b>09</b>Risicobeheer</span>
-      <span class="topic"><b>10</b>Tradingpsychologie</span>
+      <span class="topic"><b>07</b><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span>
+      <span class="topic"><b>08</b><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span>
+      <span class="topic"><b>09</b><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span>
+      <span class="topic"><b>10</b><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span>
     </div>
   </div>
 </section>
 
 <!-- ============ SHOT 04 — HET MODEL ============ -->
 <section class="shot wrap" id="model">
-  <div class="shot__tag"><i></i><b>04</b> Het model<i></i></div>
+  <div class="shot__tag"><i></i><b>04</b> <span lang="nl">Het model</span><span lang="en">The model</span><i></i></div>
   <div class="shot__art">
-    <svg viewBox="0 0 720 380" role="img" aria-label="Schematische weergave van een sweep boven gelijke hoogtes en het herstel in een gap">
+    <svg viewBox="0 0 720 380" role="img">
+      <title lang="nl">Schematische weergave van een sweep boven gelijke hoogtes en het herstel in een gap</title>
+      <title lang="en">Schematic view of a sweep above equal highs and the retrace into a gap</title>
       <g stroke="rgba(255,255,255,.05)">
         <path d="M0 76 H720 M0 152 H720 M0 228 H720 M0 304 H720"/>
       </g>
@@ -358,16 +391,16 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
       </g>
       <path d="M244 122 C 300 214, 340 258, 396 308" fill="none" stroke="rgba(215,179,100,.5)" stroke-width="1.8" stroke-dasharray="6 7"/>
       <path d="M396 308 l-17 -11 l22 -3 z" fill="#D7B364"/>
-      <text x="56" y="94" fill="#8B8C8F" font-size="12" letter-spacing="3" font-family="Sora,Arial,sans-serif">GELIJKE HOOGTES</text>
+      <text lang="nl" x="56" y="94" fill="#8B8C8F" font-size="12" letter-spacing="3" font-family="Sora,Arial,sans-serif">GELIJKE HOOGTES</text><text lang="en" x="56" y="94" fill="#8B8C8F" font-size="12" letter-spacing="3" font-family="Sora,Arial,sans-serif">EQUAL HIGHS</text>
       <text x="422" y="184" fill="#E6CC8E" font-size="12" letter-spacing="3" font-family="Sora,Arial,sans-serif">FVG</text>
       <text x="252" y="66" fill="#E6CC8E" font-size="12" letter-spacing="3" font-family="Sora,Arial,sans-serif">SWEEP</text>
-      <text x="12" y="372" fill="#5B5C5F" font-size="11" letter-spacing="3" font-family="Sora,Arial,sans-serif">SCHEMATISCH — GEEN KOERSEN, GEEN UITSLAG</text>
+      <text lang="nl" x="12" y="372" fill="#5B5C5F" font-size="11" letter-spacing="3" font-family="Sora,Arial,sans-serif">SCHEMATISCH — GEEN KOERSEN, GEEN UITSLAG</text><text lang="en" x="12" y="372" fill="#5B5C5F" font-size="11" letter-spacing="3" font-family="Sora,Arial,sans-serif">SCHEMATIC — NO PRICES, NO OUTCOME</text>
     </svg>
   </div>
   <div class="shot__caps">
-    <p class="cap">Eerst wordt de liquiditeit opgehaald.</p>
-    <p class="cap">Dan blijft er een gap open.</p>
-    <p class="cap">Daar wordt op gewacht — met het risico al vast.</p>
+    <p class="cap"><span lang="nl">Eerst wordt de liquiditeit opgehaald.</span><span lang="en">First the liquidity gets taken.</span></p>
+    <p class="cap"><span lang="nl">Dan blijft er een gap open.</span><span lang="en">Then a gap is left open.</span></p>
+    <p class="cap"><span lang="nl">Daar wordt op gewacht — met het risico al vast.</span><span lang="en">That is what gets waited for — with the risk already set.</span></p>
   </div>
 </section>
 
@@ -375,7 +408,9 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
 <section class="shot wrap" id="live">
   <div class="shot__tag"><i></i><b>05</b> Live trading<i></i></div>
   <div class="shot__art">
-    <svg viewBox="0 0 720 260" role="img" aria-label="Een geluidsgolf van gouden staven binnen een ring">
+    <svg viewBox="0 0 720 260" role="img">
+      <title lang="nl">Een geluidsgolf van gouden staven binnen een ring</title>
+      <title lang="en">A waveform of golden bars inside a ring</title>
       <circle cx="360" cy="130" r="118" fill="none" stroke="rgba(215,179,100,.2)"/>
       <circle cx="360" cy="130" r="86" fill="none" stroke="rgba(215,179,100,.12)"/>
       <g stroke="#D7B364" stroke-width="3" stroke-linecap="round">
@@ -388,20 +423,22 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
     </svg>
   </div>
   <div class="shot__caps">
-    <p class="cap cap--who"><span class="ring"><u></u><i></i></span> &nbsp;Live sessies in de server</p>
-    <p class="cap">De oprichter handelt live mee en vertelt wat hij ziet.</p>
-    <p class="cap cap--sm">Ook de sessies waarin hij niets doet. Tijden worden in de server aangekondigd.</p>
+    <p class="cap cap--who"><span class="ring"><u></u><i></i></span> &nbsp;<span lang="nl">Live sessies in de server</span><span lang="en">Live sessions in the server</span></p>
+    <p class="cap"><span lang="nl">De oprichter handelt live mee en vertelt wat hij ziet.</span><span lang="en">The founder trades live and talks through what he sees.</span></p>
+    <p class="cap cap--sm"><span lang="nl">Ook de sessies waarin hij niets doet. Tijden worden in de server aangekondigd.</span><span lang="en">Including the sessions where he does nothing. Times are announced in the server.</span></p>
     <div class="caps-cta">
-      <a class="cta cta--solid" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span>Stem af in Discord</a>
+      <a class="cta cta--solid" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span><span lang="nl">Stem af in Discord</span><span lang="en">Tune in on Discord</span></a>
     </div>
   </div>
 </section>
 
 <!-- ============ SHOT 06 — KANALEN ============ -->
 <section class="shot wrap" id="kanalen">
-  <div class="shot__tag"><i></i><b>06</b> De server<i></i></div>
+  <div class="shot__tag"><i></i><b>06</b> <span lang="nl">De server</span><span lang="en">The server</span><i></i></div>
   <div class="shot__art">
-    <svg viewBox="0 0 720 240" role="img" aria-label="Vijftien staven in twee groepen">
+    <svg viewBox="0 0 720 240" role="img">
+      <title lang="nl">Vijftien staven in twee groepen</title>
+      <title lang="en">Fifteen bars in two groups</title>
       <g fill="rgba(215,179,100,.55)">
         <rect x="30" y="120" width="26" height="90"/><rect x="70" y="96" width="26" height="114"/>
         <rect x="110" y="140" width="26" height="70"/><rect x="150" y="72" width="26" height="138"/>
@@ -419,10 +456,10 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
     </svg>
   </div>
   <div class="shot__caps">
-    <p class="cap">Vijftien kanalen.</p>
+    <p class="cap"><span lang="nl">Vijftien kanalen.</span><span lang="en">Fifteen channels.</span></p>
     <div class="chan">
       <div class="chan__g">
-        <div class="chan__h">Thuis — nu gratis</div>
+        <div class="chan__h"><span lang="nl">Thuis — nu gratis</span><span lang="en">Home — free right now</span></div>
         <div class="chan__l">
           <span>#nq-chart-ideeën</span><span>#es-chart-ideeën</span><span>#bitcoin</span>
           <span>#altcoins</span><span>#markt</span><span>#vragen</span>
@@ -430,12 +467,12 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
         </div>
       </div>
       <div class="chan__g chan__g--p">
-        <div class="chan__h">Premium — opent later</div>
+        <div class="chan__h"><span lang="nl">Premium — opent later</span><span lang="en">Premium — opens later</span></div>
         <div class="chan__l">
           <span>#trade-setups</span><span>#marktupdates</span><span>#indicatoren</span>
           <span>#sessie-opnames</span><span>#chart-ideeën</span><span>#premium-chat</span>
         </div>
-        <p class="chan__n">Datum en prijs worden in de server aangekondigd.</p>
+        <p class="chan__n"><span lang="nl">Datum en prijs worden in de server aangekondigd.</span><span lang="en">The date and the price are announced in the server.</span></p>
       </div>
     </div>
   </div>
@@ -443,9 +480,11 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
 
 <!-- ============ SHOT 07 — TOEGANG ============ -->
 <section class="shot wrap" id="toegang">
-  <div class="shot__tag"><i></i><b>07</b> Toegang<i></i></div>
+  <div class="shot__tag"><i></i><b>07</b> <span lang="nl">Toegang</span><span lang="en">Access</span><i></i></div>
   <div class="shot__art">
-    <svg viewBox="0 0 720 200" role="img" aria-label="Twee poorten, één open en één nog gesloten">
+    <svg viewBox="0 0 720 200" role="img">
+      <title lang="nl">Twee poorten, één open en één nog gesloten</title>
+      <title lang="en">Two gates, one open and one still closed</title>
       <g fill="none" stroke="#D7B364" stroke-width="2">
         <path d="M120 190 V60 a80 80 0 0 1 160 0 V190"/>
       </g>
@@ -461,26 +500,26 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
   <div class="shot__caps">
     <div class="two">
       <div class="two__c two__c--now">
-        <span class="k">Nu</span>
-        <h3>Gratis</h3>
+        <span class="k"><span lang="nl">Nu</span><span lang="en">Now</span></span>
+        <h3><span lang="nl">Gratis</span><span lang="en">Free</span></h3>
         <ul>
-          <li>Alle Thuis-kanalen</li>
-          <li>De educatie over tien onderwerpen</li>
-          <li>Chart-ideeën voor NQ, ES, Bitcoin en altcoins</li>
-          <li>Live sessies meekijken</li>
+          <li><span lang="nl">Alle Thuis-kanalen</span><span lang="en">All Home channels</span></li>
+          <li><span lang="nl">De educatie over tien onderwerpen</span><span lang="en">The education across ten topics</span></li>
+          <li><span lang="nl">Chart-ideeën voor NQ, ES, Bitcoin en altcoins</span><span lang="en">Chart ideas for NQ, ES, Bitcoin and altcoins</span></li>
+          <li><span lang="nl">Live sessies meekijken</span><span lang="en">Watch live sessions</span></li>
         </ul>
-        <div class="btnrow"><a class="cta cta--solid" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span>Nu binnenkomen</a></div>
+        <div class="btnrow"><a class="cta cta--solid" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span><span lang="nl">Nu binnenkomen</span><span lang="en">Come in now</span></a></div>
       </div>
       <div class="two__c">
-        <span class="k">Later</span>
+        <span class="k"><span lang="nl">Later</span><span lang="en">Later</span></span>
         <h3>Premium</h3>
         <ul>
-          <li>Trade-setups en marktupdates</li>
-          <li>Indicatoren en sessie-opnames</li>
-          <li>Eigen chart-ideeën en premium-chat</li>
-          <li>Datum en prijs volgen in de server</li>
+          <li><span lang="nl">Trade-setups en marktupdates</span><span lang="en">Trade setups and market updates</span></li>
+          <li><span lang="nl">Indicatoren en sessie-opnames</span><span lang="en">Indicators and session recordings</span></li>
+          <li><span lang="nl">Eigen chart-ideeën en premium-chat</span><span lang="en">Your own chart ideas and premium chat</span></li>
+          <li><span lang="nl">Datum en prijs volgen in de server</span><span lang="en">Date and price follow in the server</span></li>
         </ul>
-        <div class="btnrow"><a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Hoor het als eerste</a></div>
+        <div class="btnrow"><a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Hoor het als eerste</span><span lang="en">Hear it first</span></a></div>
       </div>
     </div>
   </div>
@@ -488,19 +527,21 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
 
 <!-- ============ SHOT 08 — SLOT ============ -->
 <section class="shot wrap" id="slot" style="min-height:clamp(460px,70vh,700px);border-bottom:0">
-  <div class="shot__tag"><i></i><b>08</b> Slot<i></i></div>
+  <div class="shot__tag"><i></i><b>08</b> <span lang="nl">Slot</span><span lang="en">Closing</span><i></i></div>
   <div class="shot__art">
-    <svg viewBox="0 0 720 180" role="img" aria-label="Een gouden lijn die uitloopt in een punt">
+    <svg viewBox="0 0 720 180" role="img">
+      <title lang="nl">Een gouden lijn die uitloopt in een punt</title>
+      <title lang="en">A golden line running out to a single point</title>
       <path d="M40 140 H400 L520 60 H680" fill="none" stroke="#D7B364" stroke-width="2"/>
       <circle cx="680" cy="60" r="7" fill="#E6CC8E"/>
       <circle cx="680" cy="60" r="18" fill="none" stroke="rgba(215,179,100,.4)"/>
     </svg>
   </div>
   <div class="shot__caps">
-    <p class="cap cap--big">De server staat open</p>
-    <p class="cap cap--sm">Gratis toegang. Proces, discipline en uitvoering — de rest is geduld.</p>
+    <p class="cap cap--big"><span lang="nl">De server staat open</span><span lang="en">The server is open</span></p>
+    <p class="cap cap--sm"><span lang="nl">Gratis toegang. Proces, discipline en uitvoering — de rest is geduld.</span><span lang="en">Free access. Process, discipline and execution — the rest is patience.</span></p>
     <div class="caps-cta">
-      <a class="cta cta--solid cta--lg" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span>Word lid van Discord</a>
+      <a class="cta cta--solid cta--lg" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span><span lang="nl">Word lid van Discord</span><span lang="en">Join on Discord</span></a>
     </div>
   </div>
 </section>
@@ -518,12 +559,33 @@ footer{padding:clamp(2.4rem,6vw,4rem) 0}
     <div class="foot__l">
       <a class="l" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord</a>
       <a class="l" href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok @atlascapitalbv</a>
-      <a class="l" href="#educatie">Educatie</a>
-      <a class="l" href="#kanalen">Kanalen</a>
+      <a class="l" href="#educatie"><span lang="nl">Educatie</span><span lang="en">Education</span></a>
+      <a class="l" href="#kanalen"><span lang="nl">Kanalen</span><span lang="en">Channels</span></a>
     </div>
   </div>
-  <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
 </footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

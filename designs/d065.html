@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,7 +46,7 @@ header{
 }
 .rail{
   max-width:1240px;margin:0 auto;padding:9px 16px;
-  display:flex;align-items:center;gap:14px;
+  display:flex;align-items:center;flex-wrap:wrap;gap:14px;
 }
 .mk{display:flex;align-items:center;gap:11px;flex:1 1 auto;min-width:0}
 .mk svg{width:32px;height:32px;flex:none}
@@ -231,6 +231,21 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
 }
 .foot a{color:var(--gold);text-decoration:none}
 .foot a:hover{text-decoration:underline}
+/* ── LANGUAGE ──────────────────────── */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.langsw{display:flex;align-self:stretch;flex:none;border:1px solid var(--edge);border-radius:3px;overflow:hidden}
+.langsw button{
+  font-family:ui-monospace,Menlo,Consolas,monospace;
+  font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  padding:0 11px;
+  color:var(--dim);background:transparent;
+  border:0;border-right:1px solid var(--edge-2);
+  cursor:pointer;
+}
+.langsw button:last-child{border-right:0}
+.langsw button:hover{color:var(--gold)}
+.langsw button[aria-pressed="true"]{color:var(--ink);background:var(--gold)}
 .risk{width:100%;margin:0;font-family:"Sora",sans-serif;font-size:12.5px;line-height:1.7;
   color:#7B7C80;letter-spacing:0;max-width:82ch;font-weight:300}
 </style>
@@ -260,6 +275,10 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
       Discord
     </a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
@@ -269,31 +288,31 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
 <section class="block" style="margin-top:22px">
   <div class="blocktop">
     <span class="desig">A1</span>
-    <span class="ttl">Hoofdschema</span>
-    <span class="rt">SIGNAAL → UITVOERING</span>
+    <span class="ttl"><span lang="nl">Hoofdschema</span><span lang="en">Main schematic</span></span>
+    <span class="rt"><span lang="nl">SIGNAAL → UITVOERING</span><span lang="en">SIGNAL → EXECUTION</span></span>
   </div>
   <div class="blockbody">
     <div class="duo l">
       <div>
-        <h1>Van signaal<br>naar <em>uitvoering.</em></h1>
-        <p class="lede">Proces, discipline en uitvoering — als één doorlopende lijn, niet als losse ideeën.</p>
+        <h1><span lang="nl">Van signaal<br>naar <em>uitvoering.</em></span><span lang="en">From signal<br>to <em>execution.</em></span></h1>
+        <p class="lede"><span lang="nl">Proces, discipline en uitvoering — als één doorlopende lijn, niet als losse ideeën.</span><span lang="en">Process, discipline and execution — one continuous line, not separate ideas.</span></p>
         <div class="ctas">
           <a class="btn" href="https://discord.gg/78Ff2GuSfW">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
-            Word lid van de Discord
+            <span lang="nl">Word lid van de Discord</span><span lang="en">Join on Discord</span>
           </a>
-          <a class="btn btn--o" href="#componenten">Bekijk de componenten</a>
+          <a class="btn btn--o" href="#componenten"><span lang="nl">Bekijk de componenten</span><span lang="en">See the components</span></a>
         </div>
       </div>
 
       <div class="diagram scrollx">
-        <svg viewBox="0 0 900 560" role="img" aria-label="Hoofdschema: van de markten via de educatie en het model naar de uitvoering" style="min-width:600px">
+        <svg viewBox="0 0 900 560" role="img" style="min-width:600px"><title lang="nl">Hoofdschema: van de markten via de educatie en het model naar de uitvoering</title><title lang="en">Main schematic: from the markets through the education and the model to execution</title>
           <!-- power rail: ervaring -->
           <path d="M60 46H860" class="w2"/>
           <g class="w2">
             <path d="M46 34V58"/><path d="M38 40V52"/>
           </g>
-          <text x="70" y="34" class="txg">VOEDING — 10+ JAAR ERVARING</text>
+          <text x="70" y="34" class="txg" lang="nl">VOEDING — 10+ JAAR ERVARING</text><text x="70" y="34" class="txg" lang="en">SUPPLY — 10+ YEARS EXPERIENCE</text>
           <path d="M520 46V126" class="w"/>
           <circle cx="520" cy="46" r="4" class="fg"/>
 
@@ -308,7 +327,7 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
           <text x="60" y="154" class="txs">ES</text>
           <text x="60" y="204" class="txs">BTC</text>
           <text x="60" y="254" class="txs">ALT</text>
-          <text x="60" y="304" class="txs">INGANGEN — DE MARKTEN</text>
+          <text x="60" y="304" class="txs" lang="nl">INGANGEN — DE MARKTEN</text><text x="60" y="304" class="txs" lang="en">INPUTS — THE MARKETS</text>
 
           <!-- bus -->
           <path d="M170 120V270" class="w2"/>
@@ -322,8 +341,8 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
           <path d="M250 195h10 l6 -14 l12 28 l12 -28 l12 28 l12 -28 l6 14 h10" class="w2"/>
           <circle cx="290" cy="150" r="4" class="fg"/>
           <path d="M290 150 L290 112 H196" class="w"/>
-          <text x="196" y="104" class="txg" font-size="11">E1–E10 — DE EDUCATIE</text>
-          <text x="196" y="88" class="txs">10 ONDERWERPEN</text>
+          <text x="196" y="104" class="txg" font-size="11" lang="nl">E1–E10 — DE EDUCATIE</text><text x="196" y="104" class="txg" font-size="11" lang="en">E1–E10 — THE EDUCATION</text>
+          <text x="196" y="88" class="txs" lang="nl">10 ONDERWERPEN</text><text x="196" y="88" class="txs" lang="en">10 TOPICS</text>
 
           <!-- branch to ground through the risk fuse -->
           <path d="M330 195H400" class="w"/>
@@ -337,49 +356,49 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
           </g>
           <circle cx="418" cy="285" r="4" class="fg"/>
           <path d="M418 285 L470 285" class="w"/>
-          <text x="476" y="282" class="txg" font-size="11">F1 — RISICOBEHEER</text>
-          <text x="476" y="298" class="txs">BEGRENST HET SIGNAAL</text>
-          <text x="352" y="386" class="txs">AARDE</text>
+          <text x="476" y="282" class="txg" font-size="11" lang="nl">F1 — RISICOBEHEER</text><text x="476" y="282" class="txg" font-size="11" lang="en">F1 — RISK MANAGEMENT</text>
+          <text x="476" y="298" class="txs" lang="nl">BEGRENST HET SIGNAAL</text><text x="476" y="298" class="txs" lang="en">LIMITS THE SIGNAL</text>
+          <text x="352" y="386" class="txs" lang="nl">AARDE</text><text x="352" y="386" class="txs" lang="en">GROUND</text>
 
           <!-- model block -->
           <path d="M400 195H470" class="w"/>
           <rect x="470" y="126" width="132" height="138" class="w2 fpn"/>
-          <text x="536" y="180" class="txg" font-size="11" text-anchor="middle">HET</text>
+          <text x="536" y="180" class="txg" font-size="11" text-anchor="middle" lang="nl">HET</text><text x="536" y="180" class="txg" font-size="11" text-anchor="middle" lang="en">THE</text>
           <text x="536" y="200" class="txg" font-size="11" text-anchor="middle">MODEL</text>
           <g class="wh"><path d="M486 222h100M486 236h72M486 250h88"/></g>
           <circle cx="602" cy="150" r="4" class="fg"/>
           <path d="M602 150 L660 150" class="w"/>
-          <text x="666" y="146" class="txs">SCHEMA A2</text>
+          <text x="666" y="146" class="txs" lang="nl">SCHEMA A2</text><text x="666" y="146" class="txs" lang="en">SCHEMATIC A2</text>
 
           <!-- decision gate -->
           <path d="M602 195H660" class="w"/>
           <path d="M660 158 L740 195 L660 232 Z" class="w2 fpn"/>
-          <text x="676" y="200" class="txs" font-size="10">POORT</text>
+          <text x="676" y="200" class="txs" font-size="10" lang="nl">POORT</text><text x="676" y="200" class="txs" font-size="10" lang="en">GATE</text>
           <circle cx="700" cy="232" r="4" class="fg"/>
           <path d="M700 232 L700 288 H620" class="w"/>
-          <text x="596" y="304" class="txs">BESLISSING — WEL OF NIET</text>
+          <text x="596" y="304" class="txs" lang="nl">BESLISSING — WEL OF NIET</text><text x="596" y="304" class="txs" lang="en">DECISION — YES OR NO</text>
 
           <!-- output -->
           <path d="M740 195H820" class="w2"/>
           <circle cx="828" cy="195" r="8" class="w2 fb"/>
           <path d="M836 195H866" class="w2"/>
           <path d="M878 195l-16 -7v14z" class="fg"/>
-          <text x="790" y="168" class="txg" font-size="11">UITVOERING</text>
+          <text x="790" y="168" class="txg" font-size="11" lang="nl">UITVOERING</text><text x="790" y="168" class="txg" font-size="11" lang="en">EXECUTION</text>
 
           <!-- ═ LEGEND ═ -->
           <rect x="40" y="430" width="520" height="112" class="wh fpn"/>
-          <text x="56" y="452" class="txg" font-size="10">LEGENDA</text>
+          <text x="56" y="452" class="txg" font-size="10" lang="nl">LEGENDA</text><text x="56" y="452" class="txg" font-size="10" lang="en">LEGEND</text>
           <g class="w"><path d="M60 480h8 l5 -9 l9 18 l9 -18 l9 18 l9 -18 l5 9 h8"/></g>
-          <text x="140" y="484" class="txs">WEERSTAND — EEN ONDERWERP UIT DE EDUCATIE</text>
+          <text x="140" y="484" class="txs" lang="nl">WEERSTAND — EEN ONDERWERP UIT DE EDUCATIE</text><text x="140" y="484" class="txs" lang="en">RESISTOR — A TOPIC FROM THE EDUCATION</text>
           <g class="w"><path d="M60 508h18M96 508h18"/><path d="M78 498v20M96 498v20" class="w2"/></g>
-          <text x="140" y="512" class="txs">CONDENSATOR — EEN GAT IN DE PRIJS (FVG)</text>
+          <text x="140" y="512" class="txs" lang="nl">CONDENSATOR — EEN GAT IN DE PRIJS (FVG)</text><text x="140" y="512" class="txs" lang="en">CAPACITOR — A GAP IN PRICE (FVG)</text>
           <circle cx="78" cy="532" r="4" class="fg"/>
           <path d="M60 532h36" class="w"/>
-          <text x="140" y="536" class="txs">KNOOPPUNT — HIER SPLITST DE BESLISSING</text>
-          <text x="580" y="452" class="txs">SCHEMA A1 · ATLAS CAPITAL</text>
-          <text x="580" y="472" class="txs">PROCES · DISCIPLINE · UITVOERING</text>
+          <text x="140" y="536" class="txs" lang="nl">KNOOPPUNT — HIER SPLITST DE BESLISSING</text><text x="140" y="536" class="txs" lang="en">NODE — WHERE THE DECISION SPLITS</text>
+          <text x="580" y="452" class="txs" lang="nl">SCHEMA A1 · ATLAS CAPITAL</text><text x="580" y="452" class="txs" lang="en">SCHEMATIC A1 · ATLAS CAPITAL</text>
+          <text x="580" y="472" class="txs" lang="nl">PROCES · DISCIPLINE · UITVOERING</text><text x="580" y="472" class="txs" lang="en">PROCESS · DISCIPLINE · EXECUTION</text>
         </svg>
-        <div class="dcap">Schema A1 — <b>het hoofdcircuit</b>. Elke component staat voor een echt onderdeel van de aanpak.</div>
+        <div class="dcap"><span lang="nl">Schema A1 — <b>het hoofdcircuit</b>. Elke component staat voor een echt onderdeel van de aanpak.</span><span lang="en">Schematic A1 — <b>the main circuit</b>. Every component stands for a real part of the approach.</span></div>
       </div>
     </div>
   </div>
@@ -400,26 +419,26 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
   <div class="pinL" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" class="w2 fb"/><circle cx="8" cy="8" r="2.6" class="fg"/></svg></div>
   <div class="blocktop">
     <span class="desig">V1</span>
-    <span class="ttl">Voeding</span>
-    <span class="rt">10+ JAAR ERVARING</span>
+    <span class="ttl"><span lang="nl">Voeding</span><span lang="en">Supply</span></span>
+    <span class="rt"><span lang="nl">10+ JAAR ERVARING</span><span lang="en">10+ YEARS EXPERIENCE</span></span>
   </div>
   <div class="blockbody">
     <div class="duo">
       <div>
-        <h2>Waar de stroom vandaan komt.</h2>
-        <p>"Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen."</p>
-        <p>"Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden."</p>
-        <div class="ctas"><a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW">Kijk mee in de server</a></div>
+        <h2><span lang="nl">Waar de stroom vandaan komt.</span><span lang="en">Where the current comes from.</span></h2>
+        <p><span lang="nl">"Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen."</span><span lang="en">"I've been involved in trading for over 10 years now, and during that time I've experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons."</span></p>
+        <p><span lang="nl">"Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden."</span><span lang="en">"I built Atlas Capital to share that experience, bring traders together, and show how I approach the markets on a daily basis. No get-rich-quick promises, just real setups, education, and a community focused on improving together."</span></p>
+        <div class="ctas"><a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kijk mee in de server</span><span lang="en">Look inside the server</span></a></div>
       </div>
       <div class="diagram">
-        <svg viewBox="0 0 520 300" role="img" aria-label="Voedingsbron: tien jaar ervaring die drie takken voedt">
+        <svg viewBox="0 0 520 300" role="img"><title lang="nl">Voedingsbron: tien jaar ervaring die drie takken voedt</title><title lang="en">Power source: ten years of experience feeding three branches</title>
           <!-- source -->
           <g class="w2">
             <path d="M60 90V210"/>
             <path d="M40 120V180"/>
           </g>
-          <text x="30" y="76" class="txg" font-size="11">10+ JAAR</text>
-          <text x="30" y="234" class="txs">BRON</text>
+          <text x="30" y="76" class="txg" font-size="11" lang="nl">10+ JAAR</text><text x="30" y="76" class="txg" font-size="11" lang="en">10+ YEARS</text>
+          <text x="30" y="234" class="txs" lang="nl">BRON</text><text x="30" y="234" class="txs" lang="en">SOURCE</text>
           <path d="M60 150H150" class="w2"/>
           <circle cx="150" cy="150" r="4.4" class="fg"/>
           <path d="M150 70V230" class="w2"/>
@@ -438,12 +457,12 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
           <path d="M312 150H400" class="w"/>
           <path d="M312 230H400" class="w"/>
           <g class="fg"><circle cx="400" cy="70" r="5"/><circle cx="400" cy="150" r="5"/><circle cx="400" cy="230" r="5"/></g>
-          <text x="416" y="75" class="tx" font-size="12">PROCES</text>
+          <text x="416" y="75" class="tx" font-size="12" lang="nl">PROCES</text><text x="416" y="75" class="tx" font-size="12" lang="en">PROCESS</text>
           <text x="416" y="155" class="tx" font-size="12">DISCIPLINE</text>
-          <text x="416" y="235" class="tx" font-size="12">UITVOERING</text>
-          <text x="250" y="272" class="txs">DRIE TAKKEN, ÉÉN BRON</text>
+          <text x="416" y="235" class="tx" font-size="12" lang="nl">UITVOERING</text><text x="416" y="235" class="tx" font-size="12" lang="en">EXECUTION</text>
+          <text x="250" y="272" class="txs" lang="nl">DRIE TAKKEN, ÉÉN BRON</text><text x="250" y="272" class="txs" lang="en">THREE BRANCHES, ONE SOURCE</text>
         </svg>
-        <div class="dcap">Voeding V1 — <b>ervaring</b> voedt alle drie de takken.</div>
+        <div class="dcap"><span lang="nl">Voeding V1 — <b>ervaring</b> voedt alle drie de takken.</span><span lang="en">Supply V1 — <b>experience</b> feeds all three branches.</span></div>
       </div>
     </div>
   </div>
@@ -463,79 +482,79 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
   <div class="pinL" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" class="w2 fb"/><circle cx="8" cy="8" r="2.6" class="fg"/></svg></div>
   <div class="blocktop">
     <span class="desig">E1–E10</span>
-    <span class="ttl">Componentenlijst</span>
-    <span class="rt">10 ONDERWERPEN</span>
+    <span class="ttl"><span lang="nl">Componentenlijst</span><span lang="en">Component list</span></span>
+    <span class="rt"><span lang="nl">10 ONDERWERPEN</span><span lang="en">10 TOPICS</span></span>
   </div>
   <div class="blockbody">
-    <h2>Tien componenten in het circuit.</h2>
-    <p class="lede">Elk symbool is gekozen om te laten zien wat het onderwerp dóet.</p>
+    <h2><span lang="nl">Tien componenten in het circuit.</span><span lang="en">Ten components in the circuit.</span></h2>
+    <p class="lede"><span lang="nl">Elk symbool is gekozen om te laten zien wat het onderwerp dóet.</span><span lang="en">Every symbol is chosen to show what the topic actually does.</span></p>
     <div class="comps">
       <div class="comp">
         <span class="ref">E1</span>
         <svg viewBox="0 0 120 30" aria-hidden="true"><path d="M4 22H44V8H80V22H116" class="w2"/><circle cx="62" cy="8" r="3.6" class="fg"/></svg>
-        <span class="nm">deviatie</span><span class="fn">SPRONG OVER HET NIVEAU</span>
+        <span class="nm"><span lang="nl">deviatie</span><span lang="en">deviation</span></span><span class="fn"><span lang="nl">SPRONG OVER HET NIVEAU</span><span lang="en">STEP ACROSS THE LEVEL</span></span>
       </div>
       <div class="comp">
         <span class="ref">E2</span>
         <svg viewBox="0 0 120 30" aria-hidden="true"><path d="M4 10H116" class="w2"/><path d="M4 22H116" class="wh"/><path d="M60 10V22" class="w"/></svg>
-        <span class="nm">SMT</span><span class="fn">TWEE LIJNEN VERGELEKEN</span>
+        <span class="nm">SMT</span><span class="fn"><span lang="nl">TWEE LIJNEN VERGELEKEN</span><span lang="en">TWO LINES COMPARED</span></span>
       </div>
       <div class="comp">
         <span class="ref">E3</span>
         <svg viewBox="0 0 120 30" aria-hidden="true"><path d="M4 15H52M68 15H116" class="w2"/><path d="M52 4V26M68 4V26" class="w2"/></svg>
-        <span class="nm">FVG</span><span class="fn">CONDENSATOR — HET GAT</span>
+        <span class="nm">FVG</span><span class="fn"><span lang="nl">CONDENSATOR — HET GAT</span><span lang="en">CAPACITOR — THE GAP</span></span>
       </div>
       <div class="comp">
         <span class="ref">E4</span>
         <svg viewBox="0 0 120 30" aria-hidden="true"><path d="M4 15H52M68 15H116" class="w2"/><path d="M52 4V26" class="w2"/><path d="M68 4 A14 14 0 0 1 68 26" class="w2"/></svg>
-        <span class="nm">IFVG</span><span class="fn">HETZELFDE, OMGEKEERD</span>
+        <span class="nm">IFVG</span><span class="fn"><span lang="nl">HETZELFDE, OMGEKEERD</span><span lang="en">THE SAME, INVERTED</span></span>
       </div>
       <div class="comp">
         <span class="ref">E5</span>
         <svg viewBox="0 0 120 30" aria-hidden="true"><path d="M4 15H36M84 15H116" class="w2"/><rect x="36" y="6" width="48" height="18" class="w2 fgs"/></svg>
-        <span class="nm">orderblocks</span><span class="fn">BLOK — DE HERKOMST</span>
+        <span class="nm">orderblocks</span><span class="fn"><span lang="nl">BLOK — DE HERKOMST</span><span lang="en">BLOCK — THE ORIGIN</span></span>
       </div>
       <div class="comp">
         <span class="ref">E6</span>
         <svg viewBox="0 0 120 30" aria-hidden="true"><path d="M4 20H30M90 20H116" class="w2"/><rect x="30" y="12" width="60" height="16" class="w2"/><path d="M60 12V2" class="w"/><path d="M60 0l-5 8h10z" class="fg"/></svg>
-        <span class="nm">fibonacci</span><span class="fn">AFTAKKING OP VERHOUDING</span>
+        <span class="nm">fibonacci</span><span class="fn"><span lang="nl">AFTAKKING OP VERHOUDING</span><span lang="en">TAP AT A RATIO</span></span>
       </div>
       <div class="comp">
         <span class="ref">E7</span>
         <svg viewBox="0 0 120 30" aria-hidden="true"><path d="M4 20H26" class="w2"/><path d="M26 20 A10 10 0 0 1 46 20 A10 10 0 0 1 66 20 A10 10 0 0 1 86 20" class="w2"/><path d="M86 20H116" class="w2"/></svg>
-        <span class="nm">sessie-liquiditeit</span><span class="fn">SPOEL — WAT BLIJFT HANGEN</span>
+        <span class="nm"><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></span><span class="fn"><span lang="nl">SPOEL — WAT BLIJFT HANGEN</span><span lang="en">COIL — WHAT LINGERS</span></span>
       </div>
       <div class="comp">
         <span class="ref">E8</span>
         <svg viewBox="0 0 120 30" aria-hidden="true"><path d="M60 2V10" class="w2"/><path d="M28 10H92M38 18H82M48 26H72" class="w2"/></svg>
-        <span class="nm">liquiditeit</span><span class="fn">POELEN ONDER DE MARKT</span>
+        <span class="nm"><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></span><span class="fn"><span lang="nl">POELEN ONDER DE MARKT</span><span lang="en">POOLS UNDER THE MARKET</span></span>
       </div>
       <div class="comp">
         <span class="ref">E9</span>
         <svg viewBox="0 0 120 30" aria-hidden="true"><path d="M4 15H32M88 15H116" class="w2"/><rect x="32" y="5" width="56" height="20" class="w2"/><path d="M32 15H88" class="wh"/></svg>
-        <span class="nm">risicobeheer</span><span class="fn">ZEKERING — DE BEGRENZING</span>
+        <span class="nm"><span lang="nl">risicobeheer</span><span lang="en">risk management</span></span><span class="fn"><span lang="nl">ZEKERING — DE BEGRENZING</span><span lang="en">FUSE — THE LIMIT</span></span>
       </div>
       <div class="comp">
         <span class="ref">E10</span>
         <svg viewBox="0 0 120 30" aria-hidden="true"><path d="M4 15H34M86 15H116" class="w2"/><path d="M34 4V26M86 4V26" class="w2"/><rect x="44" y="6" width="32" height="18" class="w2 fgs"/></svg>
-        <span class="nm">tradingpsychologie</span><span class="fn">KRISTAL — HET RITME</span>
+        <span class="nm"><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></span><span class="fn"><span lang="nl">KRISTAL — HET RITME</span><span lang="en">CRYSTAL — THE RHYTHM</span></span>
       </div>
     </div>
 
     <div class="legend">
-      <div class="lh">Legenda bij de componenten</div>
+      <div class="lh"><span lang="nl">Legenda bij de componenten</span><span lang="en">Legend to the components</span></div>
       <div class="legrid">
         <div class="legrow">
           <svg viewBox="0 0 52 22" aria-hidden="true"><path d="M2 11h6l4-8 7 16 7-16 7 16 7-16 4 8h6" class="w"/></svg>
-          Weerstand — een onderwerp dat het signaal vormt
+          <span lang="nl">Weerstand — een onderwerp dat het signaal vormt</span><span lang="en">Resistor — a topic that shapes the signal</span>
         </div>
         <div class="legrow">
           <svg viewBox="0 0 52 22" aria-hidden="true"><path d="M2 11h18M32 11h18" class="w"/><path d="M20 3v16M32 3v16" class="w2"/></svg>
-          Condensator — een gat dat later gevuld wordt
+          <span lang="nl">Condensator — een gat dat later gevuld wordt</span><span lang="en">Capacitor — a gap that gets filled later</span>
         </div>
         <div class="legrow">
           <svg viewBox="0 0 52 22" aria-hidden="true"><path d="M2 11h48" class="w"/><circle cx="26" cy="11" r="4" class="fg"/></svg>
-          Knooppunt — waar de beslissing splitst
+          <span lang="nl">Knooppunt — waar de beslissing splitst</span><span lang="en">Node — where the decision splits</span>
         </div>
       </div>
     </div>
@@ -543,7 +562,7 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
     <div class="ctas">
       <a class="btn" href="https://discord.gg/78Ff2GuSfW">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
-        Leer alle tien de componenten
+        <span lang="nl">Leer alle tien de componenten</span><span lang="en">Learn all ten components</span>
       </a>
     </div>
   </div>
@@ -564,25 +583,25 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
   <div class="pinL" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" class="w2 fb"/><circle cx="8" cy="8" r="2.6" class="fg"/></svg></div>
   <div class="blocktop">
     <span class="desig">A2</span>
-    <span class="ttl">Het model</span>
-    <span class="rt">SCHEMATISCH · GEEN KOERSEN</span>
+    <span class="ttl"><span lang="nl">Het model</span><span lang="en">The model</span></span>
+    <span class="rt"><span lang="nl">SCHEMATISCH · GEEN KOERSEN</span><span lang="en">SCHEMATIC · NO PRICES</span></span>
   </div>
   <div class="blockbody">
-    <h2>Het signaal, uitgelezen.</h2>
-    <p class="lede">Zo ziet één idee eruit als je het als signaal tekent.</p>
+    <h2><span lang="nl">Het signaal, uitgelezen.</span><span lang="en">The signal, read out.</span></h2>
+    <p class="lede"><span lang="nl">Zo ziet één idee eruit als je het als signaal tekent.</span><span lang="en">This is what one idea looks like drawn as a signal.</span></p>
     <div class="diagram scrollx">
-      <svg viewBox="0 0 900 480" role="img" aria-label="Het model als signaalspoor met markeringen voor liquiditeit, sweep, onbalans, orderblock en deviatie" style="min-width:660px">
+      <svg viewBox="0 0 900 480" role="img" style="min-width:660px"><title lang="nl">Het model als signaalspoor met markeringen voor liquiditeit, sweep, onbalans, orderblock en deviatie</title><title lang="en">The model as a signal trace, marked for liquidity, sweep, imbalance, orderblock and deviation</title>
         <!-- scope frame -->
         <rect x="60" y="46" width="800" height="330" class="wh fpn"/>
         <g class="wh" opacity=".5">
           <path d="M60 112H860M60 178H860M60 244H860M60 310H860"/>
           <path d="M160 46V376M260 46V376M360 46V376M460 46V376M560 46V376M660 46V376M760 46V376"/>
         </g>
-        <text x="66" y="38" class="txs">SPOOR A2 — SIGNAALVERLOOP</text>
+        <text x="66" y="38" class="txs" lang="nl">SPOOR A2 — SIGNAALVERLOOP</text><text x="66" y="38" class="txs" lang="en">TRACE A2 — SIGNAL PATH</text>
 
         <!-- trigger level = liquiditeit -->
         <path d="M60 100H620" class="w" stroke-dasharray="9 6"/>
-        <text x="628" y="96" class="txs">DREMPEL — LIQUIDITEIT</text>
+        <text x="628" y="96" class="txs" lang="nl">DREMPEL — LIQUIDITEIT</text><text x="628" y="96" class="txs" lang="en">THRESHOLD — LIQUIDITY</text>
 
         <!-- the signal trace -->
         <path d="M80 300 L130 288 L170 262 L210 268 L250 232 L290 240 L330 196 L370 204 L400 120 L420 88 L440 128 L470 206 L500 268 L540 300 L580 288 L620 306 L660 282 L700 296 L740 268 L780 278 L820 250 L855 262"
@@ -592,7 +611,7 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
         <circle cx="420" cy="88" r="5" class="fg"/>
         <path d="M420 88 L468 60 H660" class="w"/>
         <text x="666" y="56" class="txg" font-size="11">SWEEP</text>
-        <text x="666" y="72" class="txs">DE DREMPEL WORDT GEPAKT</text>
+        <text x="666" y="72" class="txs" lang="nl">DE DREMPEL WORDT GEPAKT</text><text x="666" y="72" class="txs" lang="en">THE THRESHOLD IS TAKEN</text>
 
         <!-- FVG: capacitor gap in the trace -->
         <rect x="440" y="150" width="120" height="60" class="fgs"/>
@@ -601,25 +620,25 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
         <circle cx="500" cy="210" r="5" class="fg"/>
         <path d="M500 210 L500 262 H330" class="w"/>
         <text x="242" y="278" class="txg" font-size="11">FVG</text>
-        <text x="242" y="294" class="txs">HET GAT IN HET SIGNAAL</text>
+        <text x="242" y="294" class="txs" lang="nl">HET GAT IN HET SIGNAAL</text><text x="242" y="294" class="txs" lang="en">THE GAP IN THE SIGNAL</text>
 
         <!-- orderblock as source block -->
         <rect x="356" y="176" width="34" height="60" class="w2" fill="none" stroke-dasharray="6 4"/>
         <circle cx="356" cy="236" r="5" class="fg"/>
         <path d="M356 236 L300 322 H120" class="w"/>
         <text x="120" y="340" class="txg" font-size="11">ORDERBLOCK</text>
-        <text x="120" y="356" class="txs">DE BRON VAN DE BEWEGING</text>
+        <text x="120" y="356" class="txs" lang="nl">DE BRON VAN DE BEWEGING</text><text x="120" y="356" class="txs" lang="en">THE SOURCE OF THE MOVE</text>
 
         <!-- deviation return -->
         <circle cx="620" cy="306" r="5" class="fg"/>
         <path d="M620 306 L680 348 H820" class="w"/>
-        <text x="700" y="368" class="txg" font-size="11">DEVIATIE</text>
-        <text x="620" y="368" class="txs" text-anchor="end">TERUG DOOR HET NIVEAU</text>
+        <text x="700" y="368" class="txg" font-size="11" lang="nl">DEVIATIE</text><text x="700" y="368" class="txg" font-size="11" lang="en">DEVIATION</text>
+        <text x="620" y="368" class="txs" text-anchor="end" lang="nl">TERUG DOOR HET NIVEAU</text><text x="620" y="368" class="txs" text-anchor="end" lang="en">BACK THROUGH THE LEVEL</text>
 
         <!-- output stage -->
         <path d="M860 262H886" class="w2"/>
         <path d="M898 262l-16 -7v14z" class="fg"/>
-        <text x="796" y="230" class="txg" font-size="11">UITGANG</text>
+        <text x="796" y="230" class="txg" font-size="11" lang="nl">UITGANG</text><text x="796" y="230" class="txg" font-size="11" lang="en">OUTPUT</text>
 
         <!-- risk clamp rails -->
         <path d="M60 404H400" class="w" stroke-dasharray="6 4"/>
@@ -628,10 +647,10 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
         <g class="w2"><path d="M96 396v-14M96 448v14"/></g>
         <path d="M96 378l-4.6 12h9.2z" class="fg"/>
         <path d="M96 466l-4.6-12h9.2z" class="fg"/>
-        <text x="120" y="428" class="txs">BEGRENZING — RISICOBEHEER (F1)</text>
-        <text x="440" y="428" class="txs">VOORAF VASTGELEGD, NIET ONDERWEG BIJGESTELD</text>
+        <text x="120" y="428" class="txs" lang="nl">BEGRENZING — RISICOBEHEER (F1)</text><text x="120" y="428" class="txs" lang="en">LIMIT — RISK MANAGEMENT (F1)</text>
+        <text x="440" y="428" class="txs" lang="nl">VOORAF VASTGELEGD, NIET ONDERWEG BIJGESTELD</text><text x="440" y="428" class="txs" lang="en">SET IN ADVANCE, NOT ADJUSTED EN ROUTE</text>
       </svg>
-      <div class="dcap">Spoor A2 — <b>schematisch</b>. Geen koersen, geen niveaus, geen uitkomsten.</div>
+      <div class="dcap"><span lang="nl">Spoor A2 — <b>schematisch</b>. Geen koersen, geen niveaus, geen uitkomsten.</span><span lang="en">Trace A2 — <b>schematic</b>. No prices, no levels, no outcomes.</span></div>
     </div>
   </div>
   <div class="pinR" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" class="w2 fb"/><circle cx="8" cy="8" r="2.6" class="fg"/></svg></div>
@@ -650,17 +669,17 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
   <div class="pinL" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" class="w2 fb"/><circle cx="8" cy="8" r="2.6" class="fg"/></svg></div>
   <div class="blocktop">
     <span class="desig">J1</span>
-    <span class="ttl">Aansluitingen</span>
-    <span class="rt">15 PENNEN</span>
+    <span class="ttl"><span lang="nl">Aansluitingen</span><span lang="en">Connections</span></span>
+    <span class="rt"><span lang="nl">15 PENNEN</span><span lang="en">15 PINS</span></span>
   </div>
   <div class="blockbody">
-    <h2>Vijftien aansluitingen.</h2>
-    <p class="lede">Negen staan onder spanning. Zes zijn al bedraad, maar nog niet aangesloten.</p>
+    <h2><span lang="nl">Vijftien aansluitingen.</span><span lang="en">Fifteen connections.</span></h2>
+    <p class="lede"><span lang="nl">Negen staan onder spanning. Zes zijn al bedraad, maar nog niet aangesloten.</span><span lang="en">Nine are live. Six are already wired, but not yet connected.</span></p>
 
     <div class="hdrwrap scrollx">
-      <svg viewBox="0 0 900 200" role="img" aria-label="Connector met vijftien pennen: negen aangesloten, zes gereserveerd" style="min-width:640px">
+      <svg viewBox="0 0 900 200" role="img" style="min-width:640px"><title lang="nl">Connector met vijftien pennen: negen aangesloten, zes gereserveerd</title><title lang="en">Connector with fifteen pins: nine wired, six reserved</title>
         <rect x="40" y="60" width="820" height="60" rx="4" class="w2 fpn"/>
-        <text x="40" y="46" class="txs">CONNECTOR J1 — DE SERVER</text>
+        <text x="40" y="46" class="txs" lang="nl">CONNECTOR J1 — DE SERVER</text><text x="40" y="46" class="txs" lang="en">CONNECTOR J1 — THE SERVER</text>
         <g>
           <g class="w2 fb"><rect x="60" y="76" width="26" height="28" rx="2"/><rect x="114" y="76" width="26" height="28" rx="2"/><rect x="168" y="76" width="26" height="28" rx="2"/><rect x="222" y="76" width="26" height="28" rx="2"/><rect x="276" y="76" width="26" height="28" rx="2"/><rect x="330" y="76" width="26" height="28" rx="2"/><rect x="384" y="76" width="26" height="28" rx="2"/><rect x="438" y="76" width="26" height="28" rx="2"/><rect x="492" y="76" width="26" height="28" rx="2"/></g>
           <g class="fg"><circle cx="73" cy="90" r="5"/><circle cx="127" cy="90" r="5"/><circle cx="181" cy="90" r="5"/><circle cx="235" cy="90" r="5"/><circle cx="289" cy="90" r="5"/><circle cx="343" cy="90" r="5"/><circle cx="397" cy="90" r="5"/><circle cx="451" cy="90" r="5"/><circle cx="505" cy="90" r="5"/></g>
@@ -672,14 +691,14 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
           <g class="wo"><path d="M573 120V158M627 120V158M681 120V158M735 120V158M789 120V158M835 120V158"/></g>
           <path d="M573 158H835" class="wo"/>
         </g>
-        <text x="60" y="182" class="txg" font-size="11">9 ONDER SPANNING — NU GRATIS</text>
-        <text x="560" y="182" class="txs">6 GERESERVEERD — PREMIUM VOLGT</text>
+        <text x="60" y="182" class="txg" font-size="11" lang="nl">9 ONDER SPANNING — NU GRATIS</text><text x="60" y="182" class="txg" font-size="11" lang="en">9 LIVE — FREE RIGHT NOW</text>
+        <text x="560" y="182" class="txs" lang="nl">6 GERESERVEERD — PREMIUM VOLGT</text><text x="560" y="182" class="txs" lang="en">6 RESERVED — PREMIUM FOLLOWS</text>
       </svg>
     </div>
 
     <div class="chgrid">
       <div class="chb">
-        <div class="chh"><span class="a">Thuis — nu gratis</span><span class="b">Pen 01–09</span></div>
+        <div class="chh"><span class="a"><span lang="nl">Thuis — nu gratis</span><span lang="en">Home — free right now</span></span><span class="b"><span lang="nl">Pen 01–09</span><span lang="en">Pin 01–09</span></span></div>
         <ul class="chl">
           <li><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5" class="fg"/></svg>#nq-chart-ideeën<span class="p">01</span></li>
           <li><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5" class="fg"/></svg>#es-chart-ideeën<span class="p">02</span></li>
@@ -693,7 +712,7 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
         </ul>
       </div>
       <div class="chb">
-        <div class="chh"><span class="a">Premium — opent later</span><span class="b">Pen 10–15</span></div>
+        <div class="chh"><span class="a"><span lang="nl">Premium — opent later</span><span lang="en">Premium — opens later</span></span><span class="b"><span lang="nl">Pen 10–15</span><span lang="en">Pin 10–15</span></span></div>
         <ul class="chl">
           <li class="off"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5" class="wh"/></svg>#trade-setups<span class="p">10</span></li>
           <li class="off"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5" class="wh"/></svg>#marktupdates<span class="p">11</span></li>
@@ -702,7 +721,7 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
           <li class="off"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5" class="wh"/></svg>#chart-ideeën<span class="p">14</span></li>
           <li class="off"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5" class="wh"/></svg>#premium-chat<span class="p">15</span></li>
         </ul>
-        <div style="padding:13px"><a class="btn btn--o" style="width:100%" href="https://discord.gg/78Ff2GuSfW">Sluit je aan</a></div>
+        <div style="padding:13px"><a class="btn btn--o" style="width:100%" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Sluit je aan</span><span lang="en">Connect</span></a></div>
       </div>
     </div>
   </div>
@@ -722,61 +741,61 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
   <div class="pinL" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" class="w2 fb"/><circle cx="8" cy="8" r="2.6" class="fg"/></svg></div>
   <div class="blocktop">
     <span class="desig">S1 · S2</span>
-    <span class="ttl">Schakelaars &amp; live</span>
-    <span class="rt">TOEGANG</span>
+    <span class="ttl"><span lang="nl">Schakelaars &amp; live</span><span lang="en">Switches &amp; live</span></span>
+    <span class="rt"><span lang="nl">TOEGANG</span><span lang="en">ACCESS</span></span>
   </div>
   <div class="blockbody">
     <div class="duo" style="margin-bottom:28px">
       <div>
-        <div class="livetag"><i class="blip"></i>Live in de server</div>
-        <h2>Het circuit staat aan.</h2>
-        <p>De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
-        <div class="ctas"><a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW">Zit een sessie bij</a></div>
+        <div class="livetag"><i class="blip"></i><span lang="nl">Live in de server</span><span lang="en">Live in the server</span></div>
+        <h2><span lang="nl">Het circuit staat aan.</span><span lang="en">The circuit is on.</span></h2>
+        <p><span lang="nl">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced there.</span></p>
+        <div class="ctas"><a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Zit een sessie bij</span><span lang="en">Sit in on a session</span></a></div>
       </div>
       <div class="diagram">
-        <svg viewBox="0 0 520 200" role="img" aria-label="Doorlopend signaal tijdens een live sessie, met de vier gevolgde markten">
+        <svg viewBox="0 0 520 200" role="img"><title lang="nl">Doorlopend signaal tijdens een live sessie, met de vier gevolgde markten</title><title lang="en">Continuous signal during a live session, with the four markets followed</title>
           <path d="M20 100 Q45 40 70 100 T120 100 T170 100 T220 100 T270 100 T320 100 T370 100 T420 100 T470 100" class="w2"/>
           <path d="M20 100H500" class="wh"/>
           <g class="fg"><circle cx="95" cy="100" r="4"/><circle cx="245" cy="100" r="4"/><circle cx="395" cy="100" r="4"/></g>
-          <text x="20" y="42" class="txs">DOORLOPEND SIGNAAL</text>
+          <text x="20" y="42" class="txs" lang="nl">DOORLOPEND SIGNAAL</text><text x="20" y="42" class="txs" lang="en">CONTINUOUS SIGNAL</text>
           <text x="20" y="168" class="txg" font-size="12">NQ · ES · BTC · ALT</text>
-          <text x="20" y="188" class="txs">DE GEVOLGDE MARKTEN</text>
+          <text x="20" y="188" class="txs" lang="nl">DE GEVOLGDE MARKTEN</text><text x="20" y="188" class="txs" lang="en">THE MARKETS FOLLOWED</text>
         </svg>
-        <div class="dcap">Uitgang — <b>live meekijken</b> terwijl het gebeurt.</div>
+        <div class="dcap"><span lang="nl">Uitgang — <b>live meekijken</b> terwijl het gebeurt.</span><span lang="en">Output — <b>watch live</b> while it happens.</span></div>
       </div>
     </div>
 
     <div class="sw">
       <div>
-        <svg class="swi" viewBox="0 0 280 90" role="img" aria-label="Gesloten schakelaar: gratis toegang staat open">
+        <svg class="swi" viewBox="0 0 280 90" role="img"><title lang="nl">Gesloten schakelaar: gratis toegang staat open</title><title lang="en">Closed switch: free access is open</title>
           <path d="M10 50H80" class="w2"/>
           <circle cx="80" cy="50" r="6" class="w2 fb"/>
           <path d="M80 50H200" class="w2"/>
           <circle cx="200" cy="50" r="6" class="w2 fb"/>
           <path d="M200 50H270" class="w2"/>
-          <text x="10" y="30" class="txg" font-size="11">S1 — GESLOTEN</text>
-          <text x="10" y="80" class="txs">STROOM LOOPT</text>
+          <text x="10" y="30" class="txg" font-size="11" lang="nl">S1 — GESLOTEN</text><text x="10" y="30" class="txg" font-size="11" lang="en">S1 — CLOSED</text>
+          <text x="10" y="80" class="txs" lang="nl">STROOM LOOPT</text><text x="10" y="80" class="txs" lang="en">CURRENT FLOWS</text>
         </svg>
-        <p class="val"><b>Gratis</b> toegang</p>
-        <p>Negen kanalen, de educatie en het meekijken. Geen drempel.</p>
+        <p class="val"><span lang="nl"><b>Gratis</b> toegang</span><span lang="en"><b>Free</b> access</span></p>
+        <p><span lang="nl">Negen kanalen, de educatie en het meekijken. Geen drempel.</span><span lang="en">Nine channels, the education and watching along. No barrier.</span></p>
         <a class="btn" href="https://discord.gg/78Ff2GuSfW">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
-          Word nu lid
+          <span lang="nl">Word nu lid</span><span lang="en">Join now</span>
         </a>
       </div>
       <div>
-        <svg class="swi" viewBox="0 0 280 90" role="img" aria-label="Open schakelaar: premium is nog niet aangesloten">
+        <svg class="swi" viewBox="0 0 280 90" role="img"><title lang="nl">Open schakelaar: premium is nog niet aangesloten</title><title lang="en">Open switch: premium is not connected yet</title>
           <path d="M10 50H80" class="w2"/>
           <circle cx="80" cy="50" r="6" class="w2 fb"/>
           <path d="M84 46L196 16" class="w2"/>
           <circle cx="200" cy="50" r="6" class="w2 fb"/>
           <path d="M200 50H270" class="wh"/>
-          <text x="10" y="80" class="txs">NOG NIET GESLOTEN</text>
+          <text x="10" y="80" class="txs" lang="nl">NOG NIET GESLOTEN</text><text x="10" y="80" class="txs" lang="en">NOT CLOSED YET</text>
           <text x="146" y="84" class="txs">S2 — OPEN</text>
         </svg>
         <p class="val">Premium</p>
-        <p>Zes extra kanalen. Prijs en datum worden in de server aangekondigd.</p>
-        <a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW">Blijf op de hoogte</a>
+        <p><span lang="nl">Zes extra kanalen. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Six more channels. Price and date are announced in the server.</span></p>
+        <a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Blijf op de hoogte</span><span lang="en">Stay posted</span></a>
       </div>
     </div>
   </div>
@@ -790,11 +809,11 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
     <circle cx="390" cy="48" r="5" class="fg"/>
     <circle cx="300" cy="12" r="8" class="w2 fb"/><circle cx="300" cy="12" r="3" class="fg"/>
   </svg>
-  <h2>Sluit het circuit.<br><em>Kom erbij.</em></h2>
+  <h2><span lang="nl">Sluit het circuit.<br><em>Kom erbij.</em></span><span lang="en">Close the circuit.<br><em>Come inside.</em></span></h2>
   <div class="ctas">
     <a class="btn" href="https://discord.gg/78Ff2GuSfW">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
-      Word lid van de Discord
+      <span lang="nl">Word lid van de Discord</span><span lang="en">Join on Discord</span>
     </a>
     <a class="btn btn--o" href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
   </div>
@@ -806,10 +825,31 @@ footer{max-width:1240px;margin:0 auto;padding:20px 16px 46px}
   <div class="foot">
     <a href="https://discord.gg/78Ff2GuSfW">DISCORD</a>
     <a href="https://www.tiktok.com/@atlascapitalbv">TIKTOK · @ATLASCAPITALBV</a>
-    <span style="color:var(--dim)">SCHEMA A1 · ATLAS CAPITAL</span>
-    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <span style="color:var(--dim)"><span lang="nl">SCHEMA A1 · ATLAS CAPITAL</span><span lang="en">SCHEMATIC A1 · ATLAS CAPITAL</span></span>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
   </div>
 </footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

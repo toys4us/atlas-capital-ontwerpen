@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,6 +50,23 @@ body{
 }
 a{color:inherit;text-decoration:none}
 p{margin:0}
+
+/* ---- language ----------------------------------------------------------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.langsw{display:inline-flex;box-shadow:inset 0 0 0 1px var(--gold-lo)}
+.langsw button{
+  appearance:none;-webkit-appearance:none;
+  background:transparent;border:0;margin:0;cursor:pointer;
+  padding:12px 12px 12px 16px;
+  font-family:inherit;font-size:12px;font-weight:700;line-height:1.52;
+  letter-spacing:.19em;text-transform:uppercase;color:var(--muted);
+  transition:background .16s ease,color .16s ease;
+}
+.langsw button + button{box-shadow:inset 1px 0 0 var(--gold-lo)}
+.langsw button:hover{color:var(--gold)}
+.langsw button[aria-pressed="true"]{background:var(--gold);color:var(--k1)}
 
 .field{max-width:1500px;margin:0 auto;padding:var(--gap) clamp(10px,1.6vw,18px) 0}
 
@@ -211,8 +228,12 @@ p{margin:0}
     <div class="p k4 hb c1-13">
       <div class="hd">
         <div class="mark"><span class="sq" aria-hidden="true"></span><b>Atlas Capital</b></div>
-        <span class="lab m">Proces · Discipline · Uitvoering</span>
-        <a class="btn" href="https://discord.gg/78Ff2GuSfW">Open Discord</a>
+        <span class="lab m"><span lang="nl">Proces · Discipline · Uitvoering</span><span lang="en">Process · Discipline · Execution</span></span>
+        <a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open Discord</span><span lang="en">Open Discord</span></a>
+        <div class="langsw" role="group" aria-label="Taal / Language">
+          <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
       </div>
     </div>
   </div>
@@ -220,65 +241,65 @@ p{margin:0}
   <!-- ============ 01 — HERO : FIVE PLANES ============ -->
   <div class="comp">
     <div class="p k1 hl c1-8 r1-3" style="display:flex;flex-direction:column">
-      <span class="lab">01 — Introductie</span>
+      <span class="lab"><span lang="nl">01 — Introductie</span><span lang="en">01 — Introduction</span></span>
       <div class="spacer"></div>
-      <h1 class="h1">Alles op<br>zijn plek.</h1>
-      <p class="txt mt32">Een Nederlandse trading-community rond educatie, structuur en de dagelijkse markt.</p>
-      <p class="mt32"><a class="btn lg" href="https://discord.gg/78Ff2GuSfW">Word lid via Discord</a></p>
+      <h1 class="h1"><span lang="nl">Alles op<br>zijn plek.</span><span lang="en">Everything in<br>its place.</span></h1>
+      <p class="txt mt32"><span lang="nl">Een Nederlandse trading-community rond educatie, structuur en de dagelijkse markt.</span><span lang="en">A Dutch trading community built on education, structure and the daily market.</span></p>
+      <p class="mt32"><a class="btn lg" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid via Discord</span><span lang="en">Join on Discord</span></a></p>
     </div>
 
     <div class="p k3 ht c9-13 r1-2">
-      <span class="lab m">Markten</span>
+      <span class="lab m"><span lang="nl">Markten</span><span lang="en">Markets</span></span>
       <p class="h3 mt20">NQ<br>ES<br>Bitcoin<br>Altcoins</p>
     </div>
 
     <div class="p k5 hb c9-13 r2-3">
-      <span class="lab m">De server</span>
-      <p class="h2 mt12">15 kanalen<br>10 onderwerpen</p>
-      <p class="mt20"><a class="btn line" href="https://discord.gg/78Ff2GuSfW">Bekijk de server</a></p>
+      <span class="lab m"><span lang="nl">De server</span><span lang="en">The server</span></span>
+      <p class="h2 mt12"><span lang="nl">15 kanalen<br>10 onderwerpen</span><span lang="en">15 channels<br>10 topics</span></p>
+      <p class="mt20"><a class="btn line" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Bekijk de server</span><span lang="en">See the server</span></a></p>
     </div>
 
     <div class="p k2 hr c1-13 r3-4">
-      <span class="lab">Nu gratis</span>
-      <p class="h3 mt12">Premium opent later. Prijs en datum in de server.</p>
+      <span class="lab"><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></span>
+      <p class="h3 mt12"><span lang="nl">Premium opent later. Prijs en datum in de server.</span><span lang="en">Premium opens later. Price and date in the server.</span></p>
     </div>
   </div>
 
   <!-- ============ DRIE WOORDEN : THREE PLANES, THREE EDGES ============ -->
   <div class="comp">
     <div class="p k1 hl c1-4">
-      <span class="lab">Proces</span>
-      <p class="h3 mt20">Eén manier van kijken. Elke dag dezelfde volgorde.</p>
+      <span class="lab"><span lang="nl">Proces</span><span lang="en">Process</span></span>
+      <p class="h3 mt20"><span lang="nl">Eén manier van kijken. Elke dag dezelfde volgorde.</span><span lang="en">One way of looking. The same order every day.</span></p>
     </div>
     <div class="p k5 ht c5-9">
-      <span class="lab">Discipline</span>
-      <p class="h3 mt20">Risicobeheer en psychologie staan in het curriculum, niet ernaast.</p>
+      <span class="lab"><span lang="nl">Discipline</span><span lang="en">Discipline</span></span>
+      <p class="h3 mt20"><span lang="nl">Risicobeheer en psychologie staan in het curriculum, niet ernaast.</span><span lang="en">Risk management and psychology sit inside the curriculum, not beside it.</span></p>
     </div>
     <div class="p k3 hr c10-13">
-      <span class="lab">Uitvoering</span>
-      <p class="h3 mt20">Live meekijken terwijl de markt beweegt.</p>
+      <span class="lab"><span lang="nl">Uitvoering</span><span lang="en">Execution</span></span>
+      <p class="h3 mt20"><span lang="nl">Live meekijken terwijl de markt beweegt.</span><span lang="en">Watch live while the market moves.</span></p>
     </div>
   </div>
 
   <!-- ============ MARKTEN : FOUR UNEQUAL PLANES ============ -->
   <div class="quad">
     <div class="p k1 hb">
-      <span class="lab m">Markt</span>
+      <span class="lab m"><span lang="nl">Markt</span><span lang="en">Market</span></span>
       <span class="tick">NQ</span>
       <span class="lab m">Nasdaq futures</span>
     </div>
     <div class="p k4 hl">
-      <span class="lab m">Markt</span>
+      <span class="lab m"><span lang="nl">Markt</span><span lang="en">Market</span></span>
       <span class="tick">ES</span>
       <span class="lab m">S&amp;P futures</span>
     </div>
     <div class="p k3 ht">
-      <span class="lab m">Markt</span>
+      <span class="lab m"><span lang="nl">Markt</span><span lang="en">Market</span></span>
       <span class="tick">BTC</span>
       <span class="lab m">Bitcoin</span>
     </div>
     <div class="p k5 hr">
-      <span class="lab m">Markt</span>
+      <span class="lab m"><span lang="nl">Markt</span><span lang="en">Market</span></span>
       <span class="tick">ALT</span>
       <span class="lab m">Altcoins</span>
     </div>
@@ -287,54 +308,55 @@ p{margin:0}
   <!-- ============ 02 — DE OPRICHTER ============ -->
   <div class="comp">
     <div class="p k3 hl c1-4">
-      <span class="lab">02 — De oprichter</span>
+      <span class="lab"><span lang="nl">02 — De oprichter</span><span lang="en">02 — The founder</span></span>
       <span class="num mt32">10+</span>
-      <p class="lab m mt12">jaar in de markten</p>
+      <p class="lab m mt12"><span lang="nl">jaar in de markten</span><span lang="en">years in the markets</span></p>
     </div>
     <div class="p k1 ht c5-13">
-      <p class="txt" style="max-width:52ch">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</p>
-      <p class="txt mt20" style="max-width:52ch">Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</p>
-      <p class="mt32"><a class="btn line" href="https://discord.gg/78Ff2GuSfW">Lees mee in Discord</a></p>
+      <p class="txt" style="max-width:52ch"><span lang="nl">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</span><span lang="en">I've been involved in trading for over 10 years now, and during that time I've experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons.</span></p>
+      <p class="txt mt20" style="max-width:52ch"><span lang="nl">Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</span><span lang="en">No get-rich-quick promises, just real setups, education, and a community focused on improving together.</span></p>
+      <p class="mt32"><a class="btn line" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Lees mee in Discord</span><span lang="en">Follow along in Discord</span></a></p>
     </div>
   </div>
 
   <!-- ============ 03 — EDUCATIE ============ -->
   <div class="comp">
     <div class="p k4 hb c1-13">
-      <span class="lab">03 — Educatie</span>
-      <h2 class="h2 mt20">Tien onderwerpen, tien vlakken.</h2>
+      <span class="lab"><span lang="nl">03 — Educatie</span><span lang="en">03 — Education</span></span>
+      <h2 class="h2 mt20"><span lang="nl">Tien onderwerpen, tien vlakken.</span><span lang="en">Ten topics, ten planes.</span></h2>
     </div>
   </div>
 
   <div class="mosaic" style="margin-bottom:var(--gap)">
-    <div class="topic"><s>01</s><b>deviatie</b></div>
+    <div class="topic"><s>01</s><b><span lang="nl">deviatie</span><span lang="en">deviation</span></b></div>
     <div class="topic"><s>02</s><b>SMT</b></div>
     <div class="topic"><s>03</s><b>FVG</b></div>
     <div class="topic"><s>04</s><b>IFVG</b></div>
     <div class="topic"><s>05</s><b>orderblocks</b></div>
     <div class="topic"><s>06</s><b>fibonacci</b></div>
-    <div class="topic"><s>07</s><b>sessie-liquiditeit</b></div>
-    <div class="topic"><s>08</s><b>liquiditeit</b></div>
-    <div class="topic"><s>09</s><b>risicobeheer</b></div>
-    <div class="topic"><s>10</s><b>tradingpsychologie</b></div>
+    <div class="topic"><s>07</s><b><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></b></div>
+    <div class="topic"><s>08</s><b><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></b></div>
+    <div class="topic"><s>09</s><b><span lang="nl">risicobeheer</span><span lang="en">risk management</span></b></div>
+    <div class="topic"><s>10</s><b><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></b></div>
   </div>
 
   <div class="comp">
     <div class="p k2 hr c1-13">
-      <a class="btn" href="https://discord.gg/78Ff2GuSfW">Begin bij 01</a>
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Begin bij 01</span><span lang="en">Start at 01</span></a>
     </div>
   </div>
 
   <!-- ============ 04 — HET MODEL ============ -->
   <div class="comp">
     <div class="p k3 hl c1-3">
-      <span class="lab">04 — Het model</span>
-      <p class="lab m mt20">Schematisch<br>Geen resultaat</p>
+      <span class="lab"><span lang="nl">04 — Het model</span><span lang="en">04 — The model</span></span>
+      <p class="lab m mt20"><span lang="nl">Schematisch<br>Geen resultaat</span><span lang="en">Schematic<br>Not a result</span></p>
     </div>
     <div class="p k1 ht c4-13">
-      <h2 class="h2">Deviatie.</h2>
+      <h2 class="h2"><span lang="nl">Deviatie.</span><span lang="en">Deviation.</span></h2>
       <div class="scroller mt32">
-        <svg viewBox="0 0 860 400" role="img" aria-label="Schematische weergave van een deviatie: de koers zakt kort onder een niveau en herovert het daarna">
+        <span class="vh" id="d009-fig"><span lang="nl">Schematische weergave van een deviatie: de koers zakt kort onder een niveau en herovert het daarna</span><span lang="en">Schematic view of a deviation: price dips briefly below a level and then reclaims it</span></span>
+        <svg viewBox="0 0 860 400" role="img" aria-labelledby="d009-fig">
           <!-- field -->
           <rect x="0" y="0" width="860" height="400" fill="#050607"/>
           <g stroke="rgba(215,179,100,.12)" stroke-width="1">
@@ -368,20 +390,20 @@ p{margin:0}
           </g>
           <g font-family="'Familjen Grotesk',Helvetica,Arial,sans-serif" font-size="13"
              font-weight="700" letter-spacing="2.6" fill="#F4F2EC">
-            <text x="498" y="371">DEVIATIE</text>
-            <text x="562" y="211">HEROVERING</text>
-            <text x="748" y="101">VERVOLG</text>
+            <text x="498" y="371" lang="nl">DEVIATIE</text><text x="498" y="371" lang="en">DEVIATION</text>
+            <text x="562" y="211" lang="nl">HEROVERING</text><text x="562" y="211" lang="en">RECLAIM</text>
+            <text x="748" y="101" lang="nl">VERVOLG</text><text x="748" y="101" lang="en">NEXT LEG</text>
           </g>
         </svg>
       </div>
-      <p class="txt mt20" style="max-width:56ch">Kort onder een niveau, en er direct weer boven. Niet elke uitbraak is er een.</p>
+      <p class="txt mt20" style="max-width:56ch"><span lang="nl">Kort onder een niveau, en er direct weer boven. Niet elke uitbraak is er een.</span><span lang="en">Briefly below a level, then straight back above it. Not every breakout is one.</span></p>
     </div>
   </div>
 
   <!-- ============ 05 — KANALEN ============ -->
   <div class="comp">
     <div class="p k1 hl c1-7">
-      <span class="lab">05 — Thuis, nu gratis</span>
+      <span class="lab"><span lang="nl">05 — Thuis, nu gratis</span><span lang="en">05 — Home, free right now</span></span>
       <ul class="chan nine mt20">
         <li>#nq-chart-ideeën</li>
         <li>#es-chart-ideeën</li>
@@ -395,7 +417,7 @@ p{margin:0}
       </ul>
     </div>
     <div class="p k5 hr c7-13">
-      <span class="lab m">06 — Premium, opent later</span>
+      <span class="lab m"><span lang="nl">06 — Premium, opent later</span><span lang="en">06 — Premium, opens later</span></span>
       <ul class="chan prem mt20" style="text-align:left">
         <li>#trade-setups</li>
         <li>#marktupdates</li>
@@ -404,38 +426,38 @@ p{margin:0}
         <li>#chart-ideeën</li>
         <li>#premium-chat</li>
       </ul>
-      <p class="mt32"><a class="btn line" href="https://discord.gg/78Ff2GuSfW">Open de server</a></p>
+      <p class="mt32"><a class="btn line" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de server</span><span lang="en">Open the server</span></a></p>
     </div>
   </div>
 
   <!-- ============ 07 — LIVE ============ -->
   <div class="comp">
     <div class="p k4 ht c1-9">
-      <span class="lab">07 — Live</span>
-      <h2 class="h2 mt20">De oprichter handelt live mee in Discord.</h2>
-      <p class="txt mt20">Tijden worden in de server aangekondigd.</p>
+      <span class="lab"><span lang="nl">07 — Live</span><span lang="en">07 — Live</span></span>
+      <h2 class="h2 mt20"><span lang="nl">De oprichter handelt live mee in Discord.</span><span lang="en">The founder trades live in Discord.</span></h2>
+      <p class="txt mt20"><span lang="nl">Tijden worden in de server aangekondigd.</span><span lang="en">Times are announced in the server.</span></p>
     </div>
     <div class="p k3 hb c9-13">
-      <span class="lab m">Meekijken</span>
-      <p class="h3 mt12">Gratis, in de server.</p>
-      <p class="mt20"><a class="btn line" href="https://discord.gg/78Ff2GuSfW">Zit erbij</a></p>
+      <span class="lab m"><span lang="nl">Meekijken</span><span lang="en">Watch along</span></span>
+      <p class="h3 mt12"><span lang="nl">Gratis, in de server.</span><span lang="en">Free, in the server.</span></p>
+      <p class="mt20"><a class="btn line" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Zit erbij</span><span lang="en">Sit in</span></a></p>
     </div>
   </div>
 
   <!-- ============ SESSIES : THREE PLANES ============ -->
   <div class="trio">
     <div class="p k1 hl">
-      <span class="lab m">Sessie</span>
-      <p class="h3 mt12">Azië</p>
+      <span class="lab m"><span lang="nl">Sessie</span><span lang="en">Session</span></span>
+      <p class="h3 mt12"><span lang="nl">Azië</span><span lang="en">Asia</span></p>
       <div class="bar" aria-hidden="true"><i style="left:6%;width:30%"></i></div>
     </div>
     <div class="p k5 ht">
-      <span class="lab m">Sessie</span>
-      <p class="h3 mt12">Londen</p>
+      <span class="lab m"><span lang="nl">Sessie</span><span lang="en">Session</span></span>
+      <p class="h3 mt12"><span lang="nl">Londen</span><span lang="en">London</span></p>
       <div class="bar" aria-hidden="true"><i style="left:30%;width:44%"></i></div>
     </div>
     <div class="p k4 hr">
-      <span class="lab m">Sessie</span>
+      <span class="lab m"><span lang="nl">Sessie</span><span lang="en">Session</span></span>
       <p class="h3 mt12">New York</p>
       <div class="bar" aria-hidden="true"><i style="left:52%;width:42%"></i></div>
     </div>
@@ -444,9 +466,9 @@ p{margin:0}
   <!-- ============ 08 — SLOT ============ -->
   <div class="comp">
     <div class="p k1 hl c1-13" style="padding-top:clamp(48px,8vw,110px);padding-bottom:clamp(48px,8vw,110px)">
-      <span class="lab">08 — Word lid</span>
-      <h2 class="h1 mt32">Proces.<br>Discipline.<br>Uitvoering.</h2>
-      <p class="mt48"><a class="btn lg" href="https://discord.gg/78Ff2GuSfW">Open Discord</a></p>
+      <span class="lab"><span lang="nl">08 — Word lid</span><span lang="en">08 — Join</span></span>
+      <h2 class="h1 mt32"><span lang="nl">Proces.<br>Discipline.<br>Uitvoering.</span><span lang="en">Process.<br>Discipline.<br>Execution.</span></h2>
+      <p class="mt48"><a class="btn lg" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open Discord</span><span lang="en">Open Discord</span></a></p>
     </div>
   </div>
 
@@ -454,28 +476,49 @@ p{margin:0}
   <div class="comp">
     <div class="p k5 hl c1-4">
       <div class="mark"><span class="sq" aria-hidden="true"></span><b>Atlas Capital</b></div>
-      <p class="lab m mt20">Nederlands</p>
+      <p class="lab m mt20"><span lang="nl">Nederlands</span><span lang="en">Dutch</span></p>
     </div>
     <div class="p k3 ht c5-9">
-      <span class="lab m">Volg</span>
+      <span class="lab m"><span lang="nl">Volg</span><span lang="en">Follow</span></span>
       <div class="flinks mt20">
         <a href="https://discord.gg/78Ff2GuSfW">Discord</a>
         <a href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
       </div>
     </div>
     <div class="p k4 hr c10-13">
-      <span class="lab m">Kern</span>
-      <p class="h3 mt12">Proces.<br>Discipline.<br>Uitvoering.</p>
+      <span class="lab m"><span lang="nl">Kern</span><span lang="en">Core</span></span>
+      <p class="h3 mt12"><span lang="nl">Proces.<br>Discipline.<br>Uitvoering.</span><span lang="en">Process.<br>Discipline.<br>Execution.</span></p>
     </div>
   </div>
 
   <div class="comp">
     <div class="p k1 ht c1-13">
-      <p class="risk" style="margin-top:0">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+      <p class="risk" style="margin-top:0"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
     </div>
   </div>
 
 </div>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

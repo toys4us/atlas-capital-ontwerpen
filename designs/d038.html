@@ -79,6 +79,10 @@ header.top{
 }
 .langsw button+button{border-left:1px solid var(--line)}
 .langsw button[aria-pressed="true"]{background:var(--paper-3);color:var(--ink)}
+@media (max-width:560px){
+  .langsw{margin-left:-8px}
+  .langsw button{padding:5px 8px;font-size:10px;letter-spacing:.08em}
+}
 
 /* ---------- hero ---------- */
 .hero{padding:clamp(56px,10vw,120px) 0 0;text-align:center}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -249,6 +249,21 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
 .colo a.l .fill{flex:1;border-bottom:1px dotted var(--ink-38);position:relative;top:-.25em;height:0}
 .risk{margin-top:30px;padding-top:16px;border-top:1px solid var(--ink);
   font-family:var(--mono);font-size:10.5px;line-height:1.8;color:var(--ink-55);max-width:74ch}
+
+/* ---------- taal / language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.vh{position:absolute;width:1px;height:1px;margin:0;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.langsw{display:inline-flex;flex:0 0 auto;border:1px solid var(--ink)}
+.langsw button{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  line-height:1;padding:9px 8px;border:0;background:transparent;color:var(--ink-38);
+  cursor:pointer;
+}
+.langsw button+button{border-left:1px solid var(--rule)}
+.langsw button:hover{color:var(--ink)}
+.langsw button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 </style>
 </head>
 <body>
@@ -264,10 +279,14 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
         <line x1="7" y1="19" x2="25" y2="19" stroke="#CBC6B6" stroke-width="1.2"/>
         <line x1="7" y1="24" x2="16" y2="24" stroke="#A8843C" stroke-width="1.2"/>
       </svg>
-      <span><b>ATLAS CAPITAL</b><i>Register</i></span>
+      <span><b>ATLAS CAPITAL</b><i><span lang="nl">Register</span><span lang="en">Index</span></i></span>
     </a>
-    <div class="mid kicker">A — V · Trefwoorden, kanalen, onderwerpen</div>
+    <div class="mid kicker"><span lang="nl">A — V · Trefwoorden, kanalen, onderwerpen</span><span lang="en">A — V · Headwords, channels, topics</span></div>
     <a class="btn sm" style="margin-left:auto" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord</a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
@@ -275,26 +294,26 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
 <section class="hero">
   <div class="wrap hero-in">
     <div>
-      <p class="kicker g" style="margin:0">Folio 01 · Ingang</p>
-      <h1>Zoek het <em>op.</em></h1>
-      <p class="lede">Geen verkooppraatje. Een register van alles wat er in de server te leren valt.</p>
+      <p class="kicker g" style="margin:0"><span lang="nl">Folio 01 · Ingang</span><span lang="en">Folio 01 · Way in</span></p>
+      <h1><span lang="nl">Zoek het <em>op.</em></span><span lang="en">Look it <em>up.</em></span></h1>
+      <p class="lede"><span lang="nl">Geen verkooppraatje. Een register van alles wat er in de server te leren valt.</span><span lang="en">No sales pitch. An index of everything there is to learn in the server.</span></p>
       <div class="cta">
-        <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Kom binnen op Discord</a>
-        <a class="btn ghost" href="#register">Naar het register</a>
+        <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Kom binnen op Discord</span><span lang="en">Come inside on Discord</span></a>
+        <a class="btn ghost" href="#register"><span lang="nl">Naar het register</span><span lang="en">To the index</span></a>
       </div>
     </div>
 
     <aside class="legend">
-      <p class="kicker" style="margin:0">Zo leest u dit</p>
-      <h3>Trefwoord, stippellijn, folio.</h3>
+      <p class="kicker" style="margin:0"><span lang="nl">Zo leest u dit</span><span lang="en">How to read this</span></p>
+      <h3><span lang="nl">Trefwoord, stippellijn, folio.</span><span lang="en">Headword, leader dots, folio.</span></h3>
       <div class="demo">
-        <div class="e"><span class="t">liquiditeit</span><span class="fill"></span><span class="r">02 · Pl. I</span></div>
-        <div class="e sub"><span class="t">sessie-liquiditeit</span><span class="fill"></span><span class="r">02</span></div>
+        <div class="e"><span class="t"><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></span><span class="fill"></span><span class="r">02 · Pl. I</span></div>
+        <div class="e sub"><span class="t"><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></span><span class="fill"></span><span class="r">02</span></div>
       </div>
       <ul>
-        <li>Het cijfer is de folio waar het onderwerp staat.</li>
-        <li><em>Pl. I</em> verwijst naar de plaat met het schema.</li>
-        <li>Kanalen staan met een hekje, precies zoals in de server.</li>
+        <li><span lang="nl">Het cijfer is de folio waar het onderwerp staat.</span><span lang="en">The number is the folio where the topic sits.</span></li>
+        <li><span lang="nl"><em>Pl. I</em> verwijst naar de plaat met het schema.</span><span lang="en"><em>Pl. I</em> points to the plate with the diagram.</span></li>
+        <li><span lang="nl">Kanalen staan met een hekje, precies zoals in de server.</span><span lang="en">Channels carry a hash, exactly as in the server.</span></li>
       </ul>
     </aside>
   </div>
@@ -304,11 +323,11 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
 <section class="indexwrap" id="register">
   <div class="wrap">
     <div class="idx-head">
-      <h2>Register</h2>
-      <span class="kicker rt">10 onderwerpen · 15 kanalen · 7 folio's</span>
+      <h2><span lang="nl">Register</span><span lang="en">Index</span></h2>
+      <span class="kicker rt"><span lang="nl">10 onderwerpen · 15 kanalen · 7 folio's</span><span lang="en">10 topics · 15 channels · 7 folios</span></span>
     </div>
 
-    <div class="columns">
+    <div class="columns" lang="nl">
 
       <div class="letter"><b>A</b><span>Aanvang</span></div>
       <div class="e"><span class="t cn">#algemeen</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
@@ -412,9 +431,107 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
 
     </div>
 
+    <div class="columns" lang="en">
+
+      <div class="letter"><b>A</b><span>Beginning</span></div>
+      <div class="e"><span class="t">access</span><span class="fill"></span><span class="r"><a href="#f06">06</a></span></div>
+      <div class="e"><span class="t cn">#algemeen</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+      <div class="e"><span class="t">altcoins</span><span class="fill"></span><span class="r"><a href="#f04">04</a></span></div>
+      <div class="e"><span class="t cn">#altcoins</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+      <div class="e"><span class="t">Atlas Capital</span><span class="fill"></span><span class="r"><a href="#f01">01</a></span></div>
+      <div class="e sub"><span class="t">access to</span><span class="fill"></span><span class="r"><a href="#f06">06</a></span></div>
+      <div class="e sub"><span class="t">founder of</span><span class="fill"></span><span class="r"><a href="#f03">03</a></span></div>
+      <div class="e"><span class="t cn">#atlas-op-socials</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+
+      <div class="letter"><b>B</b><span></span></div>
+      <div class="e"><span class="t">Bitcoin</span><span class="fill"></span><span class="r"><a href="#f04">04</a></span></div>
+      <div class="e"><span class="t cn">#bitcoin</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+
+      <div class="letter"><b>C</b><span>Channels</span></div>
+      <div class="e"><span class="t">channels, 15</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+      <div class="e sub"><span class="t">home, free right now</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+      <div class="e sub2"><span class="t cn">#markt</span><span class="fill"></span><span class="r">05</span></div>
+      <div class="e sub2"><span class="t cn">#vragen</span><span class="fill"></span><span class="r">05</span></div>
+      <div class="e sub2"><span class="t cn">#ondersteuning</span><span class="fill"></span><span class="r">05</span></div>
+      <div class="e sub"><span class="t">premium, opens later</span><span class="fill"></span><span class="r"><a href="#f06">06</a></span></div>
+      <div class="e sub2"><span class="t cn">#trade-setups</span><span class="fill"></span><span class="r">05</span></div>
+      <div class="e sub2"><span class="t cn">#marktupdates</span><span class="fill"></span><span class="r">05</span></div>
+      <div class="e sub2"><span class="t cn">#premium-chat</span><span class="fill"></span><span class="r">05</span></div>
+      <div class="e"><span class="t cn">#chart-ideeën</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+      <div class="e"><span class="t">community</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+
+      <div class="letter"><b>D</b><span></span></div>
+      <div class="e"><span class="t">deviation</span><span class="fill"></span><span class="r"><a href="#f02">02</a> · <a href="#plaat">Pl. I</a></span></div>
+      <div class="e"><span class="t">discipline</span><span class="fill"></span><span class="r"><a href="#f01">01</a></span></div>
+      <div class="e"><span class="t">Discord</span><span class="fill"></span><span class="r"><a href="#f01">01</a> · <a href="#f06">06</a></span></div>
+
+      <div class="letter"><b>E</b><span></span></div>
+      <div class="e see"><span class="t">education, see topics</span><span class="fill"></span><span class="r"></span></div>
+      <div class="e"><span class="t">ES — S&amp;P futures</span><span class="fill"></span><span class="r"><a href="#f04">04</a></span></div>
+      <div class="e"><span class="t cn">#es-chart-ideeën</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+      <div class="e"><span class="t">execution</span><span class="fill"></span><span class="r"><a href="#f01">01</a> · <a href="#plaat">Pl. I</a></span></div>
+
+      <div class="letter"><b>F</b><span></span></div>
+      <div class="e"><span class="t">fibonacci</span><span class="fill"></span><span class="r"><a href="#f02">02</a></span></div>
+      <div class="e"><span class="t">founder</span><span class="fill"></span><span class="r"><a href="#f03">03</a></span></div>
+      <div class="e sub"><span class="t">10+ years active</span><span class="fill"></span><span class="r"><a href="#f03">03</a></span></div>
+      <div class="e"><span class="t">free access</span><span class="fill"></span><span class="r"><a href="#f06">06</a></span></div>
+      <div class="e"><span class="t">FVG</span><span class="fill"></span><span class="r"><a href="#f02">02</a> · <a href="#plaat">Pl. I</a></span></div>
+      <div class="e sub"><span class="t">inverted, see IFVG</span><span class="fill"></span><span class="r"></span></div>
+
+      <div class="letter"><b>I</b><span></span></div>
+      <div class="e"><span class="t">IFVG</span><span class="fill"></span><span class="r"><a href="#f02">02</a></span></div>
+      <div class="e"><span class="t cn">#indicatoren</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+
+      <div class="letter"><b>L</b><span></span></div>
+      <div class="e"><span class="t">liquidity</span><span class="fill"></span><span class="r"><a href="#f02">02</a> · <a href="#plaat">Pl. I</a></span></div>
+      <div class="e sub"><span class="t">session liquidity</span><span class="fill"></span><span class="r"><a href="#f02">02</a></span></div>
+      <div class="e"><span class="t">live trading</span><span class="fill"></span><span class="r"><a href="#f03">03</a></span></div>
+      <div class="e"><span class="t">loss, risk of</span><span class="fill"></span><span class="r"><a href="#slot">07</a></span></div>
+
+      <div class="letter"><b>M</b><span></span></div>
+      <div class="e"><span class="t">markets</span><span class="fill"></span><span class="r"><a href="#f04">04</a></span></div>
+      <div class="e"><span class="t cn">#markt</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+      <div class="e"><span class="t cn">#marktupdates</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+      <div class="e"><span class="t">model, see plate</span><span class="fill"></span><span class="r"><a href="#plaat">Pl. I</a></span></div>
+
+      <div class="letter"><b>N</b><span></span></div>
+      <div class="e"><span class="t">NQ — Nasdaq futures</span><span class="fill"></span><span class="r"><a href="#f04">04</a></span></div>
+      <div class="e"><span class="t cn">#nq-chart-ideeën</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+
+      <div class="letter"><b>O</b><span></span></div>
+      <div class="e"><span class="t cn">#ondersteuning</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+      <div class="e"><span class="t">orderblocks</span><span class="fill"></span><span class="r"><a href="#f02">02</a> · <a href="#plaat">Pl. I</a></span></div>
+
+      <div class="letter"><b>P</b><span></span></div>
+      <div class="e"><span class="t">premium</span><span class="fill"></span><span class="r"><a href="#f06">06</a></span></div>
+      <div class="e sub"><span class="t">opens later</span><span class="fill"></span><span class="r"><a href="#f06">06</a></span></div>
+      <div class="e"><span class="t cn">#premium-chat</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+      <div class="e"><span class="t">process</span><span class="fill"></span><span class="r"><a href="#f01">01</a></span></div>
+      <div class="e see"><span class="t">psychology, see trading psychology</span><span class="fill"></span><span class="r"></span></div>
+
+      <div class="letter"><b>R</b><span></span></div>
+      <div class="e"><span class="t">risk management</span><span class="fill"></span><span class="r"><a href="#f02">02</a></span></div>
+
+      <div class="letter"><b>S</b><span></span></div>
+      <div class="e"><span class="t cn">#sessie-opnames</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+      <div class="e"><span class="t">session liquidity</span><span class="fill"></span><span class="r"><a href="#f02">02</a></span></div>
+      <div class="e"><span class="t">SMT</span><span class="fill"></span><span class="r"><a href="#f02">02</a></span></div>
+
+      <div class="letter"><b>T</b><span>Topics</span></div>
+      <div class="e"><span class="t">TikTok</span><span class="fill"></span><span class="r"><a href="#slot">07</a></span></div>
+      <div class="e"><span class="t">topics, 10</span><span class="fill"></span><span class="r"><a href="#f02">02</a></span></div>
+      <div class="e"><span class="t cn">#trade-setups</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+      <div class="e"><span class="t">trading psychology</span><span class="fill"></span><span class="r"><a href="#f02">02</a></span></div>
+
+      <div class="letter"><b>V</b><span>End</span></div>
+      <div class="e"><span class="t cn">#vragen</span><span class="fill"></span><span class="r"><a href="#f05">05</a></span></div>
+
+    </div>
+
     <div style="margin-top:34px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
-      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Alles hiervan staat in de server</a>
-      <span class="kicker">Toegang is nu gratis</span>
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Alles hiervan staat in de server</span><span lang="en">All of this is in the server</span></a>
+      <span class="kicker"><span lang="nl">Toegang is nu gratis</span><span lang="en">Access is free right now</span></span>
     </div>
   </div>
 </section>
@@ -423,12 +540,13 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
 <section class="plate" id="plaat">
   <div class="wrap">
     <div class="plate-head">
-      <p class="kicker g" style="margin:0">Plaat I</p>
-      <h3>Deviatie, sweep en de leegte erna</h3>
-      <span class="kicker rt">Schematisch — geen koersen</span>
+      <p class="kicker g" style="margin:0"><span lang="nl">Plaat I</span><span lang="en">Plate I</span></p>
+      <h3><span lang="nl">Deviatie, sweep en de leegte erna</span><span lang="en">Deviation, sweep and the void after it</span></h3>
+      <span class="kicker rt"><span lang="nl">Schematisch — geen koersen</span><span lang="en">Schematic — no prices</span></span>
     </div>
     <figure>
-      <svg viewBox="0 0 900 400" role="img" aria-label="Gegraveerd schema van een deviatie boven een reeks toppen, gevolgd door een fair value gap">
+      <span class="vh" id="fig78"><span lang="nl">Gegraveerd schema van een deviatie boven een reeks toppen, gevolgd door een fair value gap</span><span lang="en">Engraved diagram of a deviation above a run of highs, followed by a fair value gap</span></span>
+      <svg viewBox="0 0 900 400" role="img" aria-labelledby="fig78">
         <defs>
           <pattern id="eng78" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
             <line x1="0" y1="0" x2="0" y2="6" stroke="#A8843C" stroke-width=".9" opacity=".5"/>
@@ -448,7 +566,7 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
 
         <!-- range top line: the level that gets deviated -->
         <line x1="120" y1="120" x2="700" y2="120" stroke="#08090B" stroke-width="1.1"/>
-        <text x="120" y="112" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.6" fill="#5C5D62">REEKS TOPPEN</text>
+        <text x="120" y="112" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.6" fill="#5C5D62" lang="nl">REEKS TOPPEN</text><text x="120" y="112" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.6" fill="#5C5D62" lang="en">RUN OF HIGHS</text>
 
         <!-- candles ascending -->
         <g stroke="#08090B" stroke-width="1.3">
@@ -474,7 +592,7 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
         <rect x="314" y="88" width="28" height="32" fill="url(#eng78)" stroke="#A8843C" stroke-width=".9"/>
         <line x1="342" y1="96" x2="452" y2="60" stroke="#A8843C" stroke-width=".9"/>
         <circle cx="342" cy="96" r="2.6" fill="#A8843C"/>
-        <text x="458" y="64" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.6" fill="#08090B">I. DEVIATIE</text>
+        <text x="458" y="64" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.6" fill="#08090B" lang="nl">I. DEVIATIE</text><text x="458" y="64" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.6" fill="#08090B" lang="en">I. DEVIATION</text>
 
         <!-- FVG band -->
         <rect x="386" y="214" width="284" height="30" fill="#D7B364" opacity=".26"/>
@@ -486,24 +604,24 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
         <!-- return to the gap -->
         <path d="M556 196 C596 196, 600 210, 578 214" fill="none" stroke="#A8843C" stroke-width="1"/>
         <path d="M578 214 l10 -6 l-8 -6 z" fill="#A8843C" transform="rotate(150 578 214)"/>
-        <text x="500" y="186" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.6" fill="#5C5D62">III. TERUGKEER</text>
+        <text x="500" y="186" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.6" fill="#5C5D62" lang="nl">III. TERUGKEER</text><text x="500" y="186" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.6" fill="#5C5D62" lang="en">III. RETURN</text>
 
         <!-- execution mark -->
         <path d="M580 300 L580 336 M568 324 L580 336 L592 324" fill="none" stroke="#08090B" stroke-width="1.3" stroke-linecap="round"/>
-        <text x="600" y="340" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.6" fill="#08090B">IV. UITVOERING</text>
+        <text x="600" y="340" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.6" fill="#08090B" lang="nl">IV. UITVOERING</text><text x="600" y="340" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.6" fill="#08090B" lang="en">IV. EXECUTION</text>
 
         <!-- unnumbered axis -->
         <line x1="56" y1="356" x2="844" y2="356" stroke="#08090B" stroke-width="1"/>
         <g font-family="ui-monospace,Menlo,monospace" font-size="9" letter-spacing="1.8" fill="#84858B">
-          <text x="56" y="372">TIJD →</text>
-          <text x="770" y="372">ZONDER SCHAAL</text>
+          <text x="56" y="372" lang="nl">TIJD →</text><text x="56" y="372" lang="en">TIME →</text>
+          <text x="770" y="372" lang="nl">ZONDER SCHAAL</text><text x="770" y="372" lang="en">WITHOUT SCALE</text>
         </g>
       </svg>
       <figcaption>
-        <div><b>I · Deviatie</b>De markt gaat één keer voorbij een reeks toppen en sluit terug.</div>
-        <div><b>II · FVG</b>De beweging laat een leegte achter in de prijs.</div>
-        <div><b>III · Terugkeer</b>Die leegte wordt vaak opnieuw opgezocht.</div>
-        <div><b>IV · Uitvoering</b>Pas handelen wanneer alle drie kloppen.</div>
+        <div><b><span lang="nl">I · Deviatie</span><span lang="en">I · Deviation</span></b><span lang="nl">De markt gaat één keer voorbij een reeks toppen en sluit terug.</span><span lang="en">The market runs past a series of highs once and closes back below.</span></div>
+        <div><b>II · FVG</b><span lang="nl">De beweging laat een leegte achter in de prijs.</span><span lang="en">The move leaves a void in price.</span></div>
+        <div><b><span lang="nl">III · Terugkeer</span><span lang="en">III · Return</span></b><span lang="nl">Die leegte wordt vaak opnieuw opgezocht.</span><span lang="en">That void is often revisited.</span></div>
+        <div><b><span lang="nl">IV · Uitvoering</span><span lang="en">IV · Execution</span></b><span lang="nl">Pas handelen wanneer alle drie kloppen.</span><span lang="en">Only act when all three line up.</span></div>
       </figcaption>
     </figure>
   </div>
@@ -512,14 +630,17 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
 <!-- ══════════════ FOLIO 02 · ONDERWERPEN ══════════════ -->
 <section class="folio" id="f02">
   <div class="wrap folio-in">
-    <div class="folio-no"><span class="big">02</span>Onderwerpen</div>
+    <div class="folio-no"><span class="big">02</span><span lang="nl">Onderwerpen</span><span lang="en">Topics</span></div>
     <div>
-      <h2>Tien onderwerpen, telkens opnieuw.</h2>
-      <p class="runon">
+      <h2><span lang="nl">Tien onderwerpen, telkens opnieuw.</span><span lang="en">Ten topics, again and again.</span></h2>
+      <p class="runon" lang="nl">
         deviatie<i>·</i>SMT<i>·</i>FVG<i>·</i>IFVG<i>·</i><span>orderblocks</span><i>·</i>fibonacci<i>·</i><span>sessie-liquiditeit</span><i>·</i>liquiditeit<i>·</i><span>risicobeheer</span><i>·</i><span>tradingpsychologie</span>
       </p>
-      <p>Elk onderwerp staat in het register hierboven, met de folio waar het thuishoort.</p>
-      <a class="btn ghost" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Volg de educatie</a>
+      <p class="runon" lang="en">
+        deviation<i>·</i>SMT<i>·</i>FVG<i>·</i>IFVG<i>·</i><span>orderblocks</span><i>·</i>fibonacci<i>·</i><span>session liquidity</span><i>·</i>liquidity<i>·</i><span>risk management</span><i>·</i><span>trading psychology</span>
+      </p>
+      <p><span lang="nl">Elk onderwerp staat in het register hierboven, met de folio waar het thuishoort.</span><span lang="en">Every topic is in the index above, with the folio where it belongs.</span></p>
+      <a class="btn ghost" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Volg de educatie</span><span lang="en">Follow the education</span></a>
     </div>
   </div>
 </section>
@@ -527,16 +648,23 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
 <!-- ══════════════ FOLIO 03 · OPRICHTER ══════════════ -->
 <section class="folio" id="f03">
   <div class="wrap folio-in">
-    <div class="folio-no"><span class="big">03</span>Oprichter</div>
+    <div class="folio-no"><span class="big">03</span><span lang="nl">Oprichter</span><span lang="en">Founder</span></div>
     <div>
-      <p class="quote">
+      <p class="quote" lang="nl">
         Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles
         meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik
         gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten
         dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community
         die samen beter wil worden.
       </p>
-      <p class="kicker">Live · de oprichter tradet mee in de server; tijden worden daar aangekondigd.</p>
+      <p class="quote" lang="en">
+        I've been involved in trading for over 10 years now, and during that time I've experienced
+        pretty much everything: wins, losses, mistakes, growth, and a lot of lessons. I built Atlas
+        Capital to share that experience, bring traders together, and show how I approach the markets
+        on a daily basis. No get-rich-quick promises, just real setups, education, and a community
+        focused on improving together.
+      </p>
+      <p class="kicker"><span lang="nl">Live · de oprichter tradet mee in de server; tijden worden daar aangekondigd.</span><span lang="en">Live · the founder trades along in the server; times are announced there.</span></p>
     </div>
   </div>
 </section>
@@ -544,13 +672,13 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
 <!-- ══════════════ FOLIO 04 · MARKTEN ══════════════ -->
 <section class="folio" id="f04">
   <div class="wrap folio-in">
-    <div class="folio-no"><span class="big">04</span>Markten</div>
+    <div class="folio-no"><span class="big">04</span><span lang="nl">Markten</span><span lang="en">Markets</span></div>
     <div>
-      <h2>Vier markten, geen ruis.</h2>
-      <div class="e" style="max-width:520px"><span class="t">NQ — Nasdaq futures</span><span class="fill"></span><span class="r">Dagelijks</span></div>
-      <div class="e" style="max-width:520px"><span class="t">ES — S&amp;P futures</span><span class="fill"></span><span class="r">Dagelijks</span></div>
-      <div class="e" style="max-width:520px"><span class="t">Bitcoin</span><span class="fill"></span><span class="r">Dagelijks</span></div>
-      <div class="e" style="max-width:520px"><span class="t">Altcoins</span><span class="fill"></span><span class="r">Dagelijks</span></div>
+      <h2><span lang="nl">Vier markten, geen ruis.</span><span lang="en">Four markets, no noise.</span></h2>
+      <div class="e" style="max-width:520px"><span class="t">NQ — Nasdaq futures</span><span class="fill"></span><span class="r"><span lang="nl">Dagelijks</span><span lang="en">Daily</span></span></div>
+      <div class="e" style="max-width:520px"><span class="t">ES — S&amp;P futures</span><span class="fill"></span><span class="r"><span lang="nl">Dagelijks</span><span lang="en">Daily</span></span></div>
+      <div class="e" style="max-width:520px"><span class="t">Bitcoin</span><span class="fill"></span><span class="r"><span lang="nl">Dagelijks</span><span lang="en">Daily</span></span></div>
+      <div class="e" style="max-width:520px"><span class="t">Altcoins</span><span class="fill"></span><span class="r"><span lang="nl">Dagelijks</span><span lang="en">Daily</span></span></div>
     </div>
   </div>
 </section>
@@ -558,28 +686,28 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
 <!-- ══════════════ FOLIO 05 · KANALEN ══════════════ -->
 <section class="folio" id="f05">
   <div class="wrap folio-in">
-    <div class="folio-no"><span class="big">05</span>Kanalen</div>
+    <div class="folio-no"><span class="big">05</span><span lang="nl">Kanalen</span><span lang="en">Channels</span></div>
     <div>
-      <h2>Vijftien kanalen, twee groepen.</h2>
+      <h2><span lang="nl">Vijftien kanalen, twee groepen.</span><span lang="en">Fifteen channels, two groups.</span></h2>
       <div class="chcols">
         <div>
-          <h4>Thuis</h4>
-          <p class="st kicker g">Nu gratis · 9 kanalen</p>
+          <h4><span lang="nl">Thuis</span><span lang="en">Home</span></h4>
+          <p class="st kicker g"><span lang="nl">Nu gratis · 9 kanalen</span><span lang="en">Free right now · 9 channels</span></p>
           <ul class="chlist">
             <li><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">#nq-chart-ideeën<span class="fill"></span><span class="tag">NQ</span></a></li>
             <li><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">#es-chart-ideeën<span class="fill"></span><span class="tag">ES</span></a></li>
             <li><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">#bitcoin<span class="fill"></span><span class="tag">BTC</span></a></li>
             <li><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">#altcoins<span class="fill"></span><span class="tag">ALT</span></a></li>
-            <li><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">#markt<span class="fill"></span><span class="tag">Beeld</span></a></li>
-            <li><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">#vragen<span class="fill"></span><span class="tag">Educatie</span></a></li>
+            <li><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">#markt<span class="fill"></span><span class="tag"><span lang="nl">Beeld</span><span lang="en">View</span></span></a></li>
+            <li><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">#vragen<span class="fill"></span><span class="tag"><span lang="nl">Educatie</span><span lang="en">Education</span></span></a></li>
             <li><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">#algemeen<span class="fill"></span><span class="tag">Community</span></a></li>
             <li><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">#atlas-op-socials<span class="fill"></span><span class="tag">Socials</span></a></li>
-            <li><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">#ondersteuning<span class="fill"></span><span class="tag">Hulp</span></a></li>
+            <li><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">#ondersteuning<span class="fill"></span><span class="tag"><span lang="nl">Hulp</span><span lang="en">Help</span></span></a></li>
           </ul>
         </div>
         <div>
           <h4>Premium</h4>
-          <p class="st kicker">Opent later · 6 kanalen</p>
+          <p class="st kicker"><span lang="nl">Opent later · 6 kanalen</span><span lang="en">Opens later · 6 channels</span></p>
           <ul class="chlist">
             <li><span class="dead">#trade-setups<span class="fill"></span><span class="tag">Later</span></span></li>
             <li><span class="dead">#marktupdates<span class="fill"></span><span class="tag">Later</span></span></li>
@@ -597,30 +725,30 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
 <!-- ══════════════ FOLIO 06 · TOEGANG ══════════════ -->
 <section class="folio" id="f06">
   <div class="wrap folio-in">
-    <div class="folio-no"><span class="big">06</span>Toegang</div>
+    <div class="folio-no"><span class="big">06</span><span lang="nl">Toegang</span><span lang="en">Access</span></div>
     <div>
       <div class="two">
         <div>
-          <p class="kicker g" style="margin:0">Nu</p>
-          <h4>Thuis</h4>
-          <p class="st kicker">Gratis</p>
+          <p class="kicker g" style="margin:0"><span lang="nl">Nu</span><span lang="en">Now</span></p>
+          <h4><span lang="nl">Thuis</span><span lang="en">Home</span></h4>
+          <p class="st kicker"><span lang="nl">Gratis</span><span lang="en">Free</span></p>
           <ul>
-            <li>Negen kanalen, meteen open.</li>
-            <li>Chart-ideeën voor NQ, ES, Bitcoin en altcoins.</li>
-            <li>Vragen stellen en meelezen.</li>
+            <li><span lang="nl">Negen kanalen, meteen open.</span><span lang="en">Nine channels, open right away.</span></li>
+            <li><span lang="nl">Chart-ideeën voor NQ, ES, Bitcoin en altcoins.</span><span lang="en">Chart ideas for NQ, ES, Bitcoin and altcoins.</span></li>
+            <li><span lang="nl">Vragen stellen en meelezen.</span><span lang="en">Ask questions and read along.</span></li>
           </ul>
-          <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Nu binnenkomen</a>
+          <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Nu binnenkomen</span><span lang="en">Come in now</span></a>
         </div>
         <div>
           <p class="kicker" style="margin:0">Later</p>
           <h4>Premium</h4>
-          <p class="st kicker">Opent later</p>
+          <p class="st kicker"><span lang="nl">Opent later</span><span lang="en">Opens later</span></p>
           <ul>
-            <li>Zes extra kanalen.</li>
-            <li>Sessie-opnames en indicatoren.</li>
-            <li>Prijs en datum worden in de server aangekondigd.</li>
+            <li><span lang="nl">Zes extra kanalen.</span><span lang="en">Six extra channels.</span></li>
+            <li><span lang="nl">Sessie-opnames en indicatoren.</span><span lang="en">Session recordings and indicators.</span></li>
+            <li><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">Price and date are announced in the server.</span></li>
           </ul>
-          <a class="btn ghost" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Blijf op de hoogte</a>
+          <a class="btn ghost" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Blijf op de hoogte</span><span lang="en">Stay up to date</span></a>
         </div>
       </div>
     </div>
@@ -630,11 +758,11 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
 <!-- ══════════════ FOLIO 07 · SLOT ══════════════ -->
 <section class="close" id="slot">
   <div class="wrap">
-    <p class="kicker" style="margin:0">Folio 07 · Slot</p>
-    <h2>Het register is <em>gratis</em> in te zien.</h2>
-    <p>Alles wat hierboven staat, staat ook in de server. Premium opent later.</p>
+    <p class="kicker" style="margin:0"><span lang="nl">Folio 07 · Slot</span><span lang="en">Folio 07 · Close</span></p>
+    <h2><span lang="nl">Het register is <em>gratis</em> in te zien.</span><span lang="en">The index is <em>free</em> to read.</span></h2>
+    <p><span lang="nl">Alles wat hierboven staat, staat ook in de server. Premium opent later.</span><span lang="en">Everything above is in the server too. Premium opens later.</span></p>
     <div style="display:flex;flex-wrap:wrap;gap:10px">
-      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Word lid op Discord</a>
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Word lid op Discord</span><span lang="en">Join on Discord</span></a>
       <a class="btn ghost" href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok</a>
     </div>
   </div>
@@ -652,29 +780,50 @@ footer{padding:clamp(30px,4.4vw,60px) 0 46px}
             <line x1="7" y1="16" x2="20" y2="16" stroke="#CBC6B6" stroke-width="1.2"/>
             <line x1="7" y1="23" x2="25" y2="23" stroke="#A8843C" stroke-width="1.2"/>
           </svg>
-          <span><b>ATLAS CAPITAL</b><i>Proces · Discipline · Uitvoering</i></span>
+          <span><b>ATLAS CAPITAL</b><i><span lang="nl">Proces · Discipline · Uitvoering</span><span lang="en">Process · Discipline · Execution</span></i></span>
         </div>
         <p style="margin:0;font-size:14px;color:var(--ink-75);max-width:34ch;font-weight:300">
-          Een register, geen brochure. Wat er niet in staat, beloven we ook niet.
+          <span lang="nl">Een register, geen brochure. Wat er niet in staat, beloven we ook niet.</span><span lang="en">An index, not a brochure. What is not in it, we do not promise either.</span>
         </p>
       </div>
       <div>
-        <p class="kicker" style="margin:0 0 8px">Vindplaats</p>
+        <p class="kicker" style="margin:0 0 8px"><span lang="nl">Vindplaats</span><span lang="en">Where to find us</span></p>
         <a class="l" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord<span class="fill"></span><span>↗</span></a>
         <a class="l" href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok @atlascapitalbv<span class="fill"></span><span>↗</span></a>
       </div>
       <div>
-        <p class="kicker" style="margin:0 0 8px">Folio's</p>
-        <a class="l" href="#register">Register<span class="fill"></span><span>A–V</span></a>
-        <a class="l" href="#plaat">Plaat I<span class="fill"></span><span>Schema</span></a>
-        <a class="l" href="#f05">Kanalen<span class="fill"></span><span>05</span></a>
+        <p class="kicker" style="margin:0 0 8px"><span lang="nl">Folio's</span><span lang="en">Folios</span></p>
+        <a class="l" href="#register"><span lang="nl">Register</span><span lang="en">Index</span><span class="fill"></span><span>A–V</span></a>
+        <a class="l" href="#plaat"><span lang="nl">Plaat I</span><span lang="en">Plate I</span><span class="fill"></span><span><span lang="nl">Schema</span><span lang="en">Diagram</span></span></a>
+        <a class="l" href="#f05"><span lang="nl">Kanalen</span><span lang="en">Channels</span><span class="fill"></span><span>05</span></a>
       </div>
     </div>
     <p class="risk">
-      Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.
+      <span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span>
     </p>
   </div>
 </footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

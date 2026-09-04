@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,6 +23,10 @@
 }
 
 *{box-sizing:border-box}
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
 
 html{
   color-scheme:dark;
@@ -112,6 +116,37 @@ a{color:inherit;text-decoration:none}
 }
 .top-mid{display:none}
 @media(min-width:900px){.top-mid{display:block}}
+
+.langsw{
+  display:flex;
+  flex:0 0 auto;
+  border:1px solid rgba(215,179,100,.42);
+  border-radius:1px;
+}
+.langsw button{
+  appearance:none;
+  -webkit-appearance:none;
+  margin:0;
+  border:0;
+  border-left:1px solid rgba(215,179,100,.42);
+  background:transparent;
+  padding:.62em .5em .62em .62em;
+  font-family:var(--sans);
+  font-size:clamp(10px,1.4vw,11.5px);
+  font-weight:700;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--dim);
+  cursor:pointer;
+  transition:color .3s,background-color .3s;
+}
+.langsw button:first-child{border-left:0}
+.langsw button:hover{color:var(--gold)}
+.langsw button[aria-pressed="true"]{
+  background:linear-gradient(118deg,var(--gold-hi),var(--gold) 46%,var(--gold-lo));
+  color:#0E0A03;
+}
 
 /* ---------- hero : the runway floor ---------- */
 
@@ -468,8 +503,12 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
 <header class="top">
   <div class="wrap top-in">
     <span class="top-name">Atlas Capital</span>
-    <p class="kick top-mid">Runway &mdash; tien onderwerpen</p>
+    <p class="kick top-mid"><span lang="nl">Runway &mdash; tien onderwerpen</span><span lang="en">Runway &mdash; ten topics</span></p>
     <a class="ghost" href="https://discord.gg/78Ff2GuSfW">Discord <span aria-hidden="true">&#8599;</span></a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
@@ -479,11 +518,11 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
   <section class="hero">
     <div class="wrap">
       <div class="hero-head">
-        <h1 class="disp">Tien onder&#8209;<br>werpen. <span class="out">E&eacute;n show.</span></h1>
+        <h1 class="disp"><span lang="nl">Tien onder&#8209;<br>werpen. <span class="out">E&eacute;n show.</span></span><span lang="en">Ten<br>topics. <span class="out">One show.</span></span></h1>
         <div class="side">
-          <p class="kick kick--gold">Proces. Discipline. Uitvoering.</p>
-          <p class="lede">De educatie loopt langs je heen. Sleep de strip opzij en bekijk elk onderwerp.</p>
-          <a class="btn" href="https://discord.gg/78Ff2GuSfW">Word lid <span aria-hidden="true">&#8594;</span></a>
+          <p class="kick kick--gold"><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></p>
+          <p class="lede"><span lang="nl">De educatie loopt langs je heen. Sleep de strip opzij en bekijk elk onderwerp.</span><span lang="en">The education walks past you. Drag the strip aside and see every topic.</span></p>
+          <a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid</span><span lang="en">Join</span> <span aria-hidden="true">&#8594;</span></a>
         </div>
       </div>
 
@@ -516,10 +555,10 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
       </div>
 
       <div class="marks">
-        <p class="kick">15 kanalen</p>
-        <p class="kick">10 onderwerpen</p>
+        <p class="kick"><span lang="nl">15 kanalen</span><span lang="en">15 channels</span></p>
+        <p class="kick"><span lang="nl">10 onderwerpen</span><span lang="en">10 topics</span></p>
         <p class="kick">NQ &middot; ES &middot; Bitcoin &middot; altcoins</p>
-        <p class="kick kick--gold">Nu gratis toegang</p>
+        <p class="kick kick--gold"><span lang="nl">Nu gratis toegang</span><span lang="en">Free access right now</span></p>
       </div>
     </div>
   </section>
@@ -527,8 +566,8 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
   <!-- ================= THE STRIP ================= -->
   <section class="show">
     <div class="wrap show-head">
-      <h2 class="disp">De <span class="gold">collectie</span><br>onderwerp voor onderwerp</h2>
-      <p class="hint">Sleep zijwaarts <span class="slide" aria-hidden="true">&#8594;</span></p>
+      <h2 class="disp"><span lang="nl">De <span class="gold">collectie</span><br>onderwerp voor onderwerp</span><span lang="en">The <span class="gold">collection</span><br>topic by topic</span></h2>
+      <p class="hint"><span lang="nl">Sleep zijwaarts</span><span lang="en">Drag sideways</span> <span class="slide" aria-hidden="true">&#8594;</span></p>
     </div>
 
     <div class="runway" tabindex="0" role="region" aria-label="Tien onderwerpen, horizontaal te scrollen">
@@ -554,8 +593,8 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
             </svg>
           </span>
           <div>
-            <p class="look-name">deviatie</p>
-            <p class="look-cap">Door het niveau, terug eronder</p>
+            <p class="look-name"><span lang="nl">deviatie</span><span lang="en">deviation</span></p>
+            <p class="look-cap"><span lang="nl">Door het niveau, terug eronder</span><span lang="en">Through the level, back below</span></p>
           </div>
         </li>
 
@@ -573,7 +612,7 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
           </span>
           <div>
             <p class="look-name">SMT</p>
-            <p class="look-cap">Twee markten, één verhaal</p>
+            <p class="look-cap"><span lang="nl">Twee markten, één verhaal</span><span lang="en">Two markets, one story</span></p>
           </div>
         </li>
 
@@ -596,7 +635,7 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
           </span>
           <div>
             <p class="look-name">FVG</p>
-            <p class="look-cap">De onbalans</p>
+            <p class="look-cap"><span lang="nl">De onbalans</span><span lang="en">The imbalance</span></p>
           </div>
         </li>
 
@@ -614,7 +653,7 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
           </span>
           <div>
             <p class="look-name">IFVG</p>
-            <p class="look-cap">Van steun naar weerstand</p>
+            <p class="look-cap"><span lang="nl">Van steun naar weerstand</span><span lang="en">From support to resistance</span></p>
           </div>
         </li>
 
@@ -634,7 +673,7 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
           </span>
           <div>
             <p class="look-name">orderblocks</p>
-            <p class="look-cap">Waar de beweging begint</p>
+            <p class="look-cap"><span lang="nl">Waar de beweging begint</span><span lang="en">Where the move begins</span></p>
           </div>
         </li>
 
@@ -656,7 +695,7 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
           </span>
           <div>
             <p class="look-name">fibonacci</p>
-            <p class="look-cap">Verhouding als kader</p>
+            <p class="look-cap"><span lang="nl">Verhouding als kader</span><span lang="en">Ratio as a frame</span></p>
           </div>
         </li>
 
@@ -675,8 +714,8 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
             </svg>
           </span>
           <div>
-            <p class="look-name">sessie&#8209;liquiditeit</p>
-            <p class="look-cap">Openen, lopen, sluiten</p>
+            <p class="look-name"><span lang="nl">sessie&#8209;liquiditeit</span><span lang="en">session liquidity</span></p>
+            <p class="look-cap"><span lang="nl">Openen, lopen, sluiten</span><span lang="en">Open, run, close</span></p>
           </div>
         </li>
 
@@ -699,8 +738,8 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
             </svg>
           </span>
           <div>
-            <p class="look-name">liquiditeit</p>
-            <p class="look-cap">Waar de orders liggen</p>
+            <p class="look-name"><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></p>
+            <p class="look-cap"><span lang="nl">Waar de orders liggen</span><span lang="en">Where the orders sit</span></p>
           </div>
         </li>
 
@@ -718,8 +757,8 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
             </svg>
           </span>
           <div>
-            <p class="look-name">risicobeheer</p>
-            <p class="look-cap">Vooraf bepaald</p>
+            <p class="look-name"><span lang="nl">risicobeheer</span><span lang="en">risk management</span></p>
+            <p class="look-cap"><span lang="nl">Vooraf bepaald</span><span lang="en">Decided in advance</span></p>
           </div>
         </li>
 
@@ -735,16 +774,16 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
             </svg>
           </span>
           <div>
-            <p class="look-name">tradingpsychologie</p>
-            <p class="look-cap">Hetzelfde blijven doen</p>
+            <p class="look-name"><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></p>
+            <p class="look-cap"><span lang="nl">Hetzelfde blijven doen</span><span lang="en">Doing the same thing</span></p>
           </div>
         </li>
 
         <li class="look look--final">
           <span class="look-no">&#8594;</span>
-          <p class="look-name">Einde<br>van de show</p>
-          <p>De hele collectie staat in de server, met kanalen per markt en live sessies.</p>
-          <a class="btn" href="https://discord.gg/78Ff2GuSfW">Word lid <span aria-hidden="true">&#8594;</span></a>
+          <p class="look-name"><span lang="nl">Einde<br>van de show</span><span lang="en">End<br>of the show</span></p>
+          <p><span lang="nl">De hele collectie staat in de server, met kanalen per markt en live sessies.</span><span lang="en">The whole collection is in the server, with channels per market and live sessions.</span></p>
+          <a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid</span><span lang="en">Join</span> <span aria-hidden="true">&#8594;</span></a>
         </li>
 
       </ol>
@@ -776,11 +815,11 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
       </svg>
     </div>
     <div>
-      <p class="kick kick--gold">De eerste rij</p>
-      <h2 class="disp">Gebouwd door<br><span class="gold">10+ jaar</span> ervaring</h2>
-      <p class="said">&#8220;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&#8221;</p>
-      <p class="said said--sub">&#8220;Geen snelle&#8209;rijk&#8209;verhalen, maar echte setups, educatie en een community die samen beter wil worden.&#8221;</p>
-      <a class="ghost" href="https://discord.gg/78Ff2GuSfW">Ontmoet de community <span aria-hidden="true">&#8599;</span></a>
+      <p class="kick kick--gold"><span lang="nl">De eerste rij</span><span lang="en">The front row</span></p>
+      <h2 class="disp"><span lang="nl">Gebouwd door<br><span class="gold">10+ jaar</span> ervaring</span><span lang="en">Built on<br><span class="gold">10+ years</span> of experience</span></h2>
+      <p class="said"><span lang="nl">&#8220;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&#8221;</span><span lang="en">&#8220;I&#8217;ve been involved in trading for over 10 years now, and during that time I&#8217;ve experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons.&#8221;</span></p>
+      <p class="said said--sub"><span lang="nl">&#8220;Geen snelle&#8209;rijk&#8209;verhalen, maar echte setups, educatie en een community die samen beter wil worden.&#8221;</span><span lang="en">&#8220;No get-rich-quick promises, just real setups, education, and a community focused on improving together.&#8221;</span></p>
+      <a class="ghost" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Ontmoet de community</span><span lang="en">Meet the community</span> <span aria-hidden="true">&#8599;</span></a>
     </div>
   </section>
 
@@ -788,8 +827,8 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
   <section class="model">
     <div class="wrap">
       <div class="model-head">
-        <h2 class="disp">Het <span class="gold">model</span>,<br>uitgelicht</h2>
-        <p class="kick">Schema &mdash; geen resultaat, geen prijs</p>
+        <h2 class="disp"><span lang="nl">Het <span class="gold">model</span>,<br>uitgelicht</span><span lang="en">The <span class="gold">model</span>,<br>on show</span></h2>
+        <p class="kick"><span lang="nl">Schema &mdash; geen resultaat, geen prijs</span><span lang="en">Diagram &mdash; no result, no price</span></p>
       </div>
       <div class="model-frame">
         <svg viewBox="0 0 1000 400" fill="none" role="img" aria-label="Schema: liquiditeit onder een niveau wordt opgehaald, daarna terug in de fair value gap">
@@ -798,7 +837,8 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
             <path d="M200 0V400"/><path d="M400 0V400"/><path d="M600 0V400"/><path d="M800 0V400"/>
           </g>
           <path d="M50 286 H950" stroke="rgba(244,242,236,.5)" stroke-dasharray="8 7"/>
-          <text x="50" y="274" fill="#A5A6A8" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="4">LIQUIDITEIT</text>
+          <text x="50" y="274" fill="#A5A6A8" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="4" lang="nl">LIQUIDITEIT</text>
+          <text x="50" y="274" fill="#A5A6A8" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="4" lang="en">LIQUIDITY</text>
           <rect x="520" y="128" width="400" height="50" fill="rgba(215,179,100,.15)" stroke="rgba(215,179,100,.55)"/>
           <text x="534" y="160" fill="#D7B364" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="4">FVG</text>
           <g stroke="rgba(244,242,236,.75)" stroke-width="1.7">
@@ -830,32 +870,32 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
           <path d="M886 160 L894 142 L902 160" stroke="#D7B364" stroke-width="2"/>
           <text x="800" y="330" fill="#A5A6A8" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="4">RETEST</text>
         </svg>
-        <p class="model-cap">Schematische illustratie &mdash; uitsluitend educatief</p>
+        <p class="model-cap"><span lang="nl">Schematische illustratie &mdash; uitsluitend educatief</span><span lang="en">Schematic illustration &mdash; educational only</span></p>
       </div>
     </div>
   </section>
 
   <!-- ================= CAST LIST ================= -->
   <section class="wrap cast">
-    <h2 class="disp">De <span class="gold">cast</span> &mdash; 15 kanalen</h2>
+    <h2 class="disp"><span lang="nl">De <span class="gold">cast</span> &mdash; 15 kanalen</span><span lang="en">The <span class="gold">cast</span> &mdash; 15 channels</span></h2>
     <div class="cast-cols">
       <div class="cast-col">
-        <h3>Thuis &mdash; nu gratis</h3>
+        <h3><span lang="nl">Thuis &mdash; nu gratis</span><span lang="en">Home &mdash; free right now</span></h3>
         <ul>
           <li><b>#nq-chart-idee&euml;n</b><i>NQ</i></li>
           <li><b>#es-chart-idee&euml;n</b><i>ES</i></li>
           <li><b>#bitcoin</b><i>BTC</i></li>
           <li><b>#altcoins</b><i>Alts</i></li>
-          <li><b>#markt</b><i>Markt</i></li>
-          <li><b>#vragen</b><i>Vragen</i></li>
+          <li><b>#markt</b><i><span lang="nl">Markt</span><span lang="en">Market</span></i></li>
+          <li><b>#vragen</b><i><span lang="nl">Vragen</span><span lang="en">Questions</span></i></li>
           <li><b>#algemeen</b><i>Chat</i></li>
           <li><b>#atlas-op-socials</b><i>Socials</i></li>
-          <li><b>#ondersteuning</b><i>Hulp</i></li>
+          <li><b>#ondersteuning</b><i><span lang="nl">Hulp</span><span lang="en">Help</span></i></li>
         </ul>
-        <p class="cast-foot"><a class="ghost" href="https://discord.gg/78Ff2GuSfW">Open de server <span aria-hidden="true">&#8599;</span></a></p>
+        <p class="cast-foot"><a class="ghost" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de server</span><span lang="en">Open the server</span> <span aria-hidden="true">&#8599;</span></a></p>
       </div>
       <div class="cast-col cast-col--later">
-        <h3>Premium &mdash; opent later</h3>
+        <h3><span lang="nl">Premium &mdash; opent later</span><span lang="en">Premium &mdash; opens later</span></h3>
         <ul>
           <li><b>#trade-setups</b><i>Later</i></li>
           <li><b>#marktupdates</b><i>Later</i></li>
@@ -864,7 +904,7 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
           <li><b>#chart-idee&euml;n</b><i>Later</i></li>
           <li><b>#premium-chat</b><i>Later</i></li>
         </ul>
-        <p class="cast-foot kick">Prijs en datum worden in de server aangekondigd.</p>
+        <p class="cast-foot kick"><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">Price and date will be announced in the server.</span></p>
       </div>
     </div>
   </section>
@@ -875,19 +915,19 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
       <div class="finale-grid">
         <div class="card card--live">
           <span class="livedot"><span class="d" aria-hidden="true"></span> Live</span>
-          <h3>Live traden in de server</h3>
-          <p>De oprichter handelt live mee. Tijden worden in de server aangekondigd.</p>
-          <a class="ghost" href="https://discord.gg/78Ff2GuSfW">Zit erbij <span aria-hidden="true">&#8599;</span></a>
+          <h3><span lang="nl">Live traden in de server</span><span lang="en">Live trading in the server</span></h3>
+          <p><span lang="nl">De oprichter handelt live mee. Tijden worden in de server aangekondigd.</span><span lang="en">The founder trades live. Times are announced in the server.</span></p>
+          <a class="ghost" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Zit erbij</span><span lang="en">Sit in</span> <span aria-hidden="true">&#8599;</span></a>
         </div>
         <div class="card">
-          <p class="kick kick--gold">Thuis</p>
-          <h3>Nu gratis</h3>
-          <p>Toegang tot de gratis kanalen en de volledige educatie.</p>
+          <p class="kick kick--gold"><span lang="nl">Thuis</span><span lang="en">Home</span></p>
+          <h3><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></h3>
+          <p><span lang="nl">Toegang tot de gratis kanalen en de volledige educatie.</span><span lang="en">Access to the free channels and the full education.</span></p>
         </div>
         <div class="card">
           <p class="kick">Premium</p>
-          <h3>Opent later</h3>
-          <p>Prijs en datum volgen in de server.</p>
+          <h3><span lang="nl">Opent later</span><span lang="en">Opens later</span></h3>
+          <p><span lang="nl">Prijs en datum volgen in de server.</span><span lang="en">Price and date follow in the server.</span></p>
         </div>
       </div>
     </div>
@@ -895,10 +935,10 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
 
   <!-- ================= CLOSING ================= -->
   <section class="wrap closing">
-    <p class="kick kick--gold">Applaus</p>
-    <h2 class="disp">Word lid</h2>
-    <p>Proces. Discipline. Uitvoering.</p>
-    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Open Discord <span aria-hidden="true">&#8594;</span></a>
+    <p class="kick kick--gold"><span lang="nl">Applaus</span><span lang="en">Applause</span></p>
+    <h2 class="disp"><span lang="nl">Word lid</span><span lang="en">Join us</span></h2>
+    <p><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></p>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open Discord</span><span lang="en">Open the Discord</span> <span aria-hidden="true">&#8594;</span></a>
   </section>
 
 </main>
@@ -911,8 +951,29 @@ footer{border-top:1px solid var(--hair);padding-top:clamp(26px,3.6vw,44px);paddi
       <a class="ghost" href="https://www.tiktok.com/@atlascapitalbv">TikTok @atlascapitalbv <span aria-hidden="true">&#8599;</span></a>
     </div>
   </div>
-  <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
 </footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,6 +31,11 @@
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --sans:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
 
 html{color-scheme:dark;background:var(--ink);-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 *,*::before,*::after{box-sizing:border-box}
@@ -106,6 +111,16 @@ hr.hair{
 .head nav a{color:var(--muted);text-decoration:none;padding-bottom:3px;border-bottom:1px solid transparent}
 .head nav a:hover{color:var(--gold);border-bottom-color:var(--gold)}
 .head .top-cta{margin:26px 0 0}
+.head .langsw{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 26px;margin:24px 0 0}
+.langsw button{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--muted);background:none;border:0;border-bottom:1px solid transparent;
+  padding:0 0 3px;line-height:1.4;cursor:pointer;
+  transition:color .25s ease,border-color .25s ease;
+}
+.langsw button:hover{color:var(--gold);border-bottom-color:var(--gold)}
+.langsw button[aria-pressed="true"]{color:var(--gold);border-bottom-color:var(--gold)}
+.langsw button:focus-visible{outline:2px solid var(--paper);outline-offset:4px}
 .crest{transform-origin:17px 17px;animation:crest 18s ease-in-out infinite}
 @keyframes crest{0%,100%{transform:rotate(0deg)}50%{transform:rotate(6deg)}}
 
@@ -324,14 +339,18 @@ footer a:hover{color:var(--gold)}
     <span class="nm">Atlas Capital</span>
   </a>
   <nav>
-    <a href="#leren">Leren</a>
-    <a href="#model">Model</a>
-    <a href="#kanalen">Kanalen</a>
-    <a href="#live">Live</a>
-    <a href="#toegang">Toegang</a>
+    <a href="#leren"><span lang="nl">Leren</span><span lang="en">Learning</span></a>
+    <a href="#model"><span lang="nl">Model</span><span lang="en">Model</span></a>
+    <a href="#kanalen"><span lang="nl">Kanalen</span><span lang="en">Channels</span></a>
+    <a href="#live"><span lang="nl">Live</span><span lang="en">Live</span></a>
+    <a href="#toegang"><span lang="nl">Toegang</span><span lang="en">Access</span></a>
   </nav>
   <div class="top-cta">
     <a class="knock" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord</a>
+  </div>
+  <div class="langsw" role="group" aria-label="Taal / Language">
+    <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
   </div>
 </header>
 
@@ -340,7 +359,8 @@ footer a:hover{color:var(--gold)}
   <!-- ================= HERO ================= -->
   <section class="hero">
     <div class="breathstage">
-      <svg viewBox="0 0 400 400" role="img" aria-label="Concentrische ringen rond een gouden kern, een ademend schema">
+      <p class="vh" id="fig094a"><span lang="nl">Concentrische ringen rond een gouden kern, een ademend schema</span><span lang="en">Concentric rings around a golden core, a breathing schematic</span></p>
+      <svg viewBox="0 0 400 400" role="img" aria-labelledby="fig094a">
         <circle class="r4" cx="200" cy="200" r="176" fill="none" stroke="#B9954A" stroke-opacity=".3" stroke-width="1"/>
         <circle class="r3" cx="200" cy="200" r="140" fill="none" stroke="#B9954A" stroke-opacity=".45" stroke-width="1"/>
         <circle class="r2" cx="200" cy="200" r="104" fill="none" stroke="#D7B364" stroke-opacity=".65" stroke-width="1"/>
@@ -365,13 +385,13 @@ footer a:hover{color:var(--gold)}
       </svg>
     </div>
     <div class="col">
-      <p class="tag">Nederlandse trading-community</p>
-      <h1>Rustig<br><em>ademen</em>.<br>Dan pas<br>handelen.</h1>
-      <p class="say">Educatie, chart-ideeën en een community die geen haast heeft.</p>
+      <p class="tag"><span lang="nl">Nederlandse trading-community</span><span lang="en">Dutch trading community</span></p>
+      <h1><span lang="nl">Rustig<br><em>ademen</em>.<br>Dan pas<br>handelen.</span><span lang="en">Breathe<br><em>slowly</em>.<br>Then<br>trade.</span></h1>
+      <p class="say"><span lang="nl">Educatie, chart-ideeën en een community die geen haast heeft.</span><span lang="en">Education, chart ideas and a community in no hurry.</span></p>
       <div>
-        <a class="knock" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Kom binnen — gratis</a>
+        <a class="knock" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Kom binnen — gratis</span><span lang="en">Come inside — free</span></a>
       </div>
-      <p class="tag dim">Proces · Discipline · Uitvoering</p>
+      <p class="tag dim"><span lang="nl">Proces · Discipline · Uitvoering</span><span lang="en">Process · Discipline · Execution</span></p>
     </div>
   </section>
 
@@ -393,12 +413,12 @@ footer a:hover{color:var(--gold)}
       </svg>
     </div>
     <div class="col">
-      <p class="tag">De oprichter</p>
+      <p class="tag"><span lang="nl">De oprichter</span><span lang="en">The founder</span></p>
       <p class="years">10+</p>
-      <p class="tag dim">jaar actief in trading</p>
-      <p class="quote">&ldquo;Winst, verlies, fouten, groei en vooral <em>heel veel lessen</em>.&rdquo;</p>
-      <p class="after">&ldquo;Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</p>
-      <p class="tag dim">— Oprichter, Atlas Capital</p>
+      <p class="tag dim"><span lang="nl">jaar actief in trading</span><span lang="en">years active in trading</span></p>
+      <p class="quote"><span lang="nl">&ldquo;Winst, verlies, fouten, groei en vooral <em>heel veel lessen</em>.&rdquo;</span><span lang="en">&ldquo;Wins, losses, mistakes, growth, and <em>a lot of lessons</em>.&rdquo;</span></p>
+      <p class="after"><span lang="nl">&ldquo;Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</span><span lang="en">&ldquo;I built Atlas Capital to share that experience, bring traders together, and show how I approach the markets on a daily basis. No get-rich-quick promises, just real setups, education, and a community focused on improving together.&rdquo;</span></p>
+      <p class="tag dim"><span lang="nl">— Oprichter, Atlas Capital</span><span lang="en">— Founder, Atlas Capital</span></p>
     </div>
   </section>
 
@@ -412,25 +432,25 @@ footer a:hover{color:var(--gold)}
       </div>
     </div>
     <div class="col">
-      <p class="tag">Educatie — 10 onderwerpen</p>
-      <h2>Tien dingen,<br>steeds <em>opnieuw</em>.</h2>
+      <p class="tag"><span lang="nl">Educatie — 10 onderwerpen</span><span lang="en">Education — 10 topics</span></p>
+      <h2><span lang="nl">Tien dingen,<br>steeds <em>opnieuw</em>.</span><span lang="en">Ten things,<br>over and <em>over</em>.</span></h2>
     </div>
     <div class="wide" style="margin-top:clamp(30px,5vh,54px)">
       <ul class="subjects">
-        <li>deviatie</li>
+        <li><span lang="nl">deviatie</span><span lang="en">deviation</span></li>
         <li>SMT</li>
         <li>FVG</li>
         <li>IFVG</li>
         <li>orderblocks</li>
         <li>fibonacci</li>
-        <li>sessie-liquiditeit</li>
-        <li>liquiditeit</li>
-        <li>risicobeheer</li>
-        <li>tradingpsychologie</li>
+        <li><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></li>
+        <li><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></li>
+        <li><span lang="nl">risicobeheer</span><span lang="en">risk management</span></li>
+        <li><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></li>
       </ul>
     </div>
     <div class="col" style="margin-top:clamp(34px,6vh,60px)">
-      <a class="knock quiet" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Leer mee in Discord</a>
+      <a class="knock quiet" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Leer mee in Discord</span><span lang="en">Learn along in Discord</span></a>
     </div>
   </section>
 
@@ -439,12 +459,13 @@ footer a:hover{color:var(--gold)}
   <!-- ================= MODEL ================= -->
   <section id="model">
     <div class="col">
-      <p class="tag">Een schema — geen resultaat</p>
-      <h2>Zo ziet een<br><em>opzet</em> eruit.</h2>
+      <p class="tag"><span lang="nl">Een schema — geen resultaat</span><span lang="en">A schematic — not a result</span></p>
+      <h2><span lang="nl">Zo ziet een<br><em>opzet</em> eruit.</span><span lang="en">This is what a<br><em>setup</em> looks like.</span></h2>
     </div>
     <div class="wide" style="margin-top:clamp(34px,6vh,60px)">
       <div class="plate">
-        <svg viewBox="0 0 760 360" role="img" aria-label="Schematische tekening van liquiditeit, een deviatie en de onbalans die overblijft">
+        <p class="vh" id="fig094b"><span lang="nl">Schematische tekening van liquiditeit, een deviatie en de onbalans die overblijft</span><span lang="en">Schematic drawing of liquidity, a deviation and the imbalance that is left</span></p>
+        <svg viewBox="0 0 760 360" role="img" aria-labelledby="fig094b">
           <defs>
             <linearGradient id="band" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" stop-color="#D7B364" stop-opacity=".5"/>
@@ -456,11 +477,14 @@ footer a:hover{color:var(--gold)}
           </g>
           <path class="rail" d="M30 96 H730" stroke="#D7B364" stroke-width="1.2" fill="none"/>
           <path class="rail" d="M30 292 H730" stroke="#B9954A" stroke-opacity=".7" stroke-width="1.2" fill="none"/>
-          <text x="32" y="86" fill="#D7B364" font-family="ui-monospace,Menlo,monospace" font-size="9.5" letter-spacing="3">LIQUIDITEIT BOVEN</text>
-          <text x="32" y="310" fill="#B9954A" font-family="ui-monospace,Menlo,monospace" font-size="9.5" letter-spacing="3">LIQUIDITEIT ONDER</text>
+          <text lang="nl" x="32" y="86" fill="#D7B364" font-family="ui-monospace,Menlo,monospace" font-size="9.5" letter-spacing="3">LIQUIDITEIT BOVEN</text>
+          <text lang="en" x="32" y="86" fill="#D7B364" font-family="ui-monospace,Menlo,monospace" font-size="9.5" letter-spacing="3">LIQUIDITY ABOVE</text>
+          <text lang="nl" x="32" y="310" fill="#B9954A" font-family="ui-monospace,Menlo,monospace" font-size="9.5" letter-spacing="3">LIQUIDITEIT ONDER</text>
+          <text lang="en" x="32" y="310" fill="#B9954A" font-family="ui-monospace,Menlo,monospace" font-size="9.5" letter-spacing="3">LIQUIDITY BELOW</text>
 
           <rect class="gapband" x="392" y="168" width="338" height="44" fill="url(#band)" stroke="#D7B364" stroke-opacity=".45"/>
-          <text x="398" y="162" fill="#E6CC8E" font-family="ui-monospace,Menlo,monospace" font-size="9.5" letter-spacing="3">ONBALANS</text>
+          <text lang="nl" x="398" y="162" fill="#E6CC8E" font-family="ui-monospace,Menlo,monospace" font-size="9.5" letter-spacing="3">ONBALANS</text>
+          <text lang="en" x="398" y="162" fill="#E6CC8E" font-family="ui-monospace,Menlo,monospace" font-size="9.5" letter-spacing="3">IMBALANCE</text>
 
           <g stroke="#F4F2EC" stroke-opacity=".8" stroke-width="2" fill="none">
             <path d="M80 260 V204"/><rect x="74" y="216" width="12" height="32" fill="#08090B"/>
@@ -478,16 +502,17 @@ footer a:hover{color:var(--gold)}
           </g>
           <circle class="mark-in" cx="300" cy="88" r="4.5" fill="#E6CC8E"/>
           <path d="M310 84 L392 66" stroke="#E6CC8E" stroke-opacity=".7" stroke-width="1"/>
-          <text x="398" y="70" fill="#E6CC8E" font-family="ui-monospace,Menlo,monospace" font-size="9.5" letter-spacing="3">DEVIATIE</text>
+          <text lang="nl" x="398" y="70" fill="#E6CC8E" font-family="ui-monospace,Menlo,monospace" font-size="9.5" letter-spacing="3">DEVIATIE</text>
+          <text lang="en" x="398" y="70" fill="#E6CC8E" font-family="ui-monospace,Menlo,monospace" font-size="9.5" letter-spacing="3">DEVIATION</text>
           <circle class="mark-in" cx="476" cy="212" r="4" fill="#D7B364"/>
           <rect x="1" y="24" width="758" height="310" fill="none" stroke="#D7B364" stroke-opacity=".18"/>
         </svg>
       </div>
       <div class="caption-row">
-        <span><b>01</b> liquiditeit</span>
-        <span><b>02</b> deviatie</span>
-        <span><b>03</b> onbalans</span>
-        <span><b>04</b> terugkeer</span>
+        <span><b>01</b> <span lang="nl">liquiditeit</span><span lang="en">liquidity</span></span>
+        <span><b>02</b> <span lang="nl">deviatie</span><span lang="en">deviation</span></span>
+        <span><b>03</b> <span lang="nl">onbalans</span><span lang="en">imbalance</span></span>
+        <span><b>04</b> <span lang="nl">terugkeer</span><span lang="en">return</span></span>
       </div>
     </div>
   </section>
@@ -508,14 +533,14 @@ footer a:hover{color:var(--gold)}
       </svg>
     </div>
     <div class="col">
-      <p class="tag">15 kanalen</p>
-      <h2>Waar het<br><em>gebeurt</em>.</h2>
+      <p class="tag"><span lang="nl">15 kanalen</span><span lang="en">15 channels</span></p>
+      <h2><span lang="nl">Waar het<br><em>gebeurt</em>.</span><span lang="en">Where it<br><em>happens</em>.</span></h2>
     </div>
     <div class="wide" style="margin-top:clamp(34px,6vh,60px)">
       <div class="rooms">
         <div class="set">
-          <h3>Thuis</h3>
-          <span class="state">Nu gratis</span>
+          <h3><span lang="nl">Thuis</span><span lang="en">Home</span></h3>
+          <span class="state"><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></span>
           <ul>
             <li>#nq-chart-ideeën</li>
             <li>#es-chart-ideeën</li>
@@ -530,7 +555,7 @@ footer a:hover{color:var(--gold)}
         </div>
         <div class="set later">
           <h3>Premium</h3>
-          <span class="state">Opent later</span>
+          <span class="state"><span lang="nl">Opent later</span><span lang="en">Opens later</span></span>
           <ul>
             <li>#trade-setups</li>
             <li>#marktupdates</li>
@@ -549,7 +574,8 @@ footer a:hover{color:var(--gold)}
   <!-- ================= LIVE ================= -->
   <section id="live">
     <div class="dialbox">
-      <svg viewBox="0 0 260 260" role="img" aria-label="Wijzerplaat met een langzaam ronddraaiende sessiewijzer">
+      <p class="vh" id="fig094c"><span lang="nl">Wijzerplaat met een langzaam ronddraaiende sessiewijzer</span><span lang="en">Dial with a slowly turning session hand</span></p>
+      <svg viewBox="0 0 260 260" role="img" aria-labelledby="fig094c">
         <circle class="halo" cx="130" cy="130" r="112" fill="#D7B364" fill-opacity=".05" stroke="none"/>
         <circle cx="130" cy="130" r="112" fill="none" stroke="#D7B364" stroke-opacity=".22" stroke-width="1"/>
         <circle cx="130" cy="130" r="88" fill="none" stroke="#F4F2EC" stroke-opacity=".08" stroke-width="1"/>
@@ -568,15 +594,16 @@ footer a:hover{color:var(--gold)}
           <circle cx="130" cy="46" r="3.6" fill="#E6CC8E"/>
         </g>
         <circle cx="130" cy="130" r="4.5" fill="#D7B364"/>
-        <text x="130" y="160" text-anchor="middle" fill="#A5A6A8" font-family="ui-monospace,Menlo,monospace" font-size="8.5" letter-spacing="4">SESSIE</text>
+        <text lang="nl" x="130" y="160" text-anchor="middle" fill="#A5A6A8" font-family="ui-monospace,Menlo,monospace" font-size="8.5" letter-spacing="4">SESSIE</text>
+        <text lang="en" x="130" y="160" text-anchor="middle" fill="#A5A6A8" font-family="ui-monospace,Menlo,monospace" font-size="8.5" letter-spacing="4">SESSION</text>
       </svg>
     </div>
     <div class="col">
-      <p class="tag">Live in de server</p>
-      <h2>Meekijken,<br>niet <em>meelopen</em>.</h2>
-      <p class="say">De oprichter handelt live mee in Discord. Tijden worden daar aangekondigd.</p>
+      <p class="tag"><span lang="nl">Live in de server</span><span lang="en">Live in the server</span></p>
+      <h2><span lang="nl">Meekijken,<br>niet <em>meelopen</em>.</span><span lang="en">Watch along,<br>do not <em>follow</em>.</span></h2>
+      <p class="say"><span lang="nl">De oprichter handelt live mee in Discord. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in Discord. Times are announced there.</span></p>
       <div>
-        <a class="knock" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Zit erbij</a>
+        <a class="knock" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Zit erbij</span><span lang="en">Sit in</span></a>
       </div>
       <p class="tag dim">NQ · ES · Bitcoin · Altcoins</p>
     </div>
@@ -587,32 +614,32 @@ footer a:hover{color:var(--gold)}
   <!-- ================= ACCESS ================= -->
   <section id="toegang">
     <div class="col">
-      <p class="tag">Toegang</p>
-      <h2>Nu open.<br>Later <em>meer</em>.</h2>
+      <p class="tag"><span lang="nl">Toegang</span><span lang="en">Access</span></p>
+      <h2><span lang="nl">Nu open.<br>Later <em>meer</em>.</span><span lang="en">Open now.<br><em>More</em> later.</span></h2>
     </div>
     <div class="wide">
       <div class="two-rooms">
         <div class="room now">
-          <span class="state">Nu gratis</span>
-          <h3>Thuis</h3>
-          <p>Directe toegang tot de community en de charts. Geen drempel.</p>
+          <span class="state"><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></span>
+          <h3><span lang="nl">Thuis</span><span lang="en">Home</span></h3>
+          <p><span lang="nl">Directe toegang tot de community en de charts. Geen drempel.</span><span lang="en">Direct access to the community and the charts. No barrier.</span></p>
           <ul>
-            <li>Chart-ideeën voor NQ en ES</li>
-            <li>Bitcoin en altcoins</li>
-            <li>Vragen en ondersteuning</li>
+            <li><span lang="nl">Chart-ideeën voor NQ en ES</span><span lang="en">Chart ideas for NQ and ES</span></li>
+            <li><span lang="nl">Bitcoin en altcoins</span><span lang="en">Bitcoin and altcoins</span></li>
+            <li><span lang="nl">Vragen en ondersteuning</span><span lang="en">Questions and support</span></li>
           </ul>
-          <a class="knock" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Word lid</a>
+          <a class="knock" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Word lid</span><span lang="en">Join</span></a>
         </div>
         <div class="room">
-          <span class="state">Opent later</span>
+          <span class="state"><span lang="nl">Opent later</span><span lang="en">Opens later</span></span>
           <h3>Premium</h3>
-          <p>Prijs en datum worden in de server aangekondigd.</p>
+          <p><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">Price and date are announced in the server.</span></p>
           <ul>
-            <li>Trade-setups en marktupdates</li>
-            <li>Indicatoren</li>
-            <li>Sessie-opnames</li>
+            <li><span lang="nl">Trade-setups en marktupdates</span><span lang="en">Trade setups and market updates</span></li>
+            <li><span lang="nl">Indicatoren</span><span lang="en">Indicators</span></li>
+            <li><span lang="nl">Sessie-opnames</span><span lang="en">Session recordings</span></li>
           </ul>
-          <a class="knock quiet" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Hou het bij</a>
+          <a class="knock quiet" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Hou het bij</span><span lang="en">Stay posted</span></a>
         </div>
       </div>
     </div>
@@ -624,9 +651,9 @@ footer a:hover{color:var(--gold)}
     <span class="ring two" aria-hidden="true"></span>
     <span class="ring three" aria-hidden="true"></span>
     <div class="col" style="position:relative">
-      <p class="tag">Eén stap</p>
-      <h2>Adem in.<br>Loop <em>binnen</em>.</h2>
-      <p class="say">Eén server, vijftien kanalen, tien onderwerpen. Nu gratis.</p>
+      <p class="tag"><span lang="nl">Eén stap</span><span lang="en">One step</span></p>
+      <h2><span lang="nl">Adem in.<br>Loop <em>binnen</em>.</span><span lang="en">Breathe in.<br>Walk <em>in</em>.</span></h2>
+      <p class="say"><span lang="nl">Eén server, vijftien kanalen, tien onderwerpen. Nu gratis.</span><span lang="en">One server, fifteen channels, ten topics. Free right now.</span></p>
       <div>
         <a class="knock" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Open Discord</a>
       </div>
@@ -641,10 +668,30 @@ footer a:hover{color:var(--gold)}
       <a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord</a>
       <a href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok @atlascapitalbv</a>
     </div>
-    <p class="tag dim" style="margin-bottom:22px">Atlas Capital · Proces. Discipline. Uitvoering.</p>
-    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <p class="tag dim" style="margin-bottom:22px"><span lang="nl">Atlas Capital · Proces. Discipline. Uitvoering.</span><span lang="en">Atlas Capital · Process. Discipline. Execution.</span></p>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
   </div>
 </footer>
 
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
 </body>
 </html>
