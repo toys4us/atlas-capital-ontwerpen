@@ -43,6 +43,18 @@
     border-bottom:1px solid rgba(215,179,100,.18);
     backdrop-filter:blur(8px);
   }
+  /* space-between puts the middle item halfway between its neighbours, not
+     halfway across the bar -- and the wordmark is 80px wider than the language
+     switch, so the Discord button sat 40px right of centre on a page whose
+     every other element is centred. Two equal outer tracks fix it. Measured:
+     the symmetric layout needs ~580px, so it only engages once there is room;
+     below that the row stays space-between, which is right on a phone. */
+  @media (min-width:620px){
+    header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
+    header > .wm{justify-self:start}
+    header > .cta{justify-self:center}
+    header > .langsw{justify-self:end}
+  }
   .wm{display:flex;align-items:center;gap:10px;text-decoration:none}
   .wm__mark{display:block;width:22px;height:auto;flex:0 0 auto}
   .wm b{
