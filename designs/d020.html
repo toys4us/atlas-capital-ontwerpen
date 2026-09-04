@@ -119,32 +119,6 @@ ul{list-style:none;padding:0;}
 .hd .key{padding:0;}
 .hd .key .cap-in{padding:11px 16px;}
 .hd .key .cap-legend{font-size:12px;letter-spacing:.06em;}
-.hd-end{display:flex;align-items:center;gap:10px;}
-
-/* ---------------- language switch: two small keycaps ---------------- */
-.langsw{display:flex;gap:6px;}
-.langsw button{
-  font-family:var(--disp);font-weight:800;font-size:11px;letter-spacing:.06em;line-height:1;
-  color:#D9D7D2;cursor:pointer;padding:12px 12px;
-  background:linear-gradient(180deg,var(--cap-1),var(--cap-2) 52%,var(--cap-3));
-  border:1px solid var(--cap-edge);border-radius:9px;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.11),
-    inset 0 -3px 0 rgba(0,0,0,.5),
-    0 4px 0 #08090B,
-    0 9px 16px rgba(0,0,0,.5);
-  transition:transform .08s ease, box-shadow .08s ease, border-color .12s linear, color .12s linear;
-}
-.langsw button:hover{border-color:rgba(215,179,100,.45);transform:translateY(-1px);}
-.langsw button[aria-pressed="true"]{
-  color:var(--gold-hi);border-color:rgba(215,179,100,.5);
-  transform:translateY(4px);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.05),
-    inset 0 2px 6px rgba(0,0,0,.6),
-    0 0 0 #08090B,
-    0 2px 5px rgba(0,0,0,.6);
-}
 
 /* function row */
 .frow{
@@ -158,6 +132,34 @@ ul{list-style:none;padding:0;}
 .fkey .fn{
   font-family:var(--disp);font-weight:600;font-size:11.5px;color:#D9D7D2;margin-top:5px;display:block;
   letter-spacing:-.01em;
+}
+
+/* language switch — two more keys on the function row */
+.langsw{display:flex;gap:7px;flex:1 1 108px;min-width:96px;}
+.langsw button{
+  flex:1 1 50%;min-width:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--disp);font-weight:600;font-size:11.5px;letter-spacing:.06em;
+  color:#D9D7D2;cursor:pointer;padding:9px 4px 11px;
+  background:linear-gradient(180deg,var(--cap-1),var(--cap-2) 52%,var(--cap-3));
+  border:1px solid var(--cap-edge);border-radius:9px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.11),
+    inset 0 -3px 0 rgba(0,0,0,.5),
+    0 4px 0 #08090B,
+    0 9px 16px rgba(0,0,0,.5);
+  transition:transform .08s ease, box-shadow .08s ease, border-color .12s linear, color .12s linear;
+}
+.langsw button:hover{border-color:rgba(215,179,100,.45);transform:translateY(-1px);}
+.langsw button:focus-visible{border-color:rgba(215,179,100,.45);outline:none;}
+.langsw button[aria-pressed="true"]{
+  color:var(--gold-hi);border-color:rgba(215,179,100,.5);
+  transform:translateY(4px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    inset 0 2px 6px rgba(0,0,0,.6),
+    0 0 0 #08090B,
+    0 2px 5px rgba(0,0,0,.6);
 }
 
 /* ---------------- hero ---------------- */
@@ -329,15 +331,9 @@ footer{border-top:1px solid var(--grule);background:linear-gradient(180deg,#0D0E
           <span>Proces · Discipline · Uitvoering</span>
         </span>
       </a>
-      <div class="hd-end">
-        <a class="key key--gold" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
-          <span class="cap-in"><span class="cap-legend">Discord</span></span>
-        </a>
-        <div class="langsw" role="group" aria-label="Taal / Language">
-          <button type="button" data-lang="nl" aria-pressed="true">NL</button>
-          <button type="button" data-lang="en" aria-pressed="false">EN</button>
-        </div>
-      </div>
+      <a class="key key--gold" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+        <span class="cap-in"><span class="cap-legend">Discord</span></span>
+      </a>
     </div>
 
     <nav class="frow" aria-label="Secties / Sections">
@@ -349,6 +345,10 @@ footer{border-top:1px solid var(--grule);background:linear-gradient(180deg,#0D0E
       <a class="key fkey" href="#toegang"><span class="cap-in"><span class="fk">F6</span><span class="fn"><span lang="nl">Toegang</span><span lang="en">Access</span></span></span></a>
       <a class="key fkey" href="#oprichter"><span class="cap-in"><span class="fk">F7</span><span class="fn"><span lang="nl">Oprichter</span><span lang="en">Founder</span></span></span></a>
       <a class="key fkey" href="#toetreden"><span class="cap-in"><span class="fk">F8</span><span class="fn"><span lang="nl">Toetreden</span><span lang="en">Join</span></span></span></a>
+      <div class="langsw" role="group" aria-label="Taal / Language">
+        <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
     </nav>
   </div>
 </div>
