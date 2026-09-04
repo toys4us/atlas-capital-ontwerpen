@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 087 Typografisch Landschap</title>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --panel:#15161A;
+  --paper:#F4F2EC;
+  --muted:#A5A6A8;
+  --rock-far:#171512;
+  --rock-near:#0E0F11;
+  --disp:"Big Shoulders Display","Haettenschweiler","Arial Narrow",Impact,sans-serif;
+  --ui:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+html{color-scheme:dark;overflow-x:clip;}
+*{box-sizing:border-box;}
+body{
+  margin:0;background:var(--ink);color:var(--paper);
+  font-family:var(--ui);line-height:1.5;
+  -webkit-font-smoothing:antialiased;overflow-x:clip;
+}
+a{color:inherit;}
+.wrap{max-width:1360px;margin:0 auto;padding:0 clamp(14px,3.6vw,48px);position:relative;}
+
+/* ── atmospheric layers ─────────────────────────────── */
+.sky{
+  position:relative;
+  background:
+    radial-gradient(120% 90% at 62% 88%, rgba(215,179,100,.20), rgba(215,179,100,0) 62%),
+    linear-gradient(180deg,#08090B 0%,#0C0D10 55%,#121213 100%);
+  isolation:isolate;
+  overflow:hidden;
+}
+.haze{
+  position:absolute;left:0;right:0;bottom:0;height:46%;
+  background:linear-gradient(180deg,rgba(215,179,100,0) 0%,rgba(215,179,100,.16) 70%,rgba(215,179,100,.05) 100%);
+  mix-blend-mode:screen;pointer-events:none;z-index:1;
+}
+.stars{position:absolute;inset:0;z-index:0;pointer-events:none;}
+.stars svg{width:100%;height:100%;display:block;}
+
+/* ── header ─────────────────────────────────────────── */
+header.top{position:sticky;top:0;z-index:80;background:rgba(8,9,11,.94);border-bottom:1px solid #24252A;backdrop-filter:blur(6px);}
+.topin{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:11px;}
+.mark{display:flex;align-items:center;gap:11px;text-decoration:none;}
+.mark svg{width:clamp(24px,4vw,30px);height:auto;display:block;}
+.mark b{font-family:var(--disp);font-weight:900;letter-spacing:.1em;font-size:clamp(15px,2.6vw,20px);text-transform:uppercase;line-height:1;display:block;}
+.mark i{font-style:normal;font-size:9px;letter-spacing:.26em;color:var(--muted);text-transform:uppercase;display:block;margin-top:2px;}
+.btn{
+  display:inline-flex;align-items:center;gap:.6em;text-decoration:none;
+  background:var(--gold);color:var(--ink);
+  font-family:var(--disp);font-weight:900;text-transform:uppercase;
+  letter-spacing:.1em;font-size:clamp(14px,2vw,18px);
+  padding:.45em 1em .35em;border-radius:2px;border:1px solid var(--gold);
+  white-space:nowrap;line-height:1.15;
+}
+.btn:hover{background:var(--gold-hi);}
+.btn--o{background:transparent;color:var(--gold-hi);border-color:var(--gold-lo);}
+.btn--o:hover{background:rgba(215,179,100,.14);}
+.btn--lg{font-size:clamp(17px,3vw,26px);padding:.5em 1.2em .4em;}
+
+/* ── hero ───────────────────────────────────────────── */
+.hero{padding-block:clamp(40px,7vw,90px) 0;position:relative;z-index:3;}
+.kicker{font-size:clamp(9px,1.4vw,11px);letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin:0 0 clamp(14px,2.4vw,26px);font-weight:700;}
+.horizonline{
+  font-family:var(--disp);font-weight:900;text-transform:uppercase;
+  line-height:.78;letter-spacing:-.005em;margin:0;
+  display:flex;flex-wrap:wrap;align-items:flex-end;gap:0 .18em;
+}
+.horizonline span{display:inline-block;}
+.h-a{font-size:clamp(52px,15vw,190px);}
+.h-b{font-size:clamp(38px,10.5vw,132px);color:var(--gold);}
+.h-c{font-size:clamp(60px,18vw,232px);}
+.herolede{margin:clamp(18px,3vw,32px) 0 0;max-width:40ch;font-size:clamp(14px,1.8vw,18px);color:#D6D5D0;}
+.heroact{display:flex;flex-wrap:wrap;gap:12px;margin:clamp(18px,3vw,30px) 0 clamp(30px,6vw,66px);}
+
+/* ── altitude strip ─────────────────────────────────── */
+.altstrip{border-top:1px solid #24252A;border-bottom:1px solid #24252A;background:#0B0C0F;position:relative;z-index:5;}
+.altstrip ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;}
+.altstrip li{
+  padding:9px clamp(9px,2vw,22px);font-size:clamp(9px,1.3vw,11px);
+  letter-spacing:.24em;text-transform:uppercase;color:var(--muted);
+  border-right:1px solid #1D1E22;font-weight:600;
+}
+.altstrip li b{color:var(--gold);font-weight:700;}
+
+/* ── section chrome ─────────────────────────────────── */
+.sec{padding-block:clamp(48px,8vw,110px);position:relative;}
+.sechead{display:flex;align-items:baseline;gap:clamp(10px,2vw,22px);margin:0 0 clamp(18px,3vw,34px);flex-wrap:wrap;}
+.sechead .n{font-family:var(--disp);font-weight:900;font-size:clamp(30px,6vw,74px);color:var(--gold-lo);line-height:.8;}
+.sechead h2{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(26px,5.4vw,64px);line-height:.85;margin:0;letter-spacing:-.01em;}
+.sechead p{margin:0;color:var(--muted);font-size:clamp(12px,1.5vw,15px);max-width:34ch;}
+
+/* ── THE RANGE ──────────────────────────────────────── */
+.rangeblock{position:relative;isolation:isolate;padding-bottom:clamp(20px,4vw,50px);}
+.silhouette{position:absolute;left:50%;transform:translateX(-50%);width:104vw;bottom:0;height:clamp(180px,30vw,420px);z-index:0;pointer-events:none;}
+.silhouette svg{width:100%;height:100%;display:block;}
+.ridge{list-style:none;margin:0;padding:0;position:relative;z-index:2;}
+.peak{position:relative;}
+.peak .idx{
+  font-family:var(--ui);font-size:10px;letter-spacing:.22em;color:var(--gold);
+  font-weight:700;display:block;
+}
+.peak .w{
+  font-family:var(--disp);font-weight:900;text-transform:uppercase;
+  line-height:.74;letter-spacing:-.01em;display:block;color:var(--paper);
+}
+.peak--far .w{color:var(--gold-hi);}
+
+/* mobile: an elevation profile — word + a bar whose length is its height */
+.ridge{display:flex;flex-direction:column;gap:clamp(9px,2vw,14px);}
+.peak{display:grid;grid-template-columns:26px 1fr;align-items:center;gap:10px;
+  border-bottom:1px solid #1C1D21;padding-bottom:clamp(8px,1.6vw,12px);}
+.peak .idx{grid-column:1;}
+.peak .w{grid-column:2;font-size:clamp(19px,5.4vw,30px);}
+.peak::after{
+  content:"";grid-column:2;height:6px;
+  width:calc(var(--h) * 1%);
+  background:linear-gradient(90deg,var(--gold-lo),var(--gold-hi));
+  clip-path:polygon(0 100%,100% 0,100% 100%);
+}
+
+@media(min-width:900px){
+  /* --u is capped so the range can never grow past the fixed-width container */
+  .rangeblock{--u:min(1vw,12.4px);}
+  .ridge{
+    flex-direction:row;align-items:flex-end;justify-content:center;
+    gap:clamp(2px,.7vw,12px);min-height:clamp(240px,32vw,440px);
+  }
+  .peak{
+    display:block;border:0;padding:0;text-align:center;
+  }
+  .peak::after{display:none;}
+  .peak .idx{margin-bottom:.5em;}
+  .peak .w{font-size:calc(var(--fs) * var(--u));}
+  .peak--far{transform:translateY(clamp(-58px,-4vw,-20px));}
+  .peak--far .w{opacity:.86;}
+  .ridge--b{margin-top:clamp(-70px,-5vw,-24px);}
+}
+
+/* reflection (the lake) */
+.lake{
+  position:relative;z-index:1;height:clamp(56px,9vw,120px);
+  background:linear-gradient(180deg,rgba(215,179,100,.13),rgba(8,9,11,0));
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,0,0,.02));
+  mask-image:linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,0,0,.02));
+  border-top:1px solid rgba(215,179,100,.4);
+}
+.lake .mirror{
+  transform:scaleY(-1);opacity:.3;filter:blur(.4px);
+  font-family:var(--disp);font-weight:900;text-transform:uppercase;
+  color:var(--gold-hi);text-align:center;font-size:clamp(18px,4.6vw,52px);
+  line-height:.8;letter-spacing:.02em;padding-top:6px;
+}
+
+/* ── cross-section ──────────────────────────────────── */
+.section-plate{
+  border:1px solid #26272C;background:linear-gradient(180deg,#101116,#0A0B0E);
+  padding:clamp(14px,2.6vw,30px);border-radius:3px;
+}
+.section-plate h3{margin:0 0 6px;font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(18px,3vw,28px);color:var(--gold-hi);line-height:.9;}
+.section-plate>p{margin:0 0 16px;color:var(--muted);font-size:clamp(12px,1.5vw,15px);max-width:56ch;}
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.scroller svg{display:block;width:100%;min-width:340px;height:auto;}
+.keys{display:flex;flex-wrap:wrap;gap:10px 22px;list-style:none;margin:16px 0 0;padding:0;}
+.keys li{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px;font-weight:600;}
+.keys i{width:16px;height:3px;background:var(--gold);display:inline-block;}
+.keys i.d{background:transparent;border-top:2px dashed var(--gold-lo);height:0;}
+.keys i.p{background:var(--paper);}
+
+/* ── basecamp / founder ─────────────────────────────── */
+.camp{position:relative;display:grid;grid-template-columns:1fr;gap:clamp(18px,3vw,40px);align-items:start;}
+.camp .contours{width:100%;}
+.camp .contours svg{width:100%;height:auto;display:block;}
+.camp blockquote{
+  margin:0;font-size:clamp(14px,1.85vw,19px);line-height:1.55;color:#E4E3DE;
+  border-left:2px solid var(--gold);padding-left:clamp(14px,2.2vw,24px);
+}
+.camp .sig{margin:16px 0 0;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:700;}
+.bigyears{font-family:var(--disp);font-weight:900;font-size:clamp(56px,13vw,168px);line-height:.72;margin:0 0 10px;letter-spacing:-.02em;}
+.bigyears em{font-style:normal;color:var(--gold);}
+
+/* ── channels as ridgeline index ────────────────────── */
+.index{display:grid;grid-template-columns:1fr;gap:clamp(16px,2.6vw,30px);}
+.idxcol h4{
+  font-family:var(--disp);font-weight:900;text-transform:uppercase;
+  font-size:clamp(19px,3.2vw,30px);margin:0 0 4px;line-height:.9;
+}
+.idxcol .sub{margin:0 0 14px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lo);font-weight:700;}
+.idxcol ul{list-style:none;margin:0;padding:0;}
+.idxcol li{
+  display:flex;align-items:baseline;gap:8px;
+  border-bottom:1px dotted #2A2B30;padding:8px 0;
+  font-size:clamp(12px,1.6vw,15px);
+}
+.idxcol li span{flex:1 1 auto;min-width:0;overflow-wrap:anywhere;}
+.idxcol li em{font-style:normal;font-family:var(--disp);font-weight:800;color:var(--gold);font-size:1.15em;}
+.idxcol--prem li em{color:var(--muted);}
+.idxcol--prem li span{color:#CFCEC9;}
+
+/* ── two blocks ─────────────────────────────────────── */
+.twin{display:grid;grid-template-columns:1fr;gap:clamp(14px,2.4vw,24px);}
+.card{border:1px solid #26272C;padding:clamp(16px,2.6vw,30px);background:#0C0D11;border-radius:3px;}
+.card--gold{background:linear-gradient(150deg,#241E12,#0D0E11);border-color:#3A3121;}
+.card h4{margin:0 0 8px;font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(20px,3.2vw,32px);line-height:.9;}
+.card p{margin:0 0 16px;color:var(--muted);font-size:clamp(12px,1.6vw,15px);max-width:40ch;}
+.card .lbl{display:inline-block;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:700;}
+
+/* ── massif close ───────────────────────────────────── */
+.massif{position:relative;isolation:isolate;text-align:center;padding:clamp(40px,7vw,90px) 0 0;overflow:hidden;}
+.massif .bg{position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:104vw;height:clamp(200px,30vw,400px);z-index:0;}
+.massif .bg svg{width:100%;height:100%;display:block;}
+.massif .word{
+  position:relative;z-index:2;font-family:var(--disp);font-weight:900;text-transform:uppercase;
+  font-size:clamp(64px,22vw,300px);line-height:.72;margin:0;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#F4F2EC 0%,#E6CC8E 58%,#B9954A 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.massif p{position:relative;z-index:2;margin:clamp(12px,2vw,20px) auto clamp(20px,3vw,30px);max-width:36ch;color:#D6D5D0;font-size:clamp(13px,1.7vw,17px);}
+.massif .actions{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;padding-bottom:clamp(40px,7vw,90px);}
+
+footer{border-top:1px solid #24252A;background:#0A0B0E;padding:clamp(26px,4vw,48px) 0 clamp(34px,5vw,58px);}
+.fgrid{display:grid;grid-template-columns:1fr;gap:20px;}
+.fgrid h5{margin:0 0 10px;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:700;}
+.fgrid a{display:inline-block;text-decoration:none;font-size:clamp(12px,1.6vw,15px);border-bottom:1px solid var(--gold-lo);padding-bottom:2px;}
+.fgrid a:hover{color:var(--gold-hi);}
+.fmark{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(28px,5vw,52px);line-height:.85;margin:0 0 8px;}
+.risk{margin:0;font-size:11px;line-height:1.6;color:#7E7F82;max-width:62ch;}
+
+@media(min-width:760px){
+  .camp{grid-template-columns:.9fr 1.1fr;align-items:center;}
+  .index{grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,56px);}
+  .twin{grid-template-columns:1fr 1fr;}
+  .fgrid{grid-template-columns:1.4fr .8fr .8fr;}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap topin">
+    <a class="mark" href="#">
+      <svg viewBox="0 0 34 34" aria-hidden="true">
+        <path d="M2 28 L11 10 L17 21 L23 6 L32 28 Z" fill="none" stroke="#D7B364" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M2 28h30" stroke="#F4F2EC" stroke-width="1.6"/>
+      </svg>
+      <span><b>Atlas Capital</b><i>Proces · Discipline · Uitvoering</i></span>
+    </a>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+  </div>
+</header>
+
+<div class="sky">
+  <div class="stars" aria-hidden="true">
+    <svg viewBox="0 0 1200 600" preserveAspectRatio="none">
+      <g fill="#D7B364" opacity="0.5">
+        <circle cx="90" cy="60" r="1.6"/><circle cx="240" cy="120" r="1.1"/><circle cx="410" cy="48" r="1.4"/>
+        <circle cx="560" cy="150" r="1"/><circle cx="700" cy="70" r="1.7"/><circle cx="860" cy="130" r="1.2"/>
+        <circle cx="1010" cy="52" r="1.5"/><circle cx="1130" cy="160" r="1.1"/><circle cx="330" cy="210" r="1"/>
+        <circle cx="640" cy="230" r="1.3"/><circle cx="950" cy="220" r="1"/><circle cx="150" cy="250" r="1.2"/>
+      </g>
+      <g stroke="#B9954A" stroke-width=".7" opacity="0.35" fill="none">
+        <path d="M90 60 L240 120 L410 48 L560 150"/>
+        <path d="M700 70 L860 130 L1010 52"/>
+      </g>
+    </svg>
+  </div>
+  <div class="haze" aria-hidden="true"></div>
+
+  <section class="hero wrap">
+    <p class="kicker">Nederlandse trading-community · NQ · ES · Bitcoin · Altcoins</p>
+    <h1 class="horizonline">
+      <span class="h-a">Proces</span><span class="h-b">Discipline</span><span class="h-c">Uitvoering</span>
+    </h1>
+    <p class="herolede">De woorden zijn het landschap. Tien onderwerpen vormen de bergketen die je leert lezen.</p>
+    <div class="heroact">
+      <a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Join de Discord</a>
+      <a class="btn btn--o btn--lg" href="#keten">Bekijk de keten</a>
+    </div>
+  </section>
+</div>
+
+<div class="altstrip">
+  <ul>
+    <li><b>10</b> onderwerpen</li>
+    <li><b>15</b> kanalen</li>
+    <li>Live trading in de server</li>
+    <li>Nu <b>gratis</b></li>
+    <li>Premium opent later</li>
+  </ul>
+</div>
+
+<!-- ── 01 DE KETEN ── -->
+<section class="sec wrap" id="keten">
+  <div class="sechead">
+    <span class="n">01</span>
+    <h2>De keten</h2>
+    <p>Tien onderwerpen, van fundament tot top. Het silhouet is de leerlijn.</p>
+  </div>
+
+  <div class="rangeblock">
+    <div class="silhouette" aria-hidden="true">
+      <svg viewBox="0 0 1200 300" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#221E16"/><stop offset="1" stop-color="#0C0D10"/>
+          </linearGradient>
+          <linearGradient id="near" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#141412"/><stop offset="1" stop-color="#08090B"/>
+          </linearGradient>
+        </defs>
+        <path d="M0 300 L0 190 L90 120 L170 178 L260 74 L350 160 L430 108 L520 186 L610 96 L700 168 L790 122 L880 62 L970 150 L1060 104 L1140 170 L1200 132 L1200 300 Z"
+              fill="url(#far)" stroke="#B9954A" stroke-width="1.4"/>
+        <path d="M0 300 L0 244 L110 200 L200 246 L300 168 L400 232 L500 190 L600 250 L700 196 L800 240 L900 178 L1000 236 L1100 202 L1200 244 L1200 300 Z"
+              fill="url(#near)" stroke="#D7B364" stroke-width="1.8"/>
+      </svg>
+    </div>
+
+    <ol class="ridge ridge--a">
+      <li class="peak peak--far" style="--fs:5.6;--h:62"><span class="idx">01</span><span class="w">Deviatie</span></li>
+      <li class="peak peak--far" style="--fs:9.5;--h:96"><span class="idx">02</span><span class="w">SMT</span></li>
+      <li class="peak peak--far" style="--fs:3.6;--h:44"><span class="idx">03</span><span class="w">Orderblocks</span></li>
+      <li class="peak peak--far" style="--fs:8.4;--h:88"><span class="idx">04</span><span class="w">FVG</span></li>
+      <li class="peak peak--far" style="--fs:2.8;--h:52"><span class="idx">05</span><span class="w">Liquiditeit</span></li>
+    </ol>
+
+    <ol class="ridge ridge--b">
+      <li class="peak" style="--fs:7.0;--h:78"><span class="idx">06</span><span class="w">IFVG</span></li>
+      <li class="peak" style="--fs:4.2;--h:58"><span class="idx">07</span><span class="w">Fibonacci</span></li>
+      <li class="peak" style="--fs:3.2;--h:40"><span class="idx">08</span><span class="w">Risicobeheer</span></li>
+      <li class="peak" style="--fs:2.3;--h:30"><span class="idx">09</span><span class="w">Sessie-liquiditeit</span></li>
+      <li class="peak" style="--fs:2.3;--h:34"><span class="idx">10</span><span class="w">Tradingpsychologie</span></li>
+    </ol>
+  </div>
+
+  <div class="lake" aria-hidden="true"><div class="mirror">Atlas Capital</div></div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:clamp(22px,4vw,40px)">
+    <p style="margin:0;max-width:32ch;color:#D6D5D0;font-size:clamp(13px,1.7vw,16px)">Elk onderwerp wordt in de server uitgelegd met voorbeelden uit de markt.</p>
+    <a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Leer mee in Discord</a>
+  </div>
+</section>
+
+<!-- ── 02 DOORSNEDE ── -->
+<section class="sec wrap">
+  <div class="sechead">
+    <span class="n">02</span>
+    <h2>Doorsnede</h2>
+    <p>Een schema van een liquidity sweep. Illustratie, geen voorspelling.</p>
+  </div>
+  <div class="section-plate">
+    <h3>Sweep &amp; terugkeer, schematisch</h3>
+    <p>De markt haalt eerst de rust boven een oude top weg en keert daarna terug in de zone. Zo tekenen wij het — zonder koersen, zonder uitkomst.</p>
+    <div class="scroller">
+      <svg viewBox="0 0 960 400" role="img" aria-label="Schematische doorsnede van een liquidity sweep">
+        <defs>
+          <linearGradient id="strata" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#D7B364" stop-opacity=".22"/>
+            <stop offset="1" stop-color="#D7B364" stop-opacity=".04"/>
+          </linearGradient>
+        </defs>
+        <g stroke="#1E1F24" stroke-width="1">
+          <path d="M30 50h900M30 120h900M30 190h900M30 260h900M30 330h900"/>
+        </g>
+        <rect x="300" y="196" width="600" height="74" fill="url(#strata)"/>
+        <path d="M300 196h600M300 270h600" stroke="#B9954A" stroke-width="1.2" stroke-dasharray="6 5"/>
+
+        <path d="M60 96h840" stroke="#D7B364" stroke-width="1.6" stroke-dasharray="10 6"/>
+        <text x="62" y="86" fill="#D7B364" font-family="Arial,sans-serif" font-size="14" letter-spacing="3">OUDE TOP — RUST</text>
+
+        <path d="M60 300 C 150 300, 190 190, 250 150 S 330 92, 372 68 C 400 52, 430 62, 452 108
+                 C 480 168, 520 232, 590 244 C 660 256, 720 226, 790 176 C 840 140, 880 118, 910 104"
+              fill="none" stroke="#F4F2EC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+        <circle cx="372" cy="68" r="9" fill="none" stroke="#D7B364" stroke-width="2.5"/>
+        <path d="M372 40v18" stroke="#D7B364" stroke-width="1.6"/>
+        <text x="330" y="32" fill="#E6CC8E" font-family="Arial,sans-serif" font-size="14" letter-spacing="3">SWEEP</text>
+
+        <circle cx="590" cy="244" r="9" fill="none" stroke="#D7B364" stroke-width="2.5"/>
+        <path d="M590 254v26" stroke="#D7B364" stroke-width="1.6"/>
+        <text x="536" y="300" fill="#E6CC8E" font-family="Arial,sans-serif" font-size="14" letter-spacing="3">TERUG IN ZONE</text>
+
+        <text x="748" y="80" fill="#A5A6A8" font-family="Arial,sans-serif" font-size="13" letter-spacing="3">VERVOLG</text>
+        <path d="M792 90v22" stroke="#5A5B61" stroke-width="1.2"/>
+
+        <g stroke="#2C2D33" stroke-width="1">
+          <path d="M30 20v18M21 29h18M920 362v18M911 371h18"/>
+        </g>
+        <text x="30" y="386" fill="#5A5B61" font-family="Arial,sans-serif" font-size="11" letter-spacing="3">SCHEMA · GEEN KOERSEN · GEEN RESULTAAT</text>
+      </svg>
+    </div>
+    <ul class="keys">
+      <li><i></i>De zone die we bewaken</li>
+      <li><i class="d"></i>Oude top, waar rust ligt</li>
+      <li><i class="p"></i>Prijsbeweging, schematisch</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── 03 BASISKAMP ── -->
+<section class="sec wrap">
+  <div class="sechead">
+    <span class="n">03</span>
+    <h2>Basiskamp</h2>
+    <p>Wie de keten heeft gelopen.</p>
+  </div>
+  <div class="camp">
+    <div class="contours" aria-hidden="true">
+      <svg viewBox="0 0 400 320">
+        <g fill="none" stroke="#B9954A" stroke-width="1">
+          <path d="M20 300c40-14 60-46 74-84 12-32 34-52 66-56 34-4 56 16 70 46 14 30 34 48 74 60"/>
+          <path d="M34 300c38-20 56-52 68-88 12-34 32-56 62-60 32-4 54 18 68 50 12 28 30 44 62 56"/>
+          <path d="M50 300c34-24 50-58 60-94 10-34 30-58 58-62 28-4 50 20 62 52 10 26 26 40 54 52"/>
+          <path d="M68 300c30-28 44-64 52-100 8-34 28-60 54-64 26-4 46 22 56 54 8 24 22 38 46 50"/>
+        </g>
+        <g fill="none" stroke="#D7B364" stroke-width="1.6">
+          <path d="M88 300c24-32 36-70 42-106 6-34 24-62 48-66 24-4 42 24 50 56 6 22 18 34 40 46"/>
+        </g>
+        <circle cx="178" cy="128" r="5" fill="#D7B364"/>
+        <path d="M178 128 L242 76" stroke="#D7B364" stroke-width="1"/>
+        <text x="246" y="72" fill="#D7B364" font-family="Arial,sans-serif" font-size="13" letter-spacing="2">10+ JAAR</text>
+      </svg>
+    </div>
+    <div>
+      <p class="bigyears">10+<em>jaar</em></p>
+      <blockquote>Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</blockquote>
+      <p class="sig">De oprichter</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 04 NEDERZETTINGEN ── -->
+<section class="sec wrap">
+  <div class="sechead">
+    <span class="n">04</span>
+    <h2>15 kanalen</h2>
+    <p>Waar de community woont. Vrij toegankelijk of nog gesloten.</p>
+  </div>
+  <div class="index">
+    <div class="idxcol">
+      <h4>Thuis</h4>
+      <p class="sub">Nu gratis</p>
+      <ul>
+        <li><em>&#9650;</em><span>#nq-chart-idee&euml;n</span></li>
+        <li><em>&#9650;</em><span>#es-chart-idee&euml;n</span></li>
+        <li><em>&#9650;</em><span>#bitcoin</span></li>
+        <li><em>&#9650;</em><span>#altcoins</span></li>
+        <li><em>&#9650;</em><span>#markt</span></li>
+        <li><em>&#9650;</em><span>#vragen</span></li>
+        <li><em>&#9650;</em><span>#algemeen</span></li>
+        <li><em>&#9650;</em><span>#atlas-op-socials</span></li>
+        <li><em>&#9650;</em><span>#ondersteuning</span></li>
+      </ul>
+    </div>
+    <div class="idxcol idxcol--prem">
+      <h4>Premium</h4>
+      <p class="sub">Opent later</p>
+      <ul>
+        <li><em>&#9651;</em><span>#trade-setups</span></li>
+        <li><em>&#9651;</em><span>#marktupdates</span></li>
+        <li><em>&#9651;</em><span>#indicatoren</span></li>
+        <li><em>&#9651;</em><span>#sessie-opnames</span></li>
+        <li><em>&#9651;</em><span>#chart-idee&euml;n</span></li>
+        <li><em>&#9651;</em><span>#premium-chat</span></li>
+      </ul>
+      <p style="margin:16px 0 0"><a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW">Bekijk de server</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 05 LIVE & TOEGANG ── -->
+<section class="sec wrap">
+  <div class="sechead">
+    <span class="n">05</span>
+    <h2>Live &amp; toegang</h2>
+  </div>
+  <div class="twin">
+    <div class="card card--gold">
+      <span class="lbl">Live trading</span>
+      <h4>Meekijken, live</h4>
+      <p>De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW">Naar de server</a>
+    </div>
+    <div class="card">
+      <span class="lbl">Toegang</span>
+      <h4>Nu gratis</h4>
+      <p>Alles wat er nu staat is vrij toegankelijk. Premium opent later; prijs en datum worden in de server bekendgemaakt.</p>
+      <a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW">Word lid</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLOSE ── -->
+<section class="massif">
+  <div class="bg" aria-hidden="true">
+    <svg viewBox="0 0 1200 300" preserveAspectRatio="none">
+      <path d="M0 300 L0 210 L140 150 L280 220 L420 118 L560 200 L700 96 L840 190 L980 140 L1120 208 L1200 168 L1200 300 Z"
+            fill="#101013" stroke="#B9954A" stroke-width="1.4"/>
+      <path d="M0 300 L0 262 L180 226 L360 268 L540 220 L720 264 L900 214 L1080 258 L1200 228 L1200 300 Z"
+            fill="#08090B" stroke="#D7B364" stroke-width="1.6"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <p class="word">Atlas</p>
+    <p>Charts, uitleg en een community die dezelfde taal spreekt. Nederlands, elke dag.</p>
+    <div class="actions">
+      <a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Join Atlas Capital op Discord</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap fgrid">
+    <div>
+      <p class="fmark">Atlas Capital</p>
+      <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    </div>
+    <div>
+      <h5>Server</h5>
+      <a href="https://discord.gg/78Ff2GuSfW">Discord &#8594;</a>
+    </div>
+    <div>
+      <h5>Socials</h5>
+      <a href="https://www.tiktok.com/@atlascapitalbv">TikTok @atlascapitalbv &#8594;</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

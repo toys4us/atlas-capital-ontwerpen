@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 059 Marge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ATLAS CAPITAL — 059 MARGE
+   Everything lives in the outer margins. The centre of the page
+   is empty and stays empty — it carries only the fold, the
+   folio numbers, and the registration marks.
+   Exactly twice, gold is allowed to cross the middle.
+   Both times, it is crossing towards the Discord button.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --paper:#F4F2EC;
+  --grey:#63635F;
+  --soft:#8C8C87;
+  --hair:#D9D5C9;
+  --hair-2:#E6E2D7;
+
+  --u:8px;
+  --marg:26fr;
+  --void:48fr;
+
+  --t-display:clamp(2.375rem, 1.5rem + 3.1vw, 4.25rem);
+  --t-sub:clamp(1.125rem, 1rem + .55vw, 1.5rem);
+  --t-body:clamp(.9375rem, .92rem + .18vw, 1.0625rem);
+  --t-micro:clamp(.625rem, .61rem + .12vw, .71875rem);
+
+  --grot:"Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono:ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+html{color-scheme:light;-webkit-text-size-adjust:100%}
+*,*::before,*::after{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--grot);
+  font-weight:400;
+  font-size:var(--t-body);
+  line-height:1.62;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+h1,h2,h3{margin:0;font-weight:400}
+p{margin:0}
+
+.sheet{
+  position:relative;
+  max-width:1680px;
+  margin-inline:auto;
+  padding-inline:clamp(18px, 3.4vw, 56px);
+}
+
+/* the fold — one hairline, top of page to bottom, never broken */
+.sheet::before{
+  content:"";
+  position:absolute;
+  top:0;bottom:0;left:50%;
+  width:1px;
+  background:var(--hair);
+}
+
+/* ------------------------------------------------------------
+   THE SPREAD — margin · void · margin
+   ------------------------------------------------------------ */
+.spread{
+  display:grid;
+  grid-template-columns:minmax(0,var(--marg)) minmax(0,var(--void)) minmax(0,var(--marg));
+  column-gap:clamp(12px,2vw,36px);
+  align-items:start;
+  padding-block:clamp(56px, 8.5vh, 132px);
+  border-top:1px solid var(--hair-2);
+}
+.head{border-top:0}
+
+.void{
+  position:relative;
+  min-height:calc(var(--u)*6);
+  text-align:center;
+}
+.folio{
+  display:inline-block;
+  position:relative;   /* sits above the fold hairline and knocks it out */
+  z-index:1;
+  font-family:var(--mono);
+  font-size:var(--t-micro);
+  letter-spacing:.24em;
+  color:var(--gold-lo);
+  background:var(--paper);
+  padding-block:calc(var(--u)*.5);
+  padding-inline:calc(var(--u)*1.5);
+}
+.regmark{
+  display:block;
+  width:13px;height:13px;
+  margin:calc(var(--u)*4) auto 0;
+  position:relative;
+}
+.regmark::before,.regmark::after{
+  content:"";position:absolute;background:var(--gold-lo);
+}
+.regmark::before{left:0;right:0;top:6px;height:1px}
+.regmark::after{top:0;bottom:0;left:6px;width:1px}
+
+/* ------------------------------------------------------------
+   TYPE IN THE MARGINS
+   ------------------------------------------------------------ */
+.label{
+  font-family:var(--grot);
+  font-size:var(--t-micro);
+  font-weight:600;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--grey);
+}
+.label.gold{color:var(--gold-lo)}
+
+.display{
+  font-size:var(--t-display);
+  font-weight:600;
+  line-height:.94;
+  letter-spacing:-.035em;
+  text-wrap:balance;
+}
+.display .g{color:var(--gold-lo)}
+
+.sub{
+  font-size:var(--t-sub);
+  font-weight:400;
+  line-height:1.2;
+  letter-spacing:-.018em;
+  text-wrap:balance;
+}
+
+.say{color:#3A3A37;max-width:40ch}
+.say.dim{color:var(--grey)}
+
+.m1{margin-top:calc(var(--u)*1.5)}
+.m2{margin-top:calc(var(--u)*3)}
+.m3{margin-top:calc(var(--u)*5)}
+.m4{margin-top:calc(var(--u)*8)}
+
+.hair{height:1px;background:var(--ink);border:0;margin:0;width:100%}
+.hair.g{background:var(--gold)}
+
+/* ------------------------------------------------------------
+   HEADER
+   ------------------------------------------------------------ */
+.head{padding-block:clamp(20px,3vh,40px) clamp(20px,3vh,40px);border-top:0}
+.wordmark{
+  display:inline-flex;
+  align-items:center;
+  gap:.6em;
+  font-size:clamp(.8125rem,.78rem + .22vw,1rem);
+  font-weight:700;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.wordmark i{width:7px;height:7px;background:var(--gold);display:inline-block;transform:rotate(45deg)}
+.right{display:flex;justify-content:flex-end}
+
+/* ------------------------------------------------------------
+   BUTTONS
+   ------------------------------------------------------------ */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.9em;
+  background:var(--ink);
+  color:var(--paper);
+  text-decoration:none;
+  font-family:var(--grot);
+  font-weight:700;
+  font-size:var(--t-micro);
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  padding:calc(var(--u)*1.75) calc(var(--u)*2.25);
+  border:1px solid var(--ink);
+  transition:background .16s ease,color .16s ease,border-color .16s ease;
+}
+.btn:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn--gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn--gold:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.btn--wide{width:100%}
+.btn--tall{padding-block:calc(var(--u)*3);font-size:clamp(.6875rem,.65rem + .28vw,.875rem)}
+.btn .tip{width:1.2em;height:1px;background:currentColor;position:relative;flex:0 0 auto}
+.btn .tip::after{
+  content:"";position:absolute;right:0;top:50%;
+  width:.42em;height:.42em;
+  border-top:1px solid currentColor;border-right:1px solid currentColor;
+  transform:translateY(-50%) rotate(45deg);
+}
+
+/* ------------------------------------------------------------
+   THE CROSSING — the only thing allowed through the middle
+   ------------------------------------------------------------ */
+.crossing{
+  grid-column:1 / -1;
+  display:grid;
+  grid-template-columns:minmax(0,var(--marg)) minmax(0,var(--void)) minmax(0,var(--marg));
+  column-gap:clamp(12px,2vw,36px);
+  align-items:center;
+  margin-top:calc(var(--u)*5);
+}
+.crossing .beam{
+  height:2px;
+  background:var(--gold);
+  position:relative;
+}
+.crossing .beam::before,.crossing .beam::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:9px;height:9px;
+  background:var(--gold);
+  transform:translateY(-50%) rotate(45deg);
+}
+.crossing .beam::before{left:-4px}
+.crossing .beam::after{right:-4px}
+
+/* ------------------------------------------------------------
+   CURRICULUM — five in each margin
+   ------------------------------------------------------------ */
+.five{list-style:none;margin:0;padding:0}
+.five li{
+  display:flex;
+  align-items:baseline;
+  gap:calc(var(--u)*1.5);
+  padding-block:calc(var(--u)*1.5);
+  border-bottom:1px solid var(--hair);
+}
+.five li:first-child{border-top:1px solid var(--ink)}
+.five .n{font-family:var(--mono);font-size:var(--t-micro);color:var(--gold-lo);min-width:2.6ch}
+.five .w{
+  font-size:clamp(1.0625rem,.98rem + .5vw,1.4375rem);
+  font-weight:500;
+  letter-spacing:-.02em;
+  line-height:1.15;
+}
+
+/* ------------------------------------------------------------
+   CHANNELS
+   ------------------------------------------------------------ */
+.chan{list-style:none;margin:calc(var(--u)*2) 0 0;padding:0;font-family:var(--mono);font-size:clamp(.75rem,.73rem + .16vw,.875rem)}
+.chan li{padding-block:calc(var(--u)*.9);color:#3A3A37;border-bottom:1px solid var(--hair-2)}
+.chan.soon li{color:var(--soft)}
+
+/* ------------------------------------------------------------
+   VERTICAL SCHEMATIC — time runs down the margin
+   ------------------------------------------------------------ */
+.plate{margin-top:calc(var(--u)*3)}
+.plate svg{display:block;width:100%;height:auto}
+
+/* ------------------------------------------------------------
+   ACCESS
+   ------------------------------------------------------------ */
+.acc dt{font-family:var(--grot);font-size:var(--t-micro);font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--grey)}
+.acc dd{margin:calc(var(--u)*1) 0 0;font-size:clamp(1.0625rem,1rem + .5vw,1.375rem);font-weight:500;letter-spacing:-.02em}
+.acc dd.on{color:var(--ink)}
+.acc dd.off{color:var(--gold-lo)}
+.acc p{margin-top:calc(var(--u)*1.5);font-size:var(--t-micro);line-height:1.85;color:var(--grey);letter-spacing:.03em}
+.acc > div + div{margin-top:calc(var(--u)*4)}
+
+/* ------------------------------------------------------------
+   FOOTER
+   ------------------------------------------------------------ */
+.foot{padding-block:clamp(40px,6vh,88px) clamp(40px,6vh,80px)}
+.flinks{display:flex;gap:calc(var(--u)*3);flex-wrap:wrap;font-size:var(--t-micro);font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.flinks a{text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:3px}
+.flinks a:hover{border-bottom-color:var(--ink)}
+.risk{font-size:var(--t-micro);line-height:1.9;color:var(--grey);letter-spacing:.02em;max-width:44ch}
+.colo{font-family:var(--mono);font-size:var(--t-micro);letter-spacing:.14em;color:var(--soft);text-align:right}
+
+/* ------------------------------------------------------------
+   BELOW 1000px — the margins meet. The fold retires.
+   ------------------------------------------------------------ */
+@media (max-width:1000px){
+  .sheet::before{left:0}
+  .spread,.crossing{grid-template-columns:1fr;row-gap:calc(var(--u)*5)}
+  .void{text-align:left;min-height:0;order:-1}
+  .folio{padding-inline:0}
+  .regmark{margin-left:0;margin-top:calc(var(--u)*2)}
+  .right{justify-content:flex-start}
+  .crossing .beam{display:none}
+  .colo{text-align:left}
+  .sheet{padding-left:clamp(20px,6vw,44px);padding-right:clamp(20px,6vw,44px)}
+  .plate{max-width:420px}
+}
+@media (max-width:520px){
+  .spread{padding-block:clamp(40px,6vh,72px)}
+  .btn{width:100%}
+}
+
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="spread head">
+    <div>
+      <a class="wordmark" href="#top"><i aria-hidden="true"></i> Atlas Capital</a>
+    </div>
+    <div class="void"><span class="folio">00</span></div>
+    <div class="right">
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Discord <span class="tip" aria-hidden="true"></span></a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ═══════════ 01 · HERO ═══════════ -->
+    <section class="spread" aria-labelledby="a1">
+      <div>
+        <p class="label gold">Nederlandse trading-community</p>
+        <h1 class="display m2" id="a1">Proces.<br>Discipline.<br><span class="g">Uitvoering.</span></h1>
+      </div>
+
+      <div class="void">
+        <span class="folio">01</span>
+        <span class="regmark" aria-hidden="true"></span>
+      </div>
+
+      <div>
+        <hr class="hair">
+        <p class="say m2">Educatie en dagelijkse marktvoorbereiding voor NQ, ES, Bitcoin en altcoins. Alles gebeurt in één Discord-server.</p>
+        <p class="label m3">Toegang is nu gratis</p>
+      </div>
+
+      <!-- gold crosses the empty middle, once, towards the button -->
+      <div class="crossing">
+        <div><a class="btn btn--gold btn--wide btn--tall" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Kom binnen <span class="tip" aria-hidden="true"></span></a></div>
+        <div class="beam" aria-hidden="true"></div>
+        <div><a class="btn btn--gold btn--wide btn--tall" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Open Discord <span class="tip" aria-hidden="true"></span></a></div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 02 · OPRICHTER ═══════════ -->
+    <section class="spread" aria-labelledby="a2">
+      <div>
+        <p class="label">De oprichter</p>
+        <h2 class="display m2" id="a2">10+<br>jaar</h2>
+        <hr class="hair g m2" style="width:60%">
+        <p class="say dim m2" style="font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase">NQ · ES · Bitcoin · Altcoins</p>
+      </div>
+
+      <div class="void">
+        <span class="folio">02</span>
+      </div>
+
+      <div>
+        <blockquote style="margin:0">
+          <p class="say">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&rdquo;</p>
+          <p class="say m2">&ldquo;Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader.&rdquo;</p>
+          <p class="say m2">&ldquo;Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</p>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ═══════════ 03 · EDUCATIE — five in each margin ═══════════ -->
+    <section class="spread" aria-labelledby="a3">
+      <div>
+        <p class="label">Educatie — 10 onderwerpen</p>
+        <h2 class="sub m2" id="a3">De basis, en daarna het hoofd.</h2>
+        <ol class="five m3" start="1">
+          <li><span class="n">01</span><span class="w">deviatie</span></li>
+          <li><span class="n">02</span><span class="w">SMT</span></li>
+          <li><span class="n">03</span><span class="w">FVG</span></li>
+          <li><span class="n">04</span><span class="w">IFVG</span></li>
+          <li><span class="n">05</span><span class="w">orderblocks</span></li>
+        </ol>
+      </div>
+
+      <div class="void">
+        <span class="folio">03</span>
+        <span class="regmark" aria-hidden="true"></span>
+      </div>
+
+      <div>
+        <p class="label">Vervolg — 06 tot 10</p>
+        <p class="sub m2" style="color:var(--grey)">Alles wordt uitgelegd, niet verkocht.</p>
+        <ol class="five m3" start="6">
+          <li><span class="n">06</span><span class="w">fibonacci</span></li>
+          <li><span class="n">07</span><span class="w">sessie-liquiditeit</span></li>
+          <li><span class="n">08</span><span class="w">liquiditeit</span></li>
+          <li><span class="n">09</span><span class="w">risicobeheer</span></li>
+          <li><span class="n">10</span><span class="w">tradingpsychologie</span></li>
+        </ol>
+        <a class="btn btn--wide m3" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Begin bij 01 <span class="tip" aria-hidden="true"></span></a>
+      </div>
+    </section>
+
+    <!-- ═══════════ 04 · HET MODEL ═══════════ -->
+    <section class="spread" aria-labelledby="a4">
+      <div>
+        <p class="label">Het model</p>
+        <h2 class="sub m2" id="a4">Sweep. Gap. Hertest.</h2>
+        <p class="say dim m2">Schematisch getekend, met de tijd naar beneden — zoals deze pagina leest. Geen prijzen, geen resultaat, alleen de vorm.</p>
+        <hr class="hair g m3" style="width:40%">
+        <p class="label gold m2">Fig. 01</p>
+      </div>
+
+      <div class="void">
+        <span class="folio">04</span>
+      </div>
+
+      <div>
+        <div class="plate">
+          <svg viewBox="0 0 340 640" role="img" aria-label="Schematische tekening waarin de tijd naar beneden loopt: een sweep van liquiditeit, een fair value gap en een hertest">
+            <!-- vertical price gridlines -->
+            <g stroke="#E6E2D7" stroke-width="1">
+              <line x1="60" y1="24" x2="60" y2="616"/>
+              <line x1="140" y1="24" x2="140" y2="616"/>
+              <line x1="220" y1="24" x2="220" y2="616"/>
+              <line x1="300" y1="24" x2="300" y2="616"/>
+            </g>
+
+            <!-- resting liquidity, as a vertical dashed level -->
+            <line x1="272" y1="24" x2="272" y2="616" stroke="#B9954A" stroke-width="1" stroke-dasharray="6 6"/>
+            <text x="278" y="36" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10" letter-spacing="1.2" fill="#B9954A">LIQ.</text>
+
+            <!-- the fair value gap, a vertical band -->
+            <rect x="196" y="250" width="44" height="366" fill="#D7B364" fill-opacity=".16"/>
+            <line x1="196" y1="250" x2="196" y2="616" stroke="#D7B364" stroke-width="1"/>
+            <line x1="240" y1="250" x2="240" y2="616" stroke="#D7B364" stroke-width="1"/>
+            <text x="200" y="244" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10" letter-spacing="1.2" fill="#B9954A">FVG</text>
+
+            <!-- quiet bars, drifting right -->
+            <g stroke="#08090B" stroke-width="1" fill="none">
+              <line x1="120" y1="60" x2="196" y2="60"/><rect x="136" y="53" width="46" height="14"/>
+              <line x1="132" y1="94" x2="212" y2="94"/><rect x="148" y="87" width="48" height="14"/>
+              <line x1="146" y1="128" x2="238" y2="128"/><rect x="162" y="121" width="56" height="14"/>
+            </g>
+
+            <!-- the sweep: a long wick past the level -->
+            <g>
+              <line x1="160" y1="166" x2="288" y2="166" stroke="#08090B" stroke-width="1"/>
+              <rect x="176" y="158" width="62" height="16" fill="none" stroke="#08090B" stroke-width="1"/>
+            </g>
+
+            <!-- displacement back down, in gold -->
+            <g>
+              <line x1="104" y1="204" x2="252" y2="204" stroke="#B9954A" stroke-width="1"/>
+              <rect x="118" y="195" width="118" height="18" fill="#D7B364"/>
+              <line x1="74" y1="242" x2="196" y2="242" stroke="#B9954A" stroke-width="1"/>
+              <rect x="84" y="233" width="102" height="18" fill="#D7B364"/>
+            </g>
+
+            <!-- base -->
+            <g stroke="#08090B" stroke-width="1" fill="none">
+              <line x1="62" y1="288" x2="150" y2="288"/><rect x="76" y="281" width="52" height="14"/>
+              <line x1="70" y1="322" x2="164" y2="322"/><rect x="86" y="315" width="54" height="14"/>
+              <line x1="84" y1="356" x2="186" y2="356"/><rect x="100" y="349" width="60" height="14"/>
+            </g>
+
+            <!-- the retest: wicks reach into the gold band, bodies stop short -->
+            <g stroke="#08090B" stroke-width="1" fill="none">
+              <line x1="110" y1="396" x2="236" y2="396"/><rect x="126" y="388" width="66" height="16"/>
+              <line x1="118" y1="432" x2="232" y2="432"/><rect x="132" y="424" width="58" height="16"/>
+            </g>
+
+            <!-- rejection and continuation, away from the band -->
+            <g>
+              <line x1="58" y1="472" x2="200" y2="472" stroke="#B9954A" stroke-width="1"/>
+              <rect x="70" y="463" width="104" height="18" fill="#D7B364"/>
+            </g>
+            <g stroke="#08090B" stroke-width="1" fill="none">
+              <line x1="44" y1="512" x2="150" y2="512"/><rect x="56" y="505" width="60" height="14"/>
+              <line x1="36" y1="546" x2="132" y2="546"/><rect x="46" y="539" width="54" height="14"/>
+              <line x1="30" y1="580" x2="118" y2="580"/><rect x="38" y="573" width="48" height="14"/>
+            </g>
+
+            <!-- leader lines and callouts -->
+            <g stroke="#8C8C87" stroke-width="1">
+              <line x1="288" y1="166" x2="316" y2="166"/>
+            </g>
+            <text x="300" y="158" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10" letter-spacing="1.2" fill="#63635F">SWEEP</text>
+
+            <g stroke="#8C8C87" stroke-width="1">
+              <line x1="236" y1="414" x2="316" y2="414"/>
+            </g>
+            <text x="300" y="406" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10" letter-spacing="1.2" fill="#63635F">HERTEST</text>
+
+            <!-- time arrow, down the left edge -->
+            <g stroke="#B9954A" stroke-width="1" fill="none">
+              <line x1="16" y1="40" x2="16" y2="600"/>
+              <path d="M10 588 L16 602 L22 588"/>
+            </g>
+            <text x="16" y="30" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10" letter-spacing="1.2" fill="#B9954A">TIJD</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 05 · KANALEN ═══════════ -->
+    <section class="spread" aria-labelledby="a5">
+      <div>
+        <p class="label">Thuis — nu gratis</p>
+        <h2 class="sub m2" id="a5">Open zodra je binnen bent.</h2>
+        <ul class="chan">
+          <li>#nq-chart-ideeën</li>
+          <li>#es-chart-ideeën</li>
+          <li>#bitcoin</li>
+          <li>#altcoins</li>
+          <li>#markt</li>
+          <li>#vragen</li>
+          <li>#algemeen</li>
+          <li>#atlas-op-socials</li>
+          <li>#ondersteuning</li>
+        </ul>
+      </div>
+
+      <div class="void">
+        <span class="folio">05</span>
+        <span class="regmark" aria-hidden="true"></span>
+      </div>
+
+      <div>
+        <p class="label gold">Premium — opent later</p>
+        <h2 class="sub m2" style="color:var(--grey)">15 kanalen in totaal.</h2>
+        <ul class="chan soon">
+          <li>#trade-setups</li>
+          <li>#marktupdates</li>
+          <li>#indicatoren</li>
+          <li>#sessie-opnames</li>
+          <li>#chart-ideeën</li>
+          <li>#premium-chat</li>
+        </ul>
+        <a class="btn btn--wide m3" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Open de server <span class="tip" aria-hidden="true"></span></a>
+      </div>
+    </section>
+
+    <!-- ═══════════ 06 · LIVE ═══════════ -->
+    <section class="spread" aria-labelledby="a6">
+      <div>
+        <p class="label">Live</p>
+        <h2 class="display m2" id="a6">Live in de<br>server</h2>
+      </div>
+
+      <div class="void">
+        <span class="folio">06</span>
+      </div>
+
+      <div>
+        <hr class="hair">
+        <p class="say m2">De oprichter handelt live mee en legt onderweg uit wat hij ziet. Tijden worden in Discord aangekondigd.</p>
+        <a class="btn btn--wide m3" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Zit een sessie mee <span class="tip" aria-hidden="true"></span></a>
+      </div>
+    </section>
+
+    <!-- ═══════════ 07 · TOEGANG ═══════════ -->
+    <section class="spread" aria-labelledby="a7">
+      <div>
+        <p class="label">Toegang</p>
+        <h2 class="sub m2" id="a7">Nu gratis. Premium volgt.</h2>
+      </div>
+
+      <div class="void">
+        <span class="folio">07</span>
+        <span class="regmark" aria-hidden="true"></span>
+      </div>
+
+      <div>
+        <dl class="acc" style="margin:0">
+          <div>
+            <dt>Thuis</dt>
+            <dd class="on">Gratis, vanaf vandaag</dd>
+            <p>Educatie, chart-ideeën, markt en vragen — direct toegankelijk.</p>
+          </div>
+          <div>
+            <dt>Premium</dt>
+            <dd class="off">Opent later</dd>
+            <p>Prijs en datum worden in de server aangekondigd. Nergens anders.</p>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ═══════════ 08 · SLOT — gold crosses the middle a second time ═══════════ -->
+    <section class="spread" aria-labelledby="a8">
+      <div>
+        <h2 class="display" id="a8">Kom<br>binnen.</h2>
+      </div>
+
+      <div class="void">
+        <span class="folio">08</span>
+      </div>
+
+      <div>
+        <p class="say">Toegang is nu gratis. De server is de plek waar alles gebeurt — educatie, charts, en de live sessies.</p>
+        <p class="label gold m2">discord.gg/78Ff2GuSfW</p>
+      </div>
+
+      <div class="crossing">
+        <div><a class="btn btn--gold btn--wide btn--tall" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Open Discord <span class="tip" aria-hidden="true"></span></a></div>
+        <div class="beam" aria-hidden="true"></div>
+        <div><a class="btn btn--gold btn--wide btn--tall" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Word lid <span class="tip" aria-hidden="true"></span></a></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="spread foot">
+    <div>
+      <div class="flinks">
+        <a href="https://discord.gg/78Ff2GuSfW" rel="noopener">Discord</a>
+        <a href="https://www.tiktok.com/@atlascapitalbv" rel="noopener">TikTok</a>
+      </div>
+      <p class="risk m3">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    </div>
+
+    <div class="void">
+      <span class="regmark" aria-hidden="true"></span>
+    </div>
+
+    <div>
+      <p class="colo">Atlas Capital<br>Proces · Discipline · Uitvoering</p>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

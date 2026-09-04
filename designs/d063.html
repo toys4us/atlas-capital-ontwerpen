@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 063 Doorsnede</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --ink-2:#1E2025;
+  --ink-3:#5E6066;
+  --paper:#F4F2EC;
+  --paper-2:#EAE7DE;
+  --hair:rgba(8,9,11,.16);
+  --hair-2:rgba(8,9,11,.30);
+}
+html{color-scheme:light;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background-color:var(--paper);
+  background-image:
+    repeating-linear-gradient(30deg, rgba(8,9,11,.045) 0 1px, transparent 1px 46px),
+    repeating-linear-gradient(-30deg, rgba(8,9,11,.045) 0 1px, transparent 1px 46px),
+    repeating-linear-gradient(90deg, rgba(215,179,100,.16) 0 1px, transparent 1px 138px);
+  color:var(--ink-2);
+  font-family:"Space Grotesk",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px;line-height:1.6;
+  overflow-x:hidden;
+}
+a{color:inherit}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.wrap{max-width:1280px;margin:0 auto;padding:0 18px}
+
+/* ── HEADER ────────────────────────────────── */
+header{
+  position:sticky;top:0;z-index:40;
+  background:rgba(244,242,236,.93);
+  backdrop-filter:blur(8px);
+  border-bottom:1.5px solid var(--ink);
+}
+.hbar{
+  max-width:1280px;margin:0 auto;padding:10px 18px;
+  display:flex;align-items:center;gap:14px;
+}
+.mark{display:flex;align-items:center;gap:10px;flex:1 1 auto;min-width:0}
+.mark svg{width:32px;height:32px;flex:none}
+.mark .t{
+  font-weight:700;font-size:14px;letter-spacing:.24em;text-transform:uppercase;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink);
+}
+.hmeta{display:none;font-size:10.5px;letter-spacing:.20em;text-transform:uppercase;color:var(--ink-3)}
+@media(min-width:900px){.hmeta{display:block}}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.10em;
+  text-transform:uppercase;text-decoration:none;
+  padding:12px 19px;border-radius:2px;
+  color:var(--ink);background:var(--gold);border:1.5px solid var(--gold-lo);
+  white-space:nowrap;
+}
+.btn:hover{background:var(--gold-hi)}
+.btn svg{width:16px;height:16px;flex:none}
+.btn--line{background:transparent;border-color:var(--ink);color:var(--ink)}
+.btn--line:hover{background:rgba(215,179,100,.28)}
+.btn--dark{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn--dark:hover{background:#16181D}
+
+/* ── HERO ──────────────────────────────────── */
+.hero{padding:36px 0 26px}
+@media(min-width:1000px){.hero{padding:62px 0 40px}}
+.herogrid{display:grid;gap:26px;align-items:center}
+@media(min-width:1000px){.herogrid{grid-template-columns:0.9fr 1.1fr;gap:40px}}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;
+  color:var(--ink);border:1.5px solid var(--ink);padding:5px 11px;margin:0 0 20px;
+}
+.eyebrow i{width:7px;height:7px;background:var(--gold);display:block;transform:rotate(45deg)}
+h1{
+  font-size:clamp(34px,7.4vw,80px);
+  line-height:.98;font-weight:700;letter-spacing:-.035em;
+  margin:0 0 18px;color:var(--ink);
+}
+h1 span{
+  display:inline-block;
+  background:linear-gradient(to top,rgba(215,179,100,.6) 0,rgba(215,179,100,.6) .3em,transparent .3em);
+}
+.lede{font-size:clamp(16px,2vw,20px);color:var(--ink-2);max-width:46ch;margin:0 0 24px}
+.ctas{display:flex;flex-wrap:wrap;gap:11px}
+.drawbox{
+  border:1.5px solid var(--ink);background:rgba(255,255,255,.44);
+  padding:10px;position:relative;
+}
+.drawbox svg{display:block;width:100%;height:auto}
+.cap{
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);
+  border-top:1px solid var(--hair);margin-top:10px;padding-top:9px;
+}
+.cap b{color:var(--ink);font-weight:700}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* svg tokens */
+.s1{stroke:var(--ink);fill:none;stroke-width:1.4}
+.s2{stroke:var(--ink);fill:none;stroke-width:2.2}
+.sh{stroke:rgba(8,9,11,.34);fill:none;stroke-width:1}
+.sg{stroke:var(--gold-lo);fill:none;stroke-width:1.4}
+.fi{fill:var(--ink)}
+.fg{fill:var(--gold)}
+.fgs{fill:rgba(215,179,100,.36)}
+.fgt{fill:rgba(215,179,100,.18)}
+.fp{fill:#FBFAF6}
+.axis{stroke:rgba(8,9,11,.42);stroke-width:1;fill:none;stroke-dasharray:16 5 3 5}
+.lb{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;font-weight:700;fill:var(--ink);letter-spacing:.06em}
+.lbs{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;fill:#5E6066;letter-spacing:.14em}
+.lbi{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;fill:var(--ink);letter-spacing:.16em;font-weight:600}
+
+/* ── LAYER BANDS ───────────────────────────── */
+.layer{border-top:1.5px solid var(--ink);padding:34px 0 40px}
+@media(min-width:900px){.layer{padding:52px 0 58px}}
+.layerhead{display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.lnum{
+  font-family:ui-monospace,Menlo,Consolas,monospace;
+  font-size:clamp(34px,6vw,64px);font-weight:700;line-height:.86;
+  color:var(--ink);flex:none;
+  -webkit-text-stroke:1.5px var(--ink);
+  padding-right:2px;
+}
+.lnum.hollow{color:transparent}
+.ltitle{min-width:0;flex:1 1 260px}
+.ltitle h2{
+  font-size:clamp(23px,3.6vw,40px);font-weight:600;letter-spacing:-.028em;
+  margin:0 0 4px;color:var(--ink);line-height:1.04;
+}
+.ltitle p{margin:0;color:var(--ink-3);font-size:14.5px;max-width:52ch}
+.lbody{display:grid;gap:26px}
+@media(min-width:940px){.lbody.split{grid-template-columns:1.15fr 0.85fr;gap:38px;align-items:start}}
+@media(min-width:940px){.lbody.split-r{grid-template-columns:0.85fr 1.15fr;gap:38px;align-items:start}}
+
+/* channel plates */
+.chwrap{display:grid;gap:18px}
+@media(min-width:700px){.chwrap{grid-template-columns:1fr 1fr;gap:22px}}
+.chcard{border:1.5px solid var(--ink);background:rgba(255,255,255,.5)}
+.chtop{
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
+  padding:10px 13px;border-bottom:1.5px solid var(--ink);
+  font-size:10px;letter-spacing:.20em;text-transform:uppercase;font-weight:700;color:var(--ink);
+}
+.chtop em{font-style:normal;font-weight:500;color:var(--ink-3)}
+.chtop.on{background:var(--gold)}
+ul.chl{list-style:none;margin:0;padding:6px 0}
+ul.chl li{
+  display:flex;align-items:center;gap:10px;padding:7px 13px;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;color:var(--ink);
+}
+ul.chl li i{
+  width:11px;height:11px;flex:none;background:var(--gold);
+  transform:rotate(45deg);display:block;
+}
+ul.chl li.soon i{background:transparent;border:1.4px solid var(--hair-2)}
+ul.chl li.soon{color:var(--ink-3)}
+ul.chl li:hover{background:rgba(215,179,100,.2)}
+
+/* topics */
+.topics{display:grid;gap:0;border-top:1.5px solid var(--ink);border-left:1.5px solid var(--ink)}
+@media(min-width:560px){.topics{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.topics{grid-template-columns:repeat(5,1fr)}}
+.topic{
+  border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);
+  padding:15px 14px 17px;background:rgba(255,255,255,.44);
+  display:flex;flex-direction:column;gap:9px;min-height:118px;
+}
+.topic:hover{background:var(--gold)}
+.topic .tn{
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;
+  letter-spacing:.18em;color:var(--ink-3);
+}
+.topic .tt{font-size:17px;font-weight:600;letter-spacing:-.015em;line-height:1.15;color:var(--ink);margin-top:auto}
+.topic svg{width:26px;height:16px}
+
+/* founder */
+.quote{
+  font-size:clamp(17px,2.3vw,23px);line-height:1.45;font-weight:400;
+  color:var(--ink);border-left:4px solid var(--gold);padding-left:20px;margin:0 0 18px;max-width:56ch;
+}
+.tri{display:grid;gap:0;border:1.5px solid var(--ink);margin-top:20px}
+@media(min-width:640px){.tri{grid-template-columns:repeat(3,1fr)}}
+.tri div{padding:18px 16px 20px;border-bottom:1.5px solid var(--ink)}
+.tri div:last-child{border-bottom:0}
+@media(min-width:640px){
+  .tri div{border-bottom:0;border-right:1.5px solid var(--ink)}
+  .tri div:last-child{border-right:0}
+}
+.tri span{
+  display:block;font-family:ui-monospace,Menlo,Consolas,monospace;
+  font-size:9.5px;letter-spacing:.22em;color:var(--ink-3);margin-bottom:7px;
+}
+.tri b{font-size:clamp(19px,2.6vw,27px);font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+
+/* live */
+.livebox{
+  border:1.5px solid var(--ink);background:var(--ink);color:var(--paper);
+  padding:24px 20px 26px;
+}
+.livebox h3{margin:0 0 8px;font-size:clamp(21px,3vw,30px);font-weight:600;letter-spacing:-.02em;color:var(--paper)}
+.livebox p{margin:0 0 18px;color:#C7C5BF;max-width:44ch}
+.livetag{
+  display:inline-flex;align-items:center;gap:9px;border:1.5px solid var(--gold);
+  color:var(--gold);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  padding:5px 11px;margin-bottom:14px;font-weight:700;
+}
+.blip{width:7px;height:7px;background:var(--gold);border-radius:50%;animation:bl 2.4s ease-in-out infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.3}}
+@media(prefers-reduced-motion:reduce){.blip{animation:none}}
+
+/* access */
+.access{display:grid;gap:0;border:1.5px solid var(--ink)}
+@media(min-width:820px){.access{grid-template-columns:1fr 1fr}}
+.access>div{padding:24px 20px 28px}
+.access>div:first-child{border-bottom:1.5px solid var(--ink);background:var(--gold)}
+@media(min-width:820px){.access>div:first-child{border-bottom:0;border-right:1.5px solid var(--ink)}}
+.access h3{margin:0 0 6px;font-size:clamp(22px,3.2vw,32px);font-weight:700;letter-spacing:-.025em;color:var(--ink)}
+.access .k{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:10px}
+.access p{margin:0 0 16px;max-width:42ch}
+
+/* closing */
+.closing{border-top:1.5px solid var(--ink);background:var(--ink);color:var(--paper);padding:52px 18px 58px;text-align:center}
+.closing h2{font-size:clamp(30px,6.6vw,68px);font-weight:700;letter-spacing:-.035em;margin:0 0 12px;color:var(--paper);line-height:1}
+.closing h2 span{color:var(--gold)}
+.closing p{color:#C7C5BF;margin:0 auto 24px;max-width:40ch}
+.closing .ctas{justify-content:center}
+footer{background:var(--ink);color:#8E8D89;padding:0 18px 44px}
+.foot{
+  max-width:1280px;margin:0 auto;border-top:1px solid rgba(244,242,236,.2);padding-top:18px;
+  display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.10em;
+}
+.foot a{color:var(--gold);text-decoration:none}
+.foot a:hover{text-decoration:underline}
+.risk{width:100%;margin:0;font-family:"Space Grotesk",sans-serif;font-size:12.5px;line-height:1.65;color:#8E8D89;letter-spacing:0;max-width:80ch}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hbar">
+    <div class="mark">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 6 L35 14.5 L20 23 L5 14.5 Z" class="s1" fill="rgba(215,179,100,.45)"/>
+        <path d="M5 14.5 V25.5 L20 34 V23 Z" class="s1" fill="rgba(8,9,11,.08)"/>
+        <path d="M35 14.5 V25.5 L20 34 V23 Z" class="s1" fill="rgba(8,9,11,.16)"/>
+      </svg>
+      <div class="t">Atlas Capital</div>
+    </div>
+    <div class="hmeta mono">DOORSNEDE · 05 LAGEN</div>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
+      Discord
+    </a>
+  </div>
+</header>
+
+<!-- ══════════ HERO ══════════ -->
+<div class="wrap">
+  <section class="hero">
+    <div class="herogrid">
+      <div>
+        <p class="eyebrow"><i></i>Opengewerkte tekening</p>
+        <h1>Kijk dwars<br>door het<br><span>systeem.</span></h1>
+        <p class="lede">Vijf lagen, uit elkaar getrokken. Van het fundament tot de community.</p>
+        <div class="ctas">
+          <a class="btn" href="https://discord.gg/78Ff2GuSfW">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
+            Word lid van de Discord
+          </a>
+          <a class="btn btn--line" href="#laag02">Naar de educatie</a>
+        </div>
+      </div>
+
+      <!-- ═══ EXPLODED AXONOMETRIC ═══ -->
+      <div class="drawbox scrollx">
+        <svg viewBox="0 0 900 770" role="img" aria-label="Opengewerkte axonometrie: vijf lagen van het systeem uit elkaar getrokken" style="min-width:520px">
+          <!-- explosion axis -->
+          <path d="M280 8 V760" class="axis"/>
+
+          <!-- overall dimension, left -->
+          <g class="s1">
+            <path d="M105 24 H52" class="sh"/><path d="M105 728 H52" class="sh"/>
+            <path d="M64 40 V352"/><path class="fi" d="M64 24l-3.6 12h7.2z" stroke="none"/>
+            <path d="M64 400 V712"/><path class="fi" d="M64 728l-3.6-12h7.2z" stroke="none"/>
+          </g>
+          <text x="64" y="380" class="lbi" text-anchor="middle" transform="rotate(-90 64 380)">HET SYSTEEM — 05 LAGEN</text>
+
+          <!-- ── LAAG 05 · KANALEN ── -->
+          <g>
+            <path d="M105 130 L280 26 L455 130 L280 234 Z" class="s2" fill="rgba(255,255,255,.6)"/>
+            <path d="M105 130 L280 234 L455 130 L455 144 L280 248 L105 144 Z" class="s1 fgt"/>
+            <g class="s1">
+              <path d="M237 70 L250 63 L263 70 L250 77 Z" fill="var(--gold)"/>
+              <path d="M267 87 L280 80 L293 87 L280 94 Z" fill="var(--gold)"/>
+              <path d="M297 104 L310 97 L323 104 L310 111 Z" fill="var(--gold)"/>
+              <path d="M327 120 L340 113 L353 120 L340 127 Z" fill="var(--gold)"/>
+              <path d="M357 137 L370 130 L383 137 L370 144 Z" fill="var(--gold)"/>
+              <path d="M207 87 L220 80 L233 87 L220 94 Z" fill="var(--gold)"/>
+              <path d="M237 104 L250 97 L263 104 L250 111 Z" fill="var(--gold)"/>
+              <path d="M267 120 L280 113 L293 120 L280 127 Z" fill="var(--gold)"/>
+              <path d="M297 137 L310 130 L323 137 L310 144 Z" fill="var(--gold)"/>
+              <path d="M327 153 L340 146 L353 153 L340 160 Z" fill="none"/>
+              <path d="M177 104 L190 97 L203 104 L190 111 Z" fill="none"/>
+              <path d="M207 120 L220 113 L233 120 L220 127 Z" fill="none"/>
+              <path d="M237 137 L250 130 L263 137 L250 144 Z" fill="none"/>
+              <path d="M267 153 L280 146 L293 153 L280 160 Z" fill="none"/>
+              <path d="M297 170 L310 163 L323 170 L310 177 Z" fill="none"/>
+            </g>
+            <circle cx="455" cy="130" r="4.5" class="fg"/>
+            <circle cx="455" cy="130" r="4.5" class="s1"/>
+            <path d="M455 130 L520 100 H880" class="s1"/>
+            <text x="524" y="92" class="lb">LAAG 05 — DE KANALEN</text>
+            <text x="524" y="118" class="lbs">15 STUKS · 9 NU OPEN · 6 VOLGEN</text>
+          </g>
+
+          <!-- ── LAAG 04 · LIVE ── -->
+          <g>
+            <path d="M105 256 L280 152 L455 256 L280 360 Z" class="s2" fill="rgba(255,255,255,.6)"/>
+            <path d="M105 256 L280 360 L455 256 L455 270 L280 374 L105 270 Z" class="s1 fgt"/>
+            <path d="M195 256 L280 206 L365 256 L280 306 Z" class="sh"/>
+            <path d="M232 256 L280 228 L328 256 L280 284 Z" class="sh"/>
+            <circle cx="280" cy="256" r="9" class="fg"/>
+            <circle cx="280" cy="256" r="9" class="s1"/>
+            <circle cx="455" cy="256" r="4.5" class="fg"/>
+            <circle cx="455" cy="256" r="4.5" class="s1"/>
+            <path d="M455 256 L520 226 H880" class="s1"/>
+            <text x="524" y="218" class="lb">LAAG 04 — LIVE HANDELEN</text>
+            <text x="524" y="244" class="lbs">TIJDEN IN DE SERVER AANGEKONDIGD</text>
+          </g>
+
+          <!-- ── LAAG 03 · HET MODEL ── -->
+          <g>
+            <path d="M105 382 L280 278 L455 382 L280 486 Z" class="s2" fill="rgba(255,255,255,.6)"/>
+            <path d="M105 382 L280 486 L455 382 L455 396 L280 500 L105 396 Z" class="s1 fgt"/>
+            <!-- iso candles standing on the plane -->
+            <g class="s1">
+              <path d="M182 380 L182 352 L195 345 L195 373 Z" class="fp"/><path d="M195 345 L208 352 L208 380 L195 373 Z" class="fgs"/><path d="M182 352 L195 345 L208 352 L195 359 Z" class="fp"/>
+              <path d="M212 397 L212 357 L225 350 L225 390 Z" class="fp"/><path d="M225 350 L238 357 L238 397 L225 390 Z" class="fgs"/><path d="M212 357 L225 350 L238 357 L225 364 Z" class="fp"/>
+              <path d="M242 414 L242 356 L255 349 L255 407 Z" class="fp"/><path d="M255 349 L268 356 L268 414 L255 407 Z" class="fgs"/><path d="M242 356 L255 349 L268 356 L255 363 Z" class="fp"/>
+              <path d="M272 430 L272 350 L285 343 L285 423 Z" class="fp"/><path d="M285 343 L298 350 L298 430 L285 423 Z" fill="var(--gold)"/><path d="M272 350 L285 343 L298 350 L285 357 Z" class="fp"/>
+              <path d="M302 447 L302 400 L315 393 L315 440 Z" class="fp"/><path d="M315 393 L328 400 L328 447 L315 440 Z" class="fgs"/><path d="M302 400 L315 393 L328 400 L315 407 Z" class="fp"/>
+              <path d="M332 464 L332 432 L345 425 L345 457 Z" class="fp"/><path d="M345 425 L358 432 L358 464 L345 457 Z" class="fgs"/><path d="M332 432 L345 425 L358 432 L345 439 Z" class="fp"/>
+            </g>
+            <circle cx="455" cy="382" r="4.5" class="fg"/>
+            <circle cx="455" cy="382" r="4.5" class="s1"/>
+            <path d="M455 382 L520 352 H880" class="s1"/>
+            <text x="524" y="344" class="lb">LAAG 03 — HET MODEL</text>
+            <text x="524" y="370" class="lbs">SCHEMATISCH · GEEN KOERSEN</text>
+          </g>
+
+          <!-- ── LAAG 02 · EDUCATIE ── -->
+          <g>
+            <path d="M105 508 L280 404 L455 508 L280 612 Z" class="s2" fill="rgba(255,255,255,.6)"/>
+            <path d="M105 508 L280 612 L455 508 L455 522 L280 626 L105 522 Z" class="s1 fgt"/>
+            <g class="s1" fill="var(--gold)">
+              <path d="M222 463 L235 456 L248 463 L235 470 Z"/>
+              <path d="M252 480 L265 473 L278 480 L265 487 Z"/>
+              <path d="M282 496 L295 489 L308 496 L295 503 Z"/>
+              <path d="M312 513 L325 506 L338 513 L325 520 Z"/>
+              <path d="M342 529 L355 522 L368 529 L355 536 Z"/>
+              <path d="M192 479 L205 472 L218 479 L205 486 Z"/>
+              <path d="M222 496 L235 489 L248 496 L235 503 Z"/>
+              <path d="M252 512 L265 505 L278 512 L265 519 Z"/>
+              <path d="M282 529 L295 522 L308 529 L295 536 Z"/>
+              <path d="M312 545 L325 538 L338 545 L325 552 Z"/>
+            </g>
+            <circle cx="455" cy="508" r="4.5" class="fg"/>
+            <circle cx="455" cy="508" r="4.5" class="s1"/>
+            <path d="M455 508 L520 478 H880" class="s1"/>
+            <text x="524" y="470" class="lb">LAAG 02 — DE EDUCATIE</text>
+            <text x="524" y="496" class="lbs">10 ONDERWERPEN</text>
+          </g>
+
+          <!-- ── LAAG 01 · FUNDAMENT ── -->
+          <g>
+            <path d="M105 634 L280 530 L455 634 L280 738 Z" class="s2" fill="rgba(215,179,100,.30)"/>
+            <path d="M105 634 L280 738 L455 634 L455 652 L280 756 L105 652 Z" class="s1" fill="rgba(215,179,100,.5)"/>
+            <path d="M155 611 L263.5 670.5 L242.5 682 L134 622.5 Z" class="s1 fp"/>
+            <path d="M192.5 582 L301 641.5 L280 653 L171.5 593.5 Z" class="s1 fp"/>
+            <path d="M236 556 L344.5 615.5 L323.5 627 L215 567.5 Z" class="s1 fp"/>
+            <g transform="translate(173 631) skewY(28.7)"><text x="0" y="0" class="lbs" font-size="11">PROCES</text></g>
+            <g transform="translate(210 602) skewY(28.7)"><text x="0" y="0" class="lbs" font-size="11">DISCIPLINE</text></g>
+            <g transform="translate(252 576) skewY(28.7)"><text x="0" y="0" class="lbs" font-size="11">UITVOERING</text></g>
+            <circle cx="455" cy="634" r="4.5" class="fg"/>
+            <circle cx="455" cy="634" r="4.5" class="s1"/>
+            <path d="M455 634 L520 604 H880" class="s1"/>
+            <text x="524" y="596" class="lb">LAAG 01 — HET FUNDAMENT</text>
+            <text x="524" y="622" class="lbs">10+ JAAR ERVARING</text>
+          </g>
+        </svg>
+        <div class="cap">Opengewerkte tekening — <b>de vijf lagen</b>. Elke aanwijslijn eindigt op de laag die hij benoemt.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════ LAAG 05 — KANALEN ══════════ -->
+<div class="wrap">
+<section class="layer" id="laag05">
+  <div class="layerhead">
+    <div class="lnum hollow">05</div>
+    <div class="ltitle">
+      <h2>De kanalen</h2>
+      <p>Vijftien in totaal. Negen staan nu open, zes komen erbij als premium opengaat.</p>
+    </div>
+    <a class="btn btn--line" href="https://discord.gg/78Ff2GuSfW">Open de server</a>
+  </div>
+  <div class="chwrap">
+    <div class="chcard">
+      <div class="chtop on"><span>Thuis — nu gratis</span><em>9</em></div>
+      <ul class="chl">
+        <li><i></i>#nq-chart-ideeën</li>
+        <li><i></i>#es-chart-ideeën</li>
+        <li><i></i>#bitcoin</li>
+        <li><i></i>#altcoins</li>
+        <li><i></i>#markt</li>
+        <li><i></i>#vragen</li>
+        <li><i></i>#algemeen</li>
+        <li><i></i>#atlas-op-socials</li>
+        <li><i></i>#ondersteuning</li>
+      </ul>
+    </div>
+    <div class="chcard">
+      <div class="chtop"><span>Premium — opent later</span><em>6</em></div>
+      <ul class="chl">
+        <li class="soon"><i></i>#trade-setups</li>
+        <li class="soon"><i></i>#marktupdates</li>
+        <li class="soon"><i></i>#indicatoren</li>
+        <li class="soon"><i></i>#sessie-opnames</li>
+        <li class="soon"><i></i>#chart-ideeën</li>
+        <li class="soon"><i></i>#premium-chat</li>
+      </ul>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════ LAAG 04 — LIVE ══════════ -->
+<div class="wrap">
+<section class="layer" id="laag04">
+  <div class="layerhead">
+    <div class="lnum hollow">04</div>
+    <div class="ltitle">
+      <h2>Live handelen</h2>
+      <p>Meekijken terwijl de beslissing valt.</p>
+    </div>
+  </div>
+  <div class="lbody split">
+    <div class="livebox">
+      <div class="livetag"><i class="blip"></i>Live in de server</div>
+      <h3>De oprichter handelt live mee.</h3>
+      <p>Tijden worden in de server aangekondigd. Je hoeft niets te doen behalve erbij zitten.</p>
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
+        Sluit aan bij een sessie
+      </a>
+    </div>
+    <div class="drawbox">
+      <svg viewBox="0 0 420 260" role="img" aria-label="De vier markten die worden gevolgd, op een isometrisch vlak">
+        <path d="M40 150 L210 60 L380 150 L210 240 Z" class="s1" fill="rgba(255,255,255,.5)"/>
+        <path d="M110 128 L110 96" class="s1"/><path d="M110 96 L123 89 L123 121 L110 128 Z" class="fgs s1"/><circle cx="110" cy="90" r="5" class="fg"/>
+        <path d="M175 162 L175 118" class="s1"/><path d="M175 118 L188 111 L188 155 L175 162 Z" class="fgs s1"/><circle cx="175" cy="112" r="5" class="fg"/>
+        <path d="M240 128 L240 92" class="s1"/><path d="M240 92 L253 85 L253 121 L240 128 Z" class="fgs s1"/><circle cx="240" cy="86" r="5" class="fg"/>
+        <path d="M305 162 L305 130" class="s1"/><path d="M305 130 L318 123 L318 155 L305 162 Z" class="fgs s1"/><circle cx="305" cy="124" r="5" class="fg"/>
+        <text x="110" y="76" class="lbi" text-anchor="middle">NQ</text>
+        <text x="175" y="98" class="lbi" text-anchor="middle">ES</text>
+        <text x="240" y="72" class="lbi" text-anchor="middle">BTC</text>
+        <text x="305" y="110" class="lbi" text-anchor="middle">ALT</text>
+        <text x="40" y="256" class="lbs">DE GEVOLGDE MARKTEN</text>
+      </svg>
+      <div class="cap">Vier markten — <b>NQ, ES, Bitcoin, altcoins</b>.</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════ LAAG 03 — MODEL ══════════ -->
+<div class="wrap">
+<section class="layer" id="laag03">
+  <div class="layerhead">
+    <div class="lnum">03</div>
+    <div class="ltitle">
+      <h2>Het model, opengesneden</h2>
+      <p>Wat je ziet ligt bovenop wat eronder gebeurt. Deze doorsnede laat beide lagen tegelijk zien.</p>
+    </div>
+  </div>
+  <div class="drawbox scrollx">
+    <svg viewBox="0 0 940 520" role="img" aria-label="Doorsnede van een setup: bovenlaag met koersvorm, onderlaag met liquiditeit en orderblock" style="min-width:660px">
+      <!-- cut plane markers -->
+      <g class="s2">
+        <path d="M30 250 H120" stroke-dasharray="10 6"/>
+        <path d="M120 250 V232"/><path class="fi" d="M120 220l-6 14h12z" stroke="none"/>
+        <path d="M910 250 H820" stroke-dasharray="10 6"/>
+        <path d="M820 250 V232"/><path class="fi" d="M820 220l-6 14h12z" stroke="none"/>
+      </g>
+      <text x="30" y="240" class="lb">B</text>
+      <text x="898" y="240" class="lb">B</text>
+
+      <!-- ═ UPPER LAYER: wat je ziet ═ -->
+      <text x="140" y="40" class="lbi">BOVENLAAG — WAT JE ZIET</text>
+      <path d="M140 52 H820" class="sh"/>
+      <g class="s1" stroke-width="1.5">
+        <path d="M170 150V196"/><rect x="163" y="160" width="14" height="26" class="fgs"/>
+        <path d="M204 132V186"/><rect x="197" y="142" width="14" height="32" class="fgs"/>
+        <path d="M238 112V172"/><rect x="231" y="122" width="14" height="36" class="fgs"/>
+        <path d="M272 96V158"/><rect x="265" y="104" width="14" height="34" class="fgs"/>
+        <path d="M306 76V142"/><rect x="299" y="82" width="14" height="32" class="fgs"/>
+        <path d="M340 70V164"/><rect x="333" y="92" width="14" height="60" fill="var(--gold)"/>
+        <path d="M374 118V206"/><rect x="367" y="136" width="14" height="58" class="fgs"/>
+        <path d="M408 168V228"/><rect x="401" y="180" width="14" height="40" class="fgs"/>
+        <path d="M442 196V236"/><rect x="435" y="204" width="14" height="26" class="fgs"/>
+        <path d="M476 182V226"/><rect x="469" y="192" width="14" height="26" class="fgs"/>
+        <path d="M510 170V214"/><rect x="503" y="178" width="14" height="28" class="fgs"/>
+        <path d="M544 156V204"/><rect x="537" y="164" width="14" height="30" class="fgs"/>
+      </g>
+      <!-- liquidity level -->
+      <path d="M160 80 H600" class="s1" stroke-dasharray="7 5"/>
+      <circle cx="340" cy="72" r="4.5" class="fg"/><circle cx="340" cy="72" r="4.5" class="s1"/>
+      <path d="M340 72 L390 42 H600" class="s1"/>
+      <text x="604" y="46" class="lbi">SWEEP VAN DE LIQUIDITEIT</text>
+      <!-- FVG dimension -->
+      <rect x="356" y="140" width="200" height="46" class="fgt"/>
+      <rect x="356" y="140" width="200" height="46" class="sh"/>
+      <g class="s1">
+        <path d="M580 146 v10"/><path class="fi" d="M580 140l-3.6 11h7.2z" stroke="none"/>
+        <path d="M580 180 v-10"/><path class="fi" d="M580 186l-3.6-11h7.2z" stroke="none"/>
+        <path d="M556 140h40M556 186h40" class="sh"/>
+      </g>
+      <text x="602" y="168" class="lbi">FVG — ONBALANS</text>
+
+      <!-- ═ CUT LINE ═ -->
+      <path d="M140 258 H820" class="axis"/>
+      <text x="140" y="278" class="lbs">SNEDE B–B</text>
+
+      <!-- ═ LOWER LAYER: wat eronder ligt ═ -->
+      <text x="140" y="318" class="lbi">ONDERLAAG — WAT ERONDER LIGT</text>
+      <path d="M140 330 H820" class="sh"/>
+      <!-- orderblock slab -->
+      <rect x="290" y="352" width="70" height="44" class="fgs"/>
+      <rect x="290" y="352" width="70" height="44" class="s1"/>
+      <g class="sh">
+        <path d="M294 396l10-44M310 396l10-44M326 396l10-44M342 396l10-44M356 392l6-26"/>
+      </g>
+      <circle cx="290" cy="396" r="4.5" class="fg"/><circle cx="290" cy="396" r="4.5" class="s1"/>
+      <path d="M290 396 L240 438 H150" class="s1"/>
+      <text x="150" y="456" class="lbi">ORDERBLOCK — HERKOMST</text>
+      <!-- resting liquidity pools -->
+      <g class="s1">
+        <rect x="430" y="360" width="120" height="12" class="fgs"/>
+        <rect x="430" y="384" width="86" height="12" class="fgs"/>
+        <rect x="430" y="408" width="150" height="12" class="fgs"/>
+      </g>
+      <circle cx="580" cy="414" r="4.5" class="fg"/><circle cx="580" cy="414" r="4.5" class="s1"/>
+      <path d="M580 414 L640 414 H700" class="s1"/>
+      <text x="704" y="418" class="lbi">RUSTENDE ORDERS</text>
+      <!-- deviation marker -->
+      <path d="M620 352 V440" class="s1"/>
+      <path d="M596 396 H700" class="sg" stroke-dasharray="6 4"/>
+      <circle cx="620" cy="396" r="4.5" class="fg"/><circle cx="620" cy="396" r="4.5" class="s1"/>
+      <path d="M620 396 L660 470 H480" class="s1"/>
+      <text x="480" y="488" class="lbi">DEVIATIE — TERUG DOOR HET NIVEAU</text>
+      <!-- link between layers -->
+      <path d="M340 236 V352" class="sg" stroke-dasharray="4 5"/>
+      <path d="M480 240 V360" class="sg" stroke-dasharray="4 5"/>
+      <text x="700" y="300" class="lbs">DE LAGEN HOREN BIJ ELKAAR</text>
+    </svg>
+    <div class="cap">Doorsnede B–B — <b>schematisch</b>. Geen koersen, geen niveaus, geen uitkomsten.</div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════ LAAG 02 — EDUCATIE ══════════ -->
+<div class="wrap">
+<section class="layer" id="laag02">
+  <div class="layerhead">
+    <div class="lnum">02</div>
+    <div class="ltitle">
+      <h2>Tien onderwerpen</h2>
+      <p>De onderdelen waaruit laag 03 is opgebouwd.</p>
+    </div>
+    <a class="btn btn--dark" href="https://discord.gg/78Ff2GuSfW">Begin met leren</a>
+  </div>
+  <div class="topics">
+    <div class="topic"><span class="tn">02.01</span><svg viewBox="0 0 26 16" aria-hidden="true"><path d="M1 12 L8 4 L15 9 L25 2" class="s1"/><circle cx="15" cy="9" r="2.2" class="fg"/></svg><span class="tt">deviatie</span></div>
+    <div class="topic"><span class="tn">02.02</span><svg viewBox="0 0 26 16" aria-hidden="true"><path d="M1 4 L12 12 L25 5" class="s1"/><path d="M1 10 L12 3 L25 11" class="sh"/></svg><span class="tt">SMT</span></div>
+    <div class="topic"><span class="tn">02.03</span><svg viewBox="0 0 26 16" aria-hidden="true"><rect x="2" y="2" width="7" height="5" class="s1"/><rect x="17" y="9" width="7" height="5" class="s1"/><rect x="9" y="6" width="8" height="4" class="fg"/></svg><span class="tt">FVG</span></div>
+    <div class="topic"><span class="tn">02.04</span><svg viewBox="0 0 26 16" aria-hidden="true"><rect x="2" y="9" width="7" height="5" class="s1"/><rect x="17" y="2" width="7" height="5" class="s1"/><rect x="9" y="6" width="8" height="4" class="fg"/></svg><span class="tt">IFVG</span></div>
+    <div class="topic"><span class="tn">02.05</span><svg viewBox="0 0 26 16" aria-hidden="true"><rect x="3" y="4" width="9" height="8" class="fg"/><path d="M12 8 H24" class="s1"/></svg><span class="tt">orderblocks</span></div>
+    <div class="topic"><span class="tn">02.06</span><svg viewBox="0 0 26 16" aria-hidden="true"><path d="M2 3H24M2 8H24M2 13H24" class="sh"/><path d="M2 8H16" class="s1"/><circle cx="16" cy="8" r="2.2" class="fg"/></svg><span class="tt">fibonacci</span></div>
+    <div class="topic"><span class="tn">02.07</span><svg viewBox="0 0 26 16" aria-hidden="true"><path d="M2 14 A11 11 0 0 1 24 14" class="s1"/><path d="M13 14 V4" class="sh"/><circle cx="13" cy="14" r="2.2" class="fg"/></svg><span class="tt">sessie-liquiditeit</span></div>
+    <div class="topic"><span class="tn">02.08</span><svg viewBox="0 0 26 16" aria-hidden="true"><rect x="2" y="3" width="18" height="3" class="fg"/><rect x="2" y="8" width="12" height="3" class="fg"/><rect x="2" y="13" width="22" height="2" class="fgs"/></svg><span class="tt">liquiditeit</span></div>
+    <div class="topic"><span class="tn">02.09</span><svg viewBox="0 0 26 16" aria-hidden="true"><path d="M2 8H24" class="s1"/><path d="M8 4V12M18 4V12" class="s1"/><rect x="8" y="6" width="10" height="4" class="fg"/></svg><span class="tt">risicobeheer</span></div>
+    <div class="topic"><span class="tn">02.10</span><svg viewBox="0 0 26 16" aria-hidden="true"><circle cx="13" cy="8" r="6" class="s1"/><circle cx="13" cy="8" r="2.2" class="fg"/><path d="M13 2V0M13 16v-2" class="sh"/></svg><span class="tt">tradingpsychologie</span></div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════ LAAG 01 — FUNDAMENT ══════════ -->
+<div class="wrap">
+<section class="layer" id="laag01">
+  <div class="layerhead">
+    <div class="lnum">01</div>
+    <div class="ltitle">
+      <h2>Het fundament</h2>
+      <p>Waar alle bovenliggende lagen op rusten.</p>
+    </div>
+  </div>
+  <div class="lbody split-r">
+    <div class="drawbox">
+      <svg viewBox="0 0 380 300" role="img" aria-label="Het fundament: drie dragende balken onder het systeem">
+        <path d="M30 190 L190 96 L350 190 L190 284 Z" class="s1" fill="rgba(215,179,100,.3)"/>
+        <path d="M30 190 L190 284 L350 190 L350 206 L190 300 L30 206 Z" class="s1" fill="rgba(215,179,100,.5)"/>
+        <path d="M74 172 L172 230 L154 240 L56 182 Z" class="s1 fp"/>
+        <path d="M108 152 L206 210 L188 220 L90 162 Z" class="s1 fp"/>
+        <path d="M142 132 L240 190 L222 200 L124 142 Z" class="s1 fp"/>
+        <g transform="translate(86 186) skewY(30)"><text x="0" y="0" class="lbs" font-size="10">PROCES</text></g>
+        <g transform="translate(120 166) skewY(30)"><text x="0" y="0" class="lbs" font-size="10">DISCIPLINE</text></g>
+        <g transform="translate(154 146) skewY(30)"><text x="0" y="0" class="lbs" font-size="10">UITVOERING</text></g>
+        <g class="s1">
+          <path d="M20 96 H8"/><path d="M20 284 H8"/>
+          <path d="M14 112 V172"/><path class="fi" d="M14 96l-3.6 12h7.2z" stroke="none"/>
+          <path d="M14 212 V268"/><path class="fi" d="M14 284l-3.6-12h7.2z" stroke="none"/>
+        </g>
+        <text x="14" y="196" class="lbi" text-anchor="middle" transform="rotate(-90 14 196)">10+ JAAR</text>
+        <circle cx="350" cy="190" r="4.5" class="fg"/><circle cx="350" cy="190" r="4.5" class="s1"/>
+        <path d="M350 190 L368 178" class="s1"/>
+      </svg>
+      <div class="cap">Laag 01 — <b>drie dragende balken</b>, gemeten over 10+ jaar.</div>
+    </div>
+    <div>
+      <p class="quote">"Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen."</p>
+      <p>"Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden."</p>
+      <div class="tri">
+        <div><span>BALK 01</span><b>Proces</b></div>
+        <div><span>BALK 02</span><b>Discipline</b></div>
+        <div><span>BALK 03</span><b>Uitvoering</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════ TOEGANG ══════════ -->
+<div class="wrap">
+<section class="layer">
+  <div class="layerhead">
+    <div class="lnum hollow">00</div>
+    <div class="ltitle">
+      <h2>De toegang tot de tekening</h2>
+      <p>Nu open. Premium komt er later bij.</p>
+    </div>
+  </div>
+  <div class="access">
+    <div>
+      <span class="k">Nu beschikbaar</span>
+      <h3>Gratis toegang</h3>
+      <p>Negen kanalen, de educatie en het meekijken tijdens live sessies.</p>
+      <a class="btn btn--dark" href="https://discord.gg/78Ff2GuSfW">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
+        Word nu lid
+      </a>
+    </div>
+    <div>
+      <span class="k">Volgt later</span>
+      <h3>Premium</h3>
+      <p>Zes extra kanalen. Prijs en datum worden in de server aangekondigd.</p>
+      <a class="btn btn--line" href="https://discord.gg/78Ff2GuSfW">Blijf op de hoogte</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════ CLOSING ══════════ -->
+<div class="closing">
+  <h2>De tekening is <span>open.</span></h2>
+  <p>Kom binnen en kijk zelf hoe het in elkaar zit.</p>
+  <div class="ctas">
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
+      Word lid van de Discord
+    </a>
+    <a class="btn btn--line" style="border-color:rgba(244,242,236,.55);color:var(--paper)" href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
+  </div>
+</div>
+
+<footer>
+  <div class="foot">
+    <a href="https://discord.gg/78Ff2GuSfW">DISCORD</a>
+    <a href="https://www.tiktok.com/@atlascapitalbv">TIKTOK · @ATLASCAPITALBV</a>
+    <span>ATLAS CAPITAL — PROCES. DISCIPLINE. UITVOERING.</span>
+    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  </div>
+</footer>
+
+</body>
+</html>

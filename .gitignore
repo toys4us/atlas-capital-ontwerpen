@@ -1,0 +1,15 @@
+# build inputs and artifact-only variants, not part of the site
+_shots/
+_thumbs/t*.png
+gallery-bundle.html
+gallery-index.html
+gallery-nopayload.html
+gallery-small.html
+gallery-marker.html
+gallery-debug.html
+gallery-dbg2.html
+*.zip
+KIT.md
+BRIEFS.md
+_thumbs/_probe.webp
+BILINGUAL.md

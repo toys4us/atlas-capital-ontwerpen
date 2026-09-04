@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 079 Register</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ATLAS CAPITAL — 079 REGISTER
+   One register carries the whole page. Every line of the offer
+   — onderwerp, kanaal, markt, toegang — is a numbered row in a
+   single continuous table with a sticky column head, framed by
+   margins so wide the density reads as a decision.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --ink-2:#0C0D10;
+  --panel:#15161A;
+  --panel-2:#1A1C21;
+  --line:#24262C;
+  --line-2:#33363E;
+  --txt:#EAE9E6;
+  --muted:#A5A6A8;
+  --muted-2:#75777C;
+  --grot:"Space Grotesk",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--ink);color:var(--txt);
+  font-family:var(--grot);font-size:15px;line-height:1.55;
+  font-variant-numeric:tabular-nums;
+  overflow-x:hidden;
+}
+a{color:inherit}
+svg{max-width:100%}
+
+/* ---------- the frame: huge margins ---------- */
+.frame{
+  max-width:1120px;margin:0 auto;
+  padding:0 clamp(14px,5.5vw,40px);
+}
+@media(min-width:1280px){
+  .frame{max-width:980px}
+}
+.rail{
+  position:relative;
+}
+.rail::before,.rail::after{
+  content:"";position:absolute;top:0;bottom:0;width:1px;background:var(--line);
+  display:none;
+}
+@media(min-width:1280px){
+  .rail::before{display:block;left:-56px}
+  .rail::after{display:block;right:-56px}
+}
+
+.lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted-2)}
+.lbl.g{color:var(--gold)}
+
+/* ---------- header (static, not sticky — the table head does the sticking) ---------- */
+header.top{border-bottom:1px solid var(--line);background:var(--ink)}
+.top .bar{display:flex;align-items:center;gap:14px;padding:14px 0}
+.wm{display:flex;align-items:center;gap:10px;text-decoration:none}
+.wm svg{width:26px;height:26px;flex:0 0 26px}
+.wm b{font-weight:700;font-size:14px;letter-spacing:.02em}
+.wm i{display:block;font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--muted-2)}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  padding:11px 16px;border:1px solid var(--gold);background:var(--gold);color:var(--ink);
+  font-weight:500;transition:.16s ease;white-space:nowrap;
+}
+.btn:hover{background:var(--gold-hi);border-color:var(--gold-hi)}
+.btn.ghost{background:transparent;color:var(--gold);border-color:var(--line-2)}
+.btn.ghost:hover{border-color:var(--gold);background:rgba(215,179,100,.09)}
+.btn.sm{padding:8px 12px;font-size:10px}
+
+/* ---------- hero: air ---------- */
+.hero{padding:clamp(56px,13vw,150px) 0 clamp(40px,7vw,90px)}
+.hero .no{margin:0 0 clamp(20px,4vw,42px)}
+.hero h1{
+  margin:0 0 22px;font-weight:300;
+  font-size:clamp(38px,8.4vw,88px);line-height:.98;letter-spacing:-.045em;
+  max-width:15ch;
+}
+.hero h1 b{font-weight:700}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .lede{margin:0 0 32px;max-width:36ch;color:var(--muted);font-size:clamp(15px,1.7vw,18px);font-weight:300}
+.hero .cta{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* measuring rail artwork */
+.gauge{margin-top:clamp(40px,7vw,80px);border-top:1px solid var(--line);padding-top:18px}
+.gauge svg{display:block;width:100%;height:auto}
+.gauge .cap{display:flex;justify-content:space-between;gap:12px;margin-top:8px}
+
+/* ---------- the register ---------- */
+.regwrap{padding:clamp(20px,3vw,40px) 0 clamp(40px,7vw,90px)}
+.reghead{
+  display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;
+  border-bottom:1px solid var(--gold-lo);padding-bottom:10px;margin-bottom:0;
+}
+.reghead h2{margin:0;font-size:clamp(19px,2.8vw,28px);font-weight:500;letter-spacing:-.025em}
+.reghead .rt{margin-left:auto}
+
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:1px solid var(--line)}
+.scroller::-webkit-scrollbar{height:6px}
+.scroller::-webkit-scrollbar-track{background:var(--panel)}
+.scroller::-webkit-scrollbar-thumb{background:var(--line-2)}
+
+table.reg{width:100%;min-width:720px;border-collapse:collapse;font-size:13.5px}
+table.reg thead th{
+  position:sticky;top:0;z-index:20;
+  background:var(--ink-2);
+  border-bottom:1px solid var(--gold-lo);
+  text-align:left;padding:12px 14px;
+  font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted-2);
+  white-space:nowrap;
+}
+table.reg thead th::after{
+  content:"";position:absolute;left:0;right:0;bottom:-4px;height:3px;
+  background:linear-gradient(180deg,rgba(8,9,11,.9),transparent);
+}
+table.reg tbody tr:nth-child(odd) td{background:rgba(255,255,255,.021)}
+table.reg tbody tr:hover td{background:rgba(215,179,100,.075)}
+table.reg td{
+  padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.045);
+  vertical-align:baseline;
+}
+table.reg tr.group td{
+  background:var(--panel-2) !important;
+  border-top:1px solid var(--gold-lo);border-bottom:1px solid var(--line);
+  padding:12px 14px;
+}
+table.reg tr.group .gt{
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+}
+table.reg tr.group .gn{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted-2);float:right;
+}
+.c1{width:62px;font-family:var(--mono);font-size:11px;color:var(--muted-2)}
+.c2{font-weight:500;letter-spacing:-.01em;color:#F4F3F0}
+.c2 .mono{font-family:var(--mono);font-weight:400;font-size:12.5px}
+.c3,.c4{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+.c5{font-family:var(--mono);font-size:11px;color:var(--muted-2);white-space:nowrap}
+.c6{white-space:nowrap;width:118px}
+.flag{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+}
+.flag i{width:6px;height:6px;display:block;flex:0 0 6px;background:var(--gold);border-radius:50%}
+.flag.now{color:var(--gold)}
+.flag.later{color:var(--muted-2)}
+.flag.later i{background:transparent;border:1px solid var(--muted-2)}
+table.reg a{text-decoration:none;border-bottom:1px solid rgba(215,179,100,.35)}
+table.reg a:hover{color:var(--gold);border-bottom-color:var(--gold)}
+
+.regfoot{
+  display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+  padding:16px 0 0;
+}
+.regfoot .tot{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.regfoot .tot b{color:var(--gold);font-weight:500}
+
+/* ---------- annotation (founder) ---------- */
+.note{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:clamp(34px,6vw,76px) 0;
+}
+.note-in{display:grid;gap:clamp(18px,3vw,44px)}
+@media(min-width:900px){.note-in{grid-template-columns:130px minmax(0,1fr)}}
+.note-in .k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.note p.q{
+  margin:0 0 22px;font-size:clamp(16px,2.1vw,22px);line-height:1.6;font-weight:300;
+  letter-spacing:-.015em;max-width:56ch;color:#EFEEEB;
+}
+.note .yrs{
+  display:flex;align-items:baseline;gap:14px;border-top:1px solid var(--line);padding-top:16px;
+}
+.note .yrs b{font-size:clamp(30px,4.6vw,46px);font-weight:700;letter-spacing:-.05em;line-height:1}
+.note .yrs b em{font-style:normal;color:var(--gold)}
+
+/* ---------- annex plate (schematic) ---------- */
+.annex{padding:clamp(40px,7vw,92px) 0}
+.annex-head{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:18px;
+  border-bottom:1px solid var(--line);padding-bottom:10px}
+.annex-head h2{margin:0;font-size:clamp(18px,2.6vw,26px);font-weight:500;letter-spacing:-.025em}
+.annex-head .rt{margin-left:auto}
+.plate{border:1px solid var(--line);background:var(--panel);padding:clamp(12px,2.2vw,26px)}
+.plate svg{display:block;width:100%;height:auto}
+.keys{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.keys div{font-size:13px;line-height:1.55;color:var(--muted);font-weight:300}
+.keys b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:4px;font-weight:400}
+
+/* ---------- live strip ---------- */
+.live{
+  border:1px solid var(--line);background:var(--panel);
+  padding:clamp(20px,3.4vw,36px);
+  display:grid;gap:20px;align-items:center;margin-top:clamp(24px,4vw,44px);
+}
+@media(min-width:840px){.live{grid-template-columns:1fr auto}}
+.live h3{margin:0 0 8px;font-size:clamp(20px,3vw,30px);font-weight:500;letter-spacing:-.03em;line-height:1.08}
+.live p{margin:0;color:var(--muted);max-width:46ch;font-weight:300;font-size:14px}
+.pulse{display:inline-flex;align-items:center;gap:9px;margin-bottom:12px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.pulse i{width:8px;height:8px;border-radius:50%;background:var(--gold);display:block;
+  animation:p79 2.4s ease-in-out infinite}
+@keyframes p79{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+@media(prefers-reduced-motion:reduce){.pulse i{animation:none}}
+
+/* ---------- closing ---------- */
+.close{
+  border-top:1px solid var(--gold-lo);
+  padding:clamp(52px,10vw,130px) 0;
+  background:linear-gradient(180deg,rgba(215,179,100,.06),transparent 55%);
+}
+.close h2{margin:18px 0 16px;font-size:clamp(30px,6.6vw,68px);line-height:.98;font-weight:300;
+  letter-spacing:-.045em;max-width:15ch}
+.close h2 b{font-weight:700}
+.close h2 em{font-style:normal;color:var(--gold)}
+.close p{margin:0 0 30px;color:var(--muted);max-width:38ch;font-weight:300;font-size:17px}
+.close .cta{display:flex;flex-wrap:wrap;gap:10px}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:clamp(28px,4vw,54px) 0 46px;background:var(--ink-2)}
+.fg{display:grid;gap:24px}
+@media(min-width:820px){.fg{grid-template-columns:1.4fr 1fr 1fr}}
+.fg a.l{display:block;text-decoration:none;font-family:var(--mono);font-size:12px;padding:6px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);color:var(--muted)}
+.fg a.l:hover{color:var(--gold)}
+.risk{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:10.5px;line-height:1.8;color:var(--muted-2);max-width:74ch}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header class="top">
+  <div class="frame bar">
+    <a class="wm" href="#">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="2.5" y="2.5" width="27" height="27" fill="none" stroke="#33363E" stroke-width="1.2"/>
+        <line x1="2.5" y1="10" x2="29.5" y2="10" stroke="#D7B364" stroke-width="1.2"/>
+        <line x1="2.5" y1="16" x2="29.5" y2="16" stroke="#33363E" stroke-width="1"/>
+        <line x1="2.5" y1="22" x2="29.5" y2="22" stroke="#33363E" stroke-width="1"/>
+        <line x1="11" y1="2.5" x2="11" y2="29.5" stroke="#33363E" stroke-width="1"/>
+      </svg>
+      <span><b>ATLAS CAPITAL</b><i>Register</i></span>
+    </a>
+    <a class="btn sm" style="margin-left:auto" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord</a>
+  </div>
+</header>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero">
+  <div class="frame rail">
+    <p class="lbl g no">01 — Regel nul</p>
+    <h1>Eén <em>register.</em><br>Alles staat erin.</h1>
+    <p class="lede">Geen brochure, geen beloftes. Elke regel van wat we doen, geteld en benoemd.</p>
+    <div class="cta">
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Open de server</a>
+      <a class="btn ghost" href="#register">Naar het register</a>
+    </div>
+
+    <div class="gauge">
+      <svg viewBox="0 0 1000 84" preserveAspectRatio="none" role="img" aria-label="Meetlat met fijne verdelingen, waarvan enkele markeringen in goud zijn uitgelicht">
+        <line x1="0" y1="70" x2="1000" y2="70" stroke="#33363E" stroke-width="1"/>
+        <g stroke="#33363E" stroke-width="1">
+          <line x1="20" y1="70" x2="20" y2="56"/><line x1="40" y1="70" x2="40" y2="62"/>
+          <line x1="60" y1="70" x2="60" y2="62"/><line x1="80" y1="70" x2="80" y2="62"/>
+          <line x1="100" y1="70" x2="100" y2="56"/><line x1="120" y1="70" x2="120" y2="62"/>
+          <line x1="140" y1="70" x2="140" y2="62"/><line x1="160" y1="70" x2="160" y2="62"/>
+          <line x1="180" y1="70" x2="180" y2="56"/><line x1="200" y1="70" x2="200" y2="62"/>
+          <line x1="220" y1="70" x2="220" y2="62"/><line x1="240" y1="70" x2="240" y2="62"/>
+          <line x1="260" y1="70" x2="260" y2="56"/><line x1="280" y1="70" x2="280" y2="62"/>
+          <line x1="300" y1="70" x2="300" y2="62"/><line x1="320" y1="70" x2="320" y2="62"/>
+          <line x1="340" y1="70" x2="340" y2="56"/><line x1="360" y1="70" x2="360" y2="62"/>
+          <line x1="380" y1="70" x2="380" y2="62"/><line x1="400" y1="70" x2="400" y2="62"/>
+          <line x1="420" y1="70" x2="420" y2="56"/><line x1="440" y1="70" x2="440" y2="62"/>
+          <line x1="460" y1="70" x2="460" y2="62"/><line x1="480" y1="70" x2="480" y2="62"/>
+          <line x1="500" y1="70" x2="500" y2="56"/><line x1="520" y1="70" x2="520" y2="62"/>
+          <line x1="540" y1="70" x2="540" y2="62"/><line x1="560" y1="70" x2="560" y2="62"/>
+          <line x1="580" y1="70" x2="580" y2="56"/><line x1="600" y1="70" x2="600" y2="62"/>
+          <line x1="620" y1="70" x2="620" y2="62"/><line x1="640" y1="70" x2="640" y2="62"/>
+          <line x1="660" y1="70" x2="660" y2="56"/><line x1="680" y1="70" x2="680" y2="62"/>
+          <line x1="700" y1="70" x2="700" y2="62"/><line x1="720" y1="70" x2="720" y2="62"/>
+          <line x1="740" y1="70" x2="740" y2="56"/><line x1="760" y1="70" x2="760" y2="62"/>
+          <line x1="780" y1="70" x2="780" y2="62"/><line x1="800" y1="70" x2="800" y2="62"/>
+          <line x1="820" y1="70" x2="820" y2="56"/><line x1="840" y1="70" x2="840" y2="62"/>
+          <line x1="860" y1="70" x2="860" y2="62"/><line x1="880" y1="70" x2="880" y2="62"/>
+          <line x1="900" y1="70" x2="900" y2="56"/><line x1="920" y1="70" x2="920" y2="62"/>
+          <line x1="940" y1="70" x2="940" y2="62"/><line x1="960" y1="70" x2="960" y2="62"/>
+          <line x1="980" y1="70" x2="980" y2="56"/>
+        </g>
+        <!-- gold marks: ten of them, for the ten topics -->
+        <g stroke="#D7B364" stroke-width="1.6">
+          <line x1="20" y1="70" x2="20" y2="26"/><line x1="120" y1="70" x2="120" y2="34"/>
+          <line x1="220" y1="70" x2="220" y2="26"/><line x1="320" y1="70" x2="320" y2="34"/>
+          <line x1="420" y1="70" x2="420" y2="26"/><line x1="520" y1="70" x2="520" y2="34"/>
+          <line x1="620" y1="70" x2="620" y2="26"/><line x1="720" y1="70" x2="720" y2="34"/>
+          <line x1="820" y1="70" x2="820" y2="26"/><line x1="920" y1="70" x2="920" y2="34"/>
+        </g>
+        <g fill="#D7B364">
+          <rect x="17" y="14" width="6" height="6"/><rect x="217" y="14" width="6" height="6"/>
+          <rect x="417" y="14" width="6" height="6"/><rect x="617" y="14" width="6" height="6"/>
+          <rect x="817" y="14" width="6" height="6"/>
+        </g>
+      </svg>
+      <div class="cap">
+        <span class="lbl">Tien merken · tien onderwerpen</span>
+        <span class="lbl">Vijftien kanalen</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ HET REGISTER ══════════════ -->
+<section class="regwrap" id="register">
+  <div class="frame rail">
+    <div class="reghead">
+      <h2>Register</h2>
+      <span class="lbl rt">02 — Volledige opgave</span>
+    </div>
+
+    <div class="scroller">
+      <table class="reg">
+        <thead>
+          <tr>
+            <th style="width:62px">Regel</th>
+            <th>Omschrijving</th>
+            <th>Soort</th>
+            <th>Markt</th>
+            <th>Kanaal</th>
+            <th>Toegang</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr class="group"><td colspan="6"><span class="gt">I · Onderwerpen</span><span class="gn">10 regels</span></td></tr>
+          <tr><td class="c1">001</td><td class="c2">deviatie</td><td class="c3">structuur</td><td class="c4">NQ · ES</td><td class="c5">#nq-chart-ideeën</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr><td class="c1">002</td><td class="c2">SMT</td><td class="c3">correlatie</td><td class="c4">NQ · ES</td><td class="c5">#es-chart-ideeën</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr><td class="c1">003</td><td class="c2">FVG</td><td class="c3">inefficiëntie</td><td class="c4">Alle</td><td class="c5">#markt</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr><td class="c1">004</td><td class="c2">IFVG</td><td class="c3">inefficiëntie</td><td class="c4">Alle</td><td class="c5">#markt</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr><td class="c1">005</td><td class="c2">orderblocks</td><td class="c3">structuur</td><td class="c4">NQ</td><td class="c5">#nq-chart-ideeën</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr><td class="c1">006</td><td class="c2">fibonacci</td><td class="c3">meting</td><td class="c4">BTC</td><td class="c5">#bitcoin</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr><td class="c1">007</td><td class="c2">sessie-liquiditeit</td><td class="c3">timing</td><td class="c4">NQ · ES</td><td class="c5">#markt</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr><td class="c1">008</td><td class="c2">liquiditeit</td><td class="c3">structuur</td><td class="c4">Altcoins</td><td class="c5">#altcoins</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr><td class="c1">009</td><td class="c2">risicobeheer</td><td class="c3">proces</td><td class="c4">Alle</td><td class="c5">#vragen</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr><td class="c1">010</td><td class="c2">tradingpsychologie</td><td class="c3">discipline</td><td class="c4">Alle</td><td class="c5">#algemeen</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+
+          <tr class="group"><td colspan="6"><span class="gt">II · Kanalen — thuis</span><span class="gn">9 regels</span></td></tr>
+          <tr><td class="c1">011</td><td class="c2"><span class="mono">#nq-chart-ideeën</span></td><td class="c3">chart-ideeën</td><td class="c4">NQ</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
+          <tr><td class="c1">012</td><td class="c2"><span class="mono">#es-chart-ideeën</span></td><td class="c3">chart-ideeën</td><td class="c4">ES</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
+          <tr><td class="c1">013</td><td class="c2"><span class="mono">#bitcoin</span></td><td class="c3">chart-ideeën</td><td class="c4">BTC</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
+          <tr><td class="c1">014</td><td class="c2"><span class="mono">#altcoins</span></td><td class="c3">chart-ideeën</td><td class="c4">Altcoins</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
+          <tr><td class="c1">015</td><td class="c2"><span class="mono">#markt</span></td><td class="c3">marktbeeld</td><td class="c4">Alle</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
+          <tr><td class="c1">016</td><td class="c2"><span class="mono">#vragen</span></td><td class="c3">educatie</td><td class="c4">Alle</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
+          <tr><td class="c1">017</td><td class="c2"><span class="mono">#algemeen</span></td><td class="c3">community</td><td class="c4">—</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
+          <tr><td class="c1">018</td><td class="c2"><span class="mono">#atlas-op-socials</span></td><td class="c3">socials</td><td class="c4">—</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
+          <tr><td class="c1">019</td><td class="c2"><span class="mono">#ondersteuning</span></td><td class="c3">hulp</td><td class="c4">—</td><td class="c5">thuis</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
+
+          <tr class="group"><td colspan="6"><span class="gt">III · Kanalen — premium</span><span class="gn">6 regels</span></td></tr>
+          <tr><td class="c1">020</td><td class="c2"><span class="mono">#trade-setups</span></td><td class="c3">setups</td><td class="c4">Alle</td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
+          <tr><td class="c1">021</td><td class="c2"><span class="mono">#marktupdates</span></td><td class="c3">updates</td><td class="c4">Alle</td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
+          <tr><td class="c1">022</td><td class="c2"><span class="mono">#indicatoren</span></td><td class="c3">gereedschap</td><td class="c4">Alle</td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
+          <tr><td class="c1">023</td><td class="c2"><span class="mono">#sessie-opnames</span></td><td class="c3">opnames</td><td class="c4">Alle</td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
+          <tr><td class="c1">024</td><td class="c2"><span class="mono">#chart-ideeën</span></td><td class="c3">chart-ideeën</td><td class="c4">Alle</td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
+          <tr><td class="c1">025</td><td class="c2"><span class="mono">#premium-chat</span></td><td class="c3">community</td><td class="c4">—</td><td class="c5">premium</td><td class="c6"><span class="flag later"><i></i>Later</span></td></tr>
+
+          <tr class="group"><td colspan="6"><span class="gt">IV · Markten</span><span class="gn">4 regels</span></td></tr>
+          <tr><td class="c1">026</td><td class="c2">NQ — Nasdaq futures</td><td class="c3">futures</td><td class="c4">NQ</td><td class="c5">#nq-chart-ideeën</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr><td class="c1">027</td><td class="c2">ES — S&amp;P futures</td><td class="c3">futures</td><td class="c4">ES</td><td class="c5">#es-chart-ideeën</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr><td class="c1">028</td><td class="c2">Bitcoin</td><td class="c3">crypto</td><td class="c4">BTC</td><td class="c5">#bitcoin</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr><td class="c1">029</td><td class="c2">Altcoins</td><td class="c3">crypto</td><td class="c4">ALT</td><td class="c5">#altcoins</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+
+          <tr class="group"><td colspan="6"><span class="gt">V · Wat er verder is</span><span class="gn">3 regels</span></td></tr>
+          <tr><td class="c1">030</td><td class="c2">Live trading door de oprichter</td><td class="c3">sessie</td><td class="c4">Alle</td><td class="c5">in de server</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr><td class="c1">031</td><td class="c2">Educatie — 10+ jaar ervaring, gedeeld</td><td class="c3">educatie</td><td class="c4">Alle</td><td class="c5">#vragen</td><td class="c6"><span class="flag now"><i></i>Nu</span></td></tr>
+          <tr><td class="c1">032</td><td class="c2"><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Toegang tot de server</a></td><td class="c3">toegang</td><td class="c4">—</td><td class="c5">Discord</td><td class="c6"><span class="flag now"><i></i>Gratis</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="regfoot">
+      <span class="tot">Sluiting · <b>10 onderwerpen</b> · <b>15 kanalen</b> · <b>4 markten</b></span>
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Neem regel 032</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ AANTEKENING ══════════════ -->
+<section class="note">
+  <div class="frame rail note-in">
+    <div class="k">03 —<br>Aantekening<br>bij regel 031</div>
+    <div>
+      <p class="q">
+        Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles
+        meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik
+        gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten
+        dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community
+        die samen beter wil worden.
+      </p>
+      <div class="yrs">
+        <b>10<em>+</em></b>
+        <span class="lbl">jaar actief · oprichter van Atlas Capital</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ BIJLAGE — SCHEMA ══════════════ -->
+<section class="annex">
+  <div class="frame rail">
+    <div class="annex-head">
+      <h2>Bijlage bij regel 003 en 008</h2>
+      <span class="lbl rt">04 — Schematisch</span>
+    </div>
+
+    <div class="plate">
+      <svg viewBox="0 0 900 380" role="img" aria-label="Schema waarin liquiditeit onder een reeks bodems wordt opgehaald en de markt terugkeert naar een openliggende zone">
+        <!-- register-style grid -->
+        <g stroke="#22242A" stroke-width="1">
+          <line x1="50" y1="50" x2="850" y2="50"/><line x1="50" y1="112" x2="850" y2="112"/>
+          <line x1="50" y1="174" x2="850" y2="174"/><line x1="50" y1="236" x2="850" y2="236"/>
+          <line x1="50" y1="298" x2="850" y2="298"/>
+          <line x1="210" y1="30" x2="210" y2="330"/><line x1="370" y1="30" x2="370" y2="330"/>
+          <line x1="530" y1="30" x2="530" y2="330"/><line x1="690" y1="30" x2="690" y2="330"/>
+        </g>
+        <line x1="50" y1="330" x2="850" y2="330" stroke="#33363E" stroke-width="1.2"/>
+        <line x1="50" y1="30" x2="50" y2="330" stroke="#33363E" stroke-width="1.2"/>
+
+        <!-- liquidity resting under a row of lows -->
+        <line x1="90" y1="268" x2="640" y2="268" stroke="#B9954A" stroke-width="1.1" stroke-dasharray="7 5"/>
+        <text x="90" y="286" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.8" fill="#A5A6A8">LIQUIDITEIT ONDER DE BODEMS</text>
+
+        <!-- candles descending into the sweep, then reversing -->
+        <g stroke="#EAE9E6" stroke-width="1.4">
+          <line x1="116" y1="96" x2="116" y2="172"/><rect x="109" y="112" width="14" height="44" fill="#15161A"/>
+          <line x1="152" y1="124" x2="152" y2="204"/><rect x="145" y="142" width="14" height="46" fill="#EAE9E6"/>
+          <line x1="188" y1="156" x2="188" y2="232"/><rect x="181" y="172" width="14" height="46" fill="#EAE9E6"/>
+          <line x1="224" y1="188" x2="224" y2="262"/><rect x="217" y="204" width="14" height="44" fill="#EAE9E6"/>
+          <line x1="260" y1="206" x2="260" y2="264"/><rect x="253" y="220" width="14" height="36" fill="#EAE9E6"/>
+          <!-- sweep candle dips under the line and closes back above -->
+          <line x1="296" y1="212" x2="296" y2="296"/><rect x="289" y="228" width="14" height="34" fill="#D7B364" stroke="#D7B364"/>
+          <line x1="332" y1="176" x2="332" y2="252"/><rect x="325" y="192" width="14" height="44" fill="#15161A"/>
+          <line x1="368" y1="144" x2="368" y2="220"/><rect x="361" y="158" width="14" height="46" fill="#15161A"/>
+          <line x1="404" y1="112" x2="404" y2="190"/><rect x="397" y="126" width="14" height="48" fill="#15161A"/>
+          <line x1="440" y1="96" x2="440" y2="168"/><rect x="433" y="108" width="14" height="44" fill="#15161A"/>
+          <line x1="476" y1="106" x2="476" y2="180"/><rect x="469" y="120" width="14" height="44" fill="#EAE9E6"/>
+          <line x1="512" y1="122" x2="512" y2="196"/><rect x="505" y="136" width="14" height="44" fill="#EAE9E6"/>
+          <line x1="548" y1="100" x2="548" y2="178"/><rect x="541" y="114" width="14" height="46" fill="#15161A"/>
+          <line x1="584" y1="72" x2="584" y2="150"/><rect x="577" y="86" width="14" height="46" fill="#15161A"/>
+        </g>
+
+        <!-- sweep callout -->
+        <circle cx="296" cy="294" r="7" fill="none" stroke="#D7B364" stroke-width="1.4"/>
+        <line x1="296" y1="302" x2="296" y2="322" stroke="#D7B364" stroke-width="1"/>
+        <line x1="296" y1="322" x2="404" y2="322" stroke="#D7B364" stroke-width="1"/>
+        <text x="410" y="326" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.8" fill="#D7B364">SWEEP</text>
+
+        <!-- open zone (FVG) that price returns to -->
+        <rect x="422" y="152" width="250" height="28" fill="#D7B364" opacity=".2"/>
+        <line x1="422" y1="152" x2="672" y2="152" stroke="#B9954A" stroke-width="1"/>
+        <line x1="422" y1="180" x2="672" y2="180" stroke="#B9954A" stroke-width="1"/>
+        <line x1="672" y1="166" x2="742" y2="166" stroke="#B9954A" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="748" y="170" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.8" fill="#D7B364">OPEN ZONE</text>
+
+        <!-- execution mark -->
+        <path d="M512 208 L512 176 M500 188 L512 176 L524 188" fill="none" stroke="#B9954A" stroke-width="1.4" stroke-linecap="round"/>
+        <text x="474" y="226" font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing="1.8" fill="#A5A6A8">UITVOERING</text>
+
+        <!-- bracket without values -->
+        <line x1="800" y1="96" x2="800" y2="252" stroke="#33363E" stroke-width="1"/>
+        <line x1="794" y1="96" x2="806" y2="96" stroke="#33363E" stroke-width="1"/>
+        <line x1="794" y1="252" x2="806" y2="252" stroke="#33363E" stroke-width="1"/>
+        <rect x="794" y="171" width="12" height="6" fill="#B9954A"/>
+        <g font-family="ui-monospace,Menlo,monospace" font-size="9" letter-spacing="1.6" fill="#75777C">
+          <text x="814" y="100">GRENS</text>
+          <text x="814" y="178">ZONE</text>
+          <text x="814" y="256">GRENS</text>
+          <text x="50" y="356">TIJD →</text>
+          <text x="760" y="356">GEEN SCHAAL</text>
+        </g>
+      </svg>
+
+      <div class="keys">
+        <div><b>Liquiditeit</b>Stops die onder een reeks bodems blijven liggen.</div>
+        <div><b>Sweep</b>Die zone wordt opgehaald, en de markt keert.</div>
+        <div><b>Open zone</b>De onafgewerkte ruimte die de beweging achterlaat.</div>
+        <div><b>Uitvoering</b>Pas een regel schrijven als alles klopt.</div>
+      </div>
+    </div>
+
+    <div class="live">
+      <div>
+        <span class="pulse"><i></i>Live in de server</span>
+        <h3>Regel 030 gebeurt dagelijks.</h3>
+        <p>De oprichter tradet live mee. Tijden worden in de server aangekondigd.</p>
+      </div>
+      <a class="btn ghost" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Kijk mee</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SLUITING ══════════════ -->
+<section class="close">
+  <div class="frame rail">
+    <p class="lbl g">05 — Laatste regel</p>
+    <h2>Schrijf jezelf <em>in.</em></h2>
+    <p>De hele lijst hierboven is nu gratis toegankelijk. Premium opent later; prijs en datum volgen in de server.</p>
+    <div class="cta">
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Word lid op Discord</a>
+      <a class="btn ghost" href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="frame">
+    <div class="fg">
+      <div>
+        <div class="wm" style="margin-bottom:12px">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="27" height="27" fill="none" stroke="#33363E" stroke-width="1.2"/>
+            <line x1="2.5" y1="10" x2="29.5" y2="10" stroke="#D7B364" stroke-width="1.2"/>
+            <line x1="2.5" y1="20" x2="29.5" y2="20" stroke="#33363E" stroke-width="1"/>
+            <line x1="11" y1="2.5" x2="11" y2="29.5" stroke="#33363E" stroke-width="1"/>
+          </svg>
+          <span><b>ATLAS CAPITAL</b><i>Proces · Discipline · Uitvoering</i></span>
+        </div>
+        <p style="margin:0;color:var(--muted-2);font-size:13px;max-width:36ch;font-weight:300">
+          Een register telt wat er is. Meer beweren we niet.
+        </p>
+      </div>
+      <div>
+        <p class="lbl" style="margin:0 0 10px">Vindplaats</p>
+        <a class="l" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord ↗</a>
+        <a class="l" href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok @atlascapitalbv ↗</a>
+      </div>
+      <div>
+        <p class="lbl" style="margin:0 0 10px">Onderdelen</p>
+        <a class="l" href="#register">02 · Register</a>
+        <a class="l" href="#">03 · Aantekening</a>
+        <a class="l" href="#">04 · Bijlage</a>
+      </div>
+    </div>
+    <p class="risk">
+      Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

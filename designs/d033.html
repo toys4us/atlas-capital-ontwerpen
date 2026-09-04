@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 033 Sterrenkaart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================
+   ATLAS CAPITAL — 033 STERRENKAART
+   A celestial chart. Ten stars, hand-placed, joined by hairlines:
+   the ten education topics as one constellation. Everything else
+   is a star catalogue set around it. Deep night ground, gold stars.
+   Type: Newsreader.
+   ========================================================== */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --night:#070910;
+  --night-2:#0B0E16;
+  --plate:#101420;
+  --muted:#9A9DA6;
+  --dim:#666B78;
+  --serif:"Newsreader", Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --mono:ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+*{box-sizing:border-box}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--night);
+  background-image:radial-gradient(ellipse 120% 70% at 50% 0%, #121726 0%, #070910 62%);
+  color:#E8E7E3;
+  font-family:var(--serif);
+  font-size:18px;line-height:1.6;font-weight:300;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{margin:0;font-weight:300;line-height:1.06;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+ul{margin:0;padding:0;list-style:none}
+
+.wrap{max-width:1140px;margin:0 auto;padding-left:clamp(16px,4vw,44px);padding-right:clamp(16px,4vw,44px)}
+.narrow{max-width:760px;margin-left:auto;margin-right:auto}
+.center{text-align:center}
+
+.mono{
+  font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
+}
+.rule{
+  height:1px;border:0;margin:0;
+  background:linear-gradient(90deg,transparent,rgba(215,179,100,.55) 20%,rgba(215,179,100,.55) 80%,transparent);
+}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(7,9,16,.9);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(215,179,100,.2);
+}
+.hd{
+  max-width:1140px;margin:0 auto;padding:13px clamp(16px,4vw,44px);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand span{
+  font-family:var(--mono);font-size:12px;letter-spacing:.42em;text-transform:uppercase;white-space:nowrap;
+}
+.brand span i{font-style:normal;color:var(--dim)}
+.hd nav{display:flex;gap:clamp(10px,2.2vw,24px);flex-wrap:wrap}
+.hd nav a{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);text-decoration:none}
+.hd nav a:hover{color:var(--gold)}
+@media (max-width:760px){ .hd nav{display:none} }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
+  padding:13px 22px;border-radius:999px;
+  color:#0A0C12;background:linear-gradient(180deg,var(--gold-hi),var(--gold) 60%,var(--gold-lo));
+  border:1px solid rgba(230,204,142,.7);
+  box-shadow:0 0 0 1px rgba(7,9,16,.9), 0 10px 40px -18px rgba(215,179,100,.9);
+  transition:filter .25s ease, transform .25s ease;
+}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn--ghost{
+  background:none;color:var(--gold-hi);border:1px solid rgba(215,179,100,.42);box-shadow:none;
+}
+.btn--ghost:hover{background:rgba(215,179,100,.09);filter:none}
+.btn--lg{font-size:12px;padding:17px 32px}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(40px,6vw,74px);padding-bottom:clamp(26px,4vw,48px);text-align:center}
+h1{
+  font-size:clamp(38px,7.6vw,84px);font-weight:200;letter-spacing:-.03em;
+}
+h1 em{font-style:italic;color:var(--gold-hi);font-weight:300}
+.hero p.lead{
+  margin:20px auto 0;color:var(--muted);max-width:46ch;font-size:clamp(16px,1.9vw,20px);
+}
+.hero .cta{margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:24px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold-lo);
+}
+.eyebrow i{display:block;width:34px;height:1px;background:var(--gold-lo)}
+
+/* ---------- the chart ---------- */
+.chart-holder{
+  position:relative;max-width:860px;margin:0 auto;padding:0 4px;
+}
+.chart-holder svg{width:100%;height:auto;display:block}
+.chart-caption{
+  margin:18px auto 0;max-width:620px;text-align:center;
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);line-height:2;
+}
+.twinkle{animation:g033tw 4.5s ease-in-out infinite}
+.twinkle-b{animation:g033tw 6.2s ease-in-out infinite;animation-delay:-2s}
+@keyframes g033tw{0%,100%{opacity:.55}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){ .twinkle,.twinkle-b{animation:none;opacity:1} }
+
+/* ---------- sections ---------- */
+section{padding-top:clamp(52px,8vw,116px);padding-bottom:clamp(52px,8vw,116px)}
+.sec-top{text-align:center;margin-bottom:clamp(28px,4.4vw,54px)}
+.sec-top h2{font-size:clamp(28px,5vw,52px);font-weight:200;letter-spacing:-.025em;margin-top:16px}
+.sec-top p{margin:14px auto 0;color:var(--muted);max-width:44ch}
+
+/* ---------- catalogue table ---------- */
+.cat-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:520px}
+caption{
+  caption-side:top;text-align:left;padding-bottom:12px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);
+}
+th{
+  text-align:left;font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold-lo);font-weight:400;padding:10px 12px;border-bottom:1px solid rgba(215,179,100,.42);
+}
+td{
+  padding:14px 12px;border-bottom:1px solid rgba(215,179,100,.14);vertical-align:middle;
+}
+tbody tr{transition:background .3s ease}
+tbody tr:hover{background:rgba(215,179,100,.055)}
+td.bay{font-size:24px;color:var(--gold-hi);width:56px;line-height:1}
+td.nm{font-size:clamp(19px,2.6vw,26px);letter-spacing:-.015em}
+td.co{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);white-space:nowrap}
+td.gl{width:44px}
+
+/* ---------- observer note ---------- */
+.observer{
+  display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr);
+  gap:clamp(22px,4vw,54px);align-items:center;
+}
+@media (max-width:720px){ .observer{grid-template-columns:1fr;text-align:center} .observer svg{margin:0 auto} }
+.observer svg{width:100%;max-width:210px;height:auto}
+blockquote{
+  margin:0;font-size:clamp(19px,2.5vw,27px);line-height:1.45;font-weight:200;font-style:italic;
+}
+.sig{
+  margin-top:22px;padding-top:14px;border-top:1px solid rgba(215,179,100,.28);
+  display:flex;gap:20px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);
+}
+.sig b{color:var(--gold);font-weight:400}
+
+/* ---------- transit figure ---------- */
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid rgba(215,179,100,.26);background:#0A0D15}
+.scroller svg{display:block;min-width:700px;width:100%;height:auto}
+.figcap{
+  margin-top:14px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);
+}
+.figcap b{color:var(--gold);font-weight:400}
+
+/* ---------- register / channels ---------- */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(22px,4vw,52px)}
+.reg h3{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);
+  display:flex;justify-content:space-between;gap:12px;padding-bottom:12px;
+  border-bottom:1px solid rgba(215,179,100,.4);
+}
+.reg h3 span{color:var(--dim)}
+.reg li{
+  display:flex;align-items:baseline;gap:10px;padding:12px 0;
+  border-bottom:1px solid rgba(215,179,100,.12);font-size:19px;min-width:0;
+}
+.reg li b{color:var(--gold-lo);font-weight:400;font-family:var(--mono);font-size:13px;flex:none}
+.reg li .n{overflow-wrap:anywhere}
+.reg li .mag{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--dim);flex:none}
+
+/* ---------- panels ---------- */
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(18px,3vw,32px)}
+.panel{
+  border:1px solid rgba(215,179,100,.26);
+  background:linear-gradient(170deg,rgba(16,20,32,.95),rgba(7,9,16,.85));
+  padding:clamp(24px,3.4vw,40px);position:relative;overflow:hidden;
+}
+.panel h3{font-size:clamp(24px,3.4vw,34px);margin:14px 0 12px}
+.panel p{color:var(--muted);max-width:36ch}
+.chip{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
+  border:1px solid var(--gold-lo);color:var(--gold);padding:5px 11px;border-radius:999px;display:inline-block;
+}
+.panel .glint{position:absolute;right:-30px;top:-30px;opacity:.5}
+
+/* ---------- live ---------- */
+.live{
+  border-top:1px solid rgba(215,179,100,.28);border-bottom:1px solid rgba(215,179,100,.28);
+  padding:clamp(30px,5vw,58px) 0;text-align:center;
+}
+.live h3{font-size:clamp(26px,4.2vw,44px);font-weight:200}
+.live p{margin:14px auto 0;color:var(--muted);max-width:42ch}
+.live .cta{margin-top:24px}
+.pulse{
+  display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);
+  margin-right:12px;vertical-align:middle;animation:g033pulse 2.6s ease-in-out infinite;
+}
+@keyframes g033pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
+@media (prefers-reduced-motion:reduce){ .pulse{animation:none;opacity:1} }
+
+/* ---------- closing ---------- */
+.closing{text-align:center;padding-top:clamp(56px,9vw,132px);padding-bottom:clamp(56px,9vw,132px)}
+.closing h2{font-size:clamp(34px,7.4vw,80px);font-weight:200;letter-spacing:-.035em}
+.closing h2 em{font-style:italic;color:var(--gold-hi)}
+.closing p{margin:18px auto 0;color:var(--muted);max-width:34ch}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid rgba(215,179,100,.24);background:#05070C;padding:clamp(34px,5vw,58px) 0 40px}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(18px,3vw,36px)}
+.fg h4{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;font-weight:400}
+.fg a{display:block;text-decoration:none;color:#DAD9D5;padding:4px 0;overflow-wrap:anywhere}
+.fg a:hover{color:var(--gold)}
+.fg p{color:var(--muted)}
+.risk{
+  margin-top:clamp(24px,4vw,44px);padding-top:16px;border-top:1px solid rgba(215,179,100,.16);
+  font-family:var(--mono);font-size:10px;line-height:1.9;color:var(--dim);
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+}
+.risk span{max-width:72ch}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="hd">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M13,0 L15.6,10.4 L26,13 L15.6,15.6 L13,26 L10.4,15.6 L0,13 L10.4,10.4 Z" fill="#D7B364"/>
+      </svg>
+      <span>Atlas <i>Capital</i></span>
+    </div>
+    <nav>
+      <a href="#constellatie">Constellatie</a>
+      <a href="#waarnemer">Waarnemer</a>
+      <a href="#transit">Transit</a>
+      <a href="#register">Kanalen</a>
+      <a href="#toegang">Toegang</a>
+    </nav>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+  </div>
+</header>
+
+<!-- ============ HERO + STAR CHART ============ -->
+<div class="wrap hero">
+  <span class="eyebrow"><i></i>Kaart 033 &nbsp;·&nbsp; hemelkaart<i></i></span>
+  <h1>Tien sterren.<br>Eén <em>constellatie</em>.</h1>
+  <p class="lead">Atlas Capital is een Nederlandse trading-community. De educatie staat hierboven aan de hemel: tien onderwerpen, één figuur.</p>
+  <div class="cta">
+    <a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
+    <a class="btn btn--ghost btn--lg" href="#register">Bekijk de kanalen</a>
+  </div>
+</div>
+
+<div class="chart-holder" id="constellatie">
+  <svg viewBox="0 0 800 800" role="img" aria-label="Hemelkaart met tien sterren die de tien educatie-onderwerpen vormen">
+    <defs>
+      <clipPath id="g033-disc"><circle cx="400" cy="400" r="278"/></clipPath>
+      <radialGradient id="g033-sky" cx="50%" cy="42%" r="62%">
+        <stop offset="0" stop-color="#131829"/>
+        <stop offset="1" stop-color="#070910"/>
+      </radialGradient>
+      <radialGradient id="g033-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#E6CC8E" stop-opacity=".85"/>
+        <stop offset="1" stop-color="#E6CC8E" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="g033-way" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#D7B364" stop-opacity=".13"/>
+        <stop offset="1" stop-color="#D7B364" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <!-- outer bezel -->
+    <circle cx="400" cy="400" r="330" fill="none" stroke="#B9954A" stroke-width="1" stroke-opacity=".35"/>
+    <circle cx="400" cy="400" r="318" fill="none" stroke="#B9954A" stroke-width=".6" stroke-opacity=".7"/>
+    <circle cx="400" cy="400" r="292" fill="none" stroke="#B9954A" stroke-width=".6" stroke-opacity=".55"/>
+
+    <!-- degree collar: one tick, rotated -->
+    <g stroke="#B9954A" stroke-opacity=".75">
+      <g id="g033-t1" stroke-width=".9"><line x1="400" y1="70" x2="400" y2="84"/></g>
+      <g id="g033-t2" stroke-width=".6"><line x1="400" y1="74" x2="400" y2="84"/></g>
+      <use href="#g033-t1"/>
+      <use href="#g033-t1" transform="rotate(30 400 400)"/>
+      <use href="#g033-t1" transform="rotate(60 400 400)"/>
+      <use href="#g033-t1" transform="rotate(90 400 400)"/>
+      <use href="#g033-t1" transform="rotate(120 400 400)"/>
+      <use href="#g033-t1" transform="rotate(150 400 400)"/>
+      <use href="#g033-t1" transform="rotate(180 400 400)"/>
+      <use href="#g033-t1" transform="rotate(210 400 400)"/>
+      <use href="#g033-t1" transform="rotate(240 400 400)"/>
+      <use href="#g033-t1" transform="rotate(270 400 400)"/>
+      <use href="#g033-t1" transform="rotate(300 400 400)"/>
+      <use href="#g033-t1" transform="rotate(330 400 400)"/>
+      <use href="#g033-t2" transform="rotate(10 400 400)"/>
+      <use href="#g033-t2" transform="rotate(20 400 400)"/>
+      <use href="#g033-t2" transform="rotate(40 400 400)"/>
+      <use href="#g033-t2" transform="rotate(50 400 400)"/>
+      <use href="#g033-t2" transform="rotate(70 400 400)"/>
+      <use href="#g033-t2" transform="rotate(80 400 400)"/>
+      <use href="#g033-t2" transform="rotate(100 400 400)"/>
+      <use href="#g033-t2" transform="rotate(110 400 400)"/>
+      <use href="#g033-t2" transform="rotate(130 400 400)"/>
+      <use href="#g033-t2" transform="rotate(140 400 400)"/>
+      <use href="#g033-t2" transform="rotate(160 400 400)"/>
+      <use href="#g033-t2" transform="rotate(170 400 400)"/>
+      <use href="#g033-t2" transform="rotate(190 400 400)"/>
+      <use href="#g033-t2" transform="rotate(200 400 400)"/>
+      <use href="#g033-t2" transform="rotate(220 400 400)"/>
+      <use href="#g033-t2" transform="rotate(230 400 400)"/>
+      <use href="#g033-t2" transform="rotate(250 400 400)"/>
+      <use href="#g033-t2" transform="rotate(260 400 400)"/>
+      <use href="#g033-t2" transform="rotate(280 400 400)"/>
+      <use href="#g033-t2" transform="rotate(290 400 400)"/>
+      <use href="#g033-t2" transform="rotate(310 400 400)"/>
+      <use href="#g033-t2" transform="rotate(320 400 400)"/>
+      <use href="#g033-t2" transform="rotate(340 400 400)"/>
+      <use href="#g033-t2" transform="rotate(350 400 400)"/>
+    </g>
+
+    <!-- the sky -->
+    <circle cx="400" cy="400" r="278" fill="url(#g033-sky)"/>
+
+    <g clip-path="url(#g033-disc)">
+      <!-- a faint band of light -->
+      <ellipse cx="430" cy="330" rx="330" ry="120" fill="url(#g033-way)" transform="rotate(-28 430 330)"/>
+
+      <!-- declination circles -->
+      <g fill="none" stroke="#B9954A" stroke-opacity=".2" stroke-width=".8">
+        <circle cx="400" cy="400" r="70"/><circle cx="400" cy="400" r="140"/><circle cx="400" cy="400" r="210"/>
+      </g>
+      <!-- right-ascension spokes -->
+      <g stroke="#B9954A" stroke-opacity=".16" stroke-width=".8">
+        <g id="g033-ra"><line x1="400" y1="400" x2="400" y2="112"/></g>
+        <use href="#g033-ra"/>
+        <use href="#g033-ra" transform="rotate(30 400 400)"/>
+        <use href="#g033-ra" transform="rotate(60 400 400)"/>
+        <use href="#g033-ra" transform="rotate(90 400 400)"/>
+        <use href="#g033-ra" transform="rotate(120 400 400)"/>
+        <use href="#g033-ra" transform="rotate(150 400 400)"/>
+        <use href="#g033-ra" transform="rotate(180 400 400)"/>
+        <use href="#g033-ra" transform="rotate(210 400 400)"/>
+        <use href="#g033-ra" transform="rotate(240 400 400)"/>
+        <use href="#g033-ra" transform="rotate(270 400 400)"/>
+        <use href="#g033-ra" transform="rotate(300 400 400)"/>
+        <use href="#g033-ra" transform="rotate(330 400 400)"/>
+      </g>
+      <!-- the ecliptic -->
+      <ellipse cx="400" cy="400" rx="272" ry="104" fill="none" stroke="#D7B364" stroke-opacity=".38"
+               stroke-width="1.1" stroke-dasharray="9 6" transform="rotate(-18 400 400)"/>
+
+      <!-- ===== background stars: hand-placed on five rings ===== -->
+      <g fill="#E8E7E3">
+        <circle cx="484.6" cy="430.8" r="1.1"/><circle cx="423.3" cy="486.9" r="0.9"/>
+        <circle cx="331.0" cy="457.9" r="1.2"/><circle cx="315.4" cy="369.2" r="0.8"/>
+        <circle cx="392.2" cy="310.4" r="1.0"/><circle cx="468.9" cy="342.1" r="0.9"/>
+        <circle cx="542.8" cy="425.2" r="1.3"/><circle cx="493.2" cy="511.1" r="0.9"/>
+        <circle cx="387.4" cy="544.4" r="1.1"/><circle cx="297.5" cy="502.5" r="0.8"/>
+        <circle cx="255.6" cy="412.6" r="1.2"/><circle cx="281.2" cy="316.8" r="0.9"/>
+        <circle cx="362.5" cy="259.9" r="1.0"/><circle cx="472.5" cy="274.4" r="0.8"/>
+        <circle cx="536.3" cy="350.4" r="1.1"/><circle cx="599.2" cy="417.4" r="0.9"/>
+        <circle cx="563.8" cy="514.7" r="1.2"/><circle cx="484.5" cy="581.3" r="0.8"/>
+        <circle cx="365.3" cy="597.0" r="1.0"/><circle cx="271.4" cy="553.2" r="1.1"/>
+        <circle cx="212.1" cy="468.4" r="0.9"/><circle cx="203.0" cy="365.3" r="1.3"/>
+        <circle cx="258.6" cy="258.6" r="0.9"/><circle cx="348.2" cy="206.8" r="1.0"/>
+        <circle cx="451.8" cy="206.8" r="0.8"/><circle cx="541.4" cy="258.6" r="1.1"/>
+        <circle cx="593.2" cy="348.2" r="0.9"/><circle cx="639.5" cy="464.2" r="1.0"/>
+        <circle cx="575.4" cy="575.4" r="0.8"/><circle cx="443.1" cy="644.2" r="1.2"/>
+        <circle cx="295.2" cy="624.7" r="0.9"/><circle cx="185.2" cy="524.0" r="1.0"/>
+        <circle cx="152.9" cy="378.4" r="0.8"/><circle cx="185.2" cy="276.0" r="1.1"/>
+        <circle cx="276.0" cy="185.2" r="0.9"/><circle cx="400.0" cy="152.0" r="1.3"/>
+        <circle cx="524.0" cy="185.2" r="0.9"/><circle cx="614.8" cy="276.0" r="1.0"/>
+        <circle cx="640.2" cy="512.0" r="0.8"/><circle cx="532.5" cy="629.5" r="1.0"/>
+        <circle cx="331.4" cy="656.0" r="0.9"/><circle cx="182.9" cy="552.0" r="1.1"/>
+        <circle cx="135.9" cy="376.9" r="0.8"/><circle cx="151.0" cy="309.4" r="1.0"/>
+        <circle cx="229.7" cy="197.0" r="0.9"/><circle cx="490.6" cy="151.0" r="1.2"/>
+        <circle cx="603.0" cy="229.7" r="0.8"/><circle cx="664.0" cy="376.9" r="1.0"/>
+      </g>
+      <g fill="#B9954A" fill-opacity=".8">
+        <circle cx="310" cy="248" r="0.7"/><circle cx="502" cy="326" r="0.7"/>
+        <circle cx="248" cy="466" r="0.7"/><circle cx="576" cy="452" r="0.7"/>
+        <circle cx="392" cy="222" r="0.7"/><circle cx="466" cy="540" r="0.7"/>
+        <circle cx="238" cy="342" r="0.7"/><circle cx="612" cy="396" r="0.7"/>
+      </g>
+
+      <!-- ===== the constellation: hairlines ===== -->
+      <g stroke="#D7B364" stroke-width="1.15" stroke-opacity=".75" fill="none">
+        <path d="M232,208 L352,152 L470,190 L556,290 L466,372 L330,330 L232,208"/>
+        <path d="M330,330 L200,392 L286,520 L420,592 L560,486 L466,372"/>
+      </g>
+
+      <!-- ===== the ten stars ===== -->
+      <g>
+        <circle cx="232" cy="208" r="18" fill="url(#g033-glow)" class="twinkle"/>
+        <circle cx="232" cy="208" r="4.6" fill="#E6CC8E"/>
+        <circle cx="352" cy="152" r="16" fill="url(#g033-glow)" class="twinkle-b"/>
+        <circle cx="352" cy="152" r="4.0" fill="#E6CC8E"/>
+        <circle cx="470" cy="190" r="19" fill="url(#g033-glow)" class="twinkle"/>
+        <circle cx="470" cy="190" r="5.0" fill="#F1E2BE"/>
+        <circle cx="556" cy="290" r="15" fill="url(#g033-glow)" class="twinkle-b"/>
+        <circle cx="556" cy="290" r="3.8" fill="#E6CC8E"/>
+        <circle cx="466" cy="372" r="22" fill="url(#g033-glow)" class="twinkle"/>
+        <circle cx="466" cy="372" r="6.0" fill="#F5EACC"/>
+        <circle cx="330" cy="330" r="17" fill="url(#g033-glow)" class="twinkle-b"/>
+        <circle cx="330" cy="330" r="4.4" fill="#E6CC8E"/>
+        <circle cx="200" cy="392" r="15" fill="url(#g033-glow)" class="twinkle"/>
+        <circle cx="200" cy="392" r="3.8" fill="#E6CC8E"/>
+        <circle cx="286" cy="520" r="16" fill="url(#g033-glow)" class="twinkle-b"/>
+        <circle cx="286" cy="520" r="4.2" fill="#E6CC8E"/>
+        <circle cx="420" cy="592" r="19" fill="url(#g033-glow)" class="twinkle"/>
+        <circle cx="420" cy="592" r="5.0" fill="#F1E2BE"/>
+        <circle cx="560" cy="486" r="16" fill="url(#g033-glow)" class="twinkle-b"/>
+        <circle cx="560" cy="486" r="4.2" fill="#E6CC8E"/>
+      </g>
+
+      <!-- diffraction spikes on the two brightest -->
+      <g stroke="#F5EACC" stroke-width=".9" stroke-opacity=".7">
+        <path d="M466,352 V392 M446,372 H486"/>
+        <path d="M470,174 V206 M454,190 H486"/>
+      </g>
+    </g>
+
+    <!-- ===== labels ===== -->
+    <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" letter-spacing="1.6" fill="#E6CC8E">
+      <text x="216" y="200" text-anchor="end">deviatie</text>
+      <text x="352" y="132" text-anchor="middle">SMT</text>
+      <text x="486" y="184" text-anchor="start">FVG</text>
+      <text x="572" y="286" text-anchor="start">IFVG</text>
+      <text x="482" y="366" text-anchor="start">orderblocks</text>
+      <text x="314" y="322" text-anchor="end">fibonacci</text>
+      <text x="200" y="368" text-anchor="middle">sessie-liquiditeit</text>
+      <text x="272" y="530" text-anchor="end">liquiditeit</text>
+      <text x="420" y="620" text-anchor="middle">risicobeheer</text>
+      <text x="576" y="492" text-anchor="start">tradingpsychologie</text>
+    </g>
+    <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" fill="#B9954A" fill-opacity=".9">
+      <text x="240" y="228">&#945;</text><text x="360" y="172">&#946;</text><text x="478" y="212">&#947;</text>
+      <text x="564" y="312">&#948;</text><text x="474" y="396">&#949;</text><text x="338" y="352">&#950;</text>
+      <text x="208" y="414">&#951;</text><text x="294" y="542">&#952;</text><text x="428" y="572">&#953;</text>
+      <text x="568" y="508">&#954;</text>
+    </g>
+
+    <!-- cardinal marks on the bezel -->
+    <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="3" fill="#B9954A">
+      <text x="400" y="52" text-anchor="middle">N</text>
+      <text x="752" y="406" text-anchor="middle">O</text>
+      <text x="400" y="764" text-anchor="middle">Z</text>
+      <text x="48" y="406" text-anchor="middle">W</text>
+    </g>
+    <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="9.5" letter-spacing="1.4" fill="#666B78">
+      <text x="400" y="352" text-anchor="middle">ATLAS</text>
+    </g>
+  </svg>
+
+  <p class="chart-caption">
+    Figuur &laquo;Atlas&raquo; &nbsp;·&nbsp; tien sterren, met de hand geplaatst<br>
+    Decoratieve hemelcoördinaten &nbsp;·&nbsp; geen marktgegevens
+  </p>
+</div>
+
+<!-- ============ CATALOGUE ============ -->
+<section class="wrap">
+  <div class="sec-top">
+    <span class="mono">Catalogus &nbsp;·&nbsp; 01</span>
+    <h2>De tien onderwerpen</h2>
+    <p>De educatie in de server, sterren van dezelfde figuur.</p>
+  </div>
+
+  <div class="cat-wrap">
+    <table>
+      <caption>Catalogus van de figuur Atlas &nbsp;·&nbsp; 10 onderwerpen</caption>
+      <thead>
+        <tr><th>Bayer</th><th>Teken</th><th>Onderwerp</th><th>Coördinaat</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="bay">&#945;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="4.4" fill="#E6CC8E"/></svg></td><td class="nm">deviatie</td><td class="co">02u 14m &nbsp;+38°</td></tr>
+        <tr><td class="bay">&#946;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="3.6" fill="#E6CC8E"/></svg></td><td class="nm">SMT</td><td class="co">03u 06m &nbsp;+52°</td></tr>
+        <tr><td class="bay">&#947;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="5" fill="#F1E2BE"/></svg></td><td class="nm">FVG</td><td class="co">04u 22m &nbsp;+44°</td></tr>
+        <tr><td class="bay">&#948;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="3.4" fill="#E6CC8E"/></svg></td><td class="nm">IFVG</td><td class="co">05u 48m &nbsp;+27°</td></tr>
+        <tr><td class="bay">&#949;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="6" fill="#F5EACC"/></svg></td><td class="nm">orderblocks</td><td class="co">06u 30m &nbsp;+11°</td></tr>
+        <tr><td class="bay">&#950;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="4.2" fill="#E6CC8E"/></svg></td><td class="nm">fibonacci</td><td class="co">07u 12m &nbsp;+19°</td></tr>
+        <tr><td class="bay">&#951;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="3.4" fill="#E6CC8E"/></svg></td><td class="nm">sessie-liquiditeit</td><td class="co">08u 04m &nbsp;&minus;06°</td></tr>
+        <tr><td class="bay">&#952;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="4" fill="#E6CC8E"/></svg></td><td class="nm">liquiditeit</td><td class="co">09u 26m &nbsp;&minus;21°</td></tr>
+        <tr><td class="bay">&#953;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="5" fill="#F1E2BE"/></svg></td><td class="nm">risicobeheer</td><td class="co">10u 40m &nbsp;&minus;34°</td></tr>
+        <tr><td class="bay">&#954;</td><td class="gl"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="4" fill="#E6CC8E"/></svg></td><td class="nm">tradingpsychologie</td><td class="co">11u 58m &nbsp;&minus;18°</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="center" style="margin-top:34px">
+    <a class="btn btn--ghost" href="https://discord.gg/78Ff2GuSfW">Leer ze in de server</a>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ OBSERVER / FOUNDER ============ -->
+<section class="wrap" id="waarnemer">
+  <div class="sec-top">
+    <span class="mono">Waarnemer &nbsp;·&nbsp; 02</span>
+    <h2>Aantekening van de waarnemer</h2>
+  </div>
+
+  <div class="observer">
+    <svg viewBox="0 0 200 200" role="img" aria-label="Armillaire sfeer in lijn">
+      <circle cx="100" cy="100" r="86" fill="none" stroke="#B9954A" stroke-width="1"/>
+      <ellipse cx="100" cy="100" rx="86" ry="30" fill="none" stroke="#B9954A" stroke-width="1"/>
+      <ellipse cx="100" cy="100" rx="86" ry="30" fill="none" stroke="#B9954A" stroke-width=".7" transform="rotate(24 100 100)"/>
+      <ellipse cx="100" cy="100" rx="30" ry="86" fill="none" stroke="#B9954A" stroke-width=".7"/>
+      <ellipse cx="100" cy="100" rx="58" ry="86" fill="none" stroke="#B9954A" stroke-width=".7"/>
+      <line x1="100" y1="4" x2="100" y2="196" stroke="#D7B364" stroke-width="1.4"/>
+      <circle cx="100" cy="100" r="7" fill="#D7B364"/>
+      <path d="M100,8 L102.4,16.4 L110.8,18.8 L102.4,21.2 L100,29.6 L97.6,21.2 L89.2,18.8 L97.6,16.4 Z" fill="#E6CC8E"/>
+      <g stroke="#B9954A" stroke-width=".8" stroke-opacity=".7">
+        <path d="M40,168 H160" /><path d="M64,168 L100,186 L136,168"/>
+      </g>
+    </svg>
+
+    <div>
+      <blockquote>&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</blockquote>
+      <div class="sig">
+        <span><b>Oprichter</b> Atlas Capital</span>
+        <span>10+ jaar actief in trading</span>
+      </div>
+      <div style="margin-top:24px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Kom binnen in de server</a></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ TRANSIT / MODEL ============ -->
+<section class="wrap" id="transit">
+  <div class="sec-top">
+    <span class="mono">Transit &nbsp;·&nbsp; 03</span>
+    <h2>Een model, schematisch</h2>
+    <p>Getekend als een doorgang langs de horizon. Geen prijzen, geen resultaat.</p>
+  </div>
+
+  <div class="scroller">
+    <svg viewBox="0 0 900 440" role="img" aria-label="Schematische tekening van een setup: liquiditeit, sweep, orderblock, FVG en uitvoering">
+      <defs>
+        <pattern id="g033-band" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="8" stroke="#D7B364" stroke-width="1" stroke-opacity=".5"/>
+        </pattern>
+      </defs>
+
+      <rect width="900" height="440" fill="#0A0D15"/>
+      <!-- faint field stars behind the diagram -->
+      <g fill="#FFFFFF" fill-opacity=".28">
+        <circle cx="64" cy="52" r="1"/><circle cx="148" cy="96" r=".8"/><circle cx="232" cy="44" r="1.1"/>
+        <circle cx="318" cy="88" r=".7"/><circle cx="402" cy="38" r="1"/><circle cx="486" cy="76" r=".8"/>
+        <circle cx="572" cy="46" r="1.1"/><circle cx="656" cy="92" r=".7"/><circle cx="742" cy="40" r="1"/>
+        <circle cx="826" cy="84" r=".9"/><circle cx="106" cy="392" r=".8"/><circle cx="268" cy="410" r="1"/>
+        <circle cx="452" cy="398" r=".7"/><circle cx="638" cy="416" r=".9"/><circle cx="812" cy="396" r=".8"/>
+      </g>
+      <!-- coordinate grid -->
+      <g stroke="#D7B364" stroke-opacity=".1" stroke-width="1">
+        <path d="M0,70 H900 M0,140 H900 M0,210 H900 M0,280 H900 M0,350 H900"/>
+        <path d="M120,0 V440 M240,0 V440 M360,0 V440 M480,0 V440 M600,0 V440 M720,0 V440 M840,0 V440"/>
+      </g>
+
+      <!-- FVG band -->
+      <rect x="330" y="176" width="520" height="46" fill="url(#g033-band)" fill-opacity=".5"/>
+      <path d="M330,176 H850 M330,222 H850" stroke="#D7B364" stroke-width="1.1" stroke-opacity=".8"/>
+
+      <!-- horizon = resting liquidity -->
+      <path d="M40,330 H860" stroke="#9A9DA6" stroke-width="1.2" stroke-dasharray="8 6"/>
+      <g fill="#9A9DA6"><circle cx="132" cy="330" r="2.6"/><circle cx="186" cy="330" r="2.6"/><circle cx="240" cy="330" r="2.6"/></g>
+
+      <!-- orderblock -->
+      <rect x="236" y="256" width="76" height="44" fill="#D7B364" fill-opacity=".12" stroke="#D7B364" stroke-width="1.4"/>
+
+      <!-- candles as thin columns of light -->
+      <g stroke="#E6CC8E" stroke-width="1.3" fill="none">
+        <path d="M78,238 V306"/><rect x="72" y="252" width="12" height="34" fill="#0A0D15"/>
+        <path d="M114,226 V312"/><rect x="108" y="244" width="12" height="42" fill="#0A0D15"/>
+        <path d="M150,232 V318"/><rect x="144" y="250" width="12" height="44" fill="#0A0D15"/>
+      </g>
+      <g stroke="#B9954A" stroke-width="1.3" fill="#B9954A">
+        <path d="M186,240 V344"/><rect x="180" y="266" width="12" height="52"/>
+        <path d="M222,254 V362"/><rect x="216" y="280" width="12" height="54"/>
+      </g>
+      <!-- the sweep candle: long wick under the horizon -->
+      <g stroke="#F5EACC" stroke-width="1.6" fill="none">
+        <path d="M262,236 V392"/><rect x="256" y="248" width="12" height="50" fill="#0A0D15"/>
+      </g>
+      <circle cx="262" cy="392" r="4.4" fill="#0A0D15" stroke="#F5EACC" stroke-width="1.6"/>
+      <g stroke="#E6CC8E" stroke-width="1.3" fill="none">
+        <path d="M298,186 V282"/><rect x="292" y="196" width="12" height="62" fill="#0A0D15"/>
+        <path d="M334,146 V224"/><rect x="328" y="156" width="12" height="56" fill="#0A0D15"/>
+        <path d="M370,124 V206"/><rect x="364" y="136" width="12" height="54" fill="#0A0D15"/>
+      </g>
+      <g stroke="#B9954A" stroke-width="1.3" fill="#B9954A">
+        <path d="M406,118 V196"/><rect x="400" y="130" width="12" height="46"/>
+        <path d="M442,128 V212"/><rect x="436" y="142" width="12" height="52"/>
+      </g>
+      <g stroke="#E6CC8E" stroke-width="1.3" fill="none">
+        <path d="M478,146 V216"/><rect x="472" y="158" width="12" height="44" fill="#0A0D15"/>
+        <path d="M514,104 V180"/><rect x="508" y="116" width="12" height="50" fill="#0A0D15"/>
+        <path d="M550,76 V148"/><rect x="544" y="86" width="12" height="48" fill="#0A0D15"/>
+        <path d="M586,58 V128"/><rect x="580" y="68" width="12" height="46" fill="#0A0D15"/>
+      </g>
+
+      <!-- the transit arc: execution -->
+      <path d="M280,364 C360,364 396,256 452,200 C512,140 578,98 660,72"
+            fill="none" stroke="#D7B364" stroke-width="2.2" stroke-dasharray="7 5"/>
+      <path d="M660,72 L644,68 M660,72 L652,84" stroke="#D7B364" stroke-width="2.2" fill="none"/>
+      <path d="M666,52 L669,62 L679,65 L669,68 L666,78 L663,68 L653,65 L663,62 Z" fill="#F5EACC"/>
+
+      <!-- leaders -->
+      <g stroke="#9A9DA6" stroke-width=".9" fill="none" stroke-opacity=".8">
+        <path d="M132,330 L132,398 L104,398"/>
+        <path d="M262,392 L262,420 L306,420"/>
+        <path d="M274,256 L274,214 L226,214"/>
+        <path d="M850,199 L878,199"/>
+        <path d="M666,52 L666,28 L610,28"/>
+      </g>
+      <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1.8" fill="#DAD9D5">
+        <text x="98" y="402" text-anchor="end">LIQUIDITEIT</text>
+        <text x="312" y="424">SWEEP</text>
+        <text x="220" y="210" text-anchor="end">ORDERBLOCK</text>
+        <text x="606" y="32" text-anchor="end" fill="#E6CC8E">UITVOERING</text>
+      </g>
+      <text x="694" y="203" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="3" fill="#E6CC8E">FVG</text>
+    </svg>
+  </div>
+
+  <div class="figcap">
+    <b>Fig. 03</b><span>Schematische illustratie van een concept</span><span>Geen marktgegevens</span>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ REGISTER / CHANNELS ============ -->
+<section class="wrap" id="register">
+  <div class="sec-top">
+    <span class="mono">Register &nbsp;·&nbsp; 04</span>
+    <h2>15 kanalen</h2>
+    <p>Negen staan nu aan de hemel. Zes komen later op.</p>
+  </div>
+
+  <div class="reg">
+    <div>
+      <h3>Thuis <span>nu gratis · 9</span></h3>
+      <ul>
+        <li><b>&#9733;</b><span class="n">#nq-chart-ideeën</span><span class="mag">ZICHTBAAR</span></li>
+        <li><b>&#9733;</b><span class="n">#es-chart-ideeën</span><span class="mag">ZICHTBAAR</span></li>
+        <li><b>&#9733;</b><span class="n">#bitcoin</span><span class="mag">ZICHTBAAR</span></li>
+        <li><b>&#9733;</b><span class="n">#altcoins</span><span class="mag">ZICHTBAAR</span></li>
+        <li><b>&#9733;</b><span class="n">#markt</span><span class="mag">ZICHTBAAR</span></li>
+        <li><b>&#9733;</b><span class="n">#vragen</span><span class="mag">ZICHTBAAR</span></li>
+        <li><b>&#9733;</b><span class="n">#algemeen</span><span class="mag">ZICHTBAAR</span></li>
+        <li><b>&#9733;</b><span class="n">#atlas-op-socials</span><span class="mag">ZICHTBAAR</span></li>
+        <li><b>&#9733;</b><span class="n">#ondersteuning</span><span class="mag">ZICHTBAAR</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Premium <span>opent later · 6</span></h3>
+      <ul>
+        <li><b>&#9734;</b><span class="n">#trade-setups</span><span class="mag">ONDER DE HORIZON</span></li>
+        <li><b>&#9734;</b><span class="n">#marktupdates</span><span class="mag">ONDER DE HORIZON</span></li>
+        <li><b>&#9734;</b><span class="n">#indicatoren</span><span class="mag">ONDER DE HORIZON</span></li>
+        <li><b>&#9734;</b><span class="n">#sessie-opnames</span><span class="mag">ONDER DE HORIZON</span></li>
+        <li><b>&#9734;</b><span class="n">#chart-ideeën</span><span class="mag">ONDER DE HORIZON</span></li>
+        <li><b>&#9734;</b><span class="n">#premium-chat</span><span class="mag">ONDER DE HORIZON</span></li>
+      </ul>
+      <div style="margin-top:26px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Open de server</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIVE ============ -->
+<div class="wrap">
+  <div class="live">
+    <span class="mono">Waarneming &nbsp;·&nbsp; 05</span>
+    <h3 style="margin-top:18px"><span class="pulse"></span>Live traden, in de server.</h3>
+    <p>De oprichter handelt live mee en laat zien hoe hij de markten benadert. Tijden worden in Discord aangekondigd.</p>
+    <div class="cta"><a class="btn btn--ghost" href="https://discord.gg/78Ff2GuSfW">Zit een sessie mee</a></div>
+    <p class="chart-caption" style="margin-top:24px">NQ &nbsp;·&nbsp; ES &nbsp;·&nbsp; Bitcoin &nbsp;·&nbsp; Altcoins</p>
+  </div>
+</div>
+
+<!-- ============ TOEGANG ============ -->
+<section class="wrap" id="toegang">
+  <div class="sec-top">
+    <span class="mono">Toegang &nbsp;·&nbsp; 06</span>
+    <h2>Boven en onder de horizon</h2>
+  </div>
+
+  <div class="duo">
+    <div class="panel">
+      <svg class="glint" width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
+        <circle cx="60" cy="60" r="30" fill="none" stroke="#D7B364" stroke-opacity=".4"/>
+        <circle cx="60" cy="60" r="46" fill="none" stroke="#D7B364" stroke-opacity=".22"/>
+        <circle cx="60" cy="60" r="5" fill="#D7B364"/>
+      </svg>
+      <span class="chip">Nu zichtbaar</span>
+      <h3>Gratis</h3>
+      <p>De hele thuiskant van de server is op dit moment gratis: educatie, chart-ideeën, markt en community.</p>
+      <div style="margin-top:22px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Nu binnenlopen</a></div>
+    </div>
+    <div class="panel">
+      <svg class="glint" width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
+        <circle cx="60" cy="60" r="30" fill="none" stroke="#D7B364" stroke-opacity=".3" stroke-dasharray="4 4"/>
+        <circle cx="60" cy="60" r="46" fill="none" stroke="#D7B364" stroke-opacity=".16" stroke-dasharray="4 4"/>
+      </svg>
+      <span class="chip">Komt later op</span>
+      <h3>Premium</h3>
+      <p>Premium opent later. Wanneer en hoe wordt in de server aangekondigd.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<div class="wrap closing">
+  <svg width="46" height="46" viewBox="0 0 26 26" aria-hidden="true" style="margin-bottom:20px">
+    <path d="M13,0 L15.6,10.4 L26,13 L15.6,15.6 L13,26 L10.4,15.6 L0,13 L10.4,10.4 Z" fill="#D7B364"/>
+  </svg>
+  <h2>Kijk <em>omhoog</em>.</h2>
+  <p>Gratis toegang, vanaf het moment dat je binnenkomt.</p>
+  <div style="margin-top:30px"><a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a></div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div>
+        <h4>Atlas Capital</h4>
+        <p>Proces. Discipline. Uitvoering.</p>
+      </div>
+      <div>
+        <h4>Vind ons</h4>
+        <a href="https://discord.gg/78Ff2GuSfW">Discord</a>
+        <a href="https://www.tiktok.com/@atlascapitalbv">TikTok · @atlascapitalbv</a>
+      </div>
+      <div>
+        <h4>Markten</h4>
+        <p>NQ · ES · Bitcoin · Altcoins</p>
+      </div>
+      <div>
+        <h4>Stand</h4>
+        <p style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;line-height:2;color:var(--dim)">
+          GRATIS TOEGANG · NU<br>PREMIUM · OPENT LATER<br>10+ JAAR ERVARING
+        </p>
+      </div>
+    </div>
+    <div class="risk">
+      <span>Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span>
+      <span>KAART 033 · STERRENKAART</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

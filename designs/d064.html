@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 064 Kalibratie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --panel:#15161A;
+  --panel-2:#101116;
+  --muted:#A5A6A8;
+  --dim:#717276;
+  --edge:rgba(215,179,100,.30);
+  --edge-soft:rgba(215,179,100,.14);
+  --rail:26px;
+}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background-color:#08090B;
+  background-image:repeating-linear-gradient(0deg, rgba(215,179,100,.045) 0 1px, transparent 1px 72px);
+  color:#EDEBE6;
+  font-family:"Chivo Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  font-size:14.5px;line-height:1.6;font-weight:300;
+  overflow-x:hidden;
+}
+a{color:inherit}
+.page{max-width:1340px;margin:0 auto}
+
+/* ── HEADER ────────────────────────────────── */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(8,9,11,.94);
+  backdrop-filter:blur(7px);
+  border-bottom:1px solid var(--edge);
+}
+.hin{
+  max-width:1340px;margin:0 auto;
+  display:flex;align-items:center;gap:14px;padding:9px 14px;
+}
+.mk{display:flex;align-items:center;gap:10px;flex:1 1 auto;min-width:0}
+.mk svg{width:30px;height:30px;flex:none}
+.mk .nm{
+  font-size:13px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.mk .nm b{color:var(--gold);font-weight:500}
+.hscale{display:none;flex:0 1 260px;height:26px}
+@media(min-width:960px){.hscale{display:block}}
+.hscale svg{width:100%;height:26px;display:block}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;text-decoration:none;padding:12px 18px;
+  color:var(--ink);background:var(--gold);border:1px solid var(--gold-hi);
+  white-space:nowrap;
+}
+.btn:hover{background:var(--gold-hi)}
+.btn svg{width:15px;height:15px;flex:none}
+.btn--o{background:transparent;color:var(--gold);border-color:var(--edge)}
+.btn--o:hover{background:rgba(215,179,100,.1)}
+
+/* ── BAND with edge rails ──────────────────── */
+.band{
+  display:grid;
+  grid-template-columns:var(--rail) minmax(0,1fr) var(--rail);
+  border-bottom:1px solid var(--edge-soft);
+}
+.railcol{
+  border-right:1px solid var(--edge-soft);
+  position:relative;overflow:hidden;
+}
+.railcol.r{border-right:0;border-left:1px solid var(--edge-soft)}
+.railcol svg{display:block;position:absolute;inset:0;width:var(--rail);height:100%}
+.bandbody{padding:30px 14px 38px;min-width:0}
+@media(min-width:900px){.bandbody{padding:54px 40px 60px}}
+
+/* ── HEAD RULER ────────────────────────────── */
+.headruler{width:100%;height:34px;display:block;margin-bottom:16px}
+.sectag{
+  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:18px;
+}
+.sectag .num{
+  font-size:11px;letter-spacing:.24em;color:var(--ink);background:var(--gold);
+  padding:3px 8px;font-weight:700;
+}
+.sectag .lb{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.sectag .rt{margin-left:auto;font-size:10px;letter-spacing:.20em;color:var(--dim)}
+
+h1{
+  font-size:clamp(32px,7vw,78px);line-height:.95;font-weight:200;
+  letter-spacing:-.045em;margin:0 0 18px;
+}
+h1 b{font-weight:700;color:var(--gold)}
+h2{font-size:clamp(21px,3.6vw,38px);line-height:1.04;font-weight:400;letter-spacing:-.035em;margin:0 0 12px}
+h3{font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;margin:0 0 8px;color:var(--gold)}
+p{margin:0 0 14px;max-width:56ch;color:#C6C4BF;font-weight:300}
+.lede{font-size:clamp(15px,1.9vw,19px);color:#DEDCD7}
+.ctas{display:flex;flex-wrap:wrap;gap:11px;margin-top:22px}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* svg tokens */
+.k1{stroke:var(--gold);fill:none;stroke-width:1.2}
+.k2{stroke:var(--gold);fill:none;stroke-width:2}
+.kh{stroke:rgba(215,179,100,.34);fill:none;stroke-width:1}
+.kw{stroke:rgba(237,235,230,.55);fill:none;stroke-width:1}
+.fg{fill:var(--gold)}
+.fgs{fill:rgba(215,179,100,.22)}
+.fp{fill:var(--panel)}
+.fpp{fill:#0C0D11}
+.t1{fill:#EDEBE6;font-family:"Chivo Mono",monospace;font-size:12px;letter-spacing:.14em}
+.tg{fill:var(--gold);font-family:"Chivo Mono",monospace;font-size:12px;letter-spacing:.16em;font-weight:500}
+.ts{fill:#8A8B8F;font-family:"Chivo Mono",monospace;font-size:9.5px;letter-spacing:.18em}
+
+.instr{border:1px solid var(--edge-soft);background:var(--panel-2);padding:12px}
+.instr svg{display:block;width:100%;height:auto}
+.instrcap{
+  border-top:1px solid var(--edge-soft);margin-top:11px;padding-top:9px;
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+}
+.instrcap b{color:var(--gold);font-weight:500}
+
+/* ── GRADUATED LIST (10 topics) ────────────── */
+.grad{border-top:1px solid var(--edge-soft)}
+.grow{
+  display:grid;grid-template-columns:58px 1fr;
+  border-bottom:1px solid var(--edge-soft);
+  position:relative;
+}
+@media(min-width:820px){.grow{grid-template-columns:58px 96px 1fr 1fr}}
+.gscale{position:relative}
+.gscale .stretch{position:absolute;inset:0;width:58px;height:100%;display:block}
+.gscale .stretch line{stroke:rgba(215,179,100,.5);stroke-width:1}
+.gscale .stretch line.mj{stroke:var(--gold);stroke-width:1.4}
+.gidx{position:absolute;top:-8px;right:-1px;width:18px;height:16px}
+.gidx path{fill:var(--gold)}
+.gnum{
+  padding:16px 0 16px 6px;font-size:11px;letter-spacing:.20em;color:var(--gold);font-weight:500;
+  grid-column:2;
+}
+@media(max-width:819px){.gnum{display:none}}
+.gmain{padding:14px 4px 16px 12px;min-width:0}
+@media(min-width:820px){.gmain{padding:16px 10px 18px 0}}
+.gmain .mob{font-size:10px;letter-spacing:.2em;color:var(--gold);display:block;margin-bottom:4px}
+@media(min-width:820px){.gmain .mob{display:none}}
+.gmain .nm{font-size:clamp(17px,2.4vw,25px);font-weight:400;letter-spacing:-.03em;line-height:1.15}
+.gdesc{padding:0 4px 16px 12px;font-size:12.5px;color:var(--dim);letter-spacing:.02em;min-width:0}
+@media(min-width:820px){.gdesc{padding:18px 12px 18px 0;font-size:12px}}
+.grow:hover{background:rgba(215,179,100,.055)}
+.grow:hover .gidx path{fill:var(--gold-hi)}
+
+/* ── SEGMENT GAUGE (channels) ──────────────── */
+.gauge{border:1px solid var(--edge-soft);background:var(--panel-2);padding:16px 14px 18px;margin-bottom:22px}
+.gaugetop{display:flex;justify-content:space-between;gap:10px;font-size:10px;letter-spacing:.20em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
+.gaugetop b{color:var(--gold);font-weight:500}
+.segrow{display:flex;gap:4px;flex-wrap:wrap}
+.seg{flex:1 1 22px;height:34px;border:1px solid var(--edge-soft)}
+.seg.on{background:var(--gold);border-color:var(--gold)}
+.chcols{display:grid;gap:20px}
+@media(min-width:840px){.chcols{grid-template-columns:1fr 1fr;gap:26px}}
+.chbox{border:1px solid var(--edge-soft)}
+.chhd{
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
+  padding:11px 13px;border-bottom:1px solid var(--edge-soft);
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+}
+.chhd .a{color:var(--gold)}
+.chhd .b{color:var(--dim)}
+ul.chl{list-style:none;margin:0;padding:0}
+ul.chl li{
+  display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:10px;
+  padding:8px 13px;border-bottom:1px solid rgba(215,179,100,.08);font-size:13px;
+}
+ul.chl li:last-child{border-bottom:0}
+ul.chl li .mm{font-size:9.5px;color:var(--dim);letter-spacing:.12em}
+ul.chl li .st{font-size:9.5px;color:var(--gold);letter-spacing:.16em}
+ul.chl li:hover{background:rgba(215,179,100,.07)}
+
+/* ── TOLERANCE / ACCESS ────────────────────── */
+.tolgrid{display:grid;gap:0;border:1px solid var(--edge)}
+@media(min-width:820px){.tolgrid{grid-template-columns:1fr 1fr}}
+.tolgrid>div{padding:22px 18px 26px}
+.tolgrid>div:first-child{border-bottom:1px solid var(--edge)}
+@media(min-width:820px){.tolgrid>div:first-child{border-bottom:0;border-right:1px solid var(--edge)}}
+.tolgrid .val{font-size:clamp(23px,3.4vw,34px);font-weight:200;letter-spacing:-.035em;margin:0 0 6px}
+.tolgrid .val b{color:var(--gold);font-weight:400}
+.livetag{
+  display:inline-flex;align-items:center;gap:9px;border:1px solid var(--gold);
+  color:var(--gold);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  padding:5px 11px;margin-bottom:13px;font-weight:500;
+}
+.blip{width:7px;height:7px;background:var(--gold);border-radius:50%;animation:bp 2.4s ease-in-out infinite}
+@keyframes bp{0%,100%{opacity:1}50%{opacity:.32}}
+@media(prefers-reduced-motion:reduce){.blip{animation:none}}
+.duo{display:grid;gap:24px}
+@media(min-width:960px){.duo{grid-template-columns:1fr 1fr;gap:34px;align-items:center}}
+@media(min-width:960px){.duo.wide{grid-template-columns:1.15fr .85fr}}
+
+/* ── CLOSING ───────────────────────────────── */
+.closing{text-align:center;padding:14px 0 6px}
+.closing h2{font-size:clamp(28px,6.4vw,64px);font-weight:200;letter-spacing:-.045em}
+.closing h2 b{font-weight:700;color:var(--gold)}
+.closing .ctas{justify-content:center}
+footer{max-width:1340px;margin:0 auto;padding:24px 14px 44px}
+.foot{
+  display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;
+  border-top:1px solid var(--edge-soft);padding-top:18px;font-size:11px;letter-spacing:.10em;
+}
+.foot a{color:var(--gold);text-decoration:none}
+.foot a:hover{text-decoration:underline}
+.risk{width:100%;margin:0;color:#7A7B7F;font-size:11px;line-height:1.7;letter-spacing:.01em;max-width:82ch;font-weight:300}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<!-- ══════════ HEADER ══════════ -->
+<header>
+  <div class="hin">
+    <div class="mk">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M4 30 H36" class="k2"/>
+        <path d="M8 30v-8M14 30v-5M20 30v-11M26 30v-5M32 30v-8" class="k1"/>
+        <path d="M20 19 L20 6" class="kh"/>
+        <path d="M20 4 L15.5 13 H24.5 Z" class="fg"/>
+      </svg>
+      <div class="nm">ATLAS <b>CAPITAL</b></div>
+    </div>
+    <div class="hscale" aria-hidden="true">
+      <svg viewBox="0 0 260 26" preserveAspectRatio="none">
+        <path d="M0 20H260" class="kh"/>
+        <g class="kh">
+          <path d="M10 20v-6M30 20v-6M50 20v-6M70 20v-6M90 20v-6M110 20v-6M130 20v-6M150 20v-6M170 20v-6M190 20v-6M210 20v-6M230 20v-6M250 20v-6"/>
+        </g>
+        <g class="k1"><path d="M10 20v-12M90 20v-12M170 20v-12M250 20v-12"/></g>
+        <path d="M170 6 L164 0 H176 Z" class="fg"/>
+      </svg>
+    </div>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
+      Discord
+    </a>
+  </div>
+</header>
+
+<!-- ══════════ 01 · HERO ══════════ -->
+<section class="band">
+  <div class="railcol" aria-hidden="true">
+    <svg viewBox="0 0 26 1600" preserveAspectRatio="xMinYMin slice">
+      <path d="M25 0V1600" class="kh"/>
+      <g class="kh"><path d="M25 10h-6M25 26h-6M25 42h-6M25 58h-6M25 74h-6M25 90h-6M25 106h-6M25 122h-6M25 138h-6M25 154h-6M25 170h-6M25 186h-6M25 202h-6M25 218h-6M25 234h-6M25 250h-6M25 266h-6M25 282h-6M25 298h-6M25 314h-6M25 330h-6M25 346h-6M25 362h-6M25 378h-6M25 394h-6M25 410h-6M25 426h-6M25 442h-6M25 458h-6M25 474h-6M25 490h-6M25 506h-6M25 522h-6M25 538h-6M25 554h-6M25 570h-6M25 586h-6M25 602h-6M25 618h-6M25 634h-6M25 650h-6M25 666h-6M25 682h-6M25 698h-6M25 714h-6M25 730h-6M25 746h-6M25 762h-6M25 778h-6M25 794h-6M25 810h-6M25 826h-6M25 842h-6M25 858h-6M25 874h-6M25 890h-6M25 906h-6M25 922h-6M25 938h-6M25 954h-6M25 970h-6M25 986h-6M25 1002h-6M25 1018h-6M25 1034h-6M25 1050h-6M25 1066h-6M25 1082h-6M25 1098h-6M25 1114h-6M25 1130h-6M25 1146h-6M25 1162h-6M25 1178h-6M25 1194h-6M25 1210h-6M25 1226h-6M25 1242h-6M25 1258h-6M25 1274h-6M25 1290h-6M25 1306h-6M25 1322h-6M25 1338h-6M25 1354h-6M25 1370h-6M25 1386h-6M25 1402h-6M25 1418h-6M25 1434h-6M25 1450h-6M25 1466h-6M25 1482h-6M25 1498h-6M25 1514h-6M25 1530h-6M25 1546h-6M25 1562h-6M25 1578h-6M25 1594h-6"/></g>
+      <g class="k1"><path d="M25 10h-14M25 90h-14M25 170h-14M25 250h-14M25 330h-14M25 410h-14M25 490h-14M25 570h-14M25 650h-14M25 730h-14M25 810h-14M25 890h-14M25 970h-14M25 1050h-14M25 1130h-14M25 1210h-14M25 1290h-14M25 1370h-14M25 1450h-14M25 1530h-14"/></g>
+    </svg>
+  </div>
+  <div class="bandbody">
+    <div class="sectag"><span class="num">01</span><span class="lb">Meting</span><span class="rt">EENHEID: PROCES</span></div>
+    <div class="duo wide">
+      <div>
+        <h1>Gemeten,<br><b>niet gegokt.</b></h1>
+        <p class="lede">Proces, discipline, uitvoering — elk onderdeel heeft zijn eigen maat.</p>
+        <div class="ctas">
+          <a class="btn" href="https://discord.gg/78Ff2GuSfW">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
+            Word lid van de Discord
+          </a>
+          <a class="btn btn--o" href="#meetlat">Bekijk de meetlat</a>
+        </div>
+      </div>
+
+      <!-- ═══ VERNIER CALIPER ═══ -->
+      <div class="instr scrollx">
+        <svg viewBox="0 0 900 330" role="img" aria-label="Schuifmaat die meer dan tien jaar ervaring meet" style="min-width:520px">
+          <!-- beam -->
+          <rect x="60" y="170" width="800" height="42" class="k1 fpp"/>
+          <!-- main scale ticks along the beam -->
+          <g class="kh">
+            <path d="M75 170v-9M90 170v-9M105 170v-9M120 170v-9M135 170v-9M150 170v-9M165 170v-9M180 170v-9M195 170v-9M210 170v-9M225 170v-9M240 170v-9M255 170v-9M270 170v-9M285 170v-9M300 170v-9M315 170v-9M330 170v-9M345 170v-9M360 170v-9M375 170v-9M390 170v-9M405 170v-9M420 170v-9M435 170v-9M450 170v-9M465 170v-9M480 170v-9M495 170v-9M510 170v-9M525 170v-9M540 170v-9M555 170v-9M570 170v-9M585 170v-9M600 170v-9M615 170v-9M630 170v-9M645 170v-9M660 170v-9M675 170v-9M690 170v-9M705 170v-9M720 170v-9M735 170v-9M750 170v-9M765 170v-9M780 170v-9M795 170v-9M810 170v-9M825 170v-9M840 170v-9"/>
+          </g>
+          <g class="k1">
+            <path d="M75 170v-18M150 170v-18M225 170v-18M300 170v-18M375 170v-18M450 170v-18M525 170v-18M600 170v-18M675 170v-18M750 170v-18M825 170v-18"/>
+          </g>
+
+          <!-- fixed jaw (left) -->
+          <path d="M60 212 V128 H82 V212 Z" class="k2 fp"/>
+          <path d="M60 128 H82 L82 96 L68 96 Z" class="k2 fp"/>
+
+          <!-- object being measured: the experience -->
+          <rect x="82" y="86" width="236" height="68" class="fgs"/>
+          <rect x="82" y="86" width="236" height="68" class="k1"/>
+          <text x="200" y="130" class="tg" font-size="28" text-anchor="middle" letter-spacing="4">10+ JAAR</text>
+
+          <!-- sliding jaw + slider body -->
+          <path d="M340 212 V128 H318 V212 Z" class="k2 fp"/>
+          <path d="M340 128 H318 L318 96 L332 96 Z" class="k2 fp"/>
+          <rect x="318" y="160" width="164" height="62" class="k2 fp"/>
+          <!-- vernier scale on the slider -->
+          <g class="k1">
+            <path d="M332 222v14M345 222v14M358 222v14M371 222v14M384 222v14M397 222v14M410 222v14M423 222v14M436 222v14M449 222v14M462 222v14"/>
+          </g>
+          <path d="M332 222v22" class="k2"/>
+          <text x="332" y="258" class="ts" text-anchor="middle">0</text>
+          <text x="462" y="258" class="ts" text-anchor="middle">10</text>
+          <text x="352" y="196" class="ts">NONIUS</text>
+
+          <!-- reading leader -->
+          <circle cx="332" cy="244" r="4" class="fg"/>
+          <path d="M332 244 L332 286 H560" class="k1"/>
+          <text x="566" y="290" class="ts">AFLEZEN OP DE FIJNE STREEP</text>
+
+          <!-- dimension of the object -->
+          <g class="k1">
+            <path d="M82 60 V80" class="kh"/><path d="M318 60 V80" class="kh"/>
+            <path d="M88 68 H140"/><path class="fg" d="M82 68l12-3.6v7.2z" stroke="none"/>
+            <path d="M262 68 H312"/><path class="fg" d="M318 68l-12-3.6v7.2z" stroke="none"/>
+          </g>
+          <text x="200" y="73" class="tg" text-anchor="middle">ERVARING</text>
+
+          <!-- depth section -->
+          <path d="M860 191 H890" class="k1"/>
+          <circle cx="884" cy="191" r="4" class="fg"/>
+          <text x="700" y="152" class="ts">SCHUIFMAAT — INSTRUMENT 01</text>
+        </svg>
+        <div class="instrcap">Instrument 01 — <b>de schuifmaat</b>. Gemeten grootheid: de ervaring achter Atlas Capital.</div>
+      </div>
+    </div>
+  </div>
+  <div class="railcol r" aria-hidden="true">
+    <svg viewBox="0 0 26 1600" preserveAspectRatio="xMinYMin slice">
+      <path d="M1 0V1600" class="kh"/>
+      <g class="kh"><path d="M1 18h6M1 34h6M1 50h6M1 66h6M1 82h6M1 98h6M1 114h6M1 130h6M1 146h6M1 162h6M1 178h6M1 194h6M1 210h6M1 226h6M1 242h6M1 258h6M1 274h6M1 290h6M1 306h6M1 322h6M1 338h6M1 354h6M1 370h6M1 386h6M1 402h6M1 418h6M1 434h6M1 450h6M1 466h6M1 482h6M1 498h6M1 514h6M1 530h6M1 546h6M1 562h6M1 578h6M1 594h6M1 610h6M1 626h6M1 642h6M1 658h6M1 674h6M1 690h6M1 706h6M1 722h6M1 738h6M1 754h6M1 770h6M1 786h6M1 802h6M1 818h6M1 834h6M1 850h6M1 866h6M1 882h6M1 898h6M1 914h6M1 930h6M1 946h6M1 962h6M1 978h6M1 994h6M1 1010h6M1 1026h6M1 1042h6M1 1058h6M1 1074h6M1 1090h6M1 1106h6M1 1122h6M1 1138h6M1 1154h6M1 1170h6M1 1186h6M1 1202h6M1 1218h6M1 1234h6M1 1250h6M1 1266h6M1 1282h6M1 1298h6M1 1314h6M1 1330h6M1 1346h6M1 1362h6M1 1378h6M1 1394h6M1 1410h6M1 1426h6M1 1442h6M1 1458h6M1 1474h6M1 1490h6M1 1506h6M1 1522h6M1 1538h6M1 1554h6M1 1570h6M1 1586h6"/></g>
+      <g class="k1"><path d="M1 18h14M1 98h14M1 178h14M1 258h14M1 338h14M1 418h14M1 498h14M1 578h14M1 658h14M1 738h14M1 818h14M1 898h14M1 978h14M1 1058h14M1 1138h14M1 1218h14M1 1298h14M1 1378h14M1 1458h14M1 1538h14"/></g>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════ 02 · MEETRAPPORT (founder) ══════════ -->
+<section class="band">
+  <div class="railcol" aria-hidden="true">
+    <svg viewBox="0 0 26 900" preserveAspectRatio="xMinYMin slice">
+      <path d="M25 0V900" class="kh"/>
+      <g class="kh"><path d="M25 10h-6M25 26h-6M25 42h-6M25 58h-6M25 74h-6M25 90h-6M25 106h-6M25 122h-6M25 138h-6M25 154h-6M25 170h-6M25 186h-6M25 202h-6M25 218h-6M25 234h-6M25 250h-6M25 266h-6M25 282h-6M25 298h-6M25 314h-6M25 330h-6M25 346h-6M25 362h-6M25 378h-6M25 394h-6M25 410h-6M25 426h-6M25 442h-6M25 458h-6M25 474h-6M25 490h-6M25 506h-6M25 522h-6M25 538h-6M25 554h-6M25 570h-6M25 586h-6M25 602h-6M25 618h-6M25 634h-6M25 650h-6M25 666h-6M25 682h-6M25 698h-6M25 714h-6M25 730h-6M25 746h-6M25 762h-6M25 778h-6M25 794h-6M25 810h-6M25 826h-6M25 842h-6M25 858h-6M25 874h-6M25 890h-6"/></g>
+      <g class="k1"><path d="M25 10h-14M25 90h-14M25 170h-14M25 250h-14M25 330h-14M25 410h-14M25 490h-14M25 570h-14M25 650h-14M25 730h-14M25 810h-14M25 890h-14"/></g>
+    </svg>
+  </div>
+  <div class="bandbody">
+    <div class="sectag"><span class="num">02</span><span class="lb">Meetrapport</span><span class="rt">BRON: DE OPRICHTER</span></div>
+    <div class="duo">
+      <div>
+        <h2>Wat er in tien jaar gemeten is.</h2>
+        <p>"Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen."</p>
+        <p>"Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden."</p>
+        <div class="ctas"><a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW">Lees mee in de server</a></div>
+      </div>
+      <div class="instr">
+        <svg viewBox="0 0 480 320" role="img" aria-label="Wijzerinstrument met de drie principes op de schaal">
+          <circle cx="240" cy="196" r="150" class="k1"/>
+          <circle cx="240" cy="196" r="136" class="kh"/>
+          <!-- graduations across a 180 degree dial -->
+          <g class="kh">
+            <path d="M90 196h14M96.6 160.7l13.5 3.6M116 129.6l11.4 8.1M143.6 105.6l8.1 11.4M177.3 90.6l3.6 13.5M240 86v14M302.7 90.6l-3.6 13.5M336.4 105.6l-8.1 11.4M364 129.6l-11.4 8.1M383.4 160.7l-13.5 3.6M390 196h-14"/>
+          </g>
+          <g class="k1">
+            <path d="M90 196h26M143.6 105.6l13 18M240 86v26M336.4 105.6l-13 18M390 196h-26"/>
+          </g>
+          <!-- three principles at three bearings -->
+          <text x="118" y="240" class="tg" font-size="11">PROCES</text>
+          <text x="240" y="70" class="tg" font-size="11" text-anchor="middle">DISCIPLINE</text>
+          <text x="300" y="240" class="tg" font-size="11">UITVOERING</text>
+          <!-- needle -->
+          <path d="M240 196 L172 118" class="k2"/>
+          <circle cx="240" cy="196" r="9" class="fg"/>
+          <circle cx="240" cy="196" r="16" class="k1"/>
+          <!-- tolerance arc -->
+          <path d="M143.6 105.6 A150 150 0 0 1 240 86" class="k2" stroke-width="7" stroke-opacity=".35"/>
+          <text x="90" y="290" class="ts">WIJZER 01 — DE VOLGORDE STAAT VAST</text>
+        </svg>
+        <div class="instrcap">Instrument 02 — <b>de wijzer</b>. De naald wijst altijd eerst naar het proces.</div>
+      </div>
+    </div>
+  </div>
+  <div class="railcol r" aria-hidden="true">
+    <svg viewBox="0 0 26 900" preserveAspectRatio="xMinYMin slice">
+      <path d="M1 0V900" class="kh"/>
+      <g class="kh"><path d="M1 18h6M1 34h6M1 50h6M1 66h6M1 82h6M1 98h6M1 114h6M1 130h6M1 146h6M1 162h6M1 178h6M1 194h6M1 210h6M1 226h6M1 242h6M1 258h6M1 274h6M1 290h6M1 306h6M1 322h6M1 338h6M1 354h6M1 370h6M1 386h6M1 402h6M1 418h6M1 434h6M1 450h6M1 466h6M1 482h6M1 498h6M1 514h6M1 530h6M1 546h6M1 562h6M1 578h6M1 594h6M1 610h6M1 626h6M1 642h6M1 658h6M1 674h6M1 690h6M1 706h6M1 722h6M1 738h6M1 754h6M1 770h6M1 786h6M1 802h6M1 818h6M1 834h6M1 850h6M1 866h6M1 882h6M1 898h6"/></g>
+      <g class="k1"><path d="M1 18h14M1 98h14M1 178h14M1 258h14M1 338h14M1 418h14M1 498h14M1 578h14M1 658h14M1 738h14M1 818h14M1 898h14"/></g>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════ 03 · DE MEETLAT ══════════ -->
+<section class="band" id="meetlat">
+  <div class="railcol" aria-hidden="true">
+    <svg viewBox="0 0 26 1200" preserveAspectRatio="xMinYMin slice">
+      <path d="M25 0V1200" class="kh"/>
+      <g class="kh"><path d="M25 10h-6M25 26h-6M25 42h-6M25 58h-6M25 74h-6M25 90h-6M25 106h-6M25 122h-6M25 138h-6M25 154h-6M25 170h-6M25 186h-6M25 202h-6M25 218h-6M25 234h-6M25 250h-6M25 266h-6M25 282h-6M25 298h-6M25 314h-6M25 330h-6M25 346h-6M25 362h-6M25 378h-6M25 394h-6M25 410h-6M25 426h-6M25 442h-6M25 458h-6M25 474h-6M25 490h-6M25 506h-6M25 522h-6M25 538h-6M25 554h-6M25 570h-6M25 586h-6M25 602h-6M25 618h-6M25 634h-6M25 650h-6M25 666h-6M25 682h-6M25 698h-6M25 714h-6M25 730h-6M25 746h-6M25 762h-6M25 778h-6M25 794h-6M25 810h-6M25 826h-6M25 842h-6M25 858h-6M25 874h-6M25 890h-6M25 906h-6M25 922h-6M25 938h-6M25 954h-6M25 970h-6M25 986h-6M25 1002h-6M25 1018h-6M25 1034h-6M25 1050h-6M25 1066h-6M25 1082h-6M25 1098h-6M25 1114h-6M25 1130h-6M25 1146h-6M25 1162h-6M25 1178h-6M25 1194h-6"/></g>
+      <g class="k1"><path d="M25 10h-14M25 90h-14M25 170h-14M25 250h-14M25 330h-14M25 410h-14M25 490h-14M25 570h-14M25 650h-14M25 730h-14M25 810h-14M25 890h-14M25 970h-14M25 1050h-14M25 1130h-14"/></g>
+    </svg>
+  </div>
+  <div class="bandbody">
+    <div class="sectag"><span class="num">03</span><span class="lb">De meetlat</span><span class="rt">10 GRADATIES</span></div>
+    <h2>Tien onderwerpen, tien streepjes.</h2>
+    <p class="lede">Elke gradatie is een onderdeel van de educatie. Samen vormen ze de schaal.</p>
+
+    <div class="grad">
+      <div class="grow">
+        <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
+        <div class="gnum">01</div>
+        <div class="gmain"><span class="mob">GRADATIE 01</span><span class="nm">deviatie</span></div>
+        <div class="gdesc">Afwijking van een niveau — en wat daarna gebeurt.</div>
+      </div>
+      <div class="grow">
+        <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
+        <div class="gnum">02</div>
+        <div class="gmain"><span class="mob">GRADATIE 02</span><span class="nm">SMT</span></div>
+        <div class="gdesc">Twee markten naast elkaar leggen.</div>
+      </div>
+      <div class="grow">
+        <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
+        <div class="gnum">03</div>
+        <div class="gmain"><span class="mob">GRADATIE 03</span><span class="nm">FVG</span></div>
+        <div class="gdesc">De onbalans die de prijs achterlaat.</div>
+      </div>
+      <div class="grow">
+        <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
+        <div class="gnum">04</div>
+        <div class="gmain"><span class="mob">GRADATIE 04</span><span class="nm">IFVG</span></div>
+        <div class="gdesc">Diezelfde onbalans, maar omgekeerd.</div>
+      </div>
+      <div class="grow">
+        <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
+        <div class="gnum">05</div>
+        <div class="gmain"><span class="mob">GRADATIE 05</span><span class="nm">orderblocks</span></div>
+        <div class="gdesc">Waar de beweging vandaan komt.</div>
+      </div>
+      <div class="grow">
+        <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
+        <div class="gnum">06</div>
+        <div class="gmain"><span class="mob">GRADATIE 06</span><span class="nm">fibonacci</span></div>
+        <div class="gdesc">Verhoudingen binnen een been.</div>
+      </div>
+      <div class="grow">
+        <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
+        <div class="gnum">07</div>
+        <div class="gmain"><span class="mob">GRADATIE 07</span><span class="nm">sessie-liquiditeit</span></div>
+        <div class="gdesc">Wat een sessie achterlaat voor de volgende.</div>
+      </div>
+      <div class="grow">
+        <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
+        <div class="gnum">08</div>
+        <div class="gmain"><span class="mob">GRADATIE 08</span><span class="nm">liquiditeit</span></div>
+        <div class="gdesc">Waar de orders liggen te wachten.</div>
+      </div>
+      <div class="grow">
+        <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
+        <div class="gnum">09</div>
+        <div class="gmain"><span class="mob">GRADATIE 09</span><span class="nm">risicobeheer</span></div>
+        <div class="gdesc">De bandbreedte die je vooraf vastlegt.</div>
+      </div>
+      <div class="grow">
+        <div class="gscale"><svg class="stretch" viewBox="0 0 58 100" preserveAspectRatio="none"><line x1="46" y1="0" x2="46" y2="100" vector-effect="non-scaling-stroke"/><line class="mj" x1="46" y1="0" x2="8" y2="0" vector-effect="non-scaling-stroke"/><line x1="46" y1="25" x2="32" y2="25" vector-effect="non-scaling-stroke"/><line x1="46" y1="50" x2="26" y2="50" vector-effect="non-scaling-stroke"/><line x1="46" y1="75" x2="32" y2="75" vector-effect="non-scaling-stroke"/></svg><svg class="gidx" viewBox="0 0 18 16" aria-hidden="true"><path d="M18 8 L2 1 V15 Z"/></svg></div>
+        <div class="gnum">10</div>
+        <div class="gmain"><span class="mob">GRADATIE 10</span><span class="nm">tradingpsychologie</span></div>
+        <div class="gdesc">De hand die het instrument vasthoudt.</div>
+      </div>
+    </div>
+    <div class="ctas">
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
+        Leer de hele schaal
+      </a>
+    </div>
+  </div>
+  <div class="railcol r" aria-hidden="true">
+    <svg viewBox="0 0 26 1200" preserveAspectRatio="xMinYMin slice">
+      <path d="M1 0V1200" class="kh"/>
+      <g class="kh"><path d="M1 18h6M1 34h6M1 50h6M1 66h6M1 82h6M1 98h6M1 114h6M1 130h6M1 146h6M1 162h6M1 178h6M1 194h6M1 210h6M1 226h6M1 242h6M1 258h6M1 274h6M1 290h6M1 306h6M1 322h6M1 338h6M1 354h6M1 370h6M1 386h6M1 402h6M1 418h6M1 434h6M1 450h6M1 466h6M1 482h6M1 498h6M1 514h6M1 530h6M1 546h6M1 562h6M1 578h6M1 594h6M1 610h6M1 626h6M1 642h6M1 658h6M1 674h6M1 690h6M1 706h6M1 722h6M1 738h6M1 754h6M1 770h6M1 786h6M1 802h6M1 818h6M1 834h6M1 850h6M1 866h6M1 882h6M1 898h6M1 914h6M1 930h6M1 946h6M1 962h6M1 978h6M1 994h6M1 1010h6M1 1026h6M1 1042h6M1 1058h6M1 1074h6M1 1090h6M1 1106h6M1 1122h6M1 1138h6M1 1154h6M1 1170h6M1 1186h6"/></g>
+      <g class="k1"><path d="M1 18h14M1 98h14M1 178h14M1 258h14M1 338h14M1 418h14M1 498h14M1 578h14M1 658h14M1 738h14M1 818h14M1 898h14M1 978h14M1 1058h14M1 1138h14"/></g>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════ 04 · HET MODEL, GEMETEN ══════════ -->
+<section class="band">
+  <div class="railcol" aria-hidden="true">
+    <svg viewBox="0 0 26 800" preserveAspectRatio="xMinYMin slice">
+      <path d="M25 0V800" class="kh"/>
+      <g class="kh"><path d="M25 10h-6M25 26h-6M25 42h-6M25 58h-6M25 74h-6M25 90h-6M25 106h-6M25 122h-6M25 138h-6M25 154h-6M25 170h-6M25 186h-6M25 202h-6M25 218h-6M25 234h-6M25 250h-6M25 266h-6M25 282h-6M25 298h-6M25 314h-6M25 330h-6M25 346h-6M25 362h-6M25 378h-6M25 394h-6M25 410h-6M25 426h-6M25 442h-6M25 458h-6M25 474h-6M25 490h-6M25 506h-6M25 522h-6M25 538h-6M25 554h-6M25 570h-6M25 586h-6M25 602h-6M25 618h-6M25 634h-6M25 650h-6M25 666h-6M25 682h-6M25 698h-6M25 714h-6M25 730h-6M25 746h-6M25 762h-6M25 778h-6M25 794h-6"/></g>
+      <g class="k1"><path d="M25 10h-14M25 90h-14M25 170h-14M25 250h-14M25 330h-14M25 410h-14M25 490h-14M25 570h-14M25 650h-14M25 730h-14"/></g>
+    </svg>
+  </div>
+  <div class="bandbody">
+    <div class="sectag"><span class="num">04</span><span class="lb">Het model</span><span class="rt">SCHEMATISCH · GEEN KOERSEN</span></div>
+    <h2>Een setup, opgemeten.</h2>
+    <p class="lede">Geen niveaus, geen uitkomsten — alleen de maten van de vorm.</p>
+    <div class="instr scrollx">
+      <svg viewBox="0 0 900 500" role="img" aria-label="Schematische setup met maatvoering op de onbalans en een tolerantieband voor het risico" style="min-width:640px">
+        <!-- baseline rails -->
+        <path d="M70 60V440" class="kh"/>
+        <path d="M70 440H860" class="kh"/>
+        <g class="kh">
+          <path d="M70 100h-8M70 140h-8M70 180h-8M70 220h-8M70 260h-8M70 300h-8M70 340h-8M70 380h-8M70 420h-8"/>
+        </g>
+        <g class="k1"><path d="M70 100h-16M70 220h-16M70 340h-16"/></g>
+
+        <!-- liquidity level -->
+        <path d="M100 128H600" class="k1" stroke-dasharray="8 5"/>
+        <circle cx="250" cy="128" r="4" class="fg"/>
+        <path d="M250 128 L216 86 H120" class="k1"/>
+        <text x="120" y="78" class="ts">LIQUIDITEIT — GRADATIE 08</text>
+
+        <!-- candles -->
+        <g class="k1" stroke-width="1.4">
+          <path d="M120 246V308"/><rect x="112" y="260" width="16" height="36" class="fgs"/>
+          <path d="M156 222V294"/><rect x="148" y="234" width="16" height="44" class="fgs"/>
+          <path d="M192 192V272"/><rect x="184" y="204" width="16" height="48" class="fgs"/>
+          <path d="M228 166V252"/><rect x="220" y="178" width="16" height="50" class="fgs"/>
+          <path d="M264 142V234"/><rect x="256" y="154" width="16" height="48" class="fgs"/>
+          <path d="M300 118V218"/><rect x="292" y="126" width="16" height="44" class="fgs"/>
+          <path d="M336 114V248"/><rect x="328" y="144" width="16" height="82" fill="var(--gold)"/>
+          <path d="M372 182V314"/><rect x="364" y="210" width="16" height="86" class="fgs"/>
+          <path d="M408 250V366"/><rect x="400" y="276" width="16" height="72" class="fgs"/>
+          <path d="M444 310V398"/><rect x="436" y="326" width="16" height="56" class="fgs"/>
+          <path d="M480 334V414"/><rect x="472" y="350" width="16" height="48" class="fgs"/>
+          <path d="M516 314V406"/><rect x="508" y="344" width="16" height="42" class="fgs"/>
+          <path d="M552 298V384"/><rect x="544" y="314" width="16" height="46" class="fgs"/>
+        </g>
+
+        <!-- sweep -->
+        <path d="M300 118 L336 114" class="k2"/>
+        <circle cx="336" cy="114" r="4" class="fg"/>
+        <path d="M336 114 L392 66 H600" class="k1"/>
+        <text x="606" y="70" class="ts">SWEEP — GRADATIE 07</text>
+
+        <!-- FVG measured with a caliper-style dimension -->
+        <rect x="356" y="226" width="230" height="54" class="fgs"/>
+        <rect x="356" y="226" width="230" height="54" class="kh"/>
+        <g class="k1">
+          <path d="M612 232v12"/><path class="fg" d="M612 226l-3.6 11h7.2z" stroke="none"/>
+          <path d="M612 274v-12"/><path class="fg" d="M612 280l-3.6-11h7.2z" stroke="none"/>
+          <path d="M586 226h42M586 280h42" class="kh"/>
+        </g>
+        <text x="640" y="250" class="tg">FVG</text>
+        <text x="640" y="268" class="ts">GRADATIE 03</text>
+
+        <!-- orderblock with hatch -->
+        <rect x="288" y="120" width="24" height="56" class="k1" fill="none" stroke-dasharray="5 4"/>
+        <circle cx="288" cy="176" r="4" class="fg"/>
+        <path d="M288 176 L232 208 H120" class="k1"/>
+        <text x="120" y="224" class="ts">ORDERBLOCK — GRADATIE 05</text>
+
+        <!-- tolerance band = risicobeheer -->
+        <rect x="640" y="330" width="200" height="46" class="k1" fill="rgba(215,179,100,.16)"/>
+        <path d="M640 353H840" class="k1" stroke-dasharray="6 4"/>
+        <g class="k1">
+          <path d="M660 330v-14M660 376v14"/>
+          <path class="fg" d="M660 316l-3.6 11h7.2z" stroke="none"/>
+          <path class="fg" d="M660 390l-3.6-11h7.2z" stroke="none"/>
+        </g>
+        <text x="676" y="348" class="tg" font-size="11">TOLERANTIE</text>
+        <text x="676" y="366" class="ts">RISICOBEHEER — GRADATIE 09</text>
+        <text x="640" y="416" class="ts">VOORAF BEPAALD, NIET ONDERWEG</text>
+
+        <!-- execution arrow -->
+        <path d="M700 280V180" class="k2"/>
+        <path class="fg" d="M700 166l-5.5 16h11z"/>
+        <text x="716" y="230" class="tg" font-size="11">UITVOERING</text>
+      </svg>
+      <div class="instrcap">Instrument 03 — <b>de opstelling</b>. Elke maat verwijst naar een gradatie van de meetlat.</div>
+    </div>
+  </div>
+  <div class="railcol r" aria-hidden="true">
+    <svg viewBox="0 0 26 800" preserveAspectRatio="xMinYMin slice">
+      <path d="M1 0V800" class="kh"/>
+      <g class="kh"><path d="M1 18h6M1 34h6M1 50h6M1 66h6M1 82h6M1 98h6M1 114h6M1 130h6M1 146h6M1 162h6M1 178h6M1 194h6M1 210h6M1 226h6M1 242h6M1 258h6M1 274h6M1 290h6M1 306h6M1 322h6M1 338h6M1 354h6M1 370h6M1 386h6M1 402h6M1 418h6M1 434h6M1 450h6M1 466h6M1 482h6M1 498h6M1 514h6M1 530h6M1 546h6M1 562h6M1 578h6M1 594h6M1 610h6M1 626h6M1 642h6M1 658h6M1 674h6M1 690h6M1 706h6M1 722h6M1 738h6M1 754h6M1 770h6M1 786h6"/></g>
+      <g class="k1"><path d="M1 18h14M1 98h14M1 178h14M1 258h14M1 338h14M1 418h14M1 498h14M1 578h14M1 658h14M1 738h14"/></g>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════ 05 · KANALEN ══════════ -->
+<section class="band">
+  <div class="railcol" aria-hidden="true">
+    <svg viewBox="0 0 26 900" preserveAspectRatio="xMinYMin slice">
+      <path d="M25 0V900" class="kh"/>
+      <g class="kh"><path d="M25 10h-6M25 26h-6M25 42h-6M25 58h-6M25 74h-6M25 90h-6M25 106h-6M25 122h-6M25 138h-6M25 154h-6M25 170h-6M25 186h-6M25 202h-6M25 218h-6M25 234h-6M25 250h-6M25 266h-6M25 282h-6M25 298h-6M25 314h-6M25 330h-6M25 346h-6M25 362h-6M25 378h-6M25 394h-6M25 410h-6M25 426h-6M25 442h-6M25 458h-6M25 474h-6M25 490h-6M25 506h-6M25 522h-6M25 538h-6M25 554h-6M25 570h-6M25 586h-6M25 602h-6M25 618h-6M25 634h-6M25 650h-6M25 666h-6M25 682h-6M25 698h-6M25 714h-6M25 730h-6M25 746h-6M25 762h-6M25 778h-6M25 794h-6M25 810h-6M25 826h-6M25 842h-6M25 858h-6M25 874h-6M25 890h-6"/></g>
+      <g class="k1"><path d="M25 10h-14M25 90h-14M25 170h-14M25 250h-14M25 330h-14M25 410h-14M25 490h-14M25 570h-14M25 650h-14M25 730h-14M25 810h-14M25 890h-14"/></g>
+    </svg>
+  </div>
+  <div class="bandbody">
+    <div class="sectag"><span class="num">05</span><span class="lb">Uitlezing</span><span class="rt">15 KANALEN</span></div>
+    <h2>De stand van de server.</h2>
+    <div class="gauge">
+      <div class="gaugetop"><span>SEGMENTEN — <b>9 OPEN</b> · 6 GERESERVEERD</span><span>TOTAAL 15</span></div>
+      <div class="segrow" aria-hidden="true">
+        <i class="seg on"></i><i class="seg on"></i><i class="seg on"></i><i class="seg on"></i><i class="seg on"></i>
+        <i class="seg on"></i><i class="seg on"></i><i class="seg on"></i><i class="seg on"></i>
+        <i class="seg"></i><i class="seg"></i><i class="seg"></i><i class="seg"></i><i class="seg"></i><i class="seg"></i>
+      </div>
+    </div>
+    <div class="chcols">
+      <div class="chbox">
+        <div class="chhd"><span class="a">Thuis — nu gratis</span><span class="b">9</span></div>
+        <ul class="chl">
+          <li><span class="mm">01</span><span>#nq-chart-ideeën</span><span class="st">open</span></li>
+          <li><span class="mm">02</span><span>#es-chart-ideeën</span><span class="st">open</span></li>
+          <li><span class="mm">03</span><span>#bitcoin</span><span class="st">open</span></li>
+          <li><span class="mm">04</span><span>#altcoins</span><span class="st">open</span></li>
+          <li><span class="mm">05</span><span>#markt</span><span class="st">open</span></li>
+          <li><span class="mm">06</span><span>#vragen</span><span class="st">open</span></li>
+          <li><span class="mm">07</span><span>#algemeen</span><span class="st">open</span></li>
+          <li><span class="mm">08</span><span>#atlas-op-socials</span><span class="st">open</span></li>
+          <li><span class="mm">09</span><span>#ondersteuning</span><span class="st">open</span></li>
+        </ul>
+      </div>
+      <div class="chbox">
+        <div class="chhd"><span class="a">Premium — opent later</span><span class="b">6</span></div>
+        <ul class="chl">
+          <li><span class="mm">10</span><span>#trade-setups</span><span class="st">volgt</span></li>
+          <li><span class="mm">11</span><span>#marktupdates</span><span class="st">volgt</span></li>
+          <li><span class="mm">12</span><span>#indicatoren</span><span class="st">volgt</span></li>
+          <li><span class="mm">13</span><span>#sessie-opnames</span><span class="st">volgt</span></li>
+          <li><span class="mm">14</span><span>#chart-ideeën</span><span class="st">volgt</span></li>
+          <li><span class="mm">15</span><span>#premium-chat</span><span class="st">volgt</span></li>
+        </ul>
+        <div style="padding:13px"><a class="btn btn--o" style="width:100%" href="https://discord.gg/78Ff2GuSfW">Open de server</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="railcol r" aria-hidden="true">
+    <svg viewBox="0 0 26 900" preserveAspectRatio="xMinYMin slice">
+      <path d="M1 0V900" class="kh"/>
+      <g class="kh"><path d="M1 18h6M1 34h6M1 50h6M1 66h6M1 82h6M1 98h6M1 114h6M1 130h6M1 146h6M1 162h6M1 178h6M1 194h6M1 210h6M1 226h6M1 242h6M1 258h6M1 274h6M1 290h6M1 306h6M1 322h6M1 338h6M1 354h6M1 370h6M1 386h6M1 402h6M1 418h6M1 434h6M1 450h6M1 466h6M1 482h6M1 498h6M1 514h6M1 530h6M1 546h6M1 562h6M1 578h6M1 594h6M1 610h6M1 626h6M1 642h6M1 658h6M1 674h6M1 690h6M1 706h6M1 722h6M1 738h6M1 754h6M1 770h6M1 786h6M1 802h6M1 818h6M1 834h6M1 850h6M1 866h6M1 882h6M1 898h6"/></g>
+      <g class="k1"><path d="M1 18h14M1 98h14M1 178h14M1 258h14M1 338h14M1 418h14M1 498h14M1 578h14M1 658h14M1 738h14M1 818h14M1 898h14"/></g>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════ 06 · LIVE + TOEGANG + SLOT ══════════ -->
+<section class="band">
+  <div class="railcol" aria-hidden="true">
+    <svg viewBox="0 0 26 900" preserveAspectRatio="xMinYMin slice">
+      <path d="M25 0V900" class="kh"/>
+      <g class="kh"><path d="M25 10h-6M25 26h-6M25 42h-6M25 58h-6M25 74h-6M25 90h-6M25 106h-6M25 122h-6M25 138h-6M25 154h-6M25 170h-6M25 186h-6M25 202h-6M25 218h-6M25 234h-6M25 250h-6M25 266h-6M25 282h-6M25 298h-6M25 314h-6M25 330h-6M25 346h-6M25 362h-6M25 378h-6M25 394h-6M25 410h-6M25 426h-6M25 442h-6M25 458h-6M25 474h-6M25 490h-6M25 506h-6M25 522h-6M25 538h-6M25 554h-6M25 570h-6M25 586h-6M25 602h-6M25 618h-6M25 634h-6M25 650h-6M25 666h-6M25 682h-6M25 698h-6M25 714h-6M25 730h-6M25 746h-6M25 762h-6M25 778h-6M25 794h-6M25 810h-6M25 826h-6M25 842h-6M25 858h-6M25 874h-6M25 890h-6"/></g>
+      <g class="k1"><path d="M25 10h-14M25 90h-14M25 170h-14M25 250h-14M25 330h-14M25 410h-14M25 490h-14M25 570h-14M25 650h-14M25 730h-14M25 810h-14M25 890h-14"/></g>
+    </svg>
+  </div>
+  <div class="bandbody">
+    <div class="sectag"><span class="num">06</span><span class="lb">Uitvoering</span><span class="rt">LIVE &amp; TOEGANG</span></div>
+    <div class="tolgrid">
+      <div>
+        <div class="livetag"><i class="blip"></i>Live in de server</div>
+        <p class="val"><b>Meekijken</b> terwijl het gebeurt</p>
+        <p>De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
+        <a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW">Zit een sessie bij</a>
+      </div>
+      <div>
+        <h3>Markten in bereik</h3>
+        <svg viewBox="0 0 460 160" role="img" aria-label="De vier gevolgde markten op een schaal" style="width:100%;height:auto">
+          <path d="M30 110H430" class="k1"/>
+          <g class="kh"><path d="M30 110v-8M130 110v-8M230 110v-8M330 110v-8M430 110v-8"/></g>
+          <g class="k1">
+            <path d="M80 110V72"/><path d="M180 110V72"/><path d="M280 110V72"/><path d="M380 110V72"/>
+          </g>
+          <g class="fg"><path d="M80 66l-6 12h12z"/><path d="M180 66l-6 12h12z"/><path d="M280 66l-6 12h12z"/><path d="M380 66l-6 12h12z"/></g>
+          <text x="80" y="52" class="tg" text-anchor="middle">NQ</text>
+          <text x="180" y="52" class="tg" text-anchor="middle">ES</text>
+          <text x="280" y="52" class="tg" text-anchor="middle">BTC</text>
+          <text x="380" y="52" class="tg" text-anchor="middle">ALT</text>
+          <text x="30" y="140" class="ts">NASDAQ · S&amp;P · BITCOIN · ALTCOINS</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="tolgrid" style="margin-top:26px">
+      <div>
+        <h3>Nu — binnen bereik</h3>
+        <p class="val">Gratis toegang</p>
+        <p>Negen kanalen, de educatie en het meekijken. Geen drempel.</p>
+        <a class="btn" href="https://discord.gg/78Ff2GuSfW">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
+          Word nu lid
+        </a>
+      </div>
+      <div>
+        <h3>Later — buiten bereik</h3>
+        <p class="val">Premium</p>
+        <p>Zes extra kanalen. Prijs en datum worden in de server aangekondigd.</p>
+        <a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW">Blijf op de hoogte</a>
+      </div>
+    </div>
+
+    <div class="closing">
+      <svg viewBox="0 0 600 40" style="width:100%;height:40px;margin:34px 0 12px" aria-hidden="true">
+        <path d="M0 30H600" class="kh"/>
+        <g class="kh"><path d="M20 30v-8M60 30v-8M100 30v-8M140 30v-8M180 30v-8M220 30v-8M260 30v-8M300 30v-8M340 30v-8M380 30v-8M420 30v-8M460 30v-8M500 30v-8M540 30v-8M580 30v-8"/></g>
+        <g class="k1"><path d="M20 30v-16M180 30v-16M340 30v-16M500 30v-16"/></g>
+        <path d="M300 14 L292 2 H308 Z" class="fg"/>
+      </svg>
+      <h2>Alles gemeten.<br><b>Nu uitvoeren.</b></h2>
+      <div class="ctas">
+        <a class="btn" href="https://discord.gg/78Ff2GuSfW">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.9A18 18 0 0 0 15.9 3.5l-.2.4a13 13 0 0 0-3.7-.5 13 13 0 0 0-3.7.5l-.2-.4A18 18 0 0 0 3.7 4.9C1.3 8.6.6 12.2.9 15.7a18 18 0 0 0 5.5 2.8l1.2-1.9a11.7 11.7 0 0 1-1.8-.9l.4-.3a12.8 12.8 0 0 0 11 0l.4.3c-.6.4-1.2.7-1.8.9l1.2 1.9a18 18 0 0 0 5.5-2.8c.4-4.1-.6-7.7-2.2-10.8ZM8.3 13.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7.4 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Z"/></svg>
+          Word lid van de Discord
+        </a>
+        <a class="btn btn--o" href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
+      </div>
+    </div>
+  </div>
+  <div class="railcol r" aria-hidden="true">
+    <svg viewBox="0 0 26 900" preserveAspectRatio="xMinYMin slice">
+      <path d="M1 0V900" class="kh"/>
+      <g class="kh"><path d="M1 18h6M1 34h6M1 50h6M1 66h6M1 82h6M1 98h6M1 114h6M1 130h6M1 146h6M1 162h6M1 178h6M1 194h6M1 210h6M1 226h6M1 242h6M1 258h6M1 274h6M1 290h6M1 306h6M1 322h6M1 338h6M1 354h6M1 370h6M1 386h6M1 402h6M1 418h6M1 434h6M1 450h6M1 466h6M1 482h6M1 498h6M1 514h6M1 530h6M1 546h6M1 562h6M1 578h6M1 594h6M1 610h6M1 626h6M1 642h6M1 658h6M1 674h6M1 690h6M1 706h6M1 722h6M1 738h6M1 754h6M1 770h6M1 786h6M1 802h6M1 818h6M1 834h6M1 850h6M1 866h6M1 882h6M1 898h6"/></g>
+      <g class="k1"><path d="M1 18h14M1 98h14M1 178h14M1 258h14M1 338h14M1 418h14M1 498h14M1 578h14M1 658h14M1 738h14M1 818h14M1 898h14"/></g>
+    </svg>
+  </div>
+</section>
+
+</div><!-- /page -->
+
+<footer>
+  <div class="foot">
+    <a href="https://discord.gg/78Ff2GuSfW">DISCORD</a>
+    <a href="https://www.tiktok.com/@atlascapitalbv">TIKTOK · @ATLASCAPITALBV</a>
+    <span style="color:var(--dim)">ATLAS CAPITAL — PROCES. DISCIPLINE. UITVOERING.</span>
+    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  </div>
+</footer>
+
+</body>
+</html>

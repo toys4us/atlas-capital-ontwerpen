@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 009 Zwart Vlak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   009 — ZWART VLAK
+   No sections. Compositions. Black planes of unequal weight laid on a
+   near-black field; each plane carries exactly one gold hairline, on one
+   edge only, and its content is set flush against that hairline. The empty
+   plane is as much of a statement as the full one.
+   ========================================================================== */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --paper:#F4F2EC;
+  --muted:#8E8F92;
+  --muted-2:#6A6B6E;
+
+  --field:#131418;         /* near-black field */
+  --k1:#08090B;            /* the blacks */
+  --k2:#0A0B0E;
+  --k3:#050607;
+  --k4:#0D0E11;
+  --k5:#101115;
+
+  --gap:clamp(8px,1.1vw,14px);
+  --hair:rgba(215,179,100,.85);
+}
+
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--field);
+  color:var(--paper);
+  font-family:"Familjen Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:15.5px;
+  line-height:1.52;
+  font-weight:400;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+p{margin:0}
+
+.field{max-width:1500px;margin:0 auto;padding:var(--gap) clamp(10px,1.6vw,18px) 0}
+
+/* ---- composition grid --------------------------------------------------- */
+.comp{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:var(--gap);
+  margin-bottom:var(--gap);
+}
+
+/* ---- the plane ---------------------------------------------------------- */
+.p{
+  position:relative;
+  background:var(--k1);
+  padding:clamp(24px,3vw,44px);
+  min-height:0;
+  transition:background .2s ease;
+}
+.p.k2{background:var(--k2)}
+.p.k3{background:var(--k3)}
+.p.k4{background:var(--k4)}
+.p.k5{background:var(--k5)}
+
+/* one hairline, one edge, content flush to it */
+.p.hl{border-left:1px solid var(--hair);padding-left:clamp(14px,1.6vw,20px)}
+.p.ht{border-top:1px solid var(--hair);padding-top:clamp(14px,1.6vw,20px)}
+.p.hr{border-right:1px solid var(--hair);padding-right:clamp(14px,1.6vw,20px);text-align:right}
+.p.hb{border-bottom:1px solid var(--hair);padding-bottom:clamp(14px,1.6vw,20px);display:flex;flex-direction:column;justify-content:flex-end}
+.p.hl:hover,.p.ht:hover,.p.hr:hover,.p.hb:hover{background:#141519}
+
+/* ---- type --------------------------------------------------------------- */
+.lab{
+  font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:700;color:var(--gold);
+}
+.lab.m{color:var(--muted-2)}
+.h1{
+  font-size:clamp(2.4rem,7.4vw,6.2rem);
+  line-height:.9;font-weight:700;letter-spacing:-.038em;margin:0;
+  overflow-wrap:break-word;
+}
+.h2{
+  font-size:clamp(1.5rem,3.4vw,2.9rem);
+  line-height:.98;font-weight:700;letter-spacing:-.032em;margin:0;
+  overflow-wrap:break-word;
+}
+.h3{font-size:clamp(1.05rem,1.7vw,1.45rem);line-height:1.14;font-weight:500;letter-spacing:-.02em;margin:0}
+.txt{max-width:36ch;color:#D8D6D0}
+.dim{color:var(--muted)}
+.num{
+  font-size:clamp(2.6rem,7vw,5.4rem);line-height:.82;font-weight:700;
+  letter-spacing:-.05em;color:var(--gold);display:block;
+}
+.mt6{margin-top:6px}.mt12{margin-top:12px}.mt20{margin-top:20px}
+.mt32{margin-top:32px}.mt48{margin-top:clamp(28px,4vw,52px)}
+.spacer{flex:1 1 auto;min-height:clamp(30px,7vw,110px)}
+
+/* ---- header plane ------------------------------------------------------- */
+.hd{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.mark{display:flex;align-items:center;gap:11px}
+.mark .sq{width:14px;height:14px;background:linear-gradient(135deg,var(--gold-hi),var(--gold-lo))}
+.mark b{font-weight:700;letter-spacing:.13em;text-transform:uppercase;font-size:14px}
+
+/* ---- buttons ------------------------------------------------------------ */
+.btn{
+  display:inline-block;background:var(--gold);color:var(--k1);
+  padding:12px 20px;font-size:12px;font-weight:700;letter-spacing:.19em;
+  text-transform:uppercase;white-space:nowrap;
+  transition:background .16s ease,color .16s ease;
+}
+.btn:hover{background:var(--paper)}
+.btn.line{background:transparent;color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-lo)}
+.btn.line:hover{background:var(--gold);color:var(--k1)}
+.btn.lg{padding:18px 30px;font-size:14px;letter-spacing:.22em}
+
+/* ---- topic planes ------------------------------------------------------- */
+.topic{
+  background:var(--k2);
+  border-left:1px solid var(--hair);
+  padding:16px 14px 16px clamp(12px,1.4vw,16px);
+  display:flex;flex-direction:column;gap:8px;justify-content:space-between;
+  min-height:clamp(96px,11vw,138px);
+  transition:background .18s ease,border-left-width .12s ease;
+}
+.topic:hover{background:#181920;border-left-width:4px}
+.topic s{text-decoration:none;font-size:11px;letter-spacing:.2em;font-weight:700;color:var(--gold)}
+.topic b{font-size:clamp(14px,1.5vw,20px);font-weight:500;letter-spacing:-.02em;line-height:1.06;overflow-wrap:break-word}
+
+/* ---- channel planes ----------------------------------------------------- */
+.chan{list-style:none;margin:0;padding:0;columns:1;column-gap:clamp(18px,2.6vw,40px)}
+@media(min-width:620px){.chan.nine{columns:2}}
+.chan li{
+  break-inside:avoid;
+  padding:7px 0 7px 14px;
+  border-left:1px solid rgba(215,179,100,.28);
+  margin-bottom:6px;
+  font-size:14px;word-break:break-word;
+  transition:border-color .16s ease,padding-left .16s ease;
+}
+.chan li:hover{border-left-color:var(--gold);padding-left:18px}
+.chan.prem li{color:var(--muted);border-left-style:dashed}
+
+/* ---- schematic ---------------------------------------------------------- */
+.scroller{overflow-x:auto}
+.scroller svg{display:block;width:100%;min-width:520px;height:auto}
+
+/* ---- spans -------------------------------------------------------------- */
+.c1-8{grid-column:1/9}   .c9-13{grid-column:9/13}
+.c1-7{grid-column:1/8}   .c8-13{grid-column:8/13}
+.c1-5{grid-column:1/6}   .c6-13{grid-column:6/13}
+.c1-13{grid-column:1/13} .c1-4{grid-column:1/5}
+.c5-9{grid-column:5/10}  .c10-13{grid-column:10/13}
+.c1-3{grid-column:1/4}   .c4-13{grid-column:4/13}
+.c1-9{grid-column:1/10}  .c1-6{grid-column:1/7}
+.c7-13{grid-column:7/13}
+.r1-3{grid-row:1/3}      .r1-2{grid-row:1/2}   .r2-3{grid-row:2/3}
+.r3-4{grid-row:3/4}
+
+/* four planes of unequal width */
+.quad{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap);margin-bottom:var(--gap)}
+@media(min-width:760px){.quad{grid-template-columns:1.5fr 1fr 1fr 1.7fr}}
+.quad .p{min-height:clamp(110px,13vw,180px);display:flex;flex-direction:column;justify-content:space-between}
+.quad .p .tick{font-size:clamp(1.5rem,3vw,2.4rem);font-weight:700;letter-spacing:-.04em;line-height:1}
+
+/* three planes of unequal width — the sessions */
+.trio{display:grid;grid-template-columns:1fr;gap:var(--gap);margin-bottom:var(--gap)}
+@media(min-width:700px){.trio{grid-template-columns:1.15fr 1fr 1.45fr}}
+.bar{height:10px;background:#26272C;margin-top:18px;position:relative}
+.bar i{position:absolute;top:0;bottom:0;background:linear-gradient(90deg,var(--gold-lo),var(--gold-hi));display:block}
+
+/* topic mosaic */
+.mosaic{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap)}
+@media(min-width:640px){.mosaic{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:980px){.mosaic{grid-template-columns:repeat(5,1fr)}}
+
+/* ---- footer ------------------------------------------------------------- */
+.frow{display:flex;flex-wrap:wrap;gap:18px 40px;justify-content:space-between;align-items:flex-start}
+.flinks{display:flex;gap:26px;flex-wrap:wrap}
+.flinks a{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--gold)}
+.flinks a:hover{color:var(--paper)}
+.risk{font-size:12px;line-height:1.65;color:var(--muted-2);max-width:60ch;margin-top:22px}
+
+/* ---- responsive --------------------------------------------------------- */
+@media(max-width:900px){
+  .comp > .p,.comp > *{grid-column:1/-1 !important;grid-row:auto !important}
+  .p{padding:22px}
+  .p.hl{padding-left:14px}.p.ht{padding-top:14px}
+  .p.hr{padding-right:14px;text-align:left}.p.hb{padding-bottom:14px}
+  .spacer{min-height:26px}
+}
+</style>
+</head>
+<body>
+
+<div class="field">
+
+  <!-- ============ HEADER PLANE ============ -->
+  <div class="comp">
+    <div class="p k4 hb c1-13">
+      <div class="hd">
+        <div class="mark"><span class="sq" aria-hidden="true"></span><b>Atlas Capital</b></div>
+        <span class="lab m">Proces · Discipline · Uitvoering</span>
+        <a class="btn" href="https://discord.gg/78Ff2GuSfW">Open Discord</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 01 — HERO : FIVE PLANES ============ -->
+  <div class="comp">
+    <div class="p k1 hl c1-8 r1-3" style="display:flex;flex-direction:column">
+      <span class="lab">01 — Introductie</span>
+      <div class="spacer"></div>
+      <h1 class="h1">Alles op<br>zijn plek.</h1>
+      <p class="txt mt32">Een Nederlandse trading-community rond educatie, structuur en de dagelijkse markt.</p>
+      <p class="mt32"><a class="btn lg" href="https://discord.gg/78Ff2GuSfW">Word lid via Discord</a></p>
+    </div>
+
+    <div class="p k3 ht c9-13 r1-2">
+      <span class="lab m">Markten</span>
+      <p class="h3 mt20">NQ<br>ES<br>Bitcoin<br>Altcoins</p>
+    </div>
+
+    <div class="p k5 hb c9-13 r2-3">
+      <span class="lab m">De server</span>
+      <p class="h2 mt12">15 kanalen<br>10 onderwerpen</p>
+      <p class="mt20"><a class="btn line" href="https://discord.gg/78Ff2GuSfW">Bekijk de server</a></p>
+    </div>
+
+    <div class="p k2 hr c1-13 r3-4">
+      <span class="lab">Nu gratis</span>
+      <p class="h3 mt12">Premium opent later. Prijs en datum in de server.</p>
+    </div>
+  </div>
+
+  <!-- ============ DRIE WOORDEN : THREE PLANES, THREE EDGES ============ -->
+  <div class="comp">
+    <div class="p k1 hl c1-4">
+      <span class="lab">Proces</span>
+      <p class="h3 mt20">Eén manier van kijken. Elke dag dezelfde volgorde.</p>
+    </div>
+    <div class="p k5 ht c5-9">
+      <span class="lab">Discipline</span>
+      <p class="h3 mt20">Risicobeheer en psychologie staan in het curriculum, niet ernaast.</p>
+    </div>
+    <div class="p k3 hr c10-13">
+      <span class="lab">Uitvoering</span>
+      <p class="h3 mt20">Live meekijken terwijl de markt beweegt.</p>
+    </div>
+  </div>
+
+  <!-- ============ MARKTEN : FOUR UNEQUAL PLANES ============ -->
+  <div class="quad">
+    <div class="p k1 hb">
+      <span class="lab m">Markt</span>
+      <span class="tick">NQ</span>
+      <span class="lab m">Nasdaq futures</span>
+    </div>
+    <div class="p k4 hl">
+      <span class="lab m">Markt</span>
+      <span class="tick">ES</span>
+      <span class="lab m">S&amp;P futures</span>
+    </div>
+    <div class="p k3 ht">
+      <span class="lab m">Markt</span>
+      <span class="tick">BTC</span>
+      <span class="lab m">Bitcoin</span>
+    </div>
+    <div class="p k5 hr">
+      <span class="lab m">Markt</span>
+      <span class="tick">ALT</span>
+      <span class="lab m">Altcoins</span>
+    </div>
+  </div>
+
+  <!-- ============ 02 — DE OPRICHTER ============ -->
+  <div class="comp">
+    <div class="p k3 hl c1-4">
+      <span class="lab">02 — De oprichter</span>
+      <span class="num mt32">10+</span>
+      <p class="lab m mt12">jaar in de markten</p>
+    </div>
+    <div class="p k1 ht c5-13">
+      <p class="txt" style="max-width:52ch">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</p>
+      <p class="txt mt20" style="max-width:52ch">Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</p>
+      <p class="mt32"><a class="btn line" href="https://discord.gg/78Ff2GuSfW">Lees mee in Discord</a></p>
+    </div>
+  </div>
+
+  <!-- ============ 03 — EDUCATIE ============ -->
+  <div class="comp">
+    <div class="p k4 hb c1-13">
+      <span class="lab">03 — Educatie</span>
+      <h2 class="h2 mt20">Tien onderwerpen, tien vlakken.</h2>
+    </div>
+  </div>
+
+  <div class="mosaic" style="margin-bottom:var(--gap)">
+    <div class="topic"><s>01</s><b>deviatie</b></div>
+    <div class="topic"><s>02</s><b>SMT</b></div>
+    <div class="topic"><s>03</s><b>FVG</b></div>
+    <div class="topic"><s>04</s><b>IFVG</b></div>
+    <div class="topic"><s>05</s><b>orderblocks</b></div>
+    <div class="topic"><s>06</s><b>fibonacci</b></div>
+    <div class="topic"><s>07</s><b>sessie-liquiditeit</b></div>
+    <div class="topic"><s>08</s><b>liquiditeit</b></div>
+    <div class="topic"><s>09</s><b>risicobeheer</b></div>
+    <div class="topic"><s>10</s><b>tradingpsychologie</b></div>
+  </div>
+
+  <div class="comp">
+    <div class="p k2 hr c1-13">
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW">Begin bij 01</a>
+    </div>
+  </div>
+
+  <!-- ============ 04 — HET MODEL ============ -->
+  <div class="comp">
+    <div class="p k3 hl c1-3">
+      <span class="lab">04 — Het model</span>
+      <p class="lab m mt20">Schematisch<br>Geen resultaat</p>
+    </div>
+    <div class="p k1 ht c4-13">
+      <h2 class="h2">Deviatie.</h2>
+      <div class="scroller mt32">
+        <svg viewBox="0 0 860 400" role="img" aria-label="Schematische weergave van een deviatie: de koers zakt kort onder een niveau en herovert het daarna">
+          <!-- field -->
+          <rect x="0" y="0" width="860" height="400" fill="#050607"/>
+          <g stroke="rgba(215,179,100,.12)" stroke-width="1">
+            <path d="M0 80H860M0 160H860M0 240H860M0 320H860"/>
+          </g>
+
+          <!-- the range, as two solid planes -->
+          <rect x="40" y="150" width="780" height="6" fill="#D7B364"/>
+          <rect x="40" y="266" width="780" height="6" fill="#D7B364"/>
+          <rect x="40" y="156" width="780" height="110" fill="rgba(215,179,100,.06)"/>
+
+          <!-- the deviation plane: below the level, briefly -->
+          <rect x="352" y="272" width="118" height="60" fill="rgba(215,179,100,.24)"/>
+
+          <!-- price, drawn as hard segments -->
+          <path d="M40 210 L96 168 L142 200 L196 162 L244 214 L296 258 L352 268
+                   L392 300 L428 322 L462 288 L492 262 L536 214 L582 240
+                   L628 176 L674 150 L716 118 L768 92 L820 66"
+                fill="none" stroke="#F4F2EC" stroke-width="3" stroke-linejoin="miter"/>
+
+          <!-- reclaim marker -->
+          <rect x="484" y="254" width="18" height="18" fill="none" stroke="#D7B364" stroke-width="3"/>
+          <!-- break marker -->
+          <rect x="666" y="142" width="18" height="18" fill="none" stroke="#D7B364" stroke-width="3"/>
+
+          <!-- leaders -->
+          <g stroke="#B9954A" stroke-width="1">
+            <path d="M410 332V366H492"/>
+            <path d="M494 254V206H556"/>
+            <path d="M676 142V96H742"/>
+          </g>
+          <g font-family="'Familjen Grotesk',Helvetica,Arial,sans-serif" font-size="13"
+             font-weight="700" letter-spacing="2.6" fill="#F4F2EC">
+            <text x="498" y="371">DEVIATIE</text>
+            <text x="562" y="211">HEROVERING</text>
+            <text x="748" y="101">VERVOLG</text>
+          </g>
+        </svg>
+      </div>
+      <p class="txt mt20" style="max-width:56ch">Kort onder een niveau, en er direct weer boven. Niet elke uitbraak is er een.</p>
+    </div>
+  </div>
+
+  <!-- ============ 05 — KANALEN ============ -->
+  <div class="comp">
+    <div class="p k1 hl c1-7">
+      <span class="lab">05 — Thuis, nu gratis</span>
+      <ul class="chan nine mt20">
+        <li>#nq-chart-ideeën</li>
+        <li>#es-chart-ideeën</li>
+        <li>#bitcoin</li>
+        <li>#altcoins</li>
+        <li>#markt</li>
+        <li>#vragen</li>
+        <li>#algemeen</li>
+        <li>#atlas-op-socials</li>
+        <li>#ondersteuning</li>
+      </ul>
+    </div>
+    <div class="p k5 hr c7-13">
+      <span class="lab m">06 — Premium, opent later</span>
+      <ul class="chan prem mt20" style="text-align:left">
+        <li>#trade-setups</li>
+        <li>#marktupdates</li>
+        <li>#indicatoren</li>
+        <li>#sessie-opnames</li>
+        <li>#chart-ideeën</li>
+        <li>#premium-chat</li>
+      </ul>
+      <p class="mt32"><a class="btn line" href="https://discord.gg/78Ff2GuSfW">Open de server</a></p>
+    </div>
+  </div>
+
+  <!-- ============ 07 — LIVE ============ -->
+  <div class="comp">
+    <div class="p k4 ht c1-9">
+      <span class="lab">07 — Live</span>
+      <h2 class="h2 mt20">De oprichter handelt live mee in Discord.</h2>
+      <p class="txt mt20">Tijden worden in de server aangekondigd.</p>
+    </div>
+    <div class="p k3 hb c9-13">
+      <span class="lab m">Meekijken</span>
+      <p class="h3 mt12">Gratis, in de server.</p>
+      <p class="mt20"><a class="btn line" href="https://discord.gg/78Ff2GuSfW">Zit erbij</a></p>
+    </div>
+  </div>
+
+  <!-- ============ SESSIES : THREE PLANES ============ -->
+  <div class="trio">
+    <div class="p k1 hl">
+      <span class="lab m">Sessie</span>
+      <p class="h3 mt12">Azië</p>
+      <div class="bar" aria-hidden="true"><i style="left:6%;width:30%"></i></div>
+    </div>
+    <div class="p k5 ht">
+      <span class="lab m">Sessie</span>
+      <p class="h3 mt12">Londen</p>
+      <div class="bar" aria-hidden="true"><i style="left:30%;width:44%"></i></div>
+    </div>
+    <div class="p k4 hr">
+      <span class="lab m">Sessie</span>
+      <p class="h3 mt12">New York</p>
+      <div class="bar" aria-hidden="true"><i style="left:52%;width:42%"></i></div>
+    </div>
+  </div>
+
+  <!-- ============ 08 — SLOT ============ -->
+  <div class="comp">
+    <div class="p k1 hl c1-13" style="padding-top:clamp(48px,8vw,110px);padding-bottom:clamp(48px,8vw,110px)">
+      <span class="lab">08 — Word lid</span>
+      <h2 class="h1 mt32">Proces.<br>Discipline.<br>Uitvoering.</h2>
+      <p class="mt48"><a class="btn lg" href="https://discord.gg/78Ff2GuSfW">Open Discord</a></p>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER PLANE ============ -->
+  <div class="comp">
+    <div class="p k5 hl c1-4">
+      <div class="mark"><span class="sq" aria-hidden="true"></span><b>Atlas Capital</b></div>
+      <p class="lab m mt20">Nederlands</p>
+    </div>
+    <div class="p k3 ht c5-9">
+      <span class="lab m">Volg</span>
+      <div class="flinks mt20">
+        <a href="https://discord.gg/78Ff2GuSfW">Discord</a>
+        <a href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
+      </div>
+    </div>
+    <div class="p k4 hr c10-13">
+      <span class="lab m">Kern</span>
+      <p class="h3 mt12">Proces.<br>Discipline.<br>Uitvoering.</p>
+    </div>
+  </div>
+
+  <div class="comp">
+    <div class="p k1 ht c1-13">
+      <p class="risk" style="margin-top:0">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

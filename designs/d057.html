@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 057 Eén Lijn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ATLAS CAPITAL — 057 EÉN LIJN
+   One gold line enters at the top of the page and never stops.
+   It becomes a candle, a contour, a ladder, a fork, a pulse,
+   and finally an arrow that points straight into the button.
+   Everything else hangs off it in small clusters.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --panel:#15161A;
+  --muted:#A5A6A8;
+  --text:#E4E2DC;
+  --dim:#76787C;
+
+  --u:8px;
+  --rail:clamp(38px, 9.5vw, 104px);
+
+  --t-display:clamp(2.1rem, 1.15rem + 4.4vw, 5rem);
+  --t-lead:clamp(1.25rem, 1rem + 1.3vw, 2rem);
+  --t-body:clamp(.9375rem, .9rem + .2vw, 1.0625rem);
+  --t-micro:clamp(.6875rem, .66rem + .14vw, .78125rem);
+
+  --mono:"IBM Plex Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+*,*::before,*::after{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--text);
+  font-family:var(--mono);
+  font-weight:300;
+  font-size:var(--t-body);
+  line-height:1.62;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+
+.frame{
+  max-width:1320px;
+  margin-inline:auto;
+  padding-inline:clamp(16px, 5vw, 88px);
+}
+
+/* ------------------------------------------------------------
+   THE SPINE — every band is rail + content, stretched, so the
+   line is literally continuous from first pixel to last.
+   ------------------------------------------------------------ */
+.band{
+  display:grid;
+  grid-template-columns:var(--rail) minmax(0,1fr);
+  align-items:stretch;
+}
+
+.rail{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:100%;
+}
+/* the straight stretches between shapes */
+.rail .run{
+  flex:1 1 auto;
+  width:1px;
+  min-height:calc(var(--u)*3);
+  background:var(--gold);
+}
+.rail .shape{
+  width:100%;
+  flex:0 0 auto;
+  display:block;
+}
+.rail .shape svg{display:block;width:100%;height:auto}
+
+.body-col{
+  padding-left:clamp(14px, 3.5vw, 48px);
+  padding-block:clamp(48px, 9vh, 128px);
+  min-width:0;
+}
+.body-col.tight{padding-block:clamp(28px,5vh,64px)}
+
+/* ------------------------------------------------------------
+   HEADER
+   ------------------------------------------------------------ */
+.head .body-col{
+  padding-block:calc(var(--u)*4);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:calc(var(--u)*2);
+  flex-wrap:wrap;
+}
+.wordmark{
+  font-size:clamp(.9375rem,.88rem + .3vw,1.125rem);
+  font-weight:600;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.wordmark span{color:var(--gold)}
+
+/* ------------------------------------------------------------
+   BUTTONS — the only filled masses on the page
+   ------------------------------------------------------------ */
+.cta{
+  display:inline-flex;
+  align-items:center;
+  gap:.8em;
+  background:var(--gold);
+  color:var(--ink);
+  font-family:var(--mono);
+  font-weight:600;
+  font-size:var(--t-micro);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  text-decoration:none;
+  padding:calc(var(--u)*1.75) calc(var(--u)*2.75);
+  border:1px solid var(--gold);
+  transition:background .16s ease,color .16s ease;
+  white-space:nowrap;
+}
+.cta:hover{background:var(--gold-hi);border-color:var(--gold-hi)}
+.cta--line{
+  background:transparent;
+  color:var(--gold);
+}
+.cta--line:hover{background:var(--gold);color:var(--ink)}
+.cta--xl{
+  font-size:clamp(.75rem,.7rem + .32vw,.9375rem);
+  padding:calc(var(--u)*2.75) calc(var(--u)*4.5);
+  letter-spacing:.2em;
+}
+.cta .tip{width:1.3em;height:1px;background:currentColor;position:relative;flex:0 0 auto}
+.cta .tip::after{
+  content:"";position:absolute;right:0;top:50%;
+  width:.42em;height:.42em;
+  border-top:1px solid currentColor;border-right:1px solid currentColor;
+  transform:translateY(-50%) rotate(45deg);
+}
+
+/* ------------------------------------------------------------
+   TYPE
+   ------------------------------------------------------------ */
+h1,h2,h3{margin:0;font-weight:400}
+.eyebrow{
+  font-size:var(--t-micro);
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin:0 0 calc(var(--u)*2.5);
+  font-weight:500;
+}
+.display{
+  font-size:var(--t-display);
+  font-weight:300;
+  line-height:1.02;
+  letter-spacing:-.035em;
+  text-wrap:balance;
+}
+.display b{font-weight:600;color:var(--gold)}
+.lead{
+  font-size:var(--t-lead);
+  font-weight:300;
+  line-height:1.18;
+  letter-spacing:-.02em;
+  text-wrap:balance;
+  max-width:22ch;
+}
+.say{max-width:44ch;color:var(--muted);margin:0}
+.say.wide{max-width:52ch}
+.s1{margin-top:calc(var(--u)*2)}
+.s2{margin-top:calc(var(--u)*3)}
+.s3{margin-top:calc(var(--u)*5)}
+.s4{margin-top:calc(var(--u)*8)}
+
+/* ------------------------------------------------------------
+   THE LADDER — ten rungs, each one physically wired to the line
+   ------------------------------------------------------------ */
+.rungs{list-style:none;margin:calc(var(--u)*5) 0 0;padding:0}
+.rung{
+  position:relative;
+  display:flex;
+  align-items:baseline;
+  gap:calc(var(--u)*2);
+  padding-block:calc(var(--u)*1.75);
+}
+.rung::before{
+  content:"";
+  position:absolute;
+  left:calc(-1 * (var(--rail) / 2 + clamp(14px, 3.5vw, 48px)));
+  top:50%;
+  width:calc(var(--rail) / 2 + clamp(14px, 3.5vw, 48px) - 10px);
+  height:1px;
+  background:var(--gold-lo);
+}
+.rung::after{
+  content:"";
+  position:absolute;
+  left:-8px;top:50%;
+  width:5px;height:5px;
+  margin-top:-2px;
+  background:var(--gold);
+  transform:rotate(45deg);
+}
+.rung .idx{
+  font-size:var(--t-micro);
+  color:var(--dim);
+  min-width:3ch;
+  letter-spacing:.1em;
+}
+.rung .name{
+  font-size:clamp(1rem,.92rem + .6vw,1.5rem);
+  font-weight:300;
+  letter-spacing:-.01em;
+}
+.rung:nth-child(odd) .name{color:var(--text)}
+.rung:nth-child(even) .name{color:#C9C7C1}
+
+/* ------------------------------------------------------------
+   SCHEMATIC
+   ------------------------------------------------------------ */
+.plate{overflow-x:auto;margin-top:calc(var(--u)*4)}
+.plate svg{display:block;width:100%;min-width:320px;height:auto}
+.caption{
+  font-size:var(--t-micro);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--dim);
+  margin:calc(var(--u)*2) 0 0;
+}
+
+/* ------------------------------------------------------------
+   CHANNELS — two branches, like the fork in the rail
+   ------------------------------------------------------------ */
+.branches{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:calc(var(--u)*5);
+  margin-top:calc(var(--u)*5);
+}
+@media (min-width:780px){.branches{grid-template-columns:1fr 1fr;gap:calc(var(--u)*7)}}
+.branch h3{
+  font-size:var(--t-micro);
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  padding-bottom:calc(var(--u)*1.25);
+  margin-bottom:calc(var(--u)*2);
+  border-bottom:1px solid #2A2B30;
+}
+.branch.soon h3{color:var(--dim)}
+.branch ul{list-style:none;margin:0;padding:0;font-size:clamp(.8125rem,.79rem + .14vw,.9375rem)}
+.branch li{padding-block:calc(var(--u)*.9);color:var(--muted)}
+.branch.soon li{color:#6A6C70}
+
+/* ------------------------------------------------------------
+   ACCESS
+   ------------------------------------------------------------ */
+.access{display:grid;grid-template-columns:1fr;gap:calc(var(--u)*5);margin-top:calc(var(--u)*5);max-width:60ch}
+@media (min-width:720px){.access{grid-template-columns:1fr 1fr;gap:calc(var(--u)*7)}}
+.access .k{display:block;font-size:var(--t-micro);letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:calc(var(--u)*1.5)}
+.access .v{font-size:clamp(1.25rem,1.05rem + .9vw,1.875rem);font-weight:300;letter-spacing:-.02em;line-height:1.1;display:block}
+.access .v.on{color:var(--gold)}
+.access .v.off{color:var(--muted)}
+.access p{margin:calc(var(--u)*1.75) 0 0;font-size:var(--t-micro);line-height:1.8;color:var(--dim);max-width:32ch}
+
+/* ------------------------------------------------------------
+   FOOTER — the line ends here, in a full stop
+   ------------------------------------------------------------ */
+.foot .body-col{padding-block:calc(var(--u)*7) calc(var(--u)*8)}
+.foot-links{display:flex;gap:calc(var(--u)*4);flex-wrap:wrap;font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;font-weight:500}
+.foot-links a{text-decoration:none;color:var(--gold);border-bottom:1px solid #3A3B40;padding-bottom:4px}
+.foot-links a:hover{border-bottom-color:var(--gold)}
+.risk{font-size:var(--t-micro);line-height:1.85;color:var(--dim);max-width:58ch;margin:calc(var(--u)*4) 0 0}
+.sign{font-size:var(--t-micro);letter-spacing:.22em;text-transform:uppercase;color:#4C4E52;margin:calc(var(--u)*4) 0 0}
+
+/* ------------------------------------------------------------
+   390px — the rail narrows, the clusters stay legible
+   ------------------------------------------------------------ */
+@media (max-width:520px){
+  .body-col{padding-block:clamp(34px,7vh,64px)}
+  .display{letter-spacing:-.025em}
+  .cta--xl{width:100%;justify-content:space-between}
+  .head .body-col{padding-block:calc(var(--u)*2.5)}
+  .rung .name{letter-spacing:0}
+}
+
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+</style>
+</head>
+<body>
+
+<div class="frame">
+
+<!-- ═══════════ HEADER — the line begins ═══════════ -->
+<section class="band head">
+  <div class="rail" aria-hidden="true">
+    <div class="shape">
+      <svg viewBox="0 0 100 40" preserveAspectRatio="xMidYMin meet">
+        <circle cx="50" cy="7" r="3.5" fill="#D7B364"/>
+        <line x1="50" y1="10.5" x2="50" y2="40" stroke="#D7B364" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="run"></div>
+  </div>
+  <div class="body-col">
+    <a class="wordmark" href="#hero">Atlas<span>·</span>Capital</a>
+    <a class="cta" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Discord <span class="tip" aria-hidden="true"></span></a>
+  </div>
+</section>
+
+<!-- ═══════════ 01 · HERO — the line becomes a candle ═══════════ -->
+<section class="band" id="hero" aria-labelledby="h1">
+  <div class="rail" aria-hidden="true">
+    <div class="run"></div>
+    <div class="shape">
+      <svg viewBox="0 0 100 210" preserveAspectRatio="xMidYMid meet">
+        <line x1="50" y1="0" x2="50" y2="210" stroke="#D7B364" stroke-width="1"/>
+        <rect x="34" y="52" width="32" height="106" fill="#D7B364"/>
+        <rect x="34" y="52" width="32" height="106" fill="none" stroke="#E6CC8E" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="run"></div>
+  </div>
+  <div class="body-col">
+    <p class="eyebrow">01 — Atlas Capital</p>
+    <h1 class="display" id="h1">Eén proces.<br>Elke sessie<br><b>opnieuw.</b></h1>
+    <p class="say s3">Nederlandse trading-community op Discord. NQ, ES, Bitcoin en altcoins &mdash; met educatie die je zelf kunt navolgen.</p>
+    <div class="s3">
+      <a class="cta cta--xl" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Kom binnen op Discord <span class="tip" aria-hidden="true"></span></a>
+    </div>
+    <p class="caption s3">Proces · Discipline · Uitvoering</p>
+  </div>
+</section>
+
+<!-- ═══════════ 02 · OPRICHTER — the line becomes a contour ═══════════ -->
+<section class="band" aria-labelledby="h2">
+  <div class="rail" aria-hidden="true">
+    <div class="run"></div>
+    <div class="shape">
+      <svg viewBox="0 0 100 300" preserveAspectRatio="xMidYMid meet">
+        <path d="M50 0 C50 44 14 60 14 104 C14 148 86 156 86 200 C86 244 50 256 50 300"
+              fill="none" stroke="#D7B364" stroke-width="1"/>
+        <path d="M50 0 C50 52 26 66 26 104 C26 142 74 156 74 200 C74 240 50 250 50 300"
+              fill="none" stroke="#B9954A" stroke-width="1" stroke-dasharray="2 7"/>
+      </svg>
+    </div>
+    <div class="run"></div>
+  </div>
+  <div class="body-col">
+    <p class="eyebrow">02 — De oprichter</p>
+    <h2 class="display" id="h2">10+ jaar,<br>alles gezien.</h2>
+    <blockquote class="say wide s3" style="margin:0">
+      <p style="margin:0">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&rdquo;</p>
+      <p class="s2" style="margin-bottom:0">&ldquo;Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader.&rdquo;</p>
+    </blockquote>
+    <p class="caption s3">Geen snelle-rijk-verhalen</p>
+  </div>
+</section>
+
+<!-- ═══════════ 03 · EDUCATIE — the line becomes a ladder ═══════════ -->
+<section class="band" aria-labelledby="h3">
+  <div class="rail" aria-hidden="true">
+    <div class="run"></div>
+  </div>
+  <div class="body-col">
+    <p class="eyebrow">03 — Educatie</p>
+    <h2 class="lead" id="h3">10 onderwerpen, in de volgorde waarin ze pijn doen.</h2>
+
+    <ol class="rungs">
+      <li class="rung"><span class="idx">01</span><span class="name">deviatie</span></li>
+      <li class="rung"><span class="idx">02</span><span class="name">SMT</span></li>
+      <li class="rung"><span class="idx">03</span><span class="name">FVG</span></li>
+      <li class="rung"><span class="idx">04</span><span class="name">IFVG</span></li>
+      <li class="rung"><span class="idx">05</span><span class="name">orderblocks</span></li>
+      <li class="rung"><span class="idx">06</span><span class="name">fibonacci</span></li>
+      <li class="rung"><span class="idx">07</span><span class="name">sessie-liquiditeit</span></li>
+      <li class="rung"><span class="idx">08</span><span class="name">liquiditeit</span></li>
+      <li class="rung"><span class="idx">09</span><span class="name">risicobeheer</span></li>
+      <li class="rung"><span class="idx">10</span><span class="name">tradingpsychologie</span></li>
+    </ol>
+
+    <div class="s4">
+      <a class="cta cta--line" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Start bij 01 in Discord <span class="tip" aria-hidden="true"></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 04 · HET MODEL — the line steps out into a chart ═══════════ -->
+<section class="band" aria-labelledby="h4">
+  <div class="rail" aria-hidden="true">
+    <div class="run"></div>
+    <div class="shape">
+      <svg viewBox="0 0 100 160" preserveAspectRatio="xMidYMid meet">
+        <path d="M50 0 V44 H88" fill="none" stroke="#D7B364" stroke-width="1"/>
+        <path d="M88 116 H50 V160" fill="none" stroke="#D7B364" stroke-width="1"/>
+        <line x1="50" y1="44" x2="50" y2="116" stroke="#B9954A" stroke-width="1" stroke-dasharray="2 6"/>
+      </svg>
+    </div>
+    <div class="run"></div>
+  </div>
+  <div class="body-col">
+    <p class="eyebrow">04 — Het model</p>
+    <h2 class="lead" id="h4">Sweep, gap, hertest. Steeds dezelfde vorm.</h2>
+
+    <div class="plate">
+      <svg viewBox="0 0 900 430" role="img" aria-label="Schematische weergave van een liquidity sweep, een fair value gap en een hertest">
+        <g stroke="#1E2025" stroke-width="1">
+          <line x1="30" y1="70" x2="880" y2="70"/>
+          <line x1="30" y1="160" x2="880" y2="160"/>
+          <line x1="30" y1="250" x2="880" y2="250"/>
+          <line x1="30" y1="340" x2="880" y2="340"/>
+        </g>
+
+        <!-- resting liquidity, swept -->
+        <line x1="30" y1="104" x2="880" y2="104" stroke="#B9954A" stroke-width="1" stroke-dasharray="7 7"/>
+        <text x="34" y="96" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1.6" fill="#B9954A">LIQUIDITEIT</text>
+
+        <!-- the gap -->
+        <rect x="360" y="206" width="520" height="52" fill="#D7B364" fill-opacity=".13"/>
+        <line x1="360" y1="206" x2="880" y2="206" stroke="#D7B364" stroke-width="1"/>
+        <line x1="360" y1="258" x2="880" y2="258" stroke="#D7B364" stroke-width="1"/>
+        <text x="372" y="198" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1.6" fill="#D7B364">FVG</text>
+
+        <!-- approach -->
+        <g stroke="#8B8D91" stroke-width="1" fill="none">
+          <line x1="80" y1="286" x2="80" y2="344"/><rect x="71" y="300" width="18" height="30"/>
+          <line x1="136" y1="266" x2="136" y2="330"/><rect x="127" y="282" width="18" height="32"/>
+          <line x1="192" y1="240" x2="192" y2="312"/><rect x="183" y="256" width="18" height="40"/>
+        </g>
+        <!-- the sweep: a wick through the level -->
+        <g>
+          <line x1="248" y1="88" x2="248" y2="286" stroke="#E4E2DC" stroke-width="1"/>
+          <rect x="237" y="180" width="22" height="80" fill="none" stroke="#E4E2DC" stroke-width="1"/>
+        </g>
+        <!-- displacement down through the gap -->
+        <g>
+          <line x1="304" y1="150" x2="304" y2="300" stroke="#B9954A" stroke-width="1"/>
+          <rect x="293" y="166" width="22" height="112" fill="#D7B364"/>
+          <line x1="360" y1="196" x2="360" y2="336" stroke="#B9954A" stroke-width="1"/>
+          <rect x="349" y="214" width="22" height="104" fill="#D7B364"/>
+        </g>
+        <!-- base then return into the band -->
+        <g stroke="#8B8D91" stroke-width="1" fill="none">
+          <line x1="416" y1="278" x2="416" y2="352"/><rect x="407" y="296" width="18" height="42"/>
+          <line x1="472" y1="252" x2="472" y2="330"/><rect x="463" y="268" width="18" height="46"/>
+          <line x1="528" y1="222" x2="528" y2="300"/><rect x="519" y="238" width="18" height="46"/>
+          <line x1="584" y1="200" x2="584" y2="272"/><rect x="575" y="214" width="18" height="44"/>
+        </g>
+        <!-- rejection out of the band -->
+        <g>
+          <line x1="640" y1="208" x2="640" y2="326" stroke="#B9954A" stroke-width="1"/>
+          <rect x="629" y="248" width="22" height="62" fill="#D7B364"/>
+        </g>
+        <g stroke="#8B8D91" stroke-width="1" fill="none">
+          <line x1="696" y1="262" x2="696" y2="356"/><rect x="687" y="288" width="18" height="48"/>
+          <line x1="752" y1="290" x2="752" y2="380"/><rect x="743" y="312" width="18" height="52"/>
+          <line x1="808" y1="316" x2="808" y2="398"/><rect x="799" y="336" width="18" height="50"/>
+        </g>
+
+        <!-- callouts -->
+        <g stroke="#5C5E62" stroke-width="1">
+          <line x1="248" y1="82" x2="248" y2="46"/><line x1="248" y1="46" x2="316" y2="46"/>
+        </g>
+        <text x="326" y="50" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1.6" fill="#A5A6A8">SWEEP</text>
+
+        <g stroke="#5C5E62" stroke-width="1">
+          <line x1="612" y1="230" x2="612" y2="418"/><line x1="612" y1="418" x2="676" y2="418"/>
+        </g>
+        <text x="686" y="422" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1.6" fill="#A5A6A8">HERTEST</text>
+      </svg>
+    </div>
+    <p class="caption">Schematisch. Geen prijzen, geen resultaten — alleen de structuur.</p>
+
+    <div class="s3">
+      <a class="cta cta--line" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Zie het live in de charts <span class="tip" aria-hidden="true"></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 05 · KANALEN — the line forks ═══════════ -->
+<section class="band" aria-labelledby="h5">
+  <div class="rail" aria-hidden="true">
+    <div class="run"></div>
+    <div class="shape">
+      <svg viewBox="0 0 100 280" preserveAspectRatio="xMidYMid meet">
+        <path d="M50 0 C50 46 16 50 16 96 V184 C16 230 50 234 50 280" fill="none" stroke="#D7B364" stroke-width="1"/>
+        <path d="M50 0 C50 46 84 50 84 96 V184 C84 230 50 234 50 280" fill="none" stroke="#B9954A" stroke-width="1" stroke-dasharray="3 6"/>
+      </svg>
+    </div>
+    <div class="run"></div>
+  </div>
+  <div class="body-col">
+    <p class="eyebrow">05 — De server</p>
+    <h2 class="lead" id="h5">15 kanalen. Twee takken.</h2>
+
+    <div class="branches">
+      <div class="branch">
+        <h3>Thuis — nu gratis</h3>
+        <ul>
+          <li>#nq-chart-ideeën</li>
+          <li>#es-chart-ideeën</li>
+          <li>#bitcoin</li>
+          <li>#altcoins</li>
+          <li>#markt</li>
+          <li>#vragen</li>
+          <li>#algemeen</li>
+          <li>#atlas-op-socials</li>
+          <li>#ondersteuning</li>
+        </ul>
+      </div>
+      <div class="branch soon">
+        <h3>Premium — opent later</h3>
+        <ul>
+          <li>#trade-setups</li>
+          <li>#marktupdates</li>
+          <li>#indicatoren</li>
+          <li>#sessie-opnames</li>
+          <li>#chart-ideeën</li>
+          <li>#premium-chat</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 06 · LIVE — the line pulses ═══════════ -->
+<section class="band" aria-labelledby="h6">
+  <div class="rail" aria-hidden="true">
+    <div class="run"></div>
+    <div class="shape">
+      <svg viewBox="0 0 100 200" preserveAspectRatio="xMidYMid meet">
+        <path d="M50 0 V62 L20 84 L80 112 L34 134 L50 152 V200" fill="none" stroke="#D7B364" stroke-width="1" stroke-linejoin="round"/>
+        <circle cx="80" cy="112" r="3" fill="#D7B364"/>
+      </svg>
+    </div>
+    <div class="run"></div>
+  </div>
+  <div class="body-col tight">
+    <p class="eyebrow">06 — Live</p>
+    <h2 class="display" id="h6">Live in de<br>server.</h2>
+    <p class="say s3">De oprichter handelt live mee en denkt hardop. Tijden worden in Discord aangekondigd.</p>
+    <div class="s3">
+      <a class="cta" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Zit een sessie mee <span class="tip" aria-hidden="true"></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 07 · TOEGANG ═══════════ -->
+<section class="band" aria-labelledby="h7">
+  <div class="rail" aria-hidden="true">
+    <div class="run"></div>
+    <div class="shape">
+      <svg viewBox="0 0 100 140" preserveAspectRatio="xMidYMid meet">
+        <line x1="50" y1="0" x2="50" y2="140" stroke="#D7B364" stroke-width="1"/>
+        <line x1="26" y1="46" x2="74" y2="46" stroke="#D7B364" stroke-width="1"/>
+        <line x1="34" y1="94" x2="66" y2="94" stroke="#B9954A" stroke-width="1" stroke-dasharray="3 5"/>
+      </svg>
+    </div>
+    <div class="run"></div>
+  </div>
+  <div class="body-col tight">
+    <p class="eyebrow">07 — Toegang</p>
+    <h2 class="lead" id="h7">Nu gratis. Straks meer.</h2>
+    <div class="access">
+      <div>
+        <span class="k">Thuis</span>
+        <span class="v on">Open, gratis</span>
+        <p>Educatie, chart-ideeën, markt en vragen. Je kunt vandaag beginnen.</p>
+      </div>
+      <div>
+        <span class="k">Premium</span>
+        <span class="v off">Opent later</span>
+        <p>Datum en prijs worden in de server aangekondigd. Niet hier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 08 · SLOT — the line becomes an arrow ═══════════ -->
+<section class="band" aria-labelledby="h8">
+  <div class="rail" aria-hidden="true">
+    <div class="run"></div>
+    <div class="shape">
+      <svg viewBox="0 0 100 130" preserveAspectRatio="xMidYMid meet">
+        <line x1="50" y1="0" x2="50" y2="104" stroke="#D7B364" stroke-width="2"/>
+        <path d="M26 80 L50 108 L74 80" fill="none" stroke="#D7B364" stroke-width="2" stroke-linecap="square"/>
+      </svg>
+    </div>
+  </div>
+  <div class="body-col">
+    <p class="eyebrow">08 — Kom binnen</p>
+    <h2 class="display" id="h8">De lijn stopt<br>bij de <b>deur.</b></h2>
+    <p class="say s3">Toegang is nu gratis. Eén klik en je zit erin.</p>
+    <div class="s3">
+      <a class="cta cta--xl" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Open Discord <span class="tip" aria-hidden="true"></span></a>
+    </div>
+    <p class="caption s3">discord.gg/78Ff2GuSfW</p>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<section class="band foot">
+  <div class="rail" aria-hidden="true">
+    <div class="shape">
+      <svg viewBox="0 0 100 30" preserveAspectRatio="xMidYMin meet">
+        <line x1="50" y1="0" x2="50" y2="14" stroke="#D7B364" stroke-width="1"/>
+        <rect x="46" y="18" width="8" height="8" fill="#D7B364"/>
+      </svg>
+    </div>
+  </div>
+  <div class="body-col">
+    <div class="foot-links">
+      <a href="https://discord.gg/78Ff2GuSfW" rel="noopener">Discord</a>
+      <a href="https://www.tiktok.com/@atlascapitalbv" rel="noopener">TikTok · @atlascapitalbv</a>
+    </div>
+    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <p class="sign">Atlas Capital — Proces · Discipline · Uitvoering</p>
+  </div>
+</section>
+
+</div>
+
+</body>
+</html>

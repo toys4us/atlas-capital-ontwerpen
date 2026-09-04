@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="nl" data-lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 091 Plakband</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   091 — PLAKBAND
+   Stacked sticky panels. Each section sticks to the top while
+   the next one slides over it and tapes itself down. The page
+   assembles into a deck. Pure CSS, no scroll observers.
+   Every panel is fully painted at frame one.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --panel:#15161A;
+  --panel-2:#101115;
+  --paper:#F4F2EC;
+  --muted:#A5A6A8;
+  --line:rgba(215,179,100,.24);
+  --line-soft:rgba(255,255,255,.08);
+  --bar-h:58px;
+  --step:15px;
+  --sans:"Archivo",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+
+html{
+  color-scheme:dark;
+  background:var(--ink);
+  scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;
+  background:
+    radial-gradient(120% 60% at 50% -10%, #1b1d22 0%, #0a0b0e 55%, #08090B 100%);
+  color:var(--paper);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.5;
+  overflow-x:hidden;
+}
+img,svg{max-width:100%}
+a{color:inherit}
+
+/* ---------- shared bits ---------- */
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin:0 0 18px;
+}
+.lede{color:var(--muted);font-size:clamp(15px,1.5vw,18px);max-width:52ch;margin:0}
+h1,h2,h3{margin:0;font-weight:900;letter-spacing:-.03em;line-height:.94}
+h1{font-size:clamp(38px,7.6vw,90px)}
+h2{font-size:clamp(30px,5vw,58px)}
+h3{font-size:clamp(18px,2vw,22px);letter-spacing:-.01em;font-weight:600}
+
+/* ---------- buttons ---------- */
+.btn{
+  --bg:var(--gold);
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 22px;
+  border:1px solid var(--gold);
+  background:linear-gradient(160deg,var(--gold-hi),var(--gold) 55%,var(--gold-lo));
+  color:#12100A;
+  font-weight:800;
+  font-size:14px;
+  letter-spacing:.02em;
+  text-decoration:none;
+  border-radius:2px;
+  position:relative;
+  overflow:hidden;
+  transition:transform .18s ease, box-shadow .18s ease;
+  box-shadow:0 8px 26px rgba(215,179,100,.16);
+}
+.btn::after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(105deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 62%);
+  transform:translateX(-130%);
+  animation:sheen 4.6s ease-in-out infinite;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(215,179,100,.3)}
+.btn:focus-visible{outline:2px solid var(--paper);outline-offset:3px}
+.btn .arw{transition:transform .18s ease}
+.btn:hover .arw{transform:translateX(4px)}
+.btn.ghost{
+  background:transparent;color:var(--paper);
+  border-color:rgba(255,255,255,.28);
+  box-shadow:none;font-weight:600;
+}
+.btn.ghost::after{display:none}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn.sm{padding:10px 16px;font-size:12.5px}
+.btn.xl{padding:20px 34px;font-size:17px}
+
+@keyframes sheen{
+  0%,62%{transform:translateX(-130%)}
+  86%,100%{transform:translateX(130%)}
+}
+
+/* ---------- header ---------- */
+.bar{
+  position:sticky;top:0;z-index:60;
+  height:var(--bar-h);
+  display:flex;align-items:center;
+  background:rgba(8,9,11,.82);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-soft);
+}
+.bar .wrap{display:flex;align-items:center;gap:18px;width:min(1180px,100% - 24px)}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
+.mark svg{width:26px;height:26px;flex:none}
+.mark b{
+  font-size:14px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+}
+.mark span{color:var(--gold)}
+.bar nav{display:none;gap:22px}
+.bar nav a{
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent;
+}
+.bar nav a:hover{color:var(--gold);border-bottom-color:var(--gold)}
+@media(min-width:880px){.bar nav{display:flex}}
+.langsw{
+  display:flex;align-items:stretch;flex:none;
+  border:1px solid var(--line);border-radius:2px;overflow:hidden;
+  background:rgba(215,179,100,.05);
+}
+.langsw button{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;line-height:1;
+  color:var(--muted);background:transparent;border:0;padding:7px 7px;
+  cursor:pointer;transition:color .18s ease,background .18s ease;
+}
+.langsw button+button{border-left:1px solid var(--line)}
+.langsw button:hover{color:var(--gold)}
+.langsw button[aria-pressed="true"]{background:rgba(215,179,100,.16);color:var(--gold-hi)}
+.langsw button:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
+
+/* ---------- the deck ---------- */
+.deck{
+  display:block;
+  padding:0 0 6px;
+}
+.card{
+  position:sticky;
+  top:calc(var(--bar-h) + (var(--i) * var(--step)));
+  min-height:min(760px,88svh);
+  margin:0 auto 22px;
+  width:min(1180px,100% - 24px);
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:
+    linear-gradient(180deg,#191A20 0%,#111217 46%,#0C0D11 100%);
+  box-shadow:
+    0 -1px 0 rgba(255,255,255,.05) inset,
+    0 -34px 70px rgba(0,0,0,.72);
+  padding:clamp(26px,4.2vw,58px);
+  padding-top:clamp(46px,5.4vw,72px);
+  overflow:hidden;
+  isolation:isolate;
+}
+.card::before{
+  content:"";
+  position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.022) 0 1px,transparent 1px 92px);
+  pointer-events:none;
+  z-index:-1;
+}
+.card .num{
+  position:absolute;top:0;left:clamp(26px,4.2vw,58px);
+  font-family:var(--mono);font-size:11px;letter-spacing:.3em;
+  color:var(--gold);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-top:none;
+  border-radius:0 0 6px 6px;
+  padding:7px 12px 6px;
+}
+/* the tape */
+.tape{
+  position:absolute;top:-16px;left:50%;
+  width:min(210px,44%);height:40px;
+  transform:translateX(-50%) rotate(-1.6deg);
+  background:
+    linear-gradient(180deg,rgba(230,204,142,.30),rgba(185,149,74,.20)),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.10) 0 3px,rgba(255,255,255,0) 3px 7px);
+  border-left:1px dashed rgba(255,255,255,.16);
+  border-right:1px dashed rgba(255,255,255,.16);
+  box-shadow:0 6px 16px rgba(0,0,0,.4);
+  pointer-events:none;
+}
+.tape::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(255,255,255,0) 40%,rgba(255,255,255,.35) 50%,rgba(255,255,255,0) 60%);
+  background-size:280% 100%;
+  background-position:-40% 0;
+  animation:tapeglint 7s ease-in-out infinite;
+}
+.card:nth-child(even) .tape{transform:translateX(-50%) rotate(1.3deg);width:min(160px,36%)}
+@keyframes tapeglint{
+  0%,55%{background-position:-40% 0}
+  90%,100%{background-position:140% 0}
+}
+
+/* stagger the deck so the lower cards read as further back */
+.card{--i:0}
+.card:nth-of-type(1){--i:0}
+.card:nth-of-type(2){--i:1}
+.card:nth-of-type(3){--i:2}
+.card:nth-of-type(4){--i:3}
+.card:nth-of-type(5){--i:4}
+.card:nth-of-type(6){--i:5}
+.card:nth-of-type(7){--i:6}
+.card:nth-of-type(8){--i:7}
+
+/* ---------- hero card ---------- */
+.hero{display:grid;gap:clamp(26px,4vw,48px);grid-template-columns:1fr;align-items:center}
+@media(min-width:960px){.hero{grid-template-columns:1.05fr .95fr}}
+.hero h1{margin:0 0 20px}
+.hero h1 em{
+  font-style:normal;
+  color:var(--gold);
+  display:inline-block;
+}
+.words{
+  display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 28px;padding:0;list-style:none;
+}
+.words li{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:99px;padding:7px 13px;color:var(--gold-hi);
+  background:rgba(215,179,100,.06);
+}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.free-note{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin:18px 0 0;
+}
+
+/* plates artwork */
+.plates{width:100%;height:auto;display:block}
+.plate{animation:drift 9s ease-in-out infinite}
+.plate.p2{animation-delay:-1.4s}
+.plate.p3{animation-delay:-2.8s}
+.plate.p4{animation-delay:-4.2s}
+.plate.p5{animation-delay:-5.6s}
+@keyframes drift{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
+}
+.spark{animation:sparkpulse 3.4s ease-in-out infinite}
+@keyframes sparkpulse{
+  0%,100%{r:3.2}
+  50%{r:5.6}
+}
+
+/* ---------- founder ---------- */
+.founder{display:grid;gap:clamp(24px,4vw,46px);grid-template-columns:1fr;align-items:start}
+@media(min-width:900px){.founder{grid-template-columns:minmax(0,240px) 1fr}}
+.bigyear{
+  font-size:clamp(64px,12vw,132px);
+  font-weight:900;letter-spacing:-.06em;line-height:.8;
+  background:linear-gradient(170deg,var(--gold-hi),var(--gold) 45%,var(--gold-lo));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.bigyear small{display:block;font-size:12px;letter-spacing:.28em;color:var(--muted);
+  -webkit-text-fill-color:var(--muted);font-weight:600;margin-top:14px;text-transform:uppercase}
+blockquote{
+  margin:0;font-size:clamp(17px,2.2vw,25px);line-height:1.45;font-weight:400;
+  border-left:2px solid var(--gold);padding-left:clamp(16px,2.4vw,28px);
+}
+blockquote p+p{margin-bottom:0;color:var(--muted);font-size:clamp(15px,1.7vw,19px)}
+.sig{
+  margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);
+}
+
+/* ---------- curriculum ---------- */
+.topics{
+  list-style:none;margin:34px 0 0;padding:0;
+  display:grid;gap:10px;grid-template-columns:1fr;
+}
+@media(min-width:620px){.topics{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.topics{grid-template-columns:1fr 1fr 1fr}}
+.topics li{
+  display:flex;align-items:center;gap:14px;
+  border:1px solid var(--line-soft);
+  border-left:2px solid var(--gold-lo);
+  background:linear-gradient(90deg,rgba(215,179,100,.07),rgba(215,179,100,0) 70%);
+  padding:15px 16px;border-radius:3px;
+  transition:transform .2s ease,border-color .2s ease,background .2s ease;
+}
+.topics li:hover{
+  transform:translateX(6px);
+  border-left-color:var(--gold-hi);
+  background:linear-gradient(90deg,rgba(215,179,100,.16),rgba(215,179,100,0) 75%);
+}
+.topics .ix{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.12em}
+.topics .nm{font-weight:600;font-size:15.5px;letter-spacing:-.005em}
+
+/* ---------- model schematic ---------- */
+.model{display:grid;gap:clamp(22px,3.4vw,42px);grid-template-columns:1fr}
+@media(min-width:960px){.model{grid-template-columns:1fr minmax(0,330px)}}
+.chartbox{
+  border:1px solid var(--line-soft);border-radius:10px;
+  background:linear-gradient(180deg,#0E0F13,#0A0B0E);
+  padding:clamp(14px,2vw,22px);
+  overflow-x:auto;
+}
+.chartbox svg{min-width:440px;display:block}
+.sweep{animation:sweepline 6.5s ease-in-out infinite}
+@keyframes sweepline{
+  0%,100%{transform:translateX(0)}
+  50%{transform:translateX(10px)}
+}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.legend li{border-top:1px solid var(--line-soft);padding-top:14px}
+.legend b{display:block;font-size:14px;letter-spacing:.02em;color:var(--gold-hi);margin-bottom:4px}
+.legend span{color:var(--muted);font-size:14px}
+
+/* ---------- channels ---------- */
+.chgrid{display:grid;gap:22px;grid-template-columns:1fr;margin-top:30px}
+@media(min-width:860px){.chgrid{grid-template-columns:1.35fr 1fr}}
+.chcol{border:1px solid var(--line-soft);border-radius:10px;padding:22px;background:rgba(255,255,255,.015)}
+.chcol h3{margin-bottom:4px}
+.chcol .tag{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:18px;display:block;
+}
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.chips li{
+  font-family:var(--mono);font-size:13px;
+  border:1px solid var(--line-soft);border-radius:4px;padding:8px 11px;
+  color:var(--paper);background:rgba(255,255,255,.03);
+  transition:border-color .18s ease,color .18s ease,transform .18s ease;
+}
+.chips li:hover{border-color:var(--gold);color:var(--gold-hi);transform:translateY(-2px)}
+.chips.locked li{color:var(--muted);border-style:dashed}
+
+/* ---------- live ---------- */
+.live{display:grid;gap:clamp(22px,3vw,40px);grid-template-columns:1fr;align-items:center}
+@media(min-width:900px){.live{grid-template-columns:1fr minmax(0,380px)}}
+.pulse-wrap{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.dot{
+  width:11px;height:11px;border-radius:50%;background:var(--gold);flex:none;
+  box-shadow:0 0 0 0 rgba(215,179,100,.55);
+  animation:pulse 2.4s ease-out infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(215,179,100,.5)}
+  70%{box-shadow:0 0 0 16px rgba(215,179,100,0)}
+  100%{box-shadow:0 0 0 0 rgba(215,179,100,0)}
+}
+.pulse-wrap b{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.dial{width:100%;height:auto;display:block}
+.hand{transform-origin:110px 110px;animation:spin 24s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- access ---------- */
+.access{display:grid;gap:18px;grid-template-columns:1fr;margin-top:34px}
+@media(min-width:820px){.access{grid-template-columns:1fr 1fr}}
+.tier{
+  border:1px solid var(--line-soft);border-radius:12px;padding:26px;
+  background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,0));
+  position:relative;
+  transition:border-color .2s ease,transform .2s ease;
+}
+.tier:hover{border-color:var(--line);transform:translateY(-3px)}
+.tier.now{border-color:var(--gold);background:linear-gradient(180deg,rgba(215,179,100,.12),rgba(215,179,100,.02))}
+.tier .state{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold);display:block;margin-bottom:12px;
+}
+.tier p{color:var(--muted);font-size:14.5px;margin:10px 0 20px}
+.tier ul{margin:0 0 22px;padding:0;list-style:none;display:grid;gap:9px}
+.tier li{font-size:14px;color:var(--paper);display:flex;gap:10px;align-items:baseline}
+.tier li::before{content:"—";color:var(--gold-lo)}
+
+/* ---------- closing ---------- */
+.closing{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-height:inherit;gap:6px}
+.closing h2{font-size:clamp(38px,9vw,110px);line-height:.86}
+.closing .stripes{
+  width:100%;height:14px;margin:34px 0 30px;
+  background:repeating-linear-gradient(115deg,var(--gold-lo) 0 12px,transparent 12px 30px);
+  background-size:200% 100%;
+  animation:march 12s linear infinite;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+@keyframes march{to{background-position:200% 0}}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid var(--line-soft);
+  margin-top:26px;
+  padding:44px 0 56px;
+  background:#06070A;
+}
+.fgrid{display:grid;gap:26px;grid-template-columns:1fr}
+@media(min-width:760px){.fgrid{grid-template-columns:1.4fr 1fr 1fr}}
+footer h4{margin:0 0 12px;font-size:11px;font-family:var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+footer a{color:var(--paper);text-decoration:none;font-size:14.5px;display:inline-block;padding:3px 0}
+footer a:hover{color:var(--gold)}
+.risk{
+  margin:36px 0 0;padding-top:20px;border-top:1px solid var(--line-soft);
+  color:var(--muted);font-size:12.5px;line-height:1.6;max-width:70ch;
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="mark" href="#top">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 3 L28 27 H22 L16 13 L10 27 H4 Z" fill="none" stroke="#D7B364" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M11 21 H21" stroke="#D7B364" stroke-width="1.8"/>
+      </svg>
+      <b>Atlas <span>Capital</span></b>
+    </a>
+    <nav>
+      <a href="#educatie"><span lang="nl">Educatie</span><span lang="en">Education</span></a>
+      <a href="#model"><span lang="nl">Model</span><span lang="en">Model</span></a>
+      <a href="#kanalen"><span lang="nl">Kanalen</span><span lang="en">Channels</span></a>
+      <a href="#live"><span lang="nl">Live</span><span lang="en">Live</span></a>
+      <a href="#toegang"><span lang="nl">Toegang</span><span lang="en">Access</span></a>
+    </nav>
+    <a class="btn sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Open Discord <span class="arw">→</span></a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main class="deck" id="top">
+
+  <!-- ============ 01 HERO ============ -->
+  <section class="card">
+    <span class="tape" aria-hidden="true"></span>
+    <span class="num">01 / HERO</span>
+    <div class="hero">
+      <div>
+        <p class="eyebrow"><span lang="nl">Atlas Capital — Nederlandse trading-community</span><span lang="en">Atlas Capital — Dutch trading community</span></p>
+        <h1><span lang="nl">Het proces<br>stapelt zich <em>op</em>.</span><span lang="en">The process<br>stacks <em>up</em>.</span></h1>
+        <p class="lede"><span lang="nl">Structuur, herhaling en uitvoering. Laag over laag, elke sessie opnieuw.</span><span lang="en">Structure, repetition and execution. Layer on layer, session after session.</span></p>
+        <ul class="words">
+          <li><span lang="nl">Proces</span><span lang="en">Process</span></li><li><span lang="nl">Discipline</span><span lang="en">Discipline</span></li><li><span lang="nl">Uitvoering</span><span lang="en">Execution</span></li>
+        </ul>
+        <div class="cta-row">
+          <a class="btn xl" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Kom binnen op Discord</span><span lang="en">Come inside on Discord</span> <span class="arw">→</span></a>
+          <a class="btn ghost" href="#educatie"><span lang="nl">Bekijk de educatie</span><span lang="en">See the education</span></a>
+        </div>
+        <p class="free-note"><span lang="nl">Nu gratis toegang · NQ · ES · Bitcoin · Altcoins</span><span lang="en">Free access right now · NQ · ES · Bitcoin · Altcoins</span></p>
+      </div>
+      <div>
+        <p class="vh" id="fig091a"><span lang="nl">Gestapelde platen als schematische weergave van een opbouwend proces</span><span lang="en">Stacked plates as a schematic of a process building up</span></p>
+        <svg class="plates" viewBox="0 0 520 400" role="img" aria-labelledby="fig091a">
+          <defs>
+            <linearGradient id="pg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#1D1E25"/>
+              <stop offset="1" stop-color="#0B0C10"/>
+            </linearGradient>
+            <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#B9954A"/>
+              <stop offset=".5" stop-color="#E6CC8E"/>
+              <stop offset="1" stop-color="#B9954A"/>
+            </linearGradient>
+          </defs>
+          <g class="plate p5"><path d="M60,330 L260,240 L460,330 L260,420 Z" fill="url(#pg)" stroke="#B9954A" stroke-opacity=".35" stroke-width="1.4"/></g>
+          <g class="plate p4"><path d="M60,286 L260,196 L460,286 L260,376 Z" fill="url(#pg)" stroke="#B9954A" stroke-opacity=".45" stroke-width="1.4"/></g>
+          <g class="plate p3"><path d="M60,242 L260,152 L460,242 L260,332 Z" fill="url(#pg)" stroke="#B9954A" stroke-opacity=".6" stroke-width="1.4"/></g>
+          <g class="plate p2"><path d="M60,198 L260,108 L460,198 L260,288 Z" fill="url(#pg)" stroke="#C9A55C" stroke-opacity=".8" stroke-width="1.5"/></g>
+          <g class="plate">
+            <path d="M60,154 L260,64 L460,154 L260,244 Z" fill="url(#pg)" stroke="url(#edge)" stroke-width="1.8"/>
+            <!-- schematic candles resting on the top plate -->
+            <g stroke="#E6CC8E" stroke-width="2" fill="none">
+              <path d="M186,150 V126"/><rect x="180" y="132" width="12" height="20" fill="#0B0C10"/>
+              <path d="M222,158 V118"/><rect x="216" y="126" width="12" height="26" fill="#E6CC8E"/>
+              <path d="M258,150 V112"/><rect x="252" y="118" width="12" height="24" fill="#0B0C10"/>
+              <path d="M294,146 V104"/><rect x="288" y="110" width="12" height="28" fill="#E6CC8E"/>
+              <path d="M330,140 V100"/><rect x="324" y="106" width="12" height="26" fill="#0B0C10"/>
+            </g>
+            <circle class="spark" cx="330" cy="100" r="3.6" fill="#E6CC8E"/>
+          </g>
+          <g stroke="#D7B364" stroke-opacity=".28" stroke-dasharray="3 6" stroke-width="1">
+            <path d="M60,154 V330"/><path d="M460,154 V330"/><path d="M260,244 V420"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 FOUNDER ============ -->
+  <section class="card">
+    <span class="tape" aria-hidden="true"></span>
+    <span class="num"><span lang="nl">02 / OPRICHTER</span><span lang="en">02 / FOUNDER</span></span>
+    <p class="eyebrow"><span lang="nl">De man achter de server</span><span lang="en">The man behind the server</span></p>
+    <h2><span lang="nl">Ervaring, niet<br>een belofte.</span><span lang="en">Experience, not<br>a promise.</span></h2>
+    <div class="founder" style="margin-top:38px">
+      <div class="bigyear">10+<small><span lang="nl">jaar in de markt</span><span lang="en">years in the market</span></small></div>
+      <blockquote>
+        <p><span lang="nl">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&rdquo;</span><span lang="en">&ldquo;I&rsquo;ve been involved in trading for over 10 years now, and during that time I&rsquo;ve experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons.&rdquo;</span></p>
+        <p><span lang="nl">&ldquo;Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</span><span lang="en">&ldquo;No get-rich-quick promises, just real setups, education, and a community focused on improving together.&rdquo;</span></p>
+        <p class="sig"><span lang="nl">— Oprichter, Atlas Capital</span><span lang="en">— Founder, Atlas Capital</span></p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ============ 03 EDUCATIE ============ -->
+  <section class="card" id="educatie">
+    <span class="tape" aria-hidden="true"></span>
+    <span class="num"><span lang="nl">03 / EDUCATIE</span><span lang="en">03 / EDUCATION</span></span>
+    <p class="eyebrow"><span lang="nl">10 onderwerpen</span><span lang="en">10 topics</span></p>
+    <h2><span lang="nl">De laag waar<br>alles op rust.</span><span lang="en">The layer that<br>carries the rest.</span></h2>
+    <ul class="topics">
+      <li><span class="ix">01</span><span class="nm"><span lang="nl">deviatie</span><span lang="en">deviation</span></span></li>
+      <li><span class="ix">02</span><span class="nm">SMT</span></li>
+      <li><span class="ix">03</span><span class="nm">FVG</span></li>
+      <li><span class="ix">04</span><span class="nm">IFVG</span></li>
+      <li><span class="ix">05</span><span class="nm">orderblocks</span></li>
+      <li><span class="ix">06</span><span class="nm">fibonacci</span></li>
+      <li><span class="ix">07</span><span class="nm"><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></span></li>
+      <li><span class="ix">08</span><span class="nm"><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></span></li>
+      <li><span class="ix">09</span><span class="nm"><span lang="nl">risicobeheer</span><span lang="en">risk management</span></span></li>
+      <li><span class="ix">10</span><span class="nm"><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></span></li>
+    </ul>
+    <div class="cta-row" style="margin-top:32px">
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Alles staat in Discord</span><span lang="en">It is all in Discord</span> <span class="arw">→</span></a>
+    </div>
+  </section>
+
+  <!-- ============ 04 MODEL ============ -->
+  <section class="card" id="model">
+    <span class="tape" aria-hidden="true"></span>
+    <span class="num">04 / MODEL</span>
+    <p class="eyebrow"><span lang="nl">Schema, geen resultaat</span><span lang="en">A schematic, not a result</span></p>
+    <h2><span lang="nl">Zo ziet een<br>opzet eruit.</span><span lang="en">This is what a<br>setup looks like.</span></h2>
+    <div class="model" style="margin-top:34px">
+      <p class="vh" id="fig091b"><span lang="nl">Schematische tekening van een liquiditeitsgreep, een fair value gap en een orderblock</span><span lang="en">Schematic drawing of a liquidity sweep, a fair value gap and an order block</span></p>
+      <div class="chartbox">
+        <svg viewBox="0 0 640 340" role="img" aria-labelledby="fig091b">
+          <defs>
+            <linearGradient id="fvgfill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#D7B364" stop-opacity=".34"/>
+              <stop offset="1" stop-color="#D7B364" stop-opacity=".08"/>
+            </linearGradient>
+          </defs>
+          <!-- grid -->
+          <g stroke="#ffffff" stroke-opacity=".05" stroke-width="1">
+            <path d="M0 60H640M0 120H640M0 180H640M0 240H640M0 300H640"/>
+            <path d="M80 0V340M160 0V340M240 0V340M320 0V340M400 0V340M480 0V340M560 0V340"/>
+          </g>
+          <!-- liquidity line -->
+          <g class="sweep">
+            <path d="M40 92 H600" stroke="#D7B364" stroke-width="1.2" stroke-dasharray="6 6" stroke-opacity=".8"/>
+            <text lang="nl" x="44" y="82" fill="#D7B364" font-family="ui-monospace,Menlo,monospace" font-size="12" letter-spacing="2">LIQUIDITEIT</text>
+            <text lang="en" x="44" y="82" fill="#D7B364" font-family="ui-monospace,Menlo,monospace" font-size="12" letter-spacing="2">LIQUIDITY</text>
+          </g>
+          <!-- FVG band -->
+          <rect x="300" y="150" width="300" height="46" fill="url(#fvgfill)" stroke="#D7B364" stroke-opacity=".55" stroke-width="1"/>
+          <text x="308" y="143" fill="#E6CC8E" font-family="ui-monospace,Menlo,monospace" font-size="12" letter-spacing="2">FVG</text>
+          <!-- order block -->
+          <rect x="180" y="214" width="120" height="40" fill="#D7B364" fill-opacity=".13" stroke="#B9954A" stroke-width="1"/>
+          <text x="186" y="272" fill="#A5A6A8" font-family="ui-monospace,Menlo,monospace" font-size="11" letter-spacing="2">ORDERBLOCK</text>
+          <!-- candles -->
+          <g stroke="#F4F2EC" stroke-width="2">
+            <path d="M96 250V196"/><rect x="90" y="210" width="12" height="30" fill="#15161A"/>
+            <path d="M136 244V186"/><rect x="130" y="198" width="12" height="34" fill="#F4F2EC"/>
+            <path d="M176 236V172"/><rect x="170" y="184" width="12" height="40" fill="#F4F2EC"/>
+            <path d="M216 240V166"/><rect x="210" y="178" width="12" height="46" fill="#15161A"/>
+            <path d="M256 250V178"/><rect x="250" y="192" width="12" height="44" fill="#15161A"/>
+          </g>
+          <g stroke="#D7B364" stroke-width="2">
+            <path d="M296 214V84"/><rect x="290" y="98" width="12" height="104" fill="#15161A"/>
+            <path d="M336 210V128"/><rect x="330" y="140" width="12" height="58" fill="#D7B364"/>
+            <path d="M376 232V150"/><rect x="370" y="162" width="12" height="58" fill="#D7B364"/>
+            <path d="M416 262V176"/><rect x="410" y="188" width="12" height="62" fill="#D7B364"/>
+            <path d="M456 288V206"/><rect x="450" y="218" width="12" height="58" fill="#D7B364"/>
+            <path d="M496 300V232"/><rect x="490" y="244" width="12" height="48" fill="#D7B364"/>
+          </g>
+          <!-- sweep arrow -->
+          <path d="M296 88 C 320 70, 348 84, 356 108" fill="none" stroke="#E6CC8E" stroke-width="1.4" stroke-dasharray="4 4"/>
+          <path d="M356 108 l-6 -8 l10 1 z" fill="#E6CC8E"/>
+          <text lang="nl" x="366" y="106" fill="#E6CC8E" font-family="ui-monospace,Menlo,monospace" font-size="11" letter-spacing="2">DEVIATIE</text>
+          <text lang="en" x="366" y="106" fill="#E6CC8E" font-family="ui-monospace,Menlo,monospace" font-size="11" letter-spacing="2">DEVIATION</text>
+        </svg>
+      </div>
+      <ul class="legend">
+        <li><b><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></b><span><span lang="nl">Waar orders zich verzamelen boven en onder een niveau.</span><span lang="en">Where orders gather above and below a level.</span></span></li>
+        <li><b><span lang="nl">Deviatie</span><span lang="en">Deviation</span></b><span><span lang="nl">De beweging die daar doorheen prikt en weer terugkomt.</span><span lang="en">The move that pushes through it and comes back.</span></span></li>
+        <li><b>FVG</b><span><span lang="nl">De onbalans die de beweging achterlaat.</span><span lang="en">The imbalance the move leaves behind.</span></span></li>
+        <li><b>Orderblock</b><span><span lang="nl">Het gebied waar de beweging begon.</span><span lang="en">The area where the move started.</span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 05 KANALEN ============ -->
+  <section class="card" id="kanalen">
+    <span class="tape" aria-hidden="true"></span>
+    <span class="num"><span lang="nl">05 / KANALEN</span><span lang="en">05 / CHANNELS</span></span>
+    <p class="eyebrow"><span lang="nl">15 kanalen</span><span lang="en">15 channels</span></p>
+    <h2><span lang="nl">De server,<br>uitgevouwen.</span><span lang="en">The server,<br>unfolded.</span></h2>
+    <div class="chgrid">
+      <div class="chcol">
+        <h3><span lang="nl">Thuis</span><span lang="en">Home</span></h3>
+        <span class="tag"><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></span>
+        <ul class="chips">
+          <li>#nq-chart-ideeën</li>
+          <li>#es-chart-ideeën</li>
+          <li>#bitcoin</li>
+          <li>#altcoins</li>
+          <li>#markt</li>
+          <li>#vragen</li>
+          <li>#algemeen</li>
+          <li>#atlas-op-socials</li>
+          <li>#ondersteuning</li>
+        </ul>
+      </div>
+      <div class="chcol">
+        <h3>Premium</h3>
+        <span class="tag"><span lang="nl">Opent later</span><span lang="en">Opens later</span></span>
+        <ul class="chips locked">
+          <li>#trade-setups</li>
+          <li>#marktupdates</li>
+          <li>#indicatoren</li>
+          <li>#sessie-opnames</li>
+          <li>#chart-ideeën</li>
+          <li>#premium-chat</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 LIVE ============ -->
+  <section class="card" id="live">
+    <span class="tape" aria-hidden="true"></span>
+    <span class="num">06 / LIVE</span>
+    <div class="live">
+      <div>
+        <div class="pulse-wrap"><span class="dot" aria-hidden="true"></span><b><span lang="nl">Live in de server</span><span lang="en">Live in the server</span></b></div>
+        <h2><span lang="nl">Meekijken<br>terwijl het<br>gebeurt.</span><span lang="en">Watch along<br>while it<br>happens.</span></h2>
+        <p class="lede" style="margin-top:22px"><span lang="nl">De oprichter handelt live mee in Discord. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in Discord. Times are announced there.</span></p>
+        <div class="cta-row" style="margin-top:28px">
+          <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Zit erbij</span><span lang="en">Sit in</span> <span class="arw">→</span></a>
+        </div>
+      </div>
+      <div>
+        <p class="vh" id="fig091c"><span lang="nl">Sessiewijzerplaat met markeringen</span><span lang="en">Session dial with markings</span></p>
+        <svg class="dial" viewBox="0 0 220 220" role="img" aria-labelledby="fig091c">
+          <circle cx="110" cy="110" r="94" fill="none" stroke="#D7B364" stroke-opacity=".22" stroke-width="1"/>
+          <circle cx="110" cy="110" r="72" fill="none" stroke="#D7B364" stroke-opacity=".4" stroke-width="1"/>
+          <circle cx="110" cy="110" r="46" fill="none" stroke="#ffffff" stroke-opacity=".08" stroke-width="1"/>
+          <g stroke="#D7B364" stroke-width="1.4">
+            <path d="M110 16 V30"/><path d="M204 110 H190"/><path d="M110 204 V190"/><path d="M16 110 H30"/>
+          </g>
+          <g stroke="#D7B364" stroke-opacity=".45" stroke-width="1">
+            <path d="M176 44 L167 53"/><path d="M176 176 L167 167"/><path d="M44 176 L53 167"/><path d="M44 44 L53 53"/>
+          </g>
+          <g class="hand">
+            <path d="M110 110 L110 40" stroke="#E6CC8E" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="110" cy="40" r="4" fill="#E6CC8E"/>
+          </g>
+          <circle cx="110" cy="110" r="5" fill="#D7B364"/>
+          <text lang="nl" x="110" y="128" text-anchor="middle" fill="#A5A6A8" font-family="ui-monospace,Menlo,monospace" font-size="9" letter-spacing="3">SESSIE</text>
+          <text lang="en" x="110" y="128" text-anchor="middle" fill="#A5A6A8" font-family="ui-monospace,Menlo,monospace" font-size="9" letter-spacing="3">SESSION</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 TOEGANG ============ -->
+  <section class="card" id="toegang">
+    <span class="tape" aria-hidden="true"></span>
+    <span class="num"><span lang="nl">07 / TOEGANG</span><span lang="en">07 / ACCESS</span></span>
+    <p class="eyebrow"><span lang="nl">Vrij en later meer</span><span lang="en">Free now, more later</span></p>
+    <h2><span lang="nl">Nu binnenlopen<br>kost niets.</span><span lang="en">Walking in now<br>costs nothing.</span></h2>
+    <div class="access">
+      <div class="tier now">
+        <span class="state"><span lang="nl">Nu open</span><span lang="en">Open now</span></span>
+        <h3><span lang="nl">Thuis</span><span lang="en">Home</span></h3>
+        <p><span lang="nl">Directe toegang tot de community en de charts.</span><span lang="en">Direct access to the community and the charts.</span></p>
+        <ul>
+          <li><span lang="nl">Chart-ideeën voor NQ en ES</span><span lang="en">Chart ideas for NQ and ES</span></li>
+          <li><span lang="nl">Bitcoin en altcoins</span><span lang="en">Bitcoin and altcoins</span></li>
+          <li><span lang="nl">Vragen en ondersteuning</span><span lang="en">Questions and support</span></li>
+        </ul>
+        <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Gratis binnen</span><span lang="en">Free entry</span> <span class="arw">→</span></a>
+      </div>
+      <div class="tier">
+        <span class="state"><span lang="nl">Opent later</span><span lang="en">Opens later</span></span>
+        <h3>Premium</h3>
+        <p><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">Price and date are announced in the server.</span></p>
+        <ul>
+          <li><span lang="nl">Trade-setups en marktupdates</span><span lang="en">Trade setups and market updates</span></li>
+          <li><span lang="nl">Indicatoren</span><span lang="en">Indicators</span></li>
+          <li><span lang="nl">Sessie-opnames</span><span lang="en">Session recordings</span></li>
+        </ul>
+        <a class="btn ghost" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Blijf op de hoogte</span><span lang="en">Stay posted</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 SLOT ============ -->
+  <section class="card">
+    <span class="tape" aria-hidden="true"></span>
+    <span class="num"><span lang="nl">08 / SLOT</span><span lang="en">08 / CLOSING</span></span>
+    <div class="closing">
+      <p class="eyebrow"><span lang="nl">Laatste laag</span><span lang="en">Last layer</span></p>
+      <h2><span lang="nl">Plak jezelf<br>vast aan het<br>proces.</span><span lang="en">Tape yourself<br>to the<br>process.</span></h2>
+      <div class="stripes" aria-hidden="true"></div>
+      <p class="lede" style="margin-bottom:28px"><span lang="nl">Eén server. Vijftien kanalen. Elke dag dezelfde discipline.</span><span lang="en">One server. Fifteen channels. The same discipline every day.</span></p>
+      <a class="btn xl" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Open Discord <span class="arw">→</span></a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="mark" href="#top" style="margin-bottom:14px">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M16 3 L28 27 H22 L16 13 L10 27 H4 Z" fill="none" stroke="#D7B364" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M11 21 H21" stroke="#D7B364" stroke-width="1.8"/>
+          </svg>
+          <b>Atlas <span>Capital</span></b>
+        </a>
+        <p class="lede" style="font-size:14px"><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></p>
+      </div>
+      <div>
+        <h4>Community</h4>
+        <a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord →</a><br>
+        <a href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok @atlascapitalbv →</a>
+      </div>
+      <div>
+        <h4><span lang="nl">Markten</span><span lang="en">Markets</span></h4>
+        <span style="color:var(--muted);font-size:14.5px">NQ · ES · Bitcoin · Altcoins</span>
+      </div>
+    </div>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
+</body>
+</html>

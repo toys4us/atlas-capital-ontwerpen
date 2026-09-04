@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="nl" data-lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 046 Bankbiljet</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D7B364; --gold-hi:#E6CC8E; --gold-lo:#B9954A;
+  --ink:#08090B; --paper:#F4F2EC; --paper-2:#EFEBE1;
+  --sub:#6A6558; --line:#D8D2C4;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+html{color-scheme:light;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-size:17px;line-height:1.55;
+  overflow-x:hidden;
+}
+a{color:inherit}
+img,svg{max-width:100%}
+
+/* ---------- engraved primitives ---------- */
+.microtext{
+  font-family:var(--mono);font-size:6.5px;letter-spacing:.42em;
+  color:var(--gold-lo);opacity:.85;white-space:nowrap;overflow:hidden;
+  text-transform:uppercase;line-height:1.9;user-select:none;
+}
+.lathe{height:9px;overflow:hidden;position:relative}
+.hair{height:1px;background:var(--line);border:0;margin:0}
+.hair-gold{height:1px;background:var(--gold);opacity:.45;border:0;margin:0}
+.rule-pair{display:block}
+.rule-pair::before,.rule-pair::after{content:"";display:block;height:1px;background:var(--gold-lo);opacity:.5}
+.rule-pair::before{margin-bottom:2px}
+.rule-pair::after{margin-top:2px;opacity:.25}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.lbl{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--gold-lo);
+}
+.lbl-ink{color:var(--sub)}
+.sub{color:var(--sub)}
+
+/* denomination numerals */
+.denom{
+  font-family:var(--serif);font-weight:700;line-height:.8;
+  font-size:clamp(38px,7vw,74px);
+  color:rgba(185,149,74,.16);
+  -webkit-text-stroke:.7px var(--gold-lo);
+  letter-spacing:-.02em;user-select:none;
+}
+.denom-sm{font-size:clamp(26px,4vw,40px);-webkit-text-stroke:.5px var(--gold-lo)}
+
+/* plates */
+.plate{position:relative;background:var(--paper-2);border:1px solid var(--line)}
+.plate::after{
+  content:"";position:absolute;inset:5px;border:1px solid rgba(185,149,74,.35);pointer-events:none;
+}
+.plate-inner{position:relative;z-index:2;padding:clamp(22px,4vw,46px)}
+.svg-abs{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.note-frame{position:absolute;inset:6px;pointer-events:none;z-index:1}
+.note-frame>svg{display:block;width:100%;height:100%}
+.note>.plate-inner{padding-left:clamp(34px,5vw,58px);padding-right:clamp(34px,5vw,58px)}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  padding:13px 22px;text-decoration:none;position:relative;
+  background:var(--ink);color:var(--paper);border:1px solid var(--ink);
+}
+.btn::after{content:"";position:absolute;inset:3px;border:1px solid rgba(215,179,100,.55);pointer-events:none}
+.btn:hover{background:#151610}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--gold-lo)}
+.btn-ghost::after{border-color:rgba(185,149,74,.3)}
+.btn-ghost:hover{background:rgba(215,179,100,.12)}
+.btn .dot{width:5px;height:5px;background:var(--gold);border-radius:50%;flex:0 0 auto}
+
+/* header */
+header.top{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:1px solid var(--line)}
+.topbar{display:flex;align-items:center;gap:16px;padding:12px 0}
+.mark{display:flex;align-items:center;gap:12px;text-decoration:none}
+.mark .ovl{width:42px;height:30px;flex:0 0 auto}
+.mark .nm{font-size:19px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.mark .nm small{display:block;font-family:var(--mono);font-size:7.5px;letter-spacing:.3em;color:var(--gold-lo);margin-top:1px}
+.topbar .spacer{flex:1}
+.tag-inline{display:none;font-family:var(--mono);font-size:9px;letter-spacing:.28em;color:var(--sub)}
+@media(min-width:900px){.tag-inline{display:block}}
+
+/* hero note */
+.note{margin-top:26px;position:relative}
+.note-grid{display:grid;grid-template-columns:1fr;gap:clamp(20px,3vw,40px);align-items:center}
+.portrait{position:relative;width:100%;max-width:232px;margin:0 auto;order:2}
+.hero-copy{order:1}
+@media(min-width:860px){
+  .note-grid{grid-template-columns:300px 1fr}
+  .portrait{order:0;max-width:320px}
+  .hero-copy{order:0}
+}
+h1{
+  font-size:clamp(34px,6.6vw,72px);line-height:1.02;margin:12px 0 14px;
+  font-weight:600;letter-spacing:-.015em;
+}
+h1 em{font-style:italic;font-weight:300;color:var(--gold-lo)}
+.lede{font-size:clamp(17px,2vw,21px);max-width:44ch;margin:0 0 22px;color:#2B2A24}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.corner{position:absolute;z-index:3}
+.corner.tl{top:34px;left:38px}.corner.tr{top:38px;right:38px}
+.corner.bl{bottom:34px;left:38px}.corner.br{bottom:30px;right:38px}
+@media(max-width:520px){.corner.tl{top:32px;left:32px}.corner.tr{top:34px;right:32px}}
+@media(max-width:700px){.corner.bl,.corner.br{display:none}}
+
+/* section shell */
+section{padding:clamp(46px,7vw,92px) 0 0}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(26px,4vw,46px);margin:0;font-weight:500;letter-spacing:-.01em}
+.sec-note{max-width:52ch;color:var(--sub);margin:10px 0 0}
+
+/* curriculum */
+.curric{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:760px){.curric{grid-template-columns:1fr 1fr;column-gap:clamp(26px,5vw,64px)}}
+.entry{display:flex;align-items:baseline;gap:12px;padding:13px 2px;border-bottom:1px solid rgba(185,149,74,.28)}
+.entry .ros{width:15px;height:15px;flex:0 0 auto;align-self:center}
+.entry .nm{font-size:clamp(19px,2.4vw,25px);font-weight:500;letter-spacing:.005em}
+.entry .dots{flex:1;border-bottom:1px dotted rgba(106,101,88,.45);transform:translateY(-4px)}
+.entry .rn{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--gold-lo)}
+
+/* diagram */
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.scroller>svg{min-width:560px;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px}
+.legend span{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sub);display:flex;align-items:center;gap:7px}
+.legend i{width:16px;height:0;border-top:1.5px solid var(--gold-lo);display:block}
+.legend i.dash{border-top-style:dashed}
+.legend i.blk{border-top-color:var(--ink)}
+
+/* counterfoils */
+.foils{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:820px){.foils{grid-template-columns:1.15fr .85fr}}
+.chip{
+  display:inline-block;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;
+  padding:7px 11px;margin:0 6px 8px 0;border:1px solid rgba(185,149,74,.5);
+  background:rgba(215,179,100,.09);color:#2B2A24;
+}
+.chip.pm{border-style:dashed;background:transparent;color:var(--sub)}
+
+/* access plates */
+.acc{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:760px){.acc{grid-template-columns:1fr 1fr}}
+.acc .plate-inner{padding:clamp(20px,3vw,34px)}
+.acc h3{margin:8px 0 6px;font-size:clamp(22px,3vw,32px);font-weight:500}
+
+/* closing */
+.close-note{position:relative;margin-top:clamp(46px,7vw,92px)}
+.close-inner{position:relative;z-index:2;text-align:center;padding:clamp(40px,7vw,84px) 22px}
+.close-inner h2{font-size:clamp(32px,6vw,64px);margin:14px 0 10px;font-weight:600}
+
+footer{margin-top:clamp(40px,6vw,72px);border-top:1px solid var(--line);padding:26px 0 46px}
+.f-grid{display:grid;grid-template-columns:1fr;gap:22px}
+@media(min-width:760px){.f-grid{grid-template-columns:1.2fr .8fr .8fr}}
+.f-grid a{display:block;text-decoration:none;border-bottom:1px solid rgba(185,149,74,.4);width:fit-content;padding-bottom:2px;margin-bottom:8px}
+.risk{margin-top:26px;font-family:var(--mono);font-size:10px;line-height:1.8;letter-spacing:.04em;color:var(--sub);max-width:70ch}
+@media(max-width:600px){
+  .topbar{gap:10px}
+  .mark .ovl{width:34px;height:24px}
+  .mark .nm{font-size:15px;letter-spacing:.1em}
+  .mark .nm small{font-size:6.5px;letter-spacing:.22em}
+  .btn{padding:11px 14px;font-size:9.5px;letter-spacing:.14em;gap:7px}
+}
+
+/* ---------- language switch ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.langsw{display:flex;flex:0 0 auto;border:1px solid var(--gold-lo);background:transparent}
+.langsw button{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
+  background:transparent;color:var(--sub);border:0;padding:10px 11px;line-height:1;cursor:pointer;
+}
+.langsw button+button{border-left:1px solid rgba(185,149,74,.5)}
+.langsw button[aria-pressed="true"]{background:rgba(215,179,100,.16);color:var(--ink)}
+.langsw button:hover{color:var(--ink)}
+@media(max-width:600px){.langsw button{padding:8px 5px;font-size:8px;letter-spacing:.04em}}
+</style>
+</head>
+<body>
+
+<!-- ================= MICROTEXT RULE ================= -->
+<div class="microtext" aria-hidden="true">PROCES · DISCIPLINE · UITVOERING · ATLAS CAPITAL · PROCES · DISCIPLINE · UITVOERING · ATLAS CAPITAL · PROCES · DISCIPLINE · UITVOERING · ATLAS CAPITAL · PROCES · DISCIPLINE · UITVOERING · ATLAS CAPITAL · PROCES · DISCIPLINE · UITVOERING · ATLAS CAPITAL · PROCES · DISCIPLINE · UITVOERING · ATLAS CAPITAL · PROCES · DISCIPLINE · UITVOERING · ATLAS CAPITAL</div>
+
+<!-- ================= HEADER ================= -->
+<header class="top">
+  <div class="wrap topbar">
+    <a class="mark" href="#">
+      <svg class="ovl" viewBox="0 0 84 60" aria-hidden="true">
+        <defs>
+          <g id="mkros"><ellipse rx="30" ry="10" fill="none"/><ellipse rx="23" ry="7.5" fill="none"/></g>
+        </defs>
+        <g transform="translate(42 30)" stroke="#B9954A" stroke-width=".35" opacity=".55">
+          <use href="#mkros" transform="rotate(0)"/><use href="#mkros" transform="rotate(24)"/>
+          <use href="#mkros" transform="rotate(48)"/><use href="#mkros" transform="rotate(72)"/>
+          <use href="#mkros" transform="rotate(96)"/><use href="#mkros" transform="rotate(120)"/>
+          <use href="#mkros" transform="rotate(144)"/><use href="#mkros" transform="rotate(168)"/>
+        </g>
+        <ellipse cx="42" cy="30" rx="33" ry="21" fill="none" stroke="#B9954A" stroke-width=".8"/>
+        <text x="42" y="37" text-anchor="middle" font-family="Georgia,serif" font-size="19" font-weight="700" fill="#08090B" letter-spacing="1">AC</text>
+      </svg>
+      <span class="nm">Atlas Capital<small><span lang="nl">Gegraveerd · Nederland</span><span lang="en">Engraved · Netherlands</span></small></span>
+    </a>
+    <span class="spacer"></span>
+    <span class="tag-inline">PROCES · DISCIPLINE · UITVOERING</span>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW"><span class="dot"></span><span lang="nl">Open Discord</span><span lang="en">Open Discord</span></a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ================= 01 · HERO NOTE ================= -->
+<div class="note plate">
+  <div class="note-frame" aria-hidden="true">
+  <svg width="100%" height="100%">
+    <defs>
+      <!-- guilloché lattice band -->
+      <pattern id="guil" width="64" height="26" patternUnits="userSpaceOnUse">
+        <g fill="none" stroke="#B9954A" stroke-width=".4" opacity=".72">
+          <path d="M0 13 C 16 -3 48 29 64 13"/>
+          <path d="M0 13 C 16 29 48 -3 64 13"/>
+          <path d="M0 7 C 16 -9 48 23 64 7"/>
+          <path d="M0 7 C 16 23 48 -9 64 7"/>
+          <path d="M0 19 C 16 3 48 35 64 19"/>
+          <path d="M0 19 C 16 35 48 3 64 19"/>
+          <path d="M0 1 C 16 -15 48 17 64 1"/>
+          <path d="M0 25 C 16 9 48 41 64 25"/>
+        </g>
+      </pattern>
+      <pattern id="guilv" width="26" height="64" patternUnits="userSpaceOnUse">
+        <g fill="none" stroke="#B9954A" stroke-width=".4" opacity=".72">
+          <path d="M13 0 C -3 16 29 48 13 64"/>
+          <path d="M13 0 C 29 16 -3 48 13 64"/>
+          <path d="M7 0 C -9 16 23 48 7 64"/>
+          <path d="M7 0 C 23 16 -9 48 7 64"/>
+          <path d="M19 0 C 3 16 35 48 19 64"/>
+          <path d="M19 0 C 35 16 3 48 19 64"/>
+        </g>
+      </pattern>
+    </defs>
+    <rect x="0" y="0"    width="100%" height="26" fill="url(#guil)"/>
+    <rect x="0" y="100%" transform="translate(0,-26)" width="100%" height="26" fill="url(#guil)"/>
+    <rect x="0" y="0"    width="26" height="100%" fill="url(#guilv)"/>
+    <rect x="100%" y="0" transform="translate(-26,0)" width="26" height="100%" fill="url(#guilv)"/>
+    <rect x="0" y="0" width="100%" height="100%" fill="none" stroke="#B9954A" stroke-width=".6" opacity=".5"/>
+  </svg>
+  </div>
+
+  <span class="corner tl denom">01</span>
+  <span class="corner tr lbl" style="writing-mode:horizontal-tb;"><span lang="nl">SERIE ATLAS · NL</span><span lang="en">ATLAS SERIES · NL</span></span>
+  <span class="corner bl lbl"><span lang="nl">GEGRAVEERD IN NEDERLAND</span><span lang="en">ENGRAVED IN THE NETHERLANDS</span></span>
+  <span class="corner br denom-sm denom">01</span>
+
+  <div class="plate-inner" style="padding-top:clamp(60px,8vw,90px);padding-bottom:clamp(56px,8vw,86px)">
+    <div class="note-grid">
+
+      <!-- portrait oval: Atlas monogram, line art -->
+      <div class="portrait">
+        <svg viewBox="0 0 300 340" aria-hidden="true" style="display:block;width:100%;height:auto">
+          <defs>
+            <clipPath id="ovalClip"><ellipse cx="150" cy="160" rx="112" ry="140"/></clipPath>
+            <clipPath id="sphereClip"><circle cx="150" cy="128" r="62"/></clipPath>
+            <g id="rosBig">
+              <ellipse rx="118" ry="40" fill="none"/>
+              <ellipse rx="96" ry="32" fill="none"/>
+              <ellipse rx="72" ry="24" fill="none"/>
+            </g>
+          </defs>
+
+          <!-- rosette watermark inside the oval -->
+          <g clip-path="url(#ovalClip)">
+            <rect x="0" y="0" width="300" height="340" fill="#EDE8DC"/>
+            <g transform="translate(150 160)" stroke="#B9954A" stroke-width=".3" fill="none" opacity=".55">
+              <use href="#rosBig" transform="rotate(0)"/><use href="#rosBig" transform="rotate(10)"/>
+              <use href="#rosBig" transform="rotate(20)"/><use href="#rosBig" transform="rotate(30)"/>
+              <use href="#rosBig" transform="rotate(40)"/><use href="#rosBig" transform="rotate(50)"/>
+              <use href="#rosBig" transform="rotate(60)"/><use href="#rosBig" transform="rotate(70)"/>
+              <use href="#rosBig" transform="rotate(80)"/><use href="#rosBig" transform="rotate(90)"/>
+              <use href="#rosBig" transform="rotate(100)"/><use href="#rosBig" transform="rotate(110)"/>
+              <use href="#rosBig" transform="rotate(120)"/><use href="#rosBig" transform="rotate(130)"/>
+              <use href="#rosBig" transform="rotate(140)"/><use href="#rosBig" transform="rotate(150)"/>
+              <use href="#rosBig" transform="rotate(160)"/><use href="#rosBig" transform="rotate(170)"/>
+            </g>
+
+            <!-- the sphere -->
+            <g stroke="#1A1A16" fill="none" stroke-width=".7">
+              <circle cx="150" cy="128" r="62"/>
+              <g clip-path="url(#sphereClip)" stroke-width=".55" opacity=".85">
+                <ellipse cx="150" cy="128" rx="14" ry="62"/>
+                <ellipse cx="150" cy="128" rx="30" ry="62"/>
+                <ellipse cx="150" cy="128" rx="46" ry="62"/>
+                <line x1="88" y1="98" x2="212" y2="98"/>
+                <line x1="88" y1="113" x2="212" y2="113"/>
+                <line x1="88" y1="128" x2="212" y2="128"/>
+                <line x1="88" y1="143" x2="212" y2="143"/>
+                <line x1="88" y1="158" x2="212" y2="158"/>
+                <line x1="88" y1="173" x2="212" y2="173"/>
+              </g>
+            </g>
+            <!-- hatched shoulders bearing the sphere -->
+            <g stroke="#1A1A16" fill="none" stroke-width=".7">
+              <path d="M92 300 C 96 236 120 200 150 200 C 180 200 204 236 208 300"/>
+              <path d="M112 300 C 116 250 130 220 150 220 C 170 220 184 250 188 300"/>
+              <path d="M124 200 C 132 186 168 186 176 200"/>
+            </g>
+            <g stroke="#1A1A16" stroke-width=".35" opacity=".45">
+              <line x1="96" y1="252" x2="204" y2="252"/><line x1="94" y1="262" x2="206" y2="262"/>
+              <line x1="93" y1="272" x2="207" y2="272"/><line x1="92" y1="282" x2="208" y2="282"/>
+              <line x1="92" y1="292" x2="208" y2="292"/>
+            </g>
+          </g>
+          <ellipse cx="150" cy="160" rx="112" ry="140" fill="none" stroke="#08090B" stroke-width="1.1"/>
+          <ellipse cx="150" cy="160" rx="118" ry="146" fill="none" stroke="#B9954A" stroke-width=".5" opacity=".8"/>
+          <ellipse cx="150" cy="160" rx="124" ry="152" fill="none" stroke="#B9954A" stroke-width=".3" opacity=".45"/>
+        </svg>
+        <div class="lbl" style="text-align:center;margin-top:12px"><span lang="nl">ATLAS · DRAAGT DE BOL</span><span lang="en">ATLAS · BEARS THE GLOBE</span></div>
+      </div>
+
+      <!-- headline block -->
+      <div class="hero-copy">
+        <div class="lbl"><span lang="nl">01 · UITGIFTE</span><span lang="en">01 · ISSUE</span></div>
+        <h1><span lang="nl">Elke setup begint met <em>structuur</em>.</span><span lang="en">Every setup begins with <em>structure</em>.</span></h1>
+        <p class="lede"><span lang="nl">Nederlandse trading-community voor NQ, ES, Bitcoin en altcoins. Educatie, echte setups, dagelijkse markt.</span><span lang="en">Dutch trading community for NQ, ES, Bitcoin and altcoins. Education, real setups, the daily market.</span></p>
+        <div class="cta-row">
+          <a class="btn" href="https://discord.gg/78Ff2GuSfW"><span class="dot"></span><span lang="nl">Kom binnen op Discord</span><span lang="en">Come inside on Discord</span></a>
+          <a class="btn btn-ghost" href="#educatie"><span lang="nl">Bekijk de leerlijn</span><span lang="en">See the curriculum</span></a>
+        </div>
+        <div style="margin-top:26px" class="rule-pair"></div>
+        <div class="lbl" style="margin-top:14px"><span lang="nl">TOEGANG NU GRATIS · PREMIUM OPENT LATER</span><span lang="en">ACCESS IS FREE RIGHT NOW · PREMIUM OPENS LATER</span></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ================= 02 · FOUNDER ================= -->
+<section id="grondlegger">
+  <div class="sec-head">
+    <span class="denom denom-sm">02</span>
+    <h2><span lang="nl">De grondlegger</span><span lang="en">The founder</span></h2>
+    <span class="lbl" style="margin-left:auto"><span lang="nl">10+ JAAR ACTIEF</span><span lang="en">10+ YEARS ACTIVE</span></span>
+  </div>
+  <div class="hair-gold"></div>
+
+  <div class="plate" style="margin-top:24px">
+    <div class="plate-inner">
+      <div style="display:grid;grid-template-columns:1fr;gap:26px" class="fnd">
+        <svg viewBox="0 0 200 200" aria-hidden="true" style="width:118px;height:118px;flex:0 0 auto">
+          <defs>
+            <g id="rosF"><ellipse rx="82" ry="26" fill="none"/><ellipse rx="60" ry="19" fill="none"/></g>
+          </defs>
+          <g transform="translate(100 100)" stroke="#B9954A" stroke-width=".32" fill="none" opacity=".7">
+            <use href="#rosF" transform="rotate(0)"/><use href="#rosF" transform="rotate(12)"/>
+            <use href="#rosF" transform="rotate(24)"/><use href="#rosF" transform="rotate(36)"/>
+            <use href="#rosF" transform="rotate(48)"/><use href="#rosF" transform="rotate(60)"/>
+            <use href="#rosF" transform="rotate(72)"/><use href="#rosF" transform="rotate(84)"/>
+            <use href="#rosF" transform="rotate(96)"/><use href="#rosF" transform="rotate(108)"/>
+            <use href="#rosF" transform="rotate(120)"/><use href="#rosF" transform="rotate(132)"/>
+            <use href="#rosF" transform="rotate(144)"/><use href="#rosF" transform="rotate(156)"/>
+            <use href="#rosF" transform="rotate(168)"/>
+          </g>
+          <circle cx="100" cy="100" r="34" fill="#EFEBE1" stroke="#B9954A" stroke-width=".7"/>
+          <text x="100" y="96" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="700" fill="#08090B">10+</text>
+          <text lang="nl" x="100" y="112" text-anchor="middle" font-family="Consolas,monospace" font-size="8" letter-spacing="2" fill="#B9954A">JAAR</text><text lang="en" x="100" y="112" text-anchor="middle" font-family="Consolas,monospace" font-size="8" letter-spacing="2" fill="#B9954A">YEARS</text>
+        </svg>
+        <blockquote style="margin:0;font-size:clamp(18px,2.2vw,24px);line-height:1.5;max-width:62ch">
+          <span lang="nl"><span style="float:left;font-size:clamp(52px,8vw,86px);line-height:.72;padding:6px 12px 0 0;color:var(--gold-lo);font-weight:600">I</span>k ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</span><span lang="en"><span style="float:left;font-size:clamp(52px,8vw,86px);line-height:.72;padding:6px 12px 0 0;color:var(--gold-lo);font-weight:600">I</span>'ve been involved in trading for over 10 years now, and during that time I've experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons. I built Atlas Capital to share that experience, bring traders together, and show how I approach the markets on a daily basis. No get-rich-quick promises, just real setups, education, and a community focused on improving together.</span>
+        </blockquote>
+      </div>
+      <div style="margin-top:22px" class="rule-pair"></div>
+      <a class="btn btn-ghost" style="margin-top:18px" href="https://discord.gg/78Ff2GuSfW"><span class="dot"></span><span lang="nl">Volg de markten mee</span><span lang="en">Follow the markets with me</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 · EDUCATIE ================= -->
+<section id="educatie">
+  <div class="sec-head">
+    <span class="denom denom-sm">03</span>
+    <h2><span lang="nl">De leerlijn</span><span lang="en">The curriculum</span></h2>
+    <span class="lbl" style="margin-left:auto"><span lang="nl">10 ONDERWERPEN</span><span lang="en">10 TOPICS</span></span>
+  </div>
+  <div class="hair-gold"></div>
+  <p class="sec-note"><span lang="nl">Van marktstructuur tot je eigen hoofd. Dit is wat er in de server wordt uitgelegd.</span><span lang="en">From market structure to your own head. This is what gets explained in the server.</span></p>
+
+  <div class="curric" style="margin-top:22px">
+    <div class="entry"><svg class="ros" viewBox="0 0 20 20" aria-hidden="true"><g transform="translate(10 10)" fill="none" stroke="#B9954A" stroke-width=".45"><ellipse rx="8" ry="3"/><ellipse rx="8" ry="3" transform="rotate(45)"/><ellipse rx="8" ry="3" transform="rotate(90)"/><ellipse rx="8" ry="3" transform="rotate(135)"/></g></svg><span class="nm"><span lang="nl">deviatie</span><span lang="en">deviation</span></span><span class="dots"></span><span class="rn">I</span></div>
+    <div class="entry"><svg class="ros" viewBox="0 0 20 20" aria-hidden="true"><g transform="translate(10 10)" fill="none" stroke="#B9954A" stroke-width=".45"><ellipse rx="8" ry="3"/><ellipse rx="8" ry="3" transform="rotate(45)"/><ellipse rx="8" ry="3" transform="rotate(90)"/><ellipse rx="8" ry="3" transform="rotate(135)"/></g></svg><span class="nm">SMT</span><span class="dots"></span><span class="rn">II</span></div>
+    <div class="entry"><svg class="ros" viewBox="0 0 20 20" aria-hidden="true"><g transform="translate(10 10)" fill="none" stroke="#B9954A" stroke-width=".45"><ellipse rx="8" ry="3"/><ellipse rx="8" ry="3" transform="rotate(45)"/><ellipse rx="8" ry="3" transform="rotate(90)"/><ellipse rx="8" ry="3" transform="rotate(135)"/></g></svg><span class="nm">FVG</span><span class="dots"></span><span class="rn">III</span></div>
+    <div class="entry"><svg class="ros" viewBox="0 0 20 20" aria-hidden="true"><g transform="translate(10 10)" fill="none" stroke="#B9954A" stroke-width=".45"><ellipse rx="8" ry="3"/><ellipse rx="8" ry="3" transform="rotate(45)"/><ellipse rx="8" ry="3" transform="rotate(90)"/><ellipse rx="8" ry="3" transform="rotate(135)"/></g></svg><span class="nm">IFVG</span><span class="dots"></span><span class="rn">IV</span></div>
+    <div class="entry"><svg class="ros" viewBox="0 0 20 20" aria-hidden="true"><g transform="translate(10 10)" fill="none" stroke="#B9954A" stroke-width=".45"><ellipse rx="8" ry="3"/><ellipse rx="8" ry="3" transform="rotate(45)"/><ellipse rx="8" ry="3" transform="rotate(90)"/><ellipse rx="8" ry="3" transform="rotate(135)"/></g></svg><span class="nm">orderblocks</span><span class="dots"></span><span class="rn">V</span></div>
+    <div class="entry"><svg class="ros" viewBox="0 0 20 20" aria-hidden="true"><g transform="translate(10 10)" fill="none" stroke="#B9954A" stroke-width=".45"><ellipse rx="8" ry="3"/><ellipse rx="8" ry="3" transform="rotate(45)"/><ellipse rx="8" ry="3" transform="rotate(90)"/><ellipse rx="8" ry="3" transform="rotate(135)"/></g></svg><span class="nm">fibonacci</span><span class="dots"></span><span class="rn">VI</span></div>
+    <div class="entry"><svg class="ros" viewBox="0 0 20 20" aria-hidden="true"><g transform="translate(10 10)" fill="none" stroke="#B9954A" stroke-width=".45"><ellipse rx="8" ry="3"/><ellipse rx="8" ry="3" transform="rotate(45)"/><ellipse rx="8" ry="3" transform="rotate(90)"/><ellipse rx="8" ry="3" transform="rotate(135)"/></g></svg><span class="nm"><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></span><span class="dots"></span><span class="rn">VII</span></div>
+    <div class="entry"><svg class="ros" viewBox="0 0 20 20" aria-hidden="true"><g transform="translate(10 10)" fill="none" stroke="#B9954A" stroke-width=".45"><ellipse rx="8" ry="3"/><ellipse rx="8" ry="3" transform="rotate(45)"/><ellipse rx="8" ry="3" transform="rotate(90)"/><ellipse rx="8" ry="3" transform="rotate(135)"/></g></svg><span class="nm"><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></span><span class="dots"></span><span class="rn">VIII</span></div>
+    <div class="entry"><svg class="ros" viewBox="0 0 20 20" aria-hidden="true"><g transform="translate(10 10)" fill="none" stroke="#B9954A" stroke-width=".45"><ellipse rx="8" ry="3"/><ellipse rx="8" ry="3" transform="rotate(45)"/><ellipse rx="8" ry="3" transform="rotate(90)"/><ellipse rx="8" ry="3" transform="rotate(135)"/></g></svg><span class="nm"><span lang="nl">risicobeheer</span><span lang="en">risk management</span></span><span class="dots"></span><span class="rn">IX</span></div>
+    <div class="entry"><svg class="ros" viewBox="0 0 20 20" aria-hidden="true"><g transform="translate(10 10)" fill="none" stroke="#B9954A" stroke-width=".45"><ellipse rx="8" ry="3"/><ellipse rx="8" ry="3" transform="rotate(45)"/><ellipse rx="8" ry="3" transform="rotate(90)"/><ellipse rx="8" ry="3" transform="rotate(135)"/></g></svg><span class="nm"><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></span><span class="dots"></span><span class="rn">X</span></div>
+  </div>
+</section>
+
+<!-- ================= 04 · MODEL ================= -->
+<section id="model">
+  <div class="sec-head">
+    <span class="denom denom-sm">04</span>
+    <h2><span lang="nl">Het model, gegraveerd</span><span lang="en">The model, engraved</span></h2>
+  </div>
+  <div class="hair-gold"></div>
+  <p class="sec-note"><span lang="nl">Liquiditeit wordt opgehaald, de zone blijft achter, de markt keert terug. Schematisch.</span><span lang="en">Liquidity gets taken, the zone is left behind, the market comes back. Schematic.</span></p>
+
+  <div class="plate" style="margin-top:24px">
+    <div class="plate-inner">
+      <div class="scroller">
+        <svg viewBox="0 0 760 330" aria-hidden="true" style="width:100%;height:auto">
+          <defs>
+            <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="7" stroke="#B9954A" stroke-width=".5" opacity=".8"/>
+            </pattern>
+            <pattern id="hatch2" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+              <line x1="0" y1="0" x2="0" y2="5" stroke="#08090B" stroke-width=".4" opacity=".35"/>
+            </pattern>
+          </defs>
+
+          <!-- baseline grid, very faint -->
+          <g stroke="#B9954A" stroke-width=".3" opacity=".22">
+            <line x1="30" y1="40" x2="730" y2="40"/><line x1="30" y1="88" x2="730" y2="88"/>
+            <line x1="30" y1="136" x2="730" y2="136"/><line x1="30" y1="184" x2="730" y2="184"/>
+            <line x1="30" y1="232" x2="730" y2="232"/><line x1="30" y1="280" x2="730" y2="280"/>
+          </g>
+
+          <!-- liquidity line + sweep -->
+          <line x1="60" y1="72" x2="700" y2="72" stroke="#08090B" stroke-width=".9" stroke-dasharray="6 5"/>
+          <text lang="nl" x="60" y="62" font-family="Consolas,monospace" font-size="10" letter-spacing="2.4" fill="#08090B">LIQUIDITEIT</text><text lang="en" x="60" y="62" font-family="Consolas,monospace" font-size="10" letter-spacing="2.4" fill="#08090B">LIQUIDITY</text>
+
+          <!-- FVG zone -->
+          <rect x="330" y="150" width="120" height="46" fill="url(#hatch)" opacity=".55"/>
+          <rect x="330" y="150" width="120" height="46" fill="none" stroke="#B9954A" stroke-width=".8"/>
+          <line x1="450" y1="173" x2="600" y2="173" stroke="#B9954A" stroke-width=".6" stroke-dasharray="3 4"/>
+          <text x="606" y="177" font-family="Consolas,monospace" font-size="10" letter-spacing="2.4" fill="#B9954A">FVG</text>
+
+          <!-- orderblock -->
+          <rect x="196" y="196" width="52" height="34" fill="url(#hatch2)"/>
+          <rect x="196" y="196" width="52" height="34" fill="none" stroke="#08090B" stroke-width=".8"/>
+          <line x1="222" y1="230" x2="222" y2="286" stroke="#08090B" stroke-width=".5"/>
+          <text x="222" y="300" text-anchor="middle" font-family="Consolas,monospace" font-size="10" letter-spacing="2.4" fill="#08090B">ORDERBLOCK</text>
+
+          <!-- candles, engraved: thin bodies + hairline wicks -->
+          <g stroke="#08090B" stroke-width=".9" fill="#F4F2EC">
+            <line x1="80"  y1="196" x2="80"  y2="250"/><rect x="72"  y="208" width="16" height="32"/>
+            <line x1="118" y1="184" x2="118" y2="244"/><rect x="110" y="196" width="16" height="36"/>
+            <line x1="156" y1="170" x2="156" y2="238"/><rect x="148" y="182" width="16" height="42"/>
+            <line x1="194" y1="152" x2="194" y2="226"/><rect x="186" y="166" width="16" height="44"/>
+            <line x1="232" y1="120" x2="232" y2="212"/><rect x="224" y="134" width="16" height="60"/>
+          </g>
+          <!-- the sweep candle: solid ink -->
+          <g stroke="#08090B" stroke-width=".9" fill="#08090B">
+            <line x1="270" y1="58"  x2="270" y2="176"/><rect x="262" y="66"  width="16" height="94"/>
+          </g>
+          <text x="270" y="48" text-anchor="middle" font-family="Consolas,monospace" font-size="9.5" letter-spacing="2" fill="#08090B">SWEEP</text>
+          <!-- displacement down through the gap -->
+          <g stroke="#08090B" stroke-width=".9" fill="#F4F2EC">
+            <line x1="308" y1="86"  x2="308" y2="214"/><rect x="300" y="100" width="16" height="98"/>
+            <line x1="346" y1="130" x2="346" y2="252"/><rect x="338" y="146" width="16" height="90"/>
+            <line x1="384" y1="176" x2="384" y2="272"/><rect x="376" y="190" width="16" height="70"/>
+            <line x1="422" y1="196" x2="422" y2="278"/><rect x="414" y="206" width="16" height="60"/>
+            <line x1="460" y1="188" x2="460" y2="264"/><rect x="452" y="198" width="16" height="52"/>
+            <line x1="498" y1="164" x2="498" y2="240"/><rect x="490" y="176" width="16" height="50"/>
+            <line x1="536" y1="140" x2="536" y2="220"/><rect x="528" y="152" width="16" height="52"/>
+            <line x1="574" y1="112" x2="574" y2="198"/><rect x="566" y="124" width="16" height="56"/>
+            <line x1="612" y1="92"  x2="612" y2="176"/><rect x="604" y="104" width="16" height="54"/>
+            <line x1="650" y1="76"  x2="650" y2="158"/><rect x="642" y="86"  width="16" height="54"/>
+          </g>
+
+          <!-- deviation arc -->
+          <path d="M262 78 C 300 30 640 30 662 84" fill="none" stroke="#B9954A" stroke-width=".7" stroke-dasharray="4 5"/>
+          <text lang="nl" x="462" y="30" text-anchor="middle" font-family="Consolas,monospace" font-size="10" letter-spacing="2.6" fill="#B9954A">DEVIATIE · TERUG NAAR DE ZONE</text><text lang="en" x="462" y="30" text-anchor="middle" font-family="Consolas,monospace" font-size="10" letter-spacing="2.6" fill="#B9954A">DEVIATION · BACK TO THE ZONE</text>
+
+          <!-- frame -->
+          <rect x="20" y="16" width="720" height="298" fill="none" stroke="#B9954A" stroke-width=".5" opacity=".65"/>
+        </svg>
+      </div>
+      <div class="legend">
+        <span><i class="blk dash"></i><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></span>
+        <span><i></i>FVG</span>
+        <span><i class="blk"></i>orderblock</span>
+        <span><i class="dash"></i><span lang="nl">deviatie</span><span lang="en">deviation</span></span>
+      </div>
+      <p class="sec-note" style="margin-top:14px"><span lang="nl">Schematisch voorbeeld ter illustratie. Geen prijzen, geen resultaten, geen beloftes.</span><span lang="en">Schematic example, for illustration. No prices, no results, no promises.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 · KANALEN ================= -->
+<section id="kanalen">
+  <div class="sec-head">
+    <span class="denom denom-sm">05</span>
+    <h2><span lang="nl">De kanalen</span><span lang="en">The channels</span></h2>
+    <span class="lbl" style="margin-left:auto"><span lang="nl">15 KANALEN</span><span lang="en">15 CHANNELS</span></span>
+  </div>
+  <div class="hair-gold"></div>
+
+  <div class="foils" style="margin-top:24px">
+    <div class="plate"><div class="plate-inner">
+      <div class="lbl"><span lang="nl">THUIS · NU GRATIS</span><span lang="en">HOME · FREE RIGHT NOW</span></div>
+      <div style="margin-top:14px">
+        <span class="chip">#nq-chart-ideeën</span><span class="chip">#es-chart-ideeën</span>
+        <span class="chip">#bitcoin</span><span class="chip">#altcoins</span>
+        <span class="chip">#markt</span><span class="chip">#vragen</span>
+        <span class="chip">#algemeen</span><span class="chip">#atlas-op-socials</span>
+        <span class="chip">#ondersteuning</span>
+      </div>
+      <div style="margin-top:18px" class="rule-pair"></div>
+      <a class="btn" style="margin-top:16px" href="https://discord.gg/78Ff2GuSfW"><span class="dot"></span><span lang="nl">Open deze kanalen</span><span lang="en">Open these channels</span></a>
+    </div></div>
+
+    <div class="plate"><div class="plate-inner">
+      <div class="lbl"><span lang="nl">PREMIUM · OPENT LATER</span><span lang="en">PREMIUM · OPENS LATER</span></div>
+      <div style="margin-top:14px">
+        <span class="chip pm">#trade-setups</span><span class="chip pm">#marktupdates</span>
+        <span class="chip pm">#indicatoren</span><span class="chip pm">#sessie-opnames</span>
+        <span class="chip pm">#chart-ideeën</span><span class="chip pm">#premium-chat</span>
+      </div>
+      <div style="margin-top:18px" class="rule-pair"></div>
+      <p class="sec-note" style="margin-top:14px"><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">Price and date will be announced in the server.</span></p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ================= 06 · LIVE ================= -->
+<section id="live">
+  <div class="sec-head">
+    <span class="denom denom-sm">06</span>
+    <h2><span lang="nl">Live meekijken</span><span lang="en">Watching live</span></h2>
+  </div>
+  <div class="hair-gold"></div>
+  <div class="plate" style="margin-top:24px">
+    <div class="plate-inner" style="display:grid;grid-template-columns:1fr;gap:24px;align-items:center">
+      <svg viewBox="0 0 220 220" aria-hidden="true" style="width:150px;height:150px">
+        <defs><g id="rayL"><line x1="0" y1="-58" x2="0" y2="-92" /></g></defs>
+        <g transform="translate(110 110)" stroke="#B9954A" stroke-width=".6" opacity=".8">
+          <use href="#rayL" transform="rotate(0)"/><use href="#rayL" transform="rotate(15)"/>
+          <use href="#rayL" transform="rotate(30)"/><use href="#rayL" transform="rotate(45)"/>
+          <use href="#rayL" transform="rotate(60)"/><use href="#rayL" transform="rotate(75)"/>
+          <use href="#rayL" transform="rotate(90)"/><use href="#rayL" transform="rotate(105)"/>
+          <use href="#rayL" transform="rotate(120)"/><use href="#rayL" transform="rotate(135)"/>
+          <use href="#rayL" transform="rotate(150)"/><use href="#rayL" transform="rotate(165)"/>
+          <use href="#rayL" transform="rotate(180)"/><use href="#rayL" transform="rotate(195)"/>
+          <use href="#rayL" transform="rotate(210)"/><use href="#rayL" transform="rotate(225)"/>
+          <use href="#rayL" transform="rotate(240)"/><use href="#rayL" transform="rotate(255)"/>
+          <use href="#rayL" transform="rotate(270)"/><use href="#rayL" transform="rotate(285)"/>
+          <use href="#rayL" transform="rotate(300)"/><use href="#rayL" transform="rotate(315)"/>
+          <use href="#rayL" transform="rotate(330)"/><use href="#rayL" transform="rotate(345)"/>
+        </g>
+        <circle cx="110" cy="110" r="54" fill="none" stroke="#08090B" stroke-width=".9"/>
+        <circle cx="110" cy="110" r="47" fill="none" stroke="#B9954A" stroke-width=".4"/>
+        <circle cx="110" cy="110" r="7" fill="#B9954A"/>
+        <path d="M110 110 L110 74" stroke="#08090B" stroke-width="1.2"/>
+        <path d="M110 110 L138 124" stroke="#08090B" stroke-width="1.2"/>
+      </svg>
+      <div>
+        <h3 style="margin:0 0 8px;font-size:clamp(22px,3vw,32px);font-weight:500"><span lang="nl">De oprichter handelt live in de server.</span><span lang="en">The founder trades live in the server.</span></h3>
+        <p class="sec-note" style="margin:0"><span lang="nl">Tijden worden in de server aangekondigd.</span><span lang="en">Times are announced in the server.</span></p>
+        <a class="btn btn-ghost" style="margin-top:18px" href="https://discord.gg/78Ff2GuSfW"><span class="dot"></span><span lang="nl">Zit een sessie bij</span><span lang="en">Sit in on a session</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 07 · TOEGANG ================= -->
+<section id="toegang">
+  <div class="sec-head">
+    <span class="denom denom-sm">07</span>
+    <h2><span lang="nl">Toegang</span><span lang="en">Access</span></h2>
+  </div>
+  <div class="hair-gold"></div>
+  <div class="acc" style="margin-top:24px">
+    <div class="plate"><div class="plate-inner">
+      <div class="lbl"><span lang="nl">NU</span><span lang="en">NOW</span></div>
+      <h3><span lang="nl">Gratis</span><span lang="en">Free</span></h3>
+      <p class="sec-note" style="margin-top:0"><span lang="nl">Alle thuiskanalen open. Educatie, chart-ideeën en de dagelijkse markt.</span><span lang="en">All home channels open. Education, chart ideas and the daily market.</span></p>
+      <a class="btn" style="margin-top:14px" href="https://discord.gg/78Ff2GuSfW"><span class="dot"></span><span lang="nl">Word lid</span><span lang="en">Join</span></a>
+    </div></div>
+    <div class="plate"><div class="plate-inner">
+      <div class="lbl"><span lang="nl">LATER</span><span lang="en">LATER</span></div>
+      <h3><span lang="nl">Premium</span><span lang="en">Premium</span></h3>
+      <p class="sec-note" style="margin-top:0"><span lang="nl">Opent later. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Opens later. Price and date will be announced in the server.</span></p>
+      <div class="lbl lbl-ink" style="margin-top:18px"><span lang="nl">AANKONDIGING VOLGT IN DE SERVER</span><span lang="en">ANNOUNCEMENT FOLLOWS IN THE SERVER</span></div>
+    </div></div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= 08 · CLOSING ================= -->
+<div class="wrap">
+  <div class="close-note plate">
+    <svg class="svg-abs" width="100%" height="100%" aria-hidden="true">
+      <defs>
+        <pattern id="guilC" width="72" height="40" patternUnits="userSpaceOnUse">
+          <g fill="none" stroke="#B9954A" stroke-width=".38" opacity=".55">
+            <path d="M0 20 C 18 0 54 40 72 20"/><path d="M0 20 C 18 40 54 0 72 20"/>
+            <path d="M0 12 C 18 -8 54 32 72 12"/><path d="M0 28 C 18 8 54 48 72 28"/>
+            <path d="M0 4 C 18 -16 54 24 72 4"/><path d="M0 36 C 18 16 54 56 72 36"/>
+          </g>
+        </pattern>
+      </defs>
+      <rect x="0" y="0" width="100%" height="100%" fill="url(#guilC)" opacity=".55"/>
+    </svg>
+    <div class="close-inner">
+      <span class="denom">08</span>
+      <h2><span lang="nl">Kom binnen.</span><span lang="en">Come inside.</span></h2>
+      <p class="sec-note" style="margin:0 auto 22px;max-width:40ch"><span lang="nl">PROCES. DISCIPLINE. UITVOERING. Drie woorden, elke handelsdag opnieuw.</span><span lang="en">PROCESS. DISCIPLINE. EXECUTION. Three words, every trading day.</span></p>
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW"><span class="dot"></span><span lang="nl">Open Discord</span><span lang="en">Open Discord</span></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <div class="mark" style="margin-bottom:12px">
+          <span class="nm">Atlas Capital<small>PROCES · DISCIPLINE · UITVOERING</small></span>
+        </div>
+        <p class="sec-note" style="margin:0"><span lang="nl">Nederlandse trading-community. NQ, ES, Bitcoin en altcoins.</span><span lang="en">Dutch trading community. NQ, ES, Bitcoin and altcoins.</span></p>
+      </div>
+      <div>
+        <div class="lbl" style="margin-bottom:10px"><span lang="nl">KANALEN</span><span lang="en">CHANNELS</span></div>
+        <a href="https://discord.gg/78Ff2GuSfW">Discord</a>
+        <a href="https://www.tiktok.com/@atlascapitalbv">TikTok · @atlascapitalbv</a>
+      </div>
+      <div>
+        <div class="lbl" style="margin-bottom:10px"><span lang="nl">TOEGANG</span><span lang="en">ACCESS</span></div>
+        <a href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Nu gratis toetreden</span><span lang="en">Join free right now</span></a>
+        <span class="sec-note" style="display:block"><span lang="nl">Premium opent later.</span><span lang="en">Premium opens later.</span></span>
+      </div>
+    </div>
+    <div class="microtext" style="margin-top:26px" aria-hidden="true">ATLAS CAPITAL · PROCES · DISCIPLINE · UITVOERING · ATLAS CAPITAL · PROCES · DISCIPLINE · UITVOERING · ATLAS CAPITAL · PROCES · DISCIPLINE · UITVOERING · ATLAS CAPITAL · PROCES · DISCIPLINE · UITVOERING · ATLAS CAPITAL · PROCES · DISCIPLINE · UITVOERING</div>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
+  </div>
+</footer>
+
+<style>
+@media(min-width:720px){
+  .fnd{grid-template-columns:auto 1fr!important;align-items:start}
+  #live .plate-inner{grid-template-columns:auto 1fr!important}
+}
+</style>
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 084 Parfum</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --panel:#15161A;
+  --paper:#F4F2EC;
+  --muted:#A5A6A8;
+  --dim:#6E7073;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --sans:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --pad:clamp(20px,6vw,80px);
+}
+
+*{box-sizing:border-box}
+
+html{
+  color-scheme:dark;
+  overflow-x:clip;
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--sans);
+  line-height:1.6;
+  text-align:center;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:inherit;text-decoration:none}
+
+.axis{
+  width:100%;
+  max-width:940px;
+  margin:0 auto;
+  padding-left:var(--pad);
+  padding-right:var(--pad);
+}
+
+/* ---------- atoms ---------- */
+
+.caps{
+  margin:0;
+  font-family:var(--sans);
+  font-size:clamp(9px,1.5vw,10.5px);
+  letter-spacing:.42em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--muted);
+}
+.caps--gold{color:var(--gold)}
+.caps--dim{color:var(--dim);letter-spacing:.34em}
+
+.serif{
+  font-family:var(--serif);
+  font-weight:400;
+  letter-spacing:-.01em;
+  margin:0;
+}
+
+.rule{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:clamp(22px,4vw,44px) auto;
+  max-width:340px;
+}
+.rule::before,.rule::after{
+  content:"";
+  height:1px;
+  flex:1 1 auto;
+  background:linear-gradient(90deg,rgba(215,179,100,0),rgba(215,179,100,.65));
+}
+.rule::after{background:linear-gradient(90deg,rgba(215,179,100,.65),rgba(215,179,100,0))}
+.rule i{
+  width:6px;height:6px;
+  background:var(--gold);
+  transform:rotate(45deg);
+  flex:0 0 auto;
+}
+
+.hair{
+  width:1px;
+  height:clamp(40px,7vw,86px);
+  margin:clamp(22px,4vw,44px) auto;
+  background:linear-gradient(180deg,rgba(215,179,100,.7),rgba(215,179,100,0));
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.9em;
+  padding:1.15em 2.2em;
+  border:1px solid var(--gold);
+  color:var(--gold);
+  font-size:clamp(10px,1.5vw,11.5px);
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  font-weight:600;
+  transition:background .45s ease,color .45s ease,letter-spacing .45s ease;
+}
+.btn:hover{background:var(--gold);color:#0B0904;letter-spacing:.4em}
+
+.btn--solid{
+  background:linear-gradient(122deg,var(--gold-hi),var(--gold) 48%,var(--gold-lo));
+  border-color:transparent;
+  color:#0B0904;
+}
+.btn--solid:hover{background:linear-gradient(122deg,var(--gold),var(--gold-hi));color:#0B0904}
+
+.link{
+  display:inline-flex;
+  align-items:center;
+  gap:.55em;
+  font-size:clamp(9.5px,1.4vw,11px);
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--gold);
+  border-bottom:1px solid rgba(215,179,100,.4);
+  padding-bottom:.4em;
+  transition:border-color .4s,color .4s;
+}
+.link:hover{border-color:var(--gold);color:var(--gold-hi)}
+
+/* ---------- header ---------- */
+
+.top{
+  padding-top:clamp(22px,3.6vw,40px);
+  padding-bottom:clamp(18px,3vw,32px);
+  border-bottom:1px solid rgba(244,242,236,.09);
+}
+.top .name{
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:clamp(10.5px,1.7vw,12px);
+  letter-spacing:.56em;
+  text-transform:uppercase;
+  margin:0 0 clamp(12px,2vw,18px);
+  text-indent:.56em;
+}
+.top .row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(14px,3vw,40px);
+  flex-wrap:wrap;
+}
+
+/* ---------- hero ---------- */
+
+.hero{
+  padding-top:clamp(46px,10vw,140px);
+  padding-bottom:clamp(50px,10vw,150px);
+  position:relative;
+}
+.flacon-wrap{
+  position:relative;
+  display:grid;
+  place-items:center;
+  margin-bottom:clamp(30px,5.4vw,64px);
+}
+.aura{
+  position:absolute;
+  width:min(88%,560px);
+  aspect-ratio:1/1;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(215,179,100,.24),rgba(215,179,100,.06) 46%,rgba(8,9,11,0) 70%);
+  animation:breathe 9s ease-in-out infinite;
+}
+@keyframes breathe{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.11)}
+}
+@media(prefers-reduced-motion:reduce){.aura{animation:none}}
+
+.flacon{
+  position:relative;
+  width:min(58%,300px);
+  height:auto;
+  display:block;
+}
+
+.hero h1{
+  font-size:clamp(46px,12.5vw,150px);
+  line-height:.9;
+}
+.hero h1 em{font-style:italic}
+.hero .sub{
+  margin:clamp(16px,2.6vw,26px) auto 0;
+  max-width:26ch;
+  font-family:var(--serif);
+  font-size:clamp(18px,2.7vw,27px);
+  line-height:1.35;
+  color:rgba(244,242,236,.82);
+}
+.hero .act{margin-top:clamp(30px,5vw,54px)}
+
+/* ---------- generic quiet section ---------- */
+
+.quiet{
+  padding-top:clamp(56px,11vw,170px);
+  padding-bottom:clamp(56px,11vw,170px);
+}
+.quiet h2{
+  font-size:clamp(34px,7.4vw,86px);
+  line-height:.94;
+  margin:clamp(14px,2.2vw,22px) 0 0;
+}
+.quiet h2 em{font-style:italic;color:var(--gold)}
+.quiet .lede{
+  margin:clamp(16px,2.4vw,26px) auto 0;
+  max-width:30ch;
+  font-family:var(--serif);
+  font-size:clamp(17px,2.3vw,23px);
+  line-height:1.42;
+  color:rgba(244,242,236,.76);
+}
+
+/* ---------- the notes ---------- */
+
+.notes{display:grid;gap:clamp(28px,5vw,58px);margin-top:clamp(30px,5vw,60px)}
+.note h3{
+  margin:0 0 clamp(10px,1.6vw,16px);
+  font-family:var(--sans);
+  font-size:clamp(9px,1.4vw,10.5px);
+  letter-spacing:.4em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--gold);
+}
+.note p{
+  margin:0 auto;
+  font-family:var(--serif);
+  font-size:clamp(21px,4.2vw,44px);
+  line-height:1.24;
+  max-width:20ch;
+}
+.note p span{color:rgba(244,242,236,.42)}
+
+/* ---------- the model, framed like an illustration ---------- */
+
+.frame{
+  margin:clamp(28px,5vw,56px) auto 0;
+  max-width:720px;
+  border:1px solid rgba(215,179,100,.34);
+  padding:clamp(16px,3vw,36px);
+  background:linear-gradient(180deg,rgba(244,242,236,.035),rgba(244,242,236,0));
+}
+.frame svg{width:100%;height:auto;display:block}
+.frame figcaption{
+  margin-top:clamp(14px,2.2vw,20px);
+  font-family:var(--sans);
+  font-size:clamp(9px,1.35vw,10.5px);
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--dim);
+}
+
+/* ---------- founder ---------- */
+
+.quote{
+  margin:0 auto;
+  max-width:32ch;
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(21px,3.6vw,38px);
+  line-height:1.3;
+}
+.quote-2{
+  margin:clamp(20px,3vw,30px) auto 0;
+  max-width:34ch;
+  font-family:var(--serif);
+  font-size:clamp(17px,2.3vw,23px);
+  line-height:1.4;
+  color:rgba(244,242,236,.7);
+}
+
+/* ---------- the house / channels ---------- */
+
+.house{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(30px,5vw,54px);
+  margin-top:clamp(28px,4.4vw,52px);
+}
+@media(min-width:720px){
+  .house{grid-template-columns:1fr 1px 1fr;align-items:start}
+  .house .divider{background:linear-gradient(180deg,rgba(215,179,100,0),rgba(215,179,100,.45),rgba(215,179,100,0));height:100%;min-height:180px}
+}
+.house .divider{display:none}
+@media(min-width:720px){.house .divider{display:block}}
+.wing h3{
+  margin:0 0 clamp(12px,2vw,20px);
+  font-family:var(--sans);
+  font-size:clamp(9px,1.4vw,10.5px);
+  letter-spacing:.36em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--gold);
+}
+.wing ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.42em}
+.wing li{
+  font-family:var(--serif);
+  font-size:clamp(16px,2.1vw,21px);
+  color:rgba(244,242,236,.9);
+  line-height:1.3;
+}
+.wing--later li{color:rgba(244,242,236,.52)}
+.wing .after{
+  margin:clamp(16px,2.4vw,24px) 0 0;
+  font-size:clamp(10px,1.4vw,11px);
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--dim);
+}
+
+/* ---------- access pair ---------- */
+
+.pair{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(26px,4.4vw,50px);
+  margin-top:clamp(26px,4vw,48px);
+}
+@media(min-width:700px){.pair{grid-template-columns:1fr 1fr}}
+.pair .cell{
+  padding:clamp(22px,3.4vw,40px) clamp(14px,2.2vw,26px);
+  border-top:1px solid rgba(215,179,100,.4);
+}
+.pair .cell h3{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(28px,5vw,52px);
+  margin:clamp(12px,1.8vw,18px) 0 clamp(10px,1.6vw,14px);
+  line-height:1;
+}
+.pair .cell p{margin:0 auto;max-width:24ch;font-size:clamp(12.5px,1.6vw,14.5px);color:var(--muted)}
+
+/* ---------- closing ---------- */
+
+.closing{
+  padding-top:clamp(64px,13vw,200px);
+  padding-bottom:clamp(64px,13vw,200px);
+  border-top:1px solid rgba(244,242,236,.08);
+}
+.closing h2{
+  font-size:clamp(52px,15vw,200px);
+  line-height:.85;
+  margin:clamp(16px,2.4vw,26px) 0 clamp(26px,4.4vw,50px);
+  background:linear-gradient(100deg,var(--gold-lo),var(--gold-hi) 40%,var(--gold) 66%,var(--gold-lo));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){
+  .closing h2{color:var(--gold);background:none}
+}
+
+/* ---------- footer ---------- */
+
+footer{
+  border-top:1px solid rgba(244,242,236,.08);
+  padding-top:clamp(28px,4vw,50px);
+  padding-bottom:clamp(34px,5vw,66px);
+}
+.foot-links{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:14px clamp(18px,3vw,38px);
+  margin-bottom:clamp(22px,3.4vw,34px);
+}
+.risk{
+  margin:0 auto;
+  max-width:62ch;
+  font-size:clamp(10px,1.35vw,11px);
+  line-height:1.75;
+  color:#5F6164;
+}
+</style>
+</head>
+<body>
+
+<header class="top axis">
+  <p class="name">Atlas Capital</p>
+  <div class="row">
+    <p class="caps caps--dim">Educatie</p>
+    <a class="link" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+    <p class="caps caps--dim">Community</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= HERO : THE OBJECT ================= -->
+  <section class="hero axis">
+    <div class="flacon-wrap">
+      <span class="aura" aria-hidden="true"></span>
+      <svg class="flacon" viewBox="0 0 300 470" fill="none" role="img" aria-label="Een flacon in goud lijnwerk met een schematische kaarsentekening als inhoud">
+        <defs>
+          <linearGradient id="cap" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#E6CC8E"/>
+            <stop offset=".35" stop-color="#B9954A"/>
+            <stop offset=".6" stop-color="#E6CC8E"/>
+            <stop offset="1" stop-color="#8A6F34"/>
+          </linearGradient>
+          <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#F4F2EC" stop-opacity=".10"/>
+            <stop offset=".18" stop-color="#F4F2EC" stop-opacity=".03"/>
+            <stop offset=".55" stop-color="#F4F2EC" stop-opacity=".01"/>
+            <stop offset=".84" stop-color="#F4F2EC" stop-opacity=".07"/>
+            <stop offset="1" stop-color="#F4F2EC" stop-opacity=".02"/>
+          </linearGradient>
+          <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#D7B364" stop-opacity=".20"/>
+            <stop offset="1" stop-color="#B9954A" stop-opacity=".62"/>
+          </linearGradient>
+        </defs>
+
+        <!-- cap -->
+        <rect x="108" y="14" width="84" height="66" fill="url(#cap)"/>
+        <rect x="108" y="14" width="84" height="66" stroke="rgba(35,26,6,.35)"/>
+        <path d="M108 62 H192" stroke="rgba(35,26,6,.3)"/>
+
+        <!-- neck -->
+        <rect x="130" y="80" width="40" height="34" fill="rgba(244,242,236,.06)" stroke="rgba(215,179,100,.55)"/>
+        <path d="M130 96 H170" stroke="rgba(215,179,100,.35)"/>
+
+        <!-- shoulders + body -->
+        <path d="M130 114 C130 132, 62 138, 62 176 L62 428 C62 442, 72 452, 86 452 L214 452 C228 452, 238 442, 238 428 L238 176 C238 138, 170 132, 170 114 Z"
+              fill="url(#glass)" stroke="#D7B364" stroke-width="1.6"/>
+
+        <!-- the liquid -->
+        <path d="M62 300 L238 300 L238 428 C238 442, 228 452, 214 452 L86 452 C72 452, 62 442, 62 428 Z" fill="url(#liquid)"/>
+        <path d="M62 300 H238" stroke="rgba(230,204,142,.75)"/>
+
+        <!-- the schematic suspended inside -->
+        <g stroke="rgba(244,242,236,.55)" stroke-width="1.3">
+          <path d="M96 200 V262"/><rect x="90" y="214" width="12" height="34" fill="rgba(8,9,11,.55)"/>
+          <path d="M126 186 V256"/><rect x="120" y="200" width="12" height="40" fill="rgba(8,9,11,.55)"/>
+        </g>
+        <g stroke="#E6CC8E" stroke-width="1.5">
+          <path d="M156 166 V266"/><rect x="150" y="184" width="12" height="60" fill="rgba(215,179,100,.28)"/>
+          <path d="M186 176 V252"/><rect x="180" y="190" width="12" height="44" fill="rgba(215,179,100,.28)"/>
+        </g>
+        <g stroke="rgba(244,242,236,.55)" stroke-width="1.3">
+          <path d="M212 196 V268"/><rect x="206" y="210" width="12" height="42" fill="rgba(8,9,11,.55)"/>
+        </g>
+        <path d="M78 178 H222" stroke="rgba(215,179,100,.4)" stroke-dasharray="4 6"/>
+
+        <!-- the label -->
+        <rect x="94" y="330" width="112" height="62" fill="rgba(8,9,11,.45)" stroke="rgba(230,204,142,.7)"/>
+        <text x="150" y="356" text-anchor="middle" fill="#E6CC8E" font-family="Georgia, serif" font-size="19" letter-spacing="2">Atlas</text>
+        <text x="150" y="376" text-anchor="middle" fill="rgba(230,204,142,.8)" font-family="Helvetica, Arial, sans-serif" font-size="8" letter-spacing="4">CAPITAL</text>
+
+        <!-- highlight -->
+        <path d="M84 190 C78 240, 78 330, 86 420" stroke="rgba(244,242,236,.3)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <p class="caps caps--gold">Nu geopend &middot; gratis toegang</p>
+    <h1 class="serif">Atlas <em>Capital</em></h1>
+    <p class="sub">Proces. Discipline. Uitvoering.</p>
+    <div class="act"><a class="btn btn--solid" href="https://discord.gg/78Ff2GuSfW">Word lid</a></div>
+    <span class="hair" aria-hidden="true"></span>
+    <p class="caps caps--dim">NQ &middot; ES &middot; Bitcoin &middot; Altcoins</p>
+  </section>
+
+  <!-- ================= THE NOTES ================= -->
+  <section class="quiet axis">
+    <p class="caps">De noten</p>
+    <h2 class="serif">Tien <em>onderwerpen</em></h2>
+    <span class="rule" aria-hidden="true"><i></i></span>
+
+    <div class="notes">
+      <div class="note">
+        <h3>Kopnoten</h3>
+        <p class="serif">deviatie <span>&middot;</span> SMT <span>&middot;</span> FVG</p>
+      </div>
+      <div class="note">
+        <h3>Hartnoten</h3>
+        <p class="serif">IFVG <span>&middot;</span> orderblocks <span>&middot;</span> fibonacci <span>&middot;</span> sessie&#8209;liquiditeit</p>
+      </div>
+      <div class="note">
+        <h3>Basisnoten</h3>
+        <p class="serif">liquiditeit <span>&middot;</span> risicobeheer <span>&middot;</span> tradingpsychologie</p>
+      </div>
+    </div>
+
+    <span class="hair" aria-hidden="true"></span>
+    <a class="link" href="https://discord.gg/78Ff2GuSfW">De educatie in Discord</a>
+  </section>
+
+  <!-- ================= THE MODEL ================= -->
+  <section class="quiet axis">
+    <p class="caps">Het model</p>
+    <h2 class="serif">Structuur, <em>schematisch</em></h2>
+
+    <figure class="frame">
+      <svg viewBox="0 0 680 300" fill="none" role="img" aria-label="Schema van een niveau, een deviatie en een fair value gap">
+        <path d="M40 92 H640" stroke="rgba(244,242,236,.28)" stroke-dasharray="6 7"/>
+        <text x="40" y="80" fill="#A5A6A8" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="4">NIVEAU</text>
+
+        <rect x="352" y="150" width="268" height="38" fill="rgba(215,179,100,.14)" stroke="rgba(215,179,100,.5)"/>
+        <text x="364" y="175" fill="#D7B364" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="4">FVG</text>
+
+        <g stroke="rgba(244,242,236,.75)" stroke-width="1.4">
+          <path d="M74 150 V228"/><rect x="66" y="166" width="16" height="46" fill="#0C0D11"/>
+          <path d="M118 138 V222"/><rect x="110" y="156" width="16" height="48" fill="#0C0D11"/>
+          <path d="M162 120 V206"/><rect x="154" y="136" width="16" height="52" fill="#0C0D11"/>
+        </g>
+        <g stroke="#D7B364" stroke-width="1.7">
+          <path d="M206 66 V196"/><rect x="198" y="102" width="16" height="70" fill="rgba(215,179,100,.22)"/>
+        </g>
+        <path d="M214 72 L282 46" stroke="#D7B364"/>
+        <circle cx="212" cy="72" r="3.6" fill="#D7B364"/>
+        <text x="288" y="44" fill="#D7B364" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="4">DEVIATIE</text>
+
+        <g stroke="rgba(244,242,236,.75)" stroke-width="1.4">
+          <path d="M250 118 V232"/><rect x="242" y="136" width="16" height="72" fill="#0C0D11"/>
+          <path d="M294 148 V258"/><rect x="286" y="164" width="16" height="76" fill="#0C0D11"/>
+          <path d="M338 178 V272"/><rect x="330" y="192" width="16" height="62" fill="#0C0D11"/>
+        </g>
+        <g stroke="#D7B364" stroke-width="1.7">
+          <path d="M382 142 V236"/><rect x="374" y="158" width="16" height="58" fill="rgba(215,179,100,.22)"/>
+          <path d="M426 118 V212"/><rect x="418" y="132" width="16" height="56" fill="rgba(215,179,100,.22)"/>
+        </g>
+        <g stroke="rgba(244,242,236,.75)" stroke-width="1.4">
+          <path d="M470 132 V226"/><rect x="462" y="148" width="16" height="56" fill="#0C0D11"/>
+          <path d="M514 148 V242"/><rect x="506" y="164" width="16" height="58" fill="#0C0D11"/>
+        </g>
+        <path d="M566 200 C 604 200, 610 168, 610 150" stroke="#D7B364" stroke-dasharray="5 6"/>
+        <path d="M604 160 L610 146 L616 160" stroke="#D7B364" stroke-width="1.6"/>
+      </svg>
+      <figcaption>Uitsluitend ter illustratie &mdash; geen resultaat, geen belofte</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= THE MAKER ================= -->
+  <section class="quiet axis">
+    <p class="caps">De maker</p>
+    <span class="rule" aria-hidden="true"><i></i></span>
+    <p class="quote">&#8220;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&#8221;</p>
+    <p class="quote-2">&#8220;Geen snelle&#8209;rijk&#8209;verhalen, maar echte setups, educatie en een community die samen beter wil worden.&#8221;</p>
+    <span class="hair" aria-hidden="true"></span>
+    <p class="caps caps--gold">10+ jaar</p>
+  </section>
+
+  <!-- ================= THE HOUSE ================= -->
+  <section class="quiet axis">
+    <p class="caps">Het huis</p>
+    <h2 class="serif">15 <em>kanalen</em></h2>
+
+    <div class="house">
+      <div class="wing">
+        <h3>Thuis &mdash; nu gratis</h3>
+        <ul>
+          <li>#nq-chart-idee&euml;n</li>
+          <li>#es-chart-idee&euml;n</li>
+          <li>#bitcoin</li>
+          <li>#altcoins</li>
+          <li>#markt</li>
+          <li>#vragen</li>
+          <li>#algemeen</li>
+          <li>#atlas-op-socials</li>
+          <li>#ondersteuning</li>
+        </ul>
+      </div>
+      <span class="divider" aria-hidden="true"></span>
+      <div class="wing wing--later">
+        <h3>Premium &mdash; opent later</h3>
+        <ul>
+          <li>#trade-setups</li>
+          <li>#marktupdates</li>
+          <li>#indicatoren</li>
+          <li>#sessie-opnames</li>
+          <li>#chart-idee&euml;n</li>
+          <li>#premium-chat</li>
+        </ul>
+        <p class="after">Prijs en datum in de server</p>
+      </div>
+    </div>
+
+    <span class="hair" aria-hidden="true"></span>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Open de server</a>
+  </section>
+
+  <!-- ================= LIVE ================= -->
+  <section class="quiet axis">
+    <p class="caps">Live</p>
+    <h2 class="serif">Meekijken, <em>live</em></h2>
+    <p class="lede">De oprichter handelt live mee in de server. Tijden worden daar aangekondigd.</p>
+    <span class="rule" aria-hidden="true"><i></i></span>
+    <a class="link" href="https://discord.gg/78Ff2GuSfW">Zit erbij</a>
+  </section>
+
+  <!-- ================= ACCESS ================= -->
+  <section class="quiet axis">
+    <p class="caps">Toegang</p>
+    <div class="pair">
+      <div class="cell">
+        <p class="caps caps--gold">Thuis</p>
+        <h3>Nu gratis</h3>
+        <p>Volledige toegang tot de gratis kanalen en de educatie.</p>
+      </div>
+      <div class="cell">
+        <p class="caps caps--dim">Premium</p>
+        <h3>Opent later</h3>
+        <p>Prijs en datum worden in de server aangekondigd.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CLOSING ================= -->
+  <section class="closing axis">
+    <p class="caps">Atlas Capital</p>
+    <h2 class="serif">Word lid</h2>
+    <a class="btn btn--solid" href="https://discord.gg/78Ff2GuSfW">Open Discord</a>
+  </section>
+
+</main>
+
+<footer class="axis">
+  <div class="foot-links">
+    <a class="link" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+    <a class="link" href="https://www.tiktok.com/@atlascapitalbv">TikTok @atlascapitalbv</a>
+  </div>
+  <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+</footer>
+
+</body>
+</html>

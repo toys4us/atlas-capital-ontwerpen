@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 012 Tape</title>
+<style>
+/* ============================================================
+   ATLAS CAPITAL — 012 TAPE
+   Wit vel. Zwarte schrijfmachine. Vier gouden loopbanden
+   dwars door de pagina. Scheurlijnen als op een bon.
+   Geen webfont: dit is printerwerk.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --paper:#F4F2EC;
+  --paper-hi:#FBFAF5;
+  --grey:#5C5C5E;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono","Courier New",monospace;
+}
+
+html{color-scheme:light;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--mono);
+  font-size:13px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+a{color:inherit}
+
+/* ---------- kop ---------- */
+.bar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px clamp(12px,4vw,32px);
+  border-bottom:2px solid var(--ink);
+  background:var(--paper-hi);
+  flex-wrap:wrap;
+}
+.bar__mark{display:flex;align-items:center;gap:10px;min-width:0}
+.bar__mark svg{width:22px;height:22px;flex:none}
+.bar__name{font-weight:700;letter-spacing:.24em;font-size:11px;text-transform:uppercase;white-space:nowrap}
+.bar__note{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);white-space:nowrap}
+
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font:700 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;padding:12px 15px;
+  background:var(--ink);color:var(--paper);border:2px solid var(--ink);
+}
+.btn:hover{background:var(--gold);color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--gold-lo);outline-offset:3px}
+.btn--out{background:transparent;color:var(--ink)}
+.btn--out:hover{background:var(--ink);color:var(--paper)}
+.btn--gold{background:var(--gold);border-color:var(--ink);color:var(--ink)}
+.btn--gold:hover{background:var(--ink);color:var(--gold)}
+.btn--wide{width:100%;justify-content:center;padding:18px 16px;font-size:12px;letter-spacing:.2em}
+
+/* ---------- loopband ---------- */
+.tape{
+  position:relative;width:100%;overflow:hidden;
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  background:var(--gold);
+}
+.tape--ink{background:var(--ink)}
+.tape__row{display:flex;width:max-content;animation:roll 34s linear infinite}
+.tape--b .tape__row{animation-duration:26s;animation-direction:reverse}
+.tape--c .tape__row{animation-duration:46s}
+.tape--d .tape__row{animation-duration:30s;animation-direction:reverse}
+@keyframes roll{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+.seg{
+  display:block;white-space:nowrap;padding:11px 0;
+  font-weight:700;font-size:clamp(12px,2.1vw,17px);
+  letter-spacing:.22em;text-transform:uppercase;color:var(--ink);
+}
+.tape--ink .seg{color:var(--gold)}
+@media (prefers-reduced-motion:reduce){.tape__row{animation:none}}
+
+/* ---------- de bon ---------- */
+.receipt{
+  max-width:780px;margin:0 auto;background:var(--paper-hi);
+  border-left:2px dashed var(--ink);border-right:2px dashed var(--ink);
+  padding:0 clamp(14px,4.4vw,44px);
+}
+.blk{padding:clamp(26px,5vw,48px) 0}
+.tear{
+  height:0;border-top:2px dashed var(--ink);opacity:.55;
+  position:relative;
+}
+.tear::after{
+  content:"✂";position:absolute;left:-2px;top:-11px;font-size:14px;color:var(--ink);opacity:.5;
+}
+
+.center{text-align:center}
+.eyebrow{font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--grey);margin:0}
+.stars{letter-spacing:.36em;font-size:11px;color:var(--ink);opacity:.45;margin:14px 0;word-break:break-all}
+
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.02em;text-transform:uppercase}
+h1{font-size:clamp(2rem,9.6vw,4.6rem);line-height:.95;letter-spacing:-.05em}
+h2{font-size:clamp(1.25rem,4.6vw,2.1rem);line-height:1.02}
+h3{font-size:clamp(1rem,3vw,1.25rem)}
+.lead{margin:16px 0 0;font-size:clamp(12.5px,1.5vw,15px);line-height:1.65;color:var(--ink)}
+.dim{color:var(--grey)}
+
+/* leader-regels */
+.row{display:flex;align-items:baseline;gap:8px;padding:6px 0;min-width:0}
+.row__k{flex:0 0 auto;font-size:11px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.row__d{flex:1 1 auto;border-bottom:1.5px dotted var(--ink);transform:translateY(-4px);opacity:.5;min-width:12px}
+.row__v{flex:0 0 auto;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-align:right;white-space:nowrap}
+.row__v.g{background:var(--gold);color:var(--ink);padding:1px .4em}
+
+.rows--edu .row__k{font-size:clamp(12px,2.6vw,16px);letter-spacing:-.01em;text-transform:none;font-weight:700}
+.rows--edu .row__n{flex:0 0 auto;font-size:10px;color:var(--ink);font-weight:700;letter-spacing:.1em;width:22px;border-bottom:3px solid var(--gold);align-self:center}
+.rows--edu .row__v{font-size:10px;font-weight:400;color:var(--grey);text-transform:none;letter-spacing:0}
+@media (max-width:520px){.rows--edu .row__v{display:none}}
+
+/* blokken */
+.box{border:2px solid var(--ink);padding:clamp(14px,3.4vw,22px)}
+.box--gold{background:var(--gold)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:620px){.duo{grid-template-columns:1fr}}
+
+.chips{margin:0;padding:0;list-style:none}
+.chips li{
+  padding:6px 0;border-bottom:1px dotted rgba(8,9,11,.35);
+  font-size:12.5px;display:flex;justify-content:space-between;gap:8px;word-break:break-word;
+}
+.chips li:last-child{border-bottom:none}
+.chips li b{font-weight:700}
+.chips li i{font-style:normal;font-size:9px;letter-spacing:.14em;color:var(--grey);flex:none;align-self:center}
+
+.quote{margin:0;font-size:clamp(13px,1.7vw,15.5px);line-height:1.75}
+.quote p{margin:0 0 12px}
+.quote p:last-child{margin:0}
+.sig{margin-top:18px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--grey)}
+
+.scrollx{overflow-x:auto}
+.fig{display:block;width:100%;min-width:460px;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:16px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey)}
+.legend b{color:var(--ink);border-bottom:3px solid var(--gold)}
+
+.barcode{display:block;width:100%;max-width:340px;height:auto;margin:0 auto}
+.foot{padding:clamp(24px,5vw,40px) clamp(14px,4vw,32px);border-top:2px solid var(--ink);background:var(--paper)}
+.foot__grid{max-width:780px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px}
+.foot h4{
+  margin:0 0 10px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink);border-bottom:3px solid var(--gold);padding-bottom:6px;
+}
+.foot a{display:block;text-decoration:none;font-size:12px;padding:2px 0;word-break:break-all}
+.foot a:hover{background:var(--gold)}
+.risk{max-width:780px;margin:24px auto 0;padding-top:14px;border-top:2px dashed var(--ink);font-size:10.5px;line-height:1.6;color:var(--grey)}
+</style>
+</head>
+<body>
+
+<!-- ============ KOP ============ -->
+<header class="bar">
+  <span class="bar__mark">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <rect x="2" y="2" width="36" height="36" fill="none" stroke="#08090B" stroke-width="3"/>
+      <path d="M9 29 L20 11 L31 29" fill="none" stroke="#08090B" stroke-width="3"/>
+    </svg>
+    <span class="bar__name">Atlas Capital</span>
+  </span>
+  <span class="bar__note">Trading-community · Nederlands</span>
+  <a class="btn" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Open Discord →</a>
+</header>
+
+<!-- ============ BAND 1 ============ -->
+<div class="tape tape--a" aria-hidden="true">
+  <div class="tape__row">
+    <span class="seg">PROCES · DISCIPLINE · UITVOERING · PROCES · DISCIPLINE · UITVOERING · PROCES · DISCIPLINE · UITVOERING · PROCES · DISCIPLINE · UITVOERING ·&nbsp;</span>
+    <span class="seg">PROCES · DISCIPLINE · UITVOERING · PROCES · DISCIPLINE · UITVOERING · PROCES · DISCIPLINE · UITVOERING · PROCES · DISCIPLINE · UITVOERING ·&nbsp;</span>
+  </div>
+</div>
+
+<div class="receipt">
+
+  <!-- ============ HERO ============ -->
+  <section class="blk center">
+    <p class="eyebrow">Atlas Capital · Discord</p>
+    <p class="stars">= = = = = = = = = = = =</p>
+    <h1>Lees<br>de tape.</h1>
+    <p class="lead" style="max-width:38ch;margin-left:auto;margin-right:auto">Elke dag structuur in NQ, ES, Bitcoin en altcoins. Geen ruis, geen verhalen.</p>
+    <p class="stars">= = = = = = = = = = = =</p>
+    <div style="max-width:400px;margin:0 auto">
+      <a class="btn btn--wide" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Word lid op Discord →</a>
+    </div>
+    <div style="max-width:400px;margin:22px auto 0;text-align:left">
+      <div class="row"><span class="row__k">Toegang</span><span class="row__d"></span><span class="row__v g">Nu gratis</span></div>
+      <div class="row"><span class="row__k">Educatie</span><span class="row__d"></span><span class="row__v">10 onderwerpen</span></div>
+      <div class="row"><span class="row__k">Server</span><span class="row__d"></span><span class="row__v">15 kanalen</span></div>
+      <div class="row"><span class="row__k">Oprichter</span><span class="row__d"></span><span class="row__v">10+ jaar</span></div>
+      <div class="row"><span class="row__k">Markten</span><span class="row__d"></span><span class="row__v">NQ · ES · BTC · ALT</span></div>
+    </div>
+  </section>
+
+  <div class="tear"></div>
+
+  <!-- ============ OPRICHTER ============ -->
+  <section class="blk">
+    <p class="eyebrow">Regel 01 · De oprichter</p>
+    <h2 style="margin-top:10px">10+ jaar,<br>alles meegemaakt.</h2>
+    <blockquote class="quote" style="margin-top:20px">
+      <p>&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</p>
+      <p>Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</p>
+    </blockquote>
+    <p class="sig">— Oprichter, Atlas Capital</p>
+  </section>
+</div>
+
+<!-- ============ BAND 2 ============ -->
+<div class="tape tape--b tape--ink" aria-hidden="true">
+  <div class="tape__row">
+    <span class="seg">NQ · ES · BITCOIN · ALTCOINS · NQ · ES · BITCOIN · ALTCOINS · NQ · ES · BITCOIN · ALTCOINS · NQ · ES · BITCOIN · ALTCOINS ·&nbsp;</span>
+    <span class="seg">NQ · ES · BITCOIN · ALTCOINS · NQ · ES · BITCOIN · ALTCOINS · NQ · ES · BITCOIN · ALTCOINS · NQ · ES · BITCOIN · ALTCOINS ·&nbsp;</span>
+  </div>
+</div>
+
+<div class="receipt">
+
+  <!-- ============ EDUCATIE ============ -->
+  <section class="blk">
+    <p class="eyebrow">Regel 02 · Educatie</p>
+    <h2 style="margin-top:10px">Tien onderwerpen,<br>afgedrukt.</h2>
+    <div class="rows--edu" style="margin-top:22px">
+      <div class="row"><span class="row__n">01</span><span class="row__k">deviatie</span><span class="row__d"></span><span class="row__v">uitbraak en terugkeer</span></div>
+      <div class="row"><span class="row__n">02</span><span class="row__k">SMT</span><span class="row__d"></span><span class="row__v">NQ tegen ES</span></div>
+      <div class="row"><span class="row__n">03</span><span class="row__k">FVG</span><span class="row__d"></span><span class="row__v">onbalans</span></div>
+      <div class="row"><span class="row__n">04</span><span class="row__k">IFVG</span><span class="row__d"></span><span class="row__v">omgekeerde onbalans</span></div>
+      <div class="row"><span class="row__n">05</span><span class="row__k">orderblocks</span><span class="row__d"></span><span class="row__v">blok voor de zet</span></div>
+      <div class="row"><span class="row__n">06</span><span class="row__k">fibonacci</span><span class="row__d"></span><span class="row__v">verhoudingen</span></div>
+      <div class="row"><span class="row__n">07</span><span class="row__k">sessie-liquiditeit</span><span class="row__d"></span><span class="row__v">per sessie</span></div>
+      <div class="row"><span class="row__n">08</span><span class="row__k">liquiditeit</span><span class="row__d"></span><span class="row__v">waar orders liggen</span></div>
+      <div class="row"><span class="row__n">09</span><span class="row__k">risicobeheer</span><span class="row__d"></span><span class="row__v">verlies begrenzen</span></div>
+      <div class="row"><span class="row__n">10</span><span class="row__k">tradingpsychologie</span><span class="row__d"></span><span class="row__v">gedrag onder druk</span></div>
+    </div>
+    <div class="box box--gold" style="margin-top:26px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between">
+      <span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700">De hele leerlijn staat open in de server.</span>
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Naar de server →</a>
+    </div>
+  </section>
+
+  <div class="tear"></div>
+
+  <!-- ============ MODEL ============ -->
+  <section class="blk">
+    <p class="eyebrow">Regel 03 · Model</p>
+    <h2 style="margin-top:10px">Deviatie,<br>uitgetekend.</h2>
+    <p class="lead dim">Prijs verlaat het bereik, komt terug en zoekt de andere kant. Schema — geen prijzen, geen datums.</p>
+
+    <div class="scrollx" style="margin-top:22px;border:2px solid var(--ink)">
+      <svg class="fig" viewBox="0 0 900 420" role="img" aria-label="Schema van een deviatie: de prijs verlaat het bereik, keert terug en zoekt de tegenoverliggende kant">
+        <rect x="0" y="0" width="900" height="420" fill="#FBFAF5"/>
+
+        <!-- bereik -->
+        <rect x="40" y="150" width="820" height="150" fill="#D7B364" opacity=".18"/>
+        <path d="M40 150 H860" stroke="#08090B" stroke-width="2" stroke-dasharray="9 6"/>
+        <path d="M40 300 H860" stroke="#08090B" stroke-width="2" stroke-dasharray="9 6"/>
+
+        <!-- prijslijn -->
+        <polyline fill="none" stroke="#08090B" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"
+          points="50,278 100,242 150,266 200,206 250,236 300,176 348,142 380,124 410,152 442,180 474,208 512,192 552,226 592,252 632,236 672,272 712,296 754,320 796,332 850,326"/>
+
+        <!-- deviatie markering -->
+        <g stroke="#B9954A" stroke-width="2">
+          <path d="M380 124 V96"/>
+          <path d="M368 106 L380 96 L392 106" fill="none"/>
+          <path d="M300 96 H460" stroke-dasharray="5 5" opacity=".7"/>
+        </g>
+        <rect x="352" y="112" width="56" height="24" fill="none" stroke="#B9954A" stroke-width="2"/>
+
+        <!-- terugkeer -->
+        <g stroke="#08090B" stroke-width="2">
+          <path d="M474 208 L474 250"/>
+          <path d="M464 240 L474 252 L484 240" fill="none"/>
+        </g>
+
+        <!-- doelzijde -->
+        <g stroke="#B9954A" stroke-width="2">
+          <path d="M754 320 L754 356"/>
+          <path d="M744 346 L754 358 L764 346" fill="none"/>
+        </g>
+
+        <g font-family="ui-monospace,Menlo,Consolas,monospace" font-size="13" font-weight="700" letter-spacing="2.2" fill="#08090B">
+          <text x="466" y="88">DEVIATIE</text>
+          <text x="46" y="142">BEREIK BOVEN</text>
+          <text x="46" y="320">BEREIK ONDER</text>
+          <text x="492" y="256">TERUGKEER</text>
+          <text x="640" y="376" fill="#B9954A">ANDERE KANT</text>
+        </g>
+
+        <!-- randtikjes -->
+        <g stroke="#08090B" stroke-width="1.5" opacity=".35">
+          <path d="M40 400 H860"/>
+          <path d="M40 394 V406"/><path d="M245 394 V406"/><path d="M450 394 V406"/>
+          <path d="M655 394 V406"/><path d="M860 394 V406"/>
+        </g>
+      </svg>
+    </div>
+
+    <p class="legend"><span><b>Bereik</b> — waar de prijs blijft hangen</span><span><b>Deviatie</b> — de uitstap</span><span><b>Terugkeer</b> — de bevestiging</span></p>
+  </section>
+</div>
+
+<!-- ============ BAND 3 ============ -->
+<div class="tape tape--c" aria-hidden="true">
+  <div class="tape__row">
+    <span class="seg">DEVIATIE · SMT · FVG · IFVG · ORDERBLOCKS · FIBONACCI · SESSIE-LIQUIDITEIT · LIQUIDITEIT · RISICOBEHEER · TRADINGPSYCHOLOGIE ·&nbsp;</span>
+    <span class="seg">DEVIATIE · SMT · FVG · IFVG · ORDERBLOCKS · FIBONACCI · SESSIE-LIQUIDITEIT · LIQUIDITEIT · RISICOBEHEER · TRADINGPSYCHOLOGIE ·&nbsp;</span>
+  </div>
+</div>
+
+<div class="receipt">
+
+  <!-- ============ KANALEN ============ -->
+  <section class="blk">
+    <p class="eyebrow">Regel 04 · Kanalen</p>
+    <h2 style="margin-top:10px">Vijftien kanalen<br>op één strook.</h2>
+    <div class="duo" style="margin-top:22px">
+      <div class="box">
+        <h3 style="font-size:11px;letter-spacing:.2em;display:inline-block;border-bottom:3px solid var(--gold);padding-bottom:5px">Thuis — nu gratis</h3>
+        <ul class="chips" style="margin-top:12px">
+          <li><b>#nq-chart-ideeën</b><i>NQ</i></li>
+          <li><b>#es-chart-ideeën</b><i>ES</i></li>
+          <li><b>#bitcoin</b><i>BTC</i></li>
+          <li><b>#altcoins</b><i>ALT</i></li>
+          <li><b>#markt</b><i>ALG</i></li>
+          <li><b>#vragen</b><i>ALG</i></li>
+          <li><b>#algemeen</b><i>ALG</i></li>
+          <li><b>#atlas-op-socials</b><i>ALG</i></li>
+          <li><b>#ondersteuning</b><i>ALG</i></li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3 style="font-size:11px;letter-spacing:.2em;display:inline-block;border-bottom:3px solid var(--gold);padding-bottom:5px">Premium — opent later</h3>
+        <ul class="chips" style="margin-top:12px">
+          <li><b>#trade-setups</b><i>PRM</i></li>
+          <li><b>#marktupdates</b><i>PRM</i></li>
+          <li><b>#indicatoren</b><i>PRM</i></li>
+          <li><b>#sessie-opnames</b><i>PRM</i></li>
+          <li><b>#chart-ideeën</b><i>PRM</i></li>
+          <li><b>#premium-chat</b><i>PRM</i></li>
+        </ul>
+        <p class="lead dim" style="font-size:11px;margin-top:14px">Prijs en datum worden in de server aangekondigd.</p>
+      </div>
+    </div>
+    <a class="btn btn--wide btn--out" style="margin-top:18px" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Bekijk de kanalen →</a>
+  </section>
+
+  <div class="tear"></div>
+
+  <!-- ============ LIVE ============ -->
+  <section class="blk">
+    <p class="eyebrow">Regel 05 · Live</p>
+    <div class="box box--gold" style="margin-top:14px">
+      <h2>Live meekijken.</h2>
+      <p class="lead" style="max-width:44ch">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
+      <a class="btn" style="margin-top:18px" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Zit erbij →</a>
+    </div>
+  </section>
+
+  <div class="tear"></div>
+
+  <!-- ============ TOEGANG ============ -->
+  <section class="blk">
+    <p class="eyebrow">Regel 06 · Toegang</p>
+    <h2 style="margin-top:10px">Wat open staat.</h2>
+    <div style="margin-top:20px">
+      <div class="row"><span class="row__k">Thuiskanalen</span><span class="row__d"></span><span class="row__v g">Nu gratis</span></div>
+      <div class="row"><span class="row__k">Educatie</span><span class="row__d"></span><span class="row__v g">Nu gratis</span></div>
+      <div class="row"><span class="row__k">Vragen stellen</span><span class="row__d"></span><span class="row__v g">Nu gratis</span></div>
+      <div class="row"><span class="row__k">Live meekijken</span><span class="row__d"></span><span class="row__v g">Nu gratis</span></div>
+      <div class="row"><span class="row__k">Premium-kanalen</span><span class="row__d"></span><span class="row__v">Opent later</span></div>
+      <div class="row"><span class="row__k">Prijs premium</span><span class="row__d"></span><span class="row__v">Volgt in server</span></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ BAND 4 ============ -->
+<div class="tape tape--d tape--ink" aria-hidden="true">
+  <div class="tape__row">
+    <span class="seg">NU GRATIS TOEGANG · ATLAS CAPITAL · DISCORD · NU GRATIS TOEGANG · ATLAS CAPITAL · DISCORD ·&nbsp;</span>
+    <span class="seg">NU GRATIS TOEGANG · ATLAS CAPITAL · DISCORD · NU GRATIS TOEGANG · ATLAS CAPITAL · DISCORD ·&nbsp;</span>
+  </div>
+</div>
+
+<div class="receipt">
+  <!-- ============ SLOT ============ -->
+  <section class="blk center">
+    <p class="stars">= = =  E I N D E   B O N  = = =</p>
+    <h1 style="font-size:clamp(1.8rem,8vw,3.6rem)">Scheur af.<br>Kom binnen.</h1>
+    <p class="lead" style="max-width:34ch;margin-left:auto;margin-right:auto">De server is open. Kijk mee, stel vragen, leer het model.</p>
+    <div style="max-width:400px;margin:24px auto 0">
+      <a class="btn btn--wide btn--gold" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Open Discord →</a>
+    </div>
+
+    <svg class="barcode" viewBox="0 0 340 70" aria-hidden="true" style="margin-top:30px">
+      <g fill="#08090B">
+        <rect x="6" y="0" width="4" height="56"/><rect x="14" y="0" width="2" height="56"/>
+        <rect x="20" y="0" width="6" height="56"/><rect x="30" y="0" width="2" height="56"/>
+        <rect x="36" y="0" width="3" height="56"/><rect x="43" y="0" width="7" height="56"/>
+        <rect x="54" y="0" width="2" height="56"/><rect x="60" y="0" width="4" height="56"/>
+        <rect x="68" y="0" width="2" height="56"/><rect x="74" y="0" width="6" height="56"/>
+        <rect x="84" y="0" width="3" height="56"/><rect x="91" y="0" width="2" height="56"/>
+        <rect x="97" y="0" width="5" height="56"/><rect x="106" y="0" width="2" height="56"/>
+        <rect x="112" y="0" width="4" height="56"/><rect x="120" y="0" width="6" height="56"/>
+        <rect x="130" y="0" width="2" height="56"/><rect x="136" y="0" width="3" height="56"/>
+        <rect x="143" y="0" width="7" height="56"/><rect x="154" y="0" width="2" height="56"/>
+        <rect x="160" y="0" width="4" height="56"/><rect x="168" y="0" width="3" height="56"/>
+        <rect x="175" y="0" width="6" height="56"/><rect x="185" y="0" width="2" height="56"/>
+        <rect x="191" y="0" width="4" height="56"/><rect x="199" y="0" width="2" height="56"/>
+        <rect x="205" y="0" width="7" height="56"/><rect x="216" y="0" width="3" height="56"/>
+        <rect x="223" y="0" width="2" height="56"/><rect x="229" y="0" width="5" height="56"/>
+        <rect x="238" y="0" width="2" height="56"/><rect x="244" y="0" width="4" height="56"/>
+        <rect x="252" y="0" width="6" height="56"/><rect x="262" y="0" width="2" height="56"/>
+        <rect x="268" y="0" width="3" height="56"/><rect x="275" y="0" width="7" height="56"/>
+        <rect x="286" y="0" width="2" height="56"/><rect x="292" y="0" width="4" height="56"/>
+        <rect x="300" y="0" width="2" height="56"/><rect x="306" y="0" width="6" height="56"/>
+        <rect x="316" y="0" width="3" height="56"/><rect x="323" y="0" width="5" height="56"/>
+      </g>
+      <text x="170" y="68" text-anchor="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="10" letter-spacing="6" fill="#08090B">ATLAS CAPITAL</text>
+    </svg>
+  </section>
+</div>
+
+<!-- ============ VOET ============ -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div>
+      <h4>Atlas Capital</h4>
+      <p style="margin:0;font-size:12px">Proces. Discipline. Uitvoering.</p>
+    </div>
+    <div>
+      <h4>Server</h4>
+      <a href="https://discord.gg/78Ff2GuSfW" rel="noopener">discord.gg/78Ff2GuSfW</a>
+    </div>
+    <div>
+      <h4>Socials</h4>
+      <a href="https://www.tiktok.com/@atlascapitalbv" rel="noopener">tiktok.com/@atlascapitalbv</a>
+    </div>
+    <div>
+      <h4>Markten</h4>
+      <p style="margin:0;font-size:12px">NQ · ES · Bitcoin · Altcoins</p>
+    </div>
+  </div>
+  <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+</footer>
+
+</body>
+</html>

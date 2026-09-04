@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 034 Kompasroos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================
+   ATLAS CAPITAL — 034 KOMPASROOS
+   One enormous 32-point compass rose is the spine of the page.
+   Every section is a bearing off it: N 000, NO 045, O 090, ZO 135,
+   Z 180, ZW 225, W 270. Portolan rhumb network underneath.
+   Ground: paper. Type: Archivo + italic serif for chart notes.
+   ========================================================== */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --ink-70:#35363B;
+  --ink-45:#6B6C71;
+  --ink-28:#A0A1A5;
+  --paper:#F4F2EC;
+  --paper-2:#EBE7DB;
+  --paper-3:#E1DCCC;
+  --rule:#CCC6B5;
+  --sans:"Archivo", "Segoe UI", -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  --note:Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --mono:ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+*{box-sizing:border-box}
+html{color-scheme:light;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.6;font-weight:400;
+  overflow-x:hidden;
+}
+h1,h2,h3{margin:0;font-weight:400;line-height:1.02;letter-spacing:-.02em}
+p{margin:0}
+a{color:inherit}
+ul{margin:0;padding:0;list-style:none}
+
+.wrap{max-width:1200px;margin:0 auto;padding-left:clamp(16px,4vw,48px);padding-right:clamp(16px,4vw,48px);position:relative;z-index:2}
+.band{position:relative;overflow:hidden}
+.rhumb{position:absolute;inset:0;z-index:0;pointer-events:none}
+.rhumb svg{width:100%;height:100%;display:block}
+
+.bear{
+  font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-lo);
+}
+.note{font-family:var(--note);font-style:italic;color:var(--ink-45)}
+
+/* ---------- header ---------- */
+header{
+  border-bottom:1px solid var(--ink);
+  background:var(--paper);
+  position:sticky;top:0;z-index:60;
+}
+header::after{content:"";display:block;height:2px;background:var(--gold);margin-top:2px}
+.hd{
+  max-width:1200px;margin:0 auto;padding:14px clamp(16px,4vw,48px);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand b{
+  font-size:15px;letter-spacing:.4em;text-transform:uppercase;font-weight:600;white-space:nowrap;
+}
+.brand i{font-style:normal;color:var(--ink-45);font-weight:300;letter-spacing:.34em}
+.hd nav{display:flex;gap:clamp(10px,2vw,22px);flex-wrap:wrap}
+.hd nav a{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-45);text-decoration:none;
+}
+.hd nav a:hover{color:var(--ink)}
+@media (max-width:820px){ .hd nav{display:none} }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
+  padding:14px 24px;color:var(--paper);background:var(--ink);
+  border:1px solid var(--ink);font-weight:500;
+  transition:background .22s ease, color .22s ease, box-shadow .22s ease;
+  box-shadow:4px 4px 0 rgba(215,179,100,.85);
+}
+.btn:hover{background:var(--gold-lo);border-color:var(--gold-lo);color:var(--ink);box-shadow:4px 4px 0 rgba(8,9,11,.85)}
+.btn--out{
+  background:none;color:var(--ink);border:1px solid var(--ink);box-shadow:4px 4px 0 rgba(8,9,11,.12);
+}
+.btn--out:hover{background:var(--ink);color:var(--paper);box-shadow:4px 4px 0 rgba(215,179,100,.85)}
+.btn--lg{font-size:12px;padding:18px 32px;letter-spacing:.26em}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(34px,5vw,70px);padding-bottom:clamp(26px,4vw,56px)}
+.hero-grid{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);
+  gap:clamp(22px,4vw,58px);align-items:center;
+}
+@media (max-width:940px){ .hero-grid{grid-template-columns:1fr} }
+h1{
+  font-size:clamp(42px,8.6vw,104px);font-weight:600;letter-spacing:-.045em;line-height:.94;
+  text-transform:uppercase;
+}
+h1 span{display:block;color:var(--gold-lo);font-weight:300}
+.hero p.lead{margin-top:22px;font-size:clamp(16px,2vw,20px);color:var(--ink-70);max-width:40ch;font-weight:300}
+.hero .cta{margin-top:30px;display:flex;gap:16px;flex-wrap:wrap}
+.hero .kv{
+  margin-top:32px;padding-top:16px;border-top:1px solid var(--ink);
+  display:flex;gap:clamp(14px,3vw,34px);flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-45);
+}
+.hero .kv b{color:var(--ink);font-weight:500}
+.rose{width:100%;height:auto;display:block}
+
+/* ---------- bearing section head ---------- */
+.leg{padding:clamp(48px,7.5vw,110px) 0;border-top:1px solid var(--rule)}
+.leg-head{display:flex;gap:clamp(14px,2.6vw,28px);align-items:center;margin-bottom:clamp(22px,3.4vw,40px);flex-wrap:wrap}
+.dial{flex:none;width:clamp(58px,7vw,84px);height:auto}
+.leg-head h2{font-size:clamp(28px,5.4vw,58px);font-weight:500;letter-spacing:-.035em;text-transform:uppercase}
+.leg-head .bear{display:block;margin-bottom:8px}
+.leg--e{text-align:left}
+.leg--e .inner{margin-left:auto;max-width:820px}
+.leg--w .inner{margin-right:auto;max-width:820px}
+.leg--c{text-align:center}
+.leg--c .leg-head{justify-content:center;text-align:left}
+.leg--c .inner{margin:0 auto;max-width:820px}
+@media (max-width:760px){ .leg--e,.leg--w,.leg--c{text-align:left} .leg--c .leg-head{justify-content:flex-start} }
+
+/* ---------- founder ---------- */
+.quote{font-size:clamp(19px,2.6vw,28px);line-height:1.42;font-weight:300;letter-spacing:-.015em}
+.quote-rule{width:64px;height:3px;background:var(--gold);margin-bottom:22px}
+.qmeta{
+  margin-top:22px;padding-top:14px;border-top:1px solid var(--rule);
+  display:flex;gap:22px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-45);
+}
+.qmeta b{color:var(--ink);font-weight:500}
+
+/* ---------- topics on bearings ---------- */
+.fan{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.fan li{
+  background:var(--paper);padding:18px 16px;min-width:0;
+  display:flex;flex-direction:column;gap:12px;
+  transition:background .28s ease, transform .28s ease;
+}
+.fan li:hover{background:var(--paper-2);transform:translateY(-2px)}
+.fan .hdr{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.fan .hdr span{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--gold-lo)}
+.fan .hdr svg{flex:none}
+.fan b{font-size:clamp(17px,2.2vw,21px);font-weight:500;letter-spacing:-.02em;overflow-wrap:anywhere}
+.fan .n{font-family:var(--note);font-style:italic;font-size:13px;color:var(--ink-45)}
+.fan-foot{
+  margin-top:16px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-45);
+}
+
+/* ---------- chart figure ---------- */
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--ink);background:var(--paper-2)}
+.scroller svg{display:block;min-width:680px;width:100%;height:auto}
+.figcap{
+  margin-top:14px;display:flex;gap:18px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-45);
+}
+.figcap b{color:var(--gold-lo);font-weight:500}
+
+/* ---------- channel manifest ---------- */
+.manifest{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(20px,3.4vw,44px)}
+.manifest h3{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;
+  padding-bottom:12px;border-bottom:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:12px;
+}
+.manifest h3 span{color:var(--gold-lo)}
+.manifest li{
+  display:flex;align-items:center;gap:11px;padding:12px 0;
+  border-bottom:1px solid var(--rule);font-size:18px;font-weight:400;min-width:0;
+}
+.manifest li svg{flex:none;color:var(--gold-lo)}
+.manifest li .n{overflow-wrap:anywhere}
+.manifest li .b{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--ink-28);flex:none}
+
+/* ---------- live ---------- */
+.live{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(20px,3.4vw,46px);align-items:center}
+.live h3{font-size:clamp(26px,4.2vw,42px);font-weight:500;letter-spacing:-.03em}
+.live p{margin-top:14px;color:var(--ink-70);max-width:38ch;font-weight:300}
+
+/* ---------- access ---------- */
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(18px,3vw,34px)}
+.card{border:1px solid var(--ink);padding:clamp(22px,3.2vw,38px);background:var(--paper);position:relative}
+.card--soft{background:var(--paper-2);border-style:dashed}
+.card h3{font-size:clamp(24px,3.4vw,34px);font-weight:500;margin:14px 0 12px;text-transform:uppercase;letter-spacing:-.03em}
+.card p{color:var(--ink-70);max-width:36ch;font-weight:300}
+.chip{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
+  border:1px solid var(--ink);padding:5px 11px;display:inline-block;
+}
+.chip--gold{border-color:var(--gold-lo);color:var(--gold-lo)}
+
+/* ---------- closing ---------- */
+.closing{padding-top:clamp(50px,8vw,120px);padding-bottom:clamp(50px,8vw,120px);border-top:1px solid var(--rule);text-align:center}
+.closing h2{font-size:clamp(38px,8.6vw,96px);font-weight:600;text-transform:uppercase;letter-spacing:-.045em}
+.closing h2 em{font-style:normal;color:var(--gold-lo);font-weight:300}
+.closing p{margin:18px auto 0;color:var(--ink-70);max-width:34ch;font-weight:300}
+
+/* ---------- footer ---------- */
+footer{border-top:2px solid var(--ink);background:var(--paper-2);padding:clamp(30px,5vw,54px) 0 40px}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(18px,3vw,36px)}
+.fg h4{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-45);margin:0 0 12px;font-weight:400}
+.fg a{display:block;text-decoration:none;color:var(--ink-70);padding:4px 0;overflow-wrap:anywhere}
+.fg a:hover{color:var(--gold-lo)}
+.fg p{color:var(--ink-70);font-weight:300}
+.risk{
+  margin-top:clamp(24px,4vw,42px);padding-top:16px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:10px;line-height:1.85;color:var(--ink-45);
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+}
+.risk span{max-width:72ch}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="hd">
+    <div class="brand">
+      <svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="#08090B" stroke-width="1.2"/>
+        <path d="M20,3 L23,17 L37,20 L23,23 L20,37 L17,23 L3,20 L17,17 Z" fill="#D7B364" stroke="#08090B" stroke-width=".7"/>
+      </svg>
+      <b>Atlas <i>Capital</i></b>
+    </div>
+    <nav>
+      <a href="#n">N · Kaartmaker</a>
+      <a href="#no">NO · Educatie</a>
+      <a href="#o">O · Model</a>
+      <a href="#zo">ZO · Kanalen</a>
+      <a href="#zw">ZW · Toegang</a>
+    </nav>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div class="band">
+  <div class="rhumb" aria-hidden="true">
+    <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice">
+      <rect width="1400" height="900" fill="#F4F2EC"/>
+      <!-- portolan rhumb network: 16 lines from each of three nodes -->
+      <g stroke="#B9954A" stroke-width=".6" stroke-opacity=".28">
+        <g id="g034-rl"><line x1="960" y1="450" x2="960" y2="-500"/></g>
+        <use href="#g034-rl"/>
+        <use href="#g034-rl" transform="rotate(22.5 960 450)"/>
+        <use href="#g034-rl" transform="rotate(45 960 450)"/>
+        <use href="#g034-rl" transform="rotate(67.5 960 450)"/>
+        <use href="#g034-rl" transform="rotate(90 960 450)"/>
+        <use href="#g034-rl" transform="rotate(112.5 960 450)"/>
+        <use href="#g034-rl" transform="rotate(135 960 450)"/>
+        <use href="#g034-rl" transform="rotate(157.5 960 450)"/>
+        <use href="#g034-rl" transform="rotate(180 960 450)"/>
+        <use href="#g034-rl" transform="rotate(202.5 960 450)"/>
+        <use href="#g034-rl" transform="rotate(225 960 450)"/>
+        <use href="#g034-rl" transform="rotate(247.5 960 450)"/>
+        <use href="#g034-rl" transform="rotate(270 960 450)"/>
+        <use href="#g034-rl" transform="rotate(292.5 960 450)"/>
+        <use href="#g034-rl" transform="rotate(315 960 450)"/>
+        <use href="#g034-rl" transform="rotate(337.5 960 450)"/>
+      </g>
+      <g stroke="#B9954A" stroke-width=".5" stroke-opacity=".2">
+        <g id="g034-rl2"><line x1="220" y1="180" x2="220" y2="-500"/></g>
+        <use href="#g034-rl2" transform="rotate(45 220 180)"/>
+        <use href="#g034-rl2" transform="rotate(90 220 180)"/>
+        <use href="#g034-rl2" transform="rotate(135 220 180)"/>
+        <use href="#g034-rl2" transform="rotate(180 220 180)"/>
+        <use href="#g034-rl2" transform="rotate(225 220 180)"/>
+        <use href="#g034-rl2" transform="rotate(270 220 180)"/>
+        <use href="#g034-rl2" transform="rotate(315 220 180)"/>
+        <g id="g034-rl3"><line x1="330" y1="760" x2="330" y2="80"/></g>
+        <use href="#g034-rl3" transform="rotate(45 330 760)"/>
+        <use href="#g034-rl3" transform="rotate(90 330 760)"/>
+        <use href="#g034-rl3" transform="rotate(135 330 760)"/>
+        <use href="#g034-rl3" transform="rotate(225 330 760)"/>
+        <use href="#g034-rl3" transform="rotate(270 330 760)"/>
+        <use href="#g034-rl3" transform="rotate(315 330 760)"/>
+      </g>
+      <g fill="none" stroke="#B9954A" stroke-opacity=".5">
+        <circle cx="220" cy="180" r="5"/><circle cx="330" cy="760" r="5"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <span class="bear">Blad 034 &nbsp;·&nbsp; roos &amp; koersen</span>
+        <h1 style="margin-top:20px">Zet je<br>koers<span>uit</span></h1>
+        <p class="lead">Atlas Capital is een Nederlandse trading-community. Educatie, structuur en dagelijkse voorbereiding op NQ, ES, Bitcoin en altcoins.</p>
+        <div class="cta">
+          <a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
+          <a class="btn btn--out btn--lg" href="#no">Bekijk de educatie</a>
+        </div>
+        <div class="kv">
+          <span><b>Proces</b></span><span><b>Discipline</b></span><span><b>Uitvoering</b></span><span>Nu gratis toegang</span>
+        </div>
+      </div>
+
+      <!-- ======= THE 32-POINT ROSE ======= -->
+      <svg class="rose" viewBox="0 0 1000 1000" role="img" aria-label="Kompasroos met 32 streken en gradenring">
+        <defs>
+          <!-- one north-pointing kite per size; rotated into all bearings -->
+          <path id="g034-maj-l" d="M500,170 L471.72,471.72 L500,500 Z"/>
+          <path id="g034-maj-r" d="M500,170 L528.28,471.72 L500,500 Z"/>
+          <path id="g034-mid-l" d="M500,250 L471.72,471.72 L500,500 Z"/>
+          <path id="g034-mid-r" d="M500,250 L528.28,471.72 L500,500 Z"/>
+          <path id="g034-min-l" d="M500,320 L490.05,475.98 L500,500 Z"/>
+          <path id="g034-min-r" d="M500,320 L509.95,475.98 L500,500 Z"/>
+          <line id="g034-deg" x1="500" y1="470" x2="500" y2="486"/>
+          <line id="g034-deg2" x1="500" y1="470" x2="500" y2="480"/>
+        </defs>
+
+        <!-- rings -->
+        <circle cx="500" cy="500" r="486" fill="none" stroke="#B9954A" stroke-width="1.4"/>
+        <circle cx="500" cy="500" r="470" fill="none" stroke="#08090B" stroke-width="1.2"/>
+        <circle cx="500" cy="500" r="452" fill="none" stroke="#08090B" stroke-width=".6"/>
+        <circle cx="500" cy="500" r="396" fill="none" stroke="#B9954A" stroke-width="1"/>
+        <circle cx="500" cy="500" r="330" fill="none" stroke="#08090B" stroke-width=".6" stroke-dasharray="3 5"/>
+
+        <!-- degree collar -->
+        <g stroke="#08090B" stroke-width="1.1">
+          <use href="#g034-deg"/>
+          <use href="#g034-deg" transform="rotate(30 500 500)"/>
+          <use href="#g034-deg" transform="rotate(60 500 500)"/>
+          <use href="#g034-deg" transform="rotate(90 500 500)"/>
+          <use href="#g034-deg" transform="rotate(120 500 500)"/>
+          <use href="#g034-deg" transform="rotate(150 500 500)"/>
+          <use href="#g034-deg" transform="rotate(180 500 500)"/>
+          <use href="#g034-deg" transform="rotate(210 500 500)"/>
+          <use href="#g034-deg" transform="rotate(240 500 500)"/>
+          <use href="#g034-deg" transform="rotate(270 500 500)"/>
+          <use href="#g034-deg" transform="rotate(300 500 500)"/>
+          <use href="#g034-deg" transform="rotate(330 500 500)"/>
+        </g>
+        <g stroke="#08090B" stroke-width=".6" stroke-opacity=".8">
+          <use href="#g034-deg2" transform="rotate(10 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(20 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(40 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(50 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(70 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(80 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(100 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(110 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(130 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(140 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(160 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(170 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(190 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(200 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(220 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(230 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(250 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(260 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(280 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(290 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(310 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(320 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(340 500 500)"/>
+          <use href="#g034-deg2" transform="rotate(350 500 500)"/>
+        </g>
+
+        <!-- degree labels -->
+        <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="19" letter-spacing="2" fill="#6B6C71" text-anchor="middle">
+          <text x="500" y="437">000</text>
+          <text x="715" y="134">030</text>
+          <text x="872" y="291">060</text>
+          <text x="930" y="507">090</text>
+          <text x="872" y="722">120</text>
+          <text x="715" y="879">150</text>
+          <text x="500" y="937">180</text>
+          <text x="285" y="879">210</text>
+          <text x="128" y="722">240</text>
+          <text x="70" y="507">270</text>
+          <text x="128" y="291">300</text>
+          <text x="285" y="134">330</text>
+        </g>
+
+        <!-- 16 by-point hairlines -->
+        <g stroke="#B9954A" stroke-width=".7" stroke-opacity=".7">
+          <g id="g034-by"><line x1="500" y1="500" x2="500" y2="382"/></g>
+          <use href="#g034-by" transform="rotate(11.25 500 500)"/>
+          <use href="#g034-by" transform="rotate(33.75 500 500)"/>
+          <use href="#g034-by" transform="rotate(56.25 500 500)"/>
+          <use href="#g034-by" transform="rotate(78.75 500 500)"/>
+          <use href="#g034-by" transform="rotate(101.25 500 500)"/>
+          <use href="#g034-by" transform="rotate(123.75 500 500)"/>
+          <use href="#g034-by" transform="rotate(146.25 500 500)"/>
+          <use href="#g034-by" transform="rotate(168.75 500 500)"/>
+          <use href="#g034-by" transform="rotate(191.25 500 500)"/>
+          <use href="#g034-by" transform="rotate(213.75 500 500)"/>
+          <use href="#g034-by" transform="rotate(236.25 500 500)"/>
+          <use href="#g034-by" transform="rotate(258.75 500 500)"/>
+          <use href="#g034-by" transform="rotate(281.25 500 500)"/>
+          <use href="#g034-by" transform="rotate(303.75 500 500)"/>
+          <use href="#g034-by" transform="rotate(326.25 500 500)"/>
+          <use href="#g034-by" transform="rotate(348.75 500 500)"/>
+        </g>
+
+        <!-- 8 secondary points (22.5 deg family) -->
+        <g stroke="#08090B" stroke-width=".8">
+          <g fill="#B9954A" fill-opacity=".55">
+            <use href="#g034-min-l" transform="rotate(22.5 500 500)"/>
+            <use href="#g034-min-l" transform="rotate(67.5 500 500)"/>
+            <use href="#g034-min-l" transform="rotate(112.5 500 500)"/>
+            <use href="#g034-min-l" transform="rotate(157.5 500 500)"/>
+            <use href="#g034-min-l" transform="rotate(202.5 500 500)"/>
+            <use href="#g034-min-l" transform="rotate(247.5 500 500)"/>
+            <use href="#g034-min-l" transform="rotate(292.5 500 500)"/>
+            <use href="#g034-min-l" transform="rotate(337.5 500 500)"/>
+          </g>
+          <g fill="#F4F2EC">
+            <use href="#g034-min-r" transform="rotate(22.5 500 500)"/>
+            <use href="#g034-min-r" transform="rotate(67.5 500 500)"/>
+            <use href="#g034-min-r" transform="rotate(112.5 500 500)"/>
+            <use href="#g034-min-r" transform="rotate(157.5 500 500)"/>
+            <use href="#g034-min-r" transform="rotate(202.5 500 500)"/>
+            <use href="#g034-min-r" transform="rotate(247.5 500 500)"/>
+            <use href="#g034-min-r" transform="rotate(292.5 500 500)"/>
+            <use href="#g034-min-r" transform="rotate(337.5 500 500)"/>
+          </g>
+        </g>
+
+        <!-- 4 intercardinal points -->
+        <g stroke="#08090B" stroke-width="1">
+          <g fill="#08090B">
+            <use href="#g034-mid-l" transform="rotate(45 500 500)"/>
+            <use href="#g034-mid-l" transform="rotate(135 500 500)"/>
+            <use href="#g034-mid-l" transform="rotate(225 500 500)"/>
+            <use href="#g034-mid-l" transform="rotate(315 500 500)"/>
+          </g>
+          <g fill="#EBE7DB">
+            <use href="#g034-mid-r" transform="rotate(45 500 500)"/>
+            <use href="#g034-mid-r" transform="rotate(135 500 500)"/>
+            <use href="#g034-mid-r" transform="rotate(225 500 500)"/>
+            <use href="#g034-mid-r" transform="rotate(315 500 500)"/>
+          </g>
+        </g>
+
+        <!-- 4 cardinal points -->
+        <g stroke="#08090B" stroke-width="1.2">
+          <g fill="#08090B">
+            <use href="#g034-maj-l"/>
+            <use href="#g034-maj-l" transform="rotate(90 500 500)"/>
+            <use href="#g034-maj-l" transform="rotate(180 500 500)"/>
+            <use href="#g034-maj-l" transform="rotate(270 500 500)"/>
+          </g>
+          <g fill="#D7B364">
+            <use href="#g034-maj-r"/>
+            <use href="#g034-maj-r" transform="rotate(90 500 500)"/>
+            <use href="#g034-maj-r" transform="rotate(180 500 500)"/>
+            <use href="#g034-maj-r" transform="rotate(270 500 500)"/>
+          </g>
+        </g>
+
+        <!-- fleur on north -->
+        <g fill="none" stroke="#08090B" stroke-width="2">
+          <path d="M500,88 C492,104 486,116 486,128 C486,142 494,150 500,150 C506,150 514,142 514,128 C514,116 508,104 500,88 Z" fill="#D7B364"/>
+          <path d="M486,132 C474,124 464,128 462,140 C460,152 470,158 480,152"/>
+          <path d="M514,132 C526,124 536,128 538,140 C540,152 530,158 520,152"/>
+          <path d="M478,158 H522"/>
+        </g>
+
+        <!-- hub -->
+        <circle cx="500" cy="500" r="26" fill="#F4F2EC" stroke="#08090B" stroke-width="1.4"/>
+        <circle cx="500" cy="500" r="16" fill="none" stroke="#B9954A" stroke-width="1"/>
+        <circle cx="500" cy="500" r="5" fill="#08090B"/>
+
+        <!-- cardinal letters -->
+        <g font-family="Archivo, Segoe UI, Helvetica, Arial, sans-serif" font-weight="600" font-size="42" fill="#08090B" text-anchor="middle">
+          <text x="500" y="76">N</text>
+          <text x="972" y="516">O</text>
+          <text x="500" y="962">Z</text>
+          <text x="28" y="516">W</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ============ N · 000 — DE KAARTMAKER ============ -->
+<div class="wrap">
+<section class="leg leg--c" id="n">
+  <div class="inner">
+    <div class="leg-head">
+      <svg class="dial" viewBox="0 0 90 90" aria-hidden="true">
+        <circle cx="45" cy="45" r="42" fill="none" stroke="#08090B" stroke-width="1.2"/>
+        <circle cx="45" cy="45" r="35" fill="none" stroke="#B9954A" stroke-width=".7"/>
+        <g stroke="#08090B" stroke-width="1"><path d="M45,3 V11 M87,45 H79 M45,87 V79 M3,45 H11"/></g>
+        <g transform="rotate(0 45 45)">
+          <path d="M45,10 L51,45 L45,52 L39,45 Z" fill="#D7B364" stroke="#08090B" stroke-width=".8"/>
+        </g>
+        <circle cx="45" cy="45" r="3.4" fill="#08090B"/>
+      </svg>
+      <div>
+        <span class="bear">Streek N &nbsp;·&nbsp; 000°</span>
+        <h2>De kaartmaker</h2>
+      </div>
+    </div>
+
+    <div class="quote-rule"></div>
+    <p class="quote">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</p>
+    <div class="qmeta">
+      <span><b>Oprichter</b> Atlas Capital</span>
+      <span>10+ jaar actief in trading</span>
+    </div>
+    <div style="margin-top:26px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Kom binnen in de server</a></div>
+  </div>
+</section>
+
+<!-- ============ NO · 045 — EDUCATIE ============ -->
+<section class="leg leg--e" id="no">
+  <div class="inner">
+    <div class="leg-head">
+      <svg class="dial" viewBox="0 0 90 90" aria-hidden="true">
+        <circle cx="45" cy="45" r="42" fill="none" stroke="#08090B" stroke-width="1.2"/>
+        <circle cx="45" cy="45" r="35" fill="none" stroke="#B9954A" stroke-width=".7"/>
+        <g stroke="#08090B" stroke-width="1"><path d="M45,3 V11 M87,45 H79 M45,87 V79 M3,45 H11"/></g>
+        <g transform="rotate(45 45 45)">
+          <path d="M45,10 L51,45 L45,52 L39,45 Z" fill="#D7B364" stroke="#08090B" stroke-width=".8"/>
+        </g>
+        <circle cx="45" cy="45" r="3.4" fill="#08090B"/>
+      </svg>
+      <div>
+        <span class="bear">Streek NO &nbsp;·&nbsp; 045°</span>
+        <h2>Tien streken educatie</h2>
+      </div>
+    </div>
+
+    <ul class="fan">
+      <li><div class="hdr"><span>011°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>deviatie</b><span class="n">afwijking van de koers</span></li>
+      <li><div class="hdr"><span>045°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>SMT</b><span class="n">twee peilingen vergeleken</span></li>
+      <li><div class="hdr"><span>079°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>FVG</b><span class="n">een gat in het vaarwater</span></li>
+      <li><div class="hdr"><span>113°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>IFVG</b><span class="n">het gat omgekeerd</span></li>
+      <li><div class="hdr"><span>146°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>orderblocks</b><span class="n">ankergrond</span></li>
+      <li><div class="hdr"><span>180°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>fibonacci</b><span class="n">verdeling van de afstand</span></li>
+      <li><div class="hdr"><span>214°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>sessie-liquiditeit</b><span class="n">getij per sessie</span></li>
+      <li><div class="hdr"><span>248°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>liquiditeit</b><span class="n">waar het water staat</span></li>
+      <li><div class="hdr"><span>281°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>risicobeheer</b><span class="n">ballast en marge</span></li>
+      <li><div class="hdr"><span>315°</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1 L10,8 L8,15 L6,8 Z" fill="#D7B364"/></svg></div><b>tradingpsychologie</b><span class="n">de hand aan het roer</span></li>
+    </ul>
+    <div class="fan-foot">
+      <span>10 onderwerpen · educatie in de server</span>
+      <a class="btn btn--out" href="https://discord.gg/78Ff2GuSfW">Vaar mee</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ O · 090 — HET MODEL ============ -->
+<section class="leg leg--e" id="o">
+  <div class="inner" style="max-width:none">
+    <div class="leg-head">
+      <svg class="dial" viewBox="0 0 90 90" aria-hidden="true">
+        <circle cx="45" cy="45" r="42" fill="none" stroke="#08090B" stroke-width="1.2"/>
+        <circle cx="45" cy="45" r="35" fill="none" stroke="#B9954A" stroke-width=".7"/>
+        <g stroke="#08090B" stroke-width="1"><path d="M45,3 V11 M87,45 H79 M45,87 V79 M3,45 H11"/></g>
+        <g transform="rotate(90 45 45)">
+          <path d="M45,10 L51,45 L45,52 L39,45 Z" fill="#D7B364" stroke="#08090B" stroke-width=".8"/>
+        </g>
+        <circle cx="45" cy="45" r="3.4" fill="#08090B"/>
+      </svg>
+      <div>
+        <span class="bear">Streek O &nbsp;·&nbsp; 090°</span>
+        <h2>Het model, uitgezet</h2>
+      </div>
+    </div>
+
+    <div class="scroller">
+      <svg viewBox="0 0 900 420" role="img" aria-label="Zeekaart-schema van een setup: liquiditeit, sweep, orderblock, FVG en uitvoering">
+        <defs>
+          <pattern id="g034-shoal" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="9" stroke="#B9954A" stroke-width="1.2" stroke-opacity=".7"/>
+          </pattern>
+        </defs>
+
+        <rect width="900" height="420" fill="#EBE7DB"/>
+        <!-- chart grid + neat lines -->
+        <g stroke="#CCC6B5" stroke-width="1">
+          <path d="M0,60 H900 M0,120 H900 M0,180 H900 M0,240 H900 M0,300 H900 M0,360 H900"/>
+          <path d="M120,0 V420 M240,0 V420 M360,0 V420 M480,0 V420 M600,0 V420 M720,0 V420 M840,0 V420"/>
+        </g>
+        <rect x="10" y="10" width="880" height="400" fill="none" stroke="#08090B" stroke-width="1.2"/>
+
+        <!-- the FVG as a marked shoal band -->
+        <rect x="330" y="168" width="500" height="44" fill="url(#g034-shoal)" fill-opacity=".55"/>
+        <path d="M330,168 H830 M330,212 H830" stroke="#08090B" stroke-width="1.1"/>
+
+        <!-- liquidity: charted depth line -->
+        <path d="M40,320 H860" stroke="#08090B" stroke-width="1.2" stroke-dasharray="9 5"/>
+        <g fill="#08090B"><circle cx="140" cy="320" r="2.6"/><circle cx="196" cy="320" r="2.6"/><circle cx="252" cy="320" r="2.6"/></g>
+
+        <!-- orderblock: anchorage box -->
+        <rect x="246" y="248" width="80" height="44" fill="#D7B364" fill-opacity=".2" stroke="#08090B" stroke-width="1.4"/>
+
+        <!-- candle schematic -->
+        <g stroke="#08090B" stroke-width="1.4">
+          <g fill="#F4F2EC">
+            <path d="M84,232 V300"/><rect x="77" y="246" width="14" height="34"/>
+            <path d="M124,220 V308"/><rect x="117" y="238" width="14" height="44"/>
+            <path d="M164,226 V314"/><rect x="157" y="244" width="14" height="46"/>
+          </g>
+          <g fill="#08090B">
+            <path d="M204,236 V340"/><rect x="197" y="262" width="14" height="52"/>
+            <path d="M244,250 V356"/><rect x="237" y="276" width="14" height="54"/>
+          </g>
+          <g fill="#F4F2EC">
+            <path d="M284,230 V384"/><rect x="277" y="242" width="14" height="50"/>
+            <path d="M324,178 V276"/><rect x="317" y="188" width="14" height="62"/>
+            <path d="M364,140 V216"/><rect x="357" y="150" width="14" height="54"/>
+            <path d="M404,118 V198"/><rect x="397" y="130" width="14" height="52"/>
+          </g>
+          <g fill="#08090B">
+            <path d="M444,112 V188"/><rect x="437" y="124" width="14" height="46"/>
+            <path d="M484,122 V204"/><rect x="477" y="136" width="14" height="50"/>
+          </g>
+          <g fill="#F4F2EC">
+            <path d="M524,140 V208"/><rect x="517" y="152" width="14" height="44"/>
+            <path d="M564,98 V172"/><rect x="557" y="110" width="14" height="48"/>
+            <path d="M604,70 V142"/><rect x="597" y="80" width="14" height="46"/>
+          </g>
+        </g>
+        <circle cx="284" cy="384" r="4.6" fill="#EBE7DB" stroke="#08090B" stroke-width="1.6"/>
+
+        <!-- course line -->
+        <path d="M300,356 C380,356 412,250 466,196 C528,134 594,96 668,68" fill="none" stroke="#B9954A" stroke-width="2.6"/>
+        <path d="M668,68 L652,64 M668,68 L660,80" stroke="#B9954A" stroke-width="2.6" fill="none"/>
+        <!-- course arrow marks -->
+        <g fill="#B9954A">
+          <path d="M406,232 L414,238 L404,242 Z"/><path d="M540,150 L548,156 L538,160 Z"/>
+        </g>
+
+        <!-- leaders + labels, chart style -->
+        <g stroke="#08090B" stroke-width=".9" fill="none">
+          <path d="M140,320 L140,382 L110,382"/>
+          <path d="M284,384 L284,404 L326,404"/>
+          <path d="M286,248 L286,206 L236,206"/>
+          <path d="M830,190 L862,190"/>
+          <path d="M668,68 L668,42 L612,42"/>
+        </g>
+        <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1.8" fill="#08090B">
+          <text x="104" y="386" text-anchor="end">LIQUIDITEIT</text>
+          <text x="332" y="408">SWEEP</text>
+          <text x="230" y="202" text-anchor="end">ORDERBLOCK</text>
+          <text x="608" y="46" text-anchor="end" fill="#B9954A">UITVOERING</text>
+        </g>
+        <text x="676" y="194" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="3" fill="#08090B">FVG</text>
+
+        <!-- corner rose -->
+        <g transform="translate(806,352) scale(.9)">
+          <circle cx="0" cy="0" r="34" fill="none" stroke="#08090B" stroke-width="1"/>
+          <path d="M0,-34 L5,-5 L0,0 L-5,-5 Z" fill="#08090B"/>
+          <path d="M0,34 L5,5 L0,0 L-5,5 Z" fill="#F4F2EC" stroke="#08090B" stroke-width=".7"/>
+          <path d="M34,0 L5,5 L0,0 L5,-5 Z" fill="#F4F2EC" stroke="#08090B" stroke-width=".7"/>
+          <path d="M-34,0 L-5,5 L0,0 L-5,-5 Z" fill="#F4F2EC" stroke="#08090B" stroke-width=".7"/>
+          <text x="0" y="-40" text-anchor="middle" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#08090B">N</text>
+        </g>
+      </svg>
+    </div>
+    <div class="figcap">
+      <b>Kaartje O</b><span>Schematische illustratie van een concept</span><span>Geen prijzen, geen resultaat</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ZO · 135 — KANALEN ============ -->
+<section class="leg leg--e" id="zo">
+  <div class="inner" style="max-width:none">
+    <div class="leg-head">
+      <svg class="dial" viewBox="0 0 90 90" aria-hidden="true">
+        <circle cx="45" cy="45" r="42" fill="none" stroke="#08090B" stroke-width="1.2"/>
+        <circle cx="45" cy="45" r="35" fill="none" stroke="#B9954A" stroke-width=".7"/>
+        <g stroke="#08090B" stroke-width="1"><path d="M45,3 V11 M87,45 H79 M45,87 V79 M3,45 H11"/></g>
+        <g transform="rotate(135 45 45)">
+          <path d="M45,10 L51,45 L45,52 L39,45 Z" fill="#D7B364" stroke="#08090B" stroke-width=".8"/>
+        </g>
+        <circle cx="45" cy="45" r="3.4" fill="#08090B"/>
+      </svg>
+      <div>
+        <span class="bear">Streek ZO &nbsp;·&nbsp; 135°</span>
+        <h2>15 kanalen</h2>
+      </div>
+    </div>
+
+    <div class="manifest">
+      <div>
+        <h3>Thuis <span>nu gratis · 9</span></h3>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="currentColor"/></svg><span class="n">#nq-chart-ideeën</span><span class="b">OPEN</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="currentColor"/></svg><span class="n">#es-chart-ideeën</span><span class="b">OPEN</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="currentColor"/></svg><span class="n">#bitcoin</span><span class="b">OPEN</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="currentColor"/></svg><span class="n">#altcoins</span><span class="b">OPEN</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="currentColor"/></svg><span class="n">#markt</span><span class="b">OPEN</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="currentColor"/></svg><span class="n">#vragen</span><span class="b">OPEN</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="currentColor"/></svg><span class="n">#algemeen</span><span class="b">OPEN</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="currentColor"/></svg><span class="n">#atlas-op-socials</span><span class="b">OPEN</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="currentColor"/></svg><span class="n">#ondersteuning</span><span class="b">OPEN</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Premium <span>opent later · 6</span></h3>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span class="n">#trade-setups</span><span class="b">LATER</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span class="n">#marktupdates</span><span class="b">LATER</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span class="n">#indicatoren</span><span class="b">LATER</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span class="n">#sessie-opnames</span><span class="b">LATER</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span class="n">#chart-ideeën</span><span class="b">LATER</span></li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M7.5,1 L14,13 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span class="n">#premium-chat</span><span class="b">LATER</span></li>
+        </ul>
+        <div style="margin-top:24px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Open de server</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Z · 180 — LIVE ============ -->
+<section class="leg leg--c" id="z">
+  <div class="inner">
+    <div class="leg-head">
+      <svg class="dial" viewBox="0 0 90 90" aria-hidden="true">
+        <circle cx="45" cy="45" r="42" fill="none" stroke="#08090B" stroke-width="1.2"/>
+        <circle cx="45" cy="45" r="35" fill="none" stroke="#B9954A" stroke-width=".7"/>
+        <g stroke="#08090B" stroke-width="1"><path d="M45,3 V11 M87,45 H79 M45,87 V79 M3,45 H11"/></g>
+        <g transform="rotate(180 45 45)">
+          <path d="M45,10 L51,45 L45,52 L39,45 Z" fill="#D7B364" stroke="#08090B" stroke-width=".8"/>
+        </g>
+        <circle cx="45" cy="45" r="3.4" fill="#08090B"/>
+      </svg>
+      <div>
+        <span class="bear">Streek Z &nbsp;·&nbsp; 180°</span>
+        <h2>Live aan het roer</h2>
+      </div>
+    </div>
+
+    <div class="live">
+      <div>
+        <h3>De oprichter handelt live mee.</h3>
+        <p>Hij laat in de server zien hoe hij de markten benadert. Tijden worden daar aangekondigd.</p>
+        <div style="margin-top:24px"><a class="btn btn--out" href="https://discord.gg/78Ff2GuSfW">Zit een sessie mee</a></div>
+      </div>
+      <svg viewBox="0 0 340 190" role="img" aria-label="Markten uitgezet op streken" style="width:100%;height:auto">
+        <g stroke="#CCC6B5" stroke-width="1"><path d="M0,48 H340 M0,95 H340 M0,142 H340 M85,0 V190 M170,0 V190 M255,0 V190"/></g>
+        <g stroke="#08090B" stroke-width="1.2" fill="#D7B364">
+          <path d="M46,142 L54,124 H38 Z"/><path d="M132,96 L140,78 H124 Z"/>
+          <path d="M214,126 L222,108 H206 Z"/><path d="M292,80 L300,62 H284 Z"/>
+        </g>
+        <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10" letter-spacing="2" fill="#35363B">
+          <text x="46" y="160" text-anchor="middle">NQ</text>
+          <text x="132" y="114" text-anchor="middle">ES</text>
+          <text x="214" y="144" text-anchor="middle">BITCOIN</text>
+          <text x="292" y="98" text-anchor="middle">ALTCOINS</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ZW · 225 — TOEGANG ============ -->
+<section class="leg leg--w" id="zw">
+  <div class="inner">
+    <div class="leg-head">
+      <svg class="dial" viewBox="0 0 90 90" aria-hidden="true">
+        <circle cx="45" cy="45" r="42" fill="none" stroke="#08090B" stroke-width="1.2"/>
+        <circle cx="45" cy="45" r="35" fill="none" stroke="#B9954A" stroke-width=".7"/>
+        <g stroke="#08090B" stroke-width="1"><path d="M45,3 V11 M87,45 H79 M45,87 V79 M3,45 H11"/></g>
+        <g transform="rotate(225 45 45)">
+          <path d="M45,10 L51,45 L45,52 L39,45 Z" fill="#D7B364" stroke="#08090B" stroke-width=".8"/>
+        </g>
+        <circle cx="45" cy="45" r="3.4" fill="#08090B"/>
+      </svg>
+      <div>
+        <span class="bear">Streek ZW &nbsp;·&nbsp; 225°</span>
+        <h2>Toegang</h2>
+      </div>
+    </div>
+
+    <div class="duo">
+      <div class="card">
+        <span class="chip">Haven open</span>
+        <h3>Gratis</h3>
+        <p>De hele thuiskant van de server is nu gratis: educatie, chart-ideeën, markt en community.</p>
+        <div style="margin-top:22px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Nu binnenlopen</a></div>
+      </div>
+      <div class="card card--soft">
+        <span class="chip chip--gold">Nog gesloten</span>
+        <h3>Premium</h3>
+        <p>Premium opent later. Wanneer en hoe wordt in de server aangekondigd.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- /wrap -->
+
+<!-- ============ W · 270 — CLOSING ============ -->
+<div class="band">
+  <div class="rhumb" aria-hidden="true">
+    <svg viewBox="0 0 1400 520" preserveAspectRatio="xMidYMid slice">
+      <rect width="1400" height="520" fill="#F4F2EC"/>
+      <g stroke="#B9954A" stroke-width=".6" stroke-opacity=".3">
+        <g id="g034-rl4"><line x1="700" y1="260" x2="700" y2="-500"/></g>
+        <use href="#g034-rl4"/>
+        <use href="#g034-rl4" transform="rotate(22.5 700 260)"/>
+        <use href="#g034-rl4" transform="rotate(45 700 260)"/>
+        <use href="#g034-rl4" transform="rotate(67.5 700 260)"/>
+        <use href="#g034-rl4" transform="rotate(90 700 260)"/>
+        <use href="#g034-rl4" transform="rotate(112.5 700 260)"/>
+        <use href="#g034-rl4" transform="rotate(135 700 260)"/>
+        <use href="#g034-rl4" transform="rotate(157.5 700 260)"/>
+        <use href="#g034-rl4" transform="rotate(180 700 260)"/>
+        <use href="#g034-rl4" transform="rotate(202.5 700 260)"/>
+        <use href="#g034-rl4" transform="rotate(225 700 260)"/>
+        <use href="#g034-rl4" transform="rotate(247.5 700 260)"/>
+        <use href="#g034-rl4" transform="rotate(270 700 260)"/>
+        <use href="#g034-rl4" transform="rotate(292.5 700 260)"/>
+        <use href="#g034-rl4" transform="rotate(315 700 260)"/>
+        <use href="#g034-rl4" transform="rotate(337.5 700 260)"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap closing">
+    <span class="bear">Streek W &nbsp;·&nbsp; 270°</span>
+    <h2 style="margin-top:20px">Vaar <em>mee</em>.</h2>
+    <p>Gratis toegang, vanaf het moment dat je binnenkomt.</p>
+    <div style="margin-top:30px"><a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a></div>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div>
+        <h4>Atlas Capital</h4>
+        <p>Proces. Discipline. Uitvoering.</p>
+      </div>
+      <div>
+        <h4>Peilingen</h4>
+        <a href="https://discord.gg/78Ff2GuSfW">Discord</a>
+        <a href="https://www.tiktok.com/@atlascapitalbv">TikTok · @atlascapitalbv</a>
+      </div>
+      <div>
+        <h4>Vaarwater</h4>
+        <p>NQ · ES · Bitcoin · Altcoins</p>
+      </div>
+      <div>
+        <h4>Stand</h4>
+        <p style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;line-height:2;color:var(--ink-45)">
+          GRATIS TOEGANG · NU<br>PREMIUM · OPENT LATER<br>10+ JAAR ERVARING
+        </p>
+      </div>
+    </div>
+    <div class="risk">
+      <span>Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span>
+      <span>BLAD 034 · KOMPASROOS</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="nl" data-lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 051 Bento</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D7B364; --gold-hi:#E6CC8E; --gold-lo:#B9954A;
+  --ink:#08090B; --panel:#15161A; --panel-2:#101116; --paper:#F4F2EC;
+  --muted:#A5A6A8; --seam:rgba(215,179,100,.22);
+  --font:"Space Grotesk",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--ink);color:var(--paper);
+  font-family:var(--font);font-size:16px;line-height:1.45;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,p,ul{margin:0}
+ul{list-style:none;padding:0}
+
+.wrap{max-width:1360px;margin:0 auto;padding:clamp(14px,2.4vw,30px)}
+
+/* ---------- THE BENTO ---------- */
+.bento{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  grid-auto-rows:minmax(58px,auto);
+  gap:1px;
+  background:var(--seam);
+  border:1px solid var(--seam);
+}
+.t{
+  background:var(--panel-2);
+  padding:clamp(14px,1.7vw,26px);
+  position:relative;
+  min-width:0;
+  display:flex;flex-direction:column;
+}
+.t--raise{background:var(--panel)}
+.idx{
+  position:absolute;top:10px;right:12px;
+  font-size:10px;letter-spacing:.22em;color:rgba(165,166,168,.45);
+}
+.lab{
+  font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:10px;
+}
+.lab--dim{color:var(--muted)}
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.langsw{position:absolute;top:10px;right:12px;display:flex;z-index:7}
+.langsw button{
+  font-family:var(--font);font-size:10px;letter-spacing:.22em;font-weight:600;
+  background:transparent;border:1px solid var(--seam);color:rgba(165,166,168,.55);
+  padding:4px 6px 3px 8px;line-height:1;cursor:pointer;
+  transition:color .2s ease,background .2s ease;
+}
+.langsw button+button{border-left:none}
+.langsw button[aria-pressed="true"]{color:var(--gold);background:rgba(215,179,100,.09)}
+.langsw button:hover{color:var(--gold-hi)}
+
+/* ---------- desktop composition ---------- */
+@media (min-width:920px){
+  .bento{grid-auto-rows:minmax(62px,auto)}
+  .a-mark   {grid-column:1/5;  grid-row:1/3}
+  .a-cta    {grid-column:5/8;  grid-row:1/3}
+  .a-tick   {grid-column:8/13; grid-row:1/3}
+  .a-hero   {grid-column:1/8;  grid-row:3/8}
+  .a-chan   {grid-column:8/13; grid-row:3/12}
+  .a-chart  {grid-column:1/5;  grid-row:8/13}
+  .a-found  {grid-column:5/8;  grid-row:8/13}
+  .a-edu    {grid-column:1/8;  grid-row:13/18}
+  .a-live   {grid-column:8/13; grid-row:12/15}
+  .a-access {grid-column:8/13; grid-row:15/18}
+  .a-mkts   {grid-column:1/13; grid-row:18/20}
+  .a-close  {grid-column:1/13; grid-row:20/23}
+  .a-foot   {grid-column:1/13; grid-row:23/25}
+}
+
+/* the tile that leaves the page */
+.a-tick{
+  overflow:hidden;justify-content:center;
+  background:linear-gradient(90deg,var(--panel) 0%,#0B0C10 100%);
+}
+@media (min-width:920px){
+  .a-tick{margin-right:calc(-1 * clamp(14px,2.4vw,30px) - 3vw);padding-right:0}
+}
+
+/* ---------- wordmark ---------- */
+.mark{display:flex;align-items:center;gap:12px}
+.mark svg{width:38px;height:38px;flex:none}
+.mark b{font-size:clamp(15px,1.5vw,19px);letter-spacing:.16em;font-weight:600}
+.tagline{
+  margin-top:auto;padding-top:12px;
+  font-size:10.5px;letter-spacing:.28em;color:var(--muted);
+}
+
+/* ---------- CTA tiles ---------- */
+.a-cta{
+  background:linear-gradient(140deg,var(--gold-hi),var(--gold) 46%,var(--gold-lo));
+  color:#0A0A0C;justify-content:center;
+}
+.a-cta .k{font-size:10.5px;letter-spacing:.26em;font-weight:700;opacity:.72}
+.a-cta .v{font-size:clamp(17px,1.9vw,23px);font-weight:700;letter-spacing:-.01em;margin-top:4px;display:flex;align-items:center;gap:10px}
+.a-cta .v span:not([lang]){transition:transform .25s ease}
+.a-cta:hover .v span:not([lang]){transform:translateX(6px)}
+
+.btn{
+  display:inline-flex;align-items:center;gap:10px;align-self:flex-start;
+  background:var(--gold);color:#0A0A0C;font-weight:700;font-family:var(--font);
+  font-size:14px;letter-spacing:.02em;padding:13px 20px;border:none;
+  transition:background .22s ease,transform .22s ease;
+}
+.btn:hover{background:var(--gold-hi);transform:translateY(-2px)}
+.btn--ghost{background:transparent;color:var(--gold);border:1px solid var(--seam)}
+.btn--ghost:hover{background:rgba(215,179,100,.08);color:var(--gold-hi)}
+.btn--dark{background:#0A0A0C;color:var(--gold)}
+.btn--dark:hover{background:#141419}
+
+/* ---------- ticker ---------- */
+.tickline{display:flex;gap:0;width:max-content;animation:slide 26s linear infinite}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tickline span{
+  padding-right:34px;font-size:clamp(15px,1.7vw,21px);font-weight:500;
+  letter-spacing:.1em;color:var(--muted);white-space:nowrap;
+}
+.tickline span i{font-style:normal;color:var(--gold);padding-right:34px}
+@media (prefers-reduced-motion:reduce){.tickline{animation:none}}
+
+/* ---------- hero ---------- */
+.a-hero h1{
+  font-size:clamp(34px,5.4vw,64px);line-height:.98;letter-spacing:-.035em;
+  font-weight:600;margin:6px 0 0;
+}
+.a-hero h1 em{font-style:normal;color:var(--gold);display:block}
+.a-hero p{color:var(--muted);max-width:34ch;margin:16px 0 22px;font-size:clamp(14px,1.15vw,16.5px)}
+.herofoot{margin-top:auto;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.herofoot .note{font-size:11px;letter-spacing:.18em;color:rgba(165,166,168,.7)}
+
+/* ---------- the overlapping medallion ---------- */
+.medal{
+  position:absolute;z-index:6;
+  width:clamp(84px,9vw,116px);height:clamp(84px,9vw,116px);
+  border-radius:50%;
+  background:radial-gradient(circle at 34% 28%,#1E1F25,#0A0B0E 70%);
+  border:1px solid var(--gold);
+  display:grid;place-items:center;text-align:center;
+  box-shadow:0 22px 44px rgba(0,0,0,.66);
+  right:-26px;bottom:-30px;
+}
+.medal b{display:block;font-size:clamp(17px,2vw,24px);color:var(--gold);letter-spacing:-.02em;line-height:1}
+.medal small{display:block;font-size:8.5px;letter-spacing:.24em;color:var(--muted);margin-top:5px}
+@media (max-width:919px){.medal{right:12px;bottom:-34px;}}
+
+/* ---------- channels (tall tile) ---------- */
+.chan{display:flex;flex-direction:column;height:100%}
+.chan .grp{
+  display:flex;align-items:baseline;justify-content:space-between;
+  border-top:1px solid var(--seam);padding-top:10px;margin-top:16px;
+}
+.chan .grp:first-of-type{margin-top:6px}
+.chan .grp b{font-size:11px;letter-spacing:.2em;color:var(--paper);font-weight:600}
+.chan .grp i{font-style:normal;font-size:10px;letter-spacing:.16em;color:var(--gold)}
+.chan li{
+  display:flex;align-items:center;gap:9px;padding:5.5px 0;
+  font-size:clamp(12.5px,1.05vw,14.5px);color:var(--muted);
+  border-bottom:1px dotted rgba(165,166,168,.16);
+}
+.chan li:last-child{border-bottom:none}
+.chan li s{text-decoration:none;color:var(--gold);opacity:.8;font-size:13px}
+.chan li:hover{color:var(--paper)}
+.chan .later s{opacity:.42}
+.chan .big{
+  font-size:clamp(40px,4.6vw,58px);line-height:.9;letter-spacing:-.04em;
+  color:var(--paper);font-weight:600;
+}
+.chan .big u{text-decoration:none;color:var(--gold)}
+
+/* ---------- chart tile ---------- */
+.chart svg{width:100%;height:auto;display:block;margin:6px 0 12px}
+.cap{font-size:12.5px;color:var(--muted);margin-top:auto}
+
+/* ---------- founder ---------- */
+.a-found blockquote{
+  margin:0;font-size:clamp(14px,1.2vw,16.5px);line-height:1.55;color:var(--paper);
+}
+.a-found .sig{margin-top:auto;padding-top:16px;font-size:11px;letter-spacing:.18em;color:var(--gold)}
+.rule{height:1px;background:var(--seam);margin:14px 0}
+
+/* ---------- education: nested sub-tiles ---------- */
+.subgrid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:1px;background:var(--seam);border:1px solid var(--seam);margin-top:4px;
+}
+@media (min-width:620px){.subgrid{grid-template-columns:repeat(5,1fr)}}
+.sub{
+  background:var(--panel-2);padding:12px 11px 14px;
+  display:flex;flex-direction:column;gap:6px;min-height:84px;
+  transition:background .2s ease;
+}
+.sub:hover{background:var(--panel)}
+.sub b{font-size:10px;letter-spacing:.14em;color:var(--gold);font-weight:600}
+.sub span{font-size:clamp(12px,1.05vw,14px);line-height:1.2;color:var(--paper)}
+
+/* ---------- live ---------- */
+.dot{
+  width:9px;height:9px;border-radius:50%;background:var(--gold);
+  display:inline-block;margin-right:9px;animation:beat 2.1s ease-in-out infinite;
+}
+@keyframes beat{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.34;transform:scale(.72)}}
+@media (prefers-reduced-motion:reduce){.dot{animation:none}}
+.a-live h3{font-size:clamp(19px,2.1vw,26px);letter-spacing:-.02em;font-weight:600}
+.a-live p{color:var(--muted);font-size:13.5px;margin-top:8px}
+
+/* ---------- access: two nested sub-tiles ---------- */
+.split2{display:grid;grid-template-columns:1fr;gap:1px;background:var(--seam);border:1px solid var(--seam);margin-top:6px}
+@media (min-width:480px){.split2{grid-template-columns:1fr 1fr}}
+.split2 div{background:var(--panel-2);padding:14px}
+.split2 b{display:block;font-size:11px;letter-spacing:.2em;color:var(--gold);margin-bottom:6px}
+.split2 span{font-size:13px;color:var(--muted)}
+.split2 .now b{color:var(--gold-hi)}
+.a-access .fine{font-size:11.5px;color:rgba(165,166,168,.75);margin-top:12px}
+
+/* ---------- markets strip: nested 4-up ---------- */
+.mkts{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--seam);border:1px solid var(--seam);margin-top:4px}
+@media (min-width:700px){.mkts{grid-template-columns:repeat(4,1fr)}}
+.mkt{background:var(--panel-2);padding:14px 14px 12px;display:flex;flex-direction:column;gap:8px}
+.mkt:hover{background:var(--panel)}
+.mkt b{font-size:clamp(15px,1.6vw,20px);letter-spacing:.06em;color:var(--paper);font-weight:600}
+.mkt span{font-size:11px;letter-spacing:.16em;color:var(--muted)}
+.mkt svg{width:100%;height:34px;display:block;margin-top:auto}
+
+/* ---------- closing ---------- */
+.a-close{
+  background:linear-gradient(120deg,#101116 0%,#191A20 55%,#101116 100%);
+  align-items:flex-start;justify-content:center;
+}
+.a-close h2{
+  font-size:clamp(28px,4.4vw,54px);letter-spacing:-.035em;line-height:1;font-weight:600;
+}
+.a-close h2 em{font-style:normal;color:var(--gold)}
+.a-close .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}
+
+/* ---------- footer ---------- */
+.a-foot{background:var(--ink)}
+.footrow{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:baseline}
+.footrow a{font-size:12.5px;letter-spacing:.14em;color:var(--gold)}
+.footrow a:hover{color:var(--gold-hi)}
+.risk{
+  margin-top:14px;font-size:11px;line-height:1.5;color:rgba(165,166,168,.62);max-width:74ch;
+}
+
+/* ---------- mobile flow ---------- */
+@media (max-width:919px){
+  .bento{grid-template-columns:1fr}
+  .t{grid-column:1/-1 !important}
+  .a-tick{order:-1}
+  .a-hero{padding-bottom:44px}
+  .a-chan .big{font-size:44px}
+}
+@media (max-width:400px){
+  .wrap{padding:10px}
+  .subgrid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<main class="bento">
+
+  <!-- 01 MARK -->
+  <header class="t t--raise a-mark">
+    <div class="mark">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="17" r="10.5" fill="none" stroke="#D7B364" stroke-width="1.4"/>
+        <path d="M6 33h36M11 33l6 10M37 33l-6 10" fill="none" stroke="#D7B364" stroke-width="1.4" stroke-linecap="square"/>
+        <path d="M13.5 17h21M24 6.5v21" stroke="rgba(215,179,100,.35)" stroke-width="1"/>
+      </svg>
+      <b>ATLAS<br>CAPITAL</b>
+    </div>
+    <div class="tagline"><span lang="nl">PROCES · DISCIPLINE · UITVOERING</span><span lang="en">PROCESS · DISCIPLINE · EXECUTION</span></div>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <!-- CTA -->
+  <a class="t a-cta" href="https://discord.gg/78Ff2GuSfW">
+    <div class="k"><span lang="nl">DISCORD · NU GRATIS</span><span lang="en">DISCORD · FREE RIGHT NOW</span></div>
+    <div class="v"><span lang="nl">Kom binnen</span><span lang="en">Come inside</span> <span>&rarr;</span></div>
+  </a>
+
+  <!-- TICKER (bleeds off the page edge) -->
+  <div class="t a-tick" aria-hidden="true">
+    <div class="tickline">
+      <span>NQ<i>·</i>ES<i>·</i>BITCOIN<i>·</i>ALTCOINS<i>·</i></span>
+      <span>NQ<i>·</i>ES<i>·</i>BITCOIN<i>·</i>ALTCOINS<i>·</i></span>
+    </div>
+  </div>
+
+  <!-- 01 HERO -->
+  <section class="t t--raise a-hero">
+    <span class="idx">01</span>
+    <div class="lab"><span lang="nl">DE COMMUNITY</span><span lang="en">THE COMMUNITY</span></div>
+    <h1><span lang="nl">Eén scherm.</span><span lang="en">One screen.</span><em><span lang="nl">Het hele proces.</span><span lang="en">The whole process.</span></em></h1>
+    <p><span lang="nl">Educatie, kanalen en live sessies op één plek in Discord.</span><span lang="en">Education, channels and live sessions in one place on Discord.</span></p>
+    <div class="herofoot">
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW">Open Discord &rarr;</a>
+      <span class="note"><span lang="nl">GRATIS TOEGANG</span><span lang="en">FREE ACCESS</span></span>
+    </div>
+    <div class="medal">
+      <div><b>10+</b><small><span lang="nl">JAAR</span><span lang="en">YEARS</span></small></div>
+    </div>
+  </section>
+
+  <!-- 06 CHANNELS — the tall tile -->
+  <section class="t a-chan">
+    <span class="idx">06</span>
+    <div class="chan">
+      <div class="lab"><span lang="nl">DE SERVER</span><span lang="en">THE SERVER</span></div>
+      <div class="big"><u>15</u> <span lang="nl">kanalen</span><span lang="en">channels</span></div>
+
+      <div class="grp"><b><span lang="nl">THUIS</span><span lang="en">HOME</span></b><i><span lang="nl">NU GRATIS</span><span lang="en">FREE RIGHT NOW</span></i></div>
+      <ul>
+        <li><s>#</s>nq-chart-ideeën</li>
+        <li><s>#</s>es-chart-ideeën</li>
+        <li><s>#</s>bitcoin</li>
+        <li><s>#</s>altcoins</li>
+        <li><s>#</s>markt</li>
+        <li><s>#</s>vragen</li>
+        <li><s>#</s>algemeen</li>
+        <li><s>#</s>atlas-op-socials</li>
+        <li><s>#</s>ondersteuning</li>
+      </ul>
+
+      <div class="grp"><b>PREMIUM</b><i><span lang="nl">OPENT LATER</span><span lang="en">OPENS LATER</span></i></div>
+      <ul class="later">
+        <li><s>#</s>trade-setups</li>
+        <li><s>#</s>marktupdates</li>
+        <li><s>#</s>indicatoren</li>
+        <li><s>#</s>sessie-opnames</li>
+        <li><s>#</s>chart-ideeën</li>
+        <li><s>#</s>premium-chat</li>
+      </ul>
+
+      <div style="margin-top:auto;padding-top:18px">
+        <a class="btn btn--ghost" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Bekijk de server</span><span lang="en">See the server</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 CHART SCHEMATIC -->
+  <section class="t t--raise a-chart chart">
+    <span class="idx">05</span>
+    <div class="lab">MODEL · FVG</div>
+    <svg viewBox="0 0 400 240" role="img" aria-label="Schematische weergave van een fair value gap / Schematic of a fair value gap">
+      <g stroke="rgba(165,166,168,.14)" stroke-width="1">
+        <path d="M0 40h400M0 100h400M0 140h400M0 200h400"/>
+      </g>
+      <rect x="0" y="100" width="400" height="40" fill="#D7B364" opacity="0.13"/>
+      <path d="M0 100h400M0 140h400" stroke="#D7B364" stroke-width="1" stroke-dasharray="5 5"/>
+
+      <g stroke="#A5A6A8" stroke-width="1.6" fill="#15161A">
+        <path d="M40 140v60"/><rect x="32" y="152" width="16" height="38"/>
+      </g>
+      <g stroke="#D7B364" stroke-width="1.6" fill="rgba(215,179,100,.2)">
+        <path d="M80 78v82"/><rect x="72" y="90" width="16" height="60"/>
+        <path d="M120 48v54"/><rect x="112" y="58" width="16" height="38"/>
+      </g>
+      <g stroke="#A5A6A8" stroke-width="1.6" fill="#15161A">
+        <path d="M160 44v44"/><rect x="152" y="54" width="16" height="24"/>
+        <path d="M200 68v54"/><rect x="192" y="74" width="16" height="36"/>
+        <path d="M240 98v48"/><rect x="232" y="104" width="16" height="32"/>
+      </g>
+      <g stroke="#D7B364" stroke-width="1.6" fill="rgba(215,179,100,.2)">
+        <path d="M280 74v66"/><rect x="272" y="82" width="16" height="48"/>
+        <path d="M320 30v66"/><rect x="312" y="40" width="16" height="46"/>
+      </g>
+
+      <path d="M248 120h48" stroke="#E6CC8E" stroke-width="1" stroke-dasharray="3 4"/>
+      <circle cx="244" cy="120" r="3.5" fill="#E6CC8E"/>
+      <text x="302" y="124" fill="#E6CC8E" font-family="Space Grotesk, Arial" font-size="13" letter-spacing="2">FVG</text>
+      <text lang="nl" x="8" y="230" fill="rgba(165,166,168,.6)" font-family="Space Grotesk, Arial" font-size="10" letter-spacing="3">SCHEMATISCH — GEEN KOERS</text>
+      <text lang="en" x="8" y="230" fill="rgba(165,166,168,.6)" font-family="Space Grotesk, Arial" font-size="10" letter-spacing="3">SCHEMATIC — NO PRICE DATA</text>
+    </svg>
+    <p class="cap"><span lang="nl">De onbalans die de markt later terugzoekt. Eén van de tien onderwerpen.</span><span lang="en">The imbalance the market comes back to later. One of the ten topics.</span></p>
+  </section>
+
+  <!-- 03 FOUNDER -->
+  <section class="t a-found">
+    <span class="idx">03</span>
+    <div class="lab"><span lang="nl">DE OPRICHTER</span><span lang="en">THE FOUNDER</span></div>
+    <blockquote><span lang="nl">&ldquo;Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</span><span lang="en">&ldquo;No get-rich-quick promises, just real setups, education, and a community focused on improving together.&rdquo;</span></blockquote>
+    <div class="rule"></div>
+    <p style="color:var(--muted);font-size:13px"><span lang="nl">Meer dan 10 jaar actief in trading. Winst, verlies, fouten, groei en vooral heel veel lessen.</span><span lang="en">Involved in trading for over 10 years. Wins, losses, mistakes, growth, and a lot of lessons.</span></p>
+    <div class="sig"><span lang="nl">OPRICHTER</span><span lang="en">FOUNDER</span> — ATLAS CAPITAL</div>
+  </section>
+
+  <!-- 04 EDUCATION with nested sub-tiles -->
+  <section class="t t--raise a-edu">
+    <span class="idx">04</span>
+    <div class="lab"><span lang="nl">EDUCATIE · 10 ONDERWERPEN</span><span lang="en">EDUCATION · 10 TOPICS</span></div>
+    <div class="subgrid">
+      <div class="sub"><b>01</b><span><span lang="nl">deviatie</span><span lang="en">deviation</span></span></div>
+      <div class="sub"><b>02</b><span>SMT</span></div>
+      <div class="sub"><b>03</b><span>FVG</span></div>
+      <div class="sub"><b>04</b><span>IFVG</span></div>
+      <div class="sub"><b>05</b><span>orderblocks</span></div>
+      <div class="sub"><b>06</b><span>fibonacci</span></div>
+      <div class="sub"><b>07</b><span><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></span></div>
+      <div class="sub"><b>08</b><span><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></span></div>
+      <div class="sub"><b>09</b><span><span lang="nl">risicobeheer</span><span lang="en">risk management</span></span></div>
+      <div class="sub"><b>10</b><span><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></span></div>
+    </div>
+    <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Start met leren</span><span lang="en">Start learning</span> &rarr;</a>
+      <span style="font-size:12px;color:var(--muted)"><span lang="nl">De volledige leerlijn staat in de server.</span><span lang="en">The full learning path is inside the server.</span></span>
+    </div>
+  </section>
+
+  <!-- 07 LIVE -->
+  <section class="t a-live">
+    <span class="idx">07</span>
+    <div class="lab">LIVE</div>
+    <h3><span class="dot"></span><span lang="nl">Live meekijken</span><span lang="en">Watch live</span></h3>
+    <p><span lang="nl">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced there.</span></p>
+  </section>
+
+  <!-- 08 ACCESS -->
+  <section class="t t--raise a-access">
+    <span class="idx">08</span>
+    <div class="lab"><span lang="nl">TOEGANG</span><span lang="en">ACCESS</span></div>
+    <div class="split2">
+      <div class="now"><b><span lang="nl">NU</span><span lang="en">NOW</span></b><span><span lang="nl">Gratis toegang tot Thuis.</span><span lang="en">Free access to Home.</span></span></div>
+      <div><b><span lang="nl">STRAKS</span><span lang="en">LATER</span></b><span><span lang="nl">Premium opent later.</span><span lang="en">Premium opens later.</span></span></div>
+    </div>
+    <p class="fine"><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">Price and date are announced in the server.</span></p>
+  </section>
+
+  <!-- 02 MARKETS -->
+  <section class="t a-mkts">
+    <span class="idx">02</span>
+    <div class="lab"><span lang="nl">MARKTEN</span><span lang="en">MARKETS</span></div>
+    <div class="mkts">
+      <div class="mkt"><b>NQ</b><span>NASDAQ FUTURES</span>
+        <svg viewBox="0 0 120 34" aria-hidden="true"><g stroke="#D7B364" stroke-width="1.4" fill="none"><path d="M10 26v-8M10 22h6M22 22v-9M22 17h6M34 17v-7M34 13h6M46 13v9M46 18h6M58 18v-8M58 14h6M70 14v-6M70 11h6M82 11v8M82 15h6M94 15v-9M94 10h6M106 10v-5"/></g></svg>
+      </div>
+      <div class="mkt"><b>ES</b><span>S&amp;P FUTURES</span>
+        <svg viewBox="0 0 120 34" aria-hidden="true"><g stroke="#D7B364" stroke-width="1.4" fill="none"><path d="M10 24v-6M10 21h6M22 21v-4M22 19h6M34 19v-8M34 15h6M46 15v6M46 18h6M58 18v-9M58 13h6M70 13v-3M70 11h6M82 11v6M82 14h6M94 14v-7M94 10h6M106 10v-4"/></g></svg>
+      </div>
+      <div class="mkt"><b>BITCOIN</b><span>SPOT</span>
+        <svg viewBox="0 0 120 34" aria-hidden="true"><g stroke="#D7B364" stroke-width="1.4" fill="none"><path d="M10 28v-10M10 23h6M22 23v-12M22 17h6M34 17v10M34 22h6M46 22v-13M46 15h6M58 15v-6M58 12h6M70 12v9M70 17h6M82 17v-10M82 12h6M94 12v-5M94 9h6M106 9v-4"/></g></svg>
+      </div>
+      <div class="mkt"><b>ALTCOINS</b><span>SPOT</span>
+        <svg viewBox="0 0 120 34" aria-hidden="true"><g stroke="#D7B364" stroke-width="1.4" fill="none"><path d="M10 22v-8M10 18h6M22 18v9M22 23h6M34 23v-12M34 17h6M46 17v-6M46 14h6M58 14v8M58 18h6M70 18v-11M70 12h6M82 12v6M82 15h6M94 15v-8M94 11h6M106 11v-6"/></g></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="t a-close">
+    <h2><span lang="nl">Kom erbij.</span><span lang="en">Come in.</span><br><em><span lang="nl">De deur staat open.</span><span lang="en">The door is open.</span></em></h2>
+    <div class="row">
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW">Open Discord &rarr;</a>
+      <a class="btn btn--ghost" href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="t a-foot">
+    <div class="footrow">
+      <span style="font-size:12.5px;letter-spacing:.2em">ATLAS CAPITAL</span>
+      <a href="https://discord.gg/78Ff2GuSfW">DISCORD</a>
+      <a href="https://www.tiktok.com/@atlascapitalbv">TIKTOK · @ATLASCAPITALBV</a>
+      <span style="font-size:12px;color:var(--muted)">NQ · ES · BITCOIN · ALTCOINS</span>
+    </div>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
+  </footer>
+
+</main>
+</div>
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 083 Etalage</title>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --panel:#15161A;
+  --paper:#F4F2EC;
+  --paper-2:#E9E5DA;
+  --muted:#A5A6A8;
+  --ink-60:#4B4B49;
+  --ink-40:#78786F;
+  --rule:rgba(8,9,11,.15);
+  --disp:"Big Shoulders Display","Haettenschweiler","Arial Narrow",Impact,sans-serif;
+  --sans:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --pad:clamp(16px,4.4vw,72px);
+}
+
+*{box-sizing:border-box}
+
+html{
+  color-scheme:light;
+  overflow-x:clip;
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:inherit;text-decoration:none}
+
+.pad{padding-left:var(--pad);padding-right:var(--pad)}
+.wrap{width:100%;max-width:1560px;margin:0 auto}
+
+.tag{
+  margin:0;
+  font-size:clamp(9px,1.4vw,10.5px);
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  font-weight:700;
+  color:var(--ink-40);
+}
+.tag--gold{color:var(--gold-lo)}
+.tag--light{color:rgba(244,242,236,.6)}
+.tag--lightgold{color:var(--gold)}
+
+.disp{
+  font-family:var(--disp);
+  font-weight:800;
+  line-height:.86;
+  letter-spacing:.006em;
+  text-transform:uppercase;
+  margin:0;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.75em;
+  padding:1em 1.7em;
+  background:linear-gradient(118deg,var(--gold-hi),var(--gold) 46%,var(--gold-lo));
+  color:#100C03;
+  font-size:clamp(11px,1.6vw,13px);
+  font-weight:700;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  border-radius:1px;
+  transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px -20px rgba(8,9,11,.8)}
+
+.blink{
+  display:inline-flex;
+  align-items:center;
+  gap:.6em;
+  font-size:clamp(10px,1.4vw,11.5px);
+  font-weight:700;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  border-bottom:1px solid currentColor;
+  padding-bottom:.35em;
+  transition:opacity .3s}
+.blink:hover{opacity:.6}
+.blink--gold{color:var(--gold)}
+
+/* ---------------- header : the street sign ---------------- */
+
+.street{
+  border-bottom:1px solid var(--rule);
+  background:var(--paper);
+}
+.street-in{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  min-height:58px;
+  padding-top:10px;padding-bottom:10px;
+}
+.street-name{
+  font-family:var(--disp);
+  font-weight:700;
+  font-size:clamp(19px,3vw,28px);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  line-height:1;
+}
+.street-mid{display:none}
+@media(min-width:880px){.street-mid{display:block}}
+
+/* ---------------- awning ---------------- */
+
+.awning{
+  height:clamp(14px,2.2vw,26px);
+  background:repeating-linear-gradient(90deg,
+    var(--gold-lo) 0 clamp(18px,3vw,42px),
+    var(--ink) clamp(18px,3vw,42px) clamp(36px,6vw,84px));
+  border-bottom:2px solid var(--ink);
+}
+
+/* ---------------- the intro line above the window ---------------- */
+
+.marquee-line{
+  padding-top:clamp(26px,5vw,64px);
+  padding-bottom:clamp(18px,3.4vw,40px);
+  display:grid;
+  gap:clamp(14px,2.6vw,30px);
+  grid-template-columns:1fr;
+  align-items:end;
+}
+@media(min-width:820px){
+  .marquee-line{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
+}
+.marquee-line h1{
+  font-size:clamp(42px,11vw,132px);
+}
+.marquee-line h1 .thin{font-weight:300;color:var(--ink-60)}
+.marquee-line .side{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+@media(min-width:820px){.marquee-line .side{align-items:flex-end;text-align:right}}
+.marquee-line .side p.lede{
+  margin:0;
+  font-size:clamp(14px,1.8vw,17px);
+  color:var(--ink-60);
+  max-width:28ch;
+}
+
+/* ---------------- THE WINDOW ---------------- */
+
+.storefront{padding-bottom:clamp(30px,6vw,80px)}
+
+.frame{
+  position:relative;
+  padding:clamp(7px,1.2vw,15px);
+  background:linear-gradient(128deg,var(--gold-lo),var(--gold-hi) 30%,var(--gold) 52%,var(--gold-lo) 78%,var(--gold-hi));
+  box-shadow:0 30px 60px -40px rgba(8,9,11,.85);
+}
+.frame::before{
+  content:"";
+  position:absolute;
+  inset:clamp(3px,.5vw,6px);
+  border:1px solid rgba(255,255,255,.35);
+  pointer-events:none;
+  z-index:6;
+}
+
+.window{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(215,179,100,.2), rgba(8,9,11,0) 60%),
+    linear-gradient(180deg,#191A1F 0%,#0B0C0F 60%,#08090B 100%);
+  min-height:clamp(440px,84vh,860px);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+
+/* the goods on display */
+.goods{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:clamp(12px,2vw,26px);
+  padding:clamp(20px,3.4vw,48px);
+  /* keeps the goods clear of the vinyl lettering on the glass */
+  padding-top:clamp(182px,42vw,330px);
+  align-items:end;
+}
+
+.good{grid-column:1 / -1}
+@media(min-width:760px){
+  .g-still{grid-column:1 / span 3;grid-row:1}
+  .g-medal{grid-column:5 / span 2;grid-row:1;align-self:start}
+  .g-card{grid-column:4 / span 3;grid-row:2}
+  .g-price{grid-column:1 / span 2;grid-row:2}
+}
+
+.plinth{
+  background:linear-gradient(180deg,#1D1E24,#101116);
+  border:1px solid rgba(215,179,100,.24);
+  padding:clamp(12px,2vw,22px);
+  box-shadow:0 30px 40px -30px rgba(0,0,0,.9);
+}
+.plinth svg{width:100%;height:auto;display:block}
+.plinth-cap{
+  margin:12px 0 0;
+  font-size:clamp(8.5px,1.3vw,10px);
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:600;
+}
+
+.medal{
+  display:grid;
+  place-items:center;
+  padding:clamp(10px,1.8vw,20px);
+}
+.medal svg{width:min(100%,190px);height:auto;display:block}
+
+.showcard{
+  background:var(--paper);
+  color:var(--ink);
+  padding:clamp(14px,2.2vw,24px);
+  border:1px solid rgba(8,9,11,.2);
+  box-shadow:0 24px 40px -28px rgba(0,0,0,.9);
+}
+.showcard h2{
+  font-family:var(--disp);
+  font-weight:700;
+  text-transform:uppercase;
+  margin:.25em 0 .3em;
+  font-size:clamp(22px,3.4vw,38px);
+  line-height:.92;
+}
+.showcard p{margin:0;font-size:clamp(12.5px,1.6vw,14.5px);color:var(--ink-60);max-width:34ch}
+
+.ticket{
+  align-self:end;
+  background:linear-gradient(140deg,var(--gold-hi),var(--gold-lo));
+  color:#140F04;
+  padding:clamp(12px,1.8vw,18px);
+  transform:rotate(-2deg);
+  box-shadow:0 18px 30px -22px rgba(0,0,0,.95);
+}
+.ticket b{
+  display:block;
+  font-family:var(--disp);
+  font-weight:800;
+  text-transform:uppercase;
+  font-size:clamp(24px,3.6vw,42px);
+  line-height:.9;
+}
+.ticket span{
+  display:block;
+  font-size:clamp(8.5px,1.3vw,10px);
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  font-weight:700;
+  margin-top:.5em;
+}
+
+/* the vinyl lettering, applied to the glass */
+.vinyl{
+  position:absolute;
+  z-index:3;
+  top:clamp(18px,3.6vw,52px);
+  left:clamp(16px,3.4vw,48px);
+  right:clamp(16px,3.4vw,48px);
+}
+.vinyl .vword{
+  display:flex;
+  justify-content:space-between;
+  font-family:var(--disp);
+  font-weight:800;
+  text-transform:uppercase;
+  line-height:.84;
+  font-size:clamp(30px,10.6vw,148px);
+  color:rgba(244,242,236,.94);
+  margin:0;
+}
+.vinyl .vword span{display:block}
+.vinyl .vsub{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:clamp(8px,1.4vw,16px) 0 0;
+  color:var(--gold);
+  font-size:clamp(8.5px,1.5vw,12px);
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  font-weight:700;
+  border-top:1px solid rgba(215,179,100,.5);
+  padding-top:clamp(7px,1.2vw,13px);
+}
+.vinyl .vcta{margin-top:clamp(14px,2.2vw,24px)}
+
+/* the glass itself */
+.glass{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  pointer-events:none;
+  background:linear-gradient(114deg,
+    rgba(255,255,255,.16) 0%,
+    rgba(255,255,255,.05) 14%,
+    rgba(255,255,255,0) 30%,
+    rgba(255,255,255,0) 56%,
+    rgba(255,255,255,.11) 68%,
+    rgba(255,255,255,.02) 80%,
+    rgba(255,255,255,0) 100%);
+}
+.mullion{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  pointer-events:none;
+}
+.mullion::before,.mullion::after{
+  content:"";
+  position:absolute;
+  background:rgba(215,179,100,.42);
+}
+.mullion::before{left:0;right:0;top:38%;height:2px}
+.mullion::after{top:0;bottom:0;left:50%;width:2px}
+
+/* street furniture under the window */
+.pavement{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(10px,1.6vw,18px);
+  margin-top:clamp(14px,2.2vw,26px);
+}
+@media(min-width:700px){.pavement{grid-template-columns:1fr auto}}
+.pavement .note{margin:0;font-size:clamp(12px,1.6vw,14px);color:var(--ink-60);max-width:52ch}
+
+/* ---------------- shelf : the collection ---------------- */
+
+.dark-band{
+  background:var(--ink);
+  color:var(--paper);
+  padding-top:clamp(44px,8vw,120px);
+  padding-bottom:clamp(44px,8vw,120px);
+}
+.band-head{
+  display:grid;
+  gap:clamp(12px,2vw,22px);
+  grid-template-columns:1fr;
+  align-items:end;
+  margin-bottom:clamp(24px,4vw,54px);
+}
+@media(min-width:820px){.band-head{grid-template-columns:minmax(0,1fr) auto}}
+.band-head h2{
+  font-size:clamp(36px,8vw,96px);
+  color:var(--paper);
+}
+.band-head h2 .gold{color:var(--gold)}
+
+.shelves{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0;
+  border-top:2px solid rgba(215,179,100,.55);
+}
+@media(min-width:640px){.shelves{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:1080px){.shelves{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.shelf-item{
+  border-bottom:2px solid rgba(215,179,100,.55);
+  border-right:1px solid rgba(244,242,236,.1);
+  padding:clamp(14px,2vw,24px) clamp(10px,1.6vw,18px) clamp(16px,2.4vw,28px);
+  min-height:clamp(126px,17vw,190px);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:14px;
+  transition:background .35s;
+}
+.shelf-item:hover{background:rgba(215,179,100,.09)}
+.shelf-item .no{
+  font-size:clamp(9px,1.3vw,10.5px);
+  letter-spacing:.24em;
+  color:var(--gold);
+  font-weight:700;
+}
+.shelf-item .nm{
+  font-family:var(--disp);
+  font-weight:600;
+  text-transform:uppercase;
+  font-size:clamp(19px,2.8vw,30px);
+  line-height:.94;
+  color:var(--paper);
+}
+.shelf-item .obj{height:34px;display:block}
+.shelf-item .obj svg{height:100%;width:auto;display:block}
+
+/* ---------------- second vitrine : the model ---------------- */
+
+.vitrine-row{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(20px,3.4vw,48px);
+  align-items:center;
+  padding-top:clamp(44px,8vw,110px);
+  padding-bottom:clamp(44px,8vw,110px);
+}
+@media(min-width:900px){.vitrine-row{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}}
+
+.case{
+  position:relative;
+  overflow:hidden;
+  border:clamp(6px,1vw,12px) solid;
+  border-image:linear-gradient(130deg,var(--gold-lo),var(--gold-hi) 40%,var(--gold-lo)) 1;
+  background:linear-gradient(180deg,#17181D,#0A0B0E);
+  padding:clamp(16px,2.6vw,36px);
+}
+.case::after{
+  content:"";
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(122deg,rgba(255,255,255,.13) 0%,rgba(255,255,255,0) 26%,rgba(255,255,255,0) 62%,rgba(255,255,255,.07) 74%,rgba(255,255,255,0) 92%);
+}
+.case svg{width:100%;height:auto;display:block;position:relative;z-index:1}
+
+.walllabel{
+  border-left:2px solid var(--gold);
+  padding-left:clamp(12px,1.8vw,22px);
+}
+.walllabel h2{
+  font-family:var(--disp);
+  font-weight:700;
+  text-transform:uppercase;
+  font-size:clamp(30px,5.4vw,60px);
+  line-height:.9;
+  margin:.2em 0 .35em;
+}
+.walllabel p{margin:0 0 1em;font-size:clamp(13.5px,1.8vw,16px);color:var(--ink-60);max-width:36ch}
+
+/* ---------------- racks : the channels ---------------- */
+
+.racks{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(14px,2.4vw,30px);
+}
+@media(min-width:760px){.racks{grid-template-columns:1.25fr 1fr}}
+.rack{
+  border:1px solid rgba(244,242,236,.16);
+  padding:clamp(16px,2.4vw,28px);
+  background:linear-gradient(180deg,rgba(244,242,236,.045),rgba(244,242,236,0));
+}
+.rack h3{
+  margin:0 0 1.1em;
+  font-family:var(--disp);
+  font-weight:700;
+  text-transform:uppercase;
+  font-size:clamp(20px,3vw,30px);
+  color:var(--gold);
+  line-height:1;
+}
+.rail{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.rail li{
+  border:1px solid rgba(215,179,100,.4);
+  padding:.55em .85em;
+  font-size:clamp(11.5px,1.5vw,13.5px);
+  color:var(--paper);
+  border-radius:1px;
+}
+.rack--later .rail li{border-color:rgba(244,242,236,.2);color:var(--muted)}
+.rack .foot{margin:1.3em 0 0}
+
+/* ---------------- door plates ---------------- */
+
+.doors{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(14px,2.4vw,26px);
+  padding-top:clamp(40px,7vw,100px);
+  padding-bottom:clamp(40px,7vw,100px);
+}
+@media(min-width:760px){.doors{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.door{
+  border:1px solid var(--rule);
+  background:var(--paper-2);
+  padding:clamp(18px,2.6vw,32px);
+  min-height:clamp(160px,20vw,230px);
+  display:flex;flex-direction:column;justify-content:space-between;gap:16px;
+}
+.door h3{
+  font-family:var(--disp);
+  font-weight:800;
+  text-transform:uppercase;
+  font-size:clamp(28px,4.4vw,48px);
+  line-height:.88;
+  margin:0;
+}
+.door p{margin:0;font-size:clamp(12.5px,1.6vw,14.5px);color:var(--ink-60);max-width:28ch}
+.door--open{
+  background:var(--ink);
+  color:var(--paper);
+  border-color:var(--ink);
+}
+.door--open p{color:rgba(244,242,236,.66)}
+.door--open h3{color:var(--gold)}
+.opensign{display:inline-flex;align-items:center;gap:.6em;font-size:clamp(9px,1.3vw,10.5px);letter-spacing:.26em;text-transform:uppercase;font-weight:700;color:var(--gold)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(215,179,100,.7);animation:glow 2.6s ease-in-out infinite}
+@keyframes glow{
+  0%,100%{box-shadow:0 0 0 0 rgba(215,179,100,.65)}
+  50%{box-shadow:0 0 0 9px rgba(215,179,100,0)}
+}
+@media(prefers-reduced-motion:reduce){.dot{animation:none}}
+
+/* ---------------- closing ---------------- */
+
+.closing{
+  background:var(--ink);
+  color:var(--paper);
+  text-align:center;
+  padding-top:clamp(56px,11vw,160px);
+  padding-bottom:clamp(56px,11vw,160px);
+}
+.closing h2{
+  font-size:clamp(46px,14vw,190px);
+  color:var(--paper);
+  margin:.2em 0 .45em;
+}
+.closing h2 .gold{color:var(--gold)}
+.closing p{margin:0 auto clamp(22px,3.4vw,38px);max-width:34ch;color:rgba(244,242,236,.66);font-size:clamp(13.5px,1.8vw,16px)}
+
+/* ---------------- footer ---------------- */
+
+footer{
+  padding-top:clamp(26px,3.6vw,44px);
+  padding-bottom:clamp(30px,4.4vw,60px);
+  border-top:1px solid var(--rule);
+}
+.foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px 28px;align-items:baseline}
+.foot-links{display:flex;flex-wrap:wrap;gap:12px 22px}
+.risk{
+  margin:clamp(20px,3vw,34px) 0 0;
+  font-size:clamp(10px,1.35vw,11.5px);
+  line-height:1.7;
+  color:var(--ink-40);
+  max-width:74ch;
+}
+</style>
+</head>
+<body>
+
+<header class="street">
+  <div class="wrap street-in pad">
+    <span class="street-name">Atlas Capital</span>
+    <p class="tag street-mid">Etalage &mdash; nu geopend</p>
+    <a class="blink" href="https://discord.gg/78Ff2GuSfW">Discord <span aria-hidden="true">&#8599;</span></a>
+  </div>
+</header>
+
+<div class="awning" aria-hidden="true"></div>
+
+<main>
+
+  <!-- ============ THE WINDOW ============ -->
+  <section class="storefront">
+    <div class="wrap pad">
+
+      <div class="marquee-line">
+        <h1 class="disp">Kijk eerst.<br><span class="thin">Kom dan binnen.</span></h1>
+        <div class="side">
+          <p class="tag tag--gold">Proces. Discipline. Uitvoering.</p>
+          <p class="lede">De hele etalage staat open: educatie, kanalen en live sessies.</p>
+          <a class="btn" href="https://discord.gg/78Ff2GuSfW">Naar binnen <span aria-hidden="true">&#8594;</span></a>
+        </div>
+      </div>
+
+      <div class="frame">
+        <div class="window">
+
+          <div class="goods">
+            <!-- object: the model, on a plinth -->
+            <div class="good g-still">
+              <div class="plinth">
+                <svg viewBox="0 0 360 240" fill="none" role="img" aria-label="Schematische kaarsentekening met een liquiditeitszone">
+                  <path d="M16 74 H344" stroke="rgba(244,242,236,.2)" stroke-dasharray="5 6"/>
+                  <path d="M16 198 H344" stroke="rgba(244,242,236,.2)" stroke-dasharray="5 6"/>
+                  <rect x="150" y="106" width="194" height="34" fill="rgba(215,179,100,.16)" stroke="rgba(215,179,100,.5)"/>
+                  <g stroke="#F4F2EC" stroke-width="1.4">
+                    <path d="M46 88 V166"/><rect x="39" y="104" width="14" height="46" fill="#101116"/>
+                    <path d="M82 78 V176"/><rect x="75" y="96" width="14" height="58" fill="#101116"/>
+                  </g>
+                  <g stroke="#D7B364" stroke-width="1.6">
+                    <path d="M118 60 V206"/><rect x="111" y="82" width="14" height="96" fill="#20190a"/>
+                    <path d="M154 66 V132"/><rect x="147" y="78" width="14" height="40" fill="#20190a"/>
+                  </g>
+                  <g stroke="#F4F2EC" stroke-width="1.4">
+                    <path d="M190 92 V178"/><rect x="183" y="110" width="14" height="48" fill="#101116"/>
+                    <path d="M226 118 V214"/><rect x="219" y="136" width="14" height="60" fill="#101116"/>
+                    <path d="M262 140 V212"/><rect x="255" y="156" width="14" height="42" fill="#101116"/>
+                  </g>
+                  <g stroke="#D7B364" stroke-width="1.6">
+                    <path d="M298 104 V190"/><rect x="291" y="120" width="14" height="52" fill="#20190a"/>
+                    <path d="M334 84 V162"/><rect x="327" y="98" width="14" height="46" fill="#20190a"/>
+                  </g>
+                  <text x="158" y="128" fill="#D7B364" font-family="Helvetica, Arial, sans-serif" font-size="11" letter-spacing="3">FVG</text>
+                  <text x="16" y="66" fill="#A5A6A8" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="3">NIVEAU</text>
+                </svg>
+                <p class="plinth-cap">Object 01 &mdash; het model, schematisch</p>
+              </div>
+            </div>
+
+            <!-- object: the medallion -->
+            <div class="good g-medal medal">
+              <svg viewBox="0 0 200 200" fill="none" role="img" aria-label="Gouden medaillon met het Atlas-monogram">
+                <circle cx="100" cy="100" r="92" fill="url(#med)" />
+                <defs>
+                  <linearGradient id="med" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#E6CC8E"/>
+                    <stop offset=".4" stop-color="#B9954A"/>
+                    <stop offset=".62" stop-color="#E6CC8E"/>
+                    <stop offset="1" stop-color="#8a6f34"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="100" cy="100" r="82" stroke="rgba(35,26,6,.45)"/>
+                <circle cx="100" cy="100" r="74" stroke="rgba(35,26,6,.25)" stroke-dasharray="2 6"/>
+                <path d="M64 142 L100 56 L136 142" stroke="#241a07" stroke-width="4" stroke-linecap="square"/>
+                <path d="M78 114 H122" stroke="#241a07" stroke-width="4"/>
+              </svg>
+            </div>
+
+            <!-- object: the show card (founder) -->
+            <div class="good g-card">
+              <div class="showcard">
+                <p class="tag">De maker</p>
+                <h2>10+ jaar<br>in de markt</h2>
+                <p>&#8220;Geen snelle&#8209;rijk&#8209;verhalen, maar echte setups, educatie en een community die samen beter wil worden.&#8221;</p>
+              </div>
+            </div>
+
+            <!-- object: the ticket -->
+            <div class="good g-price">
+              <div class="ticket">
+                <b>Gratis</b>
+                <span>Toegang &mdash; nu open</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- vinyl lettering on the glass -->
+          <div class="vinyl">
+            <p class="vword" aria-hidden="true"><span>A</span><span>T</span><span>L</span><span>A</span><span>S</span></p>
+            <p class="vsub"><span>Capital</span><span>Educatie &amp; community</span></p>
+            <div class="vcta"><a class="blink blink--gold" href="https://discord.gg/78Ff2GuSfW">Word lid via Discord <span aria-hidden="true">&#8599;</span></a></div>
+          </div>
+
+          <span class="glass" aria-hidden="true"></span>
+          <span class="mullion" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <div class="pavement">
+        <p class="note">Alles wat in de etalage staat, staat ook in de server: NQ, ES, Bitcoin en altcoins.</p>
+        <p class="tag">15 kanalen &middot; 10 onderwerpen</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ THE SHELF ============ -->
+  <section class="dark-band">
+    <div class="wrap pad">
+      <div class="band-head">
+        <h2 class="disp">De collectie<br><span class="gold">in de kast</span></h2>
+        <a class="blink blink--gold" href="https://discord.gg/78Ff2GuSfW">Bekijk de educatie <span aria-hidden="true">&#8599;</span></a>
+      </div>
+
+      <div class="shelves">
+        <div class="shelf-item">
+          <span class="no">01</span>
+          <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><path d="M2 20H58" stroke="rgba(244,242,236,.3)" stroke-dasharray="3 4"/><path d="M30 4V30" stroke="#D7B364" stroke-width="1.6"/><rect x="25" y="14" width="10" height="14" fill="#D7B364"/></svg></span>
+          <span class="nm">deviatie</span>
+        </div>
+        <div class="shelf-item">
+          <span class="no">02</span>
+          <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><path d="M4 28L28 10L56 6" stroke="#D7B364" stroke-width="1.6"/><path d="M4 22L28 14L56 24" stroke="rgba(244,242,236,.5)" stroke-width="1.6"/></svg></span>
+          <span class="nm">SMT</span>
+        </div>
+        <div class="shelf-item">
+          <span class="no">03</span>
+          <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><rect x="6" y="4" width="14" height="9" fill="rgba(244,242,236,.45)"/><rect x="40" y="21" width="14" height="9" fill="rgba(244,242,236,.45)"/><rect x="6" y="14" width="48" height="6" fill="rgba(215,179,100,.55)"/></svg></span>
+          <span class="nm">FVG</span>
+        </div>
+        <div class="shelf-item">
+          <span class="no">04</span>
+          <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><rect x="6" y="21" width="14" height="9" fill="rgba(244,242,236,.45)"/><rect x="40" y="4" width="14" height="9" fill="rgba(244,242,236,.45)"/><rect x="6" y="14" width="48" height="6" fill="rgba(215,179,100,.55)"/><path d="M6 17H54" stroke="#08090B"/></svg></span>
+          <span class="nm">IFVG</span>
+        </div>
+        <div class="shelf-item">
+          <span class="no">05</span>
+          <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><rect x="8" y="10" width="26" height="16" fill="rgba(215,179,100,.4)" stroke="#D7B364"/><path d="M42 4V30" stroke="rgba(244,242,236,.5)" stroke-width="1.6"/><path d="M52 8V26" stroke="rgba(244,242,236,.5)" stroke-width="1.6"/></svg></span>
+          <span class="nm">orderblocks</span>
+        </div>
+        <div class="shelf-item">
+          <span class="no">06</span>
+          <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><path d="M4 6H56" stroke="rgba(244,242,236,.35)"/><path d="M4 14H56" stroke="#D7B364"/><path d="M4 20H56" stroke="#D7B364"/><path d="M4 28H56" stroke="rgba(244,242,236,.35)"/></svg></span>
+          <span class="nm">fibonacci</span>
+        </div>
+        <div class="shelf-item">
+          <span class="no">07</span>
+          <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><path d="M4 30A26 26 0 0 1 56 30" stroke="#D7B364" stroke-width="1.6"/><path d="M30 4V30" stroke="rgba(244,242,236,.3)" stroke-dasharray="3 4"/></svg></span>
+          <span class="nm">sessie&#8209;liquiditeit</span>
+        </div>
+        <div class="shelf-item">
+          <span class="no">08</span>
+          <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><path d="M4 12H56" stroke="rgba(244,242,236,.4)" stroke-dasharray="4 4"/><path d="M14 12V26M24 12V22M34 12V28M44 12V20" stroke="#D7B364" stroke-width="1.6"/></svg></span>
+          <span class="nm">liquiditeit</span>
+        </div>
+        <div class="shelf-item">
+          <span class="no">09</span>
+          <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><rect x="8" y="8" width="44" height="18" stroke="rgba(244,242,236,.4)"/><rect x="8" y="8" width="16" height="18" fill="rgba(215,179,100,.6)"/></svg></span>
+          <span class="nm">risicobeheer</span>
+        </div>
+        <div class="shelf-item">
+          <span class="no">10</span>
+          <span class="obj" aria-hidden="true"><svg viewBox="0 0 60 34" fill="none"><path d="M4 26C12 26 12 8 20 8s8 18 16 18 8-14 16-14" stroke="#D7B364" stroke-width="1.6"/></svg></span>
+          <span class="nm">tradingpsychologie</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECOND VITRINE : THE MODEL ============ -->
+  <section class="wrap pad">
+    <div class="vitrine-row">
+      <div class="case">
+        <svg viewBox="0 0 760 380" fill="none" role="img" aria-label="Uitvergroot schema: liquiditeitssweep onder een niveau en een terugkeer in de gap">
+          <g stroke="rgba(244,242,236,.09)">
+            <path d="M0 76H760"/><path d="M0 152H760"/><path d="M0 228H760"/><path d="M0 304H760"/>
+            <path d="M152 0V380"/><path d="M304 0V380"/><path d="M456 0V380"/><path d="M608 0V380"/>
+          </g>
+          <path d="M40 268 H720" stroke="#F4F2EC" stroke-dasharray="7 7" stroke-width="1.2"/>
+          <text x="40" y="256" fill="#A5A6A8" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4">LIQUIDITEIT</text>
+          <rect x="392" y="128" width="300" height="46" fill="rgba(215,179,100,.15)" stroke="rgba(215,179,100,.55)"/>
+          <text x="404" y="158" fill="#D7B364" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4">FVG</text>
+          <g stroke="#F4F2EC" stroke-width="1.6">
+            <path d="M80 196 V284"/><rect x="71" y="214" width="18" height="52" fill="#0F1014"/>
+            <path d="M132 210 V296"/><rect x="123" y="230" width="18" height="52" fill="#0F1014"/>
+            <path d="M184 232 V320"/><rect x="175" y="252" width="18" height="56" fill="#0F1014"/>
+          </g>
+          <g stroke="#D7B364" stroke-width="2">
+            <path d="M236 250 V346"/><rect x="227" y="266" width="18" height="46" fill="#221a09"/>
+          </g>
+          <path d="M245 344 L316 356" stroke="#D7B364"/>
+          <circle cx="240" cy="344" r="4.5" fill="#D7B364"/>
+          <text x="322" y="362" fill="#D7B364" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4">SWEEP</text>
+          <g stroke="#F4F2EC" stroke-width="1.6">
+            <path d="M288 196 V300"/><rect x="279" y="214" width="18" height="66" fill="#0F1014"/>
+            <path d="M340 158 V262"/><rect x="331" y="176" width="18" height="66" fill="#0F1014"/>
+            <path d="M392 132 V220"/><rect x="383" y="146" width="18" height="54" fill="#0F1014"/>
+          </g>
+          <g stroke="#D7B364" stroke-width="2">
+            <path d="M444 106 V186"/><rect x="435" y="118" width="18" height="50" fill="#221a09"/>
+            <path d="M496 88 V170"/><rect x="487" y="100" width="18" height="48" fill="#221a09"/>
+          </g>
+          <g stroke="#F4F2EC" stroke-width="1.6">
+            <path d="M548 110 V196"/><rect x="539" y="126" width="18" height="52" fill="#0F1014"/>
+            <path d="M600 128 V214"/><rect x="591" y="146" width="18" height="50" fill="#0F1014"/>
+          </g>
+          <path d="M660 200 C 700 200, 706 160, 706 140" stroke="#D7B364" stroke-dasharray="6 6"/>
+          <path d="M700 152 L706 136 L712 152" stroke="#D7B364" stroke-width="1.8"/>
+        </svg>
+      </div>
+      <div class="walllabel">
+        <p class="tag tag--gold">Object 02</p>
+        <h2>Het model,<br>uitgelicht</h2>
+        <p>Een sweep onder liquiditeit, daarna terug de gap in. Een schema om te leren lezen &mdash; geen resultaat en geen belofte.</p>
+        <a class="blink" href="https://discord.gg/78Ff2GuSfW">Vraag het na in #vragen <span aria-hidden="true">&#8599;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RACKS ============ -->
+  <section class="dark-band">
+    <div class="wrap pad">
+      <div class="band-head">
+        <h2 class="disp">De rekken<br><span class="gold">15 kanalen</span></h2>
+        <p class="tag tag--light">Thuis nu gratis &middot; premium later</p>
+      </div>
+      <div class="racks">
+        <div class="rack">
+          <h3>Thuis &mdash; nu gratis</h3>
+          <ul class="rail">
+            <li>#nq-chart-idee&euml;n</li>
+            <li>#es-chart-idee&euml;n</li>
+            <li>#bitcoin</li>
+            <li>#altcoins</li>
+            <li>#markt</li>
+            <li>#vragen</li>
+            <li>#algemeen</li>
+            <li>#atlas-op-socials</li>
+            <li>#ondersteuning</li>
+          </ul>
+          <p class="foot"><a class="blink blink--gold" href="https://discord.gg/78Ff2GuSfW">Open de server <span aria-hidden="true">&#8599;</span></a></p>
+        </div>
+        <div class="rack rack--later">
+          <h3>Premium &mdash; opent later</h3>
+          <ul class="rail">
+            <li>#trade-setups</li>
+            <li>#marktupdates</li>
+            <li>#indicatoren</li>
+            <li>#sessie-opnames</li>
+            <li>#chart-idee&euml;n</li>
+            <li>#premium-chat</li>
+          </ul>
+          <p class="foot tag tag--light">Prijs en datum worden in de server aangekondigd.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOOR PLATES ============ -->
+  <section class="wrap pad">
+    <div class="doors">
+      <div class="door door--open">
+        <span class="opensign"><span class="dot" aria-hidden="true"></span> Open</span>
+        <h3>Live in de server</h3>
+        <p>De oprichter handelt live mee. Tijden worden in de server aangekondigd.</p>
+      </div>
+      <div class="door">
+        <p class="tag">Thuis</p>
+        <h3>Nu gratis</h3>
+        <p>Toegang tot de gratis kanalen en de educatie.</p>
+      </div>
+      <div class="door">
+        <p class="tag">Premium</p>
+        <h3>Opent later</h3>
+        <p>Prijs en datum volgen in de server.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING ============ -->
+  <section class="closing pad">
+    <p class="tag tag--lightgold">De deur staat open</p>
+    <h2 class="disp">Kom <span class="gold">binnen</span></h2>
+    <p>Proces. Discipline. Uitvoering.</p>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Open Discord <span aria-hidden="true">&#8594;</span></a>
+  </section>
+
+</main>
+
+<footer class="wrap pad">
+  <div class="foot-row">
+    <span class="street-name">Atlas Capital</span>
+    <div class="foot-links">
+      <a class="blink" href="https://discord.gg/78Ff2GuSfW">Discord <span aria-hidden="true">&#8599;</span></a>
+      <a class="blink" href="https://www.tiktok.com/@atlascapitalbv">TikTok @atlascapitalbv <span aria-hidden="true">&#8599;</span></a>
+    </div>
+  </div>
+  <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+</footer>
+
+</body>
+</html>

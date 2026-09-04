@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 008 Neue Haas</title>
+<style>
+/* ==========================================================================
+   008 — NEUE HAAS
+   Müller-Brockmann. One flush-left stack. Everything on an eight point
+   baseline. No rules, no boxes, no ornament: hierarchy is size and air.
+   Gold appears in the type only on numerals. The single piece of artwork is
+   a concentric arc construction — the trading sessions — set off centre and
+   cropped by the page edge.
+   ========================================================================== */
+
+:root{
+  --gold:#D7B364;
+  --gold-lo:#B9954A;
+  --gold-dk:#8A6E2E;      /* numerals at text size, legible on paper */
+  --ink:#08090B;
+  --ink-2:#4C4D50;
+  --paper:#F4F2EC;
+  --base:8px;
+}
+
+html{color-scheme:light;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Helvetica Neue",Helvetica,"Arial Nova",Arial,"Segoe UI",sans-serif;
+  font-size:16px;
+  line-height:24px;                 /* 3 × baseline */
+  font-weight:400;
+  letter-spacing:-.004em;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+p{margin:0}
+
+/* ---- measure & stack ---------------------------------------------------- */
+.page{max-width:1360px;margin:0 auto;padding:0 clamp(20px,5.5vw,96px)}
+.stack{display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+.blk{padding:0 0 var(--gap,64px)}
+.col{max-width:46ch}
+.col.narrow{max-width:38ch}
+.col.wide{max-width:62ch}
+
+/* ---- type --------------------------------------------------------------- */
+.lab{
+  font-size:12px;line-height:16px;
+  text-transform:uppercase;letter-spacing:.2em;font-weight:700;
+  color:var(--ink);
+}
+.lab .n{color:var(--gold-dk)}
+.h1{
+  font-size:clamp(2.5rem,8.2vw,6rem);
+  line-height:.92;
+  font-weight:700;
+  letter-spacing:-.035em;
+  margin:0;
+  overflow-wrap:break-word;
+}
+.h2{
+  font-size:clamp(1.6rem,3.6vw,2.75rem);
+  line-height:1.05;
+  font-weight:700;
+  letter-spacing:-.028em;
+  margin:0;
+  overflow-wrap:break-word;
+}
+.big-n{
+  font-size:clamp(3.5rem,11vw,8rem);
+  line-height:.84;
+  font-weight:700;
+  letter-spacing:-.05em;
+  color:var(--gold);
+  display:block;
+}
+.sub{font-size:18px;line-height:28px;color:var(--ink)}
+.dim{color:var(--ink-2)}
+.s8{margin-top:8px}.s16{margin-top:16px}.s24{margin-top:24px}
+.s32{margin-top:32px}.s48{margin-top:48px}.s64{margin-top:64px}
+.s96{margin-top:clamp(56px,9vw,96px)}
+.sec{padding-top:clamp(64px,10vw,136px)}
+
+/* ---- header ------------------------------------------------------------- */
+header{position:sticky;top:0;z-index:9;background:var(--paper)}
+.hrow{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 0 24px}
+.mark{display:flex;align-items:baseline;gap:12px}
+.mark b{font-size:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.mark i{font-style:normal;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+
+/* ---- link-as-button (no box: an underline and an arrow) ----------------- */
+.cta{
+  display:inline-flex;align-items:baseline;gap:12px;
+  font-size:16px;font-weight:700;letter-spacing:-.01em;
+  border-bottom:2px solid var(--gold);
+  padding-bottom:6px;
+  transition:border-color .16s ease,color .16s ease;
+}
+.cta::after{content:"→";font-weight:400;color:var(--gold-dk);transition:transform .16s ease}
+.cta:hover{border-bottom-color:var(--ink)}
+.cta:hover::after{transform:translateX(5px)}
+.cta.lg{font-size:clamp(20px,3.4vw,34px);padding-bottom:10px;border-bottom-width:3px}
+.cta.sm{font-size:13px;letter-spacing:.14em;text-transform:uppercase;border-bottom-width:1px;padding-bottom:4px}
+
+/* ---- the arc construction ---------------------------------------------- */
+.session{
+  display:grid;grid-template-columns:minmax(0,1fr);gap:40px;align-items:start;
+}
+@media(min-width:940px){
+  .session{grid-template-columns:minmax(0,40ch) 1fr;gap:clamp(40px,6vw,96px)}
+}
+.artbox{
+  position:relative;
+  margin-right:clamp(-96px,-5.5vw,-20px);   /* crop against the page edge */
+}
+.artbox svg{display:block;width:100%;height:auto;max-width:720px}
+.legend{display:grid;gap:8px;margin-top:24px}
+.legend div{display:flex;gap:12px;align-items:baseline;font-size:13px;letter-spacing:.06em}
+.legend s{text-decoration:none;color:var(--gold-dk);font-weight:700;font-variant-numeric:tabular-nums}
+
+/* ---- topics: a flush-left list, numerals gold -------------------------- */
+.topics{list-style:none;margin:0;padding:0;max-width:46ch}
+.topics li{
+  display:flex;align-items:baseline;gap:16px;
+  padding:8px 0;
+  font-size:clamp(18px,2.4vw,26px);
+  line-height:32px;
+  font-weight:700;
+  letter-spacing:-.024em;
+  transition:padding-left .16s ease;
+}
+.topics li:hover{padding-left:8px}
+.topics s{
+  text-decoration:none;
+  font-size:13px;font-weight:700;letter-spacing:.1em;
+  color:var(--gold-dk);
+  flex:0 0 2.4em;
+  font-variant-numeric:tabular-nums;
+}
+.topics.sm li{font-size:18px;line-height:24px;padding:4px 0;letter-spacing:-.015em}
+.topics.sm li em{font-style:normal;font-weight:400;color:var(--ink-2);font-size:15px}
+.topics.sm li:hover{padding-left:0}
+
+/* ---- the three words, as numbered blocks ------------------------------- */
+.words{display:grid;grid-template-columns:1fr;gap:32px;max-width:78ch}
+@media(min-width:760px){.words{grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,56px)}}
+.words > div s{
+  display:block;text-decoration:none;
+  font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--gold-dk);
+}
+.words > div b{
+  display:block;margin-top:8px;
+  font-size:clamp(20px,2.6vw,30px);line-height:32px;
+  font-weight:700;letter-spacing:-.03em;
+}
+.words > div p{margin-top:8px;font-size:15px;line-height:24px;color:var(--ink-2)}
+.words > div s.ltr{color:var(--ink-2)}   /* letters are not numerals: no gold */
+
+/* ---- schematic ---------------------------------------------------------- */
+.scroller{overflow-x:auto;max-width:900px}
+.scroller svg{display:block;width:100%;min-width:520px;height:auto}
+.cap{font-size:13px;line-height:20px;color:var(--ink-2);max-width:44ch;margin-top:16px}
+
+/* ---- channels ----------------------------------------------------------- */
+.chgrid{display:grid;grid-template-columns:1fr;gap:40px}
+@media(min-width:760px){.chgrid{grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px);max-width:78ch}}
+.chlist{list-style:none;margin:0;padding:0}
+.chlist li{
+  font-size:15px;line-height:24px;padding:4px 0;
+  letter-spacing:-.01em;word-break:break-word;
+}
+.chlist li:hover{font-weight:700}
+.chlist.prem li{color:var(--ink-2)}
+
+/* ---- access ------------------------------------------------------------- */
+.access{display:grid;grid-template-columns:1fr;gap:48px}
+@media(min-width:760px){.access{grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,88px);max-width:78ch}}
+
+/* ---- footer ------------------------------------------------------------- */
+footer{padding:clamp(72px,11vw,144px) 0 64px}
+.frow{display:flex;flex-wrap:wrap;gap:24px 48px;justify-content:space-between;align-items:flex-start}
+.flinks{display:flex;gap:32px;flex-wrap:wrap}
+.risk{font-size:12px;line-height:20px;color:var(--ink-2);max-width:60ch;margin-top:48px}
+
+@media(max-width:520px){
+  body{font-size:15px;line-height:24px}
+  .sub{font-size:16px;line-height:26px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="page hrow">
+    <div class="mark"><b>Atlas Capital</b><i>Proces · Discipline · Uitvoering</i></div>
+    <a class="cta sm" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+  </div>
+</header>
+
+<main class="page stack">
+
+  <!-- ===== 01 ===== -->
+  <section class="blk">
+    <div class="lab"><span class="n">01</span> &nbsp;Introductie</div>
+    <h1 class="h1 s32 col">Proces boven voorspelling.</h1>
+    <p class="sub s32 col narrow">Een Nederlandse trading-community rond educatie, structuur en dagelijkse marktbespreking.</p>
+    <p class="s48"><a class="cta lg" href="https://discord.gg/78Ff2GuSfW">Word lid via Discord</a></p>
+
+    <div class="s96">
+      <div class="lab">Markten</div>
+      <ul class="topics sm s16">
+        <li><s>01</s><span>NQ &nbsp;<em>Nasdaq futures</em></span></li>
+        <li><s>02</s><span>ES &nbsp;<em>S&amp;P futures</em></span></li>
+        <li><s>03</s><span>Bitcoin</span></li>
+        <li><s>04</s><span>Altcoins</span></li>
+      </ul>
+      <p class="lab dim s32"><span class="n">15</span> kanalen &nbsp;·&nbsp; <span class="n">10</span> onderwerpen &nbsp;·&nbsp; nu gratis</p>
+    </div>
+  </section>
+
+  <!-- ===== 02 : the arcs ===== -->
+  <section class="blk sec">
+    <div class="lab"><span class="n">02</span> &nbsp;Sessies &amp; live</div>
+    <div class="session s32">
+      <div>
+        <h2 class="h2">Drie sessies. Eén dag.</h2>
+        <p class="sub s24">De oprichter handelt live mee in Discord. Tijden worden daar aangekondigd.</p>
+        <div class="legend">
+          <div><s>01</s><span>Azië</span></div>
+          <div><s>02</s><span>Londen</span></div>
+          <div><s>03</s><span>New York</span></div>
+        </div>
+        <p class="s32"><a class="cta" href="https://discord.gg/78Ff2GuSfW">Zit erbij in de server</a></p>
+      </div>
+
+      <div class="artbox">
+        <svg viewBox="0 0 620 620" role="img" aria-label="Concentrische bogen die de handelssessies Azië, Londen en New York weergeven">
+          <!-- fine tick ring -->
+          <circle cx="310" cy="310" r="288" fill="none" stroke="#08090B" stroke-width="7"
+                  stroke-dasharray="1.6 13.48" opacity=".55"/>
+          <!-- cross hairs -->
+          <g stroke="#08090B" stroke-width="1" opacity=".22">
+            <path d="M310 6V614"/>
+            <path d="M6 310H614"/>
+          </g>
+          <!-- quarter marks -->
+          <g fill="#08090B">
+            <rect x="306" y="8" width="8" height="20"/>
+            <rect x="592" y="306" width="20" height="8"/>
+            <rect x="306" y="592" width="8" height="20"/>
+            <rect x="8" y="306" width="20" height="8"/>
+          </g>
+
+          <!-- outer construction circle -->
+          <circle cx="310" cy="310" r="302" fill="none" stroke="#08090B" stroke-width="1" opacity=".28"/>
+          <!-- twelve radial spokes -->
+          <g stroke="#08090B" stroke-width="1.5" opacity=".45">
+            <path d="M562 310H588"/>
+            <path d="M528.3 184L550.7 171"/>
+            <path d="M436 91.8L449 69.3"/>
+            <path d="M310 58V32"/>
+            <path d="M184 91.8L171 69.3"/>
+            <path d="M91.8 184L69.3 171"/>
+            <path d="M58 310H32"/>
+            <path d="M91.8 436L69.3 449"/>
+            <path d="M184 528.2L171 550.7"/>
+            <path d="M310 562V588"/>
+            <path d="M436 528.2L449 550.7"/>
+            <path d="M528.3 436L550.7 449"/>
+          </g>
+
+          <!-- ARC 01 — Azië -->
+          <path d="M77.9 176 A268 268 0 0 1 515.3 137.7" fill="none" stroke="#D7B364" stroke-width="10" stroke-linecap="butt"/>
+          <!-- ARC 02 — Londen -->
+          <path d="M103.2 346.5 A210 210 0 1 1 516.8 346.5" fill="none" stroke="#B9954A" stroke-width="18" stroke-linecap="butt"/>
+          <!-- ARC 03 — New York -->
+          <path d="M170.1 358.2 A148 148 0 0 1 448.2 257" fill="none" stroke="#08090B" stroke-width="26" stroke-linecap="butt"/>
+
+          <!-- inner construction -->
+          <circle cx="310" cy="310" r="92" fill="none" stroke="#08090B" stroke-width="1" opacity=".3"/>
+          <rect x="303" y="303" width="14" height="14" fill="#D7B364"/>
+
+          <!-- end markers -->
+          <g fill="#08090B">
+            <rect x="72" y="170" width="12" height="12"/>
+            <rect x="509" y="132" width="12" height="12"/>
+            <rect x="164" y="352" width="12" height="12"/>
+            <rect x="442" y="251" width="12" height="12"/>
+          </g>
+
+          <g font-family="Helvetica,Arial,sans-serif" font-size="14" font-weight="700"
+             letter-spacing="3" fill="#08090B">
+            <text x="96" y="120">AZIË</text>
+            <text x="412" y="454">LONDEN</text>
+            <text x="212" y="560">NEW YORK</text>
+          </g>
+          <g stroke="#08090B" stroke-width="1" opacity=".55">
+            <path d="M92 128 L104 156"/>
+            <path d="M448 446 L470 402"/>
+            <path d="M266 552 L266 470"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 03 ===== -->
+  <section class="blk sec">
+    <div class="lab"><span class="n">03</span> &nbsp;De oprichter</div>
+    <span class="big-n s24">10+</span>
+    <p class="lab s8">jaar in de markten</p>
+    <p class="sub s32 col wide">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</p>
+    <p class="sub s24 col wide">Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader.</p>
+    <p class="sub s24 col wide">Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</p>
+    <p class="s32"><a class="cta" href="https://discord.gg/78Ff2GuSfW">Volg de dagelijkse aanpak</a></p>
+  </section>
+
+  <!-- ===== 04 ===== -->
+  <section class="blk sec">
+    <div class="lab"><span class="n">04</span> &nbsp;Educatie</div>
+    <h2 class="h2 s24">Tien onderwerpen.</h2>
+    <ul class="topics s32">
+      <li><s>01</s><span>deviatie</span></li>
+      <li><s>02</s><span>SMT</span></li>
+      <li><s>03</s><span>FVG</span></li>
+      <li><s>04</s><span>IFVG</span></li>
+      <li><s>05</s><span>orderblocks</span></li>
+      <li><s>06</s><span>fibonacci</span></li>
+      <li><s>07</s><span>sessie-liquiditeit</span></li>
+      <li><s>08</s><span>liquiditeit</span></li>
+      <li><s>09</s><span>risicobeheer</span></li>
+      <li><s>10</s><span>tradingpsychologie</span></li>
+    </ul>
+    <p class="s48"><a class="cta" href="https://discord.gg/78Ff2GuSfW">Begin bij deviatie</a></p>
+  </section>
+
+  <!-- ===== 05 ===== -->
+  <section class="blk sec">
+    <div class="lab"><span class="n">05</span> &nbsp;Het model</div>
+    <h2 class="h2 s24">Een orderblok, schematisch.</h2>
+    <div class="scroller s32">
+      <svg viewBox="0 0 840 380" role="img" aria-label="Schematische weergave van een orderblok, de verplaatsing daarna en de hertest van de zone">
+        <!-- baseline grid, very faint -->
+        <g stroke="#08090B" stroke-width="1" opacity=".1">
+          <path d="M0 60H840M0 130H840M0 200H840M0 270H840M0 340H840"/>
+        </g>
+
+        <!-- the zone -->
+        <rect x="120" y="238" width="640" height="58" fill="#D7B364" opacity=".22"/>
+        <path d="M120 238H760M120 296H760" stroke="#B9954A" stroke-width="1.5"/>
+
+        <!-- the origin candle -->
+        <g stroke="#08090B" stroke-width="2"><path d="M156 226V312"/></g>
+        <rect x="144" y="238" width="24" height="58" fill="#08090B"/>
+
+        <!-- displacement leg -->
+        <path d="M180 250 L228 176 L262 196 L318 96 L364 128 L420 64"
+              fill="none" stroke="#08090B" stroke-width="2.6"/>
+        <!-- return to the zone -->
+        <path d="M420 64 L468 132 L520 198 L568 262 L604 268"
+              fill="none" stroke="#08090B" stroke-width="2.6"/>
+        <!-- continuation -->
+        <path d="M604 268 L648 206 L692 138 L740 84 L800 44"
+              fill="none" stroke="#08090B" stroke-width="2.6"/>
+
+        <!-- hit marker -->
+        <rect x="596" y="260" width="16" height="16" fill="none" stroke="#B9954A" stroke-width="2.5"/>
+
+        <!-- leaders -->
+        <g stroke="#08090B" stroke-width="1" opacity=".65">
+          <path d="M156 312V348H236"/>
+          <path d="M300 130V70H236"/>
+          <path d="M604 276V330H676"/>
+        </g>
+        <g font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="700"
+           letter-spacing="2.6" fill="#08090B">
+          <text x="242" y="353">ORDERBLOK</text>
+          <text x="140" y="75">VERPLAATSING</text>
+          <text x="682" y="335">HERTEST</text>
+        </g>
+      </svg>
+    </div>
+    <p class="cap">De zone waar de beweging begon. Het proces wacht tot de koers daar terugkomt — nooit een uitkomst, alleen een structuur.</p>
+    <p class="s32"><a class="cta" href="https://discord.gg/78Ff2GuSfW">Bekijk chart-ideeën</a></p>
+  </section>
+
+  <!-- ===== 06 ===== -->
+  <section class="blk sec">
+    <div class="lab"><span class="n">06</span> &nbsp;De server</div>
+    <h2 class="h2 s24"><span style="color:var(--gold-dk)">15</span> kanalen.</h2>
+    <div class="chgrid s32">
+      <div>
+        <div class="lab">Thuis — nu gratis</div>
+        <ul class="chlist s16">
+          <li>#nq-chart-ideeën</li>
+          <li>#es-chart-ideeën</li>
+          <li>#bitcoin</li>
+          <li>#altcoins</li>
+          <li>#markt</li>
+          <li>#vragen</li>
+          <li>#algemeen</li>
+          <li>#atlas-op-socials</li>
+          <li>#ondersteuning</li>
+        </ul>
+      </div>
+      <div>
+        <div class="lab dim">Premium — opent later</div>
+        <ul class="chlist prem s16">
+          <li>#trade-setups</li>
+          <li>#marktupdates</li>
+          <li>#indicatoren</li>
+          <li>#sessie-opnames</li>
+          <li>#chart-ideeën</li>
+          <li>#premium-chat</li>
+        </ul>
+      </div>
+    </div>
+    <p class="s32"><a class="cta" href="https://discord.gg/78Ff2GuSfW">Open de server</a></p>
+  </section>
+
+  <!-- ===== 07 ===== -->
+  <section class="blk sec">
+    <div class="lab"><span class="n">07</span> &nbsp;Toegang</div>
+    <div class="access s32">
+      <div>
+        <h2 class="h2">Nu — gratis.</h2>
+        <p class="sub s16">Alle thuis-kanalen, de educatie en de dagelijkse marktbespreking.</p>
+      </div>
+      <div>
+        <h2 class="h2 dim">Later — premium.</h2>
+        <p class="sub s16 dim">Zes extra kanalen. Prijs en datum worden in de server aangekondigd.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 08 ===== -->
+  <section class="blk sec" style="--gap:0">
+    <div class="lab"><span class="n">08</span> &nbsp;Word lid</div>
+    <h2 class="h1 s32 col">Proces. Discipline. Uitvoering.</h2>
+
+    <div class="words s96">
+      <div>
+        <s>01</s>
+        <b>Proces</b>
+        <p>Eén manier van kijken, elke dag dezelfde volgorde.</p>
+      </div>
+      <div>
+        <s>02</s>
+        <b>Discipline</b>
+        <p>Risicobeheer en psychologie staan in de curriculum, niet ernaast.</p>
+      </div>
+      <div>
+        <s>03</s>
+        <b>Uitvoering</b>
+        <p>Live meekijken terwijl de markt beweegt, in de server.</p>
+      </div>
+    </div>
+
+    <p class="s96"><a class="cta lg" href="https://discord.gg/78Ff2GuSfW">Open Discord</a></p>
+    <p class="lab dim s24">Gratis toegang · Nederlands</p>
+  </section>
+
+</main>
+
+<footer class="page">
+  <div class="frow">
+    <div class="mark"><b>Atlas Capital</b></div>
+    <div class="flinks">
+      <a class="cta sm" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+      <a class="cta sm" href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
+    </div>
+  </div>
+
+  <div class="words s64">
+    <div>
+      <s class="ltr">A</s>
+      <b>De server</b>
+      <p>15 kanalen op Discord, gegroepeerd in thuis en premium.</p>
+    </div>
+    <div>
+      <s class="ltr">B</s>
+      <b>Socials</b>
+      <p>Atlas Capital op TikTok: @atlascapitalbv.</p>
+    </div>
+    <div>
+      <s class="ltr">C</s>
+      <b>Toegang</b>
+      <p>Nu gratis. Premium opent later; aankondiging in de server.</p>
+    </div>
+  </div>
+
+  <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+</footer>
+
+</body>
+</html>

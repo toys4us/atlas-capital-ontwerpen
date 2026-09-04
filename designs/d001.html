@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="nl" data-lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 001 Kwartaalblad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ATLAS CAPITAL — 001 KWARTAALBLAD
+   A quarterly financial review. Cream stock, black serif,
+   gold hairlines, three-column body, leader-dot contents.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --ink-70:#3A3B3E;
+  --ink-45:#6E6F72;
+  --paper:#F4F2EC;
+  --paper-2:#EDEAE1;
+  --rule:#C9C5B8;
+  --display:"Playfair Display", Georgia, "Times New Roman", serif;
+  --text:Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --label:"Segoe UI", -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  --measure:74rem;
+}
+
+html{color-scheme:light;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--text);
+  font-size:16px;
+  line-height:1.62;
+  overflow-x:hidden;
+}
+/* faint laid-paper tooth */
+body::before{
+  content:"";
+  position:absolute;inset:0;
+  pointer-events:none;
+  background:
+    repeating-linear-gradient(0deg, rgba(8,9,11,.022) 0 1px, transparent 1px 3px),
+    radial-gradient(120% 60% at 50% 0%, rgba(215,179,100,.10), transparent 60%);
+  z-index:0;
+}
+.wrap{position:relative;z-index:1;max-width:var(--measure);margin:0 auto;padding:0 clamp(14px,4vw,44px)}
+
+a{color:inherit}
+h1,h2,h3,h4{margin:0;font-family:var(--display);font-weight:700;line-height:1.02}
+
+/* ---------- shared editorial furniture ---------- */
+.lab{
+  font-family:var(--label);
+  font-size:10px;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--ink-45);
+  font-weight:600;
+}
+.lab-gold{color:var(--gold-lo)}
+.hair{height:1px;background:var(--rule);border:0;margin:0}
+.hair-gold{height:1px;background:var(--gold);border:0;margin:0}
+.dbl{border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);height:5px}
+.sec{padding:clamp(38px,6vw,74px) 0}
+.sechead{
+  display:flex;align-items:baseline;gap:16px;
+  border-bottom:1px solid var(--ink);
+  padding-bottom:8px;margin-bottom:clamp(20px,3vw,34px);
+}
+.sechead .num{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(22px,3.4vw,34px);color:var(--gold-lo);line-height:1;
+}
+.sechead h2{font-size:clamp(20px,3vw,30px);letter-spacing:-.01em;flex:1}
+.sechead .side{margin-left:auto}
+
+/* ---------- CTA ---------- */
+.cta{
+  display:inline-flex;align-items:center;gap:.7em;
+  font-family:var(--label);font-size:12px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink);
+  background:var(--gold);
+  padding:.95em 1.5em;
+  border:1px solid var(--gold-lo);
+  box-shadow:4px 4px 0 var(--ink);
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+.cta:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.cta .arw{font-size:14px;line-height:1}
+.cta-ghost{
+  background:transparent;color:var(--ink);
+  border:1px solid var(--ink);box-shadow:none;
+}
+.cta-ghost:hover{background:var(--ink);color:var(--paper);transform:none}
+.cta-sm{font-size:10.5px;padding:.7em 1.1em;box-shadow:3px 3px 0 var(--ink)}
+
+/* ---------- masthead ---------- */
+header.mast{
+  position:sticky;top:0;z-index:20;
+  background:var(--paper);
+  border-bottom:1px solid var(--ink);
+}
+.mast-top{
+  display:flex;align-items:center;gap:14px;
+  padding:10px 0;
+  border-bottom:1px solid var(--rule);
+  font-family:var(--label);font-size:10px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--ink-45);
+}
+.mast-top .mid{flex:1;text-align:center}
+.mast-name{
+  padding:clamp(14px,2.4vw,26px) 0 clamp(10px,1.8vw,16px);
+  display:flex;align-items:flex-end;gap:clamp(12px,3vw,28px);flex-wrap:wrap;
+}
+.mast-name .wm{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(30px,7.4vw,74px);
+  letter-spacing:.02em;line-height:.9;flex:1 1 auto;
+}
+.mast-name .wm em{font-style:normal;color:var(--gold-lo)}
+.mast-name .right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.mast-strap{
+  display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;
+  padding:7px 0;border-top:1px solid var(--ink);border-bottom:3px solid var(--ink);
+}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(28px,5vw,60px) 0 clamp(20px,3vw,34px)}
+.hero h1{
+  font-size:clamp(38px,9.2vw,104px);
+  line-height:.94;letter-spacing:-.025em;
+  font-weight:900;
+  max-width:16ch;
+}
+.hero h1 i{font-style:italic;font-weight:400;color:var(--gold-lo)}
+.hero-sub{
+  display:grid;grid-template-columns:1fr;gap:18px;
+  margin-top:22px;padding-top:18px;border-top:1px solid var(--ink);
+}
+@media(min-width:820px){.hero-sub{grid-template-columns:1.5fr 1fr;align-items:start;gap:44px}}
+.stand{font-size:clamp(17px,2.1vw,22px);line-height:1.42;margin:0;max-width:44ch}
+.hero-meta{display:flex;flex-direction:column;gap:14px}
+.hero-meta .row{display:flex;justify-content:space-between;border-bottom:1px dotted var(--rule);padding-bottom:5px}
+.hero-meta .row b{font-family:var(--display);font-weight:700}
+
+/* ---------- plate ---------- */
+figure.plate{margin:0}
+.plate-frame{
+  border:1px solid var(--ink);
+  background:linear-gradient(180deg,#FBFAF6,#EFECE3);
+  padding:clamp(10px,2vw,22px);
+}
+.plate-frame svg{display:block;width:100%;height:auto}
+figcaption{
+  display:flex;gap:14px;align-items:baseline;
+  margin-top:10px;padding-top:8px;border-top:1px solid var(--rule);
+  font-size:13.5px;color:var(--ink-70);line-height:1.4;
+}
+figcaption .pl{font-family:var(--label);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-lo);white-space:nowrap;font-weight:700}
+
+/* ---------- founder three-column ---------- */
+.col3{
+  columns:1;column-gap:clamp(22px,3.4vw,42px);column-rule:1px solid var(--rule);
+  font-size:15.5px;line-height:1.68;text-align:justify;hyphens:auto;
+}
+@media(min-width:640px){.col3{columns:2}}
+@media(min-width:1000px){.col3{columns:3}}
+.col3 p{margin:0 0 1em}
+.col3 p:first-of-type::first-letter{
+  float:left;font-family:var(--display);font-weight:900;
+  font-size:4.1em;line-height:.78;
+  padding:.04em .1em 0 0;color:var(--gold-lo);
+}
+.byline{
+  margin-top:16px;padding-top:10px;border-top:1px solid var(--ink);
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+}
+
+/* ---------- contents / leader dots ---------- */
+.toc{list-style:none;margin:0;padding:0;columns:1;column-gap:clamp(26px,4vw,56px)}
+@media(min-width:760px){.toc{columns:2}}
+.toc li{
+  break-inside:avoid;display:flex;align-items:baseline;
+  padding:.58em 0;border-bottom:1px solid var(--rule);
+}
+.toc .t{
+  font-family:var(--display);font-size:clamp(18px,2.4vw,24px);
+  font-weight:700;letter-spacing:-.01em;
+}
+.toc .dots{flex:1 1 auto;min-width:1.5em;border-bottom:2px dotted var(--rule);transform:translateY(-.3em);margin:0 .55em}
+.toc .f{font-family:var(--label);font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--gold-lo)}
+.toc li:hover .t{color:var(--gold-lo)}
+
+/* ---------- channels ---------- */
+.dept{display:grid;grid-template-columns:1fr;gap:clamp(22px,3vw,40px)}
+@media(min-width:800px){.dept{grid-template-columns:1fr 1fr}}
+.dept h3{font-size:clamp(17px,2.1vw,21px);margin-bottom:2px}
+.dept .kicker{margin-bottom:12px}
+.chan{list-style:none;margin:0;padding:0}
+.chan li{
+  display:flex;align-items:baseline;gap:.5em;
+  padding:.42em 0;border-bottom:1px dotted var(--rule);
+  font-family:var(--label);font-size:14px;
+}
+.chan li .h{color:var(--gold-lo);font-weight:700}
+.chan li .st{margin-left:auto;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-45)}
+.dept-note{margin-top:14px;font-size:14px;color:var(--ink-70)}
+
+/* ---------- live + access ---------- */
+.duo{display:grid;grid-template-columns:1fr;gap:clamp(20px,3vw,34px)}
+@media(min-width:840px){.duo{grid-template-columns:1.05fr .95fr}}
+.boxrule{border:1px solid var(--ink);padding:clamp(18px,2.6vw,30px);background:var(--paper-2)}
+.boxrule h3{font-size:clamp(20px,2.6vw,27px);margin-bottom:10px}
+.boxrule p{margin:0 0 14px;font-size:15.5px;color:var(--ink-70)}
+.tiers{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--ink)}
+@media(min-width:620px){.tiers{grid-template-columns:1fr 1fr}}
+.tier{padding:clamp(16px,2.4vw,26px)}
+.tier + .tier{border-top:1px solid var(--ink)}
+@media(min-width:620px){.tier + .tier{border-top:0;border-left:1px solid var(--ink)}}
+.tier h4{font-size:clamp(19px,2.4vw,25px);margin-bottom:6px}
+.tier .state{font-family:var(--label);font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--gold-lo);display:block;margin-bottom:12px}
+.tier ul{list-style:none;margin:0 0 16px;padding:0;font-size:14.5px;color:var(--ink-70)}
+.tier li{padding:.32em 0;border-bottom:1px dotted var(--rule);display:flex;gap:.6em}
+.tier li::before{content:"—";color:var(--gold-lo)}
+
+/* ---------- closing band ---------- */
+.band{
+  border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);
+  padding:clamp(34px,6vw,70px) 0;margin-top:clamp(30px,5vw,60px);
+  text-align:center;
+}
+.band h2{font-size:clamp(32px,7.6vw,78px);line-height:.95;letter-spacing:-.02em;font-weight:900}
+.band h2 i{font-style:italic;font-weight:400;color:var(--gold-lo)}
+.band p{margin:14px auto 24px;max-width:38ch;font-size:16px;color:var(--ink-70)}
+.orn{display:block;margin:18px auto;width:min(280px,60vw);height:auto}
+
+/* ---------- footer ---------- */
+footer{padding:clamp(26px,4vw,50px) 0 34px;font-size:13.5px;color:var(--ink-70)}
+.foot-grid{display:grid;grid-template-columns:1fr;gap:22px}
+@media(min-width:760px){.foot-grid{grid-template-columns:1.3fr 1fr 1fr}}
+.foot-grid a{text-decoration:none;border-bottom:1px solid var(--gold);display:inline-block}
+.foot-grid a:hover{color:var(--gold-lo)}
+.risk{margin-top:26px;padding-top:12px;border-top:1px solid var(--ink);font-size:11.5px;color:var(--ink-45);line-height:1.5}
+.folio{display:flex;justify-content:space-between;margin-top:16px;font-family:var(--label);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-45)}
+
+/* ---------- language switch ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.langsw{display:inline-flex;align-items:baseline;gap:.55em}
+.langsw button{
+  font-family:var(--label);font-size:10px;font-weight:600;
+  letter-spacing:.26em;text-transform:uppercase;
+  color:var(--ink-45);background:none;
+  border:0;border-bottom:1px solid transparent;
+  padding:0 0 2px;margin:0;cursor:pointer;line-height:1;
+}
+.langsw button:hover{color:var(--ink)}
+.langsw button[aria-pressed="true"]{color:var(--gold-lo);border-bottom-color:var(--gold)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ MASTHEAD ══════════════════ -->
+<header class="mast">
+  <div class="wrap">
+    <div class="mast-top">
+      <span><span lang="nl">Nr. 01</span><span lang="en">No. 01</span></span>
+      <span class="mid"><span lang="nl">Kwartaalblad over proces, discipline en uitvoering</span><span lang="en">A quarterly review of process, discipline and execution</span></span>
+      <span class="lab-gold"><span lang="nl">Nederlands</span><span lang="en">English</span></span>
+    </div>
+    <div class="mast-name">
+      <div class="wm">Atlas<em>·</em>Capital</div>
+      <div class="right">
+        <a class="cta cta-sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Word lid</span><span lang="en">Join</span> <span class="arw">→</span></a>
+      </div>
+    </div>
+    <div class="mast-strap">
+      <span class="lab"><span lang="nl">Proces</span><span lang="en">Process</span></span>
+      <span class="lab">Discipline</span>
+      <span class="lab"><span lang="nl">Uitvoering</span><span lang="en">Execution</span></span>
+      <span class="lab lab-gold">NQ · ES · Bitcoin · Altcoins</span>
+      <div class="langsw" role="group" aria-label="Taal / Language">
+        <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="wrap hero">
+  <p class="lab lab-gold" style="margin:0 0 14px"><span lang="nl">Openingsartikel — 01</span><span lang="en">Opening article — 01</span></p>
+  <h1><span lang="nl">Lees de markt<br>zoals je een <i>kaart</i><br>leest.</span><span lang="en">Read the market<br>the way you read<br>a <i>map</i>.</span></h1>
+  <div class="hero-sub">
+    <div>
+      <p class="stand"><span lang="nl">Atlas Capital is een Nederlandse trading-community op Discord. Educatie, structuur en dagelijkse marktbenadering — geen snelle-rijk-verhalen.</span><span lang="en">Atlas Capital is a Dutch trading community on Discord. Education, structure and a daily approach to the markets — no get-rich-quick stories.</span></p>
+      <p style="margin:22px 0 0"><a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span> <span class="arw">→</span></a></p>
+    </div>
+    <div class="hero-meta">
+      <div class="row"><span class="lab"><span lang="nl">Toegang</span><span lang="en">Access</span></span><b><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></b></div>
+      <div class="row"><span class="lab"><span lang="nl">Kanalen</span><span lang="en">Channels</span></span><b>15</b></div>
+      <div class="row"><span class="lab"><span lang="nl">Onderwerpen</span><span lang="en">Topics</span></span><b>10</b></div>
+      <div class="row"><span class="lab"><span lang="nl">Ervaring oprichter</span><span lang="en">Founder experience</span></span><b><span lang="nl">10+ jaar</span><span lang="en">10+ years</span></b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PLAAT I — MODEL ══════════════════ -->
+<section class="wrap sec" id="model">
+  <div class="sechead">
+    <span class="num">02</span>
+    <h2><span lang="nl">Plaat I — Onbalans in de markt</span><span lang="en">Plate I — Imbalance in the market</span></h2>
+    <span class="lab side"><span lang="nl">Schema</span><span lang="en">Diagram</span></span>
+  </div>
+  <figure class="plate">
+    <div class="plate-frame">
+      <svg viewBox="0 0 900 400" role="img" aria-labelledby="d001-plate-cap">
+        <defs>
+          <pattern id="p1grid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M30 0H0V30" fill="none" stroke="#C9C5B8" stroke-width=".6"/>
+          </pattern>
+          <linearGradient id="p1gap" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#D7B364" stop-opacity=".34"/>
+            <stop offset="1" stop-color="#D7B364" stop-opacity=".10"/>
+          </linearGradient>
+        </defs>
+
+        <rect x="0" y="0" width="900" height="400" fill="url(#p1grid)"/>
+        <rect x="0" y="0" width="900" height="400" fill="none" stroke="#08090B" stroke-width="1"/>
+
+        <!-- the gap band -->
+        <rect x="161" y="196" width="560" height="42" fill="url(#p1gap)"/>
+        <line x1="161" y1="196" x2="760" y2="196" stroke="#B9954A" stroke-width="1.2" stroke-dasharray="7 5"/>
+        <line x1="161" y1="238" x2="760" y2="238" stroke="#B9954A" stroke-width="1.2" stroke-dasharray="7 5"/>
+
+        <!-- candles: stroke ink; up = paper fill, down = ink fill, impulse = gold -->
+        <g stroke="#08090B" stroke-width="1.6">
+          <g><line x1="60" y1="250" x2="60" y2="300"/><rect x="49" y="262" width="22" height="30" fill="#FBFAF6"/></g>
+          <g><line x1="116" y1="245" x2="116" y2="285"/><rect x="105" y="255" width="22" height="25" fill="#FBFAF6"/></g>
+          <g><line x1="172" y1="238" x2="172" y2="272"/><rect x="161" y="246" width="22" height="22" fill="#FBFAF6"/></g>
+          <g><line x1="228" y1="180" x2="228" y2="244"/><rect x="217" y="188" width="22" height="54" fill="#D7B364"/></g>
+          <g><line x1="284" y1="150" x2="284" y2="196"/><rect x="273" y="158" width="22" height="36" fill="#FBFAF6"/></g>
+          <g><line x1="340" y1="140" x2="340" y2="175"/><rect x="329" y="148" width="22" height="24" fill="#FBFAF6"/></g>
+          <g><line x1="396" y1="145" x2="396" y2="212"/><rect x="385" y="150" width="22" height="50" fill="#08090B"/></g>
+          <g><line x1="452" y1="130" x2="452" y2="216"/><rect x="441" y="140" width="22" height="64" fill="#FBFAF6"/></g>
+          <g><line x1="508" y1="110" x2="508" y2="145"/><rect x="497" y="118" width="22" height="24" fill="#FBFAF6"/></g>
+          <g><line x1="564" y1="100" x2="564" y2="130"/><rect x="553" y="108" width="22" height="20" fill="#FBFAF6"/></g>
+          <g><line x1="620" y1="82" x2="620" y2="118"/><rect x="609" y="90" width="22" height="24" fill="#FBFAF6"/></g>
+        </g>
+
+        <!-- leader lines + callouts -->
+        <g stroke="#08090B" stroke-width="1" fill="none">
+          <path d="M721 217 H780"/>
+          <path d="M452 226 L452 300 L560 300"/>
+          <path d="M228 320 L228 356 H340"/>
+        </g>
+        <g fill="#08090B" font-family="Georgia, serif" font-size="15">
+          <text x="788" y="213" lang="nl">Onbalans</text>
+          <text x="788" y="213" lang="en">Imbalance</text>
+          <text x="788" y="232" font-size="12.5" fill="#6E6F72">(FVG)</text>
+          <text x="568" y="304" lang="nl">Terugtest</text>
+          <text x="568" y="304" lang="en">Retest</text>
+          <text x="348" y="360" lang="nl">Impuls</text>
+          <text x="348" y="360" lang="en">Impulse</text>
+        </g>
+        <circle cx="721" cy="217" r="3.2" fill="#B9954A"/>
+        <circle cx="452" cy="226" r="3.2" fill="#B9954A"/>
+        <circle cx="228" cy="320" r="3.2" fill="#B9954A"/>
+
+        <!-- dimension bracket -->
+        <g stroke="#B9954A" stroke-width="1.1" fill="none">
+          <path d="M132 196 H150 M132 238 H150 M141 196 V238"/>
+        </g>
+        <text x="60" y="180" fill="#B9954A" font-family="Georgia, serif" font-size="12.5" letter-spacing="1.5" lang="nl">GAT</text>
+        <text x="60" y="180" fill="#B9954A" font-family="Georgia, serif" font-size="12.5" letter-spacing="1.5" lang="en">GAP</text>
+      </svg>
+    </div>
+    <figcaption>
+      <span class="pl"><span lang="nl">Plaat I</span><span lang="en">Plate I</span></span>
+      <span id="d001-plate-cap"><span lang="nl">Een impuls laat een gat achter tussen de kaarsen. De markt keert terug naar dat gat voordat de beweging verdergaat. Schematisch — geen koersen, geen resultaten.</span><span lang="en">An impulse leaves a gap between the candles. The market comes back to that gap before the move goes on. Schematic — no prices, no results.</span></span>
+    </figcaption>
+  </figure>
+  <p style="margin-top:26px"><a class="cta cta-ghost" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Bekijk chart-ideeën in de server</span><span lang="en">See chart ideas in the server</span> <span class="arw">→</span></a></p>
+</section>
+
+<hr class="hair-gold">
+
+<!-- ══════════════════ FOUNDER ══════════════════ -->
+<section class="wrap sec" id="oprichter">
+  <div class="sechead">
+    <span class="num">03</span>
+    <h2><span lang="nl">Van de oprichter</span><span lang="en">From the founder</span></h2>
+    <span class="lab side"><span lang="nl">10+ jaar</span><span lang="en">10+ years</span></span>
+  </div>
+  <div class="col3">
+    <p><span lang="nl">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</span><span lang="en">I've been involved in trading for over 10 years now, and during that time I've experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons.</span></p>
+    <p><span lang="nl">Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader.</span><span lang="en">I built Atlas Capital to share that experience, bring traders together, and show how I approach the markets on a daily basis.</span></p>
+    <p><span lang="nl">Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</span><span lang="en">No get-rich-quick promises, just real setups, education, and a community focused on improving together.</span></p>
+  </div>
+  <div class="byline">
+    <span class="lab"><span lang="nl">De oprichter van Atlas Capital</span><span lang="en">The founder of Atlas Capital</span></span>
+    <a class="cta cta-sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Stel je vraag in Discord</span><span lang="en">Ask your question on Discord</span> <span class="arw">→</span></a>
+  </div>
+</section>
+
+<hr class="hair">
+
+<!-- ══════════════════ CONTENTS / CURRICULUM ══════════════════ -->
+<section class="wrap sec" id="educatie">
+  <div class="sechead">
+    <span class="num">04</span>
+    <h2><span lang="nl">Inhoud — de leerstof</span><span lang="en">Contents — the curriculum</span></h2>
+    <span class="lab side"><span lang="nl">10 onderwerpen</span><span lang="en">10 topics</span></span>
+  </div>
+  <ul class="toc">
+    <li><span class="t"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span><span class="dots"></span><span class="f">01</span></li>
+    <li><span class="t">SMT</span><span class="dots"></span><span class="f">02</span></li>
+    <li><span class="t">FVG</span><span class="dots"></span><span class="f">03</span></li>
+    <li><span class="t">IFVG</span><span class="dots"></span><span class="f">04</span></li>
+    <li><span class="t">Orderblocks</span><span class="dots"></span><span class="f">05</span></li>
+    <li><span class="t">Fibonacci</span><span class="dots"></span><span class="f">06</span></li>
+    <li><span class="t"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span><span class="dots"></span><span class="f">07</span></li>
+    <li><span class="t"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span><span class="dots"></span><span class="f">08</span></li>
+    <li><span class="t"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span><span class="dots"></span><span class="f">09</span></li>
+    <li><span class="t"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span><span class="dots"></span><span class="f">10</span></li>
+  </ul>
+  <p style="margin-top:26px"><a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Begin bij onderwerp 01</span><span lang="en">Start with topic 01</span> <span class="arw">→</span></a></p>
+</section>
+
+<hr class="hair">
+
+<!-- ══════════════════ CHANNELS ══════════════════ -->
+<section class="wrap sec" id="kanalen">
+  <div class="sechead">
+    <span class="num">05</span>
+    <h2><span lang="nl">Rubrieken — 15 kanalen</span><span lang="en">Departments — 15 channels</span></h2>
+    <span class="lab side">Discord</span>
+  </div>
+  <div class="dept">
+    <div>
+      <h3><span lang="nl">Thuis</span><span lang="en">Home</span></h3>
+      <p class="lab lab-gold kicker"><span lang="nl">Nu gratis toegankelijk</span><span lang="en">Free to access right now</span></p>
+      <ul class="chan">
+        <li><span class="h">#</span>nq-chart-ideeën<span class="st">Open</span></li>
+        <li><span class="h">#</span>es-chart-ideeën<span class="st">Open</span></li>
+        <li><span class="h">#</span>bitcoin<span class="st">Open</span></li>
+        <li><span class="h">#</span>altcoins<span class="st">Open</span></li>
+        <li><span class="h">#</span>markt<span class="st">Open</span></li>
+        <li><span class="h">#</span>vragen<span class="st">Open</span></li>
+        <li><span class="h">#</span>algemeen<span class="st">Open</span></li>
+        <li><span class="h">#</span>atlas-op-socials<span class="st">Open</span></li>
+        <li><span class="h">#</span>ondersteuning<span class="st">Open</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Premium</h3>
+      <p class="lab lab-gold kicker"><span lang="nl">Opent later</span><span lang="en">Opens later</span></p>
+      <ul class="chan">
+        <li><span class="h">#</span>trade-setups<span class="st">Later</span></li>
+        <li><span class="h">#</span>marktupdates<span class="st">Later</span></li>
+        <li><span class="h">#</span>indicatoren<span class="st">Later</span></li>
+        <li><span class="h">#</span>sessie-opnames<span class="st">Later</span></li>
+        <li><span class="h">#</span>chart-ideeën<span class="st">Later</span></li>
+        <li><span class="h">#</span>premium-chat<span class="st">Later</span></li>
+      </ul>
+      <p class="dept-note"><span lang="nl">Datum en prijs worden in de server aangekondigd.</span><span lang="en">The date and the price are announced in the server.</span></p>
+    </div>
+  </div>
+</section>
+
+<hr class="hair">
+
+<!-- ══════════════════ LIVE + ACCESS ══════════════════ -->
+<section class="wrap sec" id="live">
+  <div class="sechead">
+    <span class="num">06</span>
+    <h2><span lang="nl">Live &amp; toegang</span><span lang="en">Live &amp; access</span></h2>
+    <span class="lab side"><span lang="nl">Rubriek</span><span lang="en">Department</span></span>
+  </div>
+  <div class="duo">
+    <div class="boxrule">
+      <h3><span lang="nl">Live meekijken</span><span lang="en">Watching live</span></h3>
+      <p><span lang="nl">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced there.</span></p>
+      <a class="cta cta-sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Zit een sessie bij</span><span lang="en">Sit in on a session</span> <span class="arw">→</span></a>
+    </div>
+    <div class="tiers">
+      <div class="tier">
+        <h4><span lang="nl">Thuis</span><span lang="en">Home</span></h4>
+        <span class="state"><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></span>
+        <ul>
+          <li><span lang="nl">Charts en marktbespreking</span><span lang="en">Charts and market discussion</span></li>
+          <li><span lang="nl">Vragen en ondersteuning</span><span lang="en">Questions and support</span></li>
+          <li><span lang="nl">De community</span><span lang="en">The community</span></li>
+        </ul>
+      </div>
+      <div class="tier">
+        <h4>Premium</h4>
+        <span class="state"><span lang="nl">Opent later</span><span lang="en">Opens later</span></span>
+        <ul>
+          <li><span lang="nl">Setups en marktupdates</span><span lang="en">Setups and market updates</span></li>
+          <li><span lang="nl">Sessie-opnames</span><span lang="en">Session recordings</span></li>
+          <li><span lang="nl">Indicatoren</span><span lang="en">Indicators</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CLOSING BAND ══════════════════ -->
+<section class="band">
+  <div class="wrap">
+    <p class="lab lab-gold" style="margin:0 0 16px"><span lang="nl">Sluitstuk — 07</span><span lang="en">Closing piece — 07</span></p>
+    <h2><span lang="nl">Proces boven<br><i>voorspelling</i>.</span><span lang="en">Process over<br><i>prediction</i>.</span></h2>
+    <svg class="orn" viewBox="0 0 300 22" aria-hidden="true">
+      <line x1="0" y1="11" x2="118" y2="11" stroke="#D7B364" stroke-width="1"/>
+      <line x1="182" y1="11" x2="300" y2="11" stroke="#D7B364" stroke-width="1"/>
+      <path d="M150 3 L158 11 L150 19 L142 11 Z" fill="#D7B364"/>
+      <circle cx="128" cy="11" r="2" fill="#B9954A"/>
+      <circle cx="172" cy="11" r="2" fill="#B9954A"/>
+    </svg>
+    <p><span lang="nl">De server is nu gratis. Kom binnen, lees mee, stel vragen.</span><span lang="en">The server is free right now. Come in, read along, ask questions.</span></p>
+    <a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Word lid van Atlas Capital</span><span lang="en">Join Atlas Capital</span> <span class="arw">→</span></a>
+  </div>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer class="wrap">
+  <div class="foot-grid">
+    <div>
+      <p class="lab" style="margin:0 0 8px"><span lang="nl">Colofon</span><span lang="en">Colophon</span></p>
+      <p style="margin:0"><span lang="nl">Atlas Capital — Nederlandse trading-community.<br>Proces. Discipline. Uitvoering.</span><span lang="en">Atlas Capital — Dutch trading community.<br>Process. Discipline. Execution.</span></p>
+    </div>
+    <div>
+      <p class="lab" style="margin:0 0 8px"><span lang="nl">Kanalen</span><span lang="en">Channels</span></p>
+      <p style="margin:0 0 6px"><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord</a></p>
+      <p style="margin:0"><a href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok — @atlascapitalbv</a></p>
+    </div>
+    <div>
+      <p class="lab" style="margin:0 0 8px"><span lang="nl">Markten</span><span lang="en">Markets</span></p>
+      <p style="margin:0">NQ · ES · Bitcoin · Altcoins</p>
+    </div>
+  </div>
+  <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
+  <div class="folio">
+    <span>Atlas Capital</span>
+    <span><span lang="nl">Kwartaalblad — Nr. 01</span><span lang="en">Quarterly Review — No. 01</span></span>
+    <span>08</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
+
+</body>
+</html>

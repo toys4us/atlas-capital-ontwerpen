@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 007 Diagonaal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   007 — DIAGONAAL
+   One axis: minus twelve degrees. An orthogonal hairline grid holds the page
+   still; every band, tag, rule and headline crosses it on the same slant.
+   No curves. No radius. Nothing soft.
+   ========================================================================== */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --panel:#15161A;
+  --muted:#A5A6A8;
+  --paper:#F4F2EC;
+  --tilt:-12deg;
+  --grid:rgba(215,179,100,.075);
+}
+
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box;border-radius:0}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--paper);
+  font-family:"Helvetica Neue",Helvetica,Arial,"Segoe UI",sans-serif;
+  font-size:15px;
+  line-height:1.5;
+  overflow-x:hidden;
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size:88px 88px;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+
+.wrap{max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px)}
+section{position:relative;overflow:hidden}
+
+/* ---- shared type -------------------------------------------------------- */
+.disp{
+  font-family:Anton,"Helvetica Neue",Impact,Haettenschweiler,sans-serif;
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:.005em;
+  line-height:.88;
+  margin:0;
+  overflow-wrap:break-word;
+}
+.lab{
+  font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  font-weight:700;color:var(--gold);
+}
+.lab.mute{color:var(--muted)}
+.lead{font-size:clamp(15px,1.5vw,18px);color:var(--paper);max-width:32em;margin:0}
+.dim{color:var(--muted)}
+.sn{
+  font-family:Anton,Impact,sans-serif;font-size:13px;letter-spacing:.22em;
+  color:var(--gold);text-transform:uppercase;
+}
+
+/* ---- the axis ----------------------------------------------------------- */
+.tilt{transform:rotate(var(--tilt));transform-origin:left center}
+.skew{transform:skewX(var(--tilt))}
+.skew > *{display:block;transform:skewX(12deg)}
+
+.band{
+  position:absolute;left:-14%;right:-14%;
+  transform:rotate(var(--tilt));
+  pointer-events:none;
+}
+.band.hair{height:1px;background:var(--gold-lo)}
+.band.fill{
+  background:linear-gradient(90deg,rgba(215,179,100,.16),rgba(215,179,100,.03) 62%,transparent);
+  border-top:1px solid rgba(215,179,100,.55);
+  border-bottom:1px solid rgba(215,179,100,.25);
+}
+
+/* ---- header ------------------------------------------------------------- */
+header{
+  position:sticky;top:0;z-index:20;
+  background:rgba(8,9,11,.92);
+  border-bottom:1px solid rgba(215,179,100,.22);
+  backdrop-filter:blur(6px);
+}
+.hrow{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+/* the skew widens the painted box past the layout box; give the header's
+   button room for its own overhang instead of clipping the corner off */
+.hrow .btn{margin-right:8px}
+.mark{display:flex;align-items:center;gap:11px}
+.mark .glyph{
+  width:20px;height:20px;flex:0 0 20px;
+  background:linear-gradient(135deg,var(--gold-hi),var(--gold-lo));
+  transform:skewX(var(--tilt));
+}
+.mark b{font-family:Anton,Impact,sans-serif;font-weight:400;letter-spacing:.13em;font-size:16px;text-transform:uppercase}
+
+/* ---- buttons ------------------------------------------------------------ */
+.btn{
+  display:inline-block;
+  background:var(--gold);color:var(--ink);
+  transform:skewX(var(--tilt));
+  padding:12px 22px;
+  border:1px solid var(--gold);
+  transition:background .16s ease,color .16s ease,border-color .16s ease;
+}
+.btn i{
+  display:block;transform:skewX(12deg);
+  font-style:normal;font-weight:700;font-size:12px;
+  letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;
+}
+.btn:hover{background:var(--paper);border-color:var(--paper)}
+.btn.line{background:transparent;color:var(--gold);border-color:var(--gold-lo)}
+.btn.line:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.btn.big i{font-size:14px;letter-spacing:.22em}
+.btn.big{padding:17px 30px}
+
+/* ---- hero --------------------------------------------------------------- */
+.hero{padding:clamp(52px,9vw,120px) 0 clamp(56px,9vw,130px)}
+.hero .band.fill{top:26%;height:clamp(120px,20vw,236px)}
+.hero .band.hair.a{top:14%}
+.hero .band.hair.b{bottom:16%}
+.hero-in{position:relative;z-index:2}
+.hero h1{
+  font-size:clamp(2.6rem,10.5vw,8.2rem);
+  transform:rotate(var(--tilt));
+  transform-origin:left center;
+  margin:clamp(26px,5vw,54px) 0 clamp(40px,7vw,84px);
+  max-width:14ch;
+}
+.hero h1 em{font-style:normal;color:var(--gold);display:block}
+.hero-foot{display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,40px);align-items:center}
+
+/* ---- ticker ------------------------------------------------------------- */
+.tickwrap{
+  position:relative;overflow:hidden;height:clamp(72px,11vw,124px);
+  border-top:1px solid rgba(215,179,100,.28);
+  border-bottom:1px solid rgba(215,179,100,.28);
+  background:var(--panel);
+}
+.tickline{
+  position:absolute;left:-30%;right:-30%;top:50%;
+  transform:rotate(var(--tilt)) translateY(-50%);
+  white-space:nowrap;overflow:hidden;
+}
+.tickline .run{
+  display:inline-block;
+  animation:slide 34s linear infinite;
+  font-family:Anton,Impact,sans-serif;
+  font-size:clamp(22px,4.4vw,48px);
+  letter-spacing:.06em;text-transform:uppercase;color:var(--gold);
+}
+.tickline .run span{padding:0 26px}
+.tickline .run u{text-decoration:none;color:#3D3B37}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.tickline .run{animation:none}}
+
+/* ---- generic section ---------------------------------------------------- */
+.sec{padding:clamp(56px,9vw,124px) 0}
+.sechead{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:clamp(24px,4vw,48px)}
+.sechead h2{font-size:clamp(1.9rem,5.6vw,4.1rem)}
+.rule-d{
+  height:1px;background:linear-gradient(90deg,var(--gold-lo),transparent);
+  transform:rotate(var(--tilt));transform-origin:left center;
+  margin:clamp(30px,5vw,60px) 0;
+}
+
+/* ---- staircase (10 onderwerpen) ---------------------------------------- */
+.stair{list-style:none;margin:0;padding:0}
+.stair li{
+  margin-left:calc(var(--i) * 3.4%);
+  border-left:3px solid var(--gold);
+  transform:skewX(var(--tilt));
+  background:linear-gradient(90deg,rgba(215,179,100,.10),transparent 72%);
+  transition:background .18s ease,margin-left .18s ease;
+  margin-bottom:6px;
+}
+.stair li > div{
+  transform:skewX(12deg);
+  padding:12px 16px;
+  display:flex;align-items:baseline;gap:16px;
+}
+.stair li:hover{background:linear-gradient(90deg,rgba(215,179,100,.26),transparent 80%)}
+.stair li b{
+  font-family:Anton,Impact,sans-serif;font-weight:400;
+  font-size:clamp(17px,2.6vw,28px);text-transform:uppercase;letter-spacing:.02em;
+}
+.stair li s{text-decoration:none;color:var(--gold);font-size:11px;letter-spacing:.24em;font-weight:700}
+
+/* ---- plate (schematic) -------------------------------------------------- */
+.plate{
+  background:var(--panel);
+  border:1px solid rgba(215,179,100,.3);
+  clip-path:polygon(3.4% 0, 100% 0, 96.6% 100%, 0 100%);
+  padding:clamp(20px,3.5vw,46px) clamp(30px,6vw,80px);
+}
+.scroller{overflow-x:auto}
+.scroller svg{display:block;width:100%;min-width:540px;height:auto}
+
+/* ---- channels ----------------------------------------------------------- */
+.tags{display:flex;flex-wrap:wrap;gap:9px}
+.tag{
+  transform:skewX(var(--tilt));
+  border:1px solid rgba(215,179,100,.34);
+  background:var(--panel);
+  transition:background .16s ease,border-color .16s ease;
+}
+.tag span{
+  display:block;transform:skewX(12deg);
+  padding:9px 15px;font-size:13px;letter-spacing:.02em;white-space:nowrap;
+}
+.tag:hover{background:rgba(215,179,100,.16);border-color:var(--gold)}
+.tag.prem{border-style:dashed;border-color:rgba(165,166,168,.4)}
+.tag.prem span{color:var(--muted)}
+
+/* ---- two-up ------------------------------------------------------------- */
+.duo{display:grid;grid-template-columns:1fr;gap:clamp(24px,4vw,54px)}
+@media(min-width:860px){.duo{grid-template-columns:1.15fr .85fr}}
+.slab{
+  border-top:2px solid var(--gold);
+  padding-top:18px;
+}
+.slab.q{border-top-color:rgba(165,166,168,.35)}
+
+/* ---- live --------------------------------------------------------------- */
+.live{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid var(--gold-lo);padding:8px 14px;
+  transform:skewX(var(--tilt));
+}
+.live > *{transform:skewX(12deg)}
+.dot{width:9px;height:9px;background:var(--gold);animation:blip 2.2s steps(1,end) infinite}
+@keyframes blip{0%,60%{background:var(--gold)}61%,100%{background:#4A4335}}
+@media (prefers-reduced-motion:reduce){.dot{animation:none}}
+
+/* ---- closing ------------------------------------------------------------ */
+.close{padding:clamp(70px,12vw,170px) 0;position:relative}
+.close .band.fill{top:8%;height:clamp(160px,26vw,300px)}
+.close h2{font-size:clamp(2.3rem,9vw,7rem);transform:rotate(var(--tilt));transform-origin:left center;max-width:12ch}
+
+/* ---- footer ------------------------------------------------------------- */
+footer{border-top:1px solid rgba(215,179,100,.24);padding:clamp(34px,5vw,60px) 0;background:#0B0C0E}
+.frow{display:flex;flex-wrap:wrap;gap:22px 40px;justify-content:space-between;align-items:flex-start}
+.flinks{display:flex;gap:26px;flex-wrap:wrap}
+.flinks a{font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--gold);border-bottom:1px solid rgba(215,179,100,.4);padding-bottom:3px}
+.flinks a:hover{color:var(--paper);border-bottom-color:var(--paper)}
+.risk{color:#7C7D80;font-size:12.5px;max-width:62ch;margin:0;line-height:1.65}
+
+@media(max-width:640px){
+  body{background-size:56px 56px}
+  .stair li{margin-left:calc(var(--i) * 1.6%)}
+  .hero h1{max-width:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hrow">
+    <div class="mark"><span class="glyph" aria-hidden="true"></span><b>Atlas Capital</b></div>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW"><i>Discord</i></a>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= 01 HERO ================= -->
+<section class="hero">
+  <span class="band hair a" aria-hidden="true"></span>
+  <span class="band fill" aria-hidden="true"></span>
+  <span class="band hair b" aria-hidden="true"></span>
+  <div class="wrap hero-in">
+    <div class="sn">01 / Atlas Capital</div>
+    <h1 class="disp">De markt beweegt.<em>Jij houdt koers.</em></h1>
+    <div class="hero-foot">
+      <a class="btn big" href="https://discord.gg/78Ff2GuSfW"><i>Word lid via Discord</i></a>
+      <p class="lead">Nederlandse trading-community. Educatie, dagelijkse markt en live sessies.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= markten ticker ================= -->
+<div class="tickwrap" aria-hidden="true">
+  <div class="tickline">
+    <div class="run">
+      <span>NQ</span><u>/</u><span>ES</span><u>/</u><span>Bitcoin</span><u>/</u><span>Altcoins</span><u>/</u><span>Proces</span><u>/</u><span>Discipline</span><u>/</u><span>Uitvoering</span><u>/</u><span>NQ</span><u>/</u><span>ES</span><u>/</u><span>Bitcoin</span><u>/</u><span>Altcoins</span><u>/</u><span>Proces</span><u>/</u><span>Discipline</span><u>/</u><span>Uitvoering</span><u>/</u>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 02 OPRICHTER ================= -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="sn">02</span>
+      <h2 class="disp">De oprichter</h2>
+    </div>
+    <div class="duo">
+      <div class="slab q">
+        <p class="lead">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</p>
+        <p class="lead" style="margin-top:18px">Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</p>
+      </div>
+      <div>
+        <div class="slab">
+          <div class="disp" style="font-size:clamp(3rem,9vw,6rem);color:var(--gold)">10+</div>
+          <div class="lab mute" style="margin-top:8px">jaar in de markten</div>
+        </div>
+        <p style="margin-top:26px"><a class="btn line" href="https://discord.gg/78Ff2GuSfW"><i>Lees mee in Discord</i></a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 EDUCATIE ================= -->
+<section class="sec" style="background:#0A0B0D">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="sn">03</span>
+      <h2 class="disp">Tien onderwerpen</h2>
+      <span class="lab mute">de curriculumtrap</span>
+    </div>
+    <ul class="stair">
+      <li style="--i:0"><div><s>01</s><b>deviatie</b></div></li>
+      <li style="--i:1"><div><s>02</s><b>SMT</b></div></li>
+      <li style="--i:2"><div><s>03</s><b>FVG</b></div></li>
+      <li style="--i:3"><div><s>04</s><b>IFVG</b></div></li>
+      <li style="--i:4"><div><s>05</s><b>orderblocks</b></div></li>
+      <li style="--i:5"><div><s>06</s><b>fibonacci</b></div></li>
+      <li style="--i:6"><div><s>07</s><b>sessie-liquiditeit</b></div></li>
+      <li style="--i:7"><div><s>08</s><b>liquiditeit</b></div></li>
+      <li style="--i:8"><div><s>09</s><b>risicobeheer</b></div></li>
+      <li style="--i:9"><div><s>10</s><b>tradingpsychologie</b></div></li>
+    </ul>
+    <div class="rule-d"></div>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW"><i>Start bij deviatie</i></a>
+  </div>
+</section>
+
+<!-- ================= 04 MODEL ================= -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="sn">04</span>
+      <h2 class="disp">Het model</h2>
+      <span class="lab mute">schematisch — geen resultaat</span>
+    </div>
+    <div class="plate">
+      <div class="scroller">
+        <svg viewBox="0 0 920 420" role="img" aria-label="Schematische weergave van een liquiditeitsgreep boven gelijke toppen, gevolgd door een omkering">
+          <g stroke="rgba(215,179,100,.14)" stroke-width="1">
+            <path d="M0 70H920M0 140H920M0 210H920M0 280H920M0 350H920"/>
+            <path d="M115 0V420M230 0V420M345 0V420M460 0V420M575 0V420M690 0V420M805 0V420"/>
+          </g>
+
+          <!-- liquidity pool above equal highs -->
+          <path d="M60 108H700" stroke="#D7B364" stroke-width="1.5" stroke-dasharray="9 7"/>
+          <g fill="#D7B364">
+            <rect x="188" y="104" width="9" height="9"/>
+            <rect x="352" y="104" width="9" height="9"/>
+            <rect x="512" y="104" width="9" height="9"/>
+          </g>
+
+          <!-- the path: equal highs, sweep, hard reversal -->
+          <path d="M60 330 L140 250 L192 110 L262 200 L318 176 L356 110 L430 226 L482 190 L516 110
+                   L546 62 L580 132 L618 214 L664 262 L700 244 L742 302 L800 360 L860 336"
+                fill="none" stroke="#F4F2EC" stroke-width="2.6" stroke-linejoin="miter"/>
+
+          <!-- the sweep, marked -->
+          <path d="M516 110 L546 62 L580 132 Z" fill="rgba(215,179,100,.28)" stroke="#D7B364" stroke-width="2"/>
+
+          <!-- structure break level -->
+          <path d="M300 214H820" stroke="#A5A6A8" stroke-width="1" stroke-dasharray="4 6"/>
+
+          <!-- leaders -->
+          <g stroke="#B9954A" stroke-width="1">
+            <path d="M352 104V56H448"/>
+            <path d="M556 62V24H646"/>
+            <path d="M700 214V368H772"/>
+          </g>
+          <g font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="700"
+             letter-spacing="2.6" fill="#F4F2EC">
+            <text x="454" y="61">GELIJKE TOPPEN</text>
+            <text x="652" y="29">GREEP</text>
+            <text x="778" y="373">OMKERING</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="duo" style="margin-top:clamp(22px,3vw,38px)">
+      <p class="lead">Boven gelijke toppen ligt liquiditeit. Wordt die opgehaald en direct verlaten, dan verandert het beeld.</p>
+      <div><a class="btn line" href="https://discord.gg/78Ff2GuSfW"><i>Meer modellen in de server</i></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 KANALEN ================= -->
+<section class="sec" style="background:#0A0B0D">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="sn">05</span>
+      <h2 class="disp">15 kanalen</h2>
+    </div>
+
+    <div class="lab" style="margin-bottom:14px">Thuis — nu gratis</div>
+    <div class="tags">
+      <span class="tag"><span>#nq-chart-ideeën</span></span>
+      <span class="tag"><span>#es-chart-ideeën</span></span>
+      <span class="tag"><span>#bitcoin</span></span>
+      <span class="tag"><span>#altcoins</span></span>
+      <span class="tag"><span>#markt</span></span>
+      <span class="tag"><span>#vragen</span></span>
+      <span class="tag"><span>#algemeen</span></span>
+      <span class="tag"><span>#atlas-op-socials</span></span>
+      <span class="tag"><span>#ondersteuning</span></span>
+    </div>
+
+    <div class="lab mute" style="margin:30px 0 14px">Premium — opent later</div>
+    <div class="tags">
+      <span class="tag prem"><span>#trade-setups</span></span>
+      <span class="tag prem"><span>#marktupdates</span></span>
+      <span class="tag prem"><span>#indicatoren</span></span>
+      <span class="tag prem"><span>#sessie-opnames</span></span>
+      <span class="tag prem"><span>#chart-ideeën</span></span>
+      <span class="tag prem"><span>#premium-chat</span></span>
+    </div>
+
+    <div class="rule-d"></div>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW"><i>Open de server</i></a>
+  </div>
+</section>
+
+<!-- ================= 06 LIVE ================= -->
+<section class="sec">
+  <span class="band hair" style="top:22%" aria-hidden="true"></span>
+  <div class="wrap" style="position:relative;z-index:2">
+    <div class="sechead">
+      <span class="sn">06</span>
+      <h2 class="disp">Live in de server</h2>
+    </div>
+    <div class="duo">
+      <div>
+        <span class="live"><span class="dot" aria-hidden="true"></span><span class="lab">Live traden</span></span>
+        <p class="lead" style="margin-top:22px">De oprichter handelt live mee in Discord. Tijden worden daar aangekondigd.</p>
+      </div>
+      <div class="slab">
+        <div class="lab mute">Markten</div>
+        <p class="disp" style="font-size:clamp(1.4rem,3.6vw,2.4rem);margin-top:12px;line-height:1.06">NQ · ES<br>Bitcoin · Altcoins</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 07 TOEGANG ================= -->
+<section class="sec" style="background:#0A0B0D">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="sn">07</span>
+      <h2 class="disp">Toegang</h2>
+    </div>
+    <div class="duo">
+      <div class="slab">
+        <div class="disp" style="font-size:clamp(2rem,6vw,3.6rem);color:var(--gold)">Nu — gratis</div>
+        <p class="lead" style="margin-top:14px">Alle thuis-kanalen, de educatie en de dagelijkse marktbespreking.</p>
+        <p style="margin-top:22px"><a class="btn" href="https://discord.gg/78Ff2GuSfW"><i>Direct erin</i></a></p>
+      </div>
+      <div class="slab q">
+        <div class="disp" style="font-size:clamp(2rem,6vw,3.6rem);color:var(--muted)">Later — premium</div>
+        <p class="lead dim" style="margin-top:14px">Zes extra kanalen. Prijs en datum worden in de server aangekondigd.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 08 SLOT ================= -->
+<section class="close">
+  <span class="band fill" aria-hidden="true"></span>
+  <div class="wrap" style="position:relative;z-index:2">
+    <div class="sn">08 / Slot</div>
+    <h2 class="disp" style="margin-top:24px">Proces. Discipline. Uitvoering.</h2>
+    <p style="margin-top:clamp(44px,7vw,90px)"><a class="btn big" href="https://discord.gg/78Ff2GuSfW"><i>Word lid via Discord</i></a></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap frow">
+    <div class="mark"><span class="glyph" aria-hidden="true"></span><b>Atlas Capital</b></div>
+    <div class="flinks">
+      <a href="https://discord.gg/78Ff2GuSfW">Discord</a>
+      <a href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
+    </div>
+    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  </div>
+</footer>
+
+</body>
+</html>

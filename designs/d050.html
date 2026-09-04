@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 050 Inlegwerk</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D7B364; --gold-hi:#E6CC8E; --gold-lo:#B9954A;
+  --ink:#08090B; --wood:#0E0F12; --wood-2:#131419; --wood-3:#181920;
+  --muted:#A5A6A8;
+  --disp:"Unbounded","Futura","Century Gothic",Avenir,-apple-system,"Segoe UI",sans-serif;
+  --body:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --spine:78px;
+}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:#E9E7E1;font-family:var(--body);font-size:16px;line-height:1.62;overflow-x:hidden}
+a{color:inherit}
+svg{max-width:100%}
+
+/* ---------- page shell with the running inlay spine ---------- */
+.page{position:relative;overflow:hidden}
+.spine{position:absolute;left:0;top:0;bottom:0;width:var(--spine);display:none;pointer-events:none;
+  background:linear-gradient(180deg,var(--wood-2),var(--wood) 40%,var(--wood-2));
+  border-right:1px solid rgba(215,179,100,.28)}
+.spine::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),transparent 55%,rgba(0,0,0,.4))}
+.spine svg{position:absolute;inset:0}
+@media(min-width:820px){.spine{display:block}}
+.inner{position:relative;z-index:2;padding-left:0}
+@media(min-width:820px){.inner{padding-left:var(--spine)}}
+
+/* offset, asymmetric measure — content hugs the spine, air on the right */
+.col{max-width:1240px;margin:0;padding:0 20px}
+@media(min-width:820px){.col{padding:0 clamp(24px,7vw,120px) 0 clamp(24px,4vw,58px)}}
+.tight{max-width:760px}
+.mid{max-width:940px}
+
+/* ---------- type ---------- */
+.d{font-family:var(--disp);font-weight:300;line-height:1.05;letter-spacing:-.03em}
+h1{font-size:clamp(34px,7.4vw,90px);margin:0;font-weight:200}
+h2{font-size:clamp(25px,4.4vw,52px);margin:0;font-weight:300}
+h3{font-size:clamp(18px,2.4vw,26px);margin:0;font-weight:500}
+.lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold)}
+.lbl.m{color:var(--muted)}
+p{color:#C3C1BC;margin:14px 0 0;max-width:54ch}
+.small{font-size:13.5px;color:var(--muted)}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;text-decoration:none;position:relative;
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  padding:14px 24px;color:#0B0A07;
+  background:linear-gradient(135deg,#EFDBAB,#D7B364 40%,#AD8B41);
+  clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);
+}
+.btn:hover{background:linear-gradient(135deg,#F7E7BE,#E2C176 40%,#BB9749)}
+.btn-o{
+  background:none;color:var(--gold);border:1px solid rgba(215,179,100,.5);
+  clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);padding:13px 24px;
+}
+.btn-o:hover{background:rgba(215,179,100,.1)}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:60;background:rgba(8,9,11,.95);border-bottom:1px solid rgba(215,179,100,.22)}
+.hb{display:flex;align-items:center;gap:14px;padding:12px 20px;max-width:1400px}
+.hm{display:flex;align-items:center;gap:11px;text-decoration:none}
+.hm .n{font-family:var(--disp);font-weight:500;font-size:15px;letter-spacing:-.01em}
+.hm .n small{display:block;font-family:var(--mono);font-size:7.5px;letter-spacing:.28em;color:var(--gold-lo);font-weight:400;margin-top:1px}
+.hb .sp{flex:1}
+
+/* ---------- full-bleed inlay bands ---------- */
+.band{position:relative;height:clamp(84px,11vw,142px);width:100%;overflow:hidden;
+  background:linear-gradient(180deg,var(--wood),var(--wood-3) 50%,var(--wood));
+  border-top:1px solid rgba(215,179,100,.22);border-bottom:1px solid rgba(215,179,100,.22)}
+.band svg{position:absolute;inset:0}
+.band .cap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  background:var(--ink);padding:7px 18px;border:1px solid rgba(215,179,100,.4);
+  font-family:var(--mono);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+
+/* ---------- sections ---------- */
+section{padding:clamp(52px,8vw,110px) 0}
+.head{display:flex;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+.lozenge{width:34px;height:34px;flex:0 0 auto}
+
+/* ---------- inlay tiles (curriculum) ---------- */
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:26px}
+.tile{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--wood-3),var(--wood));
+  border:1px solid rgba(215,179,100,.3);padding:16px 14px 14px;min-height:112px;display:flex;flex-direction:column;justify-content:flex-end}
+.tile svg.bg{position:absolute;inset:0;opacity:.9}
+.tile .rn{position:relative;font-family:var(--mono);font-size:8.5px;letter-spacing:.28em;color:var(--gold-lo);margin-bottom:6px}
+.tile .nm{position:relative;font-family:var(--disp);font-weight:300;font-size:clamp(13px,1.5vw,16px);letter-spacing:-.02em;line-height:1.2}
+.tile:nth-child(3n){min-height:140px}
+.tile:nth-child(4n){min-height:126px}
+
+/* ---------- model plate ---------- */
+.plate{position:relative;border:1px solid rgba(215,179,100,.3);background:linear-gradient(180deg,#101116,#0B0C0F);margin-top:26px}
+.plate .edge{position:absolute;left:0;right:0;height:10px}
+.plate .edge.t{top:0}.plate .edge.b{bottom:0;transform:scaleY(-1)}
+.plate-in{padding:clamp(18px,3vw,32px);position:relative}
+.scroller{overflow-x:auto}
+.scroller>svg{min-width:560px;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px}
+.legend span{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.legend i{width:16px;border-top:1.5px solid var(--gold);display:block}
+.legend i.dd{border-top-style:dashed}
+.legend i.w{border-top-color:#E9E7E1}
+
+/* ---------- channels ---------- */
+.chgrid{display:grid;grid-template-columns:1fr;gap:26px;margin-top:26px}
+@media(min-width:820px){.chgrid{grid-template-columns:1.1fr .9fr}}
+.chn{font-family:var(--mono);font-size:13px;padding:10px 0;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(215,179,100,.14)}
+.chn .lz{width:9px;height:9px;flex:0 0 auto;background:var(--gold-lo);transform:rotate(45deg);opacity:.85}
+.chn .lz.o{background:none;border:1px solid rgba(215,179,100,.6)}
+.chn .st{margin-left:auto;font-size:8.5px;letter-spacing:.26em;color:var(--gold-lo)}
+
+/* ---------- access ---------- */
+.acc{display:grid;grid-template-columns:1fr;gap:16px;margin-top:26px}
+@media(min-width:700px){.acc{grid-template-columns:1fr 1fr}}
+.acc .c{position:relative;overflow:hidden;border:1px solid rgba(215,179,100,.28);padding:clamp(20px,3vw,30px);background:linear-gradient(160deg,#121317,#0B0C0F)}
+.acc .c svg.bg{position:absolute;inset:0;opacity:.75}
+.acc .c>*{position:relative}
+
+/* ---------- close ---------- */
+.close{position:relative;overflow:hidden;padding:clamp(56px,9vw,118px) 0;border-top:1px solid rgba(215,179,100,.24)}
+.close svg.bg{position:absolute;inset:0;opacity:.85}
+.close .in{position:relative;z-index:2}
+
+footer{border-top:1px solid rgba(215,179,100,.22);background:#0A0B0D;padding:32px 0 50px}
+.f{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:760px){.f{grid-template-columns:1.4fr .8fr .8fr}}
+.f a.lk{display:block;width:fit-content;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(215,179,100,.4);padding-bottom:2px;margin-bottom:9px}
+.risk{font-family:var(--mono);font-size:10px;line-height:1.85;letter-spacing:.04em;color:#87888B;max-width:72ch;margin-top:26px}
+</style>
+</head>
+<body>
+
+<!-- ============ SHARED INLAY GEOMETRY (defs only) ============ -->
+<svg width="0" height="0" style="position:absolute;left:-9999px" aria-hidden="true">
+  <defs>
+    <!-- the marquetry motif: interlocking lozenges, chevrons, quarter-arcs -->
+    <g id="mot" fill="none" stroke-linecap="square">
+      <path d="M28 0 L56 28 L28 56 L0 28 Z"/>
+      <path d="M28 11 L45 28 L28 45 L11 28 Z"/>
+      <path d="M28 21 L35 28 L28 35 L21 28 Z"/>
+      <path d="M14 0 A14 14 0 0 1 0 14"/>
+      <path d="M42 0 A14 14 0 0 0 56 14"/>
+      <path d="M0 42 A14 14 0 0 1 14 56"/>
+      <path d="M56 42 A14 14 0 0 0 42 56"/>
+      <path d="M14 14 L28 0 L42 14"/>
+      <path d="M14 42 L28 56 L42 42"/>
+      <path d="M0 28 L11 28 M45 28 L56 28"/>
+      <path d="M28 0 L28 11 M28 45 L28 56"/>
+    </g>
+
+    <pattern id="marqS" width="56" height="56" patternUnits="userSpaceOnUse">
+      <g stroke="#D7B364" stroke-width=".5" opacity=".5"><use href="#mot"/></g>
+    </pattern>
+    <pattern id="marqM" width="84" height="84" patternUnits="userSpaceOnUse">
+      <g stroke="#D7B364" stroke-width=".3" opacity=".42"><use href="#mot" transform="scale(1.5)"/></g>
+    </pattern>
+    <pattern id="marqL" width="140" height="140" patternUnits="userSpaceOnUse">
+      <g stroke="#D7B364" stroke-width=".2" opacity=".38"><use href="#mot" transform="scale(2.5)"/></g>
+    </pattern>
+    <pattern id="marqXS" width="28" height="28" patternUnits="userSpaceOnUse">
+      <g stroke="#D7B364" stroke-width="1" opacity=".22"><use href="#mot" transform="scale(.5)"/></g>
+    </pattern>
+
+    <linearGradient id="fadeX" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fff" stop-opacity=".02"/>
+      <stop offset="18%" stop-color="#fff" stop-opacity=".95"/>
+      <stop offset="82%" stop-color="#fff" stop-opacity=".95"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity=".02"/>
+    </linearGradient>
+    <linearGradient id="fadeY" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff" stop-opacity=".15"/>
+      <stop offset="50%" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity=".15"/>
+    </linearGradient>
+    <mask id="mX"><rect x="0" y="0" width="100%" height="100%" fill="url(#fadeX)"/></mask>
+    <mask id="mY"><rect x="0" y="0" width="100%" height="100%" fill="url(#fadeY)"/></mask>
+  </defs>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="hb">
+    <a class="hm" href="#">
+      <svg viewBox="0 0 44 44" width="34" height="34" aria-hidden="true">
+        <g fill="none" stroke="#D7B364" stroke-width=".7">
+          <path d="M22 3 L41 22 L22 41 L3 22 Z"/>
+          <path d="M22 11 L33 22 L22 33 L11 22 Z"/>
+          <path d="M22 17 L27 22 L22 27 L17 22 Z"/>
+        </g>
+        <g fill="none" stroke="#E6CC8E" stroke-width=".9">
+          <path d="M11 11 L22 3 L33 11"/><path d="M11 33 L22 41 L33 33"/>
+        </g>
+      </svg>
+      <span class="n">ATLAS CAPITAL<small>PROCES · DISCIPLINE · UITVOERING</small></span>
+    </a>
+    <span class="sp"></span>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+  </div>
+</header>
+
+<div class="page">
+  <!-- the running inlay spine -->
+  <div class="spine" aria-hidden="true">
+    <svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#marqS)"/></svg>
+  </div>
+
+  <div class="inner">
+
+    <!-- ============ 01 · HERO ============ -->
+    <section style="padding-top:clamp(40px,6vw,80px)">
+      <div class="col">
+        <div class="head">
+          <svg class="lozenge" viewBox="0 0 44 44" aria-hidden="true">
+            <g fill="none" stroke="#D7B364" stroke-width=".8"><path d="M22 2 L42 22 L22 42 L2 22 Z"/><path d="M22 12 L32 22 L22 32 L12 22 Z"/></g>
+          </svg>
+          <span class="lbl">01 · INLEGWERK</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr;gap:clamp(26px,4vw,54px);align-items:center" class="hgrid">
+          <div class="tight">
+            <h1 class="d">Alles grijpt in elkaar.</h1>
+            <p style="font-size:clamp(16px,1.9vw,20px);max-width:46ch">Nederlandse trading-community voor NQ, ES, Bitcoin en altcoins. Educatie, echte setups, dagelijkse markt.</p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px">
+              <a class="btn" href="https://discord.gg/78Ff2GuSfW">Kom binnen — gratis</a>
+              <a class="btn-o btn" href="#educatie">De leerlijn</a>
+            </div>
+            <div class="lbl m" style="margin-top:22px">TOEGANG NU GRATIS · PREMIUM OPENT LATER</div>
+          </div>
+
+          <!-- the inlay medallion -->
+          <svg viewBox="0 0 420 420" aria-hidden="true" style="width:min(460px,88vw);height:auto;justify-self:start">
+            <defs>
+              <clipPath id="medClip"><circle cx="210" cy="210" r="186"/></clipPath>
+              <g id="gr"><ellipse rx="176" ry="58" fill="none"/><ellipse rx="140" ry="46" fill="none"/><ellipse rx="104" ry="34" fill="none"/></g>
+              <g id="spike"><path d="M0 -190 L -5 -152 L 0 -142 L 5 -152 Z"/></g>
+            </defs>
+
+            <g clip-path="url(#medClip)">
+              <rect x="0" y="0" width="420" height="420" fill="#0D0E12"/>
+              <rect x="0" y="0" width="420" height="420" fill="url(#marqM)"/>
+              <!-- guilloché over the marquetry -->
+              <g transform="translate(210 210)" stroke="#E6CC8E" fill="none" stroke-width=".3" opacity=".45">
+                <use href="#gr" transform="rotate(0)"/><use href="#gr" transform="rotate(9)"/>
+                <use href="#gr" transform="rotate(18)"/><use href="#gr" transform="rotate(27)"/>
+                <use href="#gr" transform="rotate(36)"/><use href="#gr" transform="rotate(45)"/>
+                <use href="#gr" transform="rotate(54)"/><use href="#gr" transform="rotate(63)"/>
+                <use href="#gr" transform="rotate(72)"/><use href="#gr" transform="rotate(81)"/>
+                <use href="#gr" transform="rotate(90)"/><use href="#gr" transform="rotate(99)"/>
+                <use href="#gr" transform="rotate(108)"/><use href="#gr" transform="rotate(117)"/>
+                <use href="#gr" transform="rotate(126)"/><use href="#gr" transform="rotate(135)"/>
+                <use href="#gr" transform="rotate(144)"/><use href="#gr" transform="rotate(153)"/>
+                <use href="#gr" transform="rotate(162)"/><use href="#gr" transform="rotate(171)"/>
+              </g>
+            </g>
+
+            <!-- inlaid spikes around the rim -->
+            <g transform="translate(210 210)" fill="#D7B364" opacity=".7">
+              <use href="#spike" transform="rotate(0)"/><use href="#spike" transform="rotate(30)"/>
+              <use href="#spike" transform="rotate(60)"/><use href="#spike" transform="rotate(90)"/>
+              <use href="#spike" transform="rotate(120)"/><use href="#spike" transform="rotate(150)"/>
+              <use href="#spike" transform="rotate(180)"/><use href="#spike" transform="rotate(210)"/>
+              <use href="#spike" transform="rotate(240)"/><use href="#spike" transform="rotate(270)"/>
+              <use href="#spike" transform="rotate(300)"/><use href="#spike" transform="rotate(330)"/>
+            </g>
+
+            <circle cx="210" cy="210" r="186" fill="none" stroke="#D7B364" stroke-width="1"/>
+            <circle cx="210" cy="210" r="176" fill="none" stroke="#B9954A" stroke-width=".3"/>
+            <circle cx="210" cy="210" r="86" fill="#0A0B0E" stroke="#D7B364" stroke-width=".8"/>
+            <circle cx="210" cy="210" r="78" fill="none" stroke="#B9954A" stroke-width=".3"/>
+
+            <!-- Atlas monogram inlaid in the centre -->
+            <g transform="translate(210 200)" fill="none" stroke="#E6CC8E" stroke-width=".8">
+              <circle cx="0" cy="-14" r="30"/><ellipse cx="0" cy="-14" rx="10" ry="30"/><ellipse cx="0" cy="-14" rx="20.5" ry="30"/>
+              <path d="M-30 -14h60M-26 -26h52M-26 -2h52"/>
+            </g>
+            <g transform="translate(210 200)" fill="none" stroke="#D7B364" stroke-width="1.2">
+              <path d="M-22 34h9v-6h26v6h9"/><path d="M-32 44h64"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BAND ============ -->
+    <div class="band" aria-hidden="true">
+      <svg width="100%" height="100%"><g mask="url(#mX)"><rect width="100%" height="100%" fill="url(#marqL)"/></g></svg>
+      <span class="cap">PROCES · DISCIPLINE · UITVOERING</span>
+    </div>
+
+    <!-- ============ 02 · FOUNDER ============ -->
+    <section id="grondlegger">
+      <div class="col">
+        <div class="head">
+          <svg class="lozenge" viewBox="0 0 44 44" aria-hidden="true"><g fill="none" stroke="#D7B364" stroke-width=".8"><path d="M22 2 L42 22 L22 42 L2 22 Z"/><path d="M22 12 L32 22 L22 32 L12 22 Z"/></g></svg>
+          <span class="lbl">02 · DE GRONDLEGGER</span>
+        </div>
+        <h2 class="d mid">Tien jaar aan lessen, in één werkwijze gelegd.</h2>
+        <div style="display:grid;grid-template-columns:1fr;gap:clamp(22px,3vw,44px);margin-top:30px" class="fgrid">
+          <svg viewBox="0 0 180 200" aria-hidden="true" style="width:150px">
+            <rect x="10" y="10" width="160" height="180" fill="none" stroke="#D7B364" stroke-width=".6" opacity=".7"/>
+            <g clip-path="none">
+              <rect x="18" y="18" width="144" height="164" fill="url(#marqS)" opacity=".55"/>
+            </g>
+            <rect x="34" y="66" width="112" height="70" fill="#0A0B0E" stroke="#D7B364" stroke-width=".7"/>
+            <text x="90" y="106" text-anchor="middle" font-family="Unbounded,Futura,sans-serif" font-weight="300" font-size="30" fill="#E6CC8E">10+</text>
+            <text x="90" y="124" text-anchor="middle" font-family="Consolas,monospace" font-size="8" letter-spacing="4" fill="#B9954A">JAAR</text>
+          </svg>
+          <blockquote style="margin:0">
+            <p style="font-family:var(--disp);font-weight:200;font-size:clamp(17px,2.1vw,23px);line-height:1.42;color:#E9E7E1;max-width:34ch;letter-spacing:-.02em;margin:0">
+              Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.
+            </p>
+            <p>Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader.</p>
+            <div class="lbl m" style="margin-top:16px">OPRICHTER · ATLAS CAPITAL</div>
+            <a class="btn-o btn" style="margin-top:20px" href="https://discord.gg/78Ff2GuSfW">Kijk dagelijks mee</a>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 · EDUCATIE ============ -->
+    <section id="educatie" style="padding-top:0">
+      <div class="col">
+        <div class="head">
+          <svg class="lozenge" viewBox="0 0 44 44" aria-hidden="true"><g fill="none" stroke="#D7B364" stroke-width=".8"><path d="M22 2 L42 22 L22 42 L2 22 Z"/><path d="M22 12 L32 22 L22 32 L12 22 Z"/></g></svg>
+          <span class="lbl">03 · DE LEERLIJN · 10 ONDERWERPEN</span>
+        </div>
+        <h2 class="d mid">Tien stukken die op elkaar aansluiten.</h2>
+        <p>Van marktstructuur tot je eigen hoofd.</p>
+
+        <div class="tiles">
+          <div class="tile"><svg class="bg" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#marqXS)"/></svg><span class="rn">I</span><span class="nm">deviatie</span></div>
+          <div class="tile"><svg class="bg" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#marqXS)"/></svg><span class="rn">II</span><span class="nm">SMT</span></div>
+          <div class="tile"><svg class="bg" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#marqXS)"/></svg><span class="rn">III</span><span class="nm">FVG</span></div>
+          <div class="tile"><svg class="bg" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#marqXS)"/></svg><span class="rn">IV</span><span class="nm">IFVG</span></div>
+          <div class="tile"><svg class="bg" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#marqXS)"/></svg><span class="rn">V</span><span class="nm">orderblocks</span></div>
+          <div class="tile"><svg class="bg" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#marqXS)"/></svg><span class="rn">VI</span><span class="nm">fibonacci</span></div>
+          <div class="tile"><svg class="bg" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#marqXS)"/></svg><span class="rn">VII</span><span class="nm">sessie-liquiditeit</span></div>
+          <div class="tile"><svg class="bg" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#marqXS)"/></svg><span class="rn">VIII</span><span class="nm">liquiditeit</span></div>
+          <div class="tile"><svg class="bg" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#marqXS)"/></svg><span class="rn">IX</span><span class="nm">risicobeheer</span></div>
+          <div class="tile"><svg class="bg" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#marqXS)"/></svg><span class="rn">X</span><span class="nm">tradingpsychologie</span></div>
+        </div>
+
+        <a class="btn" style="margin-top:26px" href="https://discord.gg/78Ff2GuSfW">Begin bij de basis</a>
+      </div>
+    </section>
+
+    <!-- ============ BAND ============ -->
+    <div class="band" aria-hidden="true">
+      <svg width="100%" height="100%"><g mask="url(#mX)"><rect width="100%" height="100%" fill="url(#marqL)"/></g></svg>
+      <span class="cap">HET MODEL</span>
+    </div>
+
+    <!-- ============ 04 · MODEL ============ -->
+    <section id="model">
+      <div class="col">
+        <div class="head">
+          <svg class="lozenge" viewBox="0 0 44 44" aria-hidden="true"><g fill="none" stroke="#D7B364" stroke-width=".8"><path d="M22 2 L42 22 L22 42 L2 22 Z"/><path d="M22 12 L32 22 L22 32 L12 22 Z"/></g></svg>
+          <span class="lbl">04 · HET MODEL</span>
+        </div>
+        <h2 class="d mid">Liquiditeit, zone, terugkeer.</h2>
+
+        <div class="plate mid" style="max-width:1000px">
+          <svg class="edge t" width="100%" height="10" aria-hidden="true"><rect width="100%" height="10" fill="url(#marqXS)"/></svg>
+          <svg class="edge b" width="100%" height="10" aria-hidden="true"><rect width="100%" height="10" fill="url(#marqXS)"/></svg>
+          <div class="plate-in">
+            <div class="scroller">
+              <svg viewBox="0 0 700 310" aria-hidden="true" style="width:100%;height:auto">
+                <defs>
+                  <pattern id="hzI" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                    <line x1="0" y1="0" x2="0" y2="6" stroke="#D7B364" stroke-width=".5" opacity=".9"/>
+                  </pattern>
+                </defs>
+                <g stroke="#D7B364" stroke-width=".25" opacity=".18">
+                  <line x1="30" y1="58" x2="670" y2="58"/><line x1="30" y1="108" x2="670" y2="108"/>
+                  <line x1="30" y1="158" x2="670" y2="158"/><line x1="30" y1="208" x2="670" y2="208"/>
+                  <line x1="30" y1="258" x2="670" y2="258"/>
+                </g>
+
+                <line x1="50" y1="74" x2="650" y2="74" stroke="#E9E7E1" stroke-width=".8" stroke-dasharray="6 5" opacity=".75"/>
+                <text x="52" y="64" font-family="Consolas,monospace" font-size="9.5" letter-spacing="2.6" fill="#E9E7E1" opacity=".8">LIQUIDITEIT</text>
+
+                <rect x="306" y="148" width="106" height="42" fill="url(#hzI)" opacity=".4"/>
+                <rect x="306" y="148" width="106" height="42" fill="none" stroke="#D7B364" stroke-width=".8"/>
+                <line x1="412" y1="169" x2="498" y2="169" stroke="#D7B364" stroke-width=".5" stroke-dasharray="3 4"/>
+                <text x="504" y="173" font-family="Consolas,monospace" font-size="9.5" letter-spacing="2.6" fill="#D7B364">FVG</text>
+
+                <rect x="186" y="196" width="48" height="30" fill="none" stroke="#E9E7E1" stroke-width=".7" opacity=".55"/>
+                <text x="210" y="248" text-anchor="middle" font-family="Consolas,monospace" font-size="9" letter-spacing="2.2" fill="#A5A6A8">ORDERBLOCK</text>
+
+                <g stroke="#9A9B9E" stroke-width=".9" fill="none">
+                  <line x1="74"  y1="200" x2="74"  y2="252"/><rect x="66"  y="210" width="16" height="32"/>
+                  <line x1="112" y1="188" x2="112" y2="246"/><rect x="104" y="198" width="16" height="36"/>
+                  <line x1="150" y1="172" x2="150" y2="238"/><rect x="142" y="184" width="16" height="42"/>
+                  <line x1="188" y1="154" x2="188" y2="226"/><rect x="180" y="166" width="16" height="44"/>
+                  <line x1="226" y1="122" x2="226" y2="212"/><rect x="218" y="134" width="16" height="60"/>
+                </g>
+                <g stroke="#E6CC8E" stroke-width="1" fill="#D7B364">
+                  <line x1="264" y1="54" x2="264" y2="176"/><rect x="256" y="64" width="16" height="94"/>
+                </g>
+                <text x="264" y="46" text-anchor="middle" font-family="Consolas,monospace" font-size="9" letter-spacing="2.2" fill="#E6CC8E">SWEEP</text>
+                <g stroke="#9A9B9E" stroke-width=".9" fill="none">
+                  <line x1="302" y1="86"  x2="302" y2="214"/><rect x="294" y="98"  width="16" height="98"/>
+                  <line x1="340" y1="130" x2="340" y2="252"/><rect x="332" y="144" width="16" height="92"/>
+                  <line x1="378" y1="176" x2="378" y2="270"/><rect x="370" y="188" width="16" height="70"/>
+                  <line x1="416" y1="194" x2="416" y2="274"/><rect x="408" y="204" width="16" height="60"/>
+                  <line x1="454" y1="184" x2="454" y2="260"/><rect x="446" y="194" width="16" height="52"/>
+                  <line x1="492" y1="160" x2="492" y2="236"/><rect x="484" y="172" width="16" height="50"/>
+                  <line x1="530" y1="136" x2="530" y2="214"/><rect x="522" y="148" width="16" height="50"/>
+                  <line x1="568" y1="108" x2="568" y2="194"/><rect x="560" y="120" width="16" height="54"/>
+                  <line x1="606" y1="88"  x2="606" y2="170"/><rect x="598" y="98"  width="16" height="54"/>
+                </g>
+                <path d="M256 70 C 318 24 578 28 608 92" fill="none" stroke="#D7B364" stroke-width=".6" stroke-dasharray="4 5"/>
+                <text x="432" y="32" text-anchor="middle" font-family="Consolas,monospace" font-size="9.5" letter-spacing="2.6" fill="#D7B364">DEVIATIE</text>
+              </svg>
+            </div>
+            <div class="legend">
+              <span><i class="w dd"></i>liquiditeit</span><span><i></i>FVG</span><span><i class="w"></i>orderblock</span><span><i class="dd"></i>deviatie</span>
+            </div>
+            <p class="small">Schematische illustratie. Geen prijzen, geen resultaten, geen beloftes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 · KANALEN ============ -->
+    <section id="kanalen" style="padding-top:0">
+      <div class="col">
+        <div class="head">
+          <svg class="lozenge" viewBox="0 0 44 44" aria-hidden="true"><g fill="none" stroke="#D7B364" stroke-width=".8"><path d="M22 2 L42 22 L22 42 L2 22 Z"/><path d="M22 12 L32 22 L22 32 L12 22 Z"/></g></svg>
+          <span class="lbl">05 · DE SERVER · 15 KANALEN</span>
+        </div>
+        <h2 class="d mid">Twee lagen inlegwerk.</h2>
+
+        <div class="chgrid">
+          <div>
+            <div class="lbl" style="margin-bottom:10px">THUIS · NU GRATIS</div>
+            <div class="chn"><span class="lz"></span>#nq-chart-ideeën<span class="st">OPEN</span></div>
+            <div class="chn"><span class="lz"></span>#es-chart-ideeën<span class="st">OPEN</span></div>
+            <div class="chn"><span class="lz"></span>#bitcoin<span class="st">OPEN</span></div>
+            <div class="chn"><span class="lz"></span>#altcoins<span class="st">OPEN</span></div>
+            <div class="chn"><span class="lz"></span>#markt<span class="st">OPEN</span></div>
+            <div class="chn"><span class="lz"></span>#vragen<span class="st">OPEN</span></div>
+            <div class="chn"><span class="lz"></span>#algemeen<span class="st">OPEN</span></div>
+            <div class="chn"><span class="lz"></span>#atlas-op-socials<span class="st">OPEN</span></div>
+            <div class="chn" style="border-bottom:0"><span class="lz"></span>#ondersteuning<span class="st">OPEN</span></div>
+            <a class="btn" style="margin-top:20px" href="https://discord.gg/78Ff2GuSfW">Open de server</a>
+          </div>
+          <div>
+            <div class="lbl" style="margin-bottom:10px">PREMIUM · OPENT LATER</div>
+            <div class="chn"><span class="lz o"></span>#trade-setups<span class="st">LATER</span></div>
+            <div class="chn"><span class="lz o"></span>#marktupdates<span class="st">LATER</span></div>
+            <div class="chn"><span class="lz o"></span>#indicatoren<span class="st">LATER</span></div>
+            <div class="chn"><span class="lz o"></span>#sessie-opnames<span class="st">LATER</span></div>
+            <div class="chn"><span class="lz o"></span>#chart-ideeën<span class="st">LATER</span></div>
+            <div class="chn" style="border-bottom:0"><span class="lz o"></span>#premium-chat<span class="st">LATER</span></div>
+            <p class="small">Prijs en datum worden in de server aangekondigd.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 · LIVE + 07 · TOEGANG ============ -->
+    <section id="live" style="padding-top:0">
+      <div class="col">
+        <div class="head">
+          <svg class="lozenge" viewBox="0 0 44 44" aria-hidden="true"><g fill="none" stroke="#D7B364" stroke-width=".8"><path d="M22 2 L42 22 L22 42 L2 22 Z"/><path d="M22 12 L32 22 L22 32 L12 22 Z"/></g></svg>
+          <span class="lbl">06 · LIVE</span>
+        </div>
+        <h2 class="d mid">De oprichter handelt live in de server.</h2>
+        <p>Tijden worden in de server aangekondigd.</p>
+        <a class="btn-o btn" style="margin-top:20px" href="https://discord.gg/78Ff2GuSfW">Zit een sessie bij</a>
+
+        <div class="head" style="margin-top:clamp(46px,7vw,90px)">
+          <svg class="lozenge" viewBox="0 0 44 44" aria-hidden="true"><g fill="none" stroke="#D7B364" stroke-width=".8"><path d="M22 2 L42 22 L22 42 L2 22 Z"/><path d="M22 12 L32 22 L22 32 L12 22 Z"/></g></svg>
+          <span class="lbl">07 · TOEGANG</span>
+        </div>
+        <div class="acc mid">
+          <div class="c">
+            <svg class="bg" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#marqXS)"/></svg>
+            <div class="lbl">NU</div>
+            <h3 class="d" style="margin:10px 0 4px">Gratis</h3>
+            <p class="small">Alle thuiskanalen open. Educatie, chart-ideeën en de dagelijkse markt.</p>
+            <a class="btn" style="margin-top:18px" href="https://discord.gg/78Ff2GuSfW">Word lid</a>
+          </div>
+          <div class="c">
+            <svg class="bg" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" fill="url(#marqXS)"/></svg>
+            <div class="lbl">LATER</div>
+            <h3 class="d" style="margin:10px 0 4px">Premium</h3>
+            <p class="small">Opent later. Prijs en datum worden in de server aangekondigd.</p>
+            <div class="lbl m" style="margin-top:24px">AANKONDIGING VOLGT</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 08 · CLOSE ============ -->
+    <div class="close">
+      <svg class="bg" width="100%" height="100%" aria-hidden="true"><g mask="url(#mY)"><rect width="100%" height="100%" fill="url(#marqM)"/></g></svg>
+      <div class="col in">
+        <div class="head">
+          <svg class="lozenge" viewBox="0 0 44 44" aria-hidden="true"><g fill="none" stroke="#D7B364" stroke-width=".8"><path d="M22 2 L42 22 L22 42 L2 22 Z"/><path d="M22 12 L32 22 L22 32 L12 22 Z"/></g></svg>
+          <span class="lbl">08 · TOETREDEN</span>
+        </div>
+        <h2 class="d" style="max-width:22ch">Het laatste stuk ben jij.</h2>
+        <p>PROCES. DISCIPLINE. UITVOERING.</p>
+        <div style="margin-top:26px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Open Discord — gratis</a></div>
+      </div>
+    </div>
+
+  </div><!-- /inner -->
+</div><!-- /page -->
+
+<footer>
+  <div class="col" style="max-width:1240px">
+    <div class="f">
+      <div>
+        <div class="d" style="font-size:20px;font-weight:500">ATLAS CAPITAL</div>
+        <div class="lbl" style="margin-top:6px">PROCES · DISCIPLINE · UITVOERING</div>
+        <p class="small" style="margin-top:12px">Nederlandse trading-community. NQ, ES, Bitcoin en altcoins.</p>
+      </div>
+      <div>
+        <div class="lbl m" style="margin-bottom:11px">VOLG</div>
+        <a class="lk" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+        <a class="lk" href="https://www.tiktok.com/@atlascapitalbv">TikTok @atlascapitalbv</a>
+      </div>
+      <div>
+        <div class="lbl m" style="margin-bottom:11px">TOEGANG</div>
+        <a class="lk" href="https://discord.gg/78Ff2GuSfW">Nu gratis toetreden</a>
+        <span class="small">Premium opent later.</span>
+      </div>
+    </div>
+    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  </div>
+</footer>
+
+<style>
+@media(min-width:900px){
+  .hgrid{grid-template-columns:1.05fr .95fr!important}
+  .fgrid{grid-template-columns:auto 1fr!important;align-items:start}
+}
+</style>
+</body>
+</html>

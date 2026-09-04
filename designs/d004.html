@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 004 Cahier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ATLAS CAPITAL — 004 CAHIER
+   A stitched notebook. Paper signature, dark middle signature,
+   paper close. A gold thread runs down the centre gutter;
+   marginalia sit in the outer margins; folios bottom-outside.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --ink-2:#33343A;
+  --ink-3:#63646A;
+  --paper:#F4F2EC;
+  --paper-2:#EAE7DD;
+  --rule:#D8D4C7;
+  --dark:#101115;
+  --dark-2:#181A1F;
+  --dline:#2C2E34;
+  --muted:#A5A6A8;
+  --serif:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans:"Segoe UI", -apple-system, Roboto, Helvetica, Arial, sans-serif;
+}
+
+html{color-scheme:light;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--ink-2);
+  font-family:var(--serif);font-size:18px;line-height:1.62;font-weight:400;
+  overflow-x:hidden;
+}
+a{color:inherit}
+h1,h2,h3,h4{margin:0;font-family:var(--serif);font-weight:600;line-height:1.02;color:var(--ink)}
+p{margin:0 0 1em}
+
+.note{font-family:var(--sans);font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.note-g{color:var(--gold-lo)}
+
+/* ---------- header ---------- */
+header.bar{
+  position:sticky;top:0;z-index:40;
+  background:rgba(244,242,236,.94);backdrop-filter:blur(5px);
+  border-bottom:1px solid var(--rule);
+}
+.bar-in{max-width:1220px;margin:0 auto;padding:9px clamp(12px,3vw,26px);display:flex;align-items:center;gap:12px}
+.stamp{display:flex;align-items:center;gap:10px;text-decoration:none}
+.stamp svg{width:30px;height:30px;display:block;flex:none}
+.stamp .nm{font-size:20px;font-weight:600;letter-spacing:.03em;color:var(--ink)}
+.bar-in .sp{flex:1}
+
+/* ---------- CTA ---------- */
+.ink-btn{
+  display:inline-flex;align-items:center;gap:.55em;
+  font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink);background:var(--gold);
+  padding:.9em 1.4em;border-radius:2px;
+  box-shadow:0 1px 0 var(--gold-lo), 0 6px 14px rgba(8,9,11,.14);
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+.ink-btn:hover{transform:translateY(-2px);box-shadow:0 1px 0 var(--gold-lo),0 10px 20px rgba(8,9,11,.2)}
+.ink-btn.sm{font-size:9.5px;padding:.7em 1.05em}
+.ink-btn.line{background:transparent;border:1px solid var(--ink);box-shadow:none;color:var(--ink)}
+.ink-btn.line:hover{background:var(--ink);color:var(--paper)}
+.on-dark .ink-btn.line{border-color:var(--gold-lo);color:var(--gold)}
+.on-dark .ink-btn.line:hover{background:var(--gold);color:var(--ink)}
+
+/* ---------- the signature / spread system ---------- */
+.sig{position:relative;padding:clamp(26px,4.4vw,58px) 0}
+.sig.paper{background:var(--paper)}
+.sig.dark{background:var(--dark);color:#DDDCD7}
+.sig.dark h1,.sig.dark h2,.sig.dark h3,.sig.dark h4{color:var(--paper)}
+.sig.ruled{
+  background-image:repeating-linear-gradient(180deg, transparent 0 33px, var(--rule) 33px 34px);
+  background-position:0 6px;
+}
+
+.spread{
+  position:relative;max-width:1220px;margin:0 auto;
+  display:grid;grid-template-columns:1fr;
+  padding:0 clamp(14px,3.6vw,26px);
+}
+@media(min-width:880px){ .spread{grid-template-columns:1fr 1fr} }
+
+.gutter{display:none}
+@media(min-width:880px){
+  .gutter{
+    display:block;position:absolute;left:50%;top:0;bottom:0;width:44px;
+    transform:translateX(-22px);pointer-events:none;z-index:3;
+    background:linear-gradient(90deg,transparent 0%,rgba(8,9,11,.07) 36%,rgba(8,9,11,.14) 50%,rgba(8,9,11,.07) 64%,transparent 100%);
+  }
+  .sig.dark .gutter{
+    background:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.45) 36%,rgba(0,0,0,.62) 50%,rgba(0,0,0,.45) 64%,transparent 100%);
+  }
+  .gutter::after{
+    content:"";position:absolute;left:50%;top:24px;bottom:24px;width:2px;transform:translateX(-1px);
+    background:repeating-linear-gradient(180deg,var(--gold) 0 14px, transparent 14px 26px);
+  }
+  .gutter::before{
+    content:"";position:absolute;left:50%;top:24px;bottom:24px;width:12px;transform:translateX(-6px);
+    background:repeating-linear-gradient(180deg, rgba(185,149,74,.42) 0 1.5px, transparent 1.5px 26px);
+  }
+}
+
+.leaf{position:relative;padding:clamp(22px,3.4vw,44px) 0 clamp(46px,5vw,64px)}
+@media(min-width:880px){
+  .leaf.l{padding-right:clamp(34px,4vw,58px);display:grid;grid-template-columns:86px 1fr;gap:18px}
+  .leaf.r{padding-left:clamp(34px,4vw,58px);display:grid;grid-template-columns:1fr 86px;gap:18px}
+  .leaf.r .marg{order:2}
+  .leaf.r .txt{order:1}
+}
+.marg{border-top:1px solid var(--gold-lo);padding-top:8px;margin-bottom:16px}
+.marg p{font-family:var(--sans);font-size:10px;line-height:1.7;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 .7em}
+.sig.dark .marg p{color:var(--muted)}
+.marg .big{font-family:var(--serif);font-size:30px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--gold-lo);line-height:1;display:block;margin-bottom:6px}
+.folio{
+  position:absolute;bottom:14px;
+  font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;color:var(--ink-3);
+}
+.sig.dark .folio{color:#6C6D71}
+.leaf.l .folio{left:0}
+.leaf.r .folio{right:0}
+@media(max-width:879px){.leaf .folio{left:0;right:auto}}
+
+/* ---------- typography inside leaves ---------- */
+h1.title{
+  font-size:clamp(40px,8.6vw,88px);font-weight:600;line-height:.94;letter-spacing:-.012em;
+}
+h1.title em{font-style:italic;font-weight:300;color:var(--gold-lo)}
+h2.head{font-size:clamp(28px,4.4vw,46px);font-weight:600;line-height:1.02;letter-spacing:-.01em;margin-bottom:14px}
+h2.head em{font-style:italic;font-weight:300;color:var(--gold-lo)}
+.sig.dark h2.head em{color:var(--gold)}
+.lede{font-size:clamp(17px,2vw,21px);line-height:1.5;color:var(--ink-2);max-width:36ch}
+.sig.dark .lede{color:#C8C7C2}
+
+/* handwritten-feeling quote */
+.hand{
+  font-style:italic;font-weight:300;
+  font-size:clamp(20px,3.2vw,30px);line-height:1.34;
+  text-align:left;max-width:26ch;color:var(--paper);
+  text-wrap:balance;
+}
+.hand + .hand{margin-top:.85em}
+.hand-sign{
+  margin-top:22px;font-family:var(--sans);font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
+}
+.underline-sketch{display:block;width:min(230px,70%);height:auto;margin-top:8px}
+
+/* ---------- topic list (dark leaf) ---------- */
+.list{list-style:none;margin:0;padding:0}
+.list li{
+  display:flex;align-items:baseline;gap:.7em;
+  padding:.42em 0;border-bottom:1px solid var(--dline);
+}
+.list .n{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--gold-lo);min-width:2.1em}
+.list .w{font-size:clamp(20px,2.6vw,26px);font-weight:600;color:var(--paper);line-height:1.1}
+.list li:hover .w{color:var(--gold-hi)}
+.list li:hover{border-bottom-color:var(--gold-lo)}
+
+/* ---------- fold-out plate ---------- */
+.foldout{position:relative;max-width:1220px;margin:0 auto;padding:0 clamp(14px,3.6vw,26px)}
+.foldout .frame{border:1px solid var(--dline);background:linear-gradient(180deg,#0C0D10,#15171B);padding:clamp(12px,2.2vw,22px)}
+.foldout svg{display:block;width:100%;height:auto}
+.foldcap{display:flex;gap:14px;margin-top:12px;padding-top:10px;border-top:1px solid var(--dline);font-size:16px;color:var(--muted);line-height:1.4;font-style:italic}
+.foldcap b{font-style:normal;font-family:var(--sans);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);white-space:nowrap;padding-top:4px;font-weight:700}
+
+/* ---------- sketch card ---------- */
+.sketch{background:var(--paper-2);border:1px solid var(--rule);padding:clamp(12px,2vw,20px);box-shadow:3px 4px 0 rgba(8,9,11,.07)}
+.sketch svg{display:block;width:100%;height:auto}
+.sketch figcaption{margin-top:10px;font-style:italic;font-size:15.5px;color:var(--ink-3);line-height:1.4}
+
+/* ---------- channel leaves ---------- */
+.chan{list-style:none;margin:0;padding:0}
+.chan li{
+  display:flex;align-items:baseline;gap:.4em;padding:.36em 0;
+  border-bottom:1px dotted var(--rule);
+  font-family:var(--sans);font-size:13.5px;color:var(--ink-2);
+}
+.chan li b{color:var(--gold-lo)}
+.state{
+  display:inline-block;font-family:var(--sans);font-size:9px;letter-spacing:.24em;text-transform:uppercase;
+  font-weight:700;padding:.32em .6em;margin-bottom:12px;
+  background:var(--gold);color:var(--ink);
+}
+.state.later{background:transparent;color:var(--ink-3);border:1px solid var(--rule)}
+
+/* ---------- tiers / live ---------- */
+.card{border:1px solid var(--rule);background:#FAF8F3;padding:clamp(16px,2.6vw,26px)}
+.card h3{font-size:clamp(22px,3vw,30px);margin-bottom:6px}
+.card ul{list-style:none;margin:0 0 16px;padding:0;font-size:16px;color:var(--ink-2)}
+.card li{padding:.24em 0;border-bottom:1px dotted var(--rule)}
+.dial{width:clamp(84px,16vw,120px);height:auto;display:block;margin-bottom:14px}
+
+/* ---------- closing ---------- */
+.closing{text-align:center;padding:clamp(40px,7vw,92px) clamp(14px,4vw,26px)}
+.closing h2{font-size:clamp(38px,9vw,102px);font-weight:600;line-height:.96;letter-spacing:-.02em}
+.closing h2 em{font-style:italic;font-weight:300;color:var(--gold-lo)}
+.closing p{margin:16px auto 26px;max-width:34ch;color:var(--ink-3);font-size:18px}
+.thread{display:block;margin:22px auto;width:min(260px,64vw);height:auto}
+
+/* ---------- footer ---------- */
+footer{background:var(--paper-2);border-top:1px solid var(--rule);padding:clamp(24px,4vw,44px) clamp(14px,4vw,26px) 34px;font-size:15.5px;color:var(--ink-3)}
+.fin{max-width:1220px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:760px){.fin{grid-template-columns:1.4fr 1fr 1fr}}
+.fin a{text-decoration:none;border-bottom:1px solid var(--gold);color:var(--ink)}
+.fin a:hover{color:var(--gold-lo)}
+.risk{max-width:1220px;margin:24px auto 0;padding-top:12px;border-top:1px solid var(--rule);font-family:var(--sans);font-size:11px;color:#8A8B8E;line-height:1.55}
+.colofon{max-width:1220px;margin:12px auto 0;display:flex;justify-content:space-between;font-family:var(--sans);font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:#8A8B8E}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header class="bar">
+  <div class="bar-in">
+    <a class="stamp" href="#">
+      <svg viewBox="0 0 44 44" aria-hidden="true">
+        <circle cx="22" cy="22" r="20" fill="none" stroke="#B9954A" stroke-width="1.2"/>
+        <circle cx="22" cy="22" r="16.5" fill="none" stroke="#B9954A" stroke-width=".6"/>
+        <path d="M13 29 L22 12 L31 29" fill="none" stroke="#08090B" stroke-width="2" stroke-linejoin="round"/>
+        <line x1="16.6" y1="23" x2="27.4" y2="23" stroke="#08090B" stroke-width="1.6"/>
+      </svg>
+      <span class="nm">Atlas Capital</span>
+    </a>
+    <span class="sp"></span>
+    <span class="note" style="display:inline-block">Cahier</span>
+    <a class="ink-btn sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord →</a>
+  </div>
+</header>
+
+<!-- ══════════════════ SIGNATURE I — PAPER ══════════════════ -->
+<section class="sig paper ruled">
+  <div class="spread">
+    <div class="gutter" aria-hidden="true"></div>
+
+    <div class="leaf l">
+      <aside class="marg">
+        <span class="big">I</span>
+        <p>Proces</p><p>Discipline</p><p>Uitvoering</p>
+      </aside>
+      <div class="txt">
+        <p class="note note-g" style="margin-bottom:16px">Nederlandse trading-community</p>
+        <h1 class="title">Een schrift vol <em>herhaling</em>.</h1>
+        <p class="lede" style="margin-top:20px">Atlas Capital is een Discord-community over educatie, structuur en de dagelijkse benadering van de markt.</p>
+        <p style="margin-top:24px"><a class="ink-btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Word lid — nu gratis →</a></p>
+      </div>
+      <span class="folio">02</span>
+    </div>
+
+    <div class="leaf r">
+      <div class="txt">
+        <figure class="sketch" style="margin:0">
+          <svg viewBox="0 0 620 400" aria-label="Geschetste weergave van een liquiditeitsveeg boven een oude piek">
+            <g stroke="#8B8878" stroke-width="1" opacity=".5">
+              <line x1="0" y1="80" x2="620" y2="80"/><line x1="0" y1="160" x2="620" y2="160"/>
+              <line x1="0" y1="240" x2="620" y2="240"/><line x1="0" y1="320" x2="620" y2="320"/>
+            </g>
+            <!-- old high -->
+            <line x1="40" y1="118" x2="586" y2="118" stroke="#B9954A" stroke-width="2"/>
+            <line x1="40" y1="122" x2="586" y2="122" stroke="#B9954A" stroke-width="1" opacity=".45"/>
+            <text x="44" y="108" font-family="Georgia, serif" font-size="17" font-style="italic" fill="#63646A">oude piek</text>
+
+            <!-- sketched path, double-pass for pencil feel -->
+            <polyline points="40,300 88,242 128,286 176,196 214,244 258,150 292,182 330,124 356,96 380,132 412,204 452,258 494,214 536,164 578,108"
+                      fill="none" stroke="#33343A" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+            <polyline points="42,303 90,245 130,289 178,199 216,247 260,153 294,185 332,127 358,99 382,135 414,207 454,261 496,217 538,167 580,111"
+                      fill="none" stroke="#33343A" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round" opacity=".35"/>
+
+            <!-- the sweep marker -->
+            <circle cx="356" cy="96" r="8" fill="none" stroke="#B9954A" stroke-width="2.4"/>
+            <path d="M356 84 C368 62, 392 58, 410 66" fill="none" stroke="#B9954A" stroke-width="1.6"/>
+            <text x="404" y="62" font-family="Georgia, serif" font-size="18" font-style="italic" fill="#B9954A">de veeg</text>
+
+            <path d="M412 216 C440 250, 452 276, 452 300" fill="none" stroke="#63646A" stroke-width="1.2" stroke-dasharray="5 5"/>
+            <text x="404" y="322" font-family="Georgia, serif" font-size="17" font-style="italic" fill="#63646A">terug naar binnen</text>
+
+            <path d="M32 352 H588" stroke="#8B8878" stroke-width="1"/>
+          </svg>
+          <figcaption>Schets — de markt haalt de liquiditeit boven een oude piek op en keert daarna terug. Geen koersen, geen uitkomsten.</figcaption>
+        </figure>
+      </div>
+      <aside class="marg">
+        <p>Markten</p>
+        <p style="color:var(--gold-lo)">NQ</p>
+        <p style="color:var(--gold-lo)">ES</p>
+        <p style="color:var(--gold-lo)">Bitcoin</p>
+        <p style="color:var(--gold-lo)">Altcoins</p>
+      </aside>
+      <span class="folio">03</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ SIGNATURE II — DARK ══════════════════ -->
+<section class="sig dark on-dark">
+  <div class="spread">
+    <div class="gutter" aria-hidden="true"></div>
+
+    <div class="leaf l">
+      <aside class="marg">
+        <span class="big">II</span>
+        <p>De oprichter</p>
+        <p style="color:var(--gold)">10+ jaar</p>
+      </aside>
+      <div class="txt">
+        <p class="note note-g" style="margin-bottom:18px">In zijn eigen woorden</p>
+        <p class="hand">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</p>
+        <p class="hand">Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader.</p>
+        <p class="hand">Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</p>
+        <svg class="underline-sketch" viewBox="0 0 240 20" aria-hidden="true">
+          <path d="M4 13 C48 5, 96 18, 142 9 S214 4, 236 11" fill="none" stroke="#D7B364" stroke-width="2" stroke-linecap="round"/>
+          <path d="M8 17 C56 11, 104 21, 150 14" fill="none" stroke="#B9954A" stroke-width="1" stroke-linecap="round" opacity=".55"/>
+        </svg>
+        <p class="hand-sign">Oprichter — Atlas Capital</p>
+      </div>
+      <span class="folio">08</span>
+    </div>
+
+    <div class="leaf r">
+      <div class="txt">
+        <h2 class="head">De <em>leerstof</em>.</h2>
+        <p class="note" style="margin-bottom:16px">10 onderwerpen</p>
+        <ul class="list">
+          <li><span class="n">01</span><span class="w">Deviatie</span></li>
+          <li><span class="n">02</span><span class="w">SMT</span></li>
+          <li><span class="n">03</span><span class="w">FVG</span></li>
+          <li><span class="n">04</span><span class="w">IFVG</span></li>
+          <li><span class="n">05</span><span class="w">Orderblocks</span></li>
+          <li><span class="n">06</span><span class="w">Fibonacci</span></li>
+          <li><span class="n">07</span><span class="w">Sessie-liquiditeit</span></li>
+          <li><span class="n">08</span><span class="w">Liquiditeit</span></li>
+          <li><span class="n">09</span><span class="w">Risicobeheer</span></li>
+          <li><span class="n">10</span><span class="w">Tradingpsychologie</span></li>
+        </ul>
+        <p style="margin-top:22px"><a class="ink-btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Lees mee in de server →</a></p>
+      </div>
+      <aside class="marg">
+        <p>Onderwerp</p>
+        <p style="color:var(--gold)">01 → 10</p>
+      </aside>
+      <span class="folio">09</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FOLD-OUT PLATE (dark) ══════════════════ -->
+<section class="sig dark on-dark" style="padding-top:0">
+  <div class="foldout">
+    <p class="note note-g" style="margin-bottom:12px">Uitvouwblad — het model</p>
+    <div class="frame">
+      <svg viewBox="0 0 1160 420" aria-label="Schematische tekening van een onbalans die opnieuw wordt getest">
+        <defs>
+          <linearGradient id="c4g" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#D7B364" stop-opacity=".34"/>
+            <stop offset="1" stop-color="#D7B364" stop-opacity=".06"/>
+          </linearGradient>
+        </defs>
+        <g stroke="#22242A" stroke-width="1">
+          <line x1="0" y1="84" x2="1160" y2="84"/><line x1="0" y1="168" x2="1160" y2="168"/>
+          <line x1="0" y1="252" x2="1160" y2="252"/><line x1="0" y1="336" x2="1160" y2="336"/>
+        </g>
+
+        <rect x="230" y="214" width="800" height="52" fill="url(#c4g)"/>
+        <line x1="230" y1="214" x2="1060" y2="214" stroke="#D7B364" stroke-width="1.3" stroke-dasharray="9 7"/>
+        <line x1="230" y1="266" x2="1060" y2="266" stroke="#D7B364" stroke-width="1.3" stroke-dasharray="9 7"/>
+
+        <g stroke="#EDEBE5" stroke-width="2.2" fill="#101115">
+          <g><line x1="70" y1="262" x2="70" y2="336"/><rect x="56" y="276" width="28" height="48"/></g>
+          <g><line x1="150" y1="252" x2="150" y2="322"/><rect x="136" y="262" width="28" height="46"/></g>
+          <g><line x1="230" y1="238" x2="230" y2="302"/><rect x="216" y="248" width="28" height="42"/></g>
+        </g>
+        <g stroke="#D7B364" stroke-width="2.4" fill="#D7B364">
+          <line x1="310" y1="176" x2="310" y2="272"/><rect x="294" y="186" width="32" height="74"/>
+        </g>
+        <g stroke="#EDEBE5" stroke-width="2.2" fill="#101115">
+          <g><line x1="390" y1="140" x2="390" y2="214"/><rect x="376" y="152" width="28" height="52"/></g>
+          <g><line x1="470" y1="124" x2="470" y2="182"/><rect x="456" y="132" width="28" height="42"/></g>
+        </g>
+        <g stroke="#EDEBE5" stroke-width="2.2" fill="#EDEBE5">
+          <g><line x1="550" y1="136" x2="550" y2="228"/><rect x="536" y="146" width="28" height="70"/></g>
+          <g><line x1="630" y1="164" x2="630" y2="278"/><rect x="616" y="176" width="28" height="86"/></g>
+        </g>
+        <g stroke="#EDEBE5" stroke-width="2.2" fill="#101115">
+          <g><line x1="710" y1="152" x2="710" y2="256"/><rect x="696" y="164" width="28" height="76"/></g>
+          <g><line x1="790" y1="112" x2="790" y2="192"/><rect x="776" y="124" width="28" height="56"/></g>
+          <g><line x1="870" y1="86" x2="870" y2="158"/><rect x="856" y="96" width="28" height="50"/></g>
+          <g><line x1="950" y1="62" x2="950" y2="128"/><rect x="936" y="72" width="28" height="44"/></g>
+          <g><line x1="1030" y1="40" x2="1030" y2="104"/><rect x="1016" y="50" width="28" height="42"/></g>
+        </g>
+
+        <g stroke="#8A8B8E" stroke-width="1" fill="none">
+          <path d="M310 288 L310 372 H440"/>
+          <path d="M630 290 L630 372 H760"/>
+        </g>
+        <circle cx="310" cy="288" r="4" fill="#D7B364"/>
+        <circle cx="630" cy="290" r="4" fill="#D7B364"/>
+        <g fill="#A5A6A8" font-family="Georgia, serif" font-size="19" font-style="italic">
+          <text x="450" y="378">de impuls laat een gat achter</text>
+          <text x="770" y="378">en de markt komt terug</text>
+        </g>
+        <text x="1070" y="219" fill="#D7B364" font-family="Georgia, serif" font-size="17" letter-spacing="1.4">FVG</text>
+      </svg>
+      <div class="foldcap">
+        <b>Plaat</b>
+        <span>Onbalans in de beweging, en de terugkeer ernaartoe. Een tekening van een idee — nooit van een uitkomst.</span>
+      </div>
+    </div>
+    <p style="margin:22px 0 0"><a class="ink-btn line" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Bekijk chart-ideeën →</a></p>
+  </div>
+</section>
+
+<!-- ══════════════════ SIGNATURE III — PAPER: CHANNELS ══════════════════ -->
+<section class="sig paper">
+  <div class="spread">
+    <div class="gutter" aria-hidden="true"></div>
+
+    <div class="leaf l">
+      <aside class="marg">
+        <span class="big">III</span>
+        <p>De server</p>
+        <p style="color:var(--gold-lo)">15 kanalen</p>
+      </aside>
+      <div class="txt">
+        <h2 class="head">Thuis.</h2>
+        <span class="state">Nu gratis</span>
+        <ul class="chan">
+          <li><b>#</b>nq-chart-ideeën</li>
+          <li><b>#</b>es-chart-ideeën</li>
+          <li><b>#</b>bitcoin</li>
+          <li><b>#</b>altcoins</li>
+          <li><b>#</b>markt</li>
+          <li><b>#</b>vragen</li>
+          <li><b>#</b>algemeen</li>
+          <li><b>#</b>atlas-op-socials</li>
+          <li><b>#</b>ondersteuning</li>
+        </ul>
+        <p style="margin-top:20px"><a class="ink-btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Open de server →</a></p>
+      </div>
+      <span class="folio">14</span>
+    </div>
+
+    <div class="leaf r">
+      <div class="txt">
+        <h2 class="head"><em>Premium.</em></h2>
+        <span class="state later">Opent later</span>
+        <ul class="chan">
+          <li><b>#</b>trade-setups</li>
+          <li><b>#</b>marktupdates</li>
+          <li><b>#</b>indicatoren</li>
+          <li><b>#</b>sessie-opnames</li>
+          <li><b>#</b>chart-ideeën</li>
+          <li><b>#</b>premium-chat</li>
+        </ul>
+        <p style="margin-top:16px;font-style:italic;color:var(--ink-3);font-size:16px">Datum en prijs worden in de server aangekondigd.</p>
+        <p style="margin-top:12px"><a class="ink-btn line sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Hoor het als eerste →</a></p>
+      </div>
+      <aside class="marg">
+        <p>Deel</p>
+        <p style="color:var(--gold-lo)">Twee</p>
+      </aside>
+      <span class="folio">15</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ SIGNATURE IV — PAPER: LIVE + TOEGANG ══════════════════ -->
+<section class="sig paper">
+  <div class="spread">
+    <div class="gutter" aria-hidden="true"></div>
+
+    <div class="leaf l">
+      <aside class="marg">
+        <span class="big">IV</span>
+        <p>Live</p>
+      </aside>
+      <div class="txt">
+        <div class="card">
+          <svg class="dial" viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="#D8D4C7" stroke-width="1.4"/>
+            <path d="M60 8 A52 52 0 0 1 104 84" fill="none" stroke="#D7B364" stroke-width="3.4"/>
+            <g stroke="#B9954A" stroke-width="1.4">
+              <line x1="60" y1="8" x2="60" y2="18"/><line x1="112" y1="60" x2="102" y2="60"/>
+              <line x1="60" y1="112" x2="60" y2="102"/><line x1="8" y1="60" x2="18" y2="60"/>
+            </g>
+            <line x1="60" y1="60" x2="60" y2="30" stroke="#08090B" stroke-width="2.2"/>
+            <line x1="60" y1="60" x2="82" y2="66" stroke="#08090B" stroke-width="1.6"/>
+            <circle cx="60" cy="60" r="4" fill="#B9954A"/>
+          </svg>
+          <h3>Live meekijken.</h3>
+          <p style="color:var(--ink-3)">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
+          <a class="ink-btn sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Zit een sessie bij →</a>
+        </div>
+      </div>
+      <span class="folio">22</span>
+    </div>
+
+    <div class="leaf r">
+      <div class="txt">
+        <h2 class="head">Toegang.</h2>
+        <div class="card" style="margin-bottom:14px">
+          <h3>Thuis</h3>
+          <span class="state">Nu gratis</span>
+          <ul>
+            <li>Charts en marktbespreking</li>
+            <li>Vragen en ondersteuning</li>
+            <li>De community</li>
+          </ul>
+          <a class="ink-btn sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Kom binnen →</a>
+        </div>
+        <div class="card">
+          <h3>Premium</h3>
+          <span class="state later">Opent later</span>
+          <ul>
+            <li>Setups en marktupdates</li>
+            <li>Sessie-opnames</li>
+            <li>Indicatoren</li>
+          </ul>
+        </div>
+      </div>
+      <aside class="marg">
+        <p>Toegang</p>
+        <p style="color:var(--gold-lo)">Gratis</p>
+      </aside>
+      <span class="folio">23</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CLOSING ══════════════════ -->
+<section class="closing">
+  <p class="note note-g">Achterplat</p>
+  <h2 style="margin-top:14px">Proces. Discipline.<br><em>Uitvoering.</em></h2>
+  <svg class="thread" viewBox="0 0 260 24" aria-hidden="true">
+    <path d="M4 12 H108" stroke="#B9954A" stroke-width="1"/>
+    <path d="M152 12 H256" stroke="#B9954A" stroke-width="1"/>
+    <path d="M118 6 L130 12 L118 18" fill="none" stroke="#D7B364" stroke-width="1.6"/>
+    <circle cx="140" cy="12" r="3.4" fill="#D7B364"/>
+  </svg>
+  <p>De server is nu gratis toegankelijk. Kom binnen, lees mee, stel vragen.</p>
+  <a class="ink-btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Word lid van Atlas Capital →</a>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <div class="fin">
+    <div>
+      <p class="note" style="margin:0 0 8px">Colofon</p>
+      <p style="margin:0">Atlas Capital — Nederlandse trading-community op Discord.</p>
+    </div>
+    <div>
+      <p class="note" style="margin:0 0 8px">Volg</p>
+      <p style="margin:0 0 6px"><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord</a></p>
+      <p style="margin:0"><a href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok — @atlascapitalbv</a></p>
+    </div>
+    <div>
+      <p class="note" style="margin:0 0 8px">Markten</p>
+      <p style="margin:0">NQ · ES · Bitcoin · Altcoins</p>
+    </div>
+  </div>
+  <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  <div class="colofon"><span>Cahier</span><span>Atlas Capital</span><span>Katern IV</span></div>
+</footer>
+
+</body>
+</html>

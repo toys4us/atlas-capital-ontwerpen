@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="nl" data-lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 056 Stilte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ATLAS CAPITAL — 056 STILTE
+   Paper ground. A slow sequence of near-empty screens.
+   Six words, one gold rule, one button. Vast, chosen margins.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --paper:#F4F2EC;
+  --paper-2:#EDEAE1;
+  --grey:#6B6B68;
+  --hair:#D6D2C6;
+
+  /* vertical rhythm: everything is a multiple of --u */
+  --u:8px;
+
+  /* type scale — 1.333 perfect fourth, clamped */
+  --t-display:clamp(2.75rem, 1.4rem + 6.6vw, 7.5rem);
+  --t-lead:clamp(1.5rem, 1.05rem + 2.2vw, 2.75rem);
+  --t-body:clamp(1rem, .95rem + .25vw, 1.1875rem);
+  --t-micro:clamp(.6875rem, .655rem + .16vw, .78125rem);
+
+  --sans:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --serif:"Instrument Serif", Georgia, "Times New Roman", Times, serif;
+  --mono:ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+html{
+  color-scheme:light;
+  -webkit-text-size-adjust:100%;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:var(--t-body);
+  line-height:1.55;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+a{color:inherit}
+
+/* ------------------------------------------------------------
+   MEASURE — the page never uses the full width. Ever.
+   Left rail is generous; the right third stays empty by design.
+   ------------------------------------------------------------ */
+.frame{
+  --pad-x:clamp(22px, 8vw, 168px);
+  padding-inline:var(--pad-x);
+  max-width:1560px;
+  margin-inline:auto;
+}
+
+/* ------------------------------------------------------------
+   HEADER — static, three items, nothing more
+   ------------------------------------------------------------ */
+.masthead{
+  padding-block:calc(var(--u)*5) calc(var(--u)*4);
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:calc(var(--u)*3);
+  flex-wrap:wrap;
+}
+
+.wordmark{
+  display:flex;
+  align-items:baseline;
+  gap:.6em;
+  font-family:var(--serif);
+  font-size:clamp(1.125rem,1rem + .5vw,1.5rem);
+  letter-spacing:.01em;
+  text-decoration:none;
+  line-height:1;
+}
+.wordmark .dot{
+  width:.34em;height:.34em;
+  background:var(--gold);
+  border-radius:50%;
+  display:inline-block;
+  transform:translateY(-.12em);
+}
+
+.micro{
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  letter-spacing:.19em;
+  text-transform:uppercase;
+  color:var(--grey);
+  font-weight:500;
+}
+
+/* ------------------------------------------------------------
+   LANGUAGE — NL default, EN on request
+   ------------------------------------------------------------ */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+
+/* the switch is masthead type, nothing more: two words on the
+   same baseline as the wordmark, the live one underlined in gold */
+.masthead .cta{margin-left:auto}
+.langsw{display:flex;align-items:baseline;gap:calc(var(--u)*1.75)}
+.langsw button{
+  appearance:none;-webkit-appearance:none;
+  background:none;border:0;border-bottom:1px solid transparent;
+  padding:0 0 3px;
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  letter-spacing:.19em;
+  text-transform:uppercase;
+  font-weight:500;
+  line-height:1;
+  color:var(--grey);
+  cursor:pointer;
+}
+.langsw button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--gold)}
+.langsw button:hover{color:var(--ink)}
+
+/* ------------------------------------------------------------
+   THE BUTTON — on a page this quiet the CTA has to be the
+   only solid mass of colour anywhere. That is the whole trick.
+   ------------------------------------------------------------ */
+.cta{
+  display:inline-flex;
+  align-items:center;
+  gap:.85em;
+  background:var(--ink);
+  color:var(--paper);
+  text-decoration:none;
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  font-weight:600;
+  padding:calc(var(--u)*2) calc(var(--u)*3.25);
+  border:1px solid var(--ink);
+  transition:background .18s ease, color .18s ease, border-color .18s ease;
+}
+.cta .arrow{display:block;width:1.35em;height:1px;background:currentColor;position:relative}
+.cta .arrow::after{
+  content:"";position:absolute;right:0;top:50%;
+  width:.45em;height:.45em;
+  border-top:1px solid currentColor;border-right:1px solid currentColor;
+  transform:translateY(-50%) rotate(45deg);
+}
+.cta:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+
+.cta--gold{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:var(--ink);
+}
+.cta--gold:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+.cta--xl{
+  font-size:clamp(.78125rem,.72rem + .3vw,.9375rem);
+  padding:calc(var(--u)*3) calc(var(--u)*5);
+  letter-spacing:.22em;
+}
+
+.cta--ghost{
+  background:transparent;
+  color:var(--ink);
+  border-color:var(--ink);
+}
+.cta--ghost:hover{background:var(--ink);color:var(--paper)}
+
+/* ------------------------------------------------------------
+   SCREENS — each one is nearly empty on purpose
+   ------------------------------------------------------------ */
+.screen{
+  position:relative;
+  min-height:86vh;
+  min-height:86svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding-block:calc(var(--u)*14);
+  border-top:1px solid var(--hair);
+}
+.screen:first-of-type{border-top:0}
+
+/* the folio sits optically outside the text block */
+.folio{
+  position:absolute;
+  top:calc(var(--u)*5);
+  right:0;
+  font-family:var(--mono);
+  font-size:var(--t-micro);
+  letter-spacing:.16em;
+  color:var(--gold-lo);
+}
+
+/* deliberate asymmetry: alternate screens step in */
+.indent-1{margin-left:0}
+.indent-2{margin-left:clamp(0px,6vw,132px)}
+.indent-3{margin-left:clamp(0px,3vw,64px)}
+
+/* ------------------------------------------------------------
+   TYPE
+   ------------------------------------------------------------ */
+h1,h2,h3{margin:0;font-weight:400}
+
+.display{
+  font-family:var(--serif);
+  font-size:var(--t-display);
+  line-height:.93;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+  max-width:16ch;
+}
+.display em{font-style:italic;color:var(--gold-lo)}
+
+.lead{
+  font-family:var(--serif);
+  font-size:var(--t-lead);
+  line-height:1.16;
+  letter-spacing:-.01em;
+  text-wrap:balance;
+  max-width:20ch;
+  margin:0;
+}
+
+.say{
+  max-width:46ch;
+  color:#3A3A38;
+  margin:0;
+}
+
+.rule{
+  height:1px;
+  background:var(--gold);
+  width:clamp(64px,16vw,232px);
+  border:0;
+  margin:0;
+}
+.rule--long{width:clamp(120px,42vw,560px)}
+
+.stack-1{margin-top:calc(var(--u)*2)}
+.stack-2{margin-top:calc(var(--u)*3)}
+.stack-3{margin-top:calc(var(--u)*5)}
+.stack-4{margin-top:calc(var(--u)*8)}
+.stack-5{margin-top:calc(var(--u)*12)}
+
+/* ------------------------------------------------------------
+   HERO ARTWORK — one hairline horizon, one gold body
+   ------------------------------------------------------------ */
+.horizon{
+  width:100%;
+  margin-top:calc(var(--u)*9);
+}
+.horizon svg{display:block;width:100%;height:auto}
+
+/* ------------------------------------------------------------
+   CURRICULUM — ten lines, nothing else
+   ------------------------------------------------------------ */
+.curriculum{
+  list-style:none;
+  margin:0;padding:0;
+  max-width:52ch;
+}
+.curriculum li{
+  display:flex;
+  align-items:baseline;
+  gap:calc(var(--u)*2);
+  padding-block:calc(var(--u)*1.5);
+  border-bottom:1px solid var(--hair);
+}
+.curriculum li:first-child{border-top:1px solid var(--hair)}
+.curriculum .n{
+  font-family:var(--mono);
+  font-size:var(--t-micro);
+  color:var(--gold-lo);
+  min-width:3ch;
+}
+.curriculum .w{
+  font-family:var(--serif);
+  font-size:clamp(1.25rem,1.05rem + .85vw,1.9rem);
+  line-height:1.1;
+  letter-spacing:-.005em;
+}
+
+/* ------------------------------------------------------------
+   MODEL SCHEMATIC
+   ------------------------------------------------------------ */
+.plate{
+  width:100%;
+  overflow-x:auto;
+  margin-top:calc(var(--u)*6);
+}
+.plate svg{display:block;width:100%;min-width:340px;height:auto}
+.plate-note{
+  font-family:var(--mono);
+  font-size:var(--t-micro);
+  letter-spacing:.1em;
+  color:var(--grey);
+  margin-top:calc(var(--u)*2);
+  text-transform:uppercase;
+}
+
+/* ------------------------------------------------------------
+   CHANNELS
+   ------------------------------------------------------------ */
+.groups{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:calc(var(--u)*7);
+  margin-top:calc(var(--u)*6);
+  max-width:64ch;
+}
+@media (min-width:820px){
+  .groups{grid-template-columns:1fr 1fr;gap:calc(var(--u)*9)}
+}
+.group h3{
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--grey);
+  padding-bottom:calc(var(--u)*1.5);
+  border-bottom:1px solid var(--ink);
+}
+.group.later h3{border-bottom-color:var(--gold)}
+.chan{
+  list-style:none;margin:0;padding:0;
+  font-family:var(--mono);
+  font-size:clamp(.8125rem,.78rem + .18vw,.9375rem);
+  letter-spacing:.005em;
+}
+.chan li{
+  padding-block:calc(var(--u)*1.1);
+  color:#3A3A38;
+}
+.group.later .chan li{color:#6B6B68}
+
+/* ------------------------------------------------------------
+   ACCESS
+   ------------------------------------------------------------ */
+.two{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:calc(var(--u)*6);
+  margin-top:calc(var(--u)*6);
+  max-width:60ch;
+}
+@media (min-width:760px){.two{grid-template-columns:1fr 1fr;gap:calc(var(--u)*8)}}
+.two .k{
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--grey);
+  display:block;
+  margin-bottom:calc(var(--u)*1.5);
+}
+.two .v{
+  font-family:var(--serif);
+  font-size:clamp(1.5rem,1.2rem + 1.3vw,2.4rem);
+  line-height:1.05;
+}
+.two .v.now{color:var(--ink)}
+.two .v.later{color:var(--gold-lo)}
+.two p{margin:calc(var(--u)*1.5) 0 0;font-size:var(--t-micro);letter-spacing:.04em;color:var(--grey);max-width:30ch;line-height:1.7}
+
+/* ------------------------------------------------------------
+   CLOSE + FOOTER
+   ------------------------------------------------------------ */
+.close{
+  min-height:78vh;
+  min-height:78svh;
+  align-items:flex-start;
+}
+.close .display{max-width:11ch}
+
+.foot{
+  border-top:1px solid var(--hair);
+  padding-block:calc(var(--u)*8) calc(var(--u)*7);
+  display:grid;
+  gap:calc(var(--u)*4);
+}
+@media (min-width:820px){
+  .foot{grid-template-columns:1fr auto;align-items:end}
+}
+.foot-links{
+  display:flex;
+  gap:calc(var(--u)*4);
+  flex-wrap:wrap;
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  letter-spacing:.19em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+.foot-links a{
+  text-decoration:none;
+  border-bottom:1px solid var(--gold);
+  padding-bottom:3px;
+}
+.foot-links a:hover{border-bottom-color:var(--ink)}
+.risk{
+  font-size:var(--t-micro);
+  line-height:1.75;
+  color:var(--grey);
+  max-width:56ch;
+  margin:0;
+  letter-spacing:.02em;
+}
+.colophon{
+  font-family:var(--mono);
+  font-size:var(--t-micro);
+  color:#9A9A96;
+  letter-spacing:.1em;
+  margin:0;
+  text-align:left;
+}
+@media (min-width:820px){.colophon{text-align:right}}
+
+/* ------------------------------------------------------------
+   390px and down: margins get tighter but stay chosen
+   ------------------------------------------------------------ */
+@media (max-width:480px){
+  .screen{min-height:auto;padding-block:calc(var(--u)*11)}
+  .indent-2,.indent-3{margin-left:0}
+  .display{max-width:12ch}
+  .folio{top:calc(var(--u)*3.5)}
+  .masthead{padding-block:calc(var(--u)*4) calc(var(--u)*3)}
+  .cta--xl{width:100%;justify-content:space-between}
+  .langsw{margin-left:auto}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important;animation:none !important}
+}
+</style>
+</head>
+<body>
+
+<div class="frame">
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="masthead">
+    <a class="wordmark" href="#top" aria-label="Atlas Capital">
+      Atlas Capital <span class="dot" aria-hidden="true"></span>
+    </a>
+    <a class="cta" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
+      Open Discord <span class="arrow" aria-hidden="true"></span>
+    </a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ═══════════ 01 · HERO ═══════════ -->
+    <section class="screen indent-1" aria-labelledby="s1">
+      <span class="folio">01</span>
+
+      <h1 class="display" id="s1"><span lang="nl">Proces.<br>Discipline.<br><em>Uitvoering.</em></span><span lang="en">Process.<br>Discipline.<br><em>Execution.</em></span></h1>
+
+      <hr class="rule stack-3">
+
+      <p class="say stack-3"><span lang="nl">Een Nederlandse trading-community op Discord. Educatie, echte setups en een oprichter die dagelijks meekijkt.</span><span lang="en">A Dutch trading community on Discord. Education, real setups and a founder who watches every day.</span></p>
+
+      <div class="stack-3">
+        <a class="cta cta--xl cta--gold" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
+          <span lang="nl">Kom binnen op Discord</span><span lang="en">Come inside on Discord</span> <span class="arrow" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <!-- hero device: one hairline horizon, one gold body -->
+      <div class="horizon" aria-hidden="true">
+        <svg viewBox="0 0 1200 220" role="img" preserveAspectRatio="xMidYMid meet">
+          <g stroke="#D6D2C6" stroke-width="1">
+            <line x1="0" y1="40" x2="1200" y2="40"/>
+            <line x1="0" y1="90" x2="1200" y2="90"/>
+            <line x1="0" y1="190" x2="1200" y2="190"/>
+          </g>
+          <g stroke="#D6D2C6" stroke-width="1" stroke-dasharray="1 9">
+            <line x1="180" y1="0" x2="180" y2="220"/>
+            <line x1="420" y1="0" x2="420" y2="220"/>
+            <line x1="660" y1="0" x2="660" y2="220"/>
+            <line x1="900" y1="0" x2="900" y2="220"/>
+          </g>
+
+          <!-- the one gold line -->
+          <line x1="0" y1="140" x2="1200" y2="140" stroke="#D7B364" stroke-width="1"/>
+
+          <!-- three quiet bodies; only the last is solid -->
+          <g stroke="#08090B" stroke-width="1" fill="none">
+            <line x1="420" y1="86" x2="420" y2="176"/>
+            <rect x="410" y="112" width="20" height="46"/>
+            <line x1="660" y1="70" x2="660" y2="168"/>
+            <rect x="650" y="96" width="20" height="52"/>
+          </g>
+          <g>
+            <line x1="900" y1="46" x2="900" y2="160" stroke="#B9954A" stroke-width="1"/>
+            <rect x="888" y="64" width="24" height="72" fill="#D7B364"/>
+          </g>
+
+          <!-- registration cross, bottom right -->
+          <g stroke="#B9954A" stroke-width="1">
+            <line x1="1150" y1="196" x2="1170" y2="196"/>
+            <line x1="1160" y1="186" x2="1160" y2="206"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ═══════════ 02 · DE OPRICHTER ═══════════ -->
+    <section class="screen indent-2" aria-labelledby="s2">
+      <span class="folio">02</span>
+
+      <p class="micro"><span lang="nl">De oprichter</span><span lang="en">The founder</span></p>
+      <h2 class="display stack-2" id="s2"><span lang="nl">Meer dan<br>10 jaar markt.</span><span lang="en">More than<br>10 years in markets.</span></h2>
+
+      <hr class="rule stack-3">
+
+      <blockquote class="say stack-3" style="margin:0">
+        <p style="margin:0"><span lang="nl">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&rdquo;</span><span lang="en">&ldquo;I&rsquo;ve been involved in trading for over 10 years now, and during that time I&rsquo;ve experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons.&rdquo;</span></p>
+        <p class="stack-2" style="margin-bottom:0"><span lang="nl">&ldquo;Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</span><span lang="en">&ldquo;No get-rich-quick promises, just real setups, education, and a community focused on improving together.&rdquo;</span></p>
+      </blockquote>
+
+      <p class="micro stack-3">NQ &nbsp;·&nbsp; ES &nbsp;·&nbsp; Bitcoin &nbsp;·&nbsp; Altcoins</p>
+    </section>
+
+    <!-- ═══════════ 03 · EDUCATIE ═══════════ -->
+    <section class="screen indent-1" aria-labelledby="s3">
+      <span class="folio">03</span>
+
+      <p class="micro"><span lang="nl">Educatie</span><span lang="en">Education</span></p>
+      <h2 class="lead stack-2" id="s3"><span lang="nl">10 onderwerpen.<br>Van structuur tot hoofd.</span><span lang="en">10 topics.<br>From structure to mindset.</span></h2>
+
+      <ol class="curriculum stack-4">
+        <li><span class="n">01</span><span class="w"><span lang="nl">deviatie</span><span lang="en">deviation</span></span></li>
+        <li><span class="n">02</span><span class="w">SMT</span></li>
+        <li><span class="n">03</span><span class="w">FVG</span></li>
+        <li><span class="n">04</span><span class="w">IFVG</span></li>
+        <li><span class="n">05</span><span class="w">orderblocks</span></li>
+        <li><span class="n">06</span><span class="w">fibonacci</span></li>
+        <li><span class="n">07</span><span class="w"><span lang="nl">sessie-liquiditeit</span><span lang="en">session liquidity</span></span></li>
+        <li><span class="n">08</span><span class="w"><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></span></li>
+        <li><span class="n">09</span><span class="w"><span lang="nl">risicobeheer</span><span lang="en">risk management</span></span></li>
+        <li><span class="n">10</span><span class="w"><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></span></li>
+      </ol>
+
+      <div class="stack-4">
+        <a class="cta cta--ghost" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
+          <span lang="nl">Bekijk het in Discord</span><span lang="en">See it in Discord</span> <span class="arrow" aria-hidden="true"></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══════════ 04 · HET MODEL ═══════════ -->
+    <section class="screen indent-3" aria-labelledby="s4">
+      <span class="folio">04</span>
+
+      <p class="micro"><span lang="nl">Het model</span><span lang="en">The model</span></p>
+      <h2 class="lead stack-2" id="s4"><span lang="nl">Zo lezen wij een zet.</span><span lang="en">How we read a move.</span></h2>
+
+      <div class="plate">
+        <svg viewBox="0 0 960 420" role="img" aria-labelledby="s4-note">
+          <!-- ground grid -->
+          <g stroke="#E2DED2" stroke-width="1">
+            <line x1="60" y1="60" x2="900" y2="60"/>
+            <line x1="60" y1="150" x2="900" y2="150"/>
+            <line x1="60" y1="240" x2="900" y2="240"/>
+            <line x1="60" y1="330" x2="900" y2="330"/>
+          </g>
+          <line x1="60" y1="30" x2="60" y2="360" stroke="#D6D2C6" stroke-width="1"/>
+
+          <!-- liquidity resting above -->
+          <line x1="60" y1="88" x2="900" y2="88" stroke="#B9954A" stroke-width="1" stroke-dasharray="6 6"/>
+          <text x="900" y="80" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" letter-spacing="1.4" fill="#B9954A" lang="nl">LIQUIDITEIT</text>
+          <text x="900" y="80" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" letter-spacing="1.4" fill="#B9954A" lang="en">LIQUIDITY</text>
+
+          <!-- the fair value gap band -->
+          <rect x="330" y="196" width="570" height="46" fill="#D7B364" fill-opacity=".18"/>
+          <line x1="330" y1="196" x2="900" y2="196" stroke="#D7B364" stroke-width="1"/>
+          <line x1="330" y1="242" x2="900" y2="242" stroke="#D7B364" stroke-width="1"/>
+
+          <!-- candles: base, impulse, gap, retest, continuation -->
+          <g stroke="#08090B" stroke-width="1" fill="none">
+            <line x1="120" y1="268" x2="120" y2="326"/><rect x="111" y="284" width="18" height="30"/>
+            <line x1="176" y1="258" x2="176" y2="318"/><rect x="167" y="274" width="18" height="28"/>
+            <line x1="232" y1="248" x2="232" y2="312"/><rect x="223" y="266" width="18" height="30"/>
+          </g>
+          <!-- impulse leg, solid -->
+          <g>
+            <line x1="288" y1="180" x2="288" y2="300" stroke="#B9954A" stroke-width="1"/>
+            <rect x="277" y="196" width="22" height="90" fill="#D7B364"/>
+            <line x1="344" y1="120" x2="344" y2="220" stroke="#B9954A" stroke-width="1"/>
+            <rect x="333" y="132" width="22" height="72" fill="#D7B364"/>
+          </g>
+          <g stroke="#08090B" stroke-width="1" fill="none">
+            <line x1="400" y1="104" x2="400" y2="172"/><rect x="391" y="116" width="18" height="44"/>
+            <line x1="456" y1="112" x2="456" y2="196"/><rect x="447" y="126" width="18" height="52"/>
+            <line x1="512" y1="140" x2="512" y2="228"/><rect x="503" y="158" width="18" height="56"/>
+          </g>
+          <!-- retest into the band -->
+          <g stroke="#08090B" stroke-width="1" fill="none">
+            <line x1="568" y1="168" x2="568" y2="248"/><rect x="559" y="186" width="18" height="46"/>
+            <line x1="624" y1="176" x2="624" y2="252"/><rect x="615" y="200" width="18" height="38"/>
+          </g>
+          <!-- continuation -->
+          <g>
+            <line x1="680" y1="118" x2="680" y2="226" stroke="#B9954A" stroke-width="1"/>
+            <rect x="669" y="132" width="22" height="76" fill="#D7B364"/>
+          </g>
+          <g stroke="#08090B" stroke-width="1" fill="none">
+            <line x1="736" y1="86" x2="736" y2="164"/><rect x="727" y="98" width="18" height="48"/>
+            <line x1="792" y1="70" x2="792" y2="146"/><rect x="783" y="82" width="18" height="44"/>
+          </g>
+
+          <!-- leader lines + callouts, no numbers anywhere -->
+          <g stroke="#08090B" stroke-width="1">
+            <line x1="344" y1="118" x2="344" y2="392"/>
+            <line x1="344" y1="392" x2="418" y2="392"/>
+          </g>
+          <text x="428" y="396" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" letter-spacing="1.4" fill="#08090B" lang="nl">IMPULS</text>
+          <text x="428" y="396" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" letter-spacing="1.4" fill="#08090B" lang="en">IMPULSE</text>
+
+          <g stroke="#08090B" stroke-width="1">
+            <line x1="596" y1="256" x2="596" y2="392"/>
+            <line x1="596" y1="392" x2="660" y2="392"/>
+          </g>
+          <text x="670" y="396" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" letter-spacing="1.4" fill="#08090B" lang="nl">HERTEST</text>
+          <text x="670" y="396" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" letter-spacing="1.4" fill="#08090B" lang="en">RETEST</text>
+
+          <text x="342" y="188" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" letter-spacing="1.4" fill="#B9954A">FVG</text>
+          <line x1="316" y1="184" x2="330" y2="184" stroke="#B9954A" stroke-width="1"/>
+        </svg>
+      </div>
+      <p class="plate-note" id="s4-note"><span lang="nl">Schematisch. Geen prijzen, geen resultaat — alleen de vorm.</span><span lang="en">Schematic. No prices, no results — only the shape.</span></p>
+    </section>
+
+    <!-- ═══════════ 05 · KANALEN ═══════════ -->
+    <section class="screen indent-1" aria-labelledby="s5">
+      <span class="folio">05</span>
+
+      <p class="micro"><span lang="nl">De server</span><span lang="en">The server</span></p>
+      <h2 class="lead stack-2" id="s5"><span lang="nl">15 kanalen.<br>Eén ritme.</span><span lang="en">15 channels.<br>One rhythm.</span></h2>
+
+      <div class="groups">
+        <div class="group">
+          <h3><span lang="nl">Thuis — nu open</span><span lang="en">Home — open now</span></h3>
+          <ul class="chan">
+            <li>#nq-chart-ideeën</li>
+            <li>#es-chart-ideeën</li>
+            <li>#bitcoin</li>
+            <li>#altcoins</li>
+            <li>#markt</li>
+            <li>#vragen</li>
+            <li>#algemeen</li>
+            <li>#atlas-op-socials</li>
+            <li>#ondersteuning</li>
+          </ul>
+        </div>
+        <div class="group later">
+          <h3><span lang="nl">Premium — opent later</span><span lang="en">Premium — opens later</span></h3>
+          <ul class="chan">
+            <li>#trade-setups</li>
+            <li>#marktupdates</li>
+            <li>#indicatoren</li>
+            <li>#sessie-opnames</li>
+            <li>#chart-ideeën</li>
+            <li>#premium-chat</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stack-4">
+        <a class="cta cta--ghost" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
+          <span lang="nl">Open de server</span><span lang="en">Open the server</span> <span class="arrow" aria-hidden="true"></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══════════ 06 · LIVE ═══════════ -->
+    <section class="screen indent-2" aria-labelledby="s6">
+      <span class="folio">06</span>
+
+      <p class="micro">Live</p>
+      <h2 class="display stack-2" id="s6"><span lang="nl">Kijk mee,<br>terwijl het<br>gebeurt.</span><span lang="en">Watch along,<br>while it<br>happens.</span></h2>
+
+      <hr class="rule rule--long stack-3">
+
+      <p class="say stack-3"><span lang="nl">De oprichter handelt live in de server. Tijden worden in Discord aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced in Discord.</span></p>
+    </section>
+
+    <!-- ═══════════ 07 · TOEGANG ═══════════ -->
+    <section class="screen indent-1" aria-labelledby="s7">
+      <span class="folio">07</span>
+
+      <p class="micro"><span lang="nl">Toegang</span><span lang="en">Access</span></p>
+      <h2 class="lead stack-2" id="s7"><span lang="nl">Nu gratis.</span><span lang="en">Free right now.</span></h2>
+
+      <div class="two">
+        <div>
+          <span class="k"><span lang="nl">Thuis</span><span lang="en">Home</span></span>
+          <span class="v now"><span lang="nl">Gratis, vanaf nu</span><span lang="en">Free, starting now</span></span>
+          <p><span lang="nl">Educatie, chart-ideeën, markt en vragen. Direct toegankelijk.</span><span lang="en">Education, chart ideas, market and questions. Open immediately.</span></p>
+        </div>
+        <div>
+          <span class="k">Premium</span>
+          <span class="v later"><span lang="nl">Opent later</span><span lang="en">Opens later</span></span>
+          <p><span lang="nl">Prijs en datum worden in de server aangekondigd. Nergens anders.</span><span lang="en">Price and date are announced in the server. Nowhere else.</span></p>
+        </div>
+      </div>
+
+      <div class="stack-4">
+        <a class="cta cta--gold" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
+          <span lang="nl">Pak je plek nu het gratis is</span><span lang="en">Take your place while it is free</span> <span class="arrow" aria-hidden="true"></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══════════ 08 · SLOT ═══════════ -->
+    <section class="screen close indent-1" aria-labelledby="s8">
+      <span class="folio">08</span>
+
+      <h2 class="display" id="s8"><span lang="nl">Stil werk.<br>Scherpe<br><em>uitvoering.</em></span><span lang="en">Quiet work.<br>Sharp<br><em>execution.</em></span></h2>
+
+      <hr class="rule stack-3">
+
+      <div class="stack-3">
+        <a class="cta cta--xl cta--gold" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
+          <span lang="nl">Kom binnen op Discord</span><span lang="en">Come inside on Discord</span> <span class="arrow" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <p class="micro stack-3">discord.gg/78Ff2GuSfW</p>
+    </section>
+
+  </main>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="foot">
+    <div>
+      <div class="foot-links">
+        <a href="https://discord.gg/78Ff2GuSfW" rel="noopener">Discord</a>
+        <a href="https://www.tiktok.com/@atlascapitalbv" rel="noopener">TikTok</a>
+      </div>
+      <p class="risk stack-3"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
+    </div>
+    <p class="colophon">Atlas Capital<br><span lang="nl">Proces · Discipline · Uitvoering</span><span lang="en">Process · Discipline · Execution</span></p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
+
+</body>
+</html>

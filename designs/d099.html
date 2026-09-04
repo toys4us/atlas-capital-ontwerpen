@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 099 Fries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   099 — FRIES
+   A continuous relief band runs horizontally through the page.
+   Beneath it the sections hang as metopes, separated by
+   triglyphs. Everything reads left-to-right, then down.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --gold-dk:#8A6E2A;
+
+  --stone:#EFEBE1;
+  --stone-lo:#E1DACA;
+  --stone-dk:#CFC5AF;
+  --stone-hi:#F7F5EE;
+
+  --ink:#191713;
+  --muted:#5A554A;
+  --dim:#7B7566;
+
+  --serif:"Instrument Serif", Georgia, "Times New Roman", serif;
+  --sans:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+         "Helvetica Neue", Arial, sans-serif;
+}
+
+html{ color-scheme:light; -webkit-text-size-adjust:100%; }
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  background:var(--stone);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:clamp(14.5px,.5vw + 13.4px,16.5px);
+  line-height:1.65;
+  overflow-x:hidden;
+}
+a{ color:inherit; }
+
+.wrap{ width:min(1320px, 100% - 2rem); margin-inline:auto; }
+
+/* ---------- stone ground ---------- */
+.grain{
+  position:absolute; inset:0; width:100%; height:100%;
+  pointer-events:none; opacity:.06; mix-blend-mode:multiply; z-index:0;
+}
+.sheet{ position:relative; isolation:isolate; }
+.sheet::before{
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:repeating-linear-gradient(178deg,
+    rgba(25,23,19,.018) 0 1px, rgba(255,255,255,.03) 1px 4px);
+}
+.sheet > *{ position:relative; z-index:1; }
+
+/* ---------- type ---------- */
+.caps{
+  font-size:11px; letter-spacing:.34em; text-transform:uppercase;
+  font-weight:600; color:var(--gold-dk); margin:0 0 1em;
+}
+.caps .n{ color:var(--dim); margin-right:.9em; letter-spacing:.2em; }
+.inc{
+  text-shadow:
+     0.022em 0.022em 0 rgba(40,32,18,.24),
+    -0.020em -0.020em 0 rgba(255,255,255,.92);
+}
+h1,h2,h3{ margin:0; font-family:var(--serif); font-weight:400; }
+h1{ font-size:clamp(40px,8.4vw,104px); line-height:.96; letter-spacing:-.01em; }
+h2{ font-size:clamp(26px,4vw,52px); line-height:1.04; }
+h3{ font-size:clamp(19px,2.1vw,27px); line-height:1.12; }
+p{ margin:0 0 1em; }
+p:last-child{ margin-bottom:0; }
+.muted{ color:var(--muted); }
+.measure{ max-width:44ch; }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-block; text-decoration:none;
+  font-family:var(--sans); font-weight:700;
+  font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+  line-height:1;
+}
+.btn-solid{
+  padding:1.15em 1.7em;
+  color:#1A1305;
+  background:linear-gradient(180deg,var(--gold-hi),var(--gold-lo));
+  border:1px solid rgba(110,86,35,.45);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65), 0 1px 0 rgba(255,255,255,.9);
+}
+.btn-solid:hover{ background:linear-gradient(180deg,#F2E0AE,var(--gold)); }
+.btn-line{
+  padding:1em 1.4em;
+  color:var(--ink);
+  border:1px solid rgba(40,32,18,.3);
+  background:linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,.06));
+  box-shadow:0 1px 0 rgba(255,255,255,.8);
+}
+.btn-line:hover{ border-color:var(--gold-lo); color:var(--gold-dk); }
+
+/* ---------- architrave header ---------- */
+.architrave{
+  border-bottom:1px solid rgba(40,32,18,.22);
+  box-shadow:0 1px 0 rgba(255,255,255,.85);
+  background:linear-gradient(180deg, rgba(255,255,255,.5), rgba(207,197,175,.18));
+}
+.hrow{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  gap:12px 20px; padding:clamp(14px,2.2vw,22px) 0;
+}
+.wm{ display:flex; align-items:center; gap:11px; }
+.wm b{ font-size:13px; letter-spacing:.36em; text-transform:uppercase; font-weight:700; }
+.wm svg{ width:26px; height:26px; color:var(--gold-dk); }
+
+/* ---------- hero ---------- */
+.hero{ padding:clamp(34px,6vw,80px) 0 clamp(24px,4vw,46px); }
+.hero-grid{
+  display:grid; gap:clamp(18px,3vw,48px);
+  grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+  align-items:end;
+}
+.hero-line{ color:var(--muted); font-size:clamp(15.5px,1.3vw,19px); max-width:36ch; }
+.hero-cta{ display:flex; flex-wrap:wrap; gap:12px; margin-top:clamp(16px,2.4vw,26px); }
+.hero-tags{
+  margin-top:clamp(18px,2.6vw,28px);
+  display:flex; flex-wrap:wrap; gap:6px 20px;
+  font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--dim);
+}
+
+/* ---------- the frieze ---------- */
+.friezeband{
+  border-top:1px solid rgba(40,32,18,.25);
+  border-bottom:1px solid rgba(40,32,18,.25);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.75), inset 0 -1px 0 rgba(255,255,255,.75);
+  background:linear-gradient(180deg, rgba(255,255,255,.44), rgba(207,197,175,.24));
+  margin-block:clamp(10px,2vw,22px);
+}
+.friezescroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.friezescroll svg{ display:block; height:auto; }
+.frieze-a svg{ width:100%; min-width:1060px; }
+.frieze-b svg{ width:100%; min-width:1240px; }
+.hint{
+  font-size:10.5px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--dim); padding:8px 2px 0; margin:0;
+}
+
+/* ---------- plinth under a band ---------- */
+.plinth{
+  height:clamp(10px,1.6vw,16px);
+  background:linear-gradient(180deg,var(--stone-lo),var(--stone-dk));
+  border-top:1px solid rgba(255,255,255,.7);
+  box-shadow:inset 0 -1px 0 rgba(40,32,18,.25);
+}
+
+/* ---------- doric row: triglyphs + metopes ---------- */
+.doric{ padding:clamp(28px,4.6vw,62px) 0 clamp(30px,5vw,66px); }
+.metopes{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));
+  border-top:1px solid rgba(40,32,18,.24);
+}
+.metope{
+  position:relative;
+  padding:clamp(30px,3.4vw,44px) clamp(14px,2vw,28px) clamp(20px,2.6vw,30px);
+  border-left:1px solid rgba(40,32,18,.14);
+}
+.metope:first-child{ border-left:0; }
+.metope::before{
+  content:"";
+  position:absolute; top:-14px; left:-11px;
+  width:22px; height:28px;
+  background:
+    linear-gradient(90deg,
+      rgba(40,32,18,.30) 0 1px, rgba(255,255,255,.85) 1px 2px,
+      rgba(0,0,0,0) 2px 6px,
+      rgba(40,32,18,.30) 6px 7px, rgba(255,255,255,.85) 7px 8px,
+      rgba(0,0,0,0) 8px 14px,
+      rgba(40,32,18,.30) 14px 15px, rgba(255,255,255,.85) 15px 16px,
+      rgba(0,0,0,0) 16px 20px,
+      rgba(40,32,18,.30) 20px 21px, rgba(255,255,255,.85) 21px 22px),
+    linear-gradient(180deg,var(--stone-hi),var(--stone-lo));
+  border:1px solid rgba(40,32,18,.2);
+}
+.metope:first-child::before{ left:0; }
+.metope h3{ margin-bottom:.45em; }
+.metope .caps{ margin-bottom:.9em; }
+.metope p{ color:var(--muted); font-size:clamp(14px,1.05vw,15.8px); }
+.metope .cta{ margin-top:clamp(14px,2vw,20px); }
+
+/* ---------- founder numeral ---------- */
+.numeral{
+  font-family:var(--serif);
+  font-size:clamp(52px,8vw,104px);
+  line-height:.86; color:var(--gold-dk);
+  margin:0 0 .12em;
+}
+
+/* ---------- the model plaque ---------- */
+.plaque-wrap{ padding:clamp(30px,5vw,70px) 0; }
+.plaque{
+  border:1px solid rgba(40,32,18,.26);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.66), 0 1px 0 rgba(255,255,255,.85);
+  background:linear-gradient(180deg, rgba(255,255,255,.42), rgba(207,197,175,.20));
+  padding:clamp(10px,1.6vw,18px);
+}
+.bead{
+  height:12px;
+  background:
+    radial-gradient(circle at 6px 6px, rgba(40,32,18,.28) 0 2.4px, rgba(0,0,0,0) 3px),
+    radial-gradient(circle at 6px 5px, rgba(255,255,255,.9) 0 2.2px, rgba(0,0,0,0) 2.8px);
+  background-size:12px 12px, 12px 12px;
+  background-position:0 0, 0 1px;
+  opacity:.85;
+}
+.plaque .scroller{ overflow-x:auto; }
+.plaque .scroller svg{ display:block; width:100%; min-width:600px; height:auto; }
+.cap{ color:var(--dim); font-size:12.5px; margin:12px 2px 0; }
+
+/* ---------- channels band ---------- */
+.chips{ display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0; list-style:none; }
+.chips li{
+  font-size:13px; color:var(--muted);
+  padding:.42em .7em;
+  border:1px solid rgba(40,32,18,.18);
+  background:rgba(255,255,255,.4);
+}
+.chips.p li{ color:var(--gold-dk); border-color:rgba(185,149,74,.55); background:rgba(215,179,100,.13); }
+
+/* ---------- closing ---------- */
+.close{
+  text-align:center;
+  padding:clamp(40px,6.4vw,92px) 0 clamp(26px,4vw,50px);
+}
+.close h2{ margin-bottom:.35em; }
+.close p{ color:var(--muted); margin:0 auto 1.8em; max-width:40ch; }
+.steps > div{
+  margin-inline:auto;
+  height:clamp(12px,1.8vw,18px);
+  background:linear-gradient(180deg,var(--stone-hi),var(--stone-dk));
+  border-top:1px solid rgba(255,255,255,.85);
+  box-shadow:inset 0 -1px 0 rgba(40,32,18,.22);
+}
+.steps .s1{ width:64%; }
+.steps .s2{ width:82%; }
+.steps .s3{ width:100%; }
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid rgba(40,32,18,.24);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85);
+  background:linear-gradient(180deg, rgba(207,197,175,.26), rgba(207,197,175,.06));
+  padding:clamp(26px,4vw,48px) 0 clamp(32px,5vw,58px);
+}
+.frow{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px 24px;
+}
+.frow a.lnk{
+  text-decoration:none; font-size:12px; letter-spacing:.24em; text-transform:uppercase;
+  border-bottom:1px solid rgba(185,149,74,.6); padding-bottom:2px; font-weight:600;
+}
+.frow a.lnk:hover{ color:var(--gold-dk); }
+.risk{ margin:clamp(18px,2.6vw,26px) 0 0; color:var(--dim); font-size:12.5px; max-width:78ch; }
+
+@media (max-width:820px){
+  .hero-grid{ grid-template-columns:1fr; align-items:start; }
+  .metope{ border-left:0; border-top:1px solid rgba(40,32,18,.14); }
+  .metope::before{ left:0; }
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<svg class="grain" aria-hidden="true" preserveAspectRatio="none">
+  <filter id="gr99">
+    <feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#gr99)"/>
+</svg>
+
+<!-- ================= ARCHITRAVE ================= -->
+<div class="architrave">
+  <div class="wrap">
+    <div class="hrow">
+      <div class="wm">
+        <svg viewBox="0 0 30 30" fill="none" aria-hidden="true">
+          <circle cx="15" cy="11" r="8.4" stroke="currentColor" stroke-width="1.3"/>
+          <ellipse cx="15" cy="11" rx="3.4" ry="8.4" stroke="currentColor" stroke-width=".8"/>
+          <line x1="6.6" y1="11" x2="23.4" y2="11" stroke="currentColor" stroke-width=".8"/>
+          <path d="M4 29 C 9 22, 21 22, 26 29" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <b class="inc">Atlas Capital</b>
+      </div>
+      <a class="btn btn-line" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="caps">Nederlandse tradingcommunity</p>
+        <h1 class="inc">Het proces,<br>in reliëf.</h1>
+      </div>
+      <div>
+        <p class="hero-line">Educatie over NQ, ES, Bitcoin en altcoins. Van waarneming tot uitvoering, in één band.</p>
+        <div class="hero-cta">
+          <a class="btn btn-solid" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
+          <a class="btn btn-line" href="#leerstof">De leerstof</a>
+        </div>
+        <div class="hero-tags"><span>Proces</span><span>Discipline</span><span>Uitvoering</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FRIEZE I — THE PROCESS ================= -->
+<div class="friezeband frieze-a">
+  <div class="wrap">
+    <div class="friezescroll">
+      <svg viewBox="0 0 2400 300" role="img"
+           aria-label="Reliëfband: markt, liquiditeit, inefficiëntie, orderblock, risico en uitvoering, schematisch getekend">
+        <defs>
+          <pattern id="meander" width="40" height="24" patternUnits="userSpaceOnUse">
+            <path d="M0 20 L0 4 L32 4 L32 16 L12 16 L12 10 L24 10 L24 20 L40 20"
+                  fill="none" stroke="#8A6E2A" stroke-width="2" opacity=".55"/>
+          </pattern>
+
+          <g id="proc99" fill="none" stroke="currentColor" stroke-width="2.6"
+             stroke-linecap="round" stroke-linejoin="round">
+            <!-- 1 · markt -->
+            <g transform="translate(40,0)">
+              <path d="M20 190 C 70 190, 84 118, 132 118 C 180 118, 196 206, 244 206 C 286 206, 300 140, 330 128"/>
+              <line x1="10" y1="228" x2="340" y2="228" stroke-width="1.4"/>
+            </g>
+            <!-- 2 · liquiditeit -->
+            <g transform="translate(440,0)">
+              <line x1="20" y1="112" x2="340" y2="112" stroke-width="1.6" stroke-dasharray="9 8"/>
+              <path d="M30 214 L86 112 L124 190 L176 112 L216 200 L262 78 L292 132 L340 214"/>
+              <circle cx="262" cy="78" r="9" stroke-width="2"/>
+            </g>
+            <!-- 3 · inefficiëntie (FVG) -->
+            <g transform="translate(840,0)">
+              <line x1="20" y1="128" x2="340" y2="128" stroke-width="1.4"/>
+              <line x1="20" y1="172" x2="340" y2="172" stroke-width="1.4"/>
+              <path d="M74 88 v 150" stroke-width="1.6"/>
+              <rect x="56" y="172" width="36" height="52"/>
+              <path d="M180 60 v 190" stroke-width="1.6"/>
+              <rect x="162" y="76" width="36" height="150"/>
+              <path d="M286 62 v 76" stroke-width="1.6"/>
+              <rect x="268" y="74" width="36" height="54"/>
+            </g>
+            <!-- 4 · orderblock -->
+            <g transform="translate(1240,0)">
+              <rect x="40" y="132" width="120" height="56"/>
+              <path d="M40 132 h 120" stroke-width="3"/>
+              <path d="M180 96 C 244 96, 250 160, 300 160"/>
+              <path d="M300 160 l -18 -10 l 2 20 z" fill="currentColor" stroke="none"/>
+              <line x1="20" y1="238" x2="340" y2="238" stroke-width="1.4"/>
+            </g>
+            <!-- 5 · risico -->
+            <g transform="translate(1640,0)">
+              <path d="M180 66 v 34"/>
+              <path d="M74 100 h 212" stroke-width="3"/>
+              <path d="M74 100 L 44 158 h 60 z"/>
+              <path d="M286 100 L 256 158 h 60 z"/>
+              <path d="M180 100 v 108"/>
+              <path d="M136 232 h 88"/>
+            </g>
+            <!-- 6 · uitvoering -->
+            <g transform="translate(2040,0)">
+              <path d="M84 62 v 190"/>
+              <path d="M256 62 v 190"/>
+              <path d="M40 158 h 250"/>
+              <path d="M290 158 l -22 -13 l 3 26 z" fill="currentColor" stroke="none"/>
+              <path d="M84 62 h 172" stroke-width="1.6"/>
+            </g>
+          </g>
+        </defs>
+
+        <!-- meander borders -->
+        <rect x="0" y="4"   width="2400" height="24" fill="url(#meander)"/>
+        <rect x="0" y="268" width="2400" height="24" fill="url(#meander)"/>
+
+        <!-- scene divisions -->
+        <g stroke="#191713" stroke-opacity=".16" stroke-width="1.4">
+          <line x1="400"  y1="36" x2="400"  y2="262"/>
+          <line x1="800"  y1="36" x2="800"  y2="262"/>
+          <line x1="1200" y1="36" x2="1200" y2="262"/>
+          <line x1="1600" y1="36" x2="1600" y2="262"/>
+          <line x1="2000" y1="36" x2="2000" y2="262"/>
+        </g>
+
+        <!-- relief: dark cast copy, then the gold line -->
+        <use href="#proc99" x="4" y="5" style="color:rgba(25,23,19,.20)"/>
+        <use href="#proc99" style="color:#B9954A"/>
+
+        <g font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="16"
+           letter-spacing="5" fill="#7B7566" text-anchor="middle">
+          <text x="200"  y="258">MARKT</text>
+          <text x="600"  y="258">LIQUIDITEIT</text>
+          <text x="1000" y="258">INEFFICIËNTIE</text>
+          <text x="1400" y="258">ORDERBLOCK</text>
+          <text x="1800" y="258">RISICO</text>
+          <text x="2200" y="258">UITVOERING</text>
+        </g>
+      </svg>
+    </div>
+    <p class="hint">Fries I · lees van links naar rechts &rarr;</p>
+  </div>
+</div>
+<div class="plinth"></div>
+
+<!-- ================= DORIC ROW A ================= -->
+<div class="doric">
+  <div class="wrap">
+    <div class="metopes">
+      <article class="metope">
+        <p class="caps"><span class="n">01</span>De oprichter</p>
+        <p class="numeral inc">10+</p>
+        <p class="caps" style="color:var(--dim)">Jaar actief in trading</p>
+        <p>Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</p>
+        <p>Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</p>
+      </article>
+
+      <article class="metope">
+        <p class="caps"><span class="n">02</span>Live</p>
+        <h3 class="inc">Meekijken terwijl het gebeurt</h3>
+        <p>De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
+        <svg viewBox="0 0 260 90" fill="none" aria-hidden="true" style="width:100%;height:auto;margin-top:14px">
+          <path d="M8 74 C 54 74, 60 20, 108 20 C 156 20, 164 66, 210 66 C 236 66, 244 40, 254 32"
+                stroke="#B9954A" stroke-width="2"/>
+          <circle cx="254" cy="32" r="6" fill="#B9954A"/>
+        </svg>
+        <p class="cta"><a class="btn btn-line" href="https://discord.gg/78Ff2GuSfW">Zit erbij</a></p>
+      </article>
+
+      <article class="metope">
+        <p class="caps"><span class="n">03</span>Toegang</p>
+        <h3 class="inc">Nu gratis</h3>
+        <p>Alle huidige kanalen, de educatie en de chart-ideeën zijn vandaag al open.</p>
+        <p>Premium opent later. Prijs en datum worden in de server aangekondigd.</p>
+        <p class="cta"><a class="btn btn-solid" href="https://discord.gg/78Ff2GuSfW">Neem nu deel</a></p>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- ================= THE MODEL PLAQUE ================= -->
+<div class="plaque-wrap">
+  <div class="wrap">
+    <p class="caps"><span class="n">04</span>Het model</p>
+    <h2 class="inc" style="margin-bottom:clamp(16px,2.4vw,26px)">Terug naar het blok, daarna pas handelen.</h2>
+
+    <div class="plaque">
+      <div class="bead"></div>
+      <div class="scroller">
+        <svg viewBox="0 0 900 380" fill="none" role="img"
+             aria-label="Schematische tekening van een orderblock: verplaatsing, terugtest van het blok en uitvoering">
+          <g stroke="#191713" stroke-opacity=".10" stroke-width="1">
+            <line x1="40" y1="70"  x2="860" y2="70"/>
+            <line x1="40" y1="150" x2="860" y2="150"/>
+            <line x1="40" y1="230" x2="860" y2="230"/>
+            <line x1="40" y1="310" x2="860" y2="310"/>
+          </g>
+
+          <!-- the block -->
+          <rect x="250" y="176" width="150" height="66" fill="#D7B364" fill-opacity=".18"/>
+          <rect x="250" y="176" width="150" height="66" stroke="#B9954A" stroke-width="1.6"/>
+          <text x="325" y="266" font-family="-apple-system, Segoe UI, Arial, sans-serif"
+                font-size="13" letter-spacing="3.4" fill="#8A6E2A" text-anchor="middle">ORDERBLOCK</text>
+
+          <!-- extended zone -->
+          <line x1="400" y1="176" x2="840" y2="176" stroke="#B9954A" stroke-width="1" stroke-dasharray="5 6"/>
+          <line x1="400" y1="242" x2="840" y2="242" stroke="#B9954A" stroke-width="1" stroke-dasharray="5 6"/>
+
+          <!-- path -->
+          <polyline points="50,120 120,164 190,116 260,196 330,238 400,300 470,332 540,286 610,240 660,214 700,238 780,300 850,344"
+                    stroke="#191713" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+
+          <!-- retest marker -->
+          <circle cx="660" cy="214" r="8" fill="#F7F5EE" stroke="#B9954A" stroke-width="1.8"/>
+          <line x1="660" y1="204" x2="660" y2="120" stroke="#B9954A" stroke-width="1"/>
+          <text x="660" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif"
+                font-size="13" letter-spacing="3.4" fill="#8A6E2A" text-anchor="middle">TERUGTEST</text>
+
+          <!-- execution -->
+          <path d="M846 258 v 76" stroke="#B9954A" stroke-width="1.6"/>
+          <path d="M846 344 l -7 -14 l 14 0 z" fill="#B9954A"/>
+          <text x="846" y="368" font-family="-apple-system, Segoe UI, Arial, sans-serif"
+                font-size="13" letter-spacing="3.4" fill="#8A6E2A" text-anchor="end">UITVOERING</text>
+        </svg>
+      </div>
+      <div class="bead" style="transform:scaleY(-1)"></div>
+    </div>
+    <p class="cap">Schematisch. Zonder prijzen, niveaus of resultaten — alleen de vorm van het model.</p>
+  </div>
+</div>
+
+<!-- ================= FRIEZE II — THE CURRICULUM ================= -->
+<div class="wrap" id="leerstof">
+  <p class="caps"><span class="n">05</span>Leerstof · 10 onderwerpen</p>
+</div>
+<div class="friezeband frieze-b">
+  <div class="wrap">
+    <div class="friezescroll">
+      <svg viewBox="0 0 2400 260" role="img"
+           aria-label="Reliëfband met de tien onderwerpen van de leerstof, elk schematisch getekend">
+        <defs>
+          <pattern id="meander2" width="40" height="24" patternUnits="userSpaceOnUse">
+            <path d="M0 20 L0 4 L32 4 L32 16 L12 16 L12 10 L24 10 L24 20 L40 20"
+                  fill="none" stroke="#8A6E2A" stroke-width="2" opacity=".5"/>
+          </pattern>
+
+          <g id="topics99" fill="none" stroke="currentColor" stroke-width="2.4"
+             stroke-linecap="round" stroke-linejoin="round">
+            <!-- deviatie -->
+            <g transform="translate(0,0)">
+              <line x1="40" y1="120" x2="200" y2="120" stroke-width="1.6" stroke-dasharray="8 7"/>
+              <path d="M48 168 L94 120 L128 76 L156 130 L200 164"/>
+            </g>
+            <!-- SMT -->
+            <g transform="translate(240,0)">
+              <path d="M44 160 L92 96 L130 128 L182 72"/>
+              <path d="M44 190 L92 140 L130 166 L182 132"/>
+              <circle cx="182" cy="72" r="8"/>
+              <circle cx="182" cy="132" r="8"/>
+            </g>
+            <!-- FVG -->
+            <g transform="translate(480,0)">
+              <line x1="40" y1="104" x2="200" y2="104" stroke-width="1.4"/>
+              <line x1="40" y1="142" x2="200" y2="142" stroke-width="1.4"/>
+              <path d="M74 78 v 100" stroke-width="1.4"/><rect x="60" y="142" width="28" height="40"/>
+              <path d="M120 58 v 140" stroke-width="1.4"/><rect x="106" y="72" width="28" height="110"/>
+              <path d="M166 56 v 62" stroke-width="1.4"/><rect x="152" y="66" width="28" height="38"/>
+            </g>
+            <!-- IFVG -->
+            <g transform="translate(720,0)">
+              <rect x="60" y="96" width="130" height="46"/>
+              <path d="M52 78 L198 160" stroke-width="2"/>
+              <path d="M60 180 h 130" stroke-width="1.4"/>
+            </g>
+            <!-- orderblocks -->
+            <g transform="translate(960,0)">
+              <rect x="52" y="84" width="90" height="40"/>
+              <rect x="86" y="132" width="90" height="40"/>
+              <path d="M176 152 C 200 152, 202 108, 176 104" stroke-width="1.8"/>
+            </g>
+            <!-- fibonacci -->
+            <g transform="translate(1200,0)">
+              <line x1="46" y1="64"  x2="196" y2="64"  stroke-width="1.6"/>
+              <line x1="46" y1="112" x2="196" y2="112" stroke-width="1.6"/>
+              <line x1="46" y1="146" x2="196" y2="146" stroke-width="1.6"/>
+              <line x1="46" y1="168" x2="196" y2="168" stroke-width="1.6"/>
+              <line x1="46" y1="182" x2="196" y2="182" stroke-width="1.6"/>
+              <path d="M120 56 v 134" stroke-width="1.2" stroke-dasharray="5 6"/>
+            </g>
+            <!-- sessie-liquiditeit -->
+            <g transform="translate(1440,0)">
+              <path d="M44 180 A 78 78 0 0 1 200 180"/>
+              <line x1="36" y1="180" x2="208" y2="180" stroke-width="1.6"/>
+              <path d="M122 180 v -62" stroke-width="1.6"/>
+              <circle cx="122" cy="180" r="6" fill="currentColor" stroke="none"/>
+            </g>
+            <!-- liquiditeit -->
+            <g transform="translate(1680,0)">
+              <line x1="40" y1="88" x2="204" y2="88" stroke-width="1.6" stroke-dasharray="8 7"/>
+              <path d="M46 176 L84 88 L114 150 L146 88 L176 156 L204 116"/>
+            </g>
+            <!-- risicobeheer -->
+            <g transform="translate(1920,0)">
+              <path d="M122 64 v 22"/>
+              <path d="M56 86 h 132" stroke-width="2.8"/>
+              <path d="M56 86 L36 130 h 40 z"/>
+              <path d="M188 86 L168 130 h 40 z"/>
+              <path d="M122 86 v 82"/>
+              <path d="M90 186 h 64"/>
+            </g>
+            <!-- tradingpsychologie -->
+            <g transform="translate(2160,0)">
+              <path d="M92 186 C 52 172, 44 116, 74 86 C 106 54, 168 62, 180 102
+                       C 190 136, 168 148, 158 152 C 150 156, 150 172, 156 186 Z"/>
+              <path d="M84 132 C 100 116, 112 148, 128 130 C 140 116, 150 128, 160 120" stroke-width="1.8"/>
+            </g>
+          </g>
+        </defs>
+
+        <rect x="0" y="4"   width="2400" height="24" fill="url(#meander2)"/>
+        <rect x="0" y="228" width="2400" height="24" fill="url(#meander2)"/>
+
+        <g stroke="#191713" stroke-opacity=".14" stroke-width="1.2">
+          <line x1="240"  y1="36" x2="240"  y2="222"/>
+          <line x1="480"  y1="36" x2="480"  y2="222"/>
+          <line x1="720"  y1="36" x2="720"  y2="222"/>
+          <line x1="960"  y1="36" x2="960"  y2="222"/>
+          <line x1="1200" y1="36" x2="1200" y2="222"/>
+          <line x1="1440" y1="36" x2="1440" y2="222"/>
+          <line x1="1680" y1="36" x2="1680" y2="222"/>
+          <line x1="1920" y1="36" x2="1920" y2="222"/>
+          <line x1="2160" y1="36" x2="2160" y2="222"/>
+        </g>
+
+        <use href="#topics99" x="3" y="4" style="color:rgba(25,23,19,.18)"/>
+        <use href="#topics99" style="color:#B9954A"/>
+
+        <g font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="15"
+           letter-spacing="4" fill="#5A554A" text-anchor="middle">
+          <text x="120"  y="218">DEVIATIE</text>
+          <text x="360"  y="218">SMT</text>
+          <text x="600"  y="218">FVG</text>
+          <text x="840"  y="218">IFVG</text>
+          <text x="1080" y="218">ORDERBLOCKS</text>
+          <text x="1320" y="218">FIBONACCI</text>
+          <text x="1560" y="218">SESSIE-LIQUIDITEIT</text>
+          <text x="1800" y="218">LIQUIDITEIT</text>
+          <text x="2040" y="218">RISICOBEHEER</text>
+          <text x="2280" y="218">TRADINGPSYCHOLOGIE</text>
+        </g>
+      </svg>
+    </div>
+    <p class="hint">Fries II · de tien onderwerpen &rarr;</p>
+  </div>
+</div>
+<div class="plinth"></div>
+
+<!-- ================= DORIC ROW B — CHANNELS ================= -->
+<div class="doric">
+  <div class="wrap">
+    <div class="metopes">
+      <article class="metope">
+        <p class="caps"><span class="n">06</span>De server · 15 kanalen</p>
+        <h3 class="inc">Thuis — nu gratis</h3>
+        <ul class="chips" style="margin-top:14px">
+          <li>#nq-chart-ideeën</li><li>#es-chart-ideeën</li><li>#bitcoin</li><li>#altcoins</li>
+          <li>#markt</li><li>#vragen</li><li>#algemeen</li><li>#atlas-op-socials</li><li>#ondersteuning</li>
+        </ul>
+        <p class="cta"><a class="btn btn-line" href="https://discord.gg/78Ff2GuSfW">Open de kanalen</a></p>
+      </article>
+
+      <article class="metope">
+        <p class="caps"><span class="n">07</span>Later</p>
+        <h3 class="inc">Premium — opent later</h3>
+        <ul class="chips p" style="margin-top:14px">
+          <li>#trade-setups</li><li>#marktupdates</li><li>#indicatoren</li>
+          <li>#sessie-opnames</li><li>#chart-ideeën</li><li>#premium-chat</li>
+        </ul>
+        <p style="margin-top:14px">Prijs en datum worden in de server aangekondigd.</p>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- ================= CLOSING ================= -->
+<div class="close">
+  <div class="wrap">
+    <p class="caps" style="text-align:center"><span class="n">08</span>Toetreden</p>
+    <h2 class="inc">Sluit aan bij de band.</h2>
+    <p>Eén invite, geen kosten. Begin bij het begin en werk de fries af.</p>
+    <a class="btn btn-solid" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
+  </div>
+  <div class="steps" style="margin-top:clamp(30px,5vw,60px)">
+    <div class="s1"></div><div class="s2"></div><div class="s3"></div>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="frow">
+      <div class="wm">
+        <svg viewBox="0 0 30 30" fill="none" aria-hidden="true">
+          <circle cx="15" cy="11" r="8.4" stroke="currentColor" stroke-width="1.3"/>
+          <ellipse cx="15" cy="11" rx="3.4" ry="8.4" stroke="currentColor" stroke-width=".8"/>
+          <line x1="6.6" y1="11" x2="23.4" y2="11" stroke="currentColor" stroke-width=".8"/>
+          <path d="M4 29 C 9 22, 21 22, 26 29" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <b class="inc">Atlas Capital</b>
+      </div>
+      <div style="display:flex;gap:22px;flex-wrap:wrap">
+        <a class="lnk" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+        <a class="lnk" href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
+      </div>
+    </div>
+    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

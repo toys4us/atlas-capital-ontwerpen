@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 048 Beursvloer</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D7B364; --gold-hi:#E6CC8E; --gold-lo:#B9954A;
+  --ink:#0A0A0C; --stone:#111114; --stone-2:#16161A;
+  --muted:#9C9DA0;
+  --disp:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --body:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:#E7E5DF;font-family:var(--body);font-size:16px;line-height:1.62;overflow-x:hidden}
+a{color:inherit}
+svg{max-width:100%}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+.disp{font-family:var(--disp);font-weight:400;line-height:1.02;letter-spacing:-.005em}
+h1{font-size:clamp(38px,7vw,86px);margin:0}
+h2{font-size:clamp(28px,4.6vw,56px);margin:0}
+h3{font-size:clamp(21px,2.7vw,30px);margin:0}
+.it{font-style:italic;color:var(--gold-hi)}
+.lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold)}
+.lbl.m{color:var(--muted)}
+p{color:#C4C2BC;margin:12px 0 0;max-width:56ch}
+.small{font-size:13.5px;color:var(--muted)}
+
+/* ---------- entablature header ---------- */
+header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg,#131317,#0B0B0E);border-bottom:1px solid rgba(215,179,100,.3)}
+.dentil{height:9px;width:100%;display:block}
+.hbar{display:flex;align-items:center;gap:16px;padding:10px 0}
+.hmark{display:flex;align-items:center;gap:11px;text-decoration:none}
+.hmark .nm{font-family:var(--disp);font-size:22px;letter-spacing:.05em}
+.hmark .nm small{display:block;font-family:var(--mono);font-size:7.5px;letter-spacing:.3em;color:var(--gold-lo);margin-top:-2px}
+.hbar .sp{flex:1}
+.hnav{display:none;gap:20px}
+@media(min-width:940px){.hnav{display:flex}}
+.hnav a{font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.hnav a:hover{color:var(--gold)}
+
+/* ---------- brass buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  padding:13px 22px;color:#0C0B08;border-radius:2px;
+  background:linear-gradient(180deg,#EBD3A0,#D7B364 45%,#A8863F);
+  box-shadow:0 1px 0 rgba(255,240,200,.5) inset,0 6px 18px rgba(0,0,0,.5);
+}
+.btn:hover{background:linear-gradient(180deg,#F5E0B4,#E0BF74 45%,#B4924A)}
+.btn-o{background:transparent;color:var(--gold);border:1px solid rgba(215,179,100,.5);box-shadow:none}
+.btn-o:hover{background:rgba(215,179,100,.1)}
+
+/* ---------- the hall ---------- */
+.hallwrap{position:relative;overflow:hidden;background:linear-gradient(180deg,#0E0E12,#08080A 70%)}
+.hall-svg{display:block;width:100%;height:auto}
+.plinth{
+  position:relative;margin:clamp(-90px,-3.4vw,-14px) auto 0;max-width:1000px;padding:26px 20px 0;z-index:3;text-align:center;
+}
+.plinth::before{
+  content:"";position:absolute;left:-10%;right:-10%;top:-40px;bottom:-40px;z-index:-1;
+  background:radial-gradient(60% 70% at 50% 55%,rgba(8,8,10,.94) 0%,rgba(8,8,10,.86) 45%,rgba(8,8,10,0) 100%);
+}
+@media(max-width:760px){.plinth{margin-top:6px}}
+
+/* ---------- bays ---------- */
+.colonnade{position:relative}
+.rail{position:absolute;top:0;bottom:0;width:60px;display:none;pointer-events:none}
+.rail.l{left:0}.rail.r{right:0}
+@media(min-width:1080px){.rail{display:block}}
+.bays{max-width:900px;margin:0 auto;padding:0 20px}
+.bay{padding:clamp(48px,7vw,96px) 0 0;position:relative}
+.bay-head{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+.bay-head .n{font-family:var(--disp);font-size:clamp(30px,4.4vw,48px);color:transparent;-webkit-text-stroke:.8px var(--gold-lo);line-height:.9}
+.brass{height:6px;position:relative;margin:16px 0 0}
+.brass::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,#D7B364 12%,#EBD3A0 50%,#D7B364 88%,transparent)}
+.brass::after{content:"";position:absolute;left:0;right:0;top:4px;height:1px;background:linear-gradient(90deg,transparent,rgba(168,134,63,.6),transparent)}
+
+/* ---------- board (curriculum) ---------- */
+.board{position:relative;background:linear-gradient(180deg,#141418,#0E0E11);border:1px solid rgba(215,179,100,.28);margin-top:22px}
+.board-in{padding:clamp(20px,3.5vw,36px)}
+.rows{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:700px){.rows{grid-template-columns:1fr 1fr;column-gap:clamp(24px,4vw,54px)}}
+.row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(215,179,100,.16)}
+.row .rn{font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--gold-lo);width:26px;flex:0 0 auto}
+.row .nm{font-family:var(--disp);font-size:clamp(20px,2.5vw,27px)}
+.row .fl{flex:1;height:1px;background:repeating-linear-gradient(90deg,rgba(215,179,100,.4) 0 2px,transparent 2px 6px)}
+
+/* ---------- galleries (channels) ---------- */
+.gal{display:grid;grid-template-columns:1fr;gap:22px;margin-top:22px}
+@media(min-width:820px){.gal{grid-template-columns:1fr 1fr}}
+.gal .box{border:1px solid rgba(215,179,100,.25);background:#101013;padding:clamp(18px,3vw,28px);position:relative}
+.gal .box::before{content:"";position:absolute;left:14px;right:14px;top:0;height:2px;background:linear-gradient(90deg,transparent,#B9954A,transparent)}
+.chn{font-family:var(--mono);font-size:12.5px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;gap:10px}
+.chn b{font-weight:400;color:var(--gold-lo);font-size:8.5px;letter-spacing:.26em;align-self:center}
+
+/* ---------- diagram ---------- */
+.scroller{overflow-x:auto}
+.scroller>svg{min-width:580px;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px}
+.legend span{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.legend i{width:16px;border-top:1.5px solid var(--gold);display:block}
+.legend i.d{border-top-style:dashed}
+.legend i.w{border-top-color:#E7E5DF}
+
+/* ---------- access ---------- */
+.acc{display:grid;grid-template-columns:1fr;gap:20px;margin-top:22px}
+@media(min-width:760px){.acc{grid-template-columns:1fr 1fr}}
+.acc .c{border:1px solid rgba(215,179,100,.25);padding:clamp(20px,3vw,32px);background:linear-gradient(180deg,#131316,#0D0D10)}
+
+/* ---------- stylobate footer ---------- */
+.stylobate{margin-top:clamp(56px,8vw,110px)}
+.step{height:14px;background:linear-gradient(180deg,#1A1A1E,#0E0E11);border-top:1px solid rgba(215,179,100,.22)}
+.step.s2{margin:0 auto;max-width:1120px}
+.step.s3{margin:0 auto;max-width:1040px}
+footer{background:#0C0C0F;border-top:1px solid rgba(215,179,100,.22);padding:34px 0 48px}
+.f{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:760px){.f{grid-template-columns:1.3fr .8fr .8fr}}
+.f a.lk{display:block;width:fit-content;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(215,179,100,.4);padding-bottom:2px;margin-bottom:9px}
+.risk{font-family:var(--mono);font-size:10px;line-height:1.85;letter-spacing:.04em;color:#87888B;max-width:72ch;margin-top:26px}
+</style>
+</head>
+<body>
+
+<!-- ===================== ENTABLATURE ===================== -->
+<header>
+  <svg class="dentil" width="100%" height="9" aria-hidden="true">
+    <defs>
+      <pattern id="dent" width="14" height="9" patternUnits="userSpaceOnUse">
+        <rect x="0" y="0" width="8" height="9" fill="#D7B364" opacity=".22"/>
+        <rect x="0" y="0" width="8" height="1" fill="#E6CC8E" opacity=".5"/>
+      </pattern>
+      <pattern id="flute" width="9" height="10" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="0" y2="10" stroke="#D7B364" stroke-width=".5" opacity=".38"/>
+        <line x1="4.5" y1="0" x2="4.5" y2="10" stroke="#D7B364" stroke-width=".25" opacity=".16"/>
+      </pattern>
+      <pattern id="hatchG" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line x1="0" y1="0" x2="0" y2="6" stroke="#D7B364" stroke-width=".5" opacity=".85"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="9" fill="url(#dent)"/>
+  </svg>
+  <div class="wrap hbar">
+    <a class="hmark" href="#">
+      <svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true">
+        <g fill="none" stroke="#D7B364" stroke-width=".7">
+          <circle cx="20" cy="15" r="10"/><ellipse cx="20" cy="15" rx="3.4" ry="10"/><ellipse cx="20" cy="15" rx="7" ry="10"/>
+          <path d="M10 15h20M11.5 10.5h17M11.5 19.5h17"/>
+        </g>
+        <g fill="none" stroke="#E6CC8E" stroke-width="1">
+          <path d="M9 28h4v-2h14v2h4"/><path d="M6 32h28"/><path d="M4 36h32"/>
+        </g>
+      </svg>
+      <span class="nm">Atlas Capital<small>PROCES · DISCIPLINE · UITVOERING</small></span>
+    </a>
+    <span class="sp"></span>
+    <nav class="hnav">
+      <a href="#educatie">Educatie</a><a href="#model">Model</a><a href="#kanalen">Kanalen</a><a href="#live">Live</a>
+    </nav>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+  </div>
+</header>
+
+<!-- ===================== 01 · THE HALL ===================== -->
+<div class="hallwrap">
+  <svg class="hall-svg" viewBox="0 0 1200 620" aria-hidden="true">
+
+    <!-- coffered ceiling: transverse ribs -->
+    <g stroke="#D7B364" fill="none" opacity=".34">
+      <line x1="0"   y1="0"   x2="1200" y2="0"   stroke-width=".8"/>
+      <line x1="60"  y1="30"  x2="1140" y2="30"  stroke-width=".7"/>
+      <line x1="120" y1="60"  x2="1080" y2="60"  stroke-width=".6"/>
+      <line x1="180" y1="90"  x2="1020" y2="90"  stroke-width=".55"/>
+      <line x1="240" y1="120" x2="960"  y2="120" stroke-width=".5"/>
+      <line x1="288" y1="144" x2="912"  y2="144" stroke-width=".45"/>
+      <line x1="330" y1="165" x2="870"  y2="165" stroke-width=".4"/>
+      <line x1="372" y1="186" x2="828"  y2="186" stroke-width=".8"/>
+    </g>
+    <!-- coffered ceiling: longitudinal ribs to the vanishing point -->
+    <g stroke="#D7B364" fill="none" stroke-width=".45" opacity=".3">
+      <line x1="0"    y1="0" x2="372" y2="186"/>
+      <line x1="150"  y1="0" x2="429" y2="186"/>
+      <line x1="300"  y1="0" x2="486" y2="186"/>
+      <line x1="450"  y1="0" x2="543" y2="186"/>
+      <line x1="600"  y1="0" x2="600" y2="186"/>
+      <line x1="750"  y1="0" x2="657" y2="186"/>
+      <line x1="900"  y1="0" x2="714" y2="186"/>
+      <line x1="1050" y1="0" x2="771" y2="186"/>
+      <line x1="1200" y1="0" x2="828" y2="186"/>
+    </g>
+    <!-- rosettes in the near coffers -->
+    <g stroke="#D7B364" fill="none" stroke-width=".35" opacity=".3">
+      <circle cx="75"   cy="15" r="9"/><circle cx="225" cy="15" r="9"/><circle cx="375" cy="15" r="9"/>
+      <circle cx="525"  cy="15" r="9"/><circle cx="675" cy="15" r="9"/><circle cx="825" cy="15" r="9"/>
+      <circle cx="975"  cy="15" r="9"/><circle cx="1125" cy="15" r="9"/>
+      <circle cx="105"  cy="45" r="6"/><circle cx="245" cy="45" r="6"/><circle cx="385" cy="45" r="6"/>
+      <circle cx="525"  cy="45" r="6"/><circle cx="675" cy="45" r="6"/><circle cx="815" cy="45" r="6"/>
+      <circle cx="955"  cy="45" r="6"/><circle cx="1095" cy="45" r="6"/>
+    </g>
+
+    <!-- back wall -->
+    <rect x="372" y="186" width="456" height="244" fill="#0D0D10" stroke="#D7B364" stroke-width=".5" opacity=".9"/>
+    <!-- the great arch -->
+    <path d="M470 430 L470 322 A130 130 0 0 1 730 322 L730 430" fill="#0A0A0C" stroke="#D7B364" stroke-width=".9" opacity=".85"/>
+    <path d="M478 430 L478 322 A122 122 0 0 1 722 322 L722 430" fill="none" stroke="#D7B364" stroke-width=".3" opacity=".5"/>
+    <!-- deco fan inside the arch -->
+    <g stroke="#D7B364" fill="none" stroke-width=".4" opacity=".55">
+      <path d="M600 322 L600 200"/>
+      <path d="M600 322 L536 209"/><path d="M600 322 L664 209"/>
+      <path d="M600 322 L487 250"/><path d="M600 322 L713 250"/>
+      <path d="M600 322 L474 300"/><path d="M600 322 L726 300"/>
+      <path d="M600 322 L568 203"/><path d="M600 322 L632 203"/>
+      <path d="M600 322 L508 227"/><path d="M600 322 L692 227"/>
+      <path d="M600 322 L478 273"/><path d="M600 322 L722 273"/>
+      <path d="M508 322 A92 92 0 0 1 692 322" stroke-width=".35"/>
+      <path d="M544 322 A56 56 0 0 1 656 322" stroke-width=".35"/>
+    </g>
+    <!-- carved name on the frieze -->
+    <text x="600" y="228" text-anchor="middle" font-family="Instrument Serif,Georgia,serif" font-size="26" letter-spacing="9" fill="#E6CC8E" opacity=".72">ATLAS CAPITAL</text>
+    <line x1="440" y1="242" x2="760" y2="242" stroke="#D7B364" stroke-width=".4" opacity=".5"/>
+
+    <!-- side walls: fluted columns, left -->
+    <g stroke="#D7B364" fill="none">
+      <g opacity=".55">
+        <rect x="60"  y="30"  width="38" height="571" stroke-width=".7"/>
+        <rect x="156" y="78"  width="32" height="493" stroke-width=".6"/>
+        <rect x="252" y="126" width="26" height="414" stroke-width=".5"/>
+        <rect x="348" y="174" width="20" height="336" stroke-width=".45"/>
+      </g>
+      <g stroke-width=".3" opacity=".38">
+        <line x1="70" y1="34" x2="70" y2="597"/><line x1="79" y1="34" x2="79" y2="597"/><line x1="88" y1="34" x2="88" y2="597"/>
+        <line x1="164" y1="82" x2="164" y2="567"/><line x1="172" y1="82" x2="172" y2="567"/><line x1="180" y1="82" x2="180" y2="567"/>
+        <line x1="259" y1="130" x2="259" y2="536"/><line x1="265" y1="130" x2="265" y2="536"/><line x1="271" y1="130" x2="271" y2="536"/>
+        <line x1="354" y1="178" x2="354" y2="506"/><line x1="358" y1="178" x2="358" y2="506"/><line x1="362" y1="178" x2="362" y2="506"/>
+      </g>
+      <!-- capitals + bases, left -->
+      <g opacity=".7" stroke-width=".6">
+        <rect x="52"  y="18"  width="54" height="12"/><rect x="56"  y="601" width="46" height="12"/>
+        <rect x="150" y="68"  width="44" height="10"/><rect x="152" y="571" width="40" height="10"/>
+        <rect x="247" y="118" width="36" height="8"/> <rect x="249" y="540" width="32" height="8"/>
+        <rect x="344" y="167" width="28" height="7"/> <rect x="345" y="510" width="26" height="7"/>
+      </g>
+    </g>
+    <!-- side walls: fluted columns, right (mirrored) -->
+    <g stroke="#D7B364" fill="none">
+      <g opacity=".55">
+        <rect x="1102" y="30"  width="38" height="571" stroke-width=".7"/>
+        <rect x="1012" y="78"  width="32" height="493" stroke-width=".6"/>
+        <rect x="922"  y="126" width="26" height="414" stroke-width=".5"/>
+        <rect x="832"  y="174" width="20" height="336" stroke-width=".45"/>
+      </g>
+      <g stroke-width=".3" opacity=".38">
+        <line x1="1112" y1="34" x2="1112" y2="597"/><line x1="1121" y1="34" x2="1121" y2="597"/><line x1="1130" y1="34" x2="1130" y2="597"/>
+        <line x1="1020" y1="82" x2="1020" y2="567"/><line x1="1028" y1="82" x2="1028" y2="567"/><line x1="1036" y1="82" x2="1036" y2="567"/>
+        <line x1="929"  y1="130" x2="929" y2="536"/><line x1="935" y1="130" x2="935" y2="536"/><line x1="941" y1="130" x2="941" y2="536"/>
+        <line x1="838"  y1="178" x2="838" y2="506"/><line x1="842" y1="178" x2="842" y2="506"/><line x1="846" y1="178" x2="846" y2="506"/>
+      </g>
+      <g opacity=".7" stroke-width=".6">
+        <rect x="1094" y="18"  width="54" height="12"/><rect x="1098" y="601" width="46" height="12"/>
+        <rect x="1006" y="68"  width="44" height="10"/><rect x="1008" y="571" width="40" height="10"/>
+        <rect x="917"  y="118" width="36" height="8"/> <rect x="919"  y="540" width="32" height="8"/>
+        <rect x="828"  y="167" width="28" height="7"/> <rect x="829"  y="510" width="26" height="7"/>
+      </g>
+    </g>
+
+    <!-- floor in perspective -->
+    <g stroke="#D7B364" fill="none" stroke-width=".35" opacity=".22">
+      <line x1="0"    y1="620" x2="356" y2="430"/>
+      <line x1="150"  y1="620" x2="417" y2="430"/>
+      <line x1="300"  y1="620" x2="478" y2="430"/>
+      <line x1="450"  y1="620" x2="539" y2="430"/>
+      <line x1="600"  y1="620" x2="600" y2="430"/>
+      <line x1="750"  y1="620" x2="661" y2="430"/>
+      <line x1="900"  y1="620" x2="722" y2="430"/>
+      <line x1="1050" y1="620" x2="783" y2="430"/>
+      <line x1="1200" y1="620" x2="844" y2="430"/>
+      <line x1="113" y1="560" x2="1087" y2="560"/>
+      <line x1="203" y1="512" x2="997"  y2="512"/>
+      <line x1="266" y1="478" x2="934"  y2="478"/>
+      <line x1="315" y1="452" x2="885"  y2="452"/>
+      <line x1="349" y1="434" x2="851"  y2="434"/>
+    </g>
+
+    <!-- the trading pit, drawn in plan on the floor -->
+    <g stroke="#E6CC8E" fill="none" opacity=".5">
+      <ellipse cx="600" cy="520" rx="150" ry="34" stroke-width=".7"/>
+      <ellipse cx="600" cy="520" rx="112" ry="25" stroke-width=".5"/>
+      <ellipse cx="600" cy="520" rx="74"  ry="17" stroke-width=".4"/>
+      <ellipse cx="600" cy="520" rx="36"  ry="8"  stroke-width=".35"/>
+    </g>
+
+    <!-- brass rail across the foreground -->
+    <g opacity=".8">
+      <line x1="40" y1="486" x2="1160" y2="486" stroke="#E6CC8E" stroke-width="1.6"/>
+      <line x1="40" y1="492" x2="1160" y2="492" stroke="#B9954A" stroke-width=".6"/>
+      <g stroke="#D7B364" stroke-width=".8">
+        <line x1="100" y1="486" x2="100" y2="540"/><line x1="220" y1="486" x2="220" y2="540"/>
+        <line x1="340" y1="486" x2="340" y2="540"/><line x1="460" y1="486" x2="460" y2="540"/>
+        <line x1="580" y1="486" x2="580" y2="540"/><line x1="700" y1="486" x2="700" y2="540"/>
+        <line x1="820" y1="486" x2="820" y2="540"/><line x1="940" y1="486" x2="940" y2="540"/>
+        <line x1="1060" y1="486" x2="1060" y2="540"/>
+      </g>
+      <g fill="#D7B364" opacity=".9">
+        <circle cx="100" cy="500" r="2.6"/><circle cx="220" cy="500" r="2.6"/><circle cx="340" cy="500" r="2.6"/>
+        <circle cx="460" cy="500" r="2.6"/><circle cx="580" cy="500" r="2.6"/><circle cx="700" cy="500" r="2.6"/>
+        <circle cx="820" cy="500" r="2.6"/><circle cx="940" cy="500" r="2.6"/><circle cx="1060" cy="500" r="2.6"/>
+      </g>
+    </g>
+  </svg>
+
+  <div class="plinth">
+    <div class="lbl">01 · DE VLOER</div>
+    <h1 class="disp" style="margin-top:10px">De vloer <span class="it">staat open</span>.</h1>
+    <p style="margin:14px auto 0;max-width:50ch">Nederlandse trading-community voor NQ, ES, Bitcoin en altcoins. Educatie, echte setups, dagelijkse markt.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px">
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW">Betreed de server</a>
+      <a class="btn btn-o" href="#educatie">Zie de leerlijn</a>
+    </div>
+    <div class="lbl m" style="margin-top:18px">TOEGANG NU GRATIS · PREMIUM OPENT LATER</div>
+  </div>
+</div>
+
+<!-- ===================== COLONNADE ===================== -->
+<div class="colonnade">
+  <!-- running fluted column rails, desktop only -->
+  <div class="rail l" aria-hidden="true">
+    <svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#flute)"/></svg>
+  </div>
+  <div class="rail r" aria-hidden="true">
+    <svg width="100%" height="100%"><rect width="100%" height="100%" fill="url(#flute)"/></svg>
+  </div>
+
+  <div class="bays">
+
+    <!-- ============ 02 · FOUNDER ============ -->
+    <section class="bay" id="grondlegger">
+      <div class="bay-head"><span class="n">02</span><span class="lbl">DE GRONDLEGGER</span></div>
+      <div class="brass"></div>
+      <h2 class="disp" style="margin-top:26px">Meer dan tien jaar op de vloer.</h2>
+      <div style="display:grid;grid-template-columns:1fr;gap:26px;margin-top:22px" class="fgrid">
+        <svg viewBox="0 0 160 200" aria-hidden="true" style="width:120px">
+          <!-- a small pilaster with an inscribed tablet -->
+          <g fill="none" stroke="#D7B364" stroke-width=".6" opacity=".8">
+            <rect x="30" y="10" width="100" height="12"/>
+            <rect x="36" y="22" width="88" height="150"/>
+            <rect x="26" y="172" width="108" height="12"/>
+            <rect x="20" y="184" width="120" height="10"/>
+          </g>
+          <rect x="42" y="28" width="76" height="138" fill="url(#hatchG)" opacity=".16"/>
+          <text x="80" y="106" text-anchor="middle" font-family="Instrument Serif,Georgia,serif" font-size="40" fill="#E6CC8E">10+</text>
+          <text x="80" y="128" text-anchor="middle" font-family="Consolas,monospace" font-size="8" letter-spacing="4" fill="#B9954A">JAAR</text>
+        </svg>
+        <blockquote style="margin:0;max-width:60ch">
+          <p style="font-family:var(--disp);font-size:clamp(19px,2.4vw,26px);line-height:1.42;color:#E7E5DF;margin:0">
+            Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.
+          </p>
+          <p>Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</p>
+          <div class="lbl m" style="margin-top:16px">OPRICHTER · ATLAS CAPITAL</div>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ============ 03 · EDUCATIE ============ -->
+    <section class="bay" id="educatie">
+      <div class="bay-head"><span class="n">03</span><span class="lbl">EDUCATIE · 10 ONDERWERPEN</span></div>
+      <div class="brass"></div>
+      <h2 class="disp" style="margin-top:26px">Het bord aan de wand.</h2>
+      <p>Van marktstructuur tot je eigen hoofd. Dit wordt in de server uitgelegd.</p>
+
+      <div class="board">
+        <svg width="100%" height="10" aria-hidden="true" style="display:block"><rect width="100%" height="10" fill="url(#dent)"/></svg>
+        <div class="board-in">
+          <div class="rows">
+            <div class="row"><span class="rn">I</span><span class="nm disp">deviatie</span><span class="fl"></span></div>
+            <div class="row"><span class="rn">II</span><span class="nm disp">SMT</span><span class="fl"></span></div>
+            <div class="row"><span class="rn">III</span><span class="nm disp">FVG</span><span class="fl"></span></div>
+            <div class="row"><span class="rn">IV</span><span class="nm disp">IFVG</span><span class="fl"></span></div>
+            <div class="row"><span class="rn">V</span><span class="nm disp">orderblocks</span><span class="fl"></span></div>
+            <div class="row"><span class="rn">VI</span><span class="nm disp">fibonacci</span><span class="fl"></span></div>
+            <div class="row"><span class="rn">VII</span><span class="nm disp">sessie-liquiditeit</span><span class="fl"></span></div>
+            <div class="row"><span class="rn">VIII</span><span class="nm disp">liquiditeit</span><span class="fl"></span></div>
+            <div class="row"><span class="rn">IX</span><span class="nm disp">risicobeheer</span><span class="fl"></span></div>
+            <div class="row" style="border-bottom:0"><span class="rn">X</span><span class="nm disp">tradingpsychologie</span><span class="fl"></span></div>
+          </div>
+          <a class="btn" style="margin-top:22px" href="https://discord.gg/78Ff2GuSfW">Volg de leerlijn</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 · MODEL ============ -->
+    <section class="bay" id="model">
+      <div class="bay-head"><span class="n">04</span><span class="lbl">HET MODEL</span></div>
+      <div class="brass"></div>
+      <h2 class="disp" style="margin-top:26px">Liquiditeit, zone, <span class="it">terugkeer</span>.</h2>
+
+      <div class="board" style="margin-top:22px"><div class="board-in">
+        <div class="scroller">
+          <svg viewBox="0 0 720 320" aria-hidden="true" style="width:100%;height:auto">
+            <!-- pilaster frame -->
+            <g stroke="#D7B364" fill="none" opacity=".45">
+              <rect x="10" y="10" width="18" height="300" stroke-width=".5"/>
+              <rect x="692" y="10" width="18" height="300" stroke-width=".5"/>
+              <line x1="10" y1="10" x2="710" y2="10" stroke-width=".5"/>
+              <line x1="10" y1="310" x2="710" y2="310" stroke-width=".5"/>
+              <line x1="16" y1="14" x2="16" y2="306" stroke-width=".25"/><line x1="22" y1="14" x2="22" y2="306" stroke-width=".25"/>
+              <line x1="698" y1="14" x2="698" y2="306" stroke-width=".25"/><line x1="704" y1="14" x2="704" y2="306" stroke-width=".25"/>
+            </g>
+
+            <g stroke="#D7B364" stroke-width=".25" opacity=".2">
+              <line x1="46" y1="66" x2="674" y2="66"/><line x1="46" y1="116" x2="674" y2="116"/>
+              <line x1="46" y1="166" x2="674" y2="166"/><line x1="46" y1="216" x2="674" y2="216"/>
+              <line x1="46" y1="266" x2="674" y2="266"/>
+            </g>
+
+            <line x1="60" y1="80" x2="660" y2="80" stroke="#E7E5DF" stroke-width=".8" stroke-dasharray="7 5" opacity=".75"/>
+            <text x="62" y="70" font-family="Consolas,monospace" font-size="9.5" letter-spacing="2.6" fill="#E7E5DF" opacity=".8">SESSIE-LIQUIDITEIT</text>
+
+            <rect x="318" y="152" width="110" height="42" fill="url(#hatchG)" opacity=".4"/>
+            <rect x="318" y="152" width="110" height="42" fill="none" stroke="#D7B364" stroke-width=".8"/>
+            <line x1="428" y1="173" x2="520" y2="173" stroke="#D7B364" stroke-width=".5" stroke-dasharray="3 4"/>
+            <text x="526" y="177" font-family="Consolas,monospace" font-size="9.5" letter-spacing="2.6" fill="#D7B364">FVG</text>
+
+            <rect x="196" y="200" width="50" height="30" fill="none" stroke="#E7E5DF" stroke-width=".7" opacity=".6"/>
+            <text x="221" y="252" text-anchor="middle" font-family="Consolas,monospace" font-size="9" letter-spacing="2.2" fill="#9C9DA0">ORDERBLOCK</text>
+
+            <g stroke="#9C9DA0" stroke-width=".9" fill="none">
+              <line x1="82"  y1="204" x2="82"  y2="256"/><rect x="74"  y="214" width="16" height="32"/>
+              <line x1="120" y1="192" x2="120" y2="250"/><rect x="112" y="202" width="16" height="36"/>
+              <line x1="158" y1="176" x2="158" y2="242"/><rect x="150" y="188" width="16" height="42"/>
+              <line x1="196" y1="158" x2="196" y2="230"/><rect x="188" y="170" width="16" height="44"/>
+              <line x1="234" y1="126" x2="234" y2="216"/><rect x="226" y="138" width="16" height="60"/>
+            </g>
+            <g stroke="#E6CC8E" stroke-width="1" fill="#D7B364">
+              <line x1="272" y1="56" x2="272" y2="180"/><rect x="264" y="66" width="16" height="96"/>
+            </g>
+            <text x="272" y="48" text-anchor="middle" font-family="Consolas,monospace" font-size="9" letter-spacing="2.2" fill="#E6CC8E">SWEEP</text>
+            <g stroke="#9C9DA0" stroke-width=".9" fill="none">
+              <line x1="310" y1="88"  x2="310" y2="218"/><rect x="302" y="100" width="16" height="100"/>
+              <line x1="348" y1="134" x2="348" y2="258"/><rect x="340" y="148" width="16" height="94"/>
+              <line x1="386" y1="182" x2="386" y2="278"/><rect x="378" y="194" width="16" height="72"/>
+              <line x1="424" y1="200" x2="424" y2="282"/><rect x="416" y="210" width="16" height="60"/>
+              <line x1="462" y1="188" x2="462" y2="264"/><rect x="454" y="198" width="16" height="52"/>
+              <line x1="500" y1="162" x2="500" y2="240"/><rect x="492" y="174" width="16" height="52"/>
+              <line x1="538" y1="138" x2="538" y2="218"/><rect x="530" y="150" width="16" height="52"/>
+              <line x1="576" y1="110" x2="576" y2="198"/><rect x="568" y="122" width="16" height="58"/>
+              <line x1="614" y1="90"  x2="614" y2="174"/><rect x="606" y="102" width="16" height="54"/>
+            </g>
+            <path d="M264 74 C 330 26 590 30 616 94" fill="none" stroke="#D7B364" stroke-width=".6" stroke-dasharray="4 5"/>
+            <text x="440" y="36" text-anchor="middle" font-family="Consolas,monospace" font-size="9.5" letter-spacing="2.6" fill="#D7B364">DEVIATIE</text>
+          </svg>
+        </div>
+        <div class="legend">
+          <span><i class="w d"></i>liquiditeit</span><span><i></i>FVG</span><span><i class="w"></i>orderblock</span><span><i class="d"></i>deviatie</span>
+        </div>
+        <p class="small">Schematische illustratie. Geen prijzen, geen resultaten, geen beloftes.</p>
+      </div></div>
+    </section>
+
+    <!-- ============ 05 · KANALEN ============ -->
+    <section class="bay" id="kanalen">
+      <div class="bay-head"><span class="n">05</span><span class="lbl">DE SERVER · 15 KANALEN</span></div>
+      <div class="brass"></div>
+      <h2 class="disp" style="margin-top:26px">Twee galerijen.</h2>
+
+      <div class="gal">
+        <div class="box">
+          <div class="lbl" style="margin-bottom:12px">THUIS · NU GRATIS</div>
+          <div class="chn">#nq-chart-ideeën<b>OPEN</b></div>
+          <div class="chn">#es-chart-ideeën<b>OPEN</b></div>
+          <div class="chn">#bitcoin<b>OPEN</b></div>
+          <div class="chn">#altcoins<b>OPEN</b></div>
+          <div class="chn">#markt<b>OPEN</b></div>
+          <div class="chn">#vragen<b>OPEN</b></div>
+          <div class="chn">#algemeen<b>OPEN</b></div>
+          <div class="chn">#atlas-op-socials<b>OPEN</b></div>
+          <div class="chn" style="border-bottom:0">#ondersteuning<b>OPEN</b></div>
+          <a class="btn" style="margin-top:18px" href="https://discord.gg/78Ff2GuSfW">Open de galerij</a>
+        </div>
+        <div class="box">
+          <div class="lbl" style="margin-bottom:12px">PREMIUM · OPENT LATER</div>
+          <div class="chn">#trade-setups<b>LATER</b></div>
+          <div class="chn">#marktupdates<b>LATER</b></div>
+          <div class="chn">#indicatoren<b>LATER</b></div>
+          <div class="chn">#sessie-opnames<b>LATER</b></div>
+          <div class="chn">#chart-ideeën<b>LATER</b></div>
+          <div class="chn" style="border-bottom:0">#premium-chat<b>LATER</b></div>
+          <p class="small">Prijs en datum worden in de server aangekondigd.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 · LIVE ============ -->
+    <section class="bay" id="live">
+      <div class="bay-head"><span class="n">06</span><span class="lbl">LIVE TRADING</span></div>
+      <div class="brass"></div>
+      <div style="display:grid;grid-template-columns:1fr;gap:26px;margin-top:26px;align-items:center" class="fgrid">
+        <svg viewBox="0 0 260 180" aria-hidden="true" style="width:min(260px,80vw)">
+          <!-- the pit in plan, octagonal steps -->
+          <g fill="none" stroke="#D7B364" opacity=".75">
+            <polygon points="130,20 200,48 228,118 200,188 60,188 32,118 60,48" stroke-width=".7" transform="translate(0,-14)"/>
+            <polygon points="130,38 186,60 208,116 186,172 74,172 52,116 74,60" stroke-width=".5" transform="translate(0,-14)"/>
+            <polygon points="130,56 172,72 188,114 172,156 88,156 72,114 88,72" stroke-width=".45" transform="translate(0,-14)"/>
+            <polygon points="130,74 158,84 168,112 158,140 102,140 92,112 102,84" stroke-width=".4" transform="translate(0,-14)"/>
+          </g>
+          <circle cx="130" cy="98" r="9" fill="#E6CC8E"/>
+          <circle cx="130" cy="98" r="16" fill="none" stroke="#E6CC8E" stroke-width=".5" opacity=".7"/>
+          <text x="130" y="172" text-anchor="middle" font-family="Consolas,monospace" font-size="9" letter-spacing="3.4" fill="#B9954A">DE PIT</text>
+        </svg>
+        <div>
+          <h2 class="disp">De oprichter handelt live in de server.</h2>
+          <p>Tijden worden in de server aangekondigd.</p>
+          <a class="btn btn-o" style="margin-top:18px" href="https://discord.gg/78Ff2GuSfW">Zit een sessie bij</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 · TOEGANG ============ -->
+    <section class="bay" id="toegang">
+      <div class="bay-head"><span class="n">07</span><span class="lbl">TOEGANG</span></div>
+      <div class="brass"></div>
+      <div class="acc">
+        <div class="c">
+          <div class="lbl">NU</div>
+          <h3 class="disp" style="margin:8px 0 6px">Gratis</h3>
+          <p class="small">Alle thuiskanalen open. Educatie, chart-ideeën en de dagelijkse markt.</p>
+          <a class="btn" style="margin-top:16px" href="https://discord.gg/78Ff2GuSfW">Word lid</a>
+        </div>
+        <div class="c">
+          <div class="lbl">LATER</div>
+          <h3 class="disp" style="margin:8px 0 6px">Premium</h3>
+          <p class="small">Opent later. Prijs en datum worden in de server aangekondigd.</p>
+          <div class="lbl m" style="margin-top:22px">AANKONDIGING VOLGT IN DE SERVER</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 08 · CLOSE ============ -->
+    <section class="bay" id="toetreden" style="text-align:center;padding-bottom:clamp(50px,7vw,90px)">
+      <div class="bay-head" style="justify-content:center"><span class="n">08</span><span class="lbl">TOETREDEN</span></div>
+      <div class="brass"></div>
+      <h2 class="disp" style="margin-top:30px">De deuren staan open.</h2>
+      <p style="margin:12px auto 0">PROCES. DISCIPLINE. UITVOERING.</p>
+      <div style="margin-top:24px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Open Discord — gratis</a></div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ===================== STYLOBATE ===================== -->
+<div class="stylobate" aria-hidden="true">
+  <div class="step s3"></div>
+  <div class="step s2"></div>
+  <div class="step"></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="f">
+      <div>
+        <div class="disp" style="font-size:26px;letter-spacing:.04em">Atlas Capital</div>
+        <div class="lbl" style="margin-top:6px">PROCES · DISCIPLINE · UITVOERING</div>
+        <p class="small" style="margin-top:12px">Nederlandse trading-community. NQ, ES, Bitcoin en altcoins.</p>
+      </div>
+      <div>
+        <div class="lbl m" style="margin-bottom:11px">VOLG</div>
+        <a class="lk" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+        <a class="lk" href="https://www.tiktok.com/@atlascapitalbv">TikTok @atlascapitalbv</a>
+      </div>
+      <div>
+        <div class="lbl m" style="margin-bottom:11px">TOEGANG</div>
+        <a class="lk" href="https://discord.gg/78Ff2GuSfW">Nu gratis toetreden</a>
+        <span class="small">Premium opent later.</span>
+      </div>
+    </div>
+    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  </div>
+</footer>
+
+<style>
+@media(min-width:760px){
+  .fgrid{grid-template-columns:auto 1fr!important}
+}
+</style>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 040 Onboarding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   040 — ONBOARDING
+   De pagina is een toetredingsroute. Eén gouden rail loopt van
+   boven naar beneden; elke halte is iets dat echt gebeurt.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --panel:#15161A;
+  --paper:#F4F2EC;
+  --muted:#A5A6A8;
+
+  --bg:#08090B;
+  --card:#0F1013;
+  --card-2:#14151A;
+  --hair:rgba(255,255,255,.07);
+  --hair-gold:rgba(215,179,100,.26);
+  --dim:#767880;
+
+  --sans:"Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+
+html{color-scheme:dark;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:#E9E7E2;
+  font-family:var(--sans);font-size:16px;line-height:1.6;font-weight:300;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4,p,ul,figure{margin:0}
+ul{list-style:none;padding:0}
+.wrap{width:min(1120px,100% - 36px);margin-inline:auto}
+@media (max-width:560px){.wrap{width:min(1120px,100% - 24px)}}
+
+/* ---------- kop ---------- */
+header.top{
+  position:sticky;top:0;z-index:40;
+  background:rgba(8,9,11,.93);border-bottom:1px solid var(--hair);
+}
+.topin{display:flex;align-items:center;gap:16px;height:64px}
+.mk{display:flex;align-items:center;gap:10px}
+.mk svg{width:28px;height:28px;flex:none}
+.mk b{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700}
+.steps-mini{margin-left:auto;display:flex;align-items:center;gap:9px}
+.steps-mini i{
+  width:26px;height:3px;border-radius:2px;background:var(--gold);display:block;
+}
+.steps-mini i:nth-child(2){background:rgba(215,179,100,.45)}
+.steps-mini i:nth-child(3){background:rgba(215,179,100,.22)}
+.steps-mini span{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.hcta{
+  background:linear-gradient(150deg,var(--gold-hi),var(--gold-lo));color:#17110A;
+  padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;flex:none;
+}
+@media (max-width:760px){.steps-mini{display:none}}
+
+/* ---------- intro ---------- */
+.intro{padding:clamp(52px,9vw,110px) 0 clamp(34px,5vw,60px)}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:10px;
+}
+.eyebrow i{width:26px;height:1px;background:var(--gold);display:block}
+h1{
+  margin-top:22px;font-weight:700;letter-spacing:-.035em;
+  font-size:clamp(38px,7.6vw,88px);line-height:.98;max-width:14ch;
+}
+h1 em{font-style:normal;color:var(--gold)}
+.lead{margin-top:20px;font-size:clamp(16px,1.8vw,20px);color:#B4B2AD;max-width:42ch}
+.introbtns{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{
+  padding:14px 26px;border-radius:9px;font-size:14.5px;font-weight:700;letter-spacing:.01em;
+  background:linear-gradient(150deg,var(--gold-hi),var(--gold-lo));color:#17110A;
+  box-shadow:0 16px 38px -14px rgba(215,179,100,.55);
+}
+.btn.line{background:none;color:var(--gold);border:1px solid var(--hair-gold);box-shadow:none}
+.btn.dark{background:var(--card-2);color:#E9E7E2;border:1px solid var(--hair);box-shadow:none}
+
+/* ---------- de route ---------- */
+.route{padding-bottom:clamp(30px,5vw,60px)}
+.step{
+  display:grid;grid-template-columns:74px minmax(0,1fr);
+  gap:clamp(16px,3vw,38px);
+}
+.node{position:relative;display:flex;justify-content:center}
+.node::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;
+  background:linear-gradient(180deg,var(--hair-gold),rgba(215,179,100,.10));
+  transform:translateX(-.5px);
+}
+.step:first-of-type .node::before{top:34px}
+.step.last .node::before{bottom:auto;height:40px}
+.dot{
+  position:relative;z-index:2;margin-top:26px;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--bg);border:1px solid var(--hair-gold);
+  display:grid;place-items:center;
+  font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--gold);
+  box-shadow:0 0 0 6px rgba(8,9,11,1),0 0 30px rgba(215,179,100,.14);
+}
+.stepbody{padding:clamp(22px,3.4vw,46px) 0 clamp(26px,4vw,54px);min-width:0}
+.card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,var(--card-2),var(--card) 60%);
+  border:1px solid var(--hair);border-radius:18px;
+  padding:clamp(22px,3.4vw,44px);
+}
+.card.hot{border-color:var(--hair-gold);background:linear-gradient(160deg,rgba(215,179,100,.10),var(--card) 62%)}
+.ghost{
+  position:absolute;right:clamp(10px,2vw,26px);top:-.16em;
+  font-size:clamp(90px,17vw,230px);font-weight:700;line-height:1;
+  color:rgba(215,179,100,.07);
+  -webkit-text-stroke:1px rgba(215,179,100,.22);
+  pointer-events:none;letter-spacing:-.04em;
+}
+.card > *{position:relative}
+.tag{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+}
+h2{margin-top:12px;font-size:clamp(26px,4.2vw,48px);line-height:1.02;letter-spacing:-.03em;font-weight:700;max-width:16ch}
+h2 em{font-style:normal;color:var(--gold)}
+.card p.t{margin-top:16px;font-size:16.5px;color:#B4B2AD;max-width:46ch}
+.card p.t b{color:#E9E7E2;font-weight:500}
+.cardcta{margin-top:26px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.fine{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+
+/* uitnodigingskaart */
+.invite{
+  margin-top:26px;max-width:440px;
+  background:#101116;border:1px solid var(--hair);border-radius:12px;padding:16px;
+  display:grid;grid-template-columns:56px minmax(0,1fr);gap:14px;align-items:center;
+  box-shadow:0 24px 50px -30px rgba(0,0,0,.9);
+}
+.invite .icon{width:56px;height:56px;border-radius:16px;background:radial-gradient(120% 120% at 30% 20%,#241E13,#0D0E12);border:1px solid var(--hair-gold);display:grid;place-items:center}
+.invite .icon svg{width:30px;height:30px}
+.invite .nm{font-size:15px;font-weight:500;color:#EFEDE8}
+.invite .sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-top:4px}
+.invite .go{
+  grid-column:1/-1;text-align:center;margin-top:4px;
+  background:linear-gradient(150deg,var(--gold-hi),var(--gold-lo));color:#17110A;
+  padding:11px;border-radius:8px;font-size:13.5px;font-weight:700;
+}
+
+/* mini kanaallijst */
+.mini{
+  margin-top:26px;border:1px solid var(--hair);border-radius:12px;overflow:hidden;background:#0C0D11;max-width:560px;
+}
+.mini .h{
+  display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--hair);
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);
+}
+.mini .h b{color:var(--gold);font-weight:400}
+.mini ul{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+.mini li{padding:9px 14px;font-size:13.5px;color:#9EA0A6;border-bottom:1px solid rgba(255,255,255,.04)}
+.mini li em{font-style:normal;color:var(--dim);font-weight:700;margin-right:5px}
+.mini li.lk{color:#63656C}
+.mini li.lk em{color:var(--gold-lo)}
+
+/* onderwerpen */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.chips span{
+  font-family:var(--mono);font-size:12.5px;color:var(--gold-hi);
+  border:1px solid var(--hair-gold);border-radius:100px;padding:8px 15px;
+}
+.chips span i{font-style:normal;color:var(--gold-lo);margin-right:7px;font-size:10px}
+
+/* live boog */
+.arcwrap{margin-top:26px;max-width:520px}
+.arcwrap svg{width:100%;height:auto;display:block}
+.pulse{width:10px;height:10px;border-radius:50%;background:var(--gold);display:inline-block;vertical-align:middle;margin-right:9px;
+  box-shadow:0 0 0 0 rgba(215,179,100,.55);animation:pz 2.6s ease-out infinite}
+@keyframes pz{to{box-shadow:0 0 0 16px rgba(215,179,100,0)}}
+@media (prefers-reduced-motion:reduce){.pulse{animation:none}}
+
+/* ---------- blokken onder de route ---------- */
+section.blk{padding:clamp(48px,7vw,96px) 0;border-top:1px solid var(--hair)}
+.kick{
+  font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:12px;margin-bottom:22px;
+}
+.kick span{flex:1;height:1px;background:var(--hair)}
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(20px,3.4vw,46px);align-items:start}
+h3.big{font-size:clamp(24px,3.6vw,42px);line-height:1.05;letter-spacing:-.028em;font-weight:700;max-width:15ch}
+h3.big em{font-style:normal;color:var(--gold)}
+.qt{
+  border-left:2px solid var(--gold);padding-left:clamp(16px,2.2vw,28px);
+  font-size:clamp(15.5px,1.7vw,18.5px);line-height:1.68;color:#CFCDC7;
+}
+.qt .who{margin-top:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lo)}
+
+.plate{border:1px solid var(--hair);border-radius:16px;background:#0C0D11;padding:clamp(14px,2vw,24px);overflow-x:auto}
+.plate svg{width:100%;min-width:440px;height:auto;display:block}
+.cap{margin-top:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+
+.acc{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-top:24px}
+.abox{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:26px}
+.abox.now{border-color:var(--hair-gold);background:linear-gradient(160deg,rgba(215,179,100,.08),var(--card) 65%)}
+.abox h4{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.abox li{padding:7px 0;font-size:14.5px;color:#B4B2AD;border-bottom:1px solid rgba(255,255,255,.045)}
+.abox li:last-child{border-bottom:0}
+.abox p.n{margin-top:14px;font-size:13px;color:var(--dim)}
+
+/* slot */
+.finale{
+  border-top:1px solid var(--hair-gold);
+  padding:clamp(60px,10vw,130px) 0;text-align:center;
+  background:radial-gradient(120% 90% at 50% 0%,rgba(215,179,100,.10),rgba(8,9,11,0) 62%);
+}
+.finale h2{margin-inline:auto;font-size:clamp(32px,6.6vw,76px);max-width:13ch}
+.finale .lead{margin-inline:auto;margin-top:18px}
+.finale .introbtns{justify-content:center}
+
+footer{border-top:1px solid var(--hair);padding:40px 0 52px;background:#0A0B0D}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px}
+.fg h5{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 9px;font-weight:400}
+.fg a{font-size:14px;border-bottom:1px solid var(--hair-gold)}
+.fg p{font-size:13.5px;color:#8C8E93}
+.risk{grid-column:1/-1;border-top:1px solid var(--hair);margin-top:22px;padding-top:18px;font-size:11.5px;color:var(--dim);line-height:1.6;max-width:76ch}
+
+/* ---------- responsief ---------- */
+@media (max-width:640px){
+  .step{grid-template-columns:46px minmax(0,1fr);gap:12px}
+  .dot{width:38px;height:38px;font-size:11px;margin-top:22px;box-shadow:0 0 0 5px rgba(8,9,11,1)}
+  .card{border-radius:14px}
+  .ghost{font-size:clamp(72px,26vw,120px);right:8px}
+  .mini ul{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E6CC8E"/><stop offset="1" stop-color="#B9954A"/>
+    </linearGradient>
+    <symbol id="atl" viewBox="0 0 32 32">
+      <circle cx="16" cy="11" r="7" fill="none" stroke="url(#g)" stroke-width="1.6"/>
+      <path d="M9 11h14" stroke="url(#g)" stroke-width=".9" opacity=".6"/>
+      <path d="M4.5 28.5c3-6 7-9 11.5-9s8.5 3 11.5 9" fill="none" stroke="url(#g)" stroke-width="1.6" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ================= KOP ================= -->
+<header class="top">
+  <div class="wrap topin">
+    <a class="mk" href="#top"><svg aria-hidden="true"><use href="#atl"/></svg><b>Atlas Capital</b></a>
+    <div class="steps-mini"><span>De route</span><i></i><i></i><i></i></div>
+    <a class="hcta" href="https://discord.gg/78Ff2GuSfW">Word lid via Discord</a>
+  </div>
+</header>
+
+<!-- ================= INTRO ================= -->
+<div class="wrap intro" id="top">
+  <p class="eyebrow"><i></i> Toegang is nu gratis</p>
+  <h1>Zo kom je <em>binnen</em>.</h1>
+  <p class="lead">Geen formulier, geen betaling. Alleen een uitnodiging, een curriculum en een sessie om bij te zitten.</p>
+  <div class="introbtns">
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Word lid via Discord</a>
+    <a class="btn line" href="#stap-02">Bekijk de educatie</a>
+  </div>
+</div>
+
+<!-- ================= DE ROUTE ================= -->
+<div class="wrap route">
+
+  <!-- STAP 01 -->
+  <div class="step" id="stap-01">
+    <div class="node"><span class="dot">01</span></div>
+    <div class="stepbody">
+      <div class="card hot">
+        <span class="ghost" aria-hidden="true">01</span>
+        <p class="tag">Stap 01 — de uitnodiging</p>
+        <h2>Open de <em>uitnodiging</em>.</h2>
+        <p class="t">Eén link. Je komt binnen in <b>#algemeen</b> en alle thuiskanalen staan meteen open.</p>
+
+        <div class="invite">
+          <span class="icon"><svg aria-hidden="true"><use href="#atl"/></svg></span>
+          <span>
+            <span class="nm">Atlas Capital</span>
+            <span class="sub">Uitnodiging · 15 kanalen</span>
+          </span>
+          <a class="go" href="https://discord.gg/78Ff2GuSfW">Uitnodiging accepteren</a>
+        </div>
+
+        <div class="cardcta">
+          <span class="fine">discord.gg/78Ff2GuSfW</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAP 02 -->
+  <div class="step" id="stap-02">
+    <div class="node"><span class="dot">02</span></div>
+    <div class="stepbody">
+      <div class="card">
+        <span class="ghost" aria-hidden="true">02</span>
+        <p class="tag">Stap 02 — de educatie</p>
+        <h2>Lees de <em>10 onderwerpen</em>.</h2>
+        <p class="t">Het curriculum ligt klaar. Begin waar je wilt; alles staat er los van elkaar.</p>
+
+        <div class="chips">
+          <span><i>01</i>deviatie</span><span><i>02</i>SMT</span><span><i>03</i>FVG</span>
+          <span><i>04</i>IFVG</span><span><i>05</i>orderblocks</span><span><i>06</i>fibonacci</span>
+          <span><i>07</i>sessie-liquiditeit</span><span><i>08</i>liquiditeit</span>
+          <span><i>01</i>risicobeheer</span><span><i>02</i>tradingpsychologie</span>
+        </div>
+
+        <div class="mini">
+          <div class="h"><b>Thuis</b> — nu gratis</div>
+          <ul>
+            <li><em>#</em>nq-chart-ideeën</li><li><em>#</em>es-chart-ideeën</li>
+            <li><em>#</em>bitcoin</li><li><em>#</em>altcoins</li>
+            <li><em>#</em>markt</li><li><em>#</em>vragen</li>
+            <li><em>#</em>algemeen</li><li><em>#</em>atlas-op-socials</li>
+            <li><em>#</em>ondersteuning</li>
+          </ul>
+        </div>
+
+        <div class="cardcta">
+          <a class="btn dark" href="https://discord.gg/78Ff2GuSfW">Naar de kanalen</a>
+          <span class="fine">Vragen? #vragen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAP 03 -->
+  <div class="step last" id="stap-03">
+    <div class="node"><span class="dot">03</span></div>
+    <div class="stepbody">
+      <div class="card">
+        <span class="ghost" aria-hidden="true">03</span>
+        <p class="tag">Stap 03 — live erbij</p>
+        <h2>Zit een <em>live sessie</em> bij.</h2>
+        <p class="t"><span class="pulse" aria-hidden="true"></span>De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
+
+        <figure class="arcwrap">
+          <svg viewBox="0 0 520 160" role="img" aria-label="Boog met markeringen voor een handelssessie">
+            <path d="M20 140 A 235 235 0 0 1 500 140" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="1.4"/>
+            <path d="M172 62.5 A 235 235 0 0 1 348 62.5" fill="none" stroke="#D7B364" stroke-width="2.6" stroke-linecap="round"/>
+            <circle cx="172" cy="62.5" r="4.5" fill="#0F1013" stroke="#D7B364" stroke-width="1.8"/>
+            <circle cx="260" cy="42" r="6.5" fill="#D7B364"/>
+            <circle cx="348" cy="62.5" r="4.5" fill="#0F1013" stroke="#D7B364" stroke-width="1.8"/>
+            <path d="M20 140h480" stroke="rgba(255,255,255,.07)"/>
+            <text x="222" y="118" fill="#767880" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="11" letter-spacing="3">SESSIE</text>
+          </svg>
+        </figure>
+
+        <div class="cardcta">
+          <a class="btn" href="https://discord.gg/78Ff2GuSfW">Zit een sessie bij</a>
+          <span class="fine">NQ · ES · Bitcoin · altcoins</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ================= OPRICHTER ================= -->
+<section class="blk wrap">
+  <p class="kick">Wie je daar tegenkomt <span></span> 10+ jaar</p>
+  <div class="duo">
+    <h3 class="big">Gebouwd door iemand die het <em>zelf</em> doet.</h3>
+    <blockquote class="qt">
+      „Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.”
+      <p class="who">Oprichter — Atlas Capital</p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ================= MODEL ================= -->
+<section class="blk wrap">
+  <p class="kick">Wat je leert herkennen <span></span> schematisch</p>
+  <div class="duo">
+    <div>
+      <h3 class="big">Een <em>fibonacci</em>-terugtrekking, uitgetekend.</h3>
+      <p class="lead" style="margin-top:16px">Een beweging, een terugtrekking, een zone. Zonder koersen en zonder uitkomsten.</p>
+      <div class="introbtns" style="margin-top:24px">
+        <a class="btn line" href="https://discord.gg/78Ff2GuSfW">Bekijk chart-ideeën</a>
+      </div>
+    </div>
+    <figure>
+      <div class="plate">
+        <svg viewBox="0 0 560 340" role="img" aria-label="Schematische fibonacci-terugtrekking met banden zonder waarden">
+          <g stroke="rgba(255,255,255,.05)">
+            <path d="M0 68h560M0 136h560M0 204h560M0 272h560"/>
+          </g>
+          <rect x="120" y="96" width="400" height="34" fill="rgba(215,179,100,.07)"/>
+          <rect x="120" y="130" width="400" height="34" fill="rgba(215,179,100,.12)"/>
+          <rect x="120" y="164" width="400" height="34" fill="rgba(215,179,100,.20)"/>
+          <rect x="120" y="198" width="400" height="34" fill="rgba(215,179,100,.12)"/>
+          <g stroke="rgba(215,179,100,.5)" stroke-width="1">
+            <path d="M120 96h400M120 130h400M120 164h400M120 198h400M120 232h400"/>
+          </g>
+          <text x="128" y="158" fill="#E6CC8E" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="11.5" letter-spacing="2.5">ZONE</text>
+          <path d="M40 288 L120 232 L200 96" fill="none" stroke="#8A8B90" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+          <path d="M200 96 L260 150 L300 128 L340 178" fill="none" stroke="#D7B364" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+          <path d="M340 178 L400 120 L470 60" fill="none" stroke="#8A8B90" stroke-width="2.4" stroke-dasharray="6 6" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="200" cy="96" r="5" fill="#0F1013" stroke="#D7B364" stroke-width="2"/>
+          <circle cx="120" cy="232" r="5" fill="#0F1013" stroke="#8A8B90" stroke-width="2"/>
+          <circle cx="340" cy="178" r="6" fill="#D7B364"/>
+          <path d="M340 178 L340 264 L250 264" stroke="#D7B364" stroke-width="1" fill="none"/>
+          <text x="70" y="268" fill="#D7B364" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="11.5" letter-spacing="2">TERUGTREKKING</text>
+          <text x="10" y="330" fill="#767880" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="10.5" letter-spacing="2">SCHEMATISCH — GEEN KOERSEN, GEEN UITKOMSTEN</text>
+          <text x="392" y="330" fill="#767880" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="10.5" letter-spacing="2">FIBONACCI</text>
+        </svg>
+      </div>
+      <figcaption class="cap">Fig. — banden zonder waarden. De uitleg staat in de server.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= TOEGANG ================= -->
+<section class="blk wrap">
+  <p class="kick">Wat open is en wat later komt <span></span> 15 kanalen</p>
+  <h3 class="big">Nu gratis. Premium <em>later</em>.</h3>
+  <div class="acc">
+    <div class="abox now">
+      <h4>Thuis — nu gratis</h4>
+      <ul>
+        <li>#nq-chart-ideeën</li><li>#es-chart-ideeën</li><li>#bitcoin</li>
+        <li>#altcoins</li><li>#markt</li><li>#vragen</li>
+        <li>#algemeen</li><li>#atlas-op-socials</li><li>#ondersteuning</li>
+      </ul>
+      <p class="n">Direct open zodra je de uitnodiging accepteert.</p>
+    </div>
+    <div class="abox">
+      <h4>Premium — opent later</h4>
+      <ul>
+        <li>#trade-setups</li><li>#marktupdates</li><li>#indicatoren</li>
+        <li>#sessie-opnames</li><li>#chart-ideeën</li><li>#premium-chat</li>
+      </ul>
+      <p class="n">Prijs en datum worden in de server aangekondigd. Er valt nu niets te kopen.</p>
+    </div>
+  </div>
+  <div class="introbtns" style="margin-top:28px">
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Word lid via Discord</a>
+    <a class="btn line" href="https://www.tiktok.com/@atlascapitalbv">@atlascapitalbv</a>
+  </div>
+</section>
+
+<!-- ================= SLOT ================= -->
+<div class="finale">
+  <div class="wrap">
+    <h2 style="font-size:clamp(32px,6.6vw,76px);font-weight:700;letter-spacing:-.035em;line-height:1">Stap <em style="font-style:normal;color:var(--gold)">01</em> duurt een seconde.</h2>
+    <p class="lead">Toegang is nu gratis.</p>
+    <div class="introbtns">
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW">Open de uitnodiging</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap fg">
+    <div>
+      <span class="mk"><svg aria-hidden="true"><use href="#atl"/></svg><b>Atlas Capital</b></span>
+      <p style="margin-top:10px">Proces. Discipline. Uitvoering.</p>
+    </div>
+    <div><h5>Discord</h5><p><a href="https://discord.gg/78Ff2GuSfW">discord.gg/78Ff2GuSfW</a></p></div>
+    <div><h5>TikTok</h5><p><a href="https://www.tiktok.com/@atlascapitalbv">@atlascapitalbv</a></p></div>
+    <div><h5>Markten</h5><p>NQ · ES · Bitcoin · altcoins</p></div>
+    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  </div>
+</footer>
+
+</body>
+</html>

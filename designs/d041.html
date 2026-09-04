@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="nl" data-lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 041 Cirkel Vierkant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   041 — CIRKEL VIERKANT
+   Pure geometry. One geometric sans. Three type sizes. Nothing else.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --paper:#F4F2EC;
+  --grey:#CFCBBF;
+  --grey-d:#5D5C58;
+
+  /* exactly three sizes */
+  --t1: clamp(1.95rem, 8.6vw, 9rem);   /* display */
+  --t2: clamp(1.05rem, 2.4vw, 1.6rem); /* mid */
+  --t3: clamp(0.78rem, 1.05vw, 0.92rem); /* small */
+
+  --bar: clamp(10px, 1.6vw, 18px);
+  --pad: clamp(18px, 5vw, 78px);
+}
+/* the display size is allowed to get truly large only once there is room for it */
+@media(min-width:1200px){ :root{ --t1: clamp(6.5rem, 10vw, 9.5rem); } }
+
+html{ color-scheme: light; }
+*{ box-sizing:border-box; }
+
+html,body{ margin:0; padding:0; }
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Unbounded", "Segoe UI", -apple-system, Helvetica, Arial, sans-serif;
+  font-weight:300;
+  font-size:var(--t3);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+
+/* ---------- primitives ---------- */
+.wrap{ max-width:1420px; margin:0 auto; padding-inline:var(--pad); }
+.bleed{ position:relative; overflow:clip; }
+
+h1,h2,h3,p,ul,ol,figure,blockquote{ margin:0; }
+ul{ list-style:none; padding:0; }
+a{ color:inherit; }
+
+.display{
+  font-weight:800;
+  font-size:var(--t1);
+  line-height:0.86;
+  letter-spacing:-0.045em;
+  text-transform:none;
+}
+.mid{ font-weight:500; font-size:var(--t2); line-height:1.15; letter-spacing:-0.02em; }
+.label{
+  font-weight:500; font-size:var(--t3); letter-spacing:0.24em;
+  text-transform:uppercase; line-height:1.2;
+}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; gap:0.8em;
+  font-family:inherit; font-weight:500; font-size:var(--t3);
+  letter-spacing:0.18em; text-transform:uppercase; text-decoration:none;
+  background:var(--ink); color:var(--paper);
+  padding:1.05em 1.6em; border:0; border-radius:0;
+  transition:background .18s linear, color .18s linear, transform .18s linear;
+}
+.btn .dot{ width:0.62em; height:0.62em; border-radius:50%; background:var(--gold); flex:none; }
+.btn:hover{ background:var(--gold); color:var(--ink); transform:translate(2px,-2px); }
+.btn:hover .dot{ background:var(--ink); }
+
+.btn-gold{ background:var(--gold); color:var(--ink); }
+.btn-gold .dot{ background:var(--ink); }
+.btn-gold:hover{ background:var(--ink); color:var(--paper); }
+.btn-gold:hover .dot{ background:var(--gold); }
+
+.btn-out{ background:transparent; color:var(--ink); box-shadow:inset 0 0 0 2px var(--ink); }
+.btn-out:hover{ background:var(--ink); color:var(--paper); }
+
+/* ---------- header ---------- */
+header.top{
+  border-bottom:2px solid var(--ink);
+  background:var(--paper);
+}
+.top-in{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding-block:clamp(14px,2vw,22px);
+}
+.mark{ display:flex; align-items:center; gap:14px; text-decoration:none; }
+.mark svg{ width:clamp(34px,4vw,44px); height:auto; display:block; }
+.mark b{ font-weight:800; letter-spacing:0.16em; font-size:var(--t3); text-transform:uppercase; }
+.mark span{ display:block; font-weight:300; letter-spacing:0.3em; font-size:0.72em; color:var(--grey-d); text-transform:uppercase; }
+
+/* ---------- hero ---------- */
+.hero{ position:relative; padding-block:clamp(40px,7vw,96px) clamp(60px,10vw,140px); overflow:clip; }
+
+.shape-circle{
+  position:absolute; z-index:0;
+  width:min(80vw, 860px); aspect-ratio:1/1; border-radius:50%;
+  background:var(--gold);
+  right:-16vw; top:clamp(30px,6vw,10px);
+  pointer-events:none;
+}
+.shape-square{
+  position:absolute; z-index:1;
+  width:min(34vw, 330px); aspect-ratio:1/1;
+  background:var(--ink);
+  right:8vw; top:clamp(180px,26vw,300px);
+  pointer-events:none;
+}
+.shape-bar{
+  position:absolute; z-index:2; left:-12vw; right:-12vw;
+  height:var(--bar); background:var(--ink);
+  top:clamp(150px,22vw,250px);
+  pointer-events:none;
+}
+.shape-ring{
+  position:absolute; z-index:1;
+  width:min(26vw,220px); aspect-ratio:1/1; border-radius:50%;
+  box-shadow:inset 0 0 0 var(--bar) var(--paper);
+  left:-6vw; bottom:-6vw;
+  pointer-events:none;
+}
+@media (prefers-reduced-motion: no-preference){
+  .shape-square{ animation: nudge 9s ease-in-out infinite alternate; }
+  @keyframes nudge{ from{ transform:translateY(0) rotate(0deg);} to{ transform:translateY(-14px) rotate(-4deg);} }
+}
+
+.hero-in{ position:relative; z-index:3; }
+.hero h1{ max-width:16ch; }
+.hero .eyebrow{ margin-bottom:clamp(22px,4vw,44px); display:flex; align-items:center; gap:14px; }
+.hero .eyebrow i{ width:44px; height:2px; background:var(--ink); display:block; flex:none; font-style:normal; }
+.hero p.lead{
+  font-size:var(--t2); font-weight:300; max-width:34ch; line-height:1.35;
+  margin-top:clamp(22px,3vw,34px); letter-spacing:-0.01em;
+}
+.hero .cta-row{ display:flex; flex-wrap:wrap; gap:14px; margin-top:clamp(28px,4vw,44px); align-items:center; }
+.hero .markets{ margin-top:clamp(30px,5vw,54px); display:flex; flex-wrap:wrap; gap:10px 26px; }
+.hero .markets li{ display:flex; align-items:center; gap:9px; letter-spacing:0.2em; text-transform:uppercase; }
+.hero .markets i{ width:9px; height:9px; background:var(--ink); display:block; flex:none; }
+.hero .markets li:nth-child(2) i{ border-radius:50%; background:var(--gold-lo); }
+.hero .markets li:nth-child(3) i{ transform:rotate(45deg); }
+.hero .markets li:nth-child(4) i{ border-radius:50% 50% 50% 0; }
+
+/* ---------- section chrome ---------- */
+.sec{ padding-block:clamp(52px,8vw,120px); border-top:2px solid var(--ink); }
+.sec-head{
+  display:grid; grid-template-columns: auto 1fr; gap:clamp(18px,3vw,40px);
+  align-items:start; margin-bottom:clamp(28px,4vw,56px);
+}
+.num{
+  font-weight:800; font-size:var(--t2); letter-spacing:-0.02em;
+  width:clamp(48px,6vw,74px); height:clamp(48px,6vw,74px); flex:none;
+  display:grid; place-items:center; background:var(--gold); color:var(--ink);
+}
+.num.sq{ border-radius:0; }
+.num.ci{ border-radius:50%; }
+.num.tri{ background:transparent; color:var(--ink); }
+.sec-head > div{ min-width:0; }
+.sec-head h2{ font-weight:800; font-size:var(--t1); line-height:0.88; letter-spacing:-0.045em; max-width:14ch; overflow-wrap:break-word; }
+.sec-head .sub{ margin-top:14px; max-width:44ch; color:var(--grey-d); overflow-wrap:break-word; }
+.hero h1, .live h3, .acc h3, .close h2{ overflow-wrap:break-word; }
+
+/* ---------- founder ---------- */
+.founder{ display:grid; grid-template-columns: 1fr; gap:clamp(24px,4vw,48px); }
+@media(min-width:900px){ .founder{ grid-template-columns: 1.15fr 0.85fr; } }
+.quote-plate{ background:var(--ink); color:var(--paper); padding:clamp(24px,4vw,52px); position:relative; overflow:clip; }
+.quote-plate blockquote{ font-size:var(--t2); font-weight:300; line-height:1.45; letter-spacing:-0.01em; position:relative; z-index:2; }
+.quote-plate .qmark{
+  position:absolute; right:-3vw; bottom:-8vw; width:min(40vw,300px); aspect-ratio:1/1;
+  border-radius:50%; background:var(--gold-lo); z-index:1;
+}
+.quote-plate .attrib{ margin-top:clamp(20px,3vw,34px); position:relative; z-index:2; display:flex; align-items:center; gap:12px; color:var(--gold); }
+.quote-plate .attrib i{ width:26px; height:2px; background:var(--gold); display:block; }
+.years{ background:var(--gold); display:grid; place-items:center; padding:clamp(30px,5vw,60px) 20px; text-align:center; }
+.years b{ display:block; font-weight:800; font-size:var(--t1); line-height:0.85; letter-spacing:-0.05em; }
+.years span{ display:block; margin-top:14px; letter-spacing:0.24em; text-transform:uppercase; }
+
+/* ---------- curriculum ---------- */
+.topics{ display:grid; grid-template-columns:repeat(auto-fit, minmax(158px,1fr)); gap:2px; background:var(--ink); border:2px solid var(--ink); }
+.topics li{ background:var(--paper); padding:clamp(16px,2.2vw,26px); display:flex; flex-direction:column; gap:clamp(18px,2.6vw,32px); min-height:clamp(150px,17vw,210px); transition:background .16s linear; }
+.topics li:hover{ background:var(--gold); }
+/* A tile clips its own contents. This also removes 18px of phantom scroll
+   area that the grid contributed at narrow widths: every box inside the
+   tile measures within its parent, yet the page reported the extra width
+   until the tile became a clipping context. Only the background changes
+   on hover, so nothing visible is lost. */
+.topics li{ overflow:clip; }
+.topics svg{ width:clamp(34px,4vw,48px); height:auto; display:block; }
+.topics .tname{ margin-top:auto; font-weight:500; font-size:var(--t2); letter-spacing:-0.02em; line-height:1.05; }
+.topics .tnum{ letter-spacing:0.22em; color:var(--grey-d); }
+.topics li:hover .tnum{ color:var(--ink); }
+
+/* ---------- model / schematic ---------- */
+.model-frame{ border:2px solid var(--ink); background:var(--paper); }
+.model-scroll{ overflow-x:auto; }
+.model-scroll svg{ display:block; width:100%; min-width:560px; height:auto; }
+.model-legend{ border-top:2px solid var(--ink); display:grid; grid-template-columns:1fr; }
+@media(min-width:760px){ .model-legend{ grid-template-columns:repeat(3,1fr); } }
+.model-legend div{ padding:clamp(16px,2.4vw,26px); }
+.model-legend div + div{ border-top:2px solid var(--ink); }
+@media(min-width:760px){ .model-legend div + div{ border-top:0; border-left:2px solid var(--ink); } }
+.model-legend b{ display:flex; align-items:center; gap:10px; font-weight:500; font-size:var(--t2); letter-spacing:-0.02em; }
+.model-legend b i{ width:14px; height:14px; background:var(--gold); display:block; flex:none; }
+.model-legend div:nth-child(2) b i{ border-radius:50%; }
+.model-legend div:nth-child(3) b i{ background:var(--ink); transform:rotate(45deg); }
+.model-legend p{ margin-top:10px; color:var(--grey-d); max-width:32ch; }
+
+/* ---------- channels ---------- */
+.chan-grid{ display:grid; grid-template-columns:1fr; gap:2px; background:var(--ink); border:2px solid var(--ink); }
+@media(min-width:860px){ .chan-grid{ grid-template-columns:1.35fr 1fr; } }
+.chan-col{ background:var(--paper); padding:clamp(20px,3vw,38px); }
+.chan-col.dark{ background:var(--ink); color:var(--paper); }
+.chan-col h3{ display:flex; align-items:center; gap:12px; font-weight:800; font-size:var(--t2); letter-spacing:-0.02em; }
+.chan-col h3 i{ width:16px; height:16px; background:var(--gold); display:block; flex:none; }
+.chan-col.dark h3 i{ border-radius:50%; }
+.chan-col .state{ margin-top:8px; letter-spacing:0.22em; text-transform:uppercase; color:var(--grey-d); }
+.chan-col.dark .state{ color:var(--gold); }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:clamp(20px,3vw,30px); }
+.chips li{ border:2px solid var(--ink); padding:0.55em 0.85em; letter-spacing:0.02em; word-break:break-word; }
+.chan-col.dark .chips li{ border-color:var(--gold-lo); color:var(--gold-hi); }
+
+/* ---------- live ---------- */
+.live{ position:relative; background:var(--ink); color:var(--paper); padding:clamp(30px,5vw,70px); overflow:clip; }
+.live .lc{ position:absolute; width:min(60vw,420px); aspect-ratio:1/1; border-radius:50%; background:var(--gold); right:-14vw; top:-18vw; }
+.live-in{ position:relative; z-index:2; display:grid; gap:clamp(18px,3vw,30px); }
+.live h3{ font-weight:800; font-size:var(--t1); line-height:0.88; letter-spacing:-0.045em; max-width:12ch; }
+.live p{ font-size:var(--t2); font-weight:300; max-width:36ch; line-height:1.35; }
+
+/* ---------- access ---------- */
+.access{ display:grid; grid-template-columns:minmax(0,1fr); gap:2px; background:var(--ink); border:2px solid var(--ink); }
+@media(min-width:820px){ .access{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); } }
+.acc{ background:var(--paper); padding:clamp(22px,3.4vw,44px); display:flex; flex-direction:column; gap:16px; }
+.acc.gold{ background:var(--gold); }
+.acc .badge{ align-self:flex-start; letter-spacing:0.24em; text-transform:uppercase; border:2px solid var(--ink); padding:0.4em 0.7em; }
+.acc h3{ font-weight:800; font-size:var(--t1); line-height:0.88; letter-spacing:-0.05em; }
+.acc p{ max-width:32ch; color:var(--grey-d); }
+.acc.gold p{ color:var(--ink); }
+.acc .btn{ align-self:flex-start; margin-top:auto; }
+
+/* ---------- closing ---------- */
+.close{ position:relative; text-align:left; padding-block:clamp(70px,12vw,170px); overflow:clip; border-top:2px solid var(--ink); }
+.close .bigci{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:min(86vw,760px); aspect-ratio:1/1; border-radius:50%; background:var(--gold); z-index:0;
+}
+@media (prefers-reduced-motion: no-preference){
+  .close .bigci{ animation: breathe 12s ease-in-out infinite alternate; }
+  @keyframes breathe{ from{ transform:translate(-50%,-50%) scale(1); } to{ transform:translate(-50%,-50%) scale(1.05); } }
+}
+.close .cbar{ position:absolute; left:-10vw; right:-10vw; height:var(--bar); background:var(--ink); top:50%; z-index:1; }
+.close-in{ position:relative; z-index:2; text-align:center; display:grid; justify-items:center; gap:clamp(22px,3vw,34px); }
+.close h2{ font-weight:800; font-size:var(--t1); line-height:0.86; letter-spacing:-0.05em; max-width:13ch; }
+
+/* ---------- footer ---------- */
+footer{ background:var(--ink); color:var(--paper); padding-block:clamp(38px,6vw,72px); }
+.foot-grid{ display:grid; grid-template-columns:1fr; gap:clamp(26px,4vw,44px); }
+@media(min-width:860px){ .foot-grid{ grid-template-columns:1.2fr 1fr 1fr; } }
+footer .label{ color:var(--gold); }
+footer a{ text-decoration:none; display:inline-flex; align-items:center; gap:10px; }
+footer a:hover{ color:var(--gold-hi); }
+.foot-links{ display:grid; gap:12px; margin-top:16px; }
+.foot-mark svg{ width:56px; height:auto; display:block; }
+.risk{ margin-top:clamp(30px,5vw,56px); border-top:2px solid var(--gold-lo); padding-top:20px; color:var(--grey); max-width:70ch; }
+.colofon{ margin-top:14px; color:var(--grey-d); letter-spacing:0.18em; text-transform:uppercase; }
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+
+.top-in{ flex-wrap:wrap; justify-content:flex-end; }
+.top-in > .mark{ margin-right:auto; }
+.langsw{ display:flex; align-items:stretch; flex:none; box-shadow:inset 0 0 0 2px var(--ink); }
+.langsw button{
+  font-family:inherit; font-weight:500; font-size:var(--t3);
+  letter-spacing:0.18em; text-transform:uppercase; line-height:1;
+  background:transparent; color:var(--ink); border:0; border-radius:0;
+  padding:1.05em 0.85em; cursor:pointer;
+  transition:background .18s linear, color .18s linear;
+}
+.langsw button + button{ box-shadow:inset 2px 0 0 var(--ink); }
+.langsw button[aria-pressed="true"]{ background:var(--ink); color:var(--paper); }
+.langsw button:hover{ background:var(--gold); color:var(--ink); }
+.langsw button:focus-visible{ outline:3px solid var(--gold-lo); outline-offset:3px; }
+
+/* an accessible name that follows the chosen language */
+.vh{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; }
+
+/* focus */
+a:focus-visible, .btn:focus-visible{ outline:3px solid var(--gold-lo); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="top">
+  <div class="wrap top-in">
+    <a class="mark" href="#top" aria-label="Atlas Capital">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" fill="#D7B364"/>
+        <rect x="17" y="17" width="30" height="30" fill="#08090B"/>
+      </svg>
+      <b>Atlas Capital<span>Proces · Discipline · Uitvoering</span></b>
+    </a>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+      <span class="dot" aria-hidden="true"></span> Discord
+    </a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="shape-circle" aria-hidden="true"></div>
+  <div class="shape-bar" aria-hidden="true"></div>
+  <div class="shape-square" aria-hidden="true"></div>
+  <div class="shape-ring" aria-hidden="true"></div>
+  <div class="wrap hero-in">
+    <p class="label eyebrow"><i aria-hidden="true"></i> <span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></p>
+    <h1 class="display"><span lang="nl">De markt heeft een vorm.</span><span lang="en">The market has a shape.</span></h1>
+    <p class="lead"><span lang="nl">Nederlandse trading-community. Educatie, structuur en de markten van vandaag.</span><span lang="en">Dutch trading community. Education, structure and the markets of today.</span></p>
+    <div class="cta-row">
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+        <span class="dot" aria-hidden="true"></span> <span lang="nl">Kom binnen op Discord</span><span lang="en">Come inside on Discord</span>
+      </a>
+      <a class="btn btn-out" href="#educatie"><span lang="nl">De leerlijn</span><span lang="en">The curriculum</span></a>
+    </div>
+    <ul class="markets">
+      <li><i aria-hidden="true"></i> NQ</li>
+      <li><i aria-hidden="true"></i> ES</li>
+      <li><i aria-hidden="true"></i> Bitcoin</li>
+      <li><i aria-hidden="true"></i> Altcoins</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 01 FOUNDER ============ -->
+<section class="sec" id="oprichter">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num ci" aria-hidden="true">01</div>
+      <div>
+        <h2><span lang="nl">Wie het bouwt</span><span lang="en">Who builds it</span></h2>
+        <p class="sub"><span lang="nl">In zijn eigen woorden. Niets meer, niets minder.</span><span lang="en">In his own words. Nothing more, nothing less.</span></p>
+      </div>
+    </div>
+    <div class="founder">
+      <div class="quote-plate">
+        <div class="qmark" aria-hidden="true"></div>
+        <blockquote>
+          <span lang="nl">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles
+          meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik
+          gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de
+          markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een
+          community die samen beter wil worden.</span><span lang="en">I've been involved in trading for over 10 years now, and during that time I've experienced
+          pretty much everything: wins, losses, mistakes, growth, and a lot of lessons. I built Atlas
+          Capital to share that experience, bring traders together, and show how I approach the markets
+          on a daily basis. No get-rich-quick promises, just real setups, education, and a community
+          focused on improving together.</span>
+        </blockquote>
+        <p class="label attrib"><i aria-hidden="true"></i> <span lang="nl">De oprichter van Atlas Capital</span><span lang="en">The founder of Atlas Capital</span></p>
+      </div>
+      <div class="years">
+        <div>
+          <b>10+</b>
+          <span><span lang="nl">jaar actief</span><span lang="en">years active</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 CURRICULUM ============ -->
+<section class="sec" id="educatie">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num sq" aria-hidden="true">02</div>
+      <div>
+        <h2><span lang="nl">10 onderwerpen</span><span lang="en">10 topics</span></h2>
+        <p class="sub"><span lang="nl">De leerlijn. Elk onderwerp een vorm, elke vorm een idee.</span><span lang="en">The curriculum. Each topic a shape, each shape an idea.</span></p>
+      </div>
+    </div>
+    <ul class="topics">
+      <li>
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M2 30 L14 30 L14 10 L38 10" fill="none" stroke="#08090B" stroke-width="4"/><circle cx="14" cy="10" r="5" fill="#D7B364"/></svg>
+        <span class="tname"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span><span class="label tnum">01</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M3 32 L17 8 L23 20 L37 4" fill="none" stroke="#08090B" stroke-width="4"/><rect x="14" y="5" width="6" height="6" fill="#D7B364"/></svg>
+        <span class="tname">SMT</span><span class="label tnum">02</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="4" y="4" width="32" height="10" fill="#08090B"/><rect x="4" y="17" width="32" height="9" fill="#D7B364"/><rect x="4" y="29" width="32" height="7" fill="#08090B"/></svg>
+        <span class="tname">FVG</span><span class="label tnum">03</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="4" y="4" width="32" height="9" fill="#D7B364"/><rect x="4" y="16" width="32" height="9" fill="#08090B"/><rect x="4" y="28" width="32" height="8" fill="#D7B364"/></svg>
+        <span class="tname">IFVG</span><span class="label tnum">04</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="12" width="30" height="16" fill="#08090B"/><rect x="11" y="18" width="18" height="4" fill="#D7B364"/></svg>
+        <span class="tname">Orderblocks</span><span class="label tnum">05</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 34 A30 30 0 0 1 34 4" fill="none" stroke="#08090B" stroke-width="4"/><path d="M4 22 H36 M4 30 H36" stroke="#D7B364" stroke-width="3"/></svg>
+        <span class="tname">Fibonacci</span><span class="label tnum">06</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16" fill="none" stroke="#08090B" stroke-width="4"/><path d="M20 20 L20 6 M20 20 L31 26" stroke="#D7B364" stroke-width="4" stroke-linecap="square"/></svg>
+        <span class="tname"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span><span class="label tnum">07</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 10 H36 M4 30 H36" stroke="#08090B" stroke-width="4"/><path d="M20 4 L20 36" stroke="#D7B364" stroke-width="4"/><circle cx="20" cy="30" r="5" fill="#D7B364"/></svg>
+        <span class="tname"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span><span class="label tnum">08</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4 L36 34 L4 34 Z" fill="none" stroke="#08090B" stroke-width="4"/><rect x="16" y="24" width="8" height="8" fill="#D7B364"/></svg>
+        <span class="tname"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span><span class="label tnum">09</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 20 A16 16 0 0 1 36 20 Z" fill="#08090B"/><path d="M36 20 A16 16 0 0 1 4 20 Z" fill="#D7B364"/></svg>
+        <span class="tname"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span><span class="label tnum">10</span>
+      </li>
+    </ul>
+    <div class="cta-row" style="display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(24px,3.5vw,40px);">
+      <a class="btn btn-gold" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+        <span class="dot" aria-hidden="true"></span> <span lang="nl">Volg de leerlijn op Discord</span><span lang="en">Follow it on Discord</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 MODEL ============ -->
+<section class="sec" id="model">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num sq" aria-hidden="true">03</div>
+      <div>
+        <h2><span lang="nl">Het model, schematisch</span><span lang="en">The model, schematic</span></h2>
+        <p class="sub"><span lang="nl">Een tekening van een idee. Geen uitslag, geen niveau, geen datum.</span><span lang="en">A drawing of an idea. No outcome, no level, no date.</span></p>
+      </div>
+    </div>
+
+    <div class="model-frame">
+      <div class="model-scroll">
+        <span class="vh" id="d041-model-alt"><span lang="nl">Schematische tekening: een sweep van liquiditeit, een fair value gap en de terugkeer naar dat gebied.</span><span lang="en">Schematic drawing: a sweep of liquidity, a fair value gap and the return to that area.</span></span>
+        <svg viewBox="0 0 900 420" role="img" aria-labelledby="d041-model-alt">
+          <!-- ground -->
+          <rect x="0" y="0" width="900" height="420" fill="#F4F2EC"/>
+          <!-- construction grid -->
+          <g stroke="#CFCBBF" stroke-width="1">
+            <path d="M0 60 H900 M0 140 H900 M0 220 H900 M0 300 H900 M0 380 H900"/>
+            <path d="M120 0 V420 M300 0 V420 M480 0 V420 M660 0 V420 M840 0 V420"/>
+          </g>
+
+          <!-- liquidity line -->
+          <path d="M40 110 H860" stroke="#08090B" stroke-width="3" stroke-dasharray="14 10"/>
+          <circle cx="860" cy="110" r="7" fill="#08090B"/>
+
+          <!-- the FVG band: a gold rectangle -->
+          <rect x="330" y="196" width="530" height="62" fill="#D7B364"/>
+
+          <!-- schematic candles built from pure rectangles -->
+          <g fill="#08090B">
+            <rect x="70" y="240" width="26" height="70"/>
+            <rect x="80" y="215" width="6" height="120"/>
+            <rect x="130" y="210" width="26" height="80"/>
+            <rect x="140" y="185" width="6" height="130"/>
+            <rect x="190" y="180" width="26" height="70"/>
+            <rect x="200" y="150" width="6" height="130"/>
+          </g>
+          <!-- the sweep candle, gold-topped -->
+          <g>
+            <rect x="250" y="86" width="6" height="180" fill="#08090B"/>
+            <rect x="240" y="140" width="26" height="110" fill="#08090B"/>
+            <rect x="240" y="140" width="26" height="20" fill="#D7B364"/>
+          </g>
+          <!-- displacement candle creating the gap -->
+          <g>
+            <rect x="307" y="130" width="6" height="200" fill="#08090B"/>
+            <rect x="297" y="150" width="26" height="160" fill="#08090B"/>
+          </g>
+          <!-- candles returning to the band -->
+          <g fill="#08090B">
+            <rect x="370" y="270" width="26" height="60"/>
+            <rect x="380" y="255" width="6" height="95"/>
+            <rect x="430" y="240" width="26" height="55"/>
+            <rect x="440" y="225" width="6" height="90"/>
+            <rect x="490" y="215" width="26" height="50"/>
+            <rect x="500" y="200" width="6" height="85"/>
+          </g>
+
+          <!-- return circle marker -->
+          <circle cx="560" cy="227" r="34" fill="none" stroke="#08090B" stroke-width="5"/>
+          <circle cx="560" cy="227" r="9" fill="#08090B"/>
+
+          <!-- continuation as a plain geometric run -->
+          <path d="M594 214 L660 176 L700 196 L780 128 L856 148" fill="none" stroke="#08090B" stroke-width="5" stroke-linejoin="miter"/>
+
+          <!-- callouts, concept-only -->
+          <g font-family="Unbounded, Segoe UI, Arial, sans-serif" font-size="15" font-weight="500" fill="#08090B" letter-spacing="2">
+            <path d="M660 110 H820" stroke="#08090B" stroke-width="2"/>
+            <text x="660" y="98" lang="nl">LIQUIDITEIT</text><text x="660" y="98" lang="en">LIQUIDITY</text>
+
+            <path d="M330 196 L330 168 L470 168" stroke="#08090B" stroke-width="2" fill="none"/>
+            <text x="345" y="158">FVG</text>
+
+            <path d="M266 140 L266 70 L200 70" stroke="#08090B" stroke-width="2" fill="none"/>
+            <text x="130" y="62">SWEEP</text>
+
+            <path d="M560 261 L560 330 L640 330" stroke="#08090B" stroke-width="2" fill="none"/>
+            <text x="566" y="352" lang="nl">REACTIE</text><text x="566" y="352" lang="en">REACTION</text>
+          </g>
+
+          <!-- axis-free frame corners -->
+          <g stroke="#08090B" stroke-width="4" fill="none">
+            <path d="M18 18 H60 M18 18 V60"/>
+            <path d="M882 402 H840 M882 402 V360"/>
+          </g>
+        </svg>
+      </div>
+      <div class="model-legend">
+        <div>
+          <b><i aria-hidden="true"></i> <span lang="nl">De zone</span><span lang="en">The zone</span></b>
+          <p><span lang="nl">Een onbalans in de beweging. Een vlak, geen lijn.</span><span lang="en">An imbalance in the move. An area, not a line.</span></p>
+        </div>
+        <div>
+          <b><i aria-hidden="true"></i> <span lang="nl">De terugkeer</span><span lang="en">The return</span></b>
+          <p><span lang="nl">Prijs komt terug naar het vlak. Daar begint het lezen.</span><span lang="en">Price comes back to the area. That is where the reading starts.</span></p>
+        </div>
+        <div>
+          <b><i aria-hidden="true"></i> <span lang="nl">Het besluit</span><span lang="en">The decision</span></b>
+          <p><span lang="nl">Wel of niet. Beide zijn een uitvoering van hetzelfde proces.</span><span lang="en">Yes or no. Both are an execution of the same process.</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 CHANNELS ============ -->
+<section class="sec" id="kanalen">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num ci" aria-hidden="true">04</div>
+      <div>
+        <h2><span lang="nl">15 kanalen</span><span lang="en">15 channels</span></h2>
+        <p class="sub"><span lang="nl">Thuis staat open. Premium opent later.</span><span lang="en">Home is open. Premium opens later.</span></p>
+      </div>
+    </div>
+    <div class="chan-grid">
+      <div class="chan-col">
+        <h3><i aria-hidden="true"></i> <span lang="nl">Thuis</span><span lang="en">Home</span></h3>
+        <p class="label state"><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></p>
+        <ul class="chips">
+          <li>#nq-chart-ideeën</li>
+          <li>#es-chart-ideeën</li>
+          <li>#bitcoin</li>
+          <li>#altcoins</li>
+          <li>#markt</li>
+          <li>#vragen</li>
+          <li>#algemeen</li>
+          <li>#atlas-op-socials</li>
+          <li>#ondersteuning</li>
+        </ul>
+      </div>
+      <div class="chan-col dark">
+        <h3><i aria-hidden="true"></i> Premium</h3>
+        <p class="label state"><span lang="nl">Opent later</span><span lang="en">Opens later</span></p>
+        <ul class="chips">
+          <li>#trade-setups</li>
+          <li>#marktupdates</li>
+          <li>#indicatoren</li>
+          <li>#sessie-opnames</li>
+          <li>#chart-ideeën</li>
+          <li>#premium-chat</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 LIVE ============ -->
+<section class="sec" id="live">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num sq" aria-hidden="true">05</div>
+      <div>
+        <h2><span lang="nl">Live meekijken</span><span lang="en">Watching live</span></h2>
+        <p class="sub"><span lang="nl">Niet opgenomen. Gewoon meekijken terwijl het gebeurt.</span><span lang="en">Not recorded. Just watch while it happens.</span></p>
+      </div>
+    </div>
+    <div class="live">
+      <div class="lc" aria-hidden="true"></div>
+      <div class="live-in">
+        <h3><span lang="nl">Hij handelt live in de server.</span><span lang="en">He trades live in the server.</span></h3>
+        <p><span lang="nl">Tijden worden in de server aangekondigd. Zit erbij, stel je vraag, kijk mee.</span><span lang="en">Times are announced in the server. Sit in, ask your question, watch along.</span></p>
+        <div>
+          <a class="btn btn-gold" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+            <span class="dot" aria-hidden="true"></span> <span lang="nl">Zit erbij op Discord</span><span lang="en">Sit in on Discord</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 ACCESS ============ -->
+<section class="sec" id="toegang">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num ci" aria-hidden="true">06</div>
+      <div>
+        <h2><span lang="nl">Toegang</span><span lang="en">Access</span></h2>
+        <p class="sub"><span lang="nl">Eerlijk en kort: nu open, later meer.</span><span lang="en">Honest and short: open now, more later.</span></p>
+      </div>
+    </div>
+    <div class="access">
+      <div class="acc gold">
+        <span class="label badge"><span lang="nl">Nu</span><span lang="en">Now</span></span>
+        <h3><span lang="nl">Gratis</span><span lang="en">Free</span></h3>
+        <p><span lang="nl">De hele Thuis-kant staat open. Charts, markt, vragen en de community.</span><span lang="en">The whole Home side is open. Charts, market, questions and the community.</span></p>
+        <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+          <span class="dot" aria-hidden="true"></span> <span lang="nl">Nu binnenlopen</span><span lang="en">Walk in now</span>
+        </a>
+      </div>
+      <div class="acc">
+        <span class="label badge"><span lang="nl">Later</span><span lang="en">Later</span></span>
+        <h3>Premium</h3>
+        <p><span lang="nl">Opent later. Prijs en datum worden in de server aangekondigd — nergens anders.</span><span lang="en">Opens later. Price and date are announced in the server — nowhere else.</span></p>
+        <a class="btn btn-out" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span lang="nl">Blijf op de hoogte</span><span lang="en">Stay in the loop</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section class="close">
+  <div class="bigci" aria-hidden="true"></div>
+  <div class="cbar" aria-hidden="true"></div>
+  <div class="wrap close-in">
+    <h2><span lang="nl">Eén cirkel. Eén klik.</span><span lang="en">One circle. One click.</span></h2>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+      <span class="dot" aria-hidden="true"></span> <span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span>
+    </a>
+    <p class="label"><span lang="nl">Gratis · Nederlands · NQ, ES, Bitcoin, altcoins</span><span lang="en">Free · Dutch · NQ, ES, Bitcoin, altcoins</span></p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-mark">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="16" cy="16" r="15" fill="#D7B364"/>
+          <rect x="17" y="17" width="30" height="30" fill="#F4F2EC"/>
+        </svg>
+        <p class="label" style="margin-top:16px;">Atlas Capital</p>
+        <p style="margin-top:10px;color:var(--grey);max-width:28ch;"><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></p>
+      </div>
+      <div>
+        <p class="label">Community</p>
+        <div class="foot-links">
+          <a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="dot" style="width:9px;height:9px;background:#D7B364;display:block;border-radius:50%;"></span> Discord</a>
+          <a href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener"><span style="width:9px;height:9px;background:#D7B364;display:block;"></span> TikTok @atlascapitalbv</a>
+        </div>
+      </div>
+      <div>
+        <p class="label"><span lang="nl">Markten</span><span lang="en">Markets</span></p>
+        <div class="foot-links">
+          <span>NQ · ES</span>
+          <span>Bitcoin · altcoins</span>
+        </div>
+      </div>
+    </div>
+    <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
+    <p class="colofon label">041 — Cirkel Vierkant</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 035 Route</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================
+   ATLAS CAPITAL — 035 ROUTE
+   A route map read top to bottom. One gold path threads down the
+   whole page, meandering from leg to leg, and every section is a
+   waypoint on it. The ground flips ink / paper at each hard seam.
+   Type: DM Sans.
+   ========================================================== */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --ink-2:#101216;
+  --paper:#F4F2EC;
+  --paper-2:#EAE6DA;
+  --muted:#A5A6A8;
+  --ink-70:#35363B;
+  --ink-45:#6B6C71;
+  --rule-d:rgba(215,179,100,.24);
+  --rule-l:#CDC7B6;
+  --sans:"DM Sans", "Segoe UI", -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  --mono:ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --rail:clamp(54px,8vw,116px);
+}
+
+*{box-sizing:border-box}
+html{color-scheme:light;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.6;font-weight:400;
+  overflow-x:hidden;
+}
+h1,h2,h3{margin:0;font-weight:500;line-height:1.05;letter-spacing:-.03em}
+p{margin:0}
+a{color:inherit}
+ul{margin:0;padding:0;list-style:none}
+
+.wrap{max-width:1240px;margin:0 auto;padding-left:clamp(16px,4vw,44px);padding-right:clamp(16px,4vw,44px)}
+.mono{font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:60;background:var(--paper);
+  border-bottom:1px solid var(--ink);
+}
+.hd{
+  max-width:1240px;margin:0 auto;padding:13px clamp(16px,4vw,44px);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.brand b{font-size:15px;letter-spacing:.36em;text-transform:uppercase;font-weight:700;white-space:nowrap}
+.brand i{font-style:normal;font-weight:300;color:var(--ink-45)}
+.hd nav{display:flex;gap:clamp(10px,2vw,22px);flex-wrap:wrap}
+.hd nav a{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-45);text-decoration:none}
+.hd nav a:hover{color:var(--ink)}
+@media (max-width:840px){ .hd nav{display:none} }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;
+  padding:14px 24px;border-radius:2px;
+  color:var(--ink);background:linear-gradient(180deg,var(--gold-hi),var(--gold) 58%,var(--gold-lo));
+  border:1px solid var(--gold-lo);
+  transition:filter .22s ease, transform .22s ease;
+}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn--lg{font-size:12px;padding:18px 32px}
+.btn--dark{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn--dark:hover{background:#1A1C21;filter:none}
+.btn--outl{background:none;border:1px solid currentColor;color:inherit}
+.btn--outl:hover{background:rgba(215,179,100,.14);filter:none}
+
+/* ---------- the leg ---------- */
+.leg{position:relative;overflow:hidden}
+.leg--ink{background:var(--ink);color:#EDECE8}
+.leg--paper{background:var(--paper);color:var(--ink)}
+.leg--paper2{background:var(--paper-2);color:var(--ink)}
+.seam{height:3px;background:var(--gold);position:relative;z-index:5}
+
+.rail{position:absolute;left:0;top:0;bottom:0;width:var(--rail);z-index:1;pointer-events:none}
+.rail svg{width:100%;height:100%;display:block}
+.leg-inner{
+  position:relative;z-index:3;
+  max-width:1240px;margin:0 auto;
+  padding:clamp(46px,7vw,104px) clamp(16px,4vw,44px) clamp(46px,7vw,104px) calc(var(--rail) + clamp(14px,2.6vw,40px));
+}
+.marker{
+  position:absolute;z-index:4;
+  left:calc(var(--rail) / 2);top:clamp(46px,7vw,104px);
+  transform:translate(-50%,-50%);
+}
+.leg-top{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-bottom:clamp(16px,2.6vw,26px)}
+.leg-top .wp{font-family:var(--mono);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-lo)}
+.leg--ink .leg-top .wp{color:var(--gold)}
+.leg-top .crs{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+h2{font-size:clamp(28px,5.4vw,58px);letter-spacing:-.04em;font-weight:500}
+.leg p.sub{margin-top:14px;max-width:44ch;font-weight:300;opacity:.82;font-size:clamp(16px,1.9vw,19px)}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(34px,5vw,66px);padding-bottom:clamp(28px,4vw,54px)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(24px,4vw,58px);align-items:center}
+@media (max-width:940px){ .hero-grid{grid-template-columns:1fr} }
+h1{font-size:clamp(42px,8.4vw,96px);font-weight:700;letter-spacing:-.05em;line-height:.95}
+h1 span{color:var(--gold-lo);font-weight:300}
+.hero p.lead{margin-top:22px;font-size:clamp(16px,2vw,20px);color:var(--ink-70);max-width:40ch;font-weight:300}
+.hero .cta{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+.hero .kv{
+  margin-top:32px;padding-top:16px;border-top:1px solid var(--ink);
+  display:flex;gap:clamp(14px,3vw,32px);flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-45);
+}
+.hero .kv b{color:var(--ink);font-weight:500}
+.overview{width:100%;height:auto;display:block;border:1px solid var(--ink)}
+
+/* ---------- founder ---------- */
+.quote{font-size:clamp(19px,2.6vw,28px);line-height:1.42;font-weight:300;letter-spacing:-.02em;max-width:26ch}
+.quote--wide{max-width:44ch}
+.qmeta{
+  margin-top:24px;padding-top:14px;border-top:1px solid var(--rule-d);
+  display:flex;gap:22px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+}
+.qmeta b{color:var(--gold);font-weight:500}
+
+/* ---------- topic trail ---------- */
+.trail{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 clamp(24px,4vw,60px)}
+.trail li{
+  position:relative;padding:14px 0 14px 40px;
+  border-bottom:1px solid var(--rule-l);
+  transition:padding-left .28s ease;
+}
+.trail li:hover{padding-left:48px}
+.trail li::before{
+  content:"";position:absolute;left:11px;top:0;bottom:0;width:2px;
+  background:repeating-linear-gradient(180deg,var(--gold-lo) 0 5px,transparent 5px 11px);
+}
+.trail li::after{
+  content:"";position:absolute;left:6px;top:50%;width:12px;height:12px;margin-top:-6px;
+  border-radius:50%;background:var(--paper);border:2px solid var(--gold-lo);
+}
+.trail li b{display:block;font-size:clamp(18px,2.4vw,23px);font-weight:500;letter-spacing:-.025em;overflow-wrap:anywhere}
+.trail li span{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-45)}
+.trail-foot{
+  margin-top:22px;display:flex;gap:18px;justify-content:space-between;flex-wrap:wrap;align-items:center;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-45);
+}
+
+/* ---------- figure ---------- */
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule-d);background:#0C0E12}
+.scroller svg{display:block;min-width:680px;width:100%;height:auto}
+.figcap{
+  margin-top:14px;display:flex;gap:18px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+}
+.figcap b{color:var(--gold);font-weight:500}
+
+/* ---------- channels ---------- */
+.stops{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:clamp(20px,3.4vw,46px)}
+.stops h3{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;
+  padding-bottom:12px;border-bottom:2px solid var(--ink);
+  display:flex;justify-content:space-between;gap:12px;font-weight:500;
+}
+.stops h3 span{color:var(--gold-lo)}
+.stops li{
+  display:flex;align-items:center;gap:11px;padding:11px 0;
+  border-bottom:1px solid var(--rule-l);font-size:18px;min-width:0;
+}
+.stops li svg{flex:none;color:var(--gold-lo)}
+.stops li .n{overflow-wrap:anywhere}
+.stops li .t{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--ink-45);flex:none}
+
+/* ---------- live ---------- */
+.livegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:clamp(20px,3.4vw,44px);align-items:center}
+.livegrid h3{font-size:clamp(24px,3.8vw,38px);font-weight:500;letter-spacing:-.03em}
+.livegrid p{margin-top:14px;max-width:38ch;font-weight:300;color:var(--muted)}
+.dot{
+  display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--gold);margin-right:11px;
+  vertical-align:middle;animation:g035p 2.5s ease-in-out infinite;
+}
+@keyframes g035p{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
+@media (prefers-reduced-motion:reduce){ .dot{animation:none;opacity:1} }
+
+/* ---------- access ---------- */
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:clamp(18px,3vw,32px)}
+.card{border:1px solid var(--rule-l);background:var(--paper);padding:clamp(22px,3.2vw,38px)}
+.card--soft{border-style:dashed;background:none}
+.card h3{font-size:clamp(23px,3.4vw,32px);margin:14px 0 12px;font-weight:500}
+.card p{color:var(--ink-70);max-width:36ch;font-weight:300}
+.chip{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
+  border:1px solid var(--gold-lo);color:var(--gold-lo);padding:5px 11px;display:inline-block;border-radius:999px;
+}
+
+/* ---------- arrival ---------- */
+.arrival{text-align:center}
+.arrival h2{font-size:clamp(36px,8vw,88px);font-weight:700;letter-spacing:-.05em}
+.arrival h2 em{font-style:normal;color:var(--gold);font-weight:300}
+.arrival p{margin:18px auto 0;color:var(--muted);max-width:34ch;font-weight:300}
+
+/* ---------- footer ---------- */
+footer{background:#050608;color:#DAD9D5;padding:clamp(32px,5vw,56px) 0 40px;border-top:1px solid var(--rule-d)}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(18px,3vw,36px)}
+.fg h4{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;font-weight:400}
+.fg a{display:block;text-decoration:none;color:#DAD9D5;padding:4px 0;overflow-wrap:anywhere}
+.fg a:hover{color:var(--gold)}
+.fg p{color:var(--muted);font-weight:300}
+.risk{
+  margin-top:clamp(24px,4vw,42px);padding-top:16px;border-top:1px solid var(--rule-d);
+  font-family:var(--mono);font-size:10px;line-height:1.85;color:var(--muted);
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+}
+.risk span{max-width:72ch}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="hd">
+    <div class="brand">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true" fill="none">
+        <path d="M4,28 C4,20 12,20 12,13 C12,7 18,4 24,7" stroke="#D7B364" stroke-width="2"/>
+        <circle cx="4" cy="28" r="3" fill="#08090B"/>
+        <circle cx="24" cy="7" r="3.6" fill="#D7B364" stroke="#08090B" stroke-width="1.2"/>
+      </svg>
+      <b>Atlas <i>Capital</i></b>
+    </div>
+    <nav>
+      <a href="#wp1">01 Kaartmaker</a>
+      <a href="#wp2">02 Etappes</a>
+      <a href="#wp3">03 Model</a>
+      <a href="#wp4">04 Kanalen</a>
+      <a href="#wp6">06 Toegang</a>
+    </nav>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div class="wrap hero">
+  <div class="hero-grid">
+    <div>
+      <span class="mono" style="color:var(--gold-lo)">Blad 035 &nbsp;·&nbsp; routekaart</span>
+      <h1 style="margin-top:20px">Eén route.<br><span>Acht punten.</span></h1>
+      <p class="lead">Atlas Capital is een Nederlandse trading-community. Educatie, structuur en dagelijkse voorbereiding op NQ, ES, Bitcoin en altcoins.</p>
+      <div class="cta">
+        <a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
+        <a class="btn btn--dark btn--lg" href="#wp2">Bekijk de etappes</a>
+      </div>
+      <div class="kv">
+        <span><b>Proces</b></span><span><b>Discipline</b></span><span><b>Uitvoering</b></span><span>Nu gratis toegang</span>
+      </div>
+    </div>
+
+    <!-- ======= OVERVIEW MAP ======= -->
+    <svg class="overview" viewBox="0 0 900 560" role="img" aria-label="Overzichtskaart van de route met acht waypoints">
+      <defs>
+        <pattern id="g035-land" width="8" height="8" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r=".9" fill="#B9954A" fill-opacity=".5"/>
+          <circle cx="6" cy="6" r=".6" fill="#B9954A" fill-opacity=".3"/>
+        </pattern>
+      </defs>
+
+      <rect width="900" height="560" fill="#EAE6DA"/>
+      <!-- graticule -->
+      <g stroke="#B9954A" stroke-width=".6" stroke-opacity=".45">
+        <path d="M0,70 H900 M0,140 H900 M0,210 H900 M0,280 H900 M0,350 H900 M0,420 H900 M0,490 H900"/>
+        <path d="M90,0 V560 M180,0 V560 M270,0 V560 M360,0 V560 M450,0 V560 M540,0 V560 M630,0 V560 M720,0 V560 M810,0 V560"/>
+      </g>
+
+      <!-- abstract land, hand-drawn -->
+      <path d="M30,120 C90,80 170,86 214,124 C252,157 244,206 288,220 C334,235 372,198 404,224
+               C438,252 412,300 366,312 C318,325 276,296 234,314 C190,333 178,382 132,388
+               C86,394 42,362 30,318 C20,282 34,254 26,222 C20,196 18,138 30,120 Z"
+            fill="url(#g035-land)" stroke="#08090B" stroke-width="1.2" stroke-opacity=".8"/>
+      <path d="M604,368 C660,344 740,356 786,398 C826,435 820,486 776,506 C734,525 690,504 650,520
+               C610,536 578,556 546,542 C516,529 518,490 548,470 C580,449 616,456 616,424
+               C616,404 590,376 604,368 Z"
+            fill="url(#g035-land)" stroke="#08090B" stroke-width="1.2" stroke-opacity=".8"/>
+
+      <!-- the route -->
+      <path d="M80,440 C120,420 140,398 176,392 C210,386 236,400 262,406 C300,414 318,352 352,330
+               C384,309 416,322 446,318 C486,313 500,262 540,242 C580,222 616,224 652,214
+               C700,201 724,164 766,120"
+            fill="none" stroke="#08090B" stroke-width="6" stroke-linecap="round" stroke-opacity=".18"/>
+      <path d="M80,440 C120,420 140,398 176,392 C210,386 236,400 262,406 C300,414 318,352 352,330
+               C384,309 416,322 446,318 C486,313 500,262 540,242 C580,222 616,224 652,214
+               C700,201 724,164 766,120"
+            fill="none" stroke="#B9954A" stroke-width="3" stroke-linecap="round"/>
+      <path d="M80,440 C120,420 140,398 176,392 C210,386 236,400 262,406 C300,414 318,352 352,330
+               C384,309 416,322 446,318 C486,313 500,262 540,242 C580,222 616,224 652,214
+               C700,201 724,164 766,120"
+            fill="none" stroke="#F4F2EC" stroke-width="1" stroke-dasharray="6 8" stroke-opacity=".9"/>
+
+      <!-- waypoints, hand-placed -->
+      <g>
+        <circle cx="80" cy="440" r="9" fill="#EAE6DA" stroke="#08090B" stroke-width="2"/><circle cx="80" cy="440" r="3.4" fill="#B9954A"/>
+        <circle cx="176" cy="392" r="9" fill="#EAE6DA" stroke="#08090B" stroke-width="2"/><circle cx="176" cy="392" r="3.4" fill="#B9954A"/>
+        <circle cx="262" cy="406" r="9" fill="#EAE6DA" stroke="#08090B" stroke-width="2"/><circle cx="262" cy="406" r="3.4" fill="#B9954A"/>
+        <circle cx="352" cy="330" r="9" fill="#EAE6DA" stroke="#08090B" stroke-width="2"/><circle cx="352" cy="330" r="3.4" fill="#B9954A"/>
+        <circle cx="446" cy="318" r="9" fill="#EAE6DA" stroke="#08090B" stroke-width="2"/><circle cx="446" cy="318" r="3.4" fill="#B9954A"/>
+        <circle cx="540" cy="242" r="9" fill="#EAE6DA" stroke="#08090B" stroke-width="2"/><circle cx="540" cy="242" r="3.4" fill="#B9954A"/>
+        <circle cx="652" cy="214" r="9" fill="#EAE6DA" stroke="#08090B" stroke-width="2"/><circle cx="652" cy="214" r="3.4" fill="#B9954A"/>
+        <circle cx="766" cy="120" r="13" fill="#B9954A" stroke="#08090B" stroke-width="2"/><circle cx="766" cy="120" r="4.4" fill="#EAE6DA"/>
+      </g>
+      <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1.4" fill="#08090B">
+        <text x="80" y="468" text-anchor="middle">01</text>
+        <text x="176" y="374" text-anchor="middle">02</text>
+        <text x="262" y="434" text-anchor="middle">03</text>
+        <text x="352" y="312" text-anchor="middle">04</text>
+        <text x="446" y="346" text-anchor="middle">05</text>
+        <text x="540" y="224" text-anchor="middle">06</text>
+        <text x="652" y="242" text-anchor="middle">07</text>
+        <text x="766" y="98" text-anchor="middle">08</text>
+      </g>
+
+      <!-- corner rose -->
+      <g transform="translate(834,486)">
+        <circle cx="0" cy="0" r="30" fill="none" stroke="#08090B" stroke-width="1"/>
+        <path d="M0,-30 L5,-5 L0,0 L-5,-5 Z" fill="#08090B"/>
+        <path d="M0,30 L5,5 L0,0 L-5,5 Z" fill="#EAE6DA" stroke="#08090B" stroke-width=".7"/>
+        <path d="M30,0 L5,5 L0,0 L5,-5 Z" fill="#EAE6DA" stroke="#08090B" stroke-width=".7"/>
+        <path d="M-30,0 L-5,5 L0,0 L-5,-5 Z" fill="#EAE6DA" stroke="#08090B" stroke-width=".7"/>
+        <text x="0" y="-36" text-anchor="middle" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#08090B">N</text>
+      </g>
+      <!-- neat line -->
+      <rect x="8" y="8" width="884" height="544" fill="none" stroke="#08090B" stroke-width="1.4"/>
+      <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10" letter-spacing="1.6" fill="#6B6C71">
+        <text x="24" y="34">ROUTE 035</text>
+        <text x="876" y="34" text-anchor="end">08 WAYPOINTS</text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<div class="seam"></div>
+
+<!-- ============ WAYPOINT 01 · DE KAARTMAKER (ink) ============ -->
+<section class="leg leg--ink" id="wp1">
+  <div class="rail" aria-hidden="true">
+    <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
+      <path d="M50,0 C50,120 14,220 14,340 C14,470 86,560 86,690 C86,820 50,880 50,1000"
+            fill="none" stroke="#B9954A" stroke-width="3" vector-effect="non-scaling-stroke"/>
+      <path d="M50,0 C50,120 14,220 14,340 C14,470 86,560 86,690 C86,820 50,880 50,1000"
+            fill="none" stroke="#08090B" stroke-width="1" stroke-dasharray="5 7" vector-effect="non-scaling-stroke"/>
+    </svg>
+  </div>
+  <svg class="marker" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+    <circle cx="17" cy="17" r="15" fill="#08090B" stroke="#D7B364" stroke-width="2"/>
+    <circle cx="17" cy="17" r="5" fill="#D7B364"/>
+  </svg>
+
+  <div class="leg-inner">
+    <div class="leg-top">
+      <span class="wp">Waypoint 01</span><span class="crs">Koers 042°</span>
+    </div>
+    <h2>De kaartmaker</h2>
+    <p class="sub">Wie de route uitzette, en waarom.</p>
+
+    <p class="quote quote--wide" style="margin-top:clamp(24px,3.6vw,42px)">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</p>
+    <div class="qmeta">
+      <span><b>Oprichter</b> Atlas Capital</span>
+      <span>10+ jaar actief in trading</span>
+    </div>
+    <div style="margin-top:28px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Kom binnen in de server</a></div>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<!-- ============ WAYPOINT 02 · TIEN ETAPPES (paper) ============ -->
+<section class="leg leg--paper" id="wp2">
+  <div class="rail" aria-hidden="true">
+    <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
+      <path d="M50,0 C50,140 86,240 86,370 C86,500 14,590 14,720 C14,840 50,900 50,1000"
+            fill="none" stroke="#B9954A" stroke-width="3" vector-effect="non-scaling-stroke"/>
+      <path d="M50,0 C50,140 86,240 86,370 C86,500 14,590 14,720 C14,840 50,900 50,1000"
+            fill="none" stroke="#F4F2EC" stroke-width="1" stroke-dasharray="5 7" vector-effect="non-scaling-stroke"/>
+    </svg>
+  </div>
+  <svg class="marker" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+    <circle cx="17" cy="17" r="15" fill="#F4F2EC" stroke="#08090B" stroke-width="2"/>
+    <circle cx="17" cy="17" r="5" fill="#B9954A"/>
+  </svg>
+
+  <div class="leg-inner">
+    <div class="leg-top">
+      <span class="wp">Waypoint 02</span><span class="crs">Koers 078°</span>
+    </div>
+    <h2>Tien etappes</h2>
+    <p class="sub">De educatie in de server, als een pad met tien punten.</p>
+
+    <ul class="trail" style="margin-top:clamp(24px,3.6vw,40px)">
+      <li><span>Etappe 01</span><b>deviatie</b></li>
+      <li><span>Etappe 02</span><b>SMT</b></li>
+      <li><span>Etappe 03</span><b>FVG</b></li>
+      <li><span>Etappe 04</span><b>IFVG</b></li>
+      <li><span>Etappe 05</span><b>orderblocks</b></li>
+      <li><span>Etappe 06</span><b>fibonacci</b></li>
+      <li><span>Etappe 07</span><b>sessie-liquiditeit</b></li>
+      <li><span>Etappe 08</span><b>liquiditeit</b></li>
+      <li><span>Etappe 09</span><b>risicobeheer</b></li>
+      <li><span>Etappe 10</span><b>tradingpsychologie</b></li>
+    </ul>
+    <div class="trail-foot">
+      <span>10 onderwerpen · educatie in de server</span>
+      <a class="btn btn--dark" href="https://discord.gg/78Ff2GuSfW">Loop de route</a>
+    </div>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<!-- ============ WAYPOINT 03 · HET MODEL (ink) ============ -->
+<section class="leg leg--ink" id="wp3">
+  <div class="rail" aria-hidden="true">
+    <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
+      <path d="M50,0 C50,160 20,260 20,420 C20,580 80,660 80,820 C80,920 50,950 50,1000"
+            fill="none" stroke="#B9954A" stroke-width="3" vector-effect="non-scaling-stroke"/>
+      <path d="M50,0 C50,160 20,260 20,420 C20,580 80,660 80,820 C80,920 50,950 50,1000"
+            fill="none" stroke="#08090B" stroke-width="1" stroke-dasharray="5 7" vector-effect="non-scaling-stroke"/>
+    </svg>
+  </div>
+  <svg class="marker" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+    <circle cx="17" cy="17" r="15" fill="#08090B" stroke="#D7B364" stroke-width="2"/>
+    <path d="M17,9 L23,23 H11 Z" fill="#D7B364"/>
+  </svg>
+
+  <div class="leg-inner">
+    <div class="leg-top">
+      <span class="wp">Waypoint 03</span><span class="crs">Koers 011°</span>
+    </div>
+    <h2>Het model</h2>
+    <p class="sub">Schematisch getekend. Geen prijzen, geen resultaat &mdash; alleen de vorm.</p>
+
+    <div class="scroller" style="margin-top:clamp(24px,3.6vw,40px)">
+      <svg viewBox="0 0 900 420" role="img" aria-label="Schematische tekening van een setup: liquiditeit, sweep, orderblock, FVG en uitvoering">
+        <defs>
+          <pattern id="g035-gap" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#D7B364" stroke-width="1" stroke-opacity=".55"/>
+          </pattern>
+        </defs>
+        <rect width="900" height="420" fill="#0C0E12"/>
+        <g stroke="#D7B364" stroke-opacity=".1" stroke-width="1">
+          <path d="M0,60 H900 M0,120 H900 M0,180 H900 M0,240 H900 M0,300 H900 M0,360 H900"/>
+          <path d="M120,0 V420 M240,0 V420 M360,0 V420 M480,0 V420 M600,0 V420 M720,0 V420 M840,0 V420"/>
+        </g>
+
+        <!-- FVG -->
+        <rect x="326" y="166" width="514" height="44" fill="url(#g035-gap)" fill-opacity=".55"/>
+        <path d="M326,166 H840 M326,210 H840" stroke="#D7B364" stroke-width="1.1"/>
+
+        <!-- liquidity -->
+        <path d="M40,318 H860" stroke="#A5A6A8" stroke-width="1.2" stroke-dasharray="8 6"/>
+        <g fill="#A5A6A8"><circle cx="140" cy="318" r="2.6"/><circle cx="194" cy="318" r="2.6"/><circle cx="248" cy="318" r="2.6"/></g>
+
+        <!-- orderblock -->
+        <rect x="242" y="246" width="80" height="44" fill="#D7B364" fill-opacity=".14" stroke="#D7B364" stroke-width="1.5"/>
+
+        <!-- candles -->
+        <g stroke="#E6CC8E" stroke-width="1.4">
+          <g fill="#0C0E12">
+            <path d="M84,230 V298"/><rect x="77" y="244" width="14" height="34"/>
+            <path d="M124,218 V306"/><rect x="117" y="236" width="14" height="44"/>
+            <path d="M164,224 V312"/><rect x="157" y="242" width="14" height="46"/>
+          </g>
+          <g fill="#B9954A" stroke="#B9954A">
+            <path d="M204,234 V338"/><rect x="197" y="260" width="14" height="52"/>
+            <path d="M244,248 V354"/><rect x="237" y="274" width="14" height="54"/>
+          </g>
+          <g fill="#0C0E12" stroke="#F5EACC" stroke-width="1.7">
+            <path d="M284,228 V382"/><rect x="277" y="240" width="14" height="50"/>
+          </g>
+          <g fill="#0C0E12">
+            <path d="M324,176 V274"/><rect x="317" y="186" width="14" height="62"/>
+            <path d="M364,138 V214"/><rect x="357" y="148" width="14" height="54"/>
+            <path d="M404,116 V196"/><rect x="397" y="128" width="14" height="52"/>
+          </g>
+          <g fill="#B9954A" stroke="#B9954A">
+            <path d="M444,110 V186"/><rect x="437" y="122" width="14" height="46"/>
+            <path d="M484,120 V202"/><rect x="477" y="134" width="14" height="50"/>
+          </g>
+          <g fill="#0C0E12">
+            <path d="M524,138 V206"/><rect x="517" y="150" width="14" height="44"/>
+            <path d="M564,96 V170"/><rect x="557" y="108" width="14" height="48"/>
+            <path d="M604,68 V140"/><rect x="597" y="78" width="14" height="46"/>
+          </g>
+        </g>
+        <circle cx="284" cy="382" r="4.6" fill="#0C0E12" stroke="#F5EACC" stroke-width="1.7"/>
+
+        <!-- the route through the setup -->
+        <path d="M300,354 C380,354 412,248 466,194 C528,132 594,94 668,66"
+              fill="none" stroke="#B9954A" stroke-width="3" stroke-linecap="round"/>
+        <path d="M300,354 C380,354 412,248 466,194 C528,132 594,94 668,66"
+              fill="none" stroke="#0C0E12" stroke-width="1" stroke-dasharray="6 8"/>
+        <circle cx="300" cy="354" r="6" fill="#0C0E12" stroke="#B9954A" stroke-width="2"/>
+        <circle cx="668" cy="66" r="8" fill="#B9954A" stroke="#0C0E12" stroke-width="2"/>
+
+        <!-- leaders -->
+        <g stroke="#A5A6A8" stroke-width=".9" fill="none" stroke-opacity=".85">
+          <path d="M140,318 L140,380 L110,380"/>
+          <path d="M284,382 L284,404 L326,404"/>
+          <path d="M282,246 L282,204 L232,204"/>
+          <path d="M840,188 L872,188"/>
+          <path d="M668,66 L668,38 L612,38"/>
+        </g>
+        <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1.8" fill="#DAD9D5">
+          <text x="104" y="384" text-anchor="end">LIQUIDITEIT</text>
+          <text x="332" y="408">SWEEP</text>
+          <text x="226" y="200" text-anchor="end">ORDERBLOCK</text>
+          <text x="608" y="42" text-anchor="end" fill="#E6CC8E">UITVOERING</text>
+        </g>
+        <text x="686" y="192" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="3" fill="#E6CC8E">FVG</text>
+      </svg>
+    </div>
+    <div class="figcap">
+      <b>Etappekaart 03</b><span>Schematische illustratie van een concept</span><span>Geen marktgegevens</span>
+    </div>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<!-- ============ WAYPOINT 04 · KANALEN (paper) ============ -->
+<section class="leg leg--paper2" id="wp4">
+  <div class="rail" aria-hidden="true">
+    <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
+      <path d="M50,0 C50,100 80,190 80,320 C80,460 20,540 20,680 C20,820 50,890 50,1000"
+            fill="none" stroke="#B9954A" stroke-width="3" vector-effect="non-scaling-stroke"/>
+      <path d="M50,0 C50,100 80,190 80,320 C80,460 20,540 20,680 C20,820 50,890 50,1000"
+            fill="none" stroke="#EAE6DA" stroke-width="1" stroke-dasharray="5 7" vector-effect="non-scaling-stroke"/>
+    </svg>
+  </div>
+  <svg class="marker" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+    <circle cx="17" cy="17" r="15" fill="#EAE6DA" stroke="#08090B" stroke-width="2"/>
+    <rect x="12" y="12" width="10" height="10" fill="#B9954A"/>
+  </svg>
+
+  <div class="leg-inner">
+    <div class="leg-top">
+      <span class="wp">Waypoint 04</span><span class="crs">Koers 126°</span>
+    </div>
+    <h2>15 kanalen onderweg</h2>
+    <p class="sub">Negen halteplaatsen liggen open. Zes verderop op de route.</p>
+
+    <div class="stops" style="margin-top:clamp(24px,3.6vw,40px)">
+      <div>
+        <h3>Thuis <span>nu gratis · 9</span></h3>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="currentColor"/></svg><span class="n">#nq-chart-ideeën</span><span class="t">HALTE 01</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="currentColor"/></svg><span class="n">#es-chart-ideeën</span><span class="t">HALTE 02</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="currentColor"/></svg><span class="n">#bitcoin</span><span class="t">HALTE 03</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="currentColor"/></svg><span class="n">#altcoins</span><span class="t">HALTE 04</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="currentColor"/></svg><span class="n">#markt</span><span class="t">HALTE 05</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="currentColor"/></svg><span class="n">#vragen</span><span class="t">HALTE 06</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="currentColor"/></svg><span class="n">#algemeen</span><span class="t">HALTE 07</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="currentColor"/></svg><span class="n">#atlas-op-socials</span><span class="t">HALTE 08</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="currentColor"/></svg><span class="n">#ondersteuning</span><span class="t">HALTE 09</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Premium <span>opent later · 6</span></h3>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3 2"/></svg><span class="n">#trade-setups</span><span class="t">VERDEROP</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3 2"/></svg><span class="n">#marktupdates</span><span class="t">VERDEROP</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3 2"/></svg><span class="n">#indicatoren</span><span class="t">VERDEROP</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3 2"/></svg><span class="n">#sessie-opnames</span><span class="t">VERDEROP</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3 2"/></svg><span class="n">#chart-ideeën</span><span class="t">VERDEROP</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3 2"/></svg><span class="n">#premium-chat</span><span class="t">VERDEROP</span></li>
+        </ul>
+        <div style="margin-top:24px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Open de server</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<!-- ============ WAYPOINT 05 · LIVE (ink) ============ -->
+<section class="leg leg--ink" id="wp5">
+  <div class="rail" aria-hidden="true">
+    <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
+      <path d="M50,0 C50,130 16,230 16,380 C16,540 84,620 84,780 C84,900 50,940 50,1000"
+            fill="none" stroke="#B9954A" stroke-width="3" vector-effect="non-scaling-stroke"/>
+      <path d="M50,0 C50,130 16,230 16,380 C16,540 84,620 84,780 C84,900 50,940 50,1000"
+            fill="none" stroke="#08090B" stroke-width="1" stroke-dasharray="5 7" vector-effect="non-scaling-stroke"/>
+    </svg>
+  </div>
+  <svg class="marker" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+    <circle cx="17" cy="17" r="15" fill="#08090B" stroke="#D7B364" stroke-width="2"/>
+    <circle cx="17" cy="17" r="6" fill="none" stroke="#D7B364" stroke-width="2"/>
+  </svg>
+
+  <div class="leg-inner">
+    <div class="leg-top">
+      <span class="wp">Waypoint 05</span><span class="crs">Koers 195°</span>
+    </div>
+    <h2>Live onderweg</h2>
+
+    <div class="livegrid" style="margin-top:clamp(22px,3.4vw,38px)">
+      <div>
+        <h3><span class="dot"></span>De oprichter handelt live mee.</h3>
+        <p>Hij laat in de server zien hoe hij de markten benadert. Tijden worden daar aangekondigd.</p>
+        <div style="margin-top:24px"><a class="btn btn--outl" style="color:var(--gold)" href="https://discord.gg/78Ff2GuSfW">Zit een sessie mee</a></div>
+      </div>
+      <svg viewBox="0 0 340 180" role="img" aria-label="Markten langs de route" style="width:100%;height:auto">
+        <path d="M14,150 C70,150 86,110 140,102 C196,94 214,58 268,44 C300,36 320,30 330,26"
+              fill="none" stroke="#B9954A" stroke-width="2.4"/>
+        <g fill="#08090B" stroke="#D7B364" stroke-width="2">
+          <circle cx="14" cy="150" r="7"/><circle cx="140" cy="102" r="7"/>
+          <circle cx="268" cy="44" r="7"/><circle cx="330" cy="26" r="7"/>
+        </g>
+        <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10" letter-spacing="2" fill="#A5A6A8">
+          <text x="14" y="172">NQ</text>
+          <text x="140" y="124" text-anchor="middle">ES</text>
+          <text x="252" y="66" text-anchor="end">BITCOIN</text>
+          <text x="330" y="16" text-anchor="end">ALTCOINS</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<!-- ============ WAYPOINT 06 · TOEGANG (paper) ============ -->
+<section class="leg leg--paper" id="wp6">
+  <div class="rail" aria-hidden="true">
+    <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
+      <path d="M50,0 C50,120 84,210 84,350 C84,490 16,570 16,710 C16,840 50,910 50,1000"
+            fill="none" stroke="#B9954A" stroke-width="3" vector-effect="non-scaling-stroke"/>
+      <path d="M50,0 C50,120 84,210 84,350 C84,490 16,570 16,710 C16,840 50,910 50,1000"
+            fill="none" stroke="#F4F2EC" stroke-width="1" stroke-dasharray="5 7" vector-effect="non-scaling-stroke"/>
+    </svg>
+  </div>
+  <svg class="marker" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+    <circle cx="17" cy="17" r="15" fill="#F4F2EC" stroke="#08090B" stroke-width="2"/>
+    <path d="M17,10 L17,24 M10,17 L24,17" stroke="#B9954A" stroke-width="3"/>
+  </svg>
+
+  <div class="leg-inner">
+    <div class="leg-top">
+      <span class="wp">Waypoint 06</span><span class="crs">Koers 268°</span>
+    </div>
+    <h2>Toegang</h2>
+
+    <div class="duo" style="margin-top:clamp(22px,3.4vw,38px)">
+      <div class="card">
+        <span class="chip">Nu open</span>
+        <h3>Gratis</h3>
+        <p>De hele thuiskant van de server is nu gratis: educatie, chart-ideeën, markt en community.</p>
+        <div style="margin-top:22px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Nu binnenlopen</a></div>
+      </div>
+      <div class="card card--soft">
+        <span class="chip">Verderop</span>
+        <h3>Premium</h3>
+        <p>Premium opent later. Wanneer en hoe wordt in de server aangekondigd.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<!-- ============ WAYPOINT 08 · AANKOMST (ink) ============ -->
+<section class="leg leg--ink" id="wp8">
+  <div class="rail" aria-hidden="true">
+    <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
+      <path d="M50,0 C50,200 30,320 30,480 C30,640 70,720 70,860 C70,940 50,970 50,1000"
+            fill="none" stroke="#B9954A" stroke-width="3" vector-effect="non-scaling-stroke"/>
+    </svg>
+  </div>
+  <svg class="marker" width="46" height="46" viewBox="0 0 46 46" aria-hidden="true">
+    <circle cx="23" cy="23" r="21" fill="#D7B364" stroke="#08090B" stroke-width="2"/>
+    <circle cx="23" cy="23" r="13" fill="none" stroke="#08090B" stroke-width="2"/>
+    <circle cx="23" cy="23" r="5" fill="#08090B"/>
+  </svg>
+
+  <div class="leg-inner arrival">
+    <div class="leg-top" style="justify-content:center">
+      <span class="wp">Waypoint 08</span><span class="crs">Aankomst</span>
+    </div>
+    <h2>Loop de route <em>mee</em>.</h2>
+    <p>Gratis toegang, vanaf het moment dat je binnenkomt.</p>
+    <div style="margin-top:30px"><a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a></div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div>
+        <h4>Atlas Capital</h4>
+        <p>Proces. Discipline. Uitvoering.</p>
+      </div>
+      <div>
+        <h4>Onderweg</h4>
+        <a href="https://discord.gg/78Ff2GuSfW">Discord</a>
+        <a href="https://www.tiktok.com/@atlascapitalbv">TikTok · @atlascapitalbv</a>
+      </div>
+      <div>
+        <h4>Terrein</h4>
+        <p>NQ · ES · Bitcoin · Altcoins</p>
+      </div>
+      <div>
+        <h4>Stand</h4>
+        <p style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;line-height:2">
+          GRATIS TOEGANG · NU<br>PREMIUM · OPENT LATER<br>10+ JAAR ERVARING
+        </p>
+      </div>
+    </div>
+    <div class="risk">
+      <span>Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span>
+      <span>BLAD 035 · ROUTE</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

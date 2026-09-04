@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 003 De Kolom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ATLAS CAPITAL — 003 DE KOLOM
+   A newspaper opinion column. Black banner nameplate, one
+   narrow river of dense grey type, a boxed gold pull-quote,
+   and the channels set as classified advertisements.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#111214;
+  --ink-2:#2E2F33;
+  --ink-3:#55565A;
+  --ink-4:#7E7F83;
+  --paper:#EFEDE6;
+  --paper-2:#E6E3DA;
+  --rule:#C6C3B8;
+  --serif:"Libre Baskerville", Georgia, "Times New Roman", serif;
+  --sans:"Segoe UI", -apple-system, Roboto, Helvetica, Arial, sans-serif;
+}
+
+html{color-scheme:light;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;color:var(--ink-2);
+  background-color:var(--paper);
+  background-image:repeating-linear-gradient(90deg, rgba(17,18,20,.016) 0 1px, transparent 1px 3px);
+  font-family:var(--serif);font-size:15px;line-height:1.72;
+  overflow-x:hidden;
+}
+a{color:inherit}
+h1,h2,h3,h4{margin:0;font-family:var(--serif);font-weight:700;line-height:1.06;color:var(--ink)}
+p{margin:0 0 1.05em}
+
+.sheet{max-width:1100px;margin:0 auto;padding:0 clamp(12px,3.6vw,32px)}
+.col{max-width:38rem;margin:0 auto}
+
+.tag{font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-4);font-weight:700}
+.tag-g{color:var(--gold-lo)}
+.hr{height:1px;background:var(--rule);border:0;margin:0}
+.hr-g{height:1px;background:var(--gold);border:0;margin:0}
+.hr-h{height:4px;border:0;margin:0;background:var(--ink);border-bottom:1px solid var(--ink)}
+
+/* ---------- CTA ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.6em;
+  font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink);background:var(--gold);
+  padding:.85em 1.35em;border:1px solid var(--ink);
+  transition:background .18s ease,color .18s ease;
+}
+.btn:hover{background:var(--ink);color:var(--gold-hi)}
+.btn-o{background:transparent;border:1px solid var(--ink)}
+.btn-o:hover{background:var(--ink);color:var(--paper)}
+.btn-s{font-size:9.5px;padding:.62em 1em}
+
+/* ---------- nameplate ---------- */
+.plate{background:var(--ink);color:var(--paper);padding:clamp(14px,2.6vw,26px) 0 clamp(10px,2vw,18px)}
+.plate .in{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.plate .over{font-family:var(--sans);font-size:9px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold)}
+.plate h1.np{
+  font-size:clamp(30px,8.6vw,88px);line-height:.94;letter-spacing:-.01em;
+  color:var(--paper);font-weight:700;
+}
+.plate .under{display:flex;gap:10px;align-items:center;width:100%;justify-content:center;margin-top:4px}
+.plate .under .b{height:1px;background:var(--gold-lo);flex:1;max-width:180px}
+.plate .under span{font-family:var(--sans);font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:#C9C7C1}
+
+.datebar{
+  border-bottom:1px solid var(--ink);
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:8px 0;
+}
+.datebar .sp{flex:1}
+header.stick{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:1px solid var(--rule)}
+.stick-in{display:flex;align-items:center;gap:12px;padding:8px 0}
+.stick-in .nm{font-weight:700;color:var(--ink);letter-spacing:.02em;font-size:15px}
+.stick-in .sp{flex:1}
+
+/* ---------- article ---------- */
+.article{padding:clamp(26px,5vw,58px) 0 clamp(18px,3vw,34px)}
+.kicker{text-align:center;margin-bottom:14px}
+.headline{
+  font-size:clamp(30px,6.6vw,62px);line-height:1.02;letter-spacing:-.018em;
+  text-align:center;margin-bottom:14px;
+}
+.deck{
+  text-align:center;font-style:italic;color:var(--ink-3);
+  font-size:clamp(15px,1.9vw,18.5px);line-height:1.5;margin:0 auto 20px;max-width:32rem;
+}
+.byline{
+  display:flex;justify-content:center;gap:10px;align-items:center;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:7px 0;margin-bottom:clamp(20px,3vw,32px);
+}
+.body p:first-of-type::first-letter{
+  float:left;font-family:var(--serif);font-weight:700;
+  font-size:3.35em;line-height:.82;padding:.06em .1em 0 0;color:var(--ink);
+}
+.body{text-align:justify;hyphens:auto}
+.sub{
+  font-family:var(--sans);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;
+  font-weight:700;color:var(--ink);margin:26px 0 10px;
+  border-bottom:1px solid var(--rule);padding-bottom:6px;
+}
+.sub .n{color:var(--gold-lo);margin-right:.7em}
+
+/* ---------- pull quote ---------- */
+.pull{
+  border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);
+  background:linear-gradient(180deg,rgba(215,179,100,.16),rgba(215,179,100,.05));
+  padding:clamp(18px,3vw,28px);margin:clamp(24px,4vw,38px) 0;text-align:left;
+}
+.pull q{quotes:none}
+.pull .q{
+  font-size:clamp(19px,3vw,27px);line-height:1.26;font-weight:700;color:var(--ink);
+  letter-spacing:-.01em;display:block;
+}
+.pull .a{display:block;margin-top:12px;font-family:var(--sans);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.pull .mk{display:block;font-family:var(--serif);font-size:44px;line-height:.4;color:var(--gold-lo);margin-bottom:14px}
+
+/* ---------- newspaper cut (figure) ---------- */
+figure.cut{margin:clamp(24px,4vw,38px) 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:14px 0}
+figure.cut svg{display:block;width:100%;height:auto}
+figure.cut figcaption{
+  font-style:italic;font-size:13px;color:var(--ink-3);line-height:1.45;margin-top:10px;
+  padding-top:8px;border-top:1px dotted var(--rule);
+}
+figure.cut figcaption b{font-style:normal;font-family:var(--sans);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-lo)}
+
+/* ---------- inline topic list ---------- */
+.topics{list-style:none;margin:0 0 8px;padding:0;border-top:1px solid var(--rule)}
+.topics li{
+  display:flex;align-items:baseline;gap:.6em;
+  border-bottom:1px solid var(--rule);padding:.45em 0;
+  font-size:14.5px;
+}
+.topics li .n{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--gold-lo);min-width:2.2em}
+.topics li .t{font-weight:700;color:var(--ink)}
+.topics li .d{margin-left:auto;font-family:var(--sans);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-4)}
+
+/* ---------- classifieds ---------- */
+.classif{background:var(--paper-2);border-top:4px solid var(--ink);border-bottom:4px solid var(--ink);padding:clamp(22px,4vw,44px) 0;margin-top:clamp(30px,5vw,56px)}
+.cl-head{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--ink);padding-bottom:8px;margin-bottom:clamp(16px,2.4vw,24px)}
+.cl-head h2{font-size:clamp(20px,3.4vw,32px)}
+.cl-head .sp{flex:1}
+.ads{columns:1;column-gap:clamp(20px,3vw,38px);column-rule:1px solid var(--rule)}
+@media(min-width:560px){.ads{columns:2}}
+@media(min-width:900px){.ads{columns:4}}
+.ad{break-inside:avoid;margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+.ad .h{
+  font-family:var(--sans);font-size:9px;letter-spacing:.26em;text-transform:uppercase;
+  font-weight:700;color:var(--ink);background:var(--gold);display:inline-block;padding:.24em .5em;margin-bottom:7px;
+}
+.ad .h.later{background:transparent;color:var(--ink-3);border:1px solid var(--rule)}
+.ad ul{list-style:none;margin:0;padding:0}
+.ad li{
+  font-family:var(--sans);font-size:12.5px;line-height:1.5;
+  text-indent:-1.05em;padding-left:1.05em;margin-bottom:.34em;color:var(--ink-2);
+}
+.ad li b{color:var(--gold-lo)}
+.ad p{font-size:12.5px;font-style:italic;color:var(--ink-3);margin:8px 0 0;line-height:1.45}
+
+/* ---------- coupon ---------- */
+.coupon{
+  border:2px dashed var(--ink);padding:clamp(20px,3.6vw,36px);
+  margin:clamp(28px,5vw,52px) auto 0;text-align:center;background:var(--paper);
+}
+.coupon h2{font-size:clamp(24px,5vw,44px);line-height:1.02;margin-bottom:10px}
+.coupon p{color:var(--ink-3);max-width:30rem;margin:0 auto 18px}
+.coupon .scis{font-family:var(--sans);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-4);display:block;margin-bottom:14px}
+
+/* ---------- two-up boxes ---------- */
+.boxes{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--ink);margin-top:clamp(24px,4vw,40px)}
+@media(min-width:600px){.boxes{grid-template-columns:1fr 1fr}}
+.bx{padding:clamp(16px,2.6vw,26px)}
+.bx + .bx{border-top:1px solid var(--ink)}
+@media(min-width:600px){.bx + .bx{border-top:0;border-left:1px solid var(--ink)}}
+.bx h3{font-size:clamp(18px,2.6vw,24px);margin-bottom:4px}
+.bx .st{display:inline-block;font-family:var(--sans);font-size:9px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--gold-lo);margin-bottom:10px}
+.bx ul{list-style:none;margin:0 0 14px;padding:0;font-size:13.5px}
+.bx li{padding:.26em 0;border-bottom:1px dotted var(--rule)}
+
+/* ---------- market strip ---------- */
+.strip{
+  border-bottom:1px solid var(--rule);padding:7px 0;
+  display:flex;gap:clamp(10px,3vw,30px);flex-wrap:wrap;justify-content:center;
+}
+.strip span{font-family:var(--sans);font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-4);font-weight:600}
+.strip span b{color:var(--gold-lo)}
+
+/* ---------- index box ---------- */
+.indexbox{
+  border:1px solid var(--ink);padding:14px 16px 12px;
+  margin:0 0 clamp(22px,3.4vw,32px);background:#F5F3EC;
+}
+.indexbox .ih{
+  display:flex;align-items:baseline;
+  font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;
+  font-weight:700;color:var(--ink);
+  border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:9px;
+}
+.indexbox .ih .r{margin-left:auto;color:var(--gold-lo)}
+.indexbox ol{list-style:none;margin:0;padding:0;columns:1;column-gap:26px}
+@media(min-width:520px){.indexbox ol{columns:2}}
+.indexbox li{
+  display:flex;align-items:baseline;break-inside:avoid;
+  font-family:var(--sans);font-size:11.5px;padding:.26em 0;color:var(--ink-2);
+}
+.indexbox li .d{flex:1 1 auto;min-width:1.2em;border-bottom:1px dotted var(--rule);margin:0 .5em;transform:translateY(-.24em)}
+.indexbox li .p{color:var(--gold-lo);font-weight:700;letter-spacing:.14em}
+
+/* ---------- printer's ornament ---------- */
+.ornament{display:block;width:min(190px,54vw);height:auto;margin:clamp(24px,4vw,38px) auto}
+
+/* ---------- boxed sidebar ---------- */
+.sidebar{
+  border:1px solid var(--ink);border-left:4px solid var(--gold);
+  background:#F5F3EC;padding:clamp(15px,2.6vw,24px);
+  margin:clamp(22px,3.4vw,34px) 0;
+}
+.sidebar h3{font-size:clamp(17px,2.4vw,23px);margin-bottom:8px}
+.sidebar .clock{display:block;width:100%;max-width:300px;height:auto;margin:4px auto 14px}
+.sidebar p{font-size:13.5px;color:var(--ink-3);margin:0 0 14px}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--ink);margin-top:clamp(30px,5vw,60px);padding:clamp(22px,3.6vw,40px) 0 34px;font-size:13px;color:var(--ink-3)}
+.fg{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:720px){.fg{grid-template-columns:1.4fr 1fr 1fr}}
+.fg a{text-decoration:none;border-bottom:1px solid var(--gold);color:var(--ink)}
+.fg a:hover{color:var(--gold-lo)}
+.risk{margin-top:22px;padding-top:10px;border-top:1px solid var(--rule);font-size:11px;color:var(--ink-4);line-height:1.55}
+.pg{display:flex;justify-content:space-between;margin-top:12px;font-family:var(--sans);font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-4)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ NAMEPLATE ══════════════════ -->
+<div class="plate">
+  <div class="sheet in">
+    <span class="over">Nederlandse trading-community</span>
+    <h1 class="np">Atlas Capital</h1>
+    <div class="under"><span class="b"></span><span>Proces · Discipline · Uitvoering</span><span class="b"></span></div>
+  </div>
+</div>
+<hr class="hr-g">
+
+<div class="sheet">
+  <div class="datebar">
+    <span class="tag">De Kolom</span>
+    <span class="tag tag-g">Opinie</span>
+    <span class="sp"></span>
+    <span class="tag">Toegang — nu gratis</span>
+  </div>
+  <div class="strip">
+    <span><b>NQ</b> Nasdaq-futures</span>
+    <span><b>ES</b> S&amp;P-futures</span>
+    <span><b>BTC</b> Bitcoin</span>
+    <span><b>ALT</b> Altcoins</span>
+  </div>
+</div>
+
+<header class="stick">
+  <div class="sheet stick-in">
+    <span class="nm">Atlas Capital</span>
+    <span class="sp"></span>
+    <a class="btn btn-s" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Word lid op Discord →</a>
+  </div>
+</header>
+
+<!-- ══════════════════ THE COLUMN ══════════════════ -->
+<main class="sheet article">
+  <div class="col">
+    <p class="kicker tag tag-g">Van de oprichter — 10+ jaar in de markt</p>
+    <h2 class="headline">Discipline is een gewoonte, geen talent.</h2>
+    <p class="deck">Waarom Atlas Capital begint bij het proces en pas daarna bij de chart.</p>
+    <div class="byline">
+      <span class="tag">Atlas Capital</span>
+      <span class="tag tag-g">·</span>
+      <span class="tag">Educatie &amp; community</span>
+    </div>
+
+    <div class="indexbox">
+      <div class="ih">In dit nummer <span class="r">Atlas Capital</span></div>
+      <ol>
+        <li><span>Van de oprichter</span><span class="d"></span><span class="p">01</span></li>
+        <li><span>De leerstof — 10 onderwerpen</span><span class="d"></span><span class="p">01</span></li>
+        <li><span>Het model, uitgetekend</span><span class="d"></span><span class="p">02</span></li>
+        <li><span>Live meekijken</span><span class="d"></span><span class="p">03</span></li>
+        <li><span>Rubriek — de kanalen</span><span class="d"></span><span class="p">04</span></li>
+        <li><span>Toegang — nu en later</span><span class="d"></span><span class="p">04</span></li>
+      </ol>
+    </div>
+
+    <div class="body">
+      <p>Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</p>
+      <p>Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</p>
+
+      <div class="pull">
+        <span class="mk">&ldquo;</span>
+        <span class="q">Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</span>
+        <span class="a">De oprichter van Atlas Capital</span>
+      </div>
+
+      <p class="sub"><span class="n">01</span> Wat er te leren valt</p>
+      <p>Tien onderwerpen vormen de leerstof van de server. Ze staan in volgorde: eerst de structuur van de markt, dan de uitvoering, dan jezelf.</p>
+
+      <ul class="topics">
+        <li><span class="n">01</span><span class="t">Deviatie</span><span class="d">Structuur</span></li>
+        <li><span class="n">02</span><span class="t">SMT</span><span class="d">Structuur</span></li>
+        <li><span class="n">03</span><span class="t">FVG</span><span class="d">Onbalans</span></li>
+        <li><span class="n">04</span><span class="t">IFVG</span><span class="d">Onbalans</span></li>
+        <li><span class="n">05</span><span class="t">Orderblocks</span><span class="d">Zones</span></li>
+        <li><span class="n">06</span><span class="t">Fibonacci</span><span class="d">Niveaus</span></li>
+        <li><span class="n">07</span><span class="t">Sessie-liquiditeit</span><span class="d">Timing</span></li>
+        <li><span class="n">08</span><span class="t">Liquiditeit</span><span class="d">Timing</span></li>
+        <li><span class="n">09</span><span class="t">Risicobeheer</span><span class="d">Uitvoering</span></li>
+        <li><span class="n">10</span><span class="t">Tradingpsychologie</span><span class="d">Uitvoering</span></li>
+      </ul>
+
+      <p style="text-align:center;margin:22px 0 0"><a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Lees de educatie in Discord →</a></p>
+
+      <svg class="ornament" viewBox="0 0 200 26" aria-hidden="true">
+        <line x1="0" y1="13" x2="72" y2="13" stroke="#B9954A" stroke-width="1"/>
+        <line x1="128" y1="13" x2="200" y2="13" stroke="#B9954A" stroke-width="1"/>
+        <path d="M100 4 L108 13 L100 22 L92 13 Z" fill="none" stroke="#111214" stroke-width="1.3"/>
+        <path d="M100 8.5 L103.5 13 L100 17.5 L96.5 13 Z" fill="#D7B364"/>
+        <circle cx="80" cy="13" r="2" fill="#B9954A"/>
+        <circle cx="120" cy="13" r="2" fill="#B9954A"/>
+      </svg>
+
+      <p class="sub" style="margin-top:34px"><span class="n">02</span> Het model, uitgetekend</p>
+
+      <figure class="cut">
+        <svg viewBox="0 0 800 430" aria-label="Schematische tekening van een deviatie onder een range">
+          <defs>
+            <pattern id="halft" width="6" height="6" patternUnits="userSpaceOnUse">
+              <circle cx="1.6" cy="1.6" r="1.05" fill="#111214" opacity=".22"/>
+            </pattern>
+            <pattern id="halftg" width="6" height="6" patternUnits="userSpaceOnUse">
+              <circle cx="1.6" cy="1.6" r="1.5" fill="#B9954A" opacity=".5"/>
+            </pattern>
+          </defs>
+
+          <rect x="0" y="0" width="800" height="430" fill="#F4F2EC"/>
+          <rect x="0" y="0" width="800" height="430" fill="none" stroke="#111214" stroke-width="1.4"/>
+
+          <!-- the range -->
+          <rect x="30" y="140" width="740" height="160" fill="url(#halft)"/>
+          <line x1="30" y1="140" x2="770" y2="140" stroke="#111214" stroke-width="1.6"/>
+          <line x1="30" y1="300" x2="770" y2="300" stroke="#111214" stroke-width="1.6"/>
+          <text x="38" y="132" font-family="Georgia, serif" font-size="14" fill="#55565A" letter-spacing="1.4">RANGE — BOVEN</text>
+          <text x="38" y="318" font-family="Georgia, serif" font-size="14" fill="#55565A" letter-spacing="1.4">RANGE — ONDER</text>
+
+          <!-- the deviation pocket -->
+          <rect x="300" y="300" width="140" height="66" fill="url(#halftg)"/>
+          <line x1="300" y1="366" x2="440" y2="366" stroke="#B9954A" stroke-width="1.4" stroke-dasharray="6 5"/>
+
+          <!-- price path -->
+          <polyline points="30,272 78,196 126,286 176,178 226,290 276,206 324,296 366,346 396,358 424,318 462,276 508,232 556,192 596,156 640,120 690,96 740,66"
+                    fill="none" stroke="#111214" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+          <polyline points="324,296 366,346 396,358 424,318" fill="none" stroke="#B9954A" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+
+          <circle cx="396" cy="358" r="5.5" fill="#B9954A"/>
+          <path d="M396 372 L396 400 H520" fill="none" stroke="#111214" stroke-width="1"/>
+          <text x="528" y="405" font-family="Georgia, serif" font-size="16" fill="#111214">Deviatie</text>
+
+          <path d="M690 96 L690 62 H600" fill="none" stroke="#111214" stroke-width="1"/>
+          <circle cx="690" cy="96" r="4.5" fill="#111214"/>
+          <text x="416" y="58" font-family="Georgia, serif" font-size="16" fill="#111214">Vervolg van de beweging</text>
+        </svg>
+        <figcaption><b>Figuur —</b> Prijs zakt kort onder de onderkant van de range, vindt daar geen vervolg en keert terug. Schematisch weergegeven; geen koersen, geen uitkomsten.</figcaption>
+      </figure>
+
+      <p class="sub"><span class="n">03</span> Live meekijken</p>
+      <p>De oprichter handelt live in de server. Tijden worden daar aangekondigd — niet hier, want ze veranderen mee met de markt.</p>
+
+      <aside class="sidebar">
+        <svg class="clock" viewBox="0 0 300 130" aria-label="De handelssessies weergegeven als bogen">
+          <line x1="10" y1="98" x2="290" y2="98" stroke="#C6C3B8" stroke-width="1"/>
+          <g fill="none" stroke="#B9954A" stroke-width="1.4">
+            <path d="M22 98 Q60 40 98 98"/>
+            <path d="M110 98 Q155 22 200 98"/>
+            <path d="M212 98 Q248 46 284 98"/>
+          </g>
+          <g fill="#D7B364">
+            <circle cx="60" cy="40" r="3"/><circle cx="155" cy="22" r="3.6"/><circle cx="248" cy="46" r="3"/>
+          </g>
+          <g stroke="#111214" stroke-width="1">
+            <line x1="22" y1="98" x2="22" y2="106"/><line x1="98" y1="98" x2="98" y2="106"/>
+            <line x1="110" y1="98" x2="110" y2="106"/><line x1="200" y1="98" x2="200" y2="106"/>
+            <line x1="212" y1="98" x2="212" y2="106"/><line x1="284" y1="98" x2="284" y2="106"/>
+          </g>
+          <g fill="#55565A" font-family="Georgia, serif" font-size="12" letter-spacing="1.6">
+            <text x="22" y="122">AZIË</text>
+            <text x="110" y="122">LONDEN</text>
+            <text x="204" y="122">NEW YORK</text>
+          </g>
+        </svg>
+        <h3>De dag in drie sessies.</h3>
+        <p>Sessie-liquiditeit is één van de tien onderwerpen. De sessies zelf staan hier alleen schematisch — geen tijden, die worden in de server aangekondigd.</p>
+        <a class="btn btn-o btn-s" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Zit een sessie bij →</a>
+      </aside>
+
+      <div class="boxes">
+        <div class="bx">
+          <h3>Thuis</h3>
+          <span class="st">Nu gratis</span>
+          <ul>
+            <li>Charts en marktbespreking</li>
+            <li>Vragen en ondersteuning</li>
+            <li>De community</li>
+          </ul>
+          <a class="btn btn-s" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Kom binnen →</a>
+        </div>
+        <div class="bx">
+          <h3>Premium</h3>
+          <span class="st">Opent later</span>
+          <ul>
+            <li>Setups en marktupdates</li>
+            <li>Sessie-opnames</li>
+            <li>Indicatoren</li>
+          </ul>
+          <a class="btn btn-o btn-s" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Hoor het als eerste →</a>
+        </div>
+      </div>
+      <p style="font-size:12.5px;font-style:italic;color:var(--ink-4);margin-top:10px">Datum en prijs van premium worden in de server aangekondigd.</p>
+    </div>
+  </div>
+</main>
+
+<!-- ══════════════════ CLASSIFIEDS ══════════════════ -->
+<section class="classif">
+  <div class="sheet">
+    <div class="cl-head">
+      <h2>Rubriek — de kanalen</h2>
+      <span class="sp"></span>
+      <span class="tag tag-g">15 kanalen · 2 delen</span>
+    </div>
+    <div class="ads">
+      <div class="ad">
+        <span class="h">Thuis — gratis</span>
+        <ul>
+          <li><b>#</b>nq-chart-ideeën</li>
+          <li><b>#</b>es-chart-ideeën</li>
+          <li><b>#</b>bitcoin</li>
+          <li><b>#</b>altcoins</li>
+          <li><b>#</b>markt</li>
+        </ul>
+      </div>
+      <div class="ad">
+        <span class="h">Thuis — gratis</span>
+        <ul>
+          <li><b>#</b>vragen</li>
+          <li><b>#</b>algemeen</li>
+          <li><b>#</b>atlas-op-socials</li>
+          <li><b>#</b>ondersteuning</li>
+        </ul>
+        <p>Direct toegankelijk zodra je binnenkomt.</p>
+      </div>
+      <div class="ad">
+        <span class="h later">Premium — opent later</span>
+        <ul>
+          <li><b>#</b>trade-setups</li>
+          <li><b>#</b>marktupdates</li>
+          <li><b>#</b>indicatoren</li>
+        </ul>
+      </div>
+      <div class="ad">
+        <span class="h later">Premium — opent later</span>
+        <ul>
+          <li><b>#</b>sessie-opnames</li>
+          <li><b>#</b>chart-ideeën</li>
+          <li><b>#</b>premium-chat</li>
+        </ul>
+        <p>Aankondiging volgt in de server.</p>
+      </div>
+    </div>
+    <p style="text-align:center;margin:clamp(18px,3vw,28px) 0 0"><a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Open de server →</a></p>
+  </div>
+</section>
+
+<!-- ══════════════════ COUPON ══════════════════ -->
+<div class="sheet">
+  <div class="col coupon">
+    <span class="scis">— knip uit en bewaar —</span>
+    <h2>Proces boven voorspelling.</h2>
+    <p>Atlas Capital is nu gratis toegankelijk. Markten: NQ, ES, Bitcoin en altcoins.</p>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Word lid van Atlas Capital →</a>
+  </div>
+</div>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <div class="sheet">
+    <div class="fg">
+      <div>
+        <p class="tag" style="margin:0 0 8px">Colofon</p>
+        <p style="margin:0">Atlas Capital — Nederlandse trading-community op Discord.<br>Proces. Discipline. Uitvoering.</p>
+      </div>
+      <div>
+        <p class="tag" style="margin:0 0 8px">Adressen</p>
+        <p style="margin:0 0 6px"><a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord</a></p>
+        <p style="margin:0"><a href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok — @atlascapitalbv</a></p>
+      </div>
+      <div>
+        <p class="tag" style="margin:0 0 8px">Markten</p>
+        <p style="margin:0">NQ · ES · Bitcoin · Altcoins</p>
+      </div>
+    </div>
+    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <div class="pg"><span>De Kolom</span><span>Atlas Capital</span><span>Blad 04</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

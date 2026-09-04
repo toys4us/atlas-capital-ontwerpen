@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 058 Punt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,200;0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ATLAS CAPITAL — 058 PUNT
+   One gold dot is the only graphic on this page.
+   It changes size and position at every beat, and the type
+   never changes size at all. The dot carries the hierarchy;
+   the words stay perfectly level. The last dot is the button.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --text:#E7E5DF;
+  --muted:#A5A6A8;
+  --dim:#6E7074;
+  --line:#1C1D21;
+
+  --u:8px;
+  --measure:40ch;
+
+  /* the type scale is deliberately almost flat */
+  --t-base:clamp(1rem, .965rem + .16vw, 1.0625rem);
+  --t-micro:clamp(.6875rem, .665rem + .1vw, .75rem);
+  --t-hero:clamp(1.75rem, 1.15rem + 2.6vw, 3.375rem);
+
+  --serif:"Newsreader", Georgia, "Times New Roman", Times, serif;
+  --sans:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+*,*::before,*::after{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--text);
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:var(--t-base);
+  line-height:1.72;
+  overflow-x:hidden;
+  text-align:center;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+p{margin:0}
+
+.page{
+  max-width:960px;
+  margin-inline:auto;
+  padding-inline:clamp(20px, 6vw, 72px);
+}
+
+/* ------------------------------------------------------------
+   THE DOT — one element, one job, nine appearances
+   ------------------------------------------------------------ */
+.dot{
+  display:block;
+  width:var(--d, 10px);
+  height:var(--d, 10px);
+  border-radius:50%;
+  background:var(--gold);
+  margin-inline:auto;
+  transform:translateX(var(--x, 0px));
+}
+.dot--ring{
+  background:transparent;
+  border:1px solid var(--gold);
+}
+.dot--half{
+  background:linear-gradient(to right, var(--gold) 50%, transparent 50%);
+}
+
+/* ------------------------------------------------------------
+   BEATS — the whole page is a sequence of quiet beats
+   ------------------------------------------------------------ */
+.beat{
+  padding-block:clamp(56px, 9vh, 120px);
+}
+.beat > * + *{margin-top:calc(var(--u)*3)}
+.beat .dot + .tag{margin-top:calc(var(--u)*6)}
+
+.measure{
+  max-width:var(--measure);
+  margin-inline:auto;
+  color:var(--muted);
+  text-wrap:pretty;
+}
+.measure + .measure{margin-top:calc(var(--u)*2)}
+
+.tag{
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:600;
+}
+.tag .n{color:var(--dim)}
+
+h1,h2{margin:0;font-weight:200;letter-spacing:-.015em}
+
+.hero-line{
+  font-size:var(--t-hero);
+  line-height:1.06;
+  max-width:18ch;
+  margin-inline:auto;
+  text-wrap:balance;
+  color:var(--text);
+}
+.hero-line i{font-style:italic;color:var(--gold)}
+
+.title{
+  font-size:var(--t-base);
+  line-height:1.7;
+  max-width:34ch;
+  margin-inline:auto;
+  color:var(--text);
+  letter-spacing:.005em;
+  text-wrap:balance;
+}
+
+.quiet{color:var(--dim)}
+
+/* ------------------------------------------------------------
+   HEADER
+   ------------------------------------------------------------ */
+.top{
+  padding-block:calc(var(--u)*5) calc(var(--u)*2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:calc(var(--u)*3);
+  flex-wrap:wrap;
+}
+.mark{
+  display:inline-flex;
+  align-items:center;
+  gap:.55em;
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  font-weight:600;
+  text-decoration:none;
+  color:var(--text);
+}
+.mark i{
+  width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block;
+}
+
+/* ------------------------------------------------------------
+   BUTTONS — a centred page needs the CTA to break the measure
+   ------------------------------------------------------------ */
+.bar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.9em;
+  width:min(100%, 30rem);
+  margin-inline:auto;
+  background:var(--gold);
+  color:var(--ink);
+  text-decoration:none;
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:clamp(.75rem,.71rem + .22vw,.875rem);
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  padding:calc(var(--u)*2.5) calc(var(--u)*3);
+  border:1px solid var(--gold);
+  transition:background .16s ease,color .16s ease;
+}
+.bar:hover{background:var(--gold-hi);border-color:var(--gold-hi)}
+
+.bar--quiet{
+  background:transparent;
+  color:var(--gold);
+  width:min(100%, 22rem);
+  font-weight:600;
+}
+.bar--quiet:hover{background:var(--gold);color:var(--ink)}
+
+.bar .tip{width:1.25em;height:1px;background:currentColor;position:relative;flex:0 0 auto}
+.bar .tip::after{
+  content:"";position:absolute;right:0;top:50%;
+  width:.42em;height:.42em;
+  border-top:1px solid currentColor;border-right:1px solid currentColor;
+  transform:translateY(-50%) rotate(45deg);
+}
+
+/* the final dot IS the button */
+.disc{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:.35em;
+  width:clamp(206px, 52vw, 300px);
+  height:clamp(206px, 52vw, 300px);
+  margin-inline:auto;
+  border-radius:50%;
+  background:var(--gold);
+  color:var(--ink);
+  text-decoration:none;
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:clamp(.75rem,.7rem + .3vw,.9375rem);
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  text-align:center;
+  padding:2em;
+  transition:background .18s ease, transform .18s ease;
+}
+.disc small{
+  display:block;
+  font-weight:500;
+  letter-spacing:.12em;
+  font-size:.72em;
+  color:#4A3E22;
+  text-transform:none;
+}
+.disc:hover{background:var(--gold-hi);transform:scale(1.02)}
+
+/* ------------------------------------------------------------
+   CURRICULUM — ten centred lines, same size as everything else
+   ------------------------------------------------------------ */
+.ten{
+  list-style:none;
+  margin:calc(var(--u)*5) auto 0;
+  padding:0;
+  max-width:30ch;
+}
+.ten li{
+  padding-block:calc(var(--u)*1.25);
+  color:var(--text);
+  letter-spacing:.02em;
+}
+.ten li + li{border-top:1px solid var(--line)}
+.ten li span{
+  font-family:var(--sans);
+  font-size:.68em;
+  letter-spacing:.2em;
+  color:var(--gold-lo);
+  margin-right:.9em;
+  vertical-align:.12em;
+}
+
+/* ------------------------------------------------------------
+   CHANNELS — centred running text, middots as breath
+   ------------------------------------------------------------ */
+.chanset{max-width:44ch;margin-inline:auto}
+.chanset h3{
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--dim);
+  margin:0 0 calc(var(--u)*2);
+}
+.chanset p{
+  line-height:2.1;
+  color:var(--text);
+  word-spacing:.06em;
+}
+.chanset .sep{color:var(--gold-lo);padding-inline:.35em}
+.chanset + .chanset{margin-top:calc(var(--u)*6)}
+.chanset.soon p{color:var(--dim)}
+/* the channel run holds no spaces, so its only break points are the hyphens;
+   the longest segment is wider than a narrow viewport and, being centred,
+   hangs off both sides. Below 600px let it break where it must. Wider than
+   that — desktop included — the wrapping is untouched. */
+@media (max-width:600px){
+  .chanset p{overflow-wrap:anywhere}
+}
+
+/* ------------------------------------------------------------
+   THE MODEL, DRAWN IN DOTS
+   the fair value gap is a real gap in the dot field
+   ------------------------------------------------------------ */
+.plate{
+  overflow-x:auto;
+  margin-top:calc(var(--u)*6);
+}
+.plate svg{display:block;width:100%;min-width:320px;height:auto;margin-inline:auto}
+.cap{
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--dim);
+  margin-top:calc(var(--u)*3);
+}
+
+/* ------------------------------------------------------------
+   ACCESS — two lines, no boxes
+   ------------------------------------------------------------ */
+.access{max-width:36ch;margin-inline:auto}
+.access dt{
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--dim);
+  font-weight:600;
+}
+.access dd{
+  margin:calc(var(--u)*1) 0 0;
+  color:var(--text);
+}
+.access dd em{font-style:normal;color:var(--gold)}
+.access div + div{margin-top:calc(var(--u)*4)}
+
+/* ------------------------------------------------------------
+   FOOTER
+   ------------------------------------------------------------ */
+.bottom{
+  border-top:1px solid var(--line);
+  padding-block:calc(var(--u)*7) calc(var(--u)*9);
+  margin-top:calc(var(--u)*8);
+}
+.links{
+  display:flex;
+  justify-content:center;
+  gap:calc(var(--u)*4);
+  flex-wrap:wrap;
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+.links a{text-decoration:none;color:var(--gold);border-bottom:1px solid #34353A;padding-bottom:4px}
+.links a:hover{border-bottom-color:var(--gold)}
+.risk{
+  max-width:52ch;
+  margin:calc(var(--u)*4) auto 0;
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  line-height:1.9;
+  color:var(--dim);
+}
+.sig{
+  margin-top:calc(var(--u)*4);
+  font-family:var(--sans);
+  font-size:var(--t-micro);
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:#45464A;
+}
+
+@media (max-width:520px){
+  .beat{padding-block:clamp(44px,7vh,80px)}
+  .dot{transform:translateX(calc(var(--x, 0px) * .5))}
+}
+
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="top">
+    <a class="mark" href="#een"><i aria-hidden="true"></i> Atlas Capital</a>
+    <a class="bar bar--quiet" style="width:auto;padding-inline:calc(var(--u)*2.5)" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
+      Discord <span class="tip" aria-hidden="true"></span>
+    </a>
+  </header>
+
+  <main>
+
+    <!-- ═══════════ 01 · HERO — the largest dot ═══════════ -->
+    <section class="beat" id="een" aria-labelledby="t1">
+      <span class="dot" style="--d:clamp(96px,26vw,168px); --x:-6vw" aria-hidden="true"></span>
+      <p class="tag"><span class="n">01</span> &nbsp;Atlas Capital</p>
+      <h1 class="hero-line" id="t1">Één punt van<br>vertrek: <i>het proces.</i></h1>
+      <p class="measure">Een Nederlandse trading-community op Discord. Educatie voor NQ, ES, Bitcoin en altcoins — rustig uitgelegd, dagelijks toegepast.</p>
+      <a class="bar" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
+        Kom binnen op Discord <span class="tip" aria-hidden="true"></span>
+      </a>
+      <p class="measure quiet" style="font-family:var(--sans);font-size:var(--t-micro);letter-spacing:.24em;text-transform:uppercase">Proces &nbsp;· &nbsp;Discipline &nbsp;· &nbsp;Uitvoering</p>
+    </section>
+
+    <!-- ═══════════ 02 · OPRICHTER — a small dot, far right ═══════════ -->
+    <section class="beat" aria-labelledby="t2">
+      <span class="dot" style="--d:9px; --x:14vw" aria-hidden="true"></span>
+      <p class="tag"><span class="n">02</span> &nbsp;De oprichter</p>
+      <h2 class="title" id="t2">Meer dan 10 jaar in de markt — en alles wat daarbij hoort.</h2>
+      <blockquote class="measure" style="margin:calc(var(--u)*3) auto 0;font-style:italic">
+        &ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&rdquo;
+      </blockquote>
+      <p class="measure">&ldquo;Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</p>
+    </section>
+
+    <!-- ═══════════ 03 · EDUCATIE — a medium dot, left ═══════════ -->
+    <section class="beat" aria-labelledby="t3">
+      <span class="dot" style="--d:34px; --x:-11vw" aria-hidden="true"></span>
+      <p class="tag"><span class="n">03</span> &nbsp;Educatie</p>
+      <h2 class="title" id="t3">10 onderwerpen. Elk onderwerp is een punt dat op zijn plek moet vallen.</h2>
+
+      <ol class="ten">
+        <li><span>01</span>deviatie</li>
+        <li><span>02</span>SMT</li>
+        <li><span>03</span>FVG</li>
+        <li><span>04</span>IFVG</li>
+        <li><span>05</span>orderblocks</li>
+        <li><span>06</span>fibonacci</li>
+        <li><span>07</span>sessie-liquiditeit</li>
+        <li><span>08</span>liquiditeit</li>
+        <li><span>09</span>risicobeheer</li>
+        <li><span>10</span>tradingpsychologie</li>
+      </ol>
+
+      <a class="bar bar--quiet" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
+        Lees mee in de server <span class="tip" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- ═══════════ 04 · HET MODEL — drawn entirely in dots ═══════════ -->
+    <section class="beat" aria-labelledby="t4">
+      <span class="dot dot--ring" style="--d:22px; --x:8vw" aria-hidden="true"></span>
+      <p class="tag"><span class="n">04</span> &nbsp;Het model</p>
+      <h2 class="title" id="t4">Een gap is letterlijk een gat: een plek waar de punten ontbreken.</h2>
+
+      <div class="plate">
+        <svg viewBox="0 0 880 400" role="img" aria-label="Schematische weergave in punten van een impuls, een fair value gap en een hertest">
+          <!-- ghost dot field -->
+          <g fill="#1F2126">
+            <circle cx="40" cy="40" r="2"/><circle cx="40" cy="120" r="2"/><circle cx="40" cy="200" r="2"/><circle cx="40" cy="280" r="2"/><circle cx="40" cy="360" r="2"/>
+            <circle cx="840" cy="40" r="2"/><circle cx="840" cy="120" r="2"/><circle cx="840" cy="200" r="2"/><circle cx="840" cy="280" r="2"/><circle cx="840" cy="360" r="2"/>
+          </g>
+
+          <!-- the level where liquidity rests, as a dotted line of dots -->
+          <g fill="#B9954A">
+            <circle cx="60" cy="96" r="1.8"/><circle cx="110" cy="96" r="1.8"/><circle cx="160" cy="96" r="1.8"/><circle cx="210" cy="96" r="1.8"/><circle cx="260" cy="96" r="1.8"/><circle cx="310" cy="96" r="1.8"/><circle cx="360" cy="96" r="1.8"/><circle cx="410" cy="96" r="1.8"/><circle cx="460" cy="96" r="1.8"/><circle cx="510" cy="96" r="1.8"/><circle cx="560" cy="96" r="1.8"/><circle cx="610" cy="96" r="1.8"/><circle cx="660" cy="96" r="1.8"/><circle cx="710" cy="96" r="1.8"/><circle cx="760" cy="96" r="1.8"/><circle cx="810" cy="96" r="1.8"/>
+          </g>
+          <text x="60" y="80" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2.4" fill="#B9954A">LIQUIDITEIT</text>
+
+          <!-- columns of dots: each column is a bar; taller stacks = wider range -->
+          <g fill="#8B8D91">
+            <circle cx="100" cy="300" r="3"/><circle cx="100" cy="320" r="3"/><circle cx="100" cy="340" r="3"/>
+            <circle cx="150" cy="272" r="3"/><circle cx="150" cy="292" r="3"/><circle cx="150" cy="312" r="3"/><circle cx="150" cy="332" r="3"/>
+            <circle cx="200" cy="240" r="3"/><circle cx="200" cy="260" r="3"/><circle cx="200" cy="280" r="3"/><circle cx="200" cy="300" r="3"/>
+          </g>
+          <!-- the sweep column reaches through the level -->
+          <g fill="#E7E5DF">
+            <circle cx="250" cy="92" r="3.4"/><circle cx="250" cy="120" r="3.4"/><circle cx="250" cy="148" r="3.4"/><circle cx="250" cy="176" r="3.4"/><circle cx="250" cy="204" r="3.4"/><circle cx="250" cy="232" r="3.4"/><circle cx="250" cy="260" r="3.4"/>
+          </g>
+
+          <!-- displacement: gold, dense -->
+          <g fill="#D7B364">
+            <circle cx="300" cy="150" r="4"/><circle cx="300" cy="172" r="4"/><circle cx="300" cy="194" r="4"/><circle cx="300" cy="216" r="4"/><circle cx="300" cy="238" r="4"/><circle cx="300" cy="260" r="4"/>
+            <circle cx="350" cy="196" r="4"/><circle cx="350" cy="218" r="4"/><circle cx="350" cy="240" r="4"/><circle cx="350" cy="262" r="4"/><circle cx="350" cy="284" r="4"/>
+          </g>
+
+          <!-- THE GAP: a rectangle of the field where no dot exists -->
+          <rect x="384" y="188" width="450" height="62" fill="#D7B364" fill-opacity=".07"/>
+          <g fill="#D7B364">
+            <circle cx="384" cy="188" r="2.6"/><circle cx="834" cy="188" r="2.6"/>
+            <circle cx="384" cy="250" r="2.6"/><circle cx="834" cy="250" r="2.6"/>
+          </g>
+          <text x="396" y="176" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2.4" fill="#D7B364">FVG — GEEN PUNTEN</text>
+
+          <!-- base, then the return that stops at the gap edge -->
+          <g fill="#8B8D91">
+            <circle cx="400" cy="300" r="3"/><circle cx="400" cy="320" r="3"/><circle cx="400" cy="340" r="3"/>
+            <circle cx="450" cy="284" r="3"/><circle cx="450" cy="304" r="3"/><circle cx="450" cy="324" r="3"/>
+            <circle cx="500" cy="266" r="3"/><circle cx="500" cy="286" r="3"/><circle cx="500" cy="306" r="3"/>
+            <circle cx="550" cy="252" r="3"/><circle cx="550" cy="272" r="3"/><circle cx="550" cy="292" r="3"/>
+          </g>
+          <g fill="#E7E5DF">
+            <circle cx="600" cy="252" r="3.4"/><circle cx="600" cy="274" r="3.4"/><circle cx="600" cy="296" r="3.4"/>
+          </g>
+
+          <!-- continuation away from the gap -->
+          <g fill="#8B8D91">
+            <circle cx="650" cy="284" r="3"/><circle cx="650" cy="306" r="3"/><circle cx="650" cy="328" r="3"/>
+            <circle cx="700" cy="310" r="3"/><circle cx="700" cy="332" r="3"/><circle cx="700" cy="354" r="3"/>
+            <circle cx="750" cy="332" r="3"/><circle cx="750" cy="354" r="3"/><circle cx="750" cy="376" r="3"/>
+          </g>
+
+          <!-- two callouts, set in the same dot language -->
+          <g fill="#5C5E62">
+            <circle cx="250" cy="52" r="1.6"/><circle cx="264" cy="52" r="1.6"/><circle cx="278" cy="52" r="1.6"/>
+          </g>
+          <text x="292" y="56" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2.4" fill="#A5A6A8">SWEEP</text>
+
+          <g fill="#5C5E62">
+            <circle cx="600" cy="386" r="1.6"/><circle cx="614" cy="386" r="1.6"/><circle cx="628" cy="386" r="1.6"/>
+          </g>
+          <text x="642" y="390" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2.4" fill="#A5A6A8">HERTEST</text>
+        </svg>
+      </div>
+      <p class="cap">Schematisch. Geen prijzen, geen resultaat — alleen de vorm.</p>
+    </section>
+
+    <!-- ═══════════ 05 · KANALEN — tiny dot, centred ═══════════ -->
+    <section class="beat" aria-labelledby="t5">
+      <span class="dot" style="--d:5px; --x:0px" aria-hidden="true"></span>
+      <p class="tag"><span class="n">05</span> &nbsp;De server</p>
+      <h2 class="title" id="t5">15 kanalen. Je hoeft er maar één tegelijk open te hebben.</h2>
+
+      <div class="chanset" style="margin-top:calc(var(--u)*5)">
+        <h3>Thuis — nu gratis</h3>
+        <p>#nq-chart-ideeën<span class="sep">·</span>#es-chart-ideeën<span class="sep">·</span>#bitcoin<span class="sep">·</span>#altcoins<span class="sep">·</span>#markt<span class="sep">·</span>#vragen<span class="sep">·</span>#algemeen<span class="sep">·</span>#atlas-op-socials<span class="sep">·</span>#ondersteuning</p>
+      </div>
+
+      <div class="chanset soon">
+        <h3>Premium — opent later</h3>
+        <p>#trade-setups<span class="sep">·</span>#marktupdates<span class="sep">·</span>#indicatoren<span class="sep">·</span>#sessie-opnames<span class="sep">·</span>#chart-ideeën<span class="sep">·</span>#premium-chat</p>
+      </div>
+    </section>
+
+    <!-- ═══════════ 06 · LIVE — half dot, right ═══════════ -->
+    <section class="beat" aria-labelledby="t6">
+      <span class="dot dot--half" style="--d:52px; --x:10vw" aria-hidden="true"></span>
+      <p class="tag"><span class="n">06</span> &nbsp;Live</p>
+      <h2 class="title" id="t6">De oprichter handelt live in de server en denkt daarbij hardop.</h2>
+      <p class="measure">Tijden worden in Discord aangekondigd. Meekijken kost je niets.</p>
+      <a class="bar bar--quiet" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
+        Zit een sessie mee <span class="tip" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- ═══════════ 07 · TOEGANG — two dots, one filled one open ═══════════ -->
+    <section class="beat" aria-labelledby="t7">
+      <span class="dot" style="--d:14px; --x:-4vw" aria-hidden="true"></span>
+      <p class="tag"><span class="n">07</span> &nbsp;Toegang</p>
+      <h2 class="title" id="t7">Nu gratis. Premium opent later.</h2>
+      <dl class="access" style="margin-top:calc(var(--u)*5)">
+        <div>
+          <dt>Thuis</dt>
+          <dd><em>Open en gratis.</em> Educatie, chart-ideeën, markt en vragen.</dd>
+        </div>
+        <div>
+          <dt>Premium</dt>
+          <dd>Opent later. Datum en prijs worden in de server aangekondigd.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ═══════════ 08 · SLOT — the last dot is the button ═══════════ -->
+    <section class="beat" aria-labelledby="t8">
+      <p class="tag"><span class="n">08</span> &nbsp;Kom binnen</p>
+      <h2 class="title" id="t8">Eén punt. Eén klik. Daarna doe je het werk.</h2>
+      <div style="margin-top:calc(var(--u)*7)">
+        <a class="disc" href="https://discord.gg/78Ff2GuSfW" rel="noopener">
+          Open Discord
+          <small>discord.gg/78Ff2GuSfW</small>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="bottom">
+    <div class="links">
+      <a href="https://discord.gg/78Ff2GuSfW" rel="noopener">Discord</a>
+      <a href="https://www.tiktok.com/@atlascapitalbv" rel="noopener">TikTok</a>
+    </div>
+    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <p class="sig">Atlas Capital</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

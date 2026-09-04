@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="nl" data-lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 081 Campagne</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --panel:#15161A;
+  --paper:#F4F2EC;
+  --muted:#A5A6A8;
+  --edge:rgba(215,179,100,.26);
+  --hair:rgba(244,242,236,.14);
+  --display:"Syne","Segoe UI",Helvetica,Arial,sans-serif;
+  --pad:clamp(16px,4.2vw,72px);
+}
+
+*{box-sizing:border-box}
+
+/* ---------- language ---------- */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+
+html{
+  color-scheme:dark;
+  overflow-x:clip;
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--display);
+  font-weight:400;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:inherit;text-decoration:none}
+
+/* ---------- shared atoms ---------- */
+
+.sheet{
+  width:100%;
+  max-width:1680px;
+  margin:0 auto;
+  padding-left:var(--pad);
+  padding-right:var(--pad);
+}
+
+.micro{
+  font-size:clamp(9.5px,1.5vw,11px);
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--muted);
+  margin:0;
+}
+
+.micro-gold{color:var(--gold)}
+
+.hairline{
+  height:1px;
+  background:var(--hair);
+  border:0;
+  margin:0;
+}
+
+.cta{
+  display:inline-flex;
+  align-items:center;
+  gap:.85em;
+  padding:1.05em 1.7em;
+  background:linear-gradient(120deg,var(--gold-lo),var(--gold-hi) 42%,var(--gold) 70%,var(--gold-lo));
+  color:#0B0A07;
+  font-weight:700;
+  font-size:clamp(11px,1.6vw,13px);
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  border-radius:1px;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;
+  box-shadow:0 0 0 rgba(215,179,100,0);
+}
+.cta:hover{transform:translateY(-2px);box-shadow:0 14px 40px -18px rgba(215,179,100,.85)}
+.cta .arw{font-size:1.15em;line-height:1}
+
+.cta-ghost{
+  display:inline-flex;
+  align-items:center;
+  gap:.7em;
+  font-size:clamp(10px,1.5vw,11.5px);
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--gold);
+  border-bottom:1px solid var(--edge);
+  padding-bottom:.45em;
+  transition:border-color .3s,color .3s;
+}
+.cta-ghost:hover{border-color:var(--gold);color:var(--gold-hi)}
+
+/* ---------- header ---------- */
+
+.top{
+  position:sticky;
+  top:0;
+  z-index:8;
+  background:rgba(8,9,11,.9);
+  border-bottom:1px solid var(--hair);
+  backdrop-filter:blur(10px);
+}
+.top-in{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  min-height:58px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+.top-mark{
+  font-weight:800;
+  font-size:clamp(11px,1.8vw,13px);
+  letter-spacing:.42em;
+  text-transform:uppercase;
+  color:var(--paper);
+}
+.top-mid{display:none}
+@media(min-width:900px){.top-mid{display:block}}
+
+.langsw{
+  display:flex;
+  flex:0 0 auto;
+  border:1px solid var(--edge);
+  border-radius:1px;
+}
+.langsw button{
+  appearance:none;
+  -webkit-appearance:none;
+  margin:0;
+  border:0;
+  border-left:1px solid var(--edge);
+  background:transparent;
+  padding:.62em .72em .62em .84em;
+  font-family:inherit;
+  font-size:clamp(9.5px,1.4vw,11px);
+  font-weight:700;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--muted);
+  cursor:pointer;
+  transition:color .3s,background-color .3s;
+}
+.langsw button:first-child{border-left:0}
+.langsw button:hover{color:var(--gold)}
+.langsw button[aria-pressed="true"]{background:var(--gold);color:#0B0A07}
+
+/* ---------- hero ---------- */
+
+.hero{padding-top:clamp(36px,7vw,96px)}
+
+.hero-kick{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:clamp(20px,3.4vw,40px);
+}
+
+.wordmark{
+  display:flex;
+  justify-content:space-between;
+  width:100%;
+  margin:0;
+  font-weight:800;
+  flex-wrap:wrap;
+  font-size:clamp(1.3rem,6.9vw,9.4rem);
+  line-height:.9;
+  color:var(--paper);
+}
+.wordmark span{display:block;flex:0 0 auto}
+.wordmark .gap{width:clamp(6px,3.2vw,54px)}
+
+.hero-sub{
+  display:grid;
+  gap:clamp(14px,2.4vw,26px);
+  grid-template-columns:1fr;
+  align-items:end;
+  margin-top:clamp(16px,2.4vw,26px);
+}
+@media(min-width:820px){
+  .hero-sub{grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,60px)}
+}
+.hero-line{
+  margin:0;
+  font-size:clamp(17px,2.6vw,27px);
+  font-weight:500;
+  line-height:1.32;
+  max-width:22ch;
+  color:var(--paper);
+}
+.hero-line em{font-style:normal;color:var(--gold)}
+.hero-act{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+@media(min-width:820px){.hero-act{align-items:flex-end;text-align:right}}
+
+/* ---------- foil field (the "image") ---------- */
+
+.foil{
+  position:relative;
+  width:100%;
+  margin-top:clamp(26px,4.6vw,64px);
+  margin-inline:0;
+  aspect-ratio:16/7;
+  min-height:210px;
+  overflow:hidden;
+  background:
+    linear-gradient(102deg,
+      #4a3a1a 0%, #8d7136 9%, #E6CC8E 21%, #D7B364 31%,
+      #7d6430 43%, #E6CC8E 57%, #B9954A 68%,
+      #E6CC8E 79%, #8d7136 90%, #40320f 100%);
+}
+.foil::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(101deg,
+    rgba(255,255,255,.13) 0 2px,
+    rgba(0,0,0,.13) 2px 5px,
+    rgba(255,255,255,.05) 5px 9px);
+  mix-blend-mode:overlay;
+}
+.foil::after{
+  content:"";
+  position:absolute;
+  inset:-30% -60%;
+  background:linear-gradient(76deg,
+    rgba(255,255,255,0) 40%,
+    rgba(255,255,255,.5) 50%,
+    rgba(255,255,255,0) 60%);
+  animation:sweep 9s linear infinite;
+}
+@keyframes sweep{
+  from{transform:translateX(-38%)}
+  to{transform:translateX(38%)}
+}
+@media(prefers-reduced-motion:reduce){
+  .foil::after{animation:none;transform:translateX(-14%)}
+}
+
+.foil-mono{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  z-index:2;
+}
+.foil-mono svg{
+  width:min(38%,240px);
+  height:auto;
+  display:block;
+}
+
+.foil-tag{
+  position:absolute;
+  z-index:3;
+  font-size:clamp(9px,1.4vw,11px);
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  font-weight:700;
+  color:#231a06;
+}
+.foil-tag.tl{top:14px;left:14px}
+.foil-tag.br{bottom:14px;right:14px}
+
+.crop{
+  position:absolute;
+  width:26px;height:26px;
+  z-index:3;
+  border-color:rgba(35,26,6,.55);
+}
+.crop.a{top:10px;right:10px;border-top:1px solid;border-right:1px solid}
+.crop.b{bottom:10px;left:10px;border-bottom:1px solid;border-left:1px solid}
+
+/* ---------- credit strip ---------- */
+
+.strip{
+  margin-top:clamp(18px,3vw,34px);
+  padding:14px 0;
+  border-top:1px solid var(--hair);
+  border-bottom:1px solid var(--hair);
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 26px;
+  justify-content:space-between;
+}
+
+/* ---------- the looks ---------- */
+
+.looks{padding-top:clamp(44px,7vw,110px)}
+
+.look{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(18px,3vw,40px);
+  padding-bottom:clamp(56px,9vw,148px);
+}
+@media(min-width:960px){
+  .look{
+    grid-template-columns:5.5rem minmax(0,1fr) minmax(0,1fr);
+    align-items:start;
+    gap:clamp(24px,3.4vw,56px);
+  }
+  .look--flip .look-img{order:3}
+  .look--flip .look-txt{order:2}
+}
+
+.look-idx{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+@media(min-width:960px){
+  .look-idx{flex-direction:column;align-items:flex-start;gap:18px;position:sticky;top:88px}
+}
+.look-num{
+  font-size:clamp(22px,3.4vw,40px);
+  font-weight:800;
+  line-height:1;
+  color:var(--gold);
+  letter-spacing:-.02em;
+}
+.look-tick{
+  flex:1 1 auto;
+  height:1px;
+  background:var(--edge);
+}
+@media(min-width:960px){
+  .look-tick{width:1px;height:70px;flex:0 0 auto}
+}
+
+.look-txt h2{
+  margin:0 0 .5em;
+  font-size:clamp(30px,6.4vw,72px);
+  line-height:.95;
+  font-weight:700;
+  letter-spacing:-.025em;
+}
+.look-txt h2 .thin{font-weight:400;color:var(--muted)}
+.look-note{
+  margin:0 0 1.4em;
+  max-width:34ch;
+  font-size:clamp(14px,1.7vw,16px);
+  line-height:1.6;
+  color:var(--muted);
+}
+.look-note strong{color:var(--paper);font-weight:600}
+
+.plate{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  background:var(--panel);
+  border:1px solid var(--hair);
+}
+.plate-cap{
+  margin-top:12px;
+  font-size:clamp(9.5px,1.4vw,11px);
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* look 01 — portrait plate */
+.portrait{
+  aspect-ratio:3/4;
+  background:
+    radial-gradient(120% 90% at 30% 8%, rgba(215,179,100,.34), rgba(21,22,26,0) 62%),
+    linear-gradient(168deg,#22201b,#0c0d10 72%);
+  display:grid;
+  place-items:center;
+}
+.portrait svg{width:62%;height:auto}
+
+/* look 02 — contact sheet of the curriculum */
+.sheetgrid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:1px;
+  background:var(--hair);
+  border:1px solid var(--hair);
+}
+@media(min-width:520px){.sheetgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.cell{
+  background:#101116;
+  padding:clamp(12px,1.8vw,20px);
+  min-height:clamp(92px,13vw,132px);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:10px;
+}
+.cell b{
+  font-size:clamp(10px,1.5vw,11px);
+  letter-spacing:.22em;
+  color:var(--gold);
+  font-weight:700;
+}
+.cell span{
+  font-size:clamp(13px,1.9vw,17px);
+  font-weight:600;
+  line-height:1.15;
+  letter-spacing:-.01em;
+}
+.cell--fill{
+  background:linear-gradient(140deg,var(--gold-lo),var(--gold-hi));
+}
+.cell--fill b{color:#3a2c0c}
+.cell--fill span{color:#14100a}
+
+/* look 03 — the model, treated as still life */
+.stilllife{
+  aspect-ratio:4/3;
+  background:
+    radial-gradient(90% 70% at 50% 100%, rgba(215,179,100,.15), rgba(8,9,11,0) 70%),
+    linear-gradient(180deg,#101116,#08090B);
+  display:grid;
+  place-items:center;
+  padding:clamp(10px,2vw,26px);
+}
+.stilllife svg{width:100%;height:auto;display:block}
+
+/* look 04 — channel column */
+.chanwrap{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1px;
+  background:var(--hair);
+  border:1px solid var(--hair);
+}
+@media(min-width:560px){.chanwrap{grid-template-columns:1fr 1fr}}
+.chanbox{background:#0e0f13;padding:clamp(14px,2vw,22px)}
+.chanbox h3{
+  margin:0 0 1.1em;
+  font-size:clamp(10px,1.5vw,11px);
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:700;
+}
+.chanbox ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.62em}
+.chanbox li{
+  font-size:clamp(12px,1.6vw,14px);
+  color:var(--paper);
+  letter-spacing:-.005em;
+  display:flex;
+  align-items:baseline;
+  gap:.55em;
+}
+.chanbox li::before{
+  content:"";
+  width:5px;height:5px;
+  flex:0 0 auto;
+  background:var(--gold);
+  transform:translateY(-2px);
+}
+.chanbox--later li{color:var(--muted)}
+.chanbox--later li::before{background:transparent;border:1px solid var(--edge)}
+
+/* look 05 — live mark */
+.live{
+  aspect-ratio:1/1;
+  background:radial-gradient(70% 70% at 50% 50%, #16171c, #08090B 74%);
+  display:grid;place-items:center;
+}
+.live svg{width:74%;height:auto}
+.pulse{transform-origin:center;animation:pulse 3.4s ease-in-out infinite}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.14)}
+}
+@media(prefers-reduced-motion:reduce){.pulse{animation:none}}
+
+/* look 06 — access */
+.access{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1px;
+  background:var(--hair);
+  border:1px solid var(--hair);
+}
+@media(min-width:560px){.access{grid-template-columns:1fr 1fr}}
+.acc{
+  background:#0e0f13;
+  padding:clamp(18px,2.6vw,30px);
+  min-height:clamp(150px,20vw,220px);
+  display:flex;flex-direction:column;justify-content:space-between;gap:18px;
+}
+.acc--now{background:linear-gradient(160deg,#1d1a12,#0e0f13 68%)}
+.acc h3{
+  margin:0;
+  font-size:clamp(19px,3vw,30px);
+  font-weight:700;
+  letter-spacing:-.02em;
+}
+.acc p{margin:0;color:var(--muted);font-size:clamp(12.5px,1.6vw,14px);max-width:26ch}
+.acc .tagline{color:var(--gold);font-weight:600;letter-spacing:.2em;text-transform:uppercase;font-size:clamp(9.5px,1.4vw,11px)}
+
+/* ---------- closing ---------- */
+
+.close{
+  border-top:1px solid var(--hair);
+  padding-top:clamp(40px,7vw,110px);
+  padding-bottom:clamp(40px,7vw,110px);
+  text-align:center;
+}
+.close h2{
+  margin:.25em 0 .5em;
+  font-size:clamp(42px,13vw,180px);
+  line-height:.86;
+  font-weight:800;
+  letter-spacing:-.04em;
+  background:linear-gradient(96deg,var(--gold-lo),var(--gold-hi) 38%,var(--gold) 62%,var(--gold-lo));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){
+  .close h2{color:var(--gold);background:none}
+}
+.close p{margin:0 auto 2em;max-width:30ch;color:var(--muted);font-size:clamp(13px,1.8vw,16px)}
+
+/* ---------- footer ---------- */
+
+footer{
+  border-top:1px solid var(--hair);
+  padding-top:clamp(24px,3.4vw,40px);
+  padding-bottom:clamp(28px,4vw,56px);
+}
+.foot-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px 30px;
+  justify-content:space-between;
+  align-items:baseline;
+}
+.foot-links{display:flex;flex-wrap:wrap;gap:12px 24px}
+.risk{
+  margin:clamp(20px,3vw,34px) 0 0;
+  font-size:clamp(10px,1.4vw,11.5px);
+  line-height:1.7;
+  color:#6f7073;
+  max-width:70ch;
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="sheet top-in">
+    <span class="top-mark">ATLAS CAPITAL</span>
+    <p class="micro top-mid"><span lang="nl">CAMPAGNE — PROCES. DISCIPLINE. UITVOERING.</span><span lang="en">CAMPAIGN — PROCESS. DISCIPLINE. EXECUTION.</span></p>
+    <a class="cta-ghost" href="https://discord.gg/78Ff2GuSfW">Discord <span aria-hidden="true">↗</span></a>
+    <div class="langsw" role="group" aria-label="Taal / Language">
+      <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero sheet">
+    <div class="hero-kick">
+      <p class="micro"><span lang="nl">Campagne — de collectie</span><span lang="en">Campaign — the collection</span></p>
+      <p class="micro micro-gold"><span lang="nl">Nu geopend · gratis toegang</span><span lang="en">Now open · free access</span></p>
+    </div>
+
+    <h1 class="wordmark" aria-label="Atlas Capital">
+      <span aria-hidden="true">A</span><span aria-hidden="true">T</span><span aria-hidden="true">L</span><span aria-hidden="true">A</span><span aria-hidden="true">S</span><span class="gap" aria-hidden="true"></span><span aria-hidden="true">C</span><span aria-hidden="true">A</span><span aria-hidden="true">P</span><span aria-hidden="true">I</span><span aria-hidden="true">T</span><span aria-hidden="true">A</span><span aria-hidden="true">L</span>
+    </h1>
+
+    <div class="hero-sub">
+      <p class="hero-line"><span lang="nl">Een Nederlandse trading&#8209;community, opgebouwd rond <em>educatie</em>.</span><span lang="en">A Dutch trading community, built around <em>education</em>.</span></p>
+      <div class="hero-act">
+        <p class="micro"><span lang="nl">Toegang via Discord</span><span lang="en">Access through Discord</span></p>
+        <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Word lid</span><span lang="en">Join</span> <span class="arw" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+    <figure class="foil" role="img" aria-label="Gouden folieveld met het Atlas-monogram">
+      <span class="foil-tag tl">ATLAS</span>
+      <span class="foil-tag br"><span lang="nl">EDITIE — GOUD</span><span lang="en">EDITION — GOLD</span></span>
+      <span class="crop a" aria-hidden="true"></span>
+      <span class="crop b" aria-hidden="true"></span>
+      <span class="foil-mono" aria-hidden="true">
+        <svg viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="88" stroke="rgba(35,26,6,.5)" stroke-width="1"/>
+          <circle cx="100" cy="100" r="72" stroke="rgba(35,26,6,.3)" stroke-width="1"/>
+          <path d="M58 146 L100 46 L142 146" stroke="#241a07" stroke-width="3" stroke-linecap="square"/>
+          <path d="M74 112 H126" stroke="#241a07" stroke-width="3"/>
+          <path d="M100 46 V146" stroke="rgba(35,26,6,.35)" stroke-width="1" stroke-dasharray="3 5"/>
+        </svg>
+      </span>
+    </figure>
+
+    <div class="strip">
+      <p class="micro">NQ · ES · Bitcoin · altcoins</p>
+      <p class="micro"><span lang="nl">15 kanalen</span><span lang="en">15 channels</span></p>
+      <p class="micro"><span lang="nl">10 onderwerpen</span><span lang="en">10 topics</span></p>
+      <p class="micro micro-gold"><span lang="nl">10+ jaar ervaring</span><span lang="en">10+ years of experience</span></p>
+    </div>
+  </section>
+
+  <!-- ============ LOOKS ============ -->
+  <div class="looks sheet">
+
+    <!-- LOOK 01 -->
+    <article class="look">
+      <div class="look-idx"><span class="look-num">01</span><span class="look-tick" aria-hidden="true"></span></div>
+      <div class="look-img">
+        <div class="plate portrait" role="img" aria-label="Monogram van de oprichter, in lijn getekend">
+          <svg viewBox="0 0 180 240" fill="none" aria-hidden="true">
+            <rect x="14" y="14" width="152" height="212" stroke="rgba(215,179,100,.3)"/>
+            <path d="M46 176 L90 66 L134 176" stroke="#D7B364" stroke-width="2"/>
+            <path d="M64 134 H116" stroke="#D7B364" stroke-width="2"/>
+            <circle cx="90" cy="121" r="58" stroke="rgba(215,179,100,.35)"/>
+            <path d="M32 200 H148" stroke="rgba(244,242,236,.2)"/>
+            <path d="M32 208 H92" stroke="rgba(244,242,236,.12)"/>
+          </svg>
+        </div>
+        <p class="plate-cap"><span lang="nl">Plaat 01 — monogram</span><span lang="en">Plate 01 — monogram</span></p>
+      </div>
+      <div class="look-txt">
+        <p class="micro micro-gold"><span lang="nl">Look 01 — de oprichter</span><span lang="en">Look 01 — the founder</span></p>
+        <h2><span lang="nl">10+ jaar<br><span class="thin">aan lessen</span></span><span lang="en">10+ years<br><span class="thin">of lessons</span></span></h2>
+        <p class="look-note"><span lang="nl">&#8220;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&#8221;</span><span lang="en">&#8220;I&#8217;ve been involved in trading for over 10 years now, and during that time I&#8217;ve experienced pretty much everything: wins, losses, mistakes, growth, and a lot of lessons.&#8221;</span></p>
+        <p class="look-note"><strong><span lang="nl">&#8220;Geen snelle&#8209;rijk&#8209;verhalen, maar echte setups, educatie en een community die samen beter wil worden.&#8221;</span><span lang="en">&#8220;No get-rich-quick promises, just real setups, education, and a community focused on improving together.&#8221;</span></strong></p>
+      </div>
+    </article>
+
+    <!-- LOOK 02 -->
+    <article class="look look--flip">
+      <div class="look-idx"><span class="look-num">02</span><span class="look-tick" aria-hidden="true"></span></div>
+      <div class="look-img">
+        <div class="sheetgrid">
+          <div class="cell"><b>01</b><span lang="nl">deviatie</span><span lang="en">deviation</span></div>
+          <div class="cell"><b>02</b><span>SMT</span></div>
+          <div class="cell cell--fill"><b>03</b><span>FVG</span></div>
+          <div class="cell"><b>04</b><span>IFVG</span></div>
+          <div class="cell"><b>05</b><span>orderblocks</span></div>
+          <div class="cell"><b>06</b><span>fibonacci</span></div>
+          <div class="cell"><b>07</b><span lang="nl">sessie&#8209;liquiditeit</span><span lang="en">session liquidity</span></div>
+          <div class="cell"><b>08</b><span lang="nl">liquiditeit</span><span lang="en">liquidity</span></div>
+          <div class="cell"><b>09</b><span lang="nl">risicobeheer</span><span lang="en">risk management</span></div>
+          <div class="cell"><b>10</b><span lang="nl">tradingpsychologie</span><span lang="en">trading psychology</span></div>
+        </div>
+        <p class="plate-cap"><span lang="nl">Plaat 02 — contactvel, 10 onderwerpen</span><span lang="en">Plate 02 — contact sheet, 10 topics</span></p>
+      </div>
+      <div class="look-txt">
+        <p class="micro micro-gold"><span lang="nl">Look 02 — de educatie</span><span lang="en">Look 02 — the education</span></p>
+        <h2><span lang="nl">De<br>collectie</span><span lang="en">The<br>collection</span></h2>
+        <p class="look-note"><span lang="nl">Tien onderwerpen. Eén curriculum. Dit is waar de community op gebouwd is.</span><span lang="en">Ten topics. One curriculum. This is what the community is built on.</span></p>
+        <a class="cta-ghost" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Bekijk in Discord</span><span lang="en">See it in Discord</span> <span aria-hidden="true">↗</span></a>
+      </div>
+    </article>
+
+    <!-- LOOK 03 -->
+    <article class="look">
+      <div class="look-idx"><span class="look-num">03</span><span class="look-tick" aria-hidden="true"></span></div>
+      <div class="look-img">
+        <div class="plate stilllife" role="img" aria-label="Schematische tekening van een fair value gap en een liquiditeitssweep">
+          <svg viewBox="0 0 440 330" fill="none" aria-hidden="true">
+            <!-- structure lines -->
+            <path d="M30 96 H410" stroke="rgba(244,242,236,.16)" stroke-dasharray="4 6"/>
+            <path d="M30 250 H410" stroke="rgba(244,242,236,.16)" stroke-dasharray="4 6"/>
+            <!-- fvg band -->
+            <rect x="150" y="150" width="248" height="44" fill="rgba(215,179,100,.16)"/>
+            <rect x="150" y="150" width="248" height="44" stroke="rgba(215,179,100,.5)"/>
+            <!-- candles -->
+            <g stroke="#F4F2EC" stroke-width="1.5">
+              <path d="M64 118 V206"/><rect x="56" y="140" width="16" height="48" fill="#0e0f13"/>
+              <path d="M104 132 V222"/><rect x="96" y="156" width="16" height="46" fill="#0e0f13"/>
+            </g>
+            <g stroke="#D7B364" stroke-width="1.5">
+              <path d="M144 108 V262"/><rect x="136" y="124" width="16" height="118" fill="#1c1608"/>
+              <path d="M184 92 V168"/><rect x="176" y="104" width="16" height="46" fill="#1c1608"/>
+            </g>
+            <g stroke="#F4F2EC" stroke-width="1.5">
+              <path d="M224 128 V212"/><rect x="216" y="146" width="16" height="44" fill="#0e0f13"/>
+              <path d="M264 150 V276"/><rect x="256" y="170" width="16" height="82" fill="#0e0f13"/>
+              <path d="M304 178 V268"/><rect x="296" y="196" width="16" height="50" fill="#0e0f13"/>
+            </g>
+            <g stroke="#D7B364" stroke-width="1.5">
+              <path d="M344 140 V244"/><rect x="336" y="158" width="16" height="60" fill="#1c1608"/>
+              <path d="M384 112 V206"/><rect x="376" y="126" width="16" height="56" fill="#1c1608"/>
+            </g>
+            <!-- sweep marker -->
+            <path d="M264 276 L292 300" stroke="#D7B364" stroke-width="1"/>
+            <circle cx="264" cy="276" r="3.5" fill="#D7B364"/>
+            <text x="296" y="308" fill="#A5A6A8" font-family="Syne, Arial, sans-serif" font-size="12" letter-spacing="2">SWEEP</text>
+            <!-- fvg leader -->
+            <path d="M398 172 L418 172" stroke="#D7B364" stroke-width="1"/>
+            <text x="330" y="140" fill="#D7B364" font-family="Syne, Arial, sans-serif" font-size="12" letter-spacing="2">FVG</text>
+            <text x="30" y="88" fill="#A5A6A8" font-family="Syne, Arial, sans-serif" font-size="11" letter-spacing="2" lang="nl">NIVEAU</text>
+            <text x="30" y="88" fill="#A5A6A8" font-family="Syne, Arial, sans-serif" font-size="11" letter-spacing="2" lang="en">LEVEL</text>
+          </svg>
+        </div>
+        <p class="plate-cap"><span lang="nl">Plaat 03 — schema, uitsluitend ter illustratie</span><span lang="en">Plate 03 — diagram, for illustration only</span></p>
+      </div>
+      <div class="look-txt">
+        <p class="micro micro-gold"><span lang="nl">Look 03 — het model</span><span lang="en">Look 03 — the model</span></p>
+        <h2><span lang="nl">Structuur<br><span class="thin">boven ruis</span></span><span lang="en">Structure<br><span class="thin">over noise</span></span></h2>
+        <p class="look-note"><span lang="nl">Een schema, geen belofte. Zo ziet een gap en een sweep eruit — meer niet.</span><span lang="en">A diagram, not a promise. This is what a gap and a sweep look like — nothing more.</span></p>
+      </div>
+    </article>
+
+    <!-- LOOK 04 -->
+    <article class="look look--flip">
+      <div class="look-idx"><span class="look-num">04</span><span class="look-tick" aria-hidden="true"></span></div>
+      <div class="look-img">
+        <div class="chanwrap">
+          <div class="chanbox">
+            <h3><span lang="nl">Thuis — nu gratis</span><span lang="en">Home — free right now</span></h3>
+            <ul>
+              <li>#nq-chart-idee&euml;n</li>
+              <li>#es-chart-idee&euml;n</li>
+              <li>#bitcoin</li>
+              <li>#altcoins</li>
+              <li>#markt</li>
+              <li>#vragen</li>
+              <li>#algemeen</li>
+              <li>#atlas-op-socials</li>
+              <li>#ondersteuning</li>
+            </ul>
+          </div>
+          <div class="chanbox chanbox--later">
+            <h3><span lang="nl">Premium — opent later</span><span lang="en">Premium — opens later</span></h3>
+            <ul>
+              <li>#trade-setups</li>
+              <li>#marktupdates</li>
+              <li>#indicatoren</li>
+              <li>#sessie-opnames</li>
+              <li>#chart-idee&euml;n</li>
+              <li>#premium-chat</li>
+            </ul>
+          </div>
+        </div>
+        <p class="plate-cap"><span lang="nl">Plaat 04 — 15 kanalen</span><span lang="en">Plate 04 — 15 channels</span></p>
+      </div>
+      <div class="look-txt">
+        <p class="micro micro-gold"><span lang="nl">Look 04 — de server</span><span lang="en">Look 04 — the server</span></p>
+        <h2><span lang="nl">15<br><span class="thin">kanalen</span></span><span lang="en">15<br><span class="thin">channels</span></span></h2>
+        <p class="look-note"><span lang="nl">NQ, ES, Bitcoin en altcoins — elk met een eigen plek.</span><span lang="en">NQ, ES, Bitcoin and altcoins — each with its own place.</span></p>
+        <a class="cta-ghost" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de server</span><span lang="en">Open the server</span> <span aria-hidden="true">↗</span></a>
+      </div>
+    </article>
+
+    <!-- LOOK 05 -->
+    <article class="look">
+      <div class="look-idx"><span class="look-num">05</span><span class="look-tick" aria-hidden="true"></span></div>
+      <div class="look-img">
+        <div class="plate live" role="img" aria-label="Gouden ring met een pulserende stip">
+          <svg viewBox="0 0 240 240" fill="none" aria-hidden="true">
+            <circle cx="120" cy="120" r="104" stroke="rgba(215,179,100,.24)"/>
+            <circle cx="120" cy="120" r="78" stroke="rgba(215,179,100,.4)" stroke-dasharray="1 7"/>
+            <path d="M120 16 A104 104 0 0 1 224 120" stroke="#D7B364" stroke-width="2"/>
+            <g class="pulse" style="transform-box:fill-box">
+              <circle cx="120" cy="120" r="12" fill="#D7B364"/>
+            </g>
+            <circle cx="120" cy="120" r="26" stroke="rgba(215,179,100,.3)"/>
+          </svg>
+        </div>
+        <p class="plate-cap"><span lang="nl">Plaat 05 — live</span><span lang="en">Plate 05 — live</span></p>
+      </div>
+      <div class="look-txt">
+        <p class="micro micro-gold"><span lang="nl">Look 05 — live traden</span><span lang="en">Look 05 — live trading</span></p>
+        <h2><span lang="nl">Live<br><span class="thin">in de server</span></span><span lang="en">Live<br><span class="thin">in the server</span></span></h2>
+        <p class="look-note"><span lang="nl">De oprichter handelt live mee in de server. Tijden worden daar aangekondigd.</span><span lang="en">The founder trades live in the server. Times are announced there.</span></p>
+        <a class="cta-ghost" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Zit erbij</span><span lang="en">Sit in</span> <span aria-hidden="true">↗</span></a>
+      </div>
+    </article>
+
+    <!-- LOOK 06 -->
+    <article class="look look--flip">
+      <div class="look-idx"><span class="look-num">06</span><span class="look-tick" aria-hidden="true"></span></div>
+      <div class="look-img">
+        <div class="access">
+          <div class="acc acc--now">
+            <span class="tagline"><span lang="nl">Thuis</span><span lang="en">Home</span></span>
+            <h3><span lang="nl">Nu gratis</span><span lang="en">Free right now</span></h3>
+            <p><span lang="nl">Volledige toegang tot de gratis kanalen en de educatie.</span><span lang="en">Full access to the free channels and the education.</span></p>
+          </div>
+          <div class="acc">
+            <span class="tagline">Premium</span>
+            <h3><span lang="nl">Opent later</span><span lang="en">Opens later</span></h3>
+            <p><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">Price and date will be announced in the server.</span></p>
+          </div>
+        </div>
+        <p class="plate-cap"><span lang="nl">Plaat 06 — toegang</span><span lang="en">Plate 06 — access</span></p>
+      </div>
+      <div class="look-txt">
+        <p class="micro micro-gold"><span lang="nl">Look 06 — toegang</span><span lang="en">Look 06 — access</span></p>
+        <h2><span lang="nl">Binnen&#8209;<br><span class="thin">komen</span></span><span lang="en">Coming<br><span class="thin">inside</span></span></h2>
+        <p class="look-note"><span lang="nl">Er is nu geen drempel. Premium volgt, aangekondigd in de server.</span><span lang="en">There is no barrier right now. Premium follows, announced in the server.</span></p>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- ============ CLOSING ============ -->
+  <section class="close sheet">
+    <p class="micro"><span lang="nl">Campagne — sluitbeeld</span><span lang="en">Campaign — closing image</span></p>
+    <h2><span lang="nl">WORD LID</span><span lang="en">JOIN</span></h2>
+    <p><span lang="nl">PROCES. DISCIPLINE. UITVOERING.</span><span lang="en">PROCESS. DISCIPLINE. EXECUTION.</span></p>
+    <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open Discord</span><span lang="en">Open the Discord</span> <span class="arw" aria-hidden="true">→</span></a>
+  </section>
+
+</main>
+
+<footer class="sheet">
+  <div class="foot-row">
+    <span class="top-mark">ATLAS CAPITAL</span>
+    <div class="foot-links">
+      <a class="cta-ghost" href="https://discord.gg/78Ff2GuSfW">Discord <span aria-hidden="true">↗</span></a>
+      <a class="cta-ghost" href="https://www.tiktok.com/@atlascapitalbv">TikTok @atlascapitalbv <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+  <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
+</footer>
+
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
+
+</body>
+</html>

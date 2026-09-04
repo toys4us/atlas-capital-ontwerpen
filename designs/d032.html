@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 032 Hoogtelijnen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================
+   ATLAS CAPITAL — 032 HOOGTELIJNEN
+   Topographic contour nests as the entire ground. Content sits
+   in the valleys between the ridges. The model is drawn as an
+   elevation cross-section, not as a price chart.
+   Ground: dark. Type: Space Grotesk.
+   ========================================================== */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --ink-2:#0C0E11;
+  --panel:#15161A;
+  --muted:#A5A6A8;
+  --dim:#6E7074;
+  --line:rgba(215,179,100,.22);
+  --sans:"Space Grotesk", "Segoe UI", -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  --mono:ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+*{box-sizing:border-box}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ink);color:#EDECE8;
+  font-family:var(--sans);font-size:17px;line-height:1.6;font-weight:300;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{margin:0;font-weight:400;letter-spacing:-.02em;line-height:1.03}
+p{margin:0}
+a{color:inherit}
+ul{margin:0;padding:0;list-style:none}
+
+.band{position:relative;overflow:hidden;isolation:isolate}
+.terrain{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.terrain svg{width:100%;height:100%;display:block}
+.wrap{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding-left:clamp(16px,4vw,52px);padding-right:clamp(16px,4vw,52px)}
+
+.tag{
+  font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold);display:inline-flex;align-items:center;gap:9px;
+}
+.tag::before{content:"";width:16px;height:16px;border:1px solid var(--gold-lo);transform:rotate(45deg);display:block;flex:none}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:40;
+  background:rgba(8,9,11,.88);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(215,179,100,.2);
+}
+.hd{
+  max-width:1280px;margin:0 auto;padding:14px clamp(16px,4vw,52px);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand svg{flex:none}
+.brand-txt{font-size:15px;letter-spacing:.34em;text-transform:uppercase;white-space:nowrap;font-weight:500}
+.brand-txt em{font-style:normal;color:var(--dim);font-weight:300}
+.hd nav{display:flex;gap:clamp(10px,2vw,22px);flex-wrap:wrap}
+.hd nav a{
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dim);text-decoration:none;
+}
+.hd nav a:hover{color:var(--gold)}
+@media (max-width:720px){ .hd nav{display:none} }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  padding:13px 22px;color:var(--ink);
+  background:linear-gradient(180deg,var(--gold-hi),var(--gold) 55%,var(--gold-lo));
+  border:1px solid var(--gold-lo);font-weight:500;
+  transition:filter .25s ease, transform .25s ease;
+}
+.btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.btn--ghost{
+  background:none;color:var(--gold);border:1px solid rgba(215,179,100,.45);
+}
+.btn--ghost:hover{background:rgba(215,179,100,.1);filter:none}
+.btn--lg{font-size:12px;padding:17px 30px;letter-spacing:.24em}
+.btn svg{flex:none}
+
+/* ---------- valleys ---------- */
+.valley{
+  max-width:620px;
+  background:linear-gradient(180deg,rgba(8,9,11,.9),rgba(8,9,11,.72));
+  border-left:2px solid var(--gold);
+  padding:clamp(22px,3.6vw,40px) clamp(20px,3.2vw,38px);
+  box-shadow:0 30px 90px -40px rgba(0,0,0,.95);
+}
+.valley--right{margin-left:auto}
+.valley--wide{max-width:900px}
+
+/* ---------- hero ---------- */
+.hero{min-height:clamp(560px,88vh,820px);display:flex;align-items:center;padding:clamp(50px,9vw,120px) 0}
+h1{font-size:clamp(40px,8.2vw,92px);font-weight:300;letter-spacing:-.035em}
+h1 b{font-weight:700;color:var(--gold)}
+.lead{margin-top:20px;color:var(--muted);font-size:clamp(16px,1.9vw,20px);max-width:42ch}
+.cta-row{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+.hero-meta{
+  margin-top:34px;padding-top:18px;border-top:1px solid rgba(215,179,100,.22);
+  display:flex;gap:clamp(14px,3vw,34px);flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);
+}
+.hero-meta b{color:var(--gold);font-weight:400}
+
+/* ---------- section head ---------- */
+.sh{display:flex;align-items:flex-end;gap:clamp(14px,2.6vw,28px);margin-bottom:clamp(22px,3.6vw,42px);flex-wrap:wrap}
+.sh .el{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--gold);
+  border:1px solid rgba(215,179,100,.5);padding:6px 10px;white-space:nowrap;
+}
+h2{font-size:clamp(28px,5vw,54px);font-weight:300;letter-spacing:-.03em}
+.sh p{color:var(--dim);font-size:15px;max-width:40ch}
+
+section{padding-top:clamp(56px,9vw,130px);padding-bottom:clamp(56px,9vw,130px)}
+
+/* ---------- founder ---------- */
+.quote{font-size:clamp(18px,2.4vw,25px);line-height:1.48;color:#EDECE8;font-weight:300}
+.quote::before{content:"";display:block;width:46px;height:2px;background:var(--gold);margin-bottom:22px}
+.qmeta{
+  margin-top:22px;display:flex;gap:18px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);
+}
+.qmeta b{color:var(--gold);font-weight:400}
+
+/* ---------- topics as contour rows ---------- */
+.rows{border-top:1px solid rgba(215,179,100,.22)}
+.row{
+  display:grid;grid-template-columns:64px minmax(0,1fr) minmax(0,190px);
+  gap:clamp(10px,2vw,24px);align-items:center;
+  padding:14px 0;border-bottom:1px solid rgba(215,179,100,.16);
+  transition:background .3s ease, padding-left .3s ease;
+}
+.row:hover{background:rgba(215,179,100,.06);padding-left:8px}
+.row .h{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.1em}
+.row .n{font-size:clamp(19px,3vw,30px);font-weight:400;letter-spacing:-.02em;overflow-wrap:anywhere}
+.row .c{height:34px;width:100%}
+.row .c svg{width:100%;height:100%;display:block}
+@media (max-width:640px){
+  .row{grid-template-columns:52px minmax(0,1fr);}
+  .row .c{grid-column:2;height:22px}
+}
+.rows-foot{
+  margin-top:18px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);
+}
+
+/* ---------- profile figure ---------- */
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid rgba(215,179,100,.24);background:rgba(12,14,17,.82)}
+.scroller svg{display:block;min-width:720px;width:100%;height:auto}
+.figcap{
+  margin-top:14px;display:flex;gap:16px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+}
+.figcap b{color:var(--gold);font-weight:400}
+
+/* ---------- stations / channels ---------- */
+.stations{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(18px,3vw,40px)}
+.st{
+  background:linear-gradient(180deg,rgba(21,22,26,.95),rgba(8,9,11,.9));
+  border:1px solid rgba(215,179,100,.24);padding:clamp(20px,3vw,32px);
+}
+.st h3{
+  font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
+  display:flex;justify-content:space-between;gap:12px;padding-bottom:12px;
+  border-bottom:1px solid rgba(215,179,100,.3);
+}
+.st h3 span{color:var(--dim)}
+.st li{
+  display:flex;align-items:center;gap:10px;padding:10px 0;
+  border-bottom:1px solid rgba(215,179,100,.1);font-size:17px;min-width:0;
+}
+.st li:last-child{border-bottom:0}
+.st li svg{flex:none;color:var(--gold-lo)}
+.st li span{overflow-wrap:anywhere}
+.st li .z{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--dim);flex:none}
+
+/* ---------- two-up ---------- */
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(18px,3vw,34px)}
+.zone{
+  border:1px solid rgba(215,179,100,.24);padding:clamp(22px,3.2vw,38px);
+  background:linear-gradient(160deg,rgba(21,22,26,.94),rgba(8,9,11,.86));
+  position:relative;
+}
+.zone h3{font-size:clamp(24px,3.4vw,34px);margin:14px 0 10px;font-weight:400}
+.zone p{color:var(--muted);max-width:36ch}
+.chip{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
+  border:1px solid var(--gold-lo);color:var(--gold);padding:5px 10px;display:inline-block;
+}
+.zone .peak{position:absolute;right:14px;top:14px;color:rgba(215,179,100,.34)}
+
+/* ---------- live ---------- */
+.live{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:clamp(20px,3.4vw,44px);align-items:center}
+.live h3{font-size:clamp(26px,4vw,42px);font-weight:300;letter-spacing:-.03em}
+.live p{margin-top:14px;color:var(--muted);max-width:38ch}
+.pulse{width:9px;height:9px;border-radius:50%;background:var(--gold);display:inline-block;margin-right:10px;
+  animation:g032pulse 2.4s ease-in-out infinite}
+@keyframes g032pulse{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:1;transform:scale(1.35)}}
+@media (prefers-reduced-motion:reduce){ .pulse{animation:none;opacity:1} }
+
+/* ---------- closing ---------- */
+.summit{text-align:center;padding-top:clamp(60px,10vw,150px);padding-bottom:clamp(60px,10vw,150px)}
+.summit h2{font-size:clamp(34px,7.6vw,86px);letter-spacing:-.04em}
+.summit p{margin:18px auto 0;color:var(--muted);max-width:34ch}
+.summit .btn{margin-top:30px}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid rgba(215,179,100,.26);background:#060709;padding:clamp(34px,5vw,58px) 0 40px}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(18px,3vw,36px)}
+.fg h4{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;font-weight:400}
+.fg a{display:block;text-decoration:none;color:#DCDBD7;padding:4px 0;overflow-wrap:anywhere}
+.fg a:hover{color:var(--gold)}
+.fg p{color:var(--muted)}
+.risk{
+  margin-top:clamp(26px,4vw,44px);padding-top:16px;border-top:1px solid rgba(215,179,100,.18);
+  font-family:var(--mono);font-size:10px;line-height:1.85;color:var(--dim);
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+}
+.risk span{max-width:72ch}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="hd">
+    <div class="brand">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="#D7B364">
+        <path d="M16,3 L29,27 H3 Z" stroke-width="1.2"/>
+        <path d="M16,10 L23.5,24 H8.5 Z" stroke-width=".8" stroke-opacity=".7"/>
+        <path d="M16,16 L20,24 H12 Z" stroke-width=".8" stroke-opacity=".5"/>
+        <circle cx="16" cy="3" r="2" fill="#D7B364" stroke="none"/>
+      </svg>
+      <div class="brand-txt">Atlas <em>Capital</em></div>
+    </div>
+    <nav>
+      <a href="#profiel">Profiel</a>
+      <a href="#hoogtelijnen">Hoogtelijnen</a>
+      <a href="#doorsnede">Doorsnede</a>
+      <a href="#stations">Kanalen</a>
+      <a href="#zones">Toegang</a>
+    </nav>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div class="band hero">
+  <div class="terrain" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <!-- hand-drawn base outlines, nested by scale to build contour sets -->
+        <path id="g032-hillA" d="M0,-196 C62,-190 118,-158 150,-112 C178,-72 196,-30 190,18
+          C184,66 150,104 108,132 C66,160 20,182 -28,178 C-80,174 -128,146 -158,104
+          C-186,64 -196,14 -186,-34 C-176,-84 -144,-128 -100,-160 C-62,-188 -32,-199 0,-196 Z"/>
+        <path id="g032-ridgeB" d="M-226,-18 C-186,-64 -120,-92 -52,-84 C4,-77 44,-44 100,-42
+          C156,-40 200,-72 236,-46 C268,-22 258,32 220,58 C178,86 118,72 62,84
+          C6,96 -40,128 -96,118 C-156,108 -206,64 -226,18 C-234,0 -234,-8 -226,-18 Z"/>
+        <path id="g032-basinC" d="M0,-112 C48,-108 88,-76 100,-32 C112,10 96,58 58,84
+          C20,110 -30,110 -66,84 C-104,56 -118,4 -104,-38 C-90,-80 -48,-116 0,-112 Z"/>
+        <radialGradient id="g032-vig" cx="50%" cy="45%" r="72%">
+          <stop offset="0" stop-color="#0E1014"/>
+          <stop offset="1" stop-color="#08090B"/>
+        </radialGradient>
+      </defs>
+
+      <rect width="1440" height="900" fill="url(#g032-vig)"/>
+
+      <!-- massif on the right: 11 nested contours, drifting summit -->
+      <g fill="none" stroke="#D7B364" stroke-width="1" stroke-opacity=".2">
+        <use href="#g032-hillA" transform="translate(1030,440) scale(2.05)"/>
+        <use href="#g032-hillA" transform="translate(1036,434) scale(1.86)"/>
+        <use href="#g032-hillA" transform="translate(1043,427) scale(1.67)"/>
+        <use href="#g032-hillA" transform="translate(1051,420) scale(1.48)"/>
+        <use href="#g032-hillA" transform="translate(1060,412) scale(1.29)"/>
+        <use href="#g032-hillA" transform="translate(1070,404) scale(1.10)"/>
+        <use href="#g032-hillA" transform="translate(1081,396) scale(.91)"/>
+        <use href="#g032-hillA" transform="translate(1093,388) scale(.72)"/>
+        <use href="#g032-hillA" transform="translate(1106,380) scale(.53)"/>
+        <use href="#g032-hillA" transform="translate(1120,372) scale(.34)"/>
+        <use href="#g032-hillA" transform="translate(1135,364) scale(.16)"/>
+      </g>
+      <!-- index contours, heavier -->
+      <g fill="none" stroke="#D7B364" stroke-width="1.6" stroke-opacity=".5">
+        <use href="#g032-hillA" transform="translate(1030,440) scale(2.05)"/>
+        <use href="#g032-hillA" transform="translate(1060,412) scale(1.29)"/>
+        <use href="#g032-hillA" transform="translate(1106,380) scale(.53)"/>
+      </g>
+      <!-- summit benchmark -->
+      <g>
+        <path d="M1135,352 L1147,374 H1123 Z" fill="none" stroke="#D7B364" stroke-width="1.4"/>
+        <circle cx="1135" cy="367" r="2.2" fill="#D7B364"/>
+      </g>
+
+      <!-- secondary ridge, lower left -->
+      <g fill="none" stroke="#D7B364" stroke-width="1" stroke-opacity=".14">
+        <use href="#g032-ridgeB" transform="translate(300,790) scale(1.6)"/>
+        <use href="#g032-ridgeB" transform="translate(306,782) scale(1.42)"/>
+        <use href="#g032-ridgeB" transform="translate(313,774) scale(1.24)"/>
+        <use href="#g032-ridgeB" transform="translate(321,766) scale(1.06)"/>
+        <use href="#g032-ridgeB" transform="translate(330,758) scale(.88)"/>
+        <use href="#g032-ridgeB" transform="translate(340,750) scale(.70)"/>
+        <use href="#g032-ridgeB" transform="translate(351,742) scale(.52)"/>
+        <use href="#g032-ridgeB" transform="translate(363,734) scale(.34)"/>
+      </g>
+      <g fill="none" stroke="#D7B364" stroke-width="1.5" stroke-opacity=".34">
+        <use href="#g032-ridgeB" transform="translate(300,790) scale(1.6)"/>
+        <use href="#g032-ridgeB" transform="translate(330,758) scale(.88)"/>
+      </g>
+
+      <!-- basin, upper left -->
+      <g fill="none" stroke="#D7B364" stroke-width="1" stroke-opacity=".13">
+        <use href="#g032-basinC" transform="translate(210,150) scale(1.5)"/>
+        <use href="#g032-basinC" transform="translate(214,146) scale(1.24)"/>
+        <use href="#g032-basinC" transform="translate(219,142) scale(.98)"/>
+        <use href="#g032-basinC" transform="translate(225,138) scale(.72)"/>
+        <use href="#g032-basinC" transform="translate(232,134) scale(.46)"/>
+      </g>
+
+      <!-- decorative contour elevation labels -->
+      <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1.6" fill="#D7B364" fill-opacity=".55">
+        <text x="820" y="446">340</text>
+        <text x="924" y="418">380</text>
+        <text x="1024" y="392">420</text>
+        <text x="190" y="792">120</text>
+        <text x="300" y="756">160</text>
+      </g>
+      <!-- graticule ticks along the frame -->
+      <g stroke="#D7B364" stroke-opacity=".28" stroke-width="1">
+        <path d="M0,180 H26 M0,360 H26 M0,540 H26 M0,720 H26"/>
+        <path d="M1440,180 H1414 M1440,360 H1414 M1440,540 H1414 M1440,720 H1414"/>
+        <path d="M240,0 V26 M480,0 V26 M720,0 V26 M960,0 V26 M1200,0 V26"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="wrap">
+    <div class="valley">
+      <span class="tag">Blad 032 · terreinkaart</span>
+      <h1 style="margin-top:22px">Leer het<br>terrein <b>lezen</b>.</h1>
+      <p class="lead">Atlas Capital is een Nederlandse trading-community. Educatie, structuur en dagelijkse voorbereiding op NQ, ES, Bitcoin en altcoins.</p>
+      <div class="cta-row">
+        <a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
+        <a class="btn btn--ghost btn--lg" href="#hoogtelijnen">Bekijk de educatie</a>
+      </div>
+      <div class="hero-meta">
+        <span><b>Proces</b></span><span><b>Discipline</b></span><span><b>Uitvoering</b></span>
+        <span>Nu gratis toegang</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 01 · PROFIEL / FOUNDER ============ -->
+<div class="band">
+  <div class="terrain" aria-hidden="true">
+    <svg viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice">
+      <rect width="1440" height="820" fill="#08090B"/>
+      <g fill="none" stroke="#D7B364" stroke-width="1" stroke-opacity=".15">
+        <use href="#g032-basinC" transform="translate(300,410) scale(2.6)"/>
+        <use href="#g032-basinC" transform="translate(305,404) scale(2.32)"/>
+        <use href="#g032-basinC" transform="translate(311,398) scale(2.04)"/>
+        <use href="#g032-basinC" transform="translate(318,392) scale(1.76)"/>
+        <use href="#g032-basinC" transform="translate(326,386) scale(1.48)"/>
+        <use href="#g032-basinC" transform="translate(335,380) scale(1.20)"/>
+        <use href="#g032-basinC" transform="translate(345,374) scale(.92)"/>
+        <use href="#g032-basinC" transform="translate(356,368) scale(.64)"/>
+        <use href="#g032-basinC" transform="translate(368,362) scale(.36)"/>
+      </g>
+      <g fill="none" stroke="#D7B364" stroke-width="1.6" stroke-opacity=".42">
+        <use href="#g032-basinC" transform="translate(300,410) scale(2.6)"/>
+        <use href="#g032-basinC" transform="translate(326,386) scale(1.48)"/>
+      </g>
+      <g fill="none" stroke="#D7B364" stroke-width="1" stroke-opacity=".1">
+        <use href="#g032-ridgeB" transform="translate(1180,680) scale(1.5)"/>
+        <use href="#g032-ridgeB" transform="translate(1188,670) scale(1.24)"/>
+        <use href="#g032-ridgeB" transform="translate(1197,660) scale(.98)"/>
+        <use href="#g032-ridgeB" transform="translate(1207,650) scale(.72)"/>
+        <use href="#g032-ridgeB" transform="translate(1218,640) scale(.46)"/>
+      </g>
+      <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1.6" fill="#D7B364" fill-opacity=".45">
+        <text x="120" y="404">080</text><text x="196" y="376">100</text>
+      </g>
+    </svg>
+  </div>
+
+  <section id="profiel" class="wrap">
+    <div class="sh">
+      <span class="el">01 · PROFIEL</span>
+      <h2>De man die het inmat</h2>
+    </div>
+    <div class="valley valley--right valley--wide">
+      <p class="quote">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</p>
+      <div class="qmeta">
+        <span><b>Oprichter</b> Atlas Capital</span>
+        <span>10+ jaar actief in trading</span>
+      </div>
+      <div class="cta-row"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Kom binnen in de server</a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 02 · HOOGTELIJNEN / TOPICS ============ -->
+<div class="band">
+  <div class="terrain" aria-hidden="true">
+    <svg viewBox="0 0 1440 1000" preserveAspectRatio="xMidYMid slice">
+      <rect width="1440" height="1000" fill="#0A0B0E"/>
+      <g fill="none" stroke="#D7B364" stroke-width="1" stroke-opacity=".1">
+        <use href="#g032-hillA" transform="translate(1220,500) scale(2.4)"/>
+        <use href="#g032-hillA" transform="translate(1228,490) scale(2.16)"/>
+        <use href="#g032-hillA" transform="translate(1237,480) scale(1.92)"/>
+        <use href="#g032-hillA" transform="translate(1247,470) scale(1.68)"/>
+        <use href="#g032-hillA" transform="translate(1258,460) scale(1.44)"/>
+        <use href="#g032-hillA" transform="translate(1270,450) scale(1.20)"/>
+        <use href="#g032-hillA" transform="translate(1283,440) scale(.96)"/>
+        <use href="#g032-hillA" transform="translate(1297,430) scale(.72)"/>
+        <use href="#g032-hillA" transform="translate(1312,420) scale(.48)"/>
+        <use href="#g032-hillA" transform="translate(1328,410) scale(.24)"/>
+      </g>
+      <g fill="none" stroke="#D7B364" stroke-width="1" stroke-opacity=".08">
+        <use href="#g032-basinC" transform="translate(120,860) scale(2.2)"/>
+        <use href="#g032-basinC" transform="translate(126,852) scale(1.9)"/>
+        <use href="#g032-basinC" transform="translate(133,844) scale(1.6)"/>
+        <use href="#g032-basinC" transform="translate(141,836) scale(1.3)"/>
+        <use href="#g032-basinC" transform="translate(150,828) scale(1.0)"/>
+      </g>
+    </svg>
+  </div>
+
+  <section id="hoogtelijnen" class="wrap">
+    <div class="sh">
+      <span class="el">02 · HOOGTELIJNEN</span>
+      <h2>Tien onderwerpen</h2>
+      <p>Elk onderwerp een lijn op de kaart. Samen vormen ze het terrein.</p>
+    </div>
+
+    <div class="rows">
+      <div class="row"><span class="h">01</span><span class="n">deviatie</span>
+        <span class="c"><svg viewBox="0 0 200 34" aria-hidden="true" fill="none" stroke="#D7B364" stroke-width="1.4"><path d="M2,26 C30,26 44,22 60,20 C80,18 96,14 120,15 C150,16 172,20 198,18"/></svg></span></div>
+      <div class="row"><span class="h">02</span><span class="n">SMT</span>
+        <span class="c"><svg viewBox="0 0 200 34" aria-hidden="true" fill="none" stroke="#D7B364" stroke-width="1.4"><path d="M2,24 C34,22 50,16 74,17 C100,18 118,24 142,20 C166,16 180,10 198,12"/></svg></span></div>
+      <div class="row"><span class="h">03</span><span class="n">FVG</span>
+        <span class="c"><svg viewBox="0 0 200 34" aria-hidden="true" fill="none" stroke="#D7B364" stroke-width="1.4"><path d="M2,28 C26,26 40,14 62,12 C86,10 100,22 124,20 C150,18 170,8 198,9"/></svg></span></div>
+      <div class="row"><span class="h">04</span><span class="n">IFVG</span>
+        <span class="c"><svg viewBox="0 0 200 34" aria-hidden="true" fill="none" stroke="#D7B364" stroke-width="1.4"><path d="M2,10 C28,12 44,24 68,24 C94,24 108,12 132,13 C158,14 176,24 198,26"/></svg></span></div>
+      <div class="row"><span class="h">05</span><span class="n">orderblocks</span>
+        <span class="c"><svg viewBox="0 0 200 34" aria-hidden="true" fill="none" stroke="#D7B364" stroke-width="1.4"><path d="M2,26 H46 L46,14 H104 L104,22 H148 L148,10 H198"/></svg></span></div>
+      <div class="row"><span class="h">06</span><span class="n">fibonacci</span>
+        <span class="c"><svg viewBox="0 0 200 34" aria-hidden="true" fill="none" stroke="#D7B364" stroke-width="1.4"><path d="M2,30 H198 M2,22 H198 M2,17 H198 M2,14 H198 M2,12 H198" stroke-opacity=".7"/></svg></span></div>
+      <div class="row"><span class="h">07</span><span class="n">sessie-liquiditeit</span>
+        <span class="c"><svg viewBox="0 0 200 34" aria-hidden="true" fill="none" stroke="#D7B364" stroke-width="1.4"><path d="M2,28 C22,28 30,6 52,6 C74,6 82,28 102,28 C122,28 130,6 152,6 C174,6 182,28 198,28"/></svg></span></div>
+      <div class="row"><span class="h">08</span><span class="n">liquiditeit</span>
+        <span class="c"><svg viewBox="0 0 200 34" aria-hidden="true" fill="none" stroke="#D7B364" stroke-width="1.4"><path d="M2,12 H198" stroke-dasharray="6 4"/><path d="M2,26 C36,26 54,20 78,22 C104,24 122,30 152,28 C176,26 186,22 198,23"/></svg></span></div>
+      <div class="row"><span class="h">09</span><span class="n">risicobeheer</span>
+        <span class="c"><svg viewBox="0 0 200 34" aria-hidden="true" fill="none" stroke="#D7B364" stroke-width="1.4"><path d="M2,8 H198 M2,28 H198" stroke-opacity=".5"/><path d="M2,20 C34,20 52,10 80,12 C110,14 128,26 158,24 C180,22 188,16 198,17"/></svg></span></div>
+      <div class="row"><span class="h">10</span><span class="n">tradingpsychologie</span>
+        <span class="c"><svg viewBox="0 0 200 34" aria-hidden="true" fill="none" stroke="#D7B364" stroke-width="1.4"><path d="M2,18 C18,4 34,32 50,18 C66,4 82,32 98,18 C114,4 130,32 146,18 C162,4 178,32 198,18"/></svg></span></div>
+    </div>
+    <p class="rows-foot">10 onderwerpen · educatie in de server · hoogte-interval 20</p>
+    <div class="cta-row" style="margin-top:26px"><a class="btn btn--ghost" href="https://discord.gg/78Ff2GuSfW">Volg de lijnen in Discord</a></div>
+  </section>
+</div>
+
+<!-- ============ 03 · DOORSNEDE ============ -->
+<div class="band">
+  <div class="terrain" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <rect width="1440" height="900" fill="#08090B"/>
+      <g fill="none" stroke="#D7B364" stroke-width="1" stroke-opacity=".09">
+        <use href="#g032-ridgeB" transform="translate(720,460) scale(2.9)"/>
+        <use href="#g032-ridgeB" transform="translate(728,450) scale(2.6)"/>
+        <use href="#g032-ridgeB" transform="translate(737,440) scale(2.3)"/>
+        <use href="#g032-ridgeB" transform="translate(747,430) scale(2.0)"/>
+        <use href="#g032-ridgeB" transform="translate(758,420) scale(1.7)"/>
+        <use href="#g032-ridgeB" transform="translate(770,410) scale(1.4)"/>
+      </g>
+      <path d="M0,140 H1440" stroke="#D7B364" stroke-opacity=".2" stroke-dasharray="10 8"/>
+      <path d="M0,760 H1440" stroke="#D7B364" stroke-opacity=".2" stroke-dasharray="10 8"/>
+      <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1.6" fill="#D7B364" fill-opacity=".4">
+        <text x="24" y="134">A</text><text x="1400" y="134">A&#8242;</text>
+      </g>
+    </svg>
+  </div>
+
+  <section id="doorsnede" class="wrap">
+    <div class="sh">
+      <span class="el">03 · DOORSNEDE A&ndash;A&#8242;</span>
+      <h2>Een model als hoogteprofiel</h2>
+      <p>Schematisch. Geen prijzen, geen resultaat &mdash; alleen de vorm van een setup.</p>
+    </div>
+
+    <div class="scroller">
+      <svg viewBox="0 0 920 470" role="img" aria-label="Hoogteprofiel van een setup: liquiditeit, sweep, orderblock, FVG en uitvoering">
+        <defs>
+          <pattern id="g032-hach" width="6" height="6" patternUnits="userSpaceOnUse">
+            <line x1="3" y1="0" x2="3" y2="6" stroke="#D7B364" stroke-width=".9" stroke-opacity=".3"/>
+          </pattern>
+          <pattern id="g032-gaph" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#D7B364" stroke-width="1" stroke-opacity=".55"/>
+          </pattern>
+        </defs>
+
+        <rect width="920" height="470" fill="#0C0E11"/>
+
+        <!-- fine survey grid -->
+        <g stroke="#D7B364" stroke-opacity=".08" stroke-width="1">
+          <path d="M0,60 H920 M0,120 H920 M0,180 H920 M0,240 H920 M0,300 H920 M0,360 H920 M0,420 H920"/>
+          <path d="M120,0 V470 M240,0 V470 M360,0 V470 M480,0 V470 M600,0 V470 M720,0 V470 M840,0 V470"/>
+        </g>
+
+        <!-- FVG: an elevation band crossed without support -->
+        <rect x="300" y="232" width="590" height="58" fill="url(#g032-gaph)" fill-opacity=".5"/>
+        <path d="M300,232 H890 M300,290 H890" stroke="#D7B364" stroke-width="1.2"/>
+
+        <!-- terrain body, hachured -->
+        <path d="M30,336 L70,330 L110,340 L150,326 L190,332 L230,318 L270,330 L300,352 L320,392
+                 L345,352 L370,330 L400,300 L430,286 L455,292 L480,292 L505,288 L530,258 L560,232
+                 L590,226 L620,214 L650,196 L680,170 L710,152 L740,130 L770,118 L800,100 L830,86 L860,78
+                 L860,455 L30,455 Z"
+              fill="url(#g032-hach)" stroke="none"/>
+
+        <!-- the profile line itself -->
+        <path d="M30,336 L70,330 L110,340 L150,326 L190,332 L230,318 L270,330 L300,352 L320,392
+                 L345,352 L370,330 L400,300 L430,286 L455,292 L480,292 L505,288 L530,258 L560,232
+                 L590,226 L620,214 L650,196 L680,170 L710,152 L740,130 L770,118 L800,100 L830,86 L860,78"
+              fill="none" stroke="#E6CC8E" stroke-width="2.4" stroke-linejoin="round"/>
+
+        <!-- liquidity datum -->
+        <path d="M20,360 H900" stroke="#A5A6A8" stroke-width="1.2" stroke-dasharray="8 5"/>
+        <g fill="#A5A6A8">
+          <circle cx="150" cy="360" r="2.6"/><circle cx="205" cy="360" r="2.6"/><circle cx="258" cy="360" r="2.6"/>
+        </g>
+
+        <!-- orderblock terrace -->
+        <rect x="428" y="284" width="82" height="40" fill="none" stroke="#D7B364" stroke-width="1.6"/>
+        <rect x="428" y="284" width="82" height="40" fill="#D7B364" fill-opacity=".12"/>
+
+        <!-- the notch (sweep) -->
+        <path d="M300,352 L320,392 L345,352" fill="none" stroke="#E6CC8E" stroke-width="3.2"/>
+        <circle cx="320" cy="392" r="4.5" fill="#08090B" stroke="#E6CC8E" stroke-width="1.6"/>
+
+        <!-- ascent path -->
+        <path d="M330,404 C400,404 420,344 470,320 C540,286 620,214 700,168 C760,134 810,108 856,90"
+              fill="none" stroke="#D7B364" stroke-width="2" stroke-dasharray="7 5"/>
+
+        <!-- summit benchmark -->
+        <path d="M860,58 L872,80 H848 Z" fill="none" stroke="#E6CC8E" stroke-width="1.6"/>
+        <circle cx="860" cy="73" r="2.4" fill="#E6CC8E"/>
+
+        <!-- leaders + labels -->
+        <g stroke="#A5A6A8" stroke-width=".9" fill="none" stroke-opacity=".8">
+          <path d="M150,360 L150,420 L118,420"/>
+          <path d="M320,392 L320,436 L360,436"/>
+          <path d="M469,284 L469,232 L420,232"/>
+          <path d="M890,261 L906,261"/>
+          <path d="M860,58 L860,36 L800,36"/>
+        </g>
+        <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1.8" fill="#DCDBD7">
+          <text x="112" y="424" text-anchor="end">LIQUIDITEIT</text>
+          <text x="366" y="440">SWEEP</text>
+          <text x="414" y="228" text-anchor="end">ORDERBLOCK</text>
+          <text x="796" y="40" text-anchor="end" fill="#E6CC8E">UITVOERING</text>
+        </g>
+        <text x="596" y="266" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="3" fill="#E6CC8E">FVG</text>
+
+        <!-- decorative elevation ticks on the left edge -->
+        <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="9.5" letter-spacing="1.2" fill="#6E7074">
+          <text x="10" y="124">400</text><text x="10" y="244">320</text><text x="10" y="364">240</text>
+        </g>
+        <g stroke="#6E7074" stroke-width=".8" stroke-opacity=".7">
+          <path d="M44,120 H56 M44,240 H56 M44,360 H56"/>
+        </g>
+      </svg>
+    </div>
+    <div class="figcap">
+      <b>Doorsnede A&ndash;A&#8242;</b>
+      <span>Schematische illustratie van een concept</span>
+      <span>Overdreven verticaal</span>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 04 · STATIONS / CHANNELS ============ -->
+<div class="band">
+  <div class="terrain" aria-hidden="true">
+    <svg viewBox="0 0 1440 860" preserveAspectRatio="xMidYMid slice">
+      <rect width="1440" height="860" fill="#0A0B0E"/>
+      <g fill="none" stroke="#D7B364" stroke-width="1" stroke-opacity=".1">
+        <use href="#g032-hillA" transform="translate(180,430) scale(1.9)"/>
+        <use href="#g032-hillA" transform="translate(187,422) scale(1.62)"/>
+        <use href="#g032-hillA" transform="translate(195,414) scale(1.34)"/>
+        <use href="#g032-hillA" transform="translate(204,406) scale(1.06)"/>
+        <use href="#g032-hillA" transform="translate(214,398) scale(.78)"/>
+        <use href="#g032-hillA" transform="translate(225,390) scale(.5)"/>
+        <use href="#g032-ridgeB" transform="translate(1260,600) scale(1.7)"/>
+        <use href="#g032-ridgeB" transform="translate(1268,590) scale(1.4)"/>
+        <use href="#g032-ridgeB" transform="translate(1277,580) scale(1.1)"/>
+        <use href="#g032-ridgeB" transform="translate(1287,570) scale(.8)"/>
+      </g>
+    </svg>
+  </div>
+
+  <section id="stations" class="wrap">
+    <div class="sh">
+      <span class="el">04 · MEETSTATIONS</span>
+      <h2>15 kanalen</h2>
+      <p>Negen open, zes op de volgende hoogte.</p>
+    </div>
+
+    <div class="stations">
+      <div class="st">
+        <h3>Thuis <span>nu gratis · 9</span></h3>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7,1 L13,12 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span>#nq-chart-ideeën</span><span class="z">ST-01</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7,1 L13,12 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span>#es-chart-ideeën</span><span class="z">ST-02</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7,1 L13,12 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span>#bitcoin</span><span class="z">ST-03</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7,1 L13,12 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span>#altcoins</span><span class="z">ST-04</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7,1 L13,12 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span>#markt</span><span class="z">ST-05</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7,1 L13,12 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span>#vragen</span><span class="z">ST-06</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7,1 L13,12 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span>#algemeen</span><span class="z">ST-07</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7,1 L13,12 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span>#atlas-op-socials</span><span class="z">ST-08</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7,1 L13,12 H1 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span>#ondersteuning</span><span class="z">ST-09</span></li>
+        </ul>
+      </div>
+
+      <div class="st">
+        <h3>Premium <span>opent later · 6</span></h3>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="7" r="1.6" fill="currentColor"/></svg><span>#trade-setups</span><span class="z">ST-10</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="7" r="1.6" fill="currentColor"/></svg><span>#marktupdates</span><span class="z">ST-11</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="7" r="1.6" fill="currentColor"/></svg><span>#indicatoren</span><span class="z">ST-12</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="7" r="1.6" fill="currentColor"/></svg><span>#sessie-opnames</span><span class="z">ST-13</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="7" r="1.6" fill="currentColor"/></svg><span>#chart-ideeën</span><span class="z">ST-14</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="7" r="1.6" fill="currentColor"/></svg><span>#premium-chat</span><span class="z">ST-15</span></li>
+        </ul>
+        <div class="cta-row" style="margin-top:22px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Open de server</a></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 05 · LIVE + 06 · ZONES ============ -->
+<div class="band">
+  <div class="terrain" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <rect width="1440" height="900" fill="#08090B"/>
+      <g fill="none" stroke="#D7B364" stroke-width="1" stroke-opacity=".1">
+        <use href="#g032-basinC" transform="translate(720,450) scale(3.4)"/>
+        <use href="#g032-basinC" transform="translate(724,444) scale(3.0)"/>
+        <use href="#g032-basinC" transform="translate(729,438) scale(2.6)"/>
+        <use href="#g032-basinC" transform="translate(735,432) scale(2.2)"/>
+        <use href="#g032-basinC" transform="translate(742,426) scale(1.8)"/>
+        <use href="#g032-basinC" transform="translate(750,420) scale(1.4)"/>
+        <use href="#g032-basinC" transform="translate(759,414) scale(1.0)"/>
+      </g>
+      <g fill="none" stroke="#D7B364" stroke-width="1.6" stroke-opacity=".3">
+        <use href="#g032-basinC" transform="translate(720,450) scale(3.4)"/>
+        <use href="#g032-basinC" transform="translate(742,426) scale(1.8)"/>
+      </g>
+    </svg>
+  </div>
+
+  <section id="zones" class="wrap">
+    <div class="sh">
+      <span class="el">05 · WAARNEMING</span>
+      <h2>Live in de server</h2>
+    </div>
+    <div class="live" style="margin-bottom:clamp(46px,7vw,90px)">
+      <div>
+        <h3><span class="pulse"></span>Live traden, elke handelsdag.</h3>
+        <p>De oprichter handelt live mee in Discord en laat zien hoe hij de markten benadert. Tijden worden daar aangekondigd.</p>
+        <div class="cta-row"><a class="btn btn--ghost" href="https://discord.gg/78Ff2GuSfW">Zit een sessie mee</a></div>
+      </div>
+      <svg viewBox="0 0 340 200" role="img" aria-label="Markten op de kaart" style="width:100%;height:auto">
+        <g stroke="#D7B364" stroke-opacity=".3" stroke-width="1">
+          <path d="M0,50 H340 M0,100 H340 M0,150 H340 M85,0 V200 M170,0 V200 M255,0 V200"/>
+        </g>
+        <g fill="none" stroke="#D7B364" stroke-width="1.4">
+          <path d="M40,150 L52,128 H28 Z"/><path d="M128,100 L140,78 H116 Z"/>
+          <path d="M212,132 L224,110 H200 Z"/><path d="M292,86 L304,64 H280 Z"/>
+        </g>
+        <g fill="#E6CC8E">
+          <circle cx="40" cy="143" r="2.2"/><circle cx="128" cy="93" r="2.2"/>
+          <circle cx="212" cy="125" r="2.2"/><circle cx="292" cy="79" r="2.2"/>
+        </g>
+        <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10" letter-spacing="2" fill="#A5A6A8">
+          <text x="40" y="170" text-anchor="middle">NQ</text>
+          <text x="128" y="120" text-anchor="middle">ES</text>
+          <text x="212" y="152" text-anchor="middle">BTC</text>
+          <text x="292" y="106" text-anchor="middle">ALT</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="sh">
+      <span class="el">06 · HOOGTEZONES</span>
+      <h2>Toegang</h2>
+    </div>
+    <div class="duo">
+      <div class="zone">
+        <svg class="peak" width="30" height="26" viewBox="0 0 30 26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M15,2 L28,24 H2 Z"/></svg>
+        <span class="chip">Zone open</span>
+        <h3>Gratis</h3>
+        <p>De hele thuiskant van de server is nu gratis: educatie, chart-ideeën, markt en community.</p>
+        <div class="cta-row" style="margin-top:20px"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Nu binnenlopen</a></div>
+      </div>
+      <div class="zone">
+        <svg class="peak" width="30" height="26" viewBox="0 0 30 26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M15,2 L28,24 H2 Z" stroke-dasharray="3 3"/></svg>
+        <span class="chip">Zone gesloten</span>
+        <h3>Premium</h3>
+        <p>Premium opent later. Wanneer en hoe wordt in de server aangekondigd.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ CLOSING ============ -->
+<div class="band">
+  <div class="terrain" aria-hidden="true">
+    <svg viewBox="0 0 1440 620" preserveAspectRatio="xMidYMid slice">
+      <rect width="1440" height="620" fill="#08090B"/>
+      <g fill="none" stroke="#D7B364" stroke-width="1" stroke-opacity=".16">
+        <use href="#g032-hillA" transform="translate(720,330) scale(2.6)"/>
+        <use href="#g032-hillA" transform="translate(724,322) scale(2.32)"/>
+        <use href="#g032-hillA" transform="translate(729,314) scale(2.04)"/>
+        <use href="#g032-hillA" transform="translate(735,306) scale(1.76)"/>
+        <use href="#g032-hillA" transform="translate(742,298) scale(1.48)"/>
+        <use href="#g032-hillA" transform="translate(750,290) scale(1.20)"/>
+        <use href="#g032-hillA" transform="translate(759,282) scale(.92)"/>
+        <use href="#g032-hillA" transform="translate(769,274) scale(.64)"/>
+        <use href="#g032-hillA" transform="translate(780,266) scale(.36)"/>
+      </g>
+      <g fill="none" stroke="#D7B364" stroke-width="1.7" stroke-opacity=".46">
+        <use href="#g032-hillA" transform="translate(720,330) scale(2.6)"/>
+        <use href="#g032-hillA" transform="translate(742,298) scale(1.48)"/>
+      </g>
+      <path d="M780,240 L794,266 H766 Z" fill="none" stroke="#E6CC8E" stroke-width="1.8"/>
+      <circle cx="780" cy="258" r="3" fill="#E6CC8E"/>
+    </svg>
+  </div>
+  <div class="wrap summit">
+    <span class="tag">Naar de top</span>
+    <h2 style="margin-top:22px">Klim mee.</h2>
+    <p>Gratis toegang, vanaf het moment dat je binnenkomt.</p>
+    <a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Word lid op Discord</a>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div>
+        <h4>Atlas Capital</h4>
+        <p>Proces. Discipline. Uitvoering.</p>
+      </div>
+      <div>
+        <h4>Kanalen</h4>
+        <a href="https://discord.gg/78Ff2GuSfW">Discord</a>
+        <a href="https://www.tiktok.com/@atlascapitalbv">TikTok · @atlascapitalbv</a>
+      </div>
+      <div>
+        <h4>Terrein</h4>
+        <p>NQ · ES · Bitcoin · Altcoins</p>
+      </div>
+      <div>
+        <h4>Status</h4>
+        <p style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;line-height:2;color:var(--dim)">
+          GRATIS TOEGANG · NU<br>PREMIUM · OPENT LATER<br>10+ JAAR ERVARING
+        </p>
+      </div>
+    </div>
+    <div class="risk">
+      <span>Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span>
+      <span>BLAD 032 · HOOGTELIJNEN</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

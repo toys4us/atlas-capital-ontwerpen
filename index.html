@@ -1,0 +1,509 @@
+<title>Atlas Capital Ontwerpwand</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  /* The wall is chrome around a hundred designs and must not compete with any
+     of them: a neutral system sans for the interface, mono for every numeral,
+     and the brand's own black and gold so the frame belongs to the work. One
+     theme by design -- this is the brand's world, not the viewer's. */
+  :root{
+    --ink:#08090B; --panel:#101115; --panel-2:#15161A;
+    --gold:#D7B364; --paper:#F4F2EC; --muted:#A5A6A8; --dim:#6E6F74;
+    --hair:rgba(244,242,236,.10); --hair-2:rgba(244,242,236,.18);
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+    --num:tabular-nums;
+    --s0:url(_thumbs/sheet0.webp);
+    --s1:url(_thumbs/sheet1.webp);
+    --s2:url(_thumbs/sheet2.webp);
+    --s3:url(_thumbs/sheet3.webp);
+  }
+  html{color-scheme:dark;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--sans);
+       font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+  /* ---------------------------------------------------------------- head */
+  .top{position:sticky;top:0;z-index:40;background:rgba(8,9,11,.94);
+       backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+  .top__in{max-width:1720px;margin:0 auto;padding:14px 22px;
+           display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .mark{display:flex;align-items:center;gap:11px;flex:0 0 auto}
+  .mark svg{display:block}
+  .mark b{font-size:13px;font-weight:650;letter-spacing:.16em;text-transform:uppercase}
+  .mark span{font-size:11px;color:var(--dim);letter-spacing:.1em;
+             padding-left:11px;margin-left:2px;border-left:1px solid var(--hair-2)}
+  .tools{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .fld{display:flex;align-items:center;gap:8px;border:1px solid var(--hair-2);
+       border-radius:2px;padding:0 10px;height:34px;background:var(--panel)}
+  .fld input{background:none;border:0;color:var(--paper);width:190px;
+             font:inherit;font-size:13px;outline:0}
+  .fld input::placeholder{color:var(--dim)}
+  .fld svg{opacity:.5;flex:0 0 auto}
+  .btn{height:34px;padding:0 14px;border:1px solid var(--hair-2);border-radius:2px;
+       background:var(--panel);font-size:12px;letter-spacing:.06em;
+       text-transform:uppercase;white-space:nowrap;
+       transition:border-color .15s,color .15s}
+  .btn[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+  a.btn{display:grid;place-items:center;text-decoration:none}
+  .btn--gold{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:650}
+  .cnt{font-family:var(--mono);font-size:12px;color:var(--dim);white-space:nowrap;
+       font-variant-numeric:var(--num)}
+  .cnt b{color:var(--gold);font-weight:600}
+
+  /* ------------------------------------------------------------- filters */
+  .fams{border-bottom:1px solid var(--hair);background:var(--ink)}
+  .fams__in{max-width:1720px;margin:0 auto;padding:10px 22px;
+            display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin}
+  .fam{flex:0 0 auto;height:28px;padding:0 11px;border:1px solid transparent;
+       border-radius:2px;font-size:12px;color:var(--muted);white-space:nowrap;
+       transition:color .15s,border-color .15s,background .15s}
+  .fam:hover{color:var(--paper);background:var(--panel)}
+  .fam[aria-pressed="true"]{color:var(--gold);border-color:rgba(215,179,100,.4);
+                            background:rgba(215,179,100,.07)}
+  .fam i{font-style:normal;font-family:var(--mono);opacity:.5;margin-left:6px;font-size:11px}
+
+  .hint{max-width:1720px;margin:0 auto;padding:16px 22px 0;
+        font-size:12px;color:var(--dim)}
+  .hint kbd{font-family:var(--mono);font-size:11px;border:1px solid var(--hair-2);
+            border-radius:2px;padding:1px 5px;color:var(--muted)}
+
+  /* ---------------------------------------------------------------- grid */
+  .wall{max-width:1720px;margin:0 auto;padding:22px 22px 90px;
+        display:grid;gap:22px;
+        grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .card{position:relative;border:1px solid var(--hair);background:var(--panel-2);
+        border-radius:3px;overflow:hidden;transition:border-color .18s,transform .18s}
+  .card:hover{border-color:rgba(215,179,100,.45);transform:translateY(-2px)}
+  .card.is-hidden{display:none}
+  /* Percentage background-position is the one sprite technique that stays
+     correct at every card width, which an auto-fill grid guarantees will vary. */
+  .shot{position:relative;display:block;width:100%;
+        aspect-ratio:200/257;overflow:hidden;background-color:var(--ink);
+        border:0;padding:0;cursor:zoom-in;text-align:left;
+        background-size:500% 500%;background-repeat:no-repeat}
+  .shot::after{content:"";position:absolute;inset:0;
+               box-shadow:inset 0 0 0 1px rgba(244,242,236,.05)}
+  .meta{display:flex;align-items:center;gap:10px;padding:11px 13px;
+        border-top:1px solid var(--hair)}
+  .meta__n{font-family:var(--mono);font-size:12px;color:var(--gold);flex:0 0 auto;
+           font-variant-numeric:var(--num)}
+  .meta__t{font-size:13px;font-weight:550;letter-spacing:-.01em;
+           white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .meta__f{margin-left:auto;font-size:11px;color:var(--dim);flex:0 0 auto;
+           white-space:nowrap}
+  .open{position:absolute;top:9px;left:9px;z-index:2;height:30px;padding:0 10px;
+        display:grid;place-items:center;border-radius:2px;font-size:11px;
+        letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+        color:var(--ink);background:var(--gold);border:1px solid var(--gold);
+        opacity:0;transition:opacity .15s}
+  .card:hover .open,.open:focus-visible{opacity:1}
+  .star{position:absolute;top:9px;right:9px;z-index:2;width:30px;height:30px;
+        display:grid;place-items:center;border-radius:2px;
+        background:rgba(8,9,11,.72);border:1px solid var(--hair-2);
+        backdrop-filter:blur(6px);opacity:0;transition:opacity .15s}
+  .card:hover .star,.star:focus-visible,.star[aria-pressed="true"]{opacity:1}
+  .star svg{fill:none;stroke:var(--paper);stroke-width:1.5}
+  .star[aria-pressed="true"] svg{fill:var(--gold);stroke:var(--gold)}
+  .empty{grid-column:1/-1;padding:80px 0;text-align:center;color:var(--dim)}
+
+  /* -------------------------------------------------------------- viewer */
+  .view[hidden]{display:none}
+  .view{position:fixed;inset:0;z-index:100;background:var(--ink);
+        display:flex;flex-direction:column}
+  .view__bar{display:flex;align-items:center;gap:14px;padding:11px 16px;
+             border-bottom:1px solid var(--hair);flex:0 0 auto;flex-wrap:wrap}
+  .view__n{font-family:var(--mono);font-size:13px;color:var(--gold);
+           font-variant-numeric:var(--num)}
+  .view__t{font-size:14px;font-weight:600}
+  .view__f{font-size:12px;color:var(--dim)}
+  .view__sp{margin-left:auto}
+  .view__stage{flex:1 1 auto;overflow:auto;display:grid;justify-items:center;
+               background:#050506;position:relative}
+  .view__stage.is-mob{padding:22px 0;background:#0b0c0e}
+  .view__frame{width:100%;height:100%;border:0;background:var(--ink);display:block}
+  .view__stage.is-mob .view__frame{width:390px;height:844px;max-width:100%;
+    border:1px solid var(--hair-2);border-radius:14px;
+    box-shadow:0 30px 80px rgba(0,0,0,.6);align-self:start}
+  .view__big[hidden]{display:none}
+  .view__big{display:grid;justify-items:center;gap:18px;padding:28px 20px 48px;
+             align-content:start}
+  .view__big span{display:block;width:min(760px,92vw);aspect-ratio:200/257;
+    background-size:500% 500%;background-repeat:no-repeat;
+    border:1px solid var(--hair-2);image-rendering:auto}
+  .view__note{max-width:60ch;text-align:center;color:var(--muted);font-size:13px;
+              line-height:1.6;margin:0}
+  .view__note b{font-family:var(--mono);color:var(--gold);font-weight:500}
+  .nav{position:fixed;top:50%;transform:translateY(-50%);z-index:101;
+       width:40px;height:70px;display:grid;place-items:center;
+       background:rgba(8,9,11,.7);border:1px solid var(--hair-2);
+       backdrop-filter:blur(6px)}
+  .nav--p{left:10px}.nav--n{right:10px}
+  .nav:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* --------------------------------------------------------------- panel */
+  .picks[hidden]{display:none}
+  .picks{position:fixed;right:0;bottom:0;top:0;width:min(360px,90vw);z-index:110;
+         background:var(--panel);border-left:1px solid var(--hair-2);
+         display:flex;flex-direction:column;box-shadow:-30px 0 80px rgba(0,0,0,.5)}
+  .picks__h{padding:16px;border-bottom:1px solid var(--hair);
+            display:flex;align-items:center;gap:10px}
+  .picks__h b{font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+  .picks__l{flex:1 1 auto;overflow:auto;padding:8px 0}
+  .pick{display:flex;align-items:center;gap:10px;padding:9px 16px;width:100%;
+        text-align:left;border-bottom:1px solid rgba(244,242,236,.05)}
+  .pick:hover{background:rgba(244,242,236,.04)}
+  .pick b{font-family:var(--mono);font-size:12px;color:var(--gold);font-weight:500;
+          font-variant-numeric:var(--num)}
+  .pick span{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .picks__f{padding:14px 16px;border-top:1px solid var(--hair);display:grid;gap:9px}
+  .picks__f textarea{width:100%;height:76px;resize:none;background:var(--ink);
+    color:var(--paper);border:1px solid var(--hair-2);border-radius:2px;
+    padding:9px;font-family:var(--mono);font-size:12px}
+  .note{font-size:11px;color:var(--dim);line-height:1.55}
+  .fatal{max-width:1720px;margin:0 auto;padding:14px 22px;color:#E0574A;
+         border:1px solid rgba(224,87,74,.4);background:rgba(224,87,74,.08)}
+
+  @media (max-width:640px){
+    .wall{grid-template-columns:1fr;padding:16px 14px 80px;gap:16px}
+    .top__in{padding:12px 14px}
+    .fld input{width:120px}
+    .nav{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="top__in">
+    <div class="mark">
+      <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="1" y="1" width="30" height="30" fill="none" stroke="#D7B364" stroke-width="1"/>
+        <path d="M9 23 16 8l7 15" fill="none" stroke="#D7B364" stroke-width="1.6"/>
+        <path d="M12.2 18.4h7.6" stroke="#D7B364" stroke-width="1.6"/>
+      </svg>
+      <b>Atlas Capital</b>
+      <span>100 richtingen</span>
+    </div>
+    <div class="tools">
+      <span class="cnt"><b id="cnt">100</b> / 100</span>
+      <label class="fld">
+        <svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true">
+          <circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M11 11l4 4" stroke="currentColor" stroke-width="1.4"/>
+        </svg>
+        <input id="q" type="search" placeholder="Zoek op naam of nummer" aria-label="Zoeken">
+      </label>
+      <button class="btn" id="favOnly" type="button" aria-pressed="false">Favorieten</button>
+      <button class="btn btn--gold" id="openPicks" type="button">Mijn keuze</button>
+    </div>
+  </div>
+</header>
+
+<nav class="fams" aria-label="Filter op stijl">
+  <div class="fams__in" id="fams"></div>
+</nav>
+
+<p class="hint">Klik op een ontwerp om het op ware grootte te openen.
+  <kbd>&larr;</kbd> <kbd>&rarr;</kbd> bladeren, <kbd>M</kbd> mobiel, <kbd>F</kbd> favoriet,
+  <kbd>Esc</kbd> sluiten. Je favorieten blijven in deze browser bewaard.</p>
+
+<main class="wall" id="wall"></main>
+
+<section class="view" id="view" hidden aria-modal="true" role="dialog" aria-label="Ontwerp bekijken">
+  <div class="view__bar">
+    <span class="view__n" id="vn">001</span>
+    <span class="view__t" id="vt">-</span>
+    <span class="view__f" id="vf">-</span>
+    <span class="view__sp"></span>
+    <a class="btn" id="vopen" href="#" target="_blank" rel="noopener">Nieuw tabblad</a>
+    <button class="btn" id="vmob" type="button" aria-pressed="false">Mobiel</button>
+    <button class="btn" id="vfav" type="button" aria-pressed="false">Favoriet</button>
+    <button class="btn" id="vclose" type="button">Sluiten</button>
+  </div>
+  <div class="view__stage" id="vstage">
+    <iframe class="view__frame" id="vframe" title="Ontwerp"></iframe>
+    <div class="view__big" id="vbig" hidden><span id="vbigimg"></span>
+      <p class="view__note">Vergroting van de voorvertoning. Het echte ontwerp,
+        op ware grootte en aanklikbaar, zit in het zip-bestand als
+        <b id="vbigfile">designs/d001.html</b>.</p>
+    </div>
+  </div>
+</section>
+<button class="nav nav--p" id="prev" type="button" aria-label="Vorige" hidden>&#8249;</button>
+<button class="nav nav--n" id="next" type="button" aria-label="Volgende" hidden>&#8250;</button>
+
+<aside class="picks" id="picks" hidden aria-label="Mijn keuze">
+  <div class="picks__h">
+    <b>Mijn keuze</b>
+    <span class="cnt" id="pcnt">0</span>
+    <span style="margin-left:auto"></span>
+    <button class="btn" id="pclose" type="button">Sluiten</button>
+  </div>
+  <div class="picks__l" id="plist"></div>
+  <div class="picks__f">
+    <textarea id="ptext" readonly aria-label="Lijst om te kopieren"></textarea>
+    <button class="btn btn--gold" id="pcopy" type="button">Kopieer lijst</button>
+    <p class="note">Stuur deze lijst terug, dan wordt het gekozen ontwerp uitgebouwd tot
+      de volledige site.</p>
+  </div>
+</aside>
+
+<script>
+(function(){
+  "use strict";
+  var D = [{"n": 1, "name": "Kwartaalblad", "fam": "Editorial"}, {"n": 2, "name": "Nachtkatern", "fam": "Editorial"}, {"n": 3, "name": "De Kolom", "fam": "Editorial"}, {"n": 4, "name": "Cahier", "fam": "Editorial"}, {"n": 5, "name": "Katern XL", "fam": "Editorial"}, {"n": 6, "name": "Raster 12", "fam": "Zwitsers"}, {"n": 7, "name": "Diagonaal", "fam": "Zwitsers"}, {"n": 8, "name": "Neue Haas", "fam": "Zwitsers"}, {"n": 9, "name": "Zwart Vlak", "fam": "Zwitsers"}, {"n": 10, "name": "Kolomsprong", "fam": "Zwitsers"}, {"n": 11, "name": "Systeem", "fam": "Brutalistisch"}, {"n": 12, "name": "Tape", "fam": "Brutalistisch"}, {"n": 13, "name": "Grofdruk", "fam": "Brutalistisch"}, {"n": 14, "name": "Blokletter", "fam": "Brutalistisch"}, {"n": 15, "name": "Foutmelding", "fam": "Brutalistisch"}, {"n": 16, "name": "Terminaal", "fam": "Terminal"}, {"n": 17, "name": "Diepte", "fam": "Terminal"}, {"n": 18, "name": "Watchlist", "fam": "Terminal"}, {"n": 19, "name": "Sessies", "fam": "Terminal"}, {"n": 20, "name": "Keypad", "fam": "Terminal"}, {"n": 21, "name": "Chronometer", "fam": "Luxe"}, {"n": 22, "name": "Staaf", "fam": "Luxe"}, {"n": 23, "name": "Guilloché", "fam": "Luxe"}, {"n": 24, "name": "Etui", "fam": "Luxe"}, {"n": 25, "name": "Distilleerderij", "fam": "Luxe"}, {"n": 26, "name": "Titelkaart", "fam": "Cinematisch"}, {"n": 27, "name": "Eenblad", "fam": "Cinematisch"}, {"n": 28, "name": "Aftiteling", "fam": "Cinematisch"}, {"n": 29, "name": "Storyboard", "fam": "Cinematisch"}, {"n": 30, "name": "Noir", "fam": "Cinematisch"}, {"n": 31, "name": "Meridiaan", "fam": "Cartografisch"}, {"n": 32, "name": "Hoogtelijnen", "fam": "Cartografisch"}, {"n": 33, "name": "Sterrenkaart", "fam": "Cartografisch"}, {"n": 34, "name": "Kompasroos", "fam": "Cartografisch"}, {"n": 35, "name": "Route", "fam": "Cartografisch"}, {"n": 36, "name": "De Server", "fam": "Discord"}, {"n": 37, "name": "Zijbalk", "fam": "Discord"}, {"n": 38, "name": "Voorvertoning", "fam": "Discord"}, {"n": 39, "name": "Kanaalmuur", "fam": "Discord"}, {"n": 40, "name": "Onboarding", "fam": "Discord"}, {"n": 41, "name": "Cirkel Vierkant", "fam": "Bauhaus"}, {"n": 42, "name": "Agitprop", "fam": "Bauhaus"}, {"n": 43, "name": "Vorm & Kleur", "fam": "Bauhaus"}, {"n": 44, "name": "Staafwerk", "fam": "Bauhaus"}, {"n": 45, "name": "De Stijl", "fam": "Bauhaus"}, {"n": 46, "name": "Bankbiljet", "fam": "Art deco"}, {"n": 47, "name": "Zonnestraal", "fam": "Art deco"}, {"n": 48, "name": "Beursvloer", "fam": "Art deco"}, {"n": 49, "name": "Zegel", "fam": "Art deco"}, {"n": 50, "name": "Inlegwerk", "fam": "Art deco"}, {"n": 51, "name": "Bento", "fam": "Bento"}, {"n": 52, "name": "Stapel", "fam": "Bento"}, {"n": 53, "name": "Mozaïek", "fam": "Bento"}, {"n": 54, "name": "Panelen", "fam": "Bento"}, {"n": 55, "name": "Lade", "fam": "Bento"}, {"n": 56, "name": "Stilte", "fam": "Minimaal"}, {"n": 57, "name": "Eén Lijn", "fam": "Minimaal"}, {"n": 58, "name": "Punt", "fam": "Minimaal"}, {"n": 59, "name": "Marge", "fam": "Minimaal"}, {"n": 60, "name": "Zwart", "fam": "Minimaal"}, {"n": 61, "name": "Bouwtekening", "fam": "Blauwdruk"}, {"n": 62, "name": "Octrooi", "fam": "Blauwdruk"}, {"n": 63, "name": "Doorsnede", "fam": "Blauwdruk"}, {"n": 64, "name": "Kalibratie", "fam": "Blauwdruk"}, {"n": 65, "name": "Schema", "fam": "Blauwdruk"}, {"n": 66, "name": "Zaal", "fam": "Museum"}, {"n": 67, "name": "Vitrine", "fam": "Museum"}, {"n": 68, "name": "Catalogus", "fam": "Museum"}, {"n": 69, "name": "Wandtekst", "fam": "Museum"}, {"n": 70, "name": "Depot", "fam": "Museum"}, {"n": 71, "name": "Uitzending", "fam": "Uitzending"}, {"n": 72, "name": "Speeldag", "fam": "Uitzending"}, {"n": 73, "name": "Regiekamer", "fam": "Uitzending"}, {"n": 74, "name": "Ondertitel", "fam": "Uitzending"}, {"n": 75, "name": "Persconferentie", "fam": "Uitzending"}, {"n": 76, "name": "Grootboek", "fam": "Grootboek"}, {"n": 77, "name": "Dossier", "fam": "Grootboek"}, {"n": 78, "name": "Index", "fam": "Grootboek"}, {"n": 79, "name": "Register", "fam": "Grootboek"}, {"n": 80, "name": "Bijlage", "fam": "Grootboek"}, {"n": 81, "name": "Campagne", "fam": "Campagne"}, {"n": 82, "name": "Lookbook", "fam": "Campagne"}, {"n": 83, "name": "Etalage", "fam": "Campagne"}, {"n": 84, "name": "Parfum", "fam": "Campagne"}, {"n": 85, "name": "Runway", "fam": "Campagne"}, {"n": 86, "name": "Overlap", "fam": "Experimenteel"}, {"n": 87, "name": "Typografisch Landschap", "fam": "Experimenteel"}, {"n": 88, "name": "Roterend", "fam": "Experimenteel"}, {"n": 89, "name": "Rasterstoring", "fam": "Experimenteel"}, {"n": 90, "name": "Negatief", "fam": "Experimenteel"}, {"n": 91, "name": "Plakband", "fam": "Beweging"}, {"n": 92, "name": "Loper", "fam": "Beweging"}, {"n": 93, "name": "Onthulling", "fam": "Beweging"}, {"n": 94, "name": "Ademen", "fam": "Beweging"}, {"n": 95, "name": "Snap", "fam": "Beweging"}, {"n": 96, "name": "Inscriptie", "fam": "Klassiek"}, {"n": 97, "name": "Zuilengang", "fam": "Klassiek"}, {"n": 98, "name": "Titaan", "fam": "Klassiek"}, {"n": 99, "name": "Fries", "fam": "Klassiek"}, {"n": 100, "name": "Fundament", "fam": "Klassiek"}];
+  var MODE = "files";                 // "files" | "inline"
+  var COLS = 5, ROWS = 5, PER = COLS * ROWS;
+  var LS = "atlas.picks.v1";
+
+  var wall = document.getElementById("wall");
+  var famsEl = document.getElementById("fams");
+  var cntEl = document.getElementById("cnt");
+  var qEl = document.getElementById("q");
+  var favOnlyBtn = document.getElementById("favOnly");
+
+  var picks = {};
+  try { picks = JSON.parse(localStorage.getItem(LS) || "{}") || {}; } catch(e){ picks = {}; }
+  function savePicks(){ try{ localStorage.setItem(LS, JSON.stringify(picks)); }catch(e){} }
+  function pad(n){ return (n<10?"00":n<100?"0":"") + n; }
+
+  /* ------------------------------------------------------------- the wall */
+  var cards = [];
+  var frag = document.createDocumentFragment();
+  D.forEach(function(d){
+    var card = document.createElement("article");
+    card.className = "card";
+    card.dataset.n = d.n; card.dataset.fam = d.fam;
+    card.dataset.q = (pad(d.n) + " " + d.name + " " + d.fam).toLowerCase();
+
+    var i = (d.n - 1) % PER, sheet = Math.floor((d.n - 1) / PER);
+    var shot = document.createElement("button");
+    shot.className = "shot"; shot.type = "button";
+    shot.style.backgroundImage = "var(--s" + sheet + ")";
+    shot.style.backgroundPosition =
+      ((i % COLS) * 100 / (COLS - 1)) + "% " +
+      (Math.floor(i / COLS) * 100 / (ROWS - 1)) + "%";
+    shot.setAttribute("aria-label", "Open ontwerp " + pad(d.n) + ", " + d.name);
+    shot.addEventListener("click", function(){ open(d.n); });
+
+    var star = document.createElement("button");
+    star.className = "star"; star.type = "button";
+    star.setAttribute("aria-label", "Zet " + pad(d.n) + " bij mijn keuze");
+    star.setAttribute("aria-pressed", picks[d.n] ? "true" : "false");
+    star.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">' +
+      '<path d="M12 3.4l2.6 5.6 6 .8-4.4 4.2 1.1 6L12 17.2 6.7 20l1.1-6L3.4 9.8l6-.8z"' +
+      ' stroke-linejoin="round"/></svg>';
+    star.addEventListener("click", function(e){ e.stopPropagation(); toggle(d.n); });
+
+    var meta = document.createElement("div");
+    meta.className = "meta";
+    meta.innerHTML = '<span class="meta__n"></span><span class="meta__t"></span>' +
+                     '<span class="meta__f"></span>';
+    meta.children[0].textContent = pad(d.n);
+    meta.children[1].textContent = d.name;
+    meta.children[2].textContent = d.fam;
+
+    card.appendChild(shot);
+    if (MODE === "files"){
+      var op = document.createElement("a");
+      op.className = "open"; op.textContent = "Openen";
+      op.href = "designs/d" + pad(d.n) + ".html";
+      op.target = "_blank"; op.rel = "noopener";
+      op.setAttribute("aria-label", "Open ontwerp " + pad(d.n) + " in een nieuw tabblad");
+      op.addEventListener("click", function(e){ e.stopPropagation(); });
+      card.appendChild(op);
+    }
+    card.appendChild(star); card.appendChild(meta);
+    frag.appendChild(card);
+    cards.push({d:d, el:card, shot:shot, star:star});
+  });
+  wall.appendChild(frag);
+
+  var emptyEl = document.createElement("p");
+  emptyEl.className = "empty"; emptyEl.hidden = true;
+  emptyEl.textContent = "Niets gevonden.";
+  wall.appendChild(emptyEl);
+
+  /* ------------------------------------------------------------ filtering */
+  var fam = "", favOnly = false, counts = {};
+  D.forEach(function(d){ counts[d.fam] = (counts[d.fam]||0) + 1; });
+
+  function mkFam(label, key, n){
+    var b = document.createElement("button");
+    b.className = "fam"; b.type = "button"; b.dataset.k = key;
+    b.setAttribute("aria-pressed", key === fam ? "true" : "false");
+    b.appendChild(document.createTextNode(label));
+    var i = document.createElement("i"); i.textContent = n; b.appendChild(i);
+    b.addEventListener("click", function(){
+      fam = (fam === key) ? "" : key;
+      [].forEach.call(famsEl.children, function(x){
+        x.setAttribute("aria-pressed", x.dataset.k === fam ? "true" : "false");
+      });
+      apply();
+    });
+    return b;
+  }
+  famsEl.appendChild(mkFam("Alles", "", D.length));
+  var seen = {};
+  D.forEach(function(d){
+    if (seen[d.fam]) return; seen[d.fam] = 1;
+    famsEl.appendChild(mkFam(d.fam, d.fam, counts[d.fam]));
+  });
+
+  function apply(){
+    var q = qEl.value.trim().toLowerCase(), n = 0;
+    cards.forEach(function(c){
+      var ok = (!fam || c.d.fam === fam)
+            && (!q || c.el.dataset.q.indexOf(q) > -1)
+            && (!favOnly || picks[c.d.n]);
+      c.el.classList.toggle("is-hidden", !ok);
+      if (ok) n++;
+    });
+    cntEl.textContent = n;
+    emptyEl.hidden = n > 0;
+  }
+  qEl.addEventListener("input", apply);
+  favOnlyBtn.addEventListener("click", function(){
+    favOnly = !favOnly;
+    favOnlyBtn.setAttribute("aria-pressed", favOnly ? "true" : "false");
+    apply();
+  });
+
+  /* ---------------------------------------------------------- favourites */
+  function toggle(n){
+    if (picks[n]) delete picks[n]; else picks[n] = 1;
+    savePicks();
+    cards.forEach(function(c){
+      if (c.d.n === n) c.star.setAttribute("aria-pressed", picks[n] ? "true":"false");
+    });
+    if (cur === n) vfav.setAttribute("aria-pressed", picks[n] ? "true":"false");
+    renderPicks();
+    if (favOnly) apply();
+  }
+
+  var picksEl = document.getElementById("picks");
+  var plist = document.getElementById("plist");
+  var ptext = document.getElementById("ptext");
+  var pcnt = document.getElementById("pcnt");
+  function renderPicks(){
+    var ns = Object.keys(picks).map(Number).sort(function(a,b){return a-b;});
+    pcnt.textContent = ns.length;
+    plist.innerHTML = "";
+    ns.forEach(function(n){
+      var d = D[n-1];
+      var b = document.createElement("button");
+      b.className = "pick"; b.type = "button";
+      var s1 = document.createElement("b"); s1.textContent = pad(n);
+      var s2 = document.createElement("span"); s2.textContent = d ? d.name : "";
+      b.appendChild(s1); b.appendChild(s2);
+      b.addEventListener("click", function(){ closePicks(); open(n); });
+      plist.appendChild(b);
+    });
+    ptext.value = ns.length
+      ? "Atlas Capital, mijn keuze: " + ns.map(function(n){
+          return pad(n) + " " + (D[n-1] ? D[n-1].name : "");
+        }).join(", ")
+      : "Nog niets gekozen.";
+  }
+  document.getElementById("openPicks").addEventListener("click", function(){
+    picksEl.hidden = false; renderPicks();
+  });
+  function closePicks(){ picksEl.hidden = true; }
+  document.getElementById("pclose").addEventListener("click", closePicks);
+  document.getElementById("pcopy").addEventListener("click", function(){
+    ptext.select();
+    try { document.execCommand("copy"); } catch(e){}
+    if (navigator.clipboard) { try{ navigator.clipboard.writeText(ptext.value); }catch(e){} }
+    var b = this, t = b.textContent; b.textContent = "Gekopieerd";
+    setTimeout(function(){ b.textContent = t; }, 1400);
+  });
+  renderPicks();
+
+  /* -------------------------------------------------------------- viewer */
+  var view = document.getElementById("view");
+  var vframe = document.getElementById("vframe");
+  var vbig = document.getElementById("vbig");
+  var vbigimg = document.getElementById("vbigimg");
+  var vbigfile = document.getElementById("vbigfile");
+  var vstage = document.getElementById("vstage");
+  var vn = document.getElementById("vn"), vt = document.getElementById("vt");
+  var vf = document.getElementById("vf"), vfav = document.getElementById("vfav");
+  var vmob = document.getElementById("vmob");
+  var vopen = document.getElementById("vopen");
+  var prev = document.getElementById("prev"), next = document.getElementById("next");
+  var cur = 0, mob = false, lastFocus = null;
+
+  function visible(){
+    return cards.filter(function(c){ return !c.el.classList.contains("is-hidden"); })
+                .map(function(c){ return c.d.n; });
+  }
+  function paint(n){
+    vframe.removeAttribute("src"); vframe.removeAttribute("srcdoc");
+    if (MODE === "files"){
+      vbig.hidden = true; vframe.hidden = false;
+      vframe.setAttribute("src", "designs/d" + pad(n) + ".html");
+      return;
+    }
+    /* The artifact viewer will not render a document this large, and the
+       hundred designs are 800 KB on their own, so here a design is shown as
+       its picture and the real file lives in the zip. */
+    vframe.hidden = true; vbig.hidden = false;
+    var i = (n - 1) % PER, sheet = Math.floor((n - 1) / PER);
+    vbigimg.style.backgroundImage = "var(--s" + sheet + ")";
+    vbigimg.style.backgroundPosition =
+      ((i % COLS) * 100 / (COLS - 1)) + "% " +
+      (Math.floor(i / COLS) * 100 / (ROWS - 1)) + "%";
+    vbigfile.textContent = "designs/d" + pad(n) + ".html";
+  }
+  function open(n){
+    lastFocus = document.activeElement;
+    cur = n;
+    var d = D[n-1];
+    vn.textContent = pad(n);
+    vt.textContent = d ? d.name : "";
+    vf.textContent = d ? d.fam : "";
+    vfav.setAttribute("aria-pressed", picks[n] ? "true":"false");
+    if (MODE === "files") vopen.href = "designs/d" + pad(n) + ".html";
+    else vopen.hidden = true;
+    paint(n);
+    view.hidden = false; prev.hidden = false; next.hidden = false;
+    document.body.style.overflow = "hidden";
+    document.getElementById("vclose").focus();
+  }
+  function close(){
+    view.hidden = true; prev.hidden = true; next.hidden = true;
+    /* drop the document, so only ever one design is alive at a time */
+    vframe.removeAttribute("src"); vframe.removeAttribute("srcdoc");
+    document.body.style.overflow = "";
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function step(dir){
+    var v = visible();
+    if (!v.length) return;
+    var i = v.indexOf(cur);
+    i = (i < 0) ? 0 : (i + dir + v.length) % v.length;
+    open(v[i]);
+  }
+  document.getElementById("vclose").addEventListener("click", close);
+  prev.addEventListener("click", function(){ step(-1); });
+  next.addEventListener("click", function(){ step(1); });
+  vfav.addEventListener("click", function(){ toggle(cur); });
+  if (MODE === "files"){
+    vmob.addEventListener("click", function(){
+      mob = !mob;
+      vmob.setAttribute("aria-pressed", mob ? "true":"false");
+      vstage.classList.toggle("is-mob", mob);
+    });
+  } else { vmob.hidden = true; }
+  document.addEventListener("keydown", function(e){
+    if (!picksEl.hidden && e.key === "Escape"){ closePicks(); return; }
+    if (view.hidden) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "ArrowRight") step(1);
+    else if (e.key === "ArrowLeft") step(-1);
+    else if (e.key === "f" || e.key === "F") toggle(cur);
+  });
+
+})();
+</script>

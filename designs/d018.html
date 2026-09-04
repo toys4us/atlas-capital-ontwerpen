@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 018 Watchlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ATLAS CAPITAL — 018 WATCHLIST
+   The curriculum as an instrument table. Symbols, rows, and a
+   detail pane driven purely by CSS :checked. No JS, no figures.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --panel:#15161A;
+  --panel-2:#101115;
+  --paper:#F4F2EC;
+  --muted:#A5A6A8;
+  --rule:rgba(255,255,255,.075);
+  --gold-rule:rgba(215,179,100,.28);
+  --mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif;
+}
+
+html{color-scheme:dark;-webkit-text-size-adjust:100%;}
+*{box-sizing:border-box;}
+body{
+  margin:0;background:var(--ink);color:#E7E5E0;
+  font-family:var(--mono);font-size:14px;line-height:1.6;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4,p,ul,figure,blockquote,table{margin:0;}
+ul{list-style:none;padding:0;}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px);}
+.kicker{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);}
+.kicker--m{color:#75767A;}
+.serif{font-family:var(--serif);}
+
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--gold);color:#0A0A0C;font-weight:600;
+  font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  padding:12px 18px;border:1px solid var(--gold-hi);
+  transition:background .16s linear,transform .16s ease;
+}
+.btn:hover{background:var(--gold-hi);transform:translateY(-1px);}
+.btn--ln{background:transparent;color:var(--gold);border-color:var(--gold-rule);}
+.btn--ln:hover{background:rgba(215,179,100,.10);color:var(--gold-hi);}
+.btn--sm{padding:9px 13px;font-size:11px;}
+.btn--blk{width:100%;justify-content:center;}
+
+/* ---------------- header ---------------- */
+header{border-bottom:1px solid var(--rule);}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0;}
+.mk{display:flex;align-items:center;gap:10px;}
+.mk b{font-size:13px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--paper);}
+.hd .meta{display:none;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#75767A;}
+@media (min-width:820px){.hd .meta{display:block;}}
+
+/* ---------------- quiet hero ---------------- */
+.hero{padding:clamp(46px,10vw,120px) 0 clamp(30px,5vw,54px);}
+.hero h1{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(34px,7vw,76px);line-height:1.02;letter-spacing:-.02em;color:var(--paper);
+  max-width:16ch;margin-top:22px;
+}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.hero p{color:var(--muted);max-width:42ch;margin-top:20px;font-size:14px;}
+.hero-cta{display:flex;flex-wrap:wrap;gap:11px;margin-top:26px;}
+.hero-rule{
+  margin-top:44px;height:1px;
+  background:linear-gradient(90deg,var(--gold),rgba(215,179,100,.06));
+}
+.hero-facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:0;border-bottom:1px solid var(--rule);
+}
+.hero-facts div{padding:16px 16px 16px 0;border-right:1px solid var(--rule);padding-left:16px;}
+.hero-facts div:first-child{padding-left:0;}
+.hero-facts div:last-child{border-right:0;}
+.hero-facts b{display:block;font-size:15px;font-weight:600;color:var(--paper);margin-top:6px;letter-spacing:.02em;}
+
+/* ---------------- watchlist ---------------- */
+.wl-sec{padding:clamp(34px,6vw,72px) 0;}
+.wl-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;}
+.wl-head h2{
+  font-family:var(--serif);font-weight:300;font-size:clamp(26px,4.4vw,46px);
+  letter-spacing:-.02em;color:var(--paper);line-height:1.05;
+}
+.wl-shell{margin-top:26px;}
+.wl-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:0;border:1px solid var(--gold-rule);}
+@media (min-width:960px){.wl-grid{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);}}
+
+.wl-table{min-width:0;overflow-x:auto;}
+.wl-inner{min-width:430px;}
+.wl-th{
+  display:grid;grid-template-columns:72px minmax(0,1fr) 106px 62px;
+  gap:10px;padding:10px 14px;border-bottom:1px solid var(--gold-rule);
+  font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#75767A;
+  background:#0C0D10;
+}
+.row{
+  display:grid;grid-template-columns:72px minmax(0,1fr) 106px 62px;
+  gap:10px;align-items:center;padding:13px 14px;
+  border-bottom:1px solid var(--rule);cursor:pointer;
+  transition:background .14s linear,box-shadow .14s linear;
+}
+.row:last-child{border-bottom:0;}
+.row:hover{background:rgba(215,179,100,.07);}
+.sym{font-weight:600;font-size:14px;color:var(--gold);letter-spacing:.06em;}
+.nm{font-family:var(--serif);font-size:17px;font-weight:400;color:var(--paper);line-height:1.2;letter-spacing:-.01em;}
+.cat{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8B8C8F;}
+.pips{display:flex;gap:4px;justify-content:flex-end;}
+.pips i{width:7px;height:7px;border-radius:50%;border:1px solid var(--gold-lo);display:block;}
+.pips i.on{background:var(--gold);border-color:var(--gold);}
+
+.wl-detail{
+  border-top:1px solid var(--gold-rule);
+  background:linear-gradient(160deg,#121317,#0A0B0D 70%);
+  padding:clamp(20px,3.4vw,30px);
+  min-height:340px;
+}
+@media (min-width:960px){.wl-detail{border-top:0;border-left:1px solid var(--gold-rule);}}
+.d{display:none;}
+.d-sym{
+  font-size:clamp(40px,7vw,74px);font-weight:500;color:var(--gold);
+  line-height:1;letter-spacing:-.02em;
+}
+.d-nm{font-family:var(--serif);font-size:clamp(20px,3vw,28px);font-weight:400;color:var(--paper);margin-top:10px;letter-spacing:-.015em;}
+.d-txt{font-family:var(--serif);font-size:16px;font-weight:300;color:#C6C4BF;margin-top:14px;line-height:1.6;}
+.d-fig{margin-top:22px;border-top:1px solid var(--rule);padding-top:18px;}
+.d-fig svg{display:block;width:100%;max-width:280px;height:auto;}
+.d-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+.d-tags span{
+  font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+  border:1px solid var(--gold-rule);padding:4px 9px;
+}
+
+/* checked wiring */
+#w1:checked ~ .wl-grid .d1,#w2:checked ~ .wl-grid .d2,#w3:checked ~ .wl-grid .d3,
+#w4:checked ~ .wl-grid .d4,#w5:checked ~ .wl-grid .d5,#w6:checked ~ .wl-grid .d6,
+#w7:checked ~ .wl-grid .d7,#w8:checked ~ .wl-grid .d8,#w9:checked ~ .wl-grid .d9,
+#w10:checked ~ .wl-grid .d10{display:block;}
+
+#w1:checked ~ .wl-grid label[for="w1"],#w2:checked ~ .wl-grid label[for="w2"],
+#w3:checked ~ .wl-grid label[for="w3"],#w4:checked ~ .wl-grid label[for="w4"],
+#w5:checked ~ .wl-grid label[for="w5"],#w6:checked ~ .wl-grid label[for="w6"],
+#w7:checked ~ .wl-grid label[for="w7"],#w8:checked ~ .wl-grid label[for="w8"],
+#w9:checked ~ .wl-grid label[for="w9"],#w10:checked ~ .wl-grid label[for="w10"]{
+  background:rgba(215,179,100,.13);
+  box-shadow:inset 3px 0 0 var(--gold);
+}
+input:focus-visible + .wl-grid{outline:1px solid var(--gold);}
+.wl-note{margin-top:12px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#65666A;}
+
+/* ---------------- model ---------------- */
+.model{padding:clamp(34px,6vw,72px) 0;border-top:1px solid var(--rule);}
+.model h2{font-family:var(--serif);font-weight:300;font-size:clamp(26px,4.4vw,46px);color:var(--paper);letter-spacing:-.02em;line-height:1.05;}
+.model p.lede{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--muted);max-width:50ch;margin-top:14px;}
+.fig{margin-top:26px;border:1px solid var(--gold-rule);background:#0A0B0D;padding:clamp(12px,2.4vw,20px);}
+.fig .sc{overflow-x:auto;}
+.fig svg{display:block;min-width:540px;width:100%;height:auto;}
+.fig figcaption{
+  margin-top:12px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#65666A;
+}
+
+/* ---------------- channels ---------------- */
+.chan-sec{padding:clamp(34px,6vw,72px) 0;border-top:1px solid var(--rule);}
+.chan-cols{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(20px,4vw,44px);margin-top:26px;}
+@media (min-width:760px){.chan-cols{grid-template-columns:repeat(2,minmax(0,1fr));}}
+.chan-cols h4{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+  padding-bottom:10px;border-bottom:1px solid var(--gold-rule);font-weight:500;
+}
+.leader{
+  display:flex;align-items:baseline;gap:8px;padding:9px 0;border-bottom:1px solid var(--rule);
+  font-size:13.5px;color:#CBC9C4;transition:color .14s linear;
+}
+.leader:hover{color:var(--gold-hi);}
+.leader .dots{flex:1;border-bottom:1px dotted rgba(255,255,255,.18);transform:translateY(-3px);}
+.leader .st{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-lo);}
+.leader .h{color:var(--gold-lo);}
+
+/* ---------------- live + access ---------------- */
+.band{
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:clamp(28px,5vw,56px) 0;
+  background:linear-gradient(90deg,rgba(215,179,100,.07),transparent 55%);
+}
+.band-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;}
+.band h3{font-family:var(--serif);font-weight:300;font-size:clamp(24px,4vw,40px);color:var(--paper);letter-spacing:-.02em;}
+.band p{color:var(--muted);max-width:44ch;margin-top:10px;font-size:13.5px;}
+.livedot{display:inline-flex;align-items:center;gap:9px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-hi);}
+.livedot i{width:8px;height:8px;border-radius:50%;background:var(--gold-hi);animation:bl 2s steps(1,end) infinite;}
+@keyframes bl{0%,49%{background:var(--gold-hi);box-shadow:0 0 0 4px rgba(215,179,100,.16);}50%,100%{background:var(--gold-lo);box-shadow:0 0 0 0 rgba(215,179,100,0);}}
+
+.access{padding:clamp(34px,6vw,72px) 0;}
+.acc-tbl{margin-top:24px;border:1px solid var(--gold-rule);}
+.acc-row{
+  display:grid;grid-template-columns:minmax(0,1fr);gap:0;
+  border-bottom:1px solid var(--gold-rule);
+}
+.acc-row:last-child{border-bottom:0;}
+@media (min-width:720px){.acc-row{grid-template-columns:150px minmax(0,1fr) 190px;align-items:center;}}
+.acc-row > div{padding:18px 18px;}
+.acc-row .k{border-bottom:1px solid var(--rule);}
+@media (min-width:720px){.acc-row .k{border-bottom:0;border-right:1px solid var(--rule);}
+.acc-row .a{border-left:1px solid var(--rule);}}
+.acc-row h3{font-family:var(--serif);font-weight:400;font-size:22px;color:var(--paper);}
+.acc-row p{color:var(--muted);font-size:13px;margin-top:7px;}
+.acc-row.on{background:rgba(215,179,100,.06);}
+
+/* ---------------- founder ---------------- */
+.founder{padding:clamp(34px,6vw,80px) 0;border-top:1px solid var(--rule);}
+.founder blockquote{
+  font-family:var(--serif);font-weight:300;font-style:italic;
+  font-size:clamp(18px,2.6vw,27px);line-height:1.5;color:#DEDCD7;letter-spacing:-.015em;
+  max-width:36ch;
+}
+.founder .fg{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(20px,4vw,54px);}
+@media (min-width:820px){.founder .fg{grid-template-columns:minmax(0,190px) minmax(0,1fr);}}
+.yrs{font-size:clamp(46px,9vw,96px);color:var(--gold);line-height:.9;font-weight:500;letter-spacing:-.04em;}
+.yrs span{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#75767A;margin-top:12px;}
+
+/* ---------------- closing ---------------- */
+.close{padding:clamp(46px,9vw,110px) 0;border-top:1px solid var(--gold-rule);text-align:center;
+  background:radial-gradient(110% 80% at 50% 0%,rgba(215,179,100,.10),transparent 60%);}
+.close h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,7.4vw,72px);color:var(--paper);letter-spacing:-.025em;line-height:1.02;}
+.close h2 em{font-style:italic;color:var(--gold);}
+.close p{color:var(--muted);margin-top:16px;}
+.close .btn{margin-top:26px;}
+
+footer{border-top:1px solid var(--rule);background:#0A0B0D;}
+.foot{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px;padding:30px 0;}
+.foot a{display:block;font-size:12.5px;color:#CBC9C4;padding:4px 0;}
+.foot a:hover{color:var(--gold-hi);}
+.risk{border-top:1px solid var(--rule);padding:18px 0 32px;font-size:11px;line-height:1.65;color:#838487;}
+.risk b{color:var(--gold-lo);font-weight:600;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hd">
+    <a class="mk" href="#top" aria-label="Atlas Capital">
+      <svg width="22" height="26" viewBox="0 0 22 26" aria-hidden="true">
+        <path d="M2 24 L11 3 L20 24" fill="none" stroke="#D7B364" stroke-width="1.2"/>
+        <path d="M6 15.5 H16" stroke="#E6CC8E" stroke-width="1.2"/>
+      </svg>
+      <b>Atlas Capital</b>
+    </a>
+    <span class="meta">Watchlist · Educatie · Nederland</span>
+    <a class="btn btn--sm" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div class="wrap" id="top">
+  <section class="hero">
+    <span class="kicker">Atlas Capital · Proces. Discipline. Uitvoering.</span>
+    <h1>Zet je <em>kennis</em> op de watchlist.</h1>
+    <p>Tien onderwerpen, één leerlijn. Bekijk ze zoals je een instrument bekijkt: één voor één, rustig, zonder haast.</p>
+    <div class="hero-cta">
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Word lid van Discord</a>
+      <a class="btn btn--ln" href="#watchlist">Open de watchlist</a>
+    </div>
+  </section>
+  <div class="hero-rule"></div>
+  <div class="hero-facts">
+    <div><span class="kicker kicker--m">Educatie</span><b>10 onderwerpen</b></div>
+    <div><span class="kicker kicker--m">Server</span><b>15 kanalen</b></div>
+    <div><span class="kicker kicker--m">Markten</span><b>NQ · ES · BTC · ALT</b></div>
+    <div><span class="kicker kicker--m">Ervaring</span><b>10+ jaar</b></div>
+    <div><span class="kicker kicker--m">Toegang</span><b>Nu gratis</b></div>
+  </div>
+</div>
+
+<!-- ============ WATCHLIST ============ -->
+<div class="wrap">
+  <section class="wl-sec" id="watchlist">
+    <div class="wl-head">
+      <div>
+        <span class="kicker">01 — Watchlist</span>
+        <h2>De leerlijn, regel voor regel.</h2>
+      </div>
+      <a class="btn btn--ln" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Alles in Discord</a>
+    </div>
+
+    <div class="wl-shell">
+      <input class="vh" type="radio" name="wl" id="w1" checked>
+      <input class="vh" type="radio" name="wl" id="w2">
+      <input class="vh" type="radio" name="wl" id="w3">
+      <input class="vh" type="radio" name="wl" id="w4">
+      <input class="vh" type="radio" name="wl" id="w5">
+      <input class="vh" type="radio" name="wl" id="w6">
+      <input class="vh" type="radio" name="wl" id="w7">
+      <input class="vh" type="radio" name="wl" id="w8">
+      <input class="vh" type="radio" name="wl" id="w9">
+      <input class="vh" type="radio" name="wl" id="w10">
+
+      <div class="wl-grid">
+        <div class="wl-table">
+          <div class="wl-inner">
+            <div class="wl-th"><span>Symbool</span><span>Onderwerp</span><span>Categorie</span><span style="text-align:right">Diepte</span></div>
+
+            <label class="row" for="w1">
+              <span class="sym">DEV</span><span class="nm">Deviatie</span><span class="cat">Structuur</span>
+              <span class="pips"><i class="on"></i><i class="on"></i><i></i></span>
+            </label>
+            <label class="row" for="w2">
+              <span class="sym">SMT</span><span class="nm">SMT</span><span class="cat">Correlatie</span>
+              <span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i></span>
+            </label>
+            <label class="row" for="w3">
+              <span class="sym">FVG</span><span class="nm">FVG</span><span class="cat">Inefficiëntie</span>
+              <span class="pips"><i class="on"></i><i class="on"></i><i></i></span>
+            </label>
+            <label class="row" for="w4">
+              <span class="sym">IFVG</span><span class="nm">IFVG</span><span class="cat">Inefficiëntie</span>
+              <span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i></span>
+            </label>
+            <label class="row" for="w5">
+              <span class="sym">OB</span><span class="nm">Orderblocks</span><span class="cat">Zones</span>
+              <span class="pips"><i class="on"></i><i class="on"></i><i></i></span>
+            </label>
+            <label class="row" for="w6">
+              <span class="sym">FIB</span><span class="nm">Fibonacci</span><span class="cat">Verhoudingen</span>
+              <span class="pips"><i class="on"></i><i></i><i></i></span>
+            </label>
+            <label class="row" for="w7">
+              <span class="sym">SLQ</span><span class="nm">Sessie-liquiditeit</span><span class="cat">Sessies</span>
+              <span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i></span>
+            </label>
+            <label class="row" for="w8">
+              <span class="sym">LQ</span><span class="nm">Liquiditeit</span><span class="cat">Structuur</span>
+              <span class="pips"><i class="on"></i><i class="on"></i><i></i></span>
+            </label>
+            <label class="row" for="w9">
+              <span class="sym">RSK</span><span class="nm">Risicobeheer</span><span class="cat">Beheer</span>
+              <span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i></span>
+            </label>
+            <label class="row" for="w10">
+              <span class="sym">PSY</span><span class="nm">Tradingpsychologie</span><span class="cat">Gedrag</span>
+              <span class="pips"><i class="on"></i><i class="on"></i><i class="on"></i></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="wl-detail">
+          <article class="d d1">
+            <div class="d-sym">DEV</div>
+            <h3 class="d-nm">Deviatie</h3>
+            <p class="d-txt">Een uitstap buiten de range die geen vervolg krijgt. De terugkeer vertelt meer dan de uitbraak.</p>
+            <div class="d-fig">
+              <svg viewBox="0 0 260 110" aria-hidden="true">
+                <rect x="10" y="34" width="240" height="52" fill="rgba(215,179,100,.07)" stroke="#B9954A"/>
+                <path d="M10 34 H250M10 86 H250" stroke="#D7B364" stroke-width="1.2"/>
+                <path d="M120 14 v58" stroke="#E6CC8E" stroke-width="1.6"/>
+                <rect x="114" y="20" width="12" height="30" fill="#E6CC8E"/>
+                <path d="M150 60 l40 18" stroke="#D7B364" stroke-width="1.2"/>
+                <path d="M190 78 l-9-3 3 9 z" fill="#D7B364"/>
+              </svg>
+            </div>
+            <div class="d-tags"><span>Structuur</span><span>Range</span><span>Reclaim</span></div>
+          </article>
+
+          <article class="d d2">
+            <div class="d-sym">SMT</div>
+            <h3 class="d-nm">SMT</h3>
+            <p class="d-txt">Twee gecorreleerde markten die niet hetzelfde doen. Het verschil is het signaal.</p>
+            <div class="d-fig">
+              <svg viewBox="0 0 260 110" aria-hidden="true">
+                <path d="M14 78 L60 50 L104 66 L150 28 L196 44 L242 22" fill="none" stroke="#D7B364" stroke-width="1.5"/>
+                <path d="M14 86 L60 62 L104 72 L150 40 L196 58 L242 52" fill="none" stroke="#B9954A" stroke-width="1.2" stroke-dasharray="4 4"/>
+                <circle cx="242" cy="22" r="5" fill="none" stroke="#E6CC8E"/>
+                <circle cx="242" cy="52" r="5" fill="none" stroke="#E6CC8E"/>
+                <path d="M242 27 V47" stroke="#E6CC8E" stroke-dasharray="2 3"/>
+              </svg>
+            </div>
+            <div class="d-tags"><span>Correlatie</span><span>Divergentie</span><span>NQ · ES</span></div>
+          </article>
+
+          <article class="d d3">
+            <div class="d-sym">FVG</div>
+            <h3 class="d-nm">FVG</h3>
+            <p class="d-txt">De ruimte die een snelle beweging achterlaat. Waar prijs iets is vergeten af te handelen.</p>
+            <div class="d-fig">
+              <svg viewBox="0 0 260 110" aria-hidden="true">
+                <rect x="70" y="40" width="120" height="26" fill="rgba(215,179,100,.2)" stroke="#E6CC8E" stroke-dasharray="3 3"/>
+                <g stroke="#B9954A" stroke-width="1.2">
+                  <path d="M50 30 v54"/><path d="M100 12 v66"/><path d="M150 20 v62"/><path d="M200 30 v50"/>
+                </g>
+                <rect x="44" y="56" width="12" height="24" fill="#15161A" stroke="#D7B364"/>
+                <rect x="94" y="18" width="12" height="26" fill="#D7B364"/>
+                <rect x="144" y="26" width="12" height="46" fill="#D7B364"/>
+                <rect x="194" y="44" width="12" height="26" fill="#15161A" stroke="#D7B364"/>
+              </svg>
+            </div>
+            <div class="d-tags"><span>Inefficiëntie</span><span>Gap</span><span>Invulling</span></div>
+          </article>
+
+          <article class="d d4">
+            <div class="d-sym">IFVG</div>
+            <h3 class="d-nm">IFVG</h3>
+            <p class="d-txt">Een gap die van kant wisselt. Steun wordt weerstand, of andersom.</p>
+            <div class="d-fig">
+              <svg viewBox="0 0 260 110" aria-hidden="true">
+                <rect x="30" y="36" width="90" height="24" fill="rgba(215,179,100,.18)" stroke="#D7B364" stroke-dasharray="3 3"/>
+                <rect x="140" y="36" width="90" height="24" fill="rgba(215,179,100,.06)" stroke="#B9954A"/>
+                <path d="M120 48 H140" stroke="#E6CC8E" stroke-width="1.4"/>
+                <path d="M140 48 l-9-4 v8 z" fill="#E6CC8E"/>
+                <path d="M60 84 L120 62 L180 76 L226 40" fill="none" stroke="#D7B364" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="d-tags"><span>Inversie</span><span>Polariteit</span><span>Vervolg</span></div>
+          </article>
+
+          <article class="d d5">
+            <div class="d-sym">OB</div>
+            <h3 class="d-nm">Orderblocks</h3>
+            <p class="d-txt">Het laatste blok voor de beweging. Een zone, geen lijn — en zeker geen belofte.</p>
+            <div class="d-fig">
+              <svg viewBox="0 0 260 110" aria-hidden="true">
+                <rect x="34" y="52" width="52" height="30" fill="rgba(215,179,100,.16)" stroke="#E6CC8E"/>
+                <g stroke="#B9954A" stroke-width="1.2">
+                  <path d="M60 44 v46"/><path d="M110 30 v58"/><path d="M160 18 v58"/><path d="M210 10 v54"/>
+                </g>
+                <rect x="54" y="52" width="12" height="30" fill="#15161A" stroke="#D7B364"/>
+                <rect x="104" y="38" width="12" height="38" fill="#D7B364"/>
+                <rect x="154" y="26" width="12" height="38" fill="#D7B364"/>
+                <rect x="204" y="16" width="12" height="36" fill="#D7B364"/>
+              </svg>
+            </div>
+            <div class="d-tags"><span>Zone</span><span>Herbezoek</span><span>Reactie</span></div>
+          </article>
+
+          <article class="d d6">
+            <div class="d-sym">FIB</div>
+            <h3 class="d-nm">Fibonacci</h3>
+            <p class="d-txt">Verhoudingen binnen een beweging. Een hulpmiddel om te meten, niet om te voorspellen.</p>
+            <div class="d-fig">
+              <svg viewBox="0 0 260 110" aria-hidden="true">
+                <path d="M20 92 L240 18" stroke="#B9954A" stroke-width="1.2"/>
+                <g stroke="#D7B364">
+                  <path d="M20 26 H240"/><path d="M20 44 H240"/><path d="M20 62 H240"/><path d="M20 80 H240"/>
+                </g>
+                <g fill="#D7B364">
+                  <circle cx="20" cy="92" r="3"/><circle cx="240" cy="18" r="3"/>
+                </g>
+                <rect x="20" y="44" width="220" height="18" fill="rgba(215,179,100,.14)"/>
+              </svg>
+            </div>
+            <div class="d-tags"><span>Verhouding</span><span>Meten</span><span>Retracement</span></div>
+          </article>
+
+          <article class="d d7">
+            <div class="d-sym">SLQ</div>
+            <h3 class="d-nm">Sessie-liquiditeit</h3>
+            <p class="d-txt">Elke sessie laat randen achter. Die randen zijn het geheugen van de markt.</p>
+            <div class="d-fig">
+              <svg viewBox="0 0 260 110" aria-hidden="true">
+                <rect x="14" y="24" width="70" height="62" fill="rgba(215,179,100,.05)" stroke="#B9954A"/>
+                <rect x="95" y="24" width="70" height="62" fill="rgba(215,179,100,.09)" stroke="#B9954A"/>
+                <rect x="176" y="24" width="70" height="62" fill="rgba(215,179,100,.05)" stroke="#B9954A"/>
+                <path d="M14 40 H246M14 74 H246" stroke="#D7B364" stroke-dasharray="4 4"/>
+                <path d="M30 66 L60 46 L110 70 L150 34 L200 58 L236 30" fill="none" stroke="#E6CC8E" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="d-tags"><span>Azië</span><span>Londen</span><span>New York</span></div>
+          </article>
+
+          <article class="d d8">
+            <div class="d-sym">LQ</div>
+            <h3 class="d-nm">Liquiditeit</h3>
+            <p class="d-txt">Waar orders liggen opgestapeld. Prijs beweegt ergens naartoe, niet zomaar.</p>
+            <div class="d-fig">
+              <svg viewBox="0 0 260 110" aria-hidden="true">
+                <path d="M20 26 H240M20 88 H240" stroke="#D7B364" stroke-dasharray="5 5"/>
+                <g stroke="#B9954A" stroke-width="1.4">
+                  <path d="M40 26 v-8M70 26 v-8M100 26 v-8M130 26 v-8"/>
+                  <path d="M140 88 v8M170 88 v8M200 88 v8M230 88 v8"/>
+                </g>
+                <path d="M30 74 L80 40 L130 62 L180 30 L232 54" fill="none" stroke="#E6CC8E" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="d-tags"><span>Pools</span><span>Sweep</span><span>Doel</span></div>
+          </article>
+
+          <article class="d d9">
+            <div class="d-sym">RSK</div>
+            <h3 class="d-nm">Risicobeheer</h3>
+            <p class="d-txt">Het onderdeel dat bepaalt of je er morgen nog bent. Regels vóór de trade, niet erna.</p>
+            <div class="d-fig">
+              <svg viewBox="0 0 260 110" aria-hidden="true">
+                <rect x="20" y="20" width="220" height="70" fill="none" stroke="#B9954A"/>
+                <rect x="20" y="20" width="60" height="70" fill="rgba(215,179,100,.18)"/>
+                <path d="M80 20 v70" stroke="#E6CC8E" stroke-width="1.4"/>
+                <path d="M20 55 H240" stroke="#D7B364" stroke-dasharray="3 3"/>
+                <g stroke="#D7B364"><path d="M110 34 h40M110 48 h60M110 62 h30M110 76 h50"/></g>
+              </svg>
+            </div>
+            <div class="d-tags"><span>Regels</span><span>Verlies</span><span>Discipline</span></div>
+          </article>
+
+          <article class="d d10">
+            <div class="d-sym">PSY</div>
+            <h3 class="d-nm">Tradingpsychologie</h3>
+            <p class="d-txt">Het moeilijkste instrument op de lijst. Je eigen gedrag, elke dag opnieuw.</p>
+            <div class="d-fig">
+              <svg viewBox="0 0 260 110" aria-hidden="true">
+                <path d="M20 84 C60 84 60 26 100 26 C140 26 140 84 180 84 C220 84 220 34 244 34" fill="none" stroke="#D7B364" stroke-width="1.6"/>
+                <path d="M20 55 H244" stroke="#B9954A" stroke-dasharray="4 4"/>
+                <circle cx="100" cy="26" r="5" fill="none" stroke="#E6CC8E"/>
+                <circle cx="180" cy="84" r="5" fill="none" stroke="#E6CC8E"/>
+              </svg>
+            </div>
+            <div class="d-tags"><span>Geduld</span><span>Routine</span><span>Herhaling</span></div>
+          </article>
+        </div>
+      </div>
+      <p class="wl-note">Kies een regel om de uitleg te openen · schematisch, zonder cijfers</p>
+    </div>
+  </section>
+</div>
+
+<!-- ============ MODEL ============ -->
+<div class="wrap">
+  <section class="model" id="model">
+    <span class="kicker">02 — Model</span>
+    <h2>Eén setup, uitgetekend.</h2>
+    <p class="lede">Liquiditeit boven de range, een orderblock eronder, een inversie ertussenin. De vorm is de les.</p>
+    <figure class="fig">
+      <div class="sc">
+        <svg viewBox="0 0 680 330" role="img" aria-label="Schematische setup met liquiditeit, orderblock en inversie">
+          <rect width="680" height="330" fill="#0A0B0D"/>
+          <g stroke="rgba(255,255,255,.05)">
+            <path d="M0 55 H680M0 110 H680M0 165 H680M0 220 H680M0 275 H680"/>
+            <path d="M85 0 V330M170 0 V330M255 0 V330M340 0 V330M425 0 V330M510 0 V330M595 0 V330"/>
+          </g>
+
+          <path d="M40 62 H640" stroke="#D7B364" stroke-dasharray="6 6"/>
+          <text x="44" y="52" fill="#D7B364" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2.6">LIQUIDITEIT BOVEN</text>
+
+          <rect x="60" y="216" width="130" height="46" fill="rgba(215,179,100,.14)" stroke="#E6CC8E"/>
+          <text x="64" y="280" fill="#E6CC8E" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2.4">ORDERBLOCK</text>
+
+          <rect x="330" y="128" width="170" height="36" fill="rgba(215,179,100,.10)" stroke="#B9954A" stroke-dasharray="3 3"/>
+          <text x="334" y="122" fill="#B9954A" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2.4">INVERSIE</text>
+
+          <g stroke="#B9954A" stroke-width="1.2">
+            <path d="M90 226 v58"/><path d="M120 210 v66"/><path d="M150 196 v70"/><path d="M180 172 v78"/>
+            <path d="M210 148 v84"/><path d="M240 122 v88"/><path d="M270 96 v92"/><path d="M300 58 v104"/>
+            <path d="M330 84 v104"/><path d="M360 110 v100"/><path d="M390 134 v92"/><path d="M420 152 v86"/>
+            <path d="M450 138 v84"/><path d="M480 118 v84"/><path d="M510 100 v82"/><path d="M540 84 v78"/>
+            <path d="M570 70 v76"/><path d="M600 58 v74"/>
+          </g>
+          <g>
+            <rect x="83" y="240" width="14" height="32" fill="#15161A" stroke="#D7B364"/>
+            <rect x="113" y="226" width="14" height="36" fill="#15161A" stroke="#D7B364"/>
+            <rect x="143" y="212" width="14" height="40" fill="#D7B364"/>
+            <rect x="173" y="188" width="14" height="46" fill="#D7B364"/>
+            <rect x="203" y="164" width="14" height="52" fill="#D7B364"/>
+            <rect x="233" y="138" width="14" height="56" fill="#D7B364"/>
+            <rect x="263" y="112" width="14" height="60" fill="#D7B364"/>
+            <rect x="293" y="76" width="14" height="66" fill="#E6CC8E"/>
+            <rect x="323" y="100" width="14" height="70" fill="#15161A" stroke="#E6CC8E" stroke-width="1.4"/>
+            <rect x="353" y="126" width="14" height="68" fill="#15161A" stroke="#D7B364"/>
+            <rect x="383" y="150" width="14" height="60" fill="#15161A" stroke="#D7B364"/>
+            <rect x="413" y="168" width="14" height="54" fill="#15161A" stroke="#D7B364"/>
+            <rect x="443" y="156" width="14" height="48" fill="#D7B364"/>
+            <rect x="473" y="136" width="14" height="48" fill="#D7B364"/>
+            <rect x="503" y="118" width="14" height="46" fill="#D7B364"/>
+            <rect x="533" y="102" width="14" height="42" fill="#D7B364"/>
+            <rect x="563" y="88" width="14" height="40" fill="#D7B364"/>
+            <rect x="593" y="76" width="14" height="38" fill="#D7B364"/>
+          </g>
+
+          <circle cx="300" cy="62" r="15" fill="none" stroke="#E6CC8E"/>
+          <path d="M315 56 L400 36" stroke="#E6CC8E"/>
+          <text x="404" y="34" fill="#E6CC8E" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2.6">SWEEP</text>
+
+          <path d="M470 262 V210" stroke="#D7B364" stroke-width="1.4"/>
+          <path d="M470 204 l-5 10 h10 z" fill="#D7B364"/>
+          <text x="440" y="280" fill="#8B8C8F" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="2">VERVOLG</text>
+
+          <g stroke="rgba(215,179,100,.45)">
+            <path d="M650 80 h18M650 100 h10M650 120 h22M650 140 h8M650 160 h16M650 180 h12M650 200 h20M650 220 h9"/>
+          </g>
+          <text x="40" y="316" fill="#5C5E61" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="2.4">SCHEMATISCH · GEEN PRIJZEN · GEEN RESULTAAT</text>
+        </svg>
+      </div>
+      <figcaption><span>Fig. 02 — Setupmodel</span><span>Illustratie, geen advies</span></figcaption>
+    </figure>
+    <div style="margin-top:22px;"><a class="btn btn--ln" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Dagelijkse charts in Discord</a></div>
+  </section>
+</div>
+
+<!-- ============ CHANNELS ============ -->
+<div class="wrap">
+  <section class="chan-sec" id="kanalen">
+    <span class="kicker">03 — Kanalen</span>
+    <h2 style="font-family:var(--serif);font-weight:300;font-size:clamp(26px,4.4vw,46px);color:var(--paper);letter-spacing:-.02em;margin-top:10px;">15 kanalen in de server.</h2>
+    <div class="chan-cols">
+      <div>
+        <h4>Thuis — nu gratis</h4>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>nq-chart-ideeën<span class="dots"></span><span class="st">Open</span></a>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>es-chart-ideeën<span class="dots"></span><span class="st">Open</span></a>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>bitcoin<span class="dots"></span><span class="st">Open</span></a>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>altcoins<span class="dots"></span><span class="st">Open</span></a>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>markt<span class="dots"></span><span class="st">Open</span></a>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>vragen<span class="dots"></span><span class="st">Open</span></a>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>algemeen<span class="dots"></span><span class="st">Open</span></a>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>atlas-op-socials<span class="dots"></span><span class="st">Open</span></a>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>ondersteuning<span class="dots"></span><span class="st">Open</span></a>
+      </div>
+      <div>
+        <h4>Premium — opent later</h4>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>trade-setups<span class="dots"></span><span class="st">Later</span></a>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>marktupdates<span class="dots"></span><span class="st">Later</span></a>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>indicatoren<span class="dots"></span><span class="st">Later</span></a>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>sessie-opnames<span class="dots"></span><span class="st">Later</span></a>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>chart-ideeën<span class="dots"></span><span class="st">Later</span></a>
+        <a class="leader" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="h">#</span>premium-chat<span class="dots"></span><span class="st">Later</span></a>
+        <p style="color:var(--muted);font-size:13px;margin-top:18px;font-family:var(--serif);">Premium opent later. Prijs en datum worden in de server aangekondigd.</p>
+        <a class="btn btn--ln btn--blk" style="margin-top:16px;" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Volg de aankondigingen</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ LIVE ============ -->
+<section class="band" id="live">
+  <div class="wrap band-in">
+    <div>
+      <span class="livedot"><i></i> 04 — Live in de server</span>
+      <h3 style="margin-top:12px;">Meekijken terwijl het gebeurt.</h3>
+      <p>De oprichter handelt live in Discord en legt uit wat hij ziet. Tijden worden in de server aangekondigd.</p>
+    </div>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Kijk mee</a>
+  </div>
+</section>
+
+<!-- ============ ACCESS ============ -->
+<div class="wrap">
+  <section class="access" id="toegang">
+    <span class="kicker">05 — Toegang</span>
+    <h2 style="font-family:var(--serif);font-weight:300;font-size:clamp(26px,4.4vw,46px);color:var(--paper);letter-spacing:-.02em;margin-top:10px;">Twee regels, meer niet.</h2>
+    <div class="acc-tbl">
+      <div class="acc-row on">
+        <div class="k"><span class="kicker">Nu open</span></div>
+        <div><h3>Thuis — gratis</h3><p>Chartideeën voor NQ, ES, Bitcoin en altcoins. Markt, vragen en ondersteuning.</p></div>
+        <div class="a"><a class="btn btn--blk" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Nu binnenlopen</a></div>
+      </div>
+      <div class="acc-row">
+        <div class="k"><span class="kicker kicker--m">Later</span></div>
+        <div><h3>Premium</h3><p>Trade-setups, marktupdates, indicatoren en sessie-opnames. Nog niet open.</p></div>
+        <div class="a"><a class="btn btn--ln btn--blk" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Blijf op de hoogte</a></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ FOUNDER ============ -->
+<div class="wrap">
+  <section class="founder" id="oprichter">
+    <span class="kicker">06 — Oprichter</span>
+    <div class="fg" style="margin-top:22px;">
+      <div class="yrs">10+<span>jaar actief in trading</span></div>
+      <div>
+        <blockquote>Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</blockquote>
+        <p style="color:var(--muted);margin-top:18px;max-width:52ch;font-size:13.5px;">Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</p>
+        <p style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#75767A;margin-top:18px;">Oprichter · Atlas Capital</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ CLOSE ============ -->
+<section class="close" id="toetreden">
+  <div class="wrap">
+    <span class="kicker">07 — Toetreden</span>
+    <h2>Voeg Atlas toe aan je <em>watchlist</em>.</h2>
+    <p>Toegang is nu gratis. Premium opent later.</p>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Word lid van Discord</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><span class="kicker">Atlas Capital</span><p style="color:var(--muted);font-size:13px;margin-top:10px;font-family:var(--serif);">Proces. Discipline. Uitvoering.</p></div>
+      <div><span class="kicker kicker--m">Community</span>
+        <a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord →</a>
+        <a href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok @atlascapitalbv →</a>
+      </div>
+      <div><span class="kicker kicker--m">Markten</span><p style="color:var(--muted);font-size:13px;margin-top:10px;">NQ · ES · Bitcoin · Altcoins</p></div>
+      <div><span class="kicker kicker--m">Toegang</span><p style="color:var(--muted);font-size:13px;margin-top:10px;">Nu gratis. Premium opent later.</p></div>
+    </div>
+    <p class="risk"><b>Risico —</b> Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  </div>
+</footer>
+
+</body>
+</html>

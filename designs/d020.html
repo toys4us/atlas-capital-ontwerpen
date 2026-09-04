@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 020 Keypad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ATLAS CAPITAL — 020 KEYPAD
+   A physical trading keyboard. Every block is a keycap with a
+   bevel, a gold legend and a real press state. Nav is F-keys.
+   ============================================================ */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --panel:#15161A;
+  --paper:#F4F2EC;
+  --muted:#A5A6A8;
+  --cap-1:#24262C;
+  --cap-2:#16171C;
+  --cap-3:#0E0F13;
+  --cap-edge:#31333B;
+  --rule:rgba(255,255,255,.07);
+  --grule:rgba(215,179,100,.3);
+  --disp:"Unbounded", "Segoe UI", -apple-system, Helvetica, Arial, sans-serif;
+  --mono:ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+}
+
+html{color-scheme:dark;-webkit-text-size-adjust:100%;}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  color:#E9E7E2;
+  font-family:var(--mono);
+  font-size:14px;line-height:1.6;overflow-x:hidden;
+  background:
+    repeating-linear-gradient(180deg,rgba(255,255,255,.014) 0 1px,transparent 1px 4px),
+    linear-gradient(180deg,#0B0C0F,#08090B 60%,#0B0C0F);
+  background-color:var(--ink);
+}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4,p,ul,figure,blockquote{margin:0;}
+ul{list-style:none;padding:0;}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(14px,3.4vw,36px);}
+.lg{font-family:var(--disp);}
+.lbl{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);}
+.lbl--m{color:#7D7E82;}
+
+/* ---------------- keycap ---------------- */
+.key{
+  display:block;position:relative;
+  background:linear-gradient(180deg,var(--cap-1),var(--cap-2) 52%,var(--cap-3));
+  border:1px solid var(--cap-edge);
+  border-radius:9px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.11),
+    inset 0 -3px 0 rgba(0,0,0,.5),
+    0 4px 0 #08090B,
+    0 9px 16px rgba(0,0,0,.5);
+  transition:transform .08s ease, box-shadow .08s ease, border-color .12s linear;
+}
+.key:hover{border-color:rgba(215,179,100,.45);transform:translateY(-1px);}
+.key:active,.key:focus-visible{
+  transform:translateY(4px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    inset 0 2px 6px rgba(0,0,0,.6),
+    0 0 0 #08090B,
+    0 2px 5px rgba(0,0,0,.6);
+  outline:none;
+}
+.key--gold{
+  background:linear-gradient(180deg,var(--gold-hi),var(--gold) 48%,var(--gold-lo));
+  border-color:#F0DCAE;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.5),
+    inset 0 -3px 0 rgba(80,58,14,.5),
+    0 4px 0 #6E561F,
+    0 9px 18px rgba(0,0,0,.55);
+  color:#0A0A0C;
+}
+.key--gold:hover{border-color:#FFF3D2;}
+.key--gold:active{box-shadow:inset 0 2px 6px rgba(80,58,14,.55),0 0 0 #6E561F,0 2px 5px rgba(0,0,0,.6);}
+
+.cap-in{display:block;padding:14px 14px 16px;}
+.cap-legend{
+  font-family:var(--disp);font-weight:800;font-size:15px;letter-spacing:-.02em;color:var(--paper);
+  line-height:1.15;overflow-wrap:anywhere;
+}
+.key--gold .cap-legend{color:#0A0A0C;}
+.cap-sub{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-lo);margin-top:7px;display:block;}
+.key--gold .cap-sub{color:rgba(10,10,12,.66);}
+.cap-idx{
+  position:absolute;top:8px;right:11px;font-size:9px;letter-spacing:.14em;color:#5F6165;
+}
+
+/* ---------------- chassis / header ---------------- */
+.chassis{
+  border-bottom:1px solid var(--grule);
+  background:linear-gradient(180deg,#141519,#0C0D10);
+  box-shadow:inset 0 -1px 0 rgba(0,0,0,.6);
+}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0;}
+.mk{display:flex;align-items:center;gap:12px;}
+.mk b{
+  font-family:var(--disp);font-weight:800;font-size:14px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--paper);
+}
+.mk span{display:block;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-lo);}
+.hd .key{padding:0;}
+.hd .key .cap-in{padding:11px 16px;}
+.hd .key .cap-legend{font-size:12px;letter-spacing:.06em;}
+
+/* function row */
+.frow{
+  display:flex;flex-wrap:wrap;gap:7px;padding:0 0 16px;
+}
+.fkey{
+  flex:1 1 108px;min-width:96px;text-align:center;
+}
+.fkey .cap-in{padding:9px 8px 11px;}
+.fkey .fk{font-size:9px;letter-spacing:.16em;color:var(--gold);display:block;}
+.fkey .fn{
+  font-family:var(--disp);font-weight:600;font-size:11.5px;color:#D9D7D2;margin-top:5px;display:block;
+  letter-spacing:-.01em;
+}
+
+/* ---------------- hero ---------------- */
+.hero{padding:clamp(26px,5vw,56px) 0 clamp(24px,4vw,50px);}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;}
+@media (min-width:940px){.hero-grid{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);}}
+
+.slab{
+  border-radius:14px;
+  background:linear-gradient(180deg,#252730,#171821 46%,#0F1014);
+  border:1px solid #33353F;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -4px 0 rgba(0,0,0,.5),
+    0 6px 0 #08090B,
+    0 16px 30px rgba(0,0,0,.55);
+  padding:clamp(22px,4vw,44px);
+}
+.slab h1{
+  font-family:var(--disp);font-weight:800;
+  font-size:clamp(26px,5.4vw,60px);line-height:1.02;letter-spacing:-.045em;color:var(--paper);
+  margin-top:16px;
+}
+.slab h1 em{font-style:normal;color:var(--gold);}
+.slab .lede{color:var(--muted);max-width:44ch;margin-top:18px;font-size:14px;}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;}
+.engrave{
+  margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.07);
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:14px;
+}
+.engrave b{display:block;font-family:var(--disp);font-weight:600;font-size:14px;color:var(--paper);margin-top:5px;}
+
+.cluster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-content:start;}
+.cluster .key .cap-in{padding:18px 14px 20px;}
+.cluster .cap-legend{font-size:clamp(18px,3vw,26px);letter-spacing:-.03em;}
+.led{
+  display:flex;align-items:center;gap:9px;font-size:9.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold-hi);
+}
+.led i{width:8px;height:8px;border-radius:50%;background:var(--gold-hi);animation:blink 2s steps(1,end) infinite;}
+@keyframes blink{
+  0%,49%{background:var(--gold-hi);box-shadow:0 0 8px 2px rgba(230,204,142,.55);}
+  50%,100%{background:#4C4327;box-shadow:0 0 0 0 rgba(230,204,142,0);}
+}
+@media (prefers-reduced-motion:reduce){.led i{animation:none;}}
+
+/* ---------------- section shell ---------------- */
+.sec{padding:clamp(30px,5vw,66px) 0;border-top:1px solid var(--rule);}
+.sec-h{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;}
+.sec-h h2{
+  font-family:var(--disp);font-weight:800;font-size:clamp(22px,4vw,42px);
+  line-height:1.04;letter-spacing:-.04em;color:var(--paper);margin-top:10px;
+}
+.sec-h h2 em{font-style:normal;color:var(--gold);}
+.sec p.sub{color:var(--muted);max-width:48ch;margin-top:12px;}
+
+/* keypad grid for topics */
+.pad{display:grid;grid-template-columns:repeat(auto-fit,minmax(146px,1fr));gap:12px;margin-top:26px;}
+.pad .key,.krow .key{min-width:0;}
+.pad .cap-in{padding:16px 14px 20px;min-height:104px;display:flex;flex-direction:column;justify-content:space-between;}
+.pad .cap-legend{font-size:clamp(14px,2vw,17px);}
+.pad .rail{display:flex;gap:3px;margin-top:14px;}
+.pad .rail i{height:3px;flex:1;background:rgba(215,179,100,.24);border-radius:2px;}
+.pad .rail i:first-child{background:var(--gold);}
+.pad .key:hover .cap-legend{color:var(--gold-hi);}
+
+/* screen */
+.screen-shell{
+  margin-top:26px;border-radius:12px;padding:clamp(10px,2vw,16px);
+  background:linear-gradient(180deg,#1B1D23,#101116);
+  border:1px solid #2E3038;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 6px 0 #08090B,0 14px 26px rgba(0,0,0,.5);
+}
+.screen{
+  border:1px solid var(--grule);border-radius:6px;background:#07080A;
+  box-shadow:inset 0 0 40px rgba(0,0,0,.9);
+  padding:clamp(8px,1.6vw,14px);
+}
+.screen .sc{overflow-x:auto;}
+.screen svg{display:block;min-width:560px;width:100%;height:auto;}
+.screen-cap{
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
+  margin-top:10px;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#5F6165;
+}
+
+/* channel keys */
+.chan-block{margin-top:26px;}
+.chan-block h4{
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
+  padding-bottom:10px;border-bottom:1px solid var(--grule);font-weight:400;
+}
+.krow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.krow .key{flex:1 1 190px;}
+.krow .cap-in{padding:11px 13px 13px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.krow .kn{font-size:13px;color:#D5D3CE;}
+.krow .kn span{color:var(--gold-lo);}
+.krow .kt{font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-lo);}
+.krow .key:hover .kn{color:var(--gold-hi);}
+
+/* live key */
+.livekey{margin-top:24px;display:grid;grid-template-columns:minmax(0,1fr);gap:16px;}
+@media (min-width:820px){.livekey{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);align-items:center;}}
+.livekey .slab{padding:clamp(20px,3.4vw,34px);}
+.livekey h3{font-family:var(--disp);font-weight:800;font-size:clamp(20px,3.2vw,32px);letter-spacing:-.035em;color:var(--paper);margin-top:12px;}
+.livekey p{color:var(--muted);margin-top:12px;max-width:44ch;}
+
+/* access */
+.acc{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-top:26px;}
+@media (min-width:760px){.acc{grid-template-columns:repeat(2,minmax(0,1fr));}}
+.acc .cap-in{padding:22px 20px 24px;}
+.acc h3{font-family:var(--disp);font-weight:800;font-size:clamp(20px,3vw,28px);letter-spacing:-.035em;color:var(--paper);margin-top:10px;}
+.acc p{color:var(--muted);margin-top:10px;font-size:13.5px;}
+.acc ul{margin-top:14px;}
+.acc ul li{font-size:12.5px;color:#B7B5B0;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.acc .go{margin-top:18px;}
+
+/* founder plate */
+.plate{
+  margin-top:24px;border-radius:12px;padding:clamp(20px,3.6vw,38px);
+  background:linear-gradient(180deg,#1A1B21,#0E0F13);
+  border:1px solid #2A2C34;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 6px 0 #08090B,0 14px 26px rgba(0,0,0,.5);
+  display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(18px,3vw,40px);
+}
+@media (min-width:880px){.plate{grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr);}}
+.plate .yr{font-family:var(--disp);font-weight:800;font-size:clamp(44px,9vw,104px);color:var(--gold);line-height:.86;letter-spacing:-.06em;}
+.plate .yr span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:#7D7E82;font-weight:400;margin-top:14px;}
+.plate blockquote{font-size:clamp(14px,1.8vw,17px);line-height:1.65;color:#DAD8D3;border-left:2px solid var(--gold);padding-left:16px;}
+.plate .by{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#7D7E82;margin-top:16px;}
+
+/* enter key close */
+.close{padding:clamp(40px,8vw,96px) 0;text-align:center;border-top:1px solid var(--rule);}
+.close h2{
+  font-family:var(--disp);font-weight:800;font-size:clamp(26px,6.4vw,64px);
+  line-height:.98;letter-spacing:-.05em;color:var(--paper);
+}
+.close h2 em{font-style:normal;color:var(--gold);}
+.close p{color:var(--muted);margin-top:16px;}
+.enter{
+  display:block;max-width:520px;margin:30px auto 0;text-align:left;
+}
+.enter .cap-in{padding:22px 24px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.enter .el{font-family:var(--disp);font-weight:800;font-size:clamp(16px,3vw,24px);letter-spacing:-.03em;color:#0A0A0C;}
+.enter .es{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(10,10,12,.66);margin-top:6px;display:block;}
+.enter .arrow{font-family:var(--disp);font-weight:800;font-size:clamp(20px,4vw,30px);color:#0A0A0C;}
+
+footer{border-top:1px solid var(--grule);background:linear-gradient(180deg,#0D0E12,#08090B);}
+.foot{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px;padding:32px 0;}
+.foot a{display:block;font-size:12.5px;color:#CDCBC6;padding:4px 0;}
+.foot a:hover{color:var(--gold-hi);}
+.risk{border-top:1px solid var(--rule);padding:18px 0 34px;font-size:11px;line-height:1.65;color:#828386;}
+.risk b{color:var(--gold-lo);}
+</style>
+</head>
+<body>
+
+<!-- ============ CHASSIS / HEADER ============ -->
+<div class="chassis">
+  <div class="wrap">
+    <div class="hd">
+      <a class="mk" href="#top" aria-label="Atlas Capital">
+        <svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true">
+          <rect x="1" y="1" width="24" height="26" rx="5" fill="none" stroke="#31333B"/>
+          <path d="M6 21 L13 7 L20 21" fill="none" stroke="#D7B364" stroke-width="1.4"/>
+          <path d="M9.4 16 H16.6" stroke="#E6CC8E" stroke-width="1.4"/>
+        </svg>
+        <span>
+          <b>Atlas Capital</b>
+          <span>Proces · Discipline · Uitvoering</span>
+        </span>
+      </a>
+      <a class="key key--gold" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+        <span class="cap-in"><span class="cap-legend">Discord</span></span>
+      </a>
+    </div>
+
+    <nav class="frow" aria-label="Secties">
+      <a class="key fkey" href="#desk"><span class="cap-in"><span class="fk">F1</span><span class="fn">Desk</span></span></a>
+      <a class="key fkey" href="#educatie"><span class="cap-in"><span class="fk">F2</span><span class="fn">Educatie</span></span></a>
+      <a class="key fkey" href="#model"><span class="cap-in"><span class="fk">F3</span><span class="fn">Model</span></span></a>
+      <a class="key fkey" href="#kanalen"><span class="cap-in"><span class="fk">F4</span><span class="fn">Kanalen</span></span></a>
+      <a class="key fkey" href="#live"><span class="cap-in"><span class="fk">F5</span><span class="fn">Live</span></span></a>
+      <a class="key fkey" href="#toegang"><span class="cap-in"><span class="fk">F6</span><span class="fn">Toegang</span></span></a>
+      <a class="key fkey" href="#oprichter"><span class="cap-in"><span class="fk">F7</span><span class="fn">Oprichter</span></span></a>
+      <a class="key fkey" href="#toetreden"><span class="cap-in"><span class="fk">F8</span><span class="fn">Toetreden</span></span></a>
+    </nav>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<div class="wrap" id="top">
+  <section class="hero" id="desk">
+    <div class="hero-grid">
+      <div class="slab">
+        <span class="lbl">01 — Desk</span>
+        <h1>Eén toets<br>voor je <em>proces</em>.</h1>
+        <p class="lede">Atlas Capital is een Nederlandse trading-community. Educatie, chartideeën en live sessies in Discord.</p>
+        <div class="hero-cta">
+          <a class="key key--gold" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+            <span class="cap-in"><span class="cap-legend">Word lid — gratis</span></span>
+          </a>
+          <a class="key" href="#educatie">
+            <span class="cap-in"><span class="cap-legend">Bekijk educatie</span></span>
+          </a>
+        </div>
+        <div class="engrave">
+          <div><span class="lbl lbl--m">Educatie</span><b>10 onderwerpen</b></div>
+          <div><span class="lbl lbl--m">Server</span><b>15 kanalen</b></div>
+          <div><span class="lbl lbl--m">Ervaring</span><b>10+ jaar</b></div>
+          <div><span class="lbl lbl--m">Toegang</span><b>Nu gratis</b></div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+          <span class="cap-in"><span class="cap-legend">NQ</span><span class="cap-sub">Nasdaq futures</span></span>
+        </a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+          <span class="cap-in"><span class="cap-legend">ES</span><span class="cap-sub">S&amp;P futures</span></span>
+        </a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+          <span class="cap-in"><span class="cap-legend">BTC</span><span class="cap-sub">Bitcoin</span></span>
+        </a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+          <span class="cap-in"><span class="cap-legend">ALT</span><span class="cap-sub">Altcoins</span></span>
+        </a>
+        <div class="key" style="grid-column:1 / -1;">
+          <span class="cap-in">
+            <span class="led"><i></i> Live-indicator</span>
+            <span class="cap-sub" style="margin-top:10px;">De oprichter handelt live in de server. Tijden worden daar aangekondigd.</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ EDUCATIE ============ -->
+<div class="wrap">
+  <section class="sec" id="educatie">
+    <div class="sec-h">
+      <div>
+        <span class="lbl">02 — Educatie</span>
+        <h2>Tien toetsen.<br><em>Eén leerlijn.</em></h2>
+      </div>
+      <a class="key key--gold" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+        <span class="cap-in"><span class="cap-legend">Open in Discord</span></span>
+      </a>
+    </div>
+    <p class="sub">Elk onderwerp is een aparte toets in hetzelfde systeem. Druk ze in de juiste volgorde in.</p>
+
+    <div class="pad">
+      <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span><span class="cap-idx">01</span><span class="cap-legend">Deviatie</span><span class="cap-sub">Structuur</span></span><span class="rail"><i></i><i></i><i></i><i></i></span></span></a>
+      <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span><span class="cap-idx">02</span><span class="cap-legend">SMT</span><span class="cap-sub">Correlatie</span></span><span class="rail"><i></i><i></i><i></i><i></i></span></span></a>
+      <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span><span class="cap-idx">03</span><span class="cap-legend">FVG</span><span class="cap-sub">Inefficiëntie</span></span><span class="rail"><i></i><i></i><i></i><i></i></span></span></a>
+      <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span><span class="cap-idx">04</span><span class="cap-legend">IFVG</span><span class="cap-sub">Inversie</span></span><span class="rail"><i></i><i></i><i></i><i></i></span></span></a>
+      <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span><span class="cap-idx">05</span><span class="cap-legend">Orderblocks</span><span class="cap-sub">Zones</span></span><span class="rail"><i></i><i></i><i></i><i></i></span></span></a>
+      <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span><span class="cap-idx">06</span><span class="cap-legend">Fibonacci</span><span class="cap-sub">Verhoudingen</span></span><span class="rail"><i></i><i></i><i></i><i></i></span></span></a>
+      <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span><span class="cap-idx">07</span><span class="cap-legend">Sessie-liquiditeit</span><span class="cap-sub">Sessies</span></span><span class="rail"><i></i><i></i><i></i><i></i></span></span></a>
+      <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span><span class="cap-idx">08</span><span class="cap-legend">Liquiditeit</span><span class="cap-sub">Structuur</span></span><span class="rail"><i></i><i></i><i></i><i></i></span></span></a>
+      <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span><span class="cap-idx">09</span><span class="cap-legend">Risicobeheer</span><span class="cap-sub">Beheer</span></span><span class="rail"><i></i><i></i><i></i><i></i></span></span></a>
+      <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span><span class="cap-idx">10</span><span class="cap-legend">Tradingpsychologie</span><span class="cap-sub">Gedrag</span></span><span class="rail"><i></i><i></i><i></i><i></i></span></span></a>
+    </div>
+  </section>
+</div>
+
+<!-- ============ MODEL ============ -->
+<div class="wrap">
+  <section class="sec" id="model">
+    <div class="sec-h">
+      <div>
+        <span class="lbl">03 — Model</span>
+        <h2>Op het <em>scherm</em>.</h2>
+      </div>
+    </div>
+    <p class="sub">Structuur, breuk, hertest. Schematisch getekend — zonder prijzen, zonder uitkomst.</p>
+
+    <div class="screen-shell">
+      <div class="screen">
+        <div class="sc">
+          <svg viewBox="0 0 700 320" role="img" aria-label="Schematische weergave van marktstructuur, een breuk en een hertest">
+            <rect width="700" height="320" fill="#07080A"/>
+            <g stroke="rgba(215,179,100,.07)">
+              <path d="M0 40 H700M0 80 H700M0 120 H700M0 160 H700M0 200 H700M0 240 H700M0 280 H700"/>
+              <path d="M100 0 V320M200 0 V320M300 0 V320M400 0 V320M500 0 V320M600 0 V320"/>
+            </g>
+
+            <!-- structure points -->
+            <g fill="#D7B364">
+              <circle cx="90" cy="212" r="3.5"/><circle cx="170" cy="168" r="3.5"/>
+              <circle cx="250" cy="196" r="3.5"/><circle cx="330" cy="128" r="3.5"/>
+              <circle cx="410" cy="164" r="3.5"/>
+            </g>
+            <path d="M90 212 L170 168 L250 196 L330 128 L410 164" fill="none" stroke="rgba(215,179,100,.5)" stroke-dasharray="4 4"/>
+            <text x="86" y="234" fill="#8B8C8F" font-family="ui-monospace,monospace" font-size="9.5" letter-spacing="2">STRUCTUUR</text>
+
+            <!-- break level -->
+            <path d="M330 128 H660" stroke="#E6CC8E" stroke-width="1.2" stroke-dasharray="6 5"/>
+            <text x="560" y="120" fill="#E6CC8E" font-family="ui-monospace,monospace" font-size="10" letter-spacing="2.4">NIVEAU</text>
+
+            <!-- candles -->
+            <g stroke="#B9954A" stroke-width="1.2">
+              <path d="M70 200 v46"/><path d="M100 186 v52"/><path d="M130 172 v56"/><path d="M160 152 v52"/>
+              <path d="M190 168 v54"/><path d="M220 182 v52"/><path d="M250 178 v46"/><path d="M280 156 v56"/>
+              <path d="M310 128 v62"/><path d="M340 112 v66"/><path d="M370 138 v60"/><path d="M400 152 v56"/>
+              <path d="M430 140 v56"/><path d="M460 126 v56"/><path d="M490 110 v54"/><path d="M520 96 v52"/>
+              <path d="M550 84 v52"/><path d="M580 72 v50"/><path d="M610 62 v48"/><path d="M640 54 v46"/>
+            </g>
+            <g>
+              <rect x="64" y="212" width="12" height="24" fill="#15161A" stroke="#D7B364"/>
+              <rect x="94" y="198" width="12" height="28" fill="#15161A" stroke="#D7B364"/>
+              <rect x="124" y="186" width="12" height="30" fill="#D7B364"/>
+              <rect x="154" y="166" width="12" height="28" fill="#D7B364"/>
+              <rect x="184" y="182" width="12" height="28" fill="#15161A" stroke="#D7B364"/>
+              <rect x="214" y="196" width="12" height="26" fill="#15161A" stroke="#D7B364"/>
+              <rect x="244" y="190" width="12" height="24" fill="#D7B364"/>
+              <rect x="274" y="170" width="12" height="30" fill="#D7B364"/>
+              <rect x="304" y="142" width="12" height="34" fill="#D7B364"/>
+              <rect x="334" y="124" width="12" height="42" fill="#E6CC8E"/>
+              <rect x="364" y="150" width="12" height="36" fill="#15161A" stroke="#D7B364"/>
+              <rect x="394" y="164" width="12" height="32" fill="#15161A" stroke="#D7B364"/>
+              <rect x="424" y="152" width="12" height="32" fill="#D7B364"/>
+              <rect x="454" y="138" width="12" height="32" fill="#D7B364"/>
+              <rect x="484" y="122" width="12" height="30" fill="#D7B364"/>
+              <rect x="514" y="108" width="12" height="28" fill="#D7B364"/>
+              <rect x="544" y="96" width="12" height="28" fill="#D7B364"/>
+              <rect x="574" y="84" width="12" height="26" fill="#D7B364"/>
+              <rect x="604" y="74" width="12" height="24" fill="#D7B364"/>
+              <rect x="634" y="66" width="12" height="22" fill="#D7B364"/>
+            </g>
+
+            <!-- break + retest callouts -->
+            <circle cx="340" cy="120" r="14" fill="none" stroke="#E6CC8E"/>
+            <path d="M354 114 L420 92" stroke="#E6CC8E"/>
+            <text x="424" y="90" fill="#E6CC8E" font-family="ui-monospace,monospace" font-size="10.5" letter-spacing="2.4">BREUK</text>
+
+            <rect x="386" y="150" width="60" height="34" fill="rgba(215,179,100,.14)" stroke="#B9954A" stroke-dasharray="3 3"/>
+            <path d="M416 214 V190" stroke="#D7B364" stroke-width="1.4"/>
+            <path d="M416 184 l-5 10 h10 z" fill="#D7B364"/>
+            <text x="384" y="232" fill="#8B8C8F" font-family="ui-monospace,monospace" font-size="9.5" letter-spacing="2">HERTEST</text>
+
+            <!-- unlabelled ladder ticks -->
+            <g stroke="rgba(215,179,100,.4)">
+              <path d="M672 70 h16M672 92 h9M672 114 h20M672 136 h11M672 158 h17M672 180 h8M672 202 h14M672 224 h10"/>
+            </g>
+
+            <text x="16" y="308" fill="#4F5155" font-family="ui-monospace,monospace" font-size="9" letter-spacing="2.4">SCHEMATISCH · GEEN PRIJZEN · GEEN RESULTAAT</text>
+          </svg>
+        </div>
+      </div>
+      <div class="screen-cap"><span>Fig. 03 — Structuurmodel</span><span>Illustratie, geen advies</span></div>
+    </div>
+
+    <div style="margin-top:22px;display:flex;flex-wrap:wrap;gap:10px;">
+      <a class="key key--gold" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+        <span class="cap-in"><span class="cap-legend">Dagelijkse charts</span></span>
+      </a>
+    </div>
+  </section>
+</div>
+
+<!-- ============ KANALEN ============ -->
+<div class="wrap">
+  <section class="sec" id="kanalen">
+    <div class="sec-h">
+      <div>
+        <span class="lbl">04 — Kanalen</span>
+        <h2>15 kanalen,<br><em>twee lagen</em>.</h2>
+      </div>
+    </div>
+
+    <div class="chan-block">
+      <h4>Thuis — nu gratis</h4>
+      <div class="krow">
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>nq-chart-ideeën</span><span class="kt">Open</span></span></a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>es-chart-ideeën</span><span class="kt">Open</span></span></a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>bitcoin</span><span class="kt">Open</span></span></a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>altcoins</span><span class="kt">Open</span></span></a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>markt</span><span class="kt">Open</span></span></a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>vragen</span><span class="kt">Open</span></span></a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>algemeen</span><span class="kt">Open</span></span></a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>atlas-op-socials</span><span class="kt">Open</span></span></a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>ondersteuning</span><span class="kt">Open</span></span></a>
+      </div>
+    </div>
+
+    <div class="chan-block">
+      <h4>Premium — opent later</h4>
+      <div class="krow">
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>trade-setups</span><span class="kt">Later</span></span></a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>marktupdates</span><span class="kt">Later</span></span></a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>indicatoren</span><span class="kt">Later</span></span></a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>sessie-opnames</span><span class="kt">Later</span></span></a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>chart-ideeën</span><span class="kt">Later</span></span></a>
+        <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cap-in"><span class="kn"><span>#</span>premium-chat</span><span class="kt">Later</span></span></a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ LIVE ============ -->
+<div class="wrap">
+  <section class="sec" id="live">
+    <span class="lbl">05 — Live</span>
+    <div class="livekey">
+      <div class="slab">
+        <span class="led"><i></i> Live in de server</span>
+        <h3>Meekijken terwijl het gebeurt.</h3>
+        <p>De oprichter handelt live in Discord en legt uit wat hij ziet. Tijden worden in de server aangekondigd.</p>
+      </div>
+      <a class="key key--gold" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+        <span class="cap-in" style="padding:26px 22px 28px;">
+          <span class="cap-legend" style="font-size:clamp(18px,3.4vw,26px);">Zit erbij</span>
+          <span class="cap-sub">Discord · gratis toegang</span>
+        </span>
+      </a>
+    </div>
+  </section>
+</div>
+
+<!-- ============ TOEGANG ============ -->
+<div class="wrap">
+  <section class="sec" id="toegang">
+    <span class="lbl">06 — Toegang</span>
+    <h2 class="lg" style="font-weight:800;font-size:clamp(22px,4vw,42px);letter-spacing:-.04em;color:var(--paper);margin-top:10px;">Nu gratis. Premium later.</h2>
+    <div class="acc">
+      <div class="key">
+        <span class="cap-in">
+          <span class="lbl">Open</span>
+          <h3>Thuis</h3>
+          <p>Alles wat nu draait, zonder kosten.</p>
+          <ul>
+            <li>Chartideeën NQ &amp; ES</li>
+            <li>Bitcoin &amp; altcoins</li>
+            <li>Markt, vragen &amp; ondersteuning</li>
+          </ul>
+          <span class="go" style="display:block;">
+            <a class="key key--gold" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener" style="display:block;">
+              <span class="cap-in" style="text-align:center;"><span class="cap-legend">Nu binnenlopen</span></span>
+            </a>
+          </span>
+        </span>
+      </div>
+      <div class="key">
+        <span class="cap-in">
+          <span class="lbl lbl--m">Later</span>
+          <h3>Premium</h3>
+          <p>Opent later. Prijs en datum worden in de server aangekondigd.</p>
+          <ul>
+            <li>Trade-setups</li>
+            <li>Marktupdates &amp; indicatoren</li>
+            <li>Sessie-opnames</li>
+          </ul>
+          <span class="go" style="display:block;">
+            <a class="key" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener" style="display:block;">
+              <span class="cap-in" style="text-align:center;"><span class="cap-legend" style="color:var(--gold);">Hoor het als eerste</span></span>
+            </a>
+          </span>
+        </span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ OPRICHTER ============ -->
+<div class="wrap">
+  <section class="sec" id="oprichter">
+    <span class="lbl">07 — Oprichter</span>
+    <div class="plate">
+      <div class="yr">10+<span>jaar actief in trading</span></div>
+      <div>
+        <blockquote>Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.</blockquote>
+        <p class="by">Oprichter · Atlas Capital</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ CLOSE ============ -->
+<section class="close" id="toetreden">
+  <div class="wrap">
+    <span class="lbl">08 — Toetreden</span>
+    <h2>Druk op <em>enter</em>.</h2>
+    <p>Toegang is nu gratis. Premium opent later.</p>
+    <a class="key key--gold enter" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">
+      <span class="cap-in">
+        <span>
+          <span class="el">Word lid van Discord</span>
+          <span class="es">discord.gg · Atlas Capital</span>
+        </span>
+        <span class="arrow">↵</span>
+      </span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><span class="lbl">Atlas Capital</span><p style="color:var(--muted);font-size:13px;margin-top:10px;">Proces. Discipline. Uitvoering.</p></div>
+      <div><span class="lbl lbl--m">Community</span>
+        <a href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord →</a>
+        <a href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok @atlascapitalbv →</a>
+      </div>
+      <div><span class="lbl lbl--m">Markten</span><p style="color:var(--muted);font-size:13px;margin-top:10px;">NQ · ES · Bitcoin · Altcoins</p></div>
+      <div><span class="lbl lbl--m">Toegang</span><p style="color:var(--muted);font-size:13px;margin-top:10px;">Nu gratis. Premium opent later.</p></div>
+    </div>
+    <p class="risk"><b>Risico —</b> Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+  </div>
+</footer>
+
+</body>
+</html>

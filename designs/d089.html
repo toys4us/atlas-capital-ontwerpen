@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 089 Rasterstoring</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --panel:#101115;
+  --line:#232429;
+  --paper:#F4F2EC;
+  --muted:#A5A6A8;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,"Courier New",monospace;
+}
+html{color-scheme:dark;overflow-x:clip;}
+*{box-sizing:border-box;}
+body{
+  margin:0;background:var(--ink);color:var(--paper);
+  font-family:var(--mono);font-weight:400;line-height:1.55;
+  overflow-x:clip;-webkit-font-smoothing:antialiased;
+}
+a{color:inherit;}
+.sheet{max-width:1300px;margin:0 auto;padding:0 clamp(12px,3.2vw,40px);position:relative;}
+
+/* ── ink / registration primitives ──────────────────── */
+.mis{color:var(--paper);text-shadow:.055em .045em 0 var(--gold-lo);}
+.mis-g{color:var(--gold);text-shadow:.055em .045em 0 rgba(244,242,236,.55);}
+.regmark{position:absolute;width:26px;height:26px;pointer-events:none;opacity:.75;}
+.regmark svg{width:100%;height:100%;display:block;}
+
+/* real interference: two ring systems with a slightly different period */
+.moire{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    repeating-radial-gradient(circle at 28% 34%, rgba(215,179,100,.36) 0 1.1px, rgba(0,0,0,0) 1.1px 7px),
+    repeating-radial-gradient(circle at 28% 34%, rgba(244,242,236,.20) 0 1.1px, rgba(0,0,0,0) 1.1px 7.55px);
+  -webkit-mask-image:radial-gradient(120% 100% at 30% 36%, rgba(0,0,0,.95), rgba(0,0,0,0) 72%);
+  mask-image:radial-gradient(120% 100% at 30% 36%, rgba(0,0,0,.95), rgba(0,0,0,0) 72%);
+}
+.moire--linear{
+  background-image:
+    repeating-linear-gradient(0deg, rgba(215,179,100,.30) 0 1px, rgba(0,0,0,0) 1px 6px),
+    repeating-linear-gradient(6deg, rgba(244,242,236,.16) 0 1px, rgba(0,0,0,0) 1px 6px);
+  -webkit-mask-image:linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,.9) 40%, rgba(0,0,0,0));
+  mask-image:linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,.9) 40%, rgba(0,0,0,0));
+}
+
+/* ── header ─────────────────────────────────────────── */
+header.top{position:sticky;top:0;z-index:90;background:rgba(8,9,11,.96);border-bottom:1px solid var(--line);}
+.topin{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:9px;}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.mark svg{width:clamp(22px,3.6vw,28px);height:auto;display:block;}
+.mark b{font-weight:700;letter-spacing:.06em;font-size:clamp(12px,2vw,15px);display:block;line-height:1.1;}
+.mark i{font-style:normal;font-size:8.5px;letter-spacing:.2em;color:var(--muted);display:block;}
+.btn{
+  display:inline-flex;align-items:center;gap:.55em;text-decoration:none;white-space:nowrap;
+  background:var(--gold);color:var(--ink);font-weight:700;
+  font-size:clamp(10.5px,1.4vw,13px);letter-spacing:.1em;text-transform:uppercase;
+  padding:.8em 1.1em;border:1px solid var(--gold);
+  box-shadow:3px 3px 0 rgba(244,242,236,.65);
+}
+.btn:hover{background:var(--gold-hi);box-shadow:1px 1px 0 rgba(244,242,236,.9);}
+.btn--o{background:transparent;color:var(--gold-hi);border-color:var(--gold-lo);box-shadow:3px 3px 0 rgba(185,149,74,.35);}
+.btn--o:hover{background:rgba(215,179,100,.14);}
+.btn--lg{font-size:clamp(12px,1.7vw,15px);padding:1em 1.5em;}
+
+/* ── sheet grid: margin column + plate column ───────── */
+.rowgrid{display:grid;grid-template-columns:1fr;gap:clamp(12px,2.2vw,26px);}
+.gutter{border-top:1px solid var(--line);padding-top:10px;}
+.gutter .plate{font-size:9.5px;letter-spacing:.24em;color:var(--gold);font-weight:600;text-transform:uppercase;margin:0 0 6px;}
+.gutter .meta{font-size:9.5px;letter-spacing:.14em;color:#6E6F73;margin:0;}
+.gutter .ramp{display:flex;gap:2px;margin-top:10px;}
+.gutter .ramp i{flex:1 1 auto;height:12px;background:var(--gold);}
+.gutter .ramp i:nth-child(1){opacity:.18}
+.gutter .ramp i:nth-child(2){opacity:.34}
+.gutter .ramp i:nth-child(3){opacity:.52}
+.gutter .ramp i:nth-child(4){opacity:.72}
+.gutter .ramp i:nth-child(5){opacity:1}
+
+/* ── hero ───────────────────────────────────────────── */
+.hero{position:relative;isolation:isolate;overflow:hidden;border-bottom:1px solid var(--line);}
+.heroin{position:relative;z-index:3;padding-block:clamp(30px,6vw,78px) clamp(34px,6vw,80px);}
+.kick{margin:0 0 clamp(14px,2.4vw,24px);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+h1.title{
+  margin:0;font-weight:700;line-height:.92;letter-spacing:-.045em;text-transform:uppercase;
+  font-size:clamp(26px,7.6vw,86px);
+}
+h1.title span{display:block;}
+h1.title .b{margin-left:clamp(0px,3vw,54px);}
+h1.title .c{margin-left:clamp(0px,5vw,92px);}
+.herolede{margin:clamp(18px,3vw,30px) 0 0;max-width:46ch;font-size:clamp(12.5px,1.6vw,16px);color:#D8D7D2;}
+.heroact{display:flex;flex-wrap:wrap;gap:11px;margin-top:clamp(18px,3vw,28px);}
+.herosphere{
+  position:relative;z-index:2;width:min(100%,520px);margin:clamp(16px,3vw,0px) 0 0 auto;
+}
+.herosphere svg{display:block;width:100%;height:auto;}
+
+/* ── strip ──────────────────────────────────────────── */
+.specstrip{border-bottom:1px solid var(--line);background:#0B0C0F;}
+.specstrip ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;}
+.specstrip li{padding:9px clamp(9px,1.9vw,22px);border-right:1px solid var(--line);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
+.specstrip li b{color:var(--gold);}
+
+/* ── sections ───────────────────────────────────────── */
+.sec{position:relative;padding:clamp(40px,6.5vw,92px) 0;border-bottom:1px solid var(--line);}
+h2.sh{margin:0 0 clamp(6px,1.2vw,12px);font-weight:700;font-size:clamp(21px,4.4vw,50px);letter-spacing:-.035em;text-transform:uppercase;line-height:1;}
+.sub{margin:0 0 clamp(18px,3vw,30px);color:var(--muted);font-size:clamp(12px,1.5vw,15px);max-width:46ch;}
+
+/* ── density ramp = the curriculum ──────────────────── */
+.ramplist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+.ramplist li{
+  background:var(--ink);
+  display:grid;grid-template-columns:34px 1fr 78px;align-items:center;gap:10px;
+  padding:10px clamp(8px,1.4vw,16px);
+}
+.ramplist .n{font-size:10px;letter-spacing:.14em;color:var(--gold);font-weight:600;}
+.ramplist .t{font-size:clamp(12.5px,1.8vw,17px);font-weight:500;letter-spacing:-.01em;overflow-wrap:anywhere;}
+.ramplist .sw{
+  height:26px;border:1px solid #2C2D32;
+  background-color:#0B0C0F;
+  background-image:radial-gradient(circle at 50% 50%, var(--gold) 0 calc(var(--d) * 1px), rgba(0,0,0,0) calc(var(--d) * 1px + .6px));
+  background-size:8px 8px;
+}
+.ramplist li:hover{background:#0E0F13;}
+
+/* ── plate (model) ──────────────────────────────────── */
+.plateblock{border:1px solid var(--line);background:#0A0B0E;padding:clamp(12px,2.2vw,26px);position:relative;}
+.plateblock h3{margin:0 0 6px;font-size:clamp(14px,2.2vw,20px);font-weight:700;letter-spacing:-.01em;color:var(--gold-hi);}
+.plateblock>p{margin:0 0 14px;color:var(--muted);font-size:clamp(11.5px,1.5vw,14px);max-width:56ch;}
+.scrollbox{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.scrollbox svg{display:block;width:100%;min-width:330px;height:auto;}
+.keys{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:9px 20px;}
+.keys li{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px;}
+.keys i{width:15px;height:9px;display:inline-block;background:var(--gold);}
+.keys i.o{background:transparent;border:1px solid var(--paper);}
+.keys i.h{background-color:transparent;background-image:radial-gradient(circle,var(--gold) 0 1.6px,rgba(0,0,0,0) 1.7px);background-size:5px 5px;}
+
+/* ── founder ────────────────────────────────────────── */
+.founder{display:grid;grid-template-columns:1fr;gap:clamp(18px,3vw,40px);align-items:center;}
+.founder .art{width:100%;}
+.founder .art svg{width:100%;height:auto;display:block;}
+.founder blockquote{margin:0;font-size:clamp(13px,1.8vw,17px);line-height:1.6;color:#E5E4DF;}
+.founder .yr{margin:0 0 14px;font-size:clamp(30px,6.4vw,68px);font-weight:700;letter-spacing:-.05em;line-height:1;}
+.founder .sig{margin:14px 0 0;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);}
+
+/* ── control strip = channels ───────────────────────── */
+.ctrl{display:flex;flex-wrap:wrap;gap:3px;}
+.patch{
+  flex:1 1 130px;min-width:118px;
+  border:1px solid #2C2D32;padding:9px 10px;
+  font-size:10.5px;letter-spacing:.01em;color:#DAD9D4;
+  background-color:#0B0C0F;
+  overflow-wrap:anywhere;
+}
+.patch b{display:block;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#6E6F73;margin-bottom:5px;font-weight:600;}
+.patch--free{
+  color:var(--ink);
+  background-color:var(--gold);
+  background-image:radial-gradient(circle at 50% 50%, rgba(8,9,11,.34) 0 1.5px, rgba(0,0,0,0) 1.6px);
+  background-size:7px 7px;
+  border-color:var(--gold-lo);
+}
+.patch--free b{color:#4A3C1C;}
+.patch--prem{
+  background-image:radial-gradient(circle at 50% 50%, rgba(215,179,100,.5) 0 1.2px, rgba(0,0,0,0) 1.3px);
+  background-size:7px 7px;
+  color:var(--gold-hi);
+}
+.ctrlhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin:0 0 10px;}
+.ctrlhead h4{margin:0;font-size:clamp(13px,1.9vw,18px);font-weight:700;letter-spacing:-.01em;}
+.ctrlhead span{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-lo);}
+
+/* ── twin cells ─────────────────────────────────────── */
+.twin{display:grid;grid-template-columns:1fr;gap:clamp(12px,2vw,22px);}
+.cell{border:1px solid var(--line);padding:clamp(14px,2.4vw,28px);background:#0B0C0F;position:relative;overflow:hidden;}
+.cell h4{margin:0 0 8px;font-size:clamp(15px,2.4vw,24px);font-weight:700;letter-spacing:-.02em;}
+.cell p{margin:0 0 15px;color:var(--muted);font-size:clamp(11.5px,1.5vw,14px);max-width:40ch;position:relative;z-index:2;}
+.cell .lb{display:inline-block;font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:9px;font-weight:600;}
+.cell .btn{position:relative;z-index:2;}
+.cell .dots{position:absolute;right:-30px;bottom:-30px;width:190px;height:190px;z-index:0;opacity:.5;
+  background-image:radial-gradient(circle,var(--gold) 0 2px,rgba(0,0,0,0) 2.2px);background-size:10px 10px;
+  -webkit-mask-image:radial-gradient(circle at 70% 70%, rgba(0,0,0,.95), rgba(0,0,0,0) 70%);
+  mask-image:radial-gradient(circle at 70% 70%, rgba(0,0,0,.95), rgba(0,0,0,0) 70%);}
+
+/* ── close ──────────────────────────────────────────── */
+.close{position:relative;isolation:isolate;overflow:hidden;padding:clamp(44px,7vw,104px) 0;text-align:center;}
+.close .big{
+  position:relative;z-index:3;margin:0 0 clamp(14px,2.4vw,22px);
+  font-weight:700;font-size:clamp(30px,10.5vw,138px);line-height:.9;letter-spacing:-.06em;text-transform:uppercase;
+}
+.close p{position:relative;z-index:3;margin:0 auto clamp(20px,3vw,28px);max-width:38ch;color:#D8D7D2;font-size:clamp(12.5px,1.6vw,16px);}
+.close .acts{position:relative;z-index:3;display:flex;flex-wrap:wrap;gap:11px;justify-content:center;}
+
+footer{background:#0A0B0E;padding:clamp(24px,4vw,44px) 0 clamp(32px,5vw,56px);border-top:1px solid var(--line);}
+.fgrid{display:grid;grid-template-columns:1fr;gap:18px;}
+.fgrid h5{margin:0 0 9px;font-size:8.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+.fgrid a{text-decoration:none;font-size:clamp(11.5px,1.5vw,14px);border-bottom:1px solid var(--gold-lo);padding-bottom:2px;display:inline-block;}
+.fmark{margin:0 0 8px;font-size:clamp(17px,3vw,28px);font-weight:700;letter-spacing:-.03em;text-transform:uppercase;}
+.risk{margin:0;font-size:10.5px;line-height:1.65;color:#75767A;max-width:64ch;}
+
+@media(min-width:900px){
+  .rowgrid{grid-template-columns:118px 1fr;gap:clamp(20px,3vw,44px);}
+  .ramplist{grid-template-columns:1fr 1fr;}
+  .founder{grid-template-columns:.85fr 1.15fr;}
+  .twin{grid-template-columns:1fr 1fr;}
+  .fgrid{grid-template-columns:1.4fr .8fr .8fr;}
+  .heroin{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,3vw,44px);align-items:center;}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="sheet topin">
+    <a class="mark" href="#">
+      <svg viewBox="0 0 30 30" aria-hidden="true">
+        <circle cx="15" cy="15" r="13" fill="none" stroke="#F4F2EC" stroke-width="1.3"/>
+        <circle cx="17" cy="13" r="13" fill="none" stroke="#D7B364" stroke-width="1.3"/>
+        <path d="M2 15h26" stroke="#D7B364" stroke-width=".8"/>
+      </svg>
+      <span><b>ATLAS CAPITAL</b><i>proces · discipline · uitvoering</i></span>
+    </a>
+    <a class="btn" href="https://discord.gg/78Ff2GuSfW">Discord</a>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="moire" aria-hidden="true"></div>
+  <span class="regmark" style="left:10px;top:12px" aria-hidden="true">
+    <svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="7.5" fill="none" stroke="#D7B364" stroke-width="1"/><path d="M13 0v26M0 13h26" stroke="#F4F2EC" stroke-width=".8"/></svg>
+  </span>
+  <span class="regmark" style="right:10px;top:12px" aria-hidden="true">
+    <svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="7.5" fill="none" stroke="#F4F2EC" stroke-width="1"/><path d="M13 0v26M0 13h26" stroke="#D7B364" stroke-width=".8"/></svg>
+  </span>
+
+  <div class="sheet heroin">
+    <div>
+      <p class="kick">Plaat 01 · goud + zwart · Nederlandse trading-community</p>
+      <h1 class="title">
+        <span class="mis">Proces</span>
+        <span class="b mis-g">Discipline</span>
+        <span class="c mis">Uitvoering</span>
+      </h1>
+      <p class="herolede">Wij lezen de markt als een raster: NQ, ES, Bitcoin en altcoins. Tien onderwerpen, vijftien kanalen, alles in het Nederlands.</p>
+      <div class="heroact">
+        <a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Join de Discord</a>
+        <a class="btn btn--o btn--lg" href="#raster">Zie het raster</a>
+      </div>
+    </div>
+
+    <div class="herosphere" aria-hidden="true">
+      <svg viewBox="0 0 520 520">
+        <defs>
+          <pattern id="h1" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="4.5" cy="4.5" r="3.7" fill="#E6CC8E"/></pattern>
+          <pattern id="h2" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="4.5" cy="4.5" r="3.0" fill="#D7B364"/></pattern>
+          <pattern id="h3" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="4.5" cy="4.5" r="2.3" fill="#D7B364"/></pattern>
+          <pattern id="h4" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="4.5" cy="4.5" r="1.6" fill="#B9954A"/></pattern>
+          <pattern id="h5" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="4.5" cy="4.5" r="1.0" fill="#B9954A"/></pattern>
+          <pattern id="h6" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="4.5" cy="4.5" r="0.6" fill="#8E7238"/></pattern>
+          <pattern id="hp" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="4.5" cy="4.5" r="1.5" fill="#F4F2EC"/></pattern>
+          <filter id="wob" x="-6%" y="-6%" width="112%" height="112%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="7" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="1.8" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+        </defs>
+
+        <!-- misregistered paper plate, offset -->
+        <g transform="translate(-6 5)" opacity=".28">
+          <circle cx="260" cy="262" r="196" fill="url(#hp)"/>
+        </g>
+
+        <!-- gold plate: density falls off from the light -->
+        <g filter="url(#wob)">
+          <circle cx="260" cy="262" r="196" fill="url(#h6)"/>
+          <circle cx="248" cy="248" r="164" fill="url(#h5)"/>
+          <circle cx="236" cy="234" r="130" fill="url(#h4)"/>
+          <circle cx="226" cy="222" r="98"  fill="url(#h3)"/>
+          <circle cx="218" cy="212" r="66"  fill="url(#h2)"/>
+          <circle cx="212" cy="205" r="34"  fill="url(#h1)"/>
+        </g>
+
+        <!-- atlas meridians -->
+        <g fill="none" stroke="#F4F2EC" stroke-width="1.1" opacity=".55">
+          <circle cx="260" cy="262" r="196"/>
+          <ellipse cx="260" cy="262" rx="196" ry="66"/>
+          <ellipse cx="260" cy="262" rx="196" ry="132"/>
+          <ellipse cx="260" cy="262" rx="66"  ry="196"/>
+          <ellipse cx="260" cy="262" rx="132" ry="196"/>
+          <path d="M64 262h392M260 66v392"/>
+        </g>
+        <g fill="none" stroke="#D7B364" stroke-width="1.1" opacity=".5" transform="translate(4 -3)">
+          <circle cx="260" cy="262" r="196"/>
+          <ellipse cx="260" cy="262" rx="196" ry="66"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="specstrip">
+  <div class="sheet">
+    <ul>
+      <li><b>10</b> onderwerpen</li>
+      <li><b>15</b> kanalen</li>
+      <li>NQ · ES · Bitcoin · Altcoins</li>
+      <li>Live in de server</li>
+      <li>Nu <b>gratis</b></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ── 02 RASTER / CURRICULUM ── -->
+<div class="sheet">
+<section class="sec" id="raster">
+  <div class="rowgrid">
+    <aside class="gutter">
+      <p class="plate">Plaat 02</p>
+      <p class="meta">Rasterdichtheid<br>01 &#8594; 10</p>
+      <div class="ramp" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    </aside>
+    <div>
+      <h2 class="sh mis">Tien onderwerpen</h2>
+      <p class="sub">De leerlijn als toonschaal: van de eerste losse punten tot een volledig dichtgedrukt raster.</p>
+      <ol class="ramplist">
+        <li><span class="n">01</span><span class="t">Deviatie</span><span class="sw" style="--d:0.7"></span></li>
+        <li><span class="n">02</span><span class="t">SMT</span><span class="sw" style="--d:1.0"></span></li>
+        <li><span class="n">03</span><span class="t">FVG</span><span class="sw" style="--d:1.3"></span></li>
+        <li><span class="n">04</span><span class="t">IFVG</span><span class="sw" style="--d:1.6"></span></li>
+        <li><span class="n">05</span><span class="t">Orderblocks</span><span class="sw" style="--d:1.9"></span></li>
+        <li><span class="n">06</span><span class="t">Fibonacci</span><span class="sw" style="--d:2.2"></span></li>
+        <li><span class="n">07</span><span class="t">Sessie-liquiditeit</span><span class="sw" style="--d:2.5"></span></li>
+        <li><span class="n">08</span><span class="t">Liquiditeit</span><span class="sw" style="--d:2.8"></span></li>
+        <li><span class="n">09</span><span class="t">Risicobeheer</span><span class="sw" style="--d:3.1"></span></li>
+        <li><span class="n">10</span><span class="t">Tradingpsychologie</span><span class="sw" style="--d:3.5"></span></li>
+      </ol>
+      <p style="margin:clamp(16px,2.6vw,26px) 0 0"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Open de leerlijn</a></p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ── 03 MODEL ── -->
+<div class="sheet">
+<section class="sec">
+  <div class="rowgrid">
+    <aside class="gutter">
+      <p class="plate">Plaat 03</p>
+      <p class="meta">Schema<br>geen koersen</p>
+    </aside>
+    <div>
+      <h2 class="sh mis">Het model</h2>
+      <p class="sub">Een fair value gap, gedrukt in raster. Illustratie van een concept — geen voorspelling, geen resultaat.</p>
+      <div class="plateblock">
+        <h3>Gap, terugtest, vervolg</h3>
+        <p>De middelste beweging laat een gat achter. Wij markeren dat gat en wachten tot de prijs er weer in komt.</p>
+        <div class="scrollbox">
+          <svg viewBox="0 0 900 400" role="img" aria-label="Rasterschema van een fair value gap met terugtest">
+            <defs>
+              <pattern id="cg" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2.1" fill="#D7B364"/></pattern>
+              <pattern id="cp" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2.1" fill="#F4F2EC"/></pattern>
+              <pattern id="cz" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.1" fill="#D7B364"/></pattern>
+            </defs>
+            <g stroke="#1B1C21" stroke-width="1">
+              <path d="M30 56h840M30 132h840M30 208h840M30 284h840M30 360h840"/>
+            </g>
+
+            <rect x="236" y="140" width="620" height="70" fill="url(#cz)"/>
+            <rect x="236" y="140" width="620" height="70" fill="none" stroke="#B9954A" stroke-width="1.2" stroke-dasharray="7 5"/>
+            <text x="240" y="132" fill="#E6CC8E" font-family="monospace" font-size="15" letter-spacing="3">GAP</text>
+
+            <g fill="url(#cp)" stroke="#F4F2EC" stroke-width="1.2">
+              <rect x="60" y="252" width="26" height="60"/>
+              <rect x="118" y="214" width="26" height="62"/>
+            </g>
+            <g stroke="#F4F2EC" stroke-width="2.2">
+              <path d="M73 252v-22M73 312v20M131 214v-20M131 276v22"/>
+            </g>
+
+            <g fill="url(#cg)" stroke="#D7B364" stroke-width="1.2">
+              <rect x="176" y="146" width="26" height="88"/>
+            </g>
+            <path d="M189 146v-26M189 234v22" stroke="#D7B364" stroke-width="2.2"/>
+
+            <g fill="url(#cp)" stroke="#F4F2EC" stroke-width="1.2">
+              <rect x="234" y="104" width="26" height="44"/>
+              <rect x="292" y="80" width="26" height="42"/>
+              <rect x="350" y="98" width="26" height="50"/>
+              <rect x="408" y="124" width="26" height="46"/>
+            </g>
+            <g stroke="#F4F2EC" stroke-width="2.2">
+              <path d="M247 104v-20M247 148v20M305 80v-20M305 122v20M363 98v-18M363 148v20M421 124v-18M421 170v20"/>
+            </g>
+
+            <g fill="url(#cg)" stroke="#D7B364" stroke-width="1.2">
+              <rect x="466" y="152" width="26" height="56"/>
+            </g>
+            <path d="M479 152v-20M479 208v26" stroke="#D7B364" stroke-width="2.2"/>
+            <text x="440" y="256" fill="#E6CC8E" font-family="monospace" font-size="15" letter-spacing="3">TERUGTEST</text>
+
+            <g fill="url(#cp)" stroke="#F4F2EC" stroke-width="1.2">
+              <rect x="524" y="112" width="26" height="52"/>
+              <rect x="582" y="82" width="26" height="48"/>
+              <rect x="640" y="60" width="26" height="46"/>
+              <rect x="698" y="42" width="26" height="42"/>
+              <rect x="756" y="30" width="26" height="38"/>
+            </g>
+            <g stroke="#F4F2EC" stroke-width="2.2">
+              <path d="M537 112v-20M537 164v20M595 82v-18M595 130v20M653 60v-18M653 106v18M711 42v-16M711 84v18M769 30v-14M769 68v18"/>
+            </g>
+
+            <path d="M189 122h610" stroke="#B9954A" stroke-width="1" stroke-dasharray="4 5"/>
+            <text x="30" y="392" fill="#4E4F54" font-family="monospace" font-size="10.5" letter-spacing="2">SCHEMA · GEEN KOERSEN · GEEN DATUM · GEEN RESULTAAT</text>
+            <g stroke="#2A2B30" stroke-width="1">
+              <path d="M30 20v18M21 29h18M860 350v18M851 359h18"/>
+            </g>
+          </svg>
+        </div>
+        <ul class="keys">
+          <li><i class="h"></i>De zone die we bewaken</li>
+          <li><i></i>Sleutelmoment</li>
+          <li><i class="o"></i>Prijs, schematisch</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ── 04 OPRICHTER ── -->
+<div class="sheet">
+<section class="sec">
+  <div class="rowgrid">
+    <aside class="gutter">
+      <p class="plate">Plaat 04</p>
+      <p class="meta">Oprichter<br>10+ jaar</p>
+    </aside>
+    <div class="founder">
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 340 340">
+          <defs>
+            <pattern id="s1" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="3.2" fill="#D7B364"/></pattern>
+            <pattern id="s2" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.1" fill="#B9954A"/></pattern>
+            <pattern id="s3" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.1" fill="#8E7238"/></pattern>
+          </defs>
+          <circle cx="170" cy="118" r="96" fill="url(#s3)"/>
+          <circle cx="158" cy="106" r="66" fill="url(#s2)"/>
+          <circle cx="150" cy="98"  r="34" fill="url(#s1)"/>
+          <g fill="none" stroke="#F4F2EC" stroke-width="1.1" opacity=".6">
+            <circle cx="170" cy="118" r="96"/>
+            <ellipse cx="170" cy="118" rx="96" ry="32"/>
+            <ellipse cx="170" cy="118" rx="34" ry="96"/>
+          </g>
+          <path d="M40 336c8-58 40-92 78-104 14-4 24-12 28-24M300 336c-8-58-40-92-78-104-14-4-24-12-28-24"
+                fill="none" stroke="#F4F2EC" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M42 336c8-58 40-92 78-104" fill="none" stroke="#D7B364" stroke-width="2.2" transform="translate(5 -4)"/>
+          <path d="M104 262c40-18 92-18 132 0" fill="none" stroke="#B9954A" stroke-width="2"/>
+        </svg>
+      </div>
+      <div>
+        <p class="yr mis">10+ jaar</p>
+        <blockquote>&#8220;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen. Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&#8221;</blockquote>
+        <p class="sig">Oprichter · Atlas Capital</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ── 05 KANALEN ── -->
+<div class="sheet">
+<section class="sec">
+  <div class="rowgrid">
+    <aside class="gutter">
+      <p class="plate">Plaat 05</p>
+      <p class="meta">Controlestrook<br>15 kanalen</p>
+    </aside>
+    <div>
+      <h2 class="sh mis">15 kanalen</h2>
+      <p class="sub">De server als controlestrook. Volle vlakken zijn open, rasters openen later.</p>
+
+      <div class="ctrlhead"><h4>Thuis</h4><span>Nu gratis</span></div>
+      <div class="ctrl">
+        <span class="patch patch--free"><b>vrij</b>#nq-chart-idee&euml;n</span>
+        <span class="patch patch--free"><b>vrij</b>#es-chart-idee&euml;n</span>
+        <span class="patch patch--free"><b>vrij</b>#bitcoin</span>
+        <span class="patch patch--free"><b>vrij</b>#altcoins</span>
+        <span class="patch patch--free"><b>vrij</b>#markt</span>
+        <span class="patch patch--free"><b>vrij</b>#vragen</span>
+        <span class="patch patch--free"><b>vrij</b>#algemeen</span>
+        <span class="patch patch--free"><b>vrij</b>#atlas-op-socials</span>
+        <span class="patch patch--free"><b>vrij</b>#ondersteuning</span>
+      </div>
+
+      <div class="ctrlhead" style="margin-top:clamp(18px,2.6vw,28px)"><h4>Premium</h4><span>Opent later</span></div>
+      <div class="ctrl">
+        <span class="patch patch--prem"><b>later</b>#trade-setups</span>
+        <span class="patch patch--prem"><b>later</b>#marktupdates</span>
+        <span class="patch patch--prem"><b>later</b>#indicatoren</span>
+        <span class="patch patch--prem"><b>later</b>#sessie-opnames</span>
+        <span class="patch patch--prem"><b>later</b>#chart-idee&euml;n</span>
+        <span class="patch patch--prem"><b>later</b>#premium-chat</span>
+      </div>
+
+      <p style="margin:clamp(18px,2.6vw,26px) 0 0"><a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW">Bekijk de server</a></p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ── 06 LIVE & TOEGANG ── -->
+<div class="sheet">
+<section class="sec">
+  <div class="rowgrid">
+    <aside class="gutter">
+      <p class="plate">Plaat 06</p>
+      <p class="meta">Live<br>&amp; toegang</p>
+    </aside>
+    <div class="twin">
+      <div class="cell">
+        <span class="dots" aria-hidden="true"></span>
+        <span class="lb">Live trading</span>
+        <h4>Meekijken terwijl het gebeurt</h4>
+        <p>De oprichter handelt live in de server. Tijden worden daar aangekondigd.</p>
+        <a class="btn" href="https://discord.gg/78Ff2GuSfW">Naar de server</a>
+      </div>
+      <div class="cell">
+        <span class="dots" aria-hidden="true"></span>
+        <span class="lb">Toegang</span>
+        <h4>Nu gratis. Premium later.</h4>
+        <p>Alles wat er nu staat is vrij toegankelijk. Prijs en datum van premium worden in de server bekendgemaakt.</p>
+        <a class="btn btn--o" href="https://discord.gg/78Ff2GuSfW">Word lid</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ── CLOSE ── -->
+<section class="close">
+  <div class="moire moire--linear" aria-hidden="true"></div>
+  <div class="sheet">
+    <p class="big mis">Kom binnen</p>
+    <p>Charts, uitleg en een community die dezelfde taal spreekt. Nederlands, elke dag.</p>
+    <div class="acts">
+      <a class="btn btn--lg" href="https://discord.gg/78Ff2GuSfW">Join Atlas Capital op Discord</a>
+      <a class="btn btn--o btn--lg" href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="sheet fgrid">
+    <div>
+      <p class="fmark">Atlas Capital</p>
+      <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    </div>
+    <div>
+      <h5>Server</h5>
+      <a href="https://discord.gg/78Ff2GuSfW">Discord &#8594;</a>
+    </div>
+    <div>
+      <h5>Socials</h5>
+      <a href="https://www.tiktok.com/@atlascapitalbv">TikTok @atlascapitalbv &#8594;</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

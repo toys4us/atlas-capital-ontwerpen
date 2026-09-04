@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 074 Ondertitel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#050607;
+  --deep:#08090B;
+  --muted:#8B8C8F;
+  --line:rgba(255,255,255,.08);
+  --gline:rgba(215,179,100,.3);
+  --f:"Sora",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--ink);color:#EFEFED;
+  font-family:var(--f);font-weight:200;font-size:16px;line-height:1.6;
+  overflow-x:hidden;
+}
+a{color:inherit}
+.wrap{width:min(1180px,100% - 2rem);margin-inline:auto}
+@media (max-width:520px){.wrap{width:min(1180px,100% - 1.2rem)}}
+
+/* ---------- header ---------- */
+.hd{
+  position:sticky;top:0;z-index:60;
+  background:linear-gradient(180deg,rgba(5,6,7,.96),rgba(5,6,7,.6) 70%,transparent);
+  padding:.85rem 0;
+}
+.hd__in{display:flex;align-items:center;gap:1rem;justify-content:space-between}
+.wm{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.wm svg{width:24px;height:24px;flex:none}
+.wm span{font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;font-weight:700}
+.cta{
+  display:inline-flex;align-items:center;gap:.6em;text-decoration:none;
+  border:1px solid var(--gline);color:var(--gold);
+  font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;
+  padding:.7em 1.15em;border-radius:999px;transition:.2s ease;
+  background:rgba(215,179,100,.05);
+}
+.cta:hover{background:var(--gold);color:#0A0805;border-color:var(--gold)}
+.cta--solid{background:var(--gold);color:#0A0805;border-color:var(--gold)}
+.cta--solid:hover{background:var(--gold-hi);border-color:var(--gold-hi)}
+.cta--lg{font-size:.82rem;padding:1em 1.9em}
+.cta__d{width:.45em;height:.45em;border-radius:50%;background:currentColor;flex:none}
+
+/* ---------- shot ---------- */
+.shot{
+  position:relative;
+  min-height:clamp(560px,88vh,900px);
+  display:grid;grid-template-rows:auto 1fr auto;
+  padding:clamp(1rem,3vw,2rem) 0 clamp(2.2rem,6vw,4rem);
+  border-bottom:1px solid var(--line);
+}
+.shot__tag{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.58rem;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);font-weight:400;
+}
+.shot__tag i{display:block;width:26px;height:1px;background:var(--gline)}
+.shot__tag b{color:var(--gold);font-weight:700}
+.shot__art{
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(1.4rem,5vw,3.4rem) 0;min-width:0;
+}
+.shot__art svg{width:min(100%,720px);height:auto;display:block}
+.shot__caps{display:flex;flex-direction:column;align-items:center;gap:.5rem;text-align:center}
+
+/* ---------- caption band ---------- */
+.cap{
+  margin:0;display:inline-block;max-width:34ch;
+  background:rgba(4,5,6,.82);
+  border-bottom:2px solid var(--gold);
+  padding:.5em .95em;
+  font-size:clamp(1.05rem,3.1vw,1.7rem);
+  font-weight:200;line-height:1.35;letter-spacing:-.005em;
+  color:#F4F3F0;
+}
+.cap--big{font-size:clamp(1.5rem,6.4vw,3.4rem);font-weight:700;letter-spacing:-.035em;line-height:1.05;max-width:18ch;border-bottom-width:3px}
+.cap--sm{font-size:clamp(.82rem,2.1vw,1rem);color:#C6C6C4;border-bottom-color:var(--gline);max-width:44ch}
+.cap--gold{color:var(--gold-hi)}
+.cap--who{
+  border-bottom:0;background:transparent;padding:0 0 .2em;
+  font-size:.6rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:700;
+}
+.cap b{font-weight:700}
+.caps-cta{margin-top:1.4rem;display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center}
+
+/* ---------- letterbox vignette ---------- */
+.shot::before,.shot::after{
+  content:"";position:absolute;left:0;right:0;height:clamp(30px,7vh,80px);pointer-events:none;
+}
+.shot::before{top:0;background:linear-gradient(180deg,rgba(0,0,0,.7),transparent)}
+.shot::after{bottom:0;background:linear-gradient(0deg,rgba(0,0,0,.7),transparent)}
+
+/* ---------- topic strip ---------- */
+.topics{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;
+  margin-top:1.1rem;max-width:60ch;
+}
+.topic{
+  font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:400;
+  color:#D2D2D0;background:rgba(255,255,255,.04);
+  border:1px solid var(--line);padding:.42em .8em;border-radius:999px;
+}
+.topic b{color:var(--gold);font-weight:700;margin-right:.5em;font-size:.66rem}
+
+/* ---------- channel captions ---------- */
+.chan{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;width:min(880px,100%);margin-top:.8rem}
+.chan__g{text-align:center}
+.chan__h{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.7rem}
+.chan__l{display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem}
+.chan__l span{
+  font-size:.78rem;color:#C9C9C7;font-weight:400;
+  padding:.32em .6em;border:1px solid var(--line);
+}
+.chan__g--p .chan__l span{border-color:var(--gline);color:var(--gold-hi);background:rgba(215,179,100,.05)}
+.chan__n{margin:.7rem 0 0;font-size:.72rem;color:var(--muted)}
+
+/* ---------- access captions ---------- */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.2rem;width:min(900px,100%);text-align:left}
+.two__c{border:1px solid var(--line);padding:1.4rem;background:rgba(255,255,255,.014)}
+.two__c--now{border-color:var(--gline)}
+.two__c h3{margin:.4rem 0 .8rem;font-size:1.5rem;font-weight:700;letter-spacing:-.03em}
+.two__c ul{margin:0;padding:0;list-style:none;display:grid;gap:.5rem;font-size:.88rem;color:#C6C6C4;font-weight:200}
+.two__c li{display:flex;gap:.6rem}
+.two__c li::before{content:"—";color:var(--gold);flex:none}
+.two__c .k{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.two__c .btnrow{margin-top:1.2rem}
+
+/* ---------- live pulse ring ---------- */
+.ring{position:relative;display:inline-flex;align-items:center;gap:.6em}
+.ring i{width:9px;height:9px;border-radius:50%;background:var(--gold);display:block;animation:bp 2.4s ease-in-out infinite}
+.ring u{position:absolute;left:-5px;top:50%;margin-top:-9.5px;width:19px;height:19px;border-radius:50%;border:1px solid var(--gold);opacity:.45;animation:rg 2.4s ease-out infinite}
+@keyframes bp{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.66);opacity:.5}}
+@keyframes rg{0%{transform:scale(.5);opacity:.45}80%,100%{transform:scale(1.5);opacity:.03}}
+@media (prefers-reduced-motion:reduce){.ring i,.ring u{animation:none}}
+
+/* ---------- slow drift on artwork ---------- */
+.drift{animation:dr 26s ease-in-out infinite}
+@keyframes dr{0%,100%{transform:translateY(-6px)}50%{transform:translateY(6px)}}
+.spin{transform-origin:50% 50%;animation:sp 90s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.drift,.spin{animation:none}}
+
+/* ---------- footer ---------- */
+footer{padding:clamp(2.4rem,6vw,4rem) 0}
+.foot{display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:space-between;align-items:flex-start}
+.foot a.l{color:var(--gold);text-decoration:none;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;font-weight:700}
+.foot a.l:hover{color:var(--gold-hi)}
+.foot__l{display:flex;flex-wrap:wrap;gap:1.2rem}
+.risk{margin:1.8rem 0 0;color:#6A6B6D;font-size:.7rem;line-height:1.75;max-width:74ch;border-top:1px solid var(--line);padding-top:1rem;font-weight:200}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="hd">
+  <div class="wrap hd__in">
+    <a class="wm" href="#top">
+      <svg viewBox="0 0 28 28" aria-hidden="true">
+        <circle cx="14" cy="14" r="13" fill="none" stroke="#D7B364"/>
+        <path d="M14 6 L21 21 H7 Z" fill="none" stroke="#E6CC8E" stroke-width="1.4"/>
+      </svg>
+      <span>Atlas Capital</span>
+    </a>
+    <a class="cta cta--solid" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span>Discord</a>
+  </div>
+</header>
+
+<!-- ============ SHOT 00 — OPENING ============ -->
+<section class="shot wrap" id="top">
+  <div class="shot__tag"><i></i><b>Opening</b><i></i></div>
+  <div class="shot__art">
+    <svg viewBox="0 0 720 420" role="img" aria-label="Een gouden diafragma van bogen boven een schematische reeks kaarsen">
+      <g class="spin" style="transform-origin:360px 190px">
+        <g fill="none" stroke="#D7B364" opacity=".55">
+          <path d="M360 60 A130 130 0 0 1 472.6 255" stroke-width="1.4"/>
+          <path d="M472.6 255 A130 130 0 0 1 247.4 255" stroke-width="1.4" opacity=".7"/>
+          <path d="M247.4 255 A130 130 0 0 1 360 60" stroke-width="1.4" opacity=".4"/>
+        </g>
+        <g fill="none" stroke="#B9954A" opacity=".35">
+          <circle cx="360" cy="190" r="164"/>
+          <circle cx="360" cy="190" r="96"/>
+        </g>
+      </g>
+      <g class="drift">
+        <g stroke-width="3" fill="#111316" stroke="#6E6F72" stroke-linecap="square">
+          <path d="M232 176 V244"/><rect x="224" y="190" width="16" height="44"/>
+          <path d="M266 166 V240"/><rect x="258" y="180" width="16" height="46"/>
+        </g>
+        <g stroke-width="3" fill="rgba(215,179,100,.26)" stroke="#D7B364">
+          <path d="M300 146 V236"/><rect x="292" y="162" width="16" height="56"/>
+          <path d="M334 122 V228"/><rect x="326" y="140" width="16" height="62"/>
+          <path d="M368 104 V222"/><rect x="360" y="122" width="16" height="72"/>
+        </g>
+        <g stroke-width="3" fill="#111316" stroke="#83848A">
+          <path d="M402 130 V246"/><rect x="394" y="146" width="16" height="76"/>
+          <path d="M436 158 V262"/><rect x="428" y="174" width="16" height="70"/>
+          <path d="M470 186 V276"/><rect x="462" y="200" width="16" height="62"/>
+        </g>
+      </g>
+      <path d="M196 300 H524" stroke="rgba(215,179,100,.28)" stroke-dasharray="6 8"/>
+      <circle cx="360" cy="190" r="3" fill="#E6CC8E"/>
+    </svg>
+  </div>
+  <div class="shot__caps">
+    <p class="cap cap--big">Kijk mee terwijl<br>hij handelt</p>
+    <p class="cap cap--sm">De oprichter handelt live mee in de server. Tijden worden daar aangekondigd.</p>
+    <div class="caps-cta">
+      <a class="cta cta--solid cta--lg" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span>Open Discord</a>
+      <a class="cta cta--lg" href="#educatie">Wat je leert</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOT 01 — DRIE WOORDEN ============ -->
+<section class="shot wrap" id="woorden">
+  <div class="shot__tag"><i></i><b>01</b> Drie woorden<i></i></div>
+  <div class="shot__art">
+    <svg viewBox="0 0 720 300" role="img" aria-label="Drie gouden bogen die in elkaar overlopen">
+      <g fill="none" stroke-linecap="round">
+        <path class="drift" d="M60 240 C 160 240, 160 90, 260 90" stroke="#B9954A" stroke-width="2"/>
+        <path d="M240 240 C 340 240, 340 60, 440 60" stroke="#D7B364" stroke-width="2.6"/>
+        <path d="M420 240 C 520 240, 520 110, 660 110" stroke="#E6CC8E" stroke-width="2"/>
+      </g>
+      <g fill="#D7B364">
+        <circle cx="260" cy="90" r="5"/><circle cx="440" cy="60" r="6"/><circle cx="660" cy="110" r="5"/>
+      </g>
+      <g stroke="rgba(255,255,255,.07)"><path d="M0 240 H720"/></g>
+    </svg>
+  </div>
+  <div class="shot__caps">
+    <p class="cap cap--gold">Proces.</p>
+    <p class="cap cap--gold">Discipline.</p>
+    <p class="cap cap--gold">Uitvoering.</p>
+    <p class="cap cap--sm">Dezelfde drie woorden, elke sessie opnieuw.</p>
+  </div>
+</section>
+
+<!-- ============ SHOT 02 — DE OPRICHTER ============ -->
+<section class="shot wrap" id="oprichter">
+  <div class="shot__tag"><i></i><b>02</b> De oprichter<i></i></div>
+  <div class="shot__art">
+    <svg viewBox="0 0 720 340" role="img" aria-label="Lijntekening van een figuur voor een raster">
+      <g stroke="rgba(255,255,255,.06)">
+        <path d="M0 60 H720 M0 120 H720 M0 180 H720 M0 240 H720 M0 300 H720"/>
+      </g>
+      <g class="drift" fill="none" stroke="#D7B364" stroke-width="2">
+        <circle cx="360" cy="118" r="46"/>
+        <path d="M268 340 c0-62 41-98 92-98 s92 36 92 98"/>
+        <path d="M360 242 v98" stroke="rgba(215,179,100,.45)" stroke-width="1.4"/>
+        <path d="M330 256 L360 292 L390 256" stroke="rgba(215,179,100,.45)" stroke-width="1.4"/>
+      </g>
+      <g fill="none" stroke="rgba(215,179,100,.22)"><circle cx="360" cy="150" r="124"/></g>
+      <path d="M150 300 H236" stroke="rgba(215,179,100,.4)"/>
+      <path d="M484 300 H570" stroke="rgba(215,179,100,.4)"/>
+    </svg>
+  </div>
+  <div class="shot__caps">
+    <p class="cap cap--who">Oprichter</p>
+    <p class="cap">Ik ben inmiddels al meer dan <b>10 jaar</b> actief in trading</p>
+    <p class="cap">en heb in die jaren vrijwel alles meegemaakt:</p>
+    <p class="cap">winst, verlies, fouten, groei en vooral heel veel lessen.</p>
+    <p class="cap">Atlas Capital heb ik gebouwd om die ervaring te delen.</p>
+    <p class="cap">Geen snelle-rijk-verhalen, maar echte setups en educatie.</p>
+    <div class="caps-cta">
+      <a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span>Kom naar de server</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOT 03 — EDUCATIE ============ -->
+<section class="shot wrap" id="educatie">
+  <div class="shot__tag"><i></i><b>03</b> Educatie<i></i></div>
+  <div class="shot__art">
+    <svg viewBox="0 0 720 220" role="img" aria-label="Tien punten verbonden door een gouden lijn">
+      <path d="M40 150 H680" stroke="rgba(215,179,100,.3)" stroke-width="1.4"/>
+      <g fill="#0A0B0D" stroke="#D7B364" stroke-width="2">
+        <circle cx="40" cy="150" r="8"/><circle cx="111" cy="150" r="8"/><circle cx="182" cy="150" r="8"/>
+        <circle cx="253" cy="150" r="8"/><circle cx="324" cy="150" r="8"/><circle cx="396" cy="150" r="8"/>
+        <circle cx="467" cy="150" r="8"/><circle cx="538" cy="150" r="8"/><circle cx="609" cy="150" r="8"/>
+        <circle cx="680" cy="150" r="8"/>
+      </g>
+      <g stroke="rgba(215,179,100,.5)" stroke-width="1.2">
+        <path d="M40 142 V96"/><path d="M111 142 V70"/><path d="M182 142 V104"/><path d="M253 142 V62"/>
+        <path d="M324 142 V92"/><path d="M396 142 V56"/><path d="M467 142 V98"/><path d="M538 142 V74"/>
+        <path d="M609 142 V110"/><path d="M680 142 V84"/>
+      </g>
+      <g fill="#E6CC8E">
+        <circle cx="40" cy="94" r="3"/><circle cx="111" cy="68" r="3"/><circle cx="182" cy="102" r="3"/>
+        <circle cx="253" cy="60" r="3"/><circle cx="324" cy="90" r="3"/><circle cx="396" cy="54" r="3"/>
+        <circle cx="467" cy="96" r="3"/><circle cx="538" cy="72" r="3"/><circle cx="609" cy="108" r="3"/>
+        <circle cx="680" cy="82" r="3"/>
+      </g>
+    </svg>
+  </div>
+  <div class="shot__caps">
+    <p class="cap">Tien onderwerpen, van structuur tot je eigen hoofd.</p>
+    <div class="topics">
+      <span class="topic"><b>01</b>Deviatie</span>
+      <span class="topic"><b>02</b>SMT</span>
+      <span class="topic"><b>03</b>FVG</span>
+      <span class="topic"><b>04</b>IFVG</span>
+      <span class="topic"><b>05</b>Orderblocks</span>
+      <span class="topic"><b>06</b>Fibonacci</span>
+      <span class="topic"><b>07</b>Sessie-liquiditeit</span>
+      <span class="topic"><b>08</b>Liquiditeit</span>
+      <span class="topic"><b>09</b>Risicobeheer</span>
+      <span class="topic"><b>10</b>Tradingpsychologie</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOT 04 — HET MODEL ============ -->
+<section class="shot wrap" id="model">
+  <div class="shot__tag"><i></i><b>04</b> Het model<i></i></div>
+  <div class="shot__art">
+    <svg viewBox="0 0 720 380" role="img" aria-label="Schematische weergave van een sweep boven gelijke hoogtes en het herstel in een gap">
+      <g stroke="rgba(255,255,255,.05)">
+        <path d="M0 76 H720 M0 152 H720 M0 228 H720 M0 304 H720"/>
+      </g>
+      <path d="M56 106 H332" stroke="#B9954A" stroke-dasharray="7 7" stroke-width="1.3"/>
+      <rect x="410" y="192" width="256" height="52" fill="rgba(215,179,100,.11)" stroke="#D7B364" stroke-width="1"/>
+      <g stroke-width="2.4" fill="#121417" stroke="#6E6F73" stroke-linecap="square">
+        <path d="M84 130 V212"/><rect x="76" y="146" width="16" height="54"/>
+        <path d="M120 124 V206"/><rect x="112" y="138" width="16" height="56"/>
+      </g>
+      <g stroke-width="2.4" fill="rgba(215,179,100,.24)" stroke="#D7B364">
+        <path d="M156 116 V202"/><rect x="148" y="130" width="16" height="58"/>
+        <path d="M192 110 V198"/><rect x="184" y="124" width="16" height="58"/>
+      </g>
+      <g stroke-width="2.6" fill="rgba(215,179,100,.32)" stroke="#E6CC8E">
+        <path d="M230 72 V210"/><rect x="221" y="106" width="18" height="72"/>
+      </g>
+      <circle cx="230" cy="84" r="18" fill="none" stroke="#E6CC8E" stroke-width="1.4"/>
+      <g stroke-width="2.4" fill="#121417" stroke="#83848A">
+        <path d="M268 112 V232"/><rect x="260" y="126" width="16" height="90"/>
+        <path d="M304 150 V270"/><rect x="296" y="164" width="16" height="92"/>
+        <path d="M340 190 V304"/><rect x="332" y="204" width="16" height="86"/>
+        <path d="M376 222 V330"/><rect x="368" y="236" width="16" height="80"/>
+      </g>
+      <g stroke-width="2.4" fill="rgba(215,179,100,.24)" stroke="#B9954A">
+        <path d="M424 214 V318"/><rect x="416" y="228" width="16" height="78"/>
+        <path d="M460 194 V298"/><rect x="452" y="206" width="16" height="78"/>
+      </g>
+      <g stroke-width="2.4" fill="#121417" stroke="#83848A">
+        <path d="M500 226 V336"/><rect x="492" y="240" width="16" height="82"/>
+        <path d="M536 258 V356"/><rect x="528" y="270" width="16" height="76"/>
+        <path d="M572 282 V366"/><rect x="564" y="294" width="16" height="66"/>
+      </g>
+      <path d="M244 122 C 300 214, 340 258, 396 308" fill="none" stroke="rgba(215,179,100,.5)" stroke-width="1.8" stroke-dasharray="6 7"/>
+      <path d="M396 308 l-17 -11 l22 -3 z" fill="#D7B364"/>
+      <text x="56" y="94" fill="#8B8C8F" font-size="12" letter-spacing="3" font-family="Sora,Arial,sans-serif">GELIJKE HOOGTES</text>
+      <text x="422" y="184" fill="#E6CC8E" font-size="12" letter-spacing="3" font-family="Sora,Arial,sans-serif">FVG</text>
+      <text x="252" y="66" fill="#E6CC8E" font-size="12" letter-spacing="3" font-family="Sora,Arial,sans-serif">SWEEP</text>
+      <text x="12" y="372" fill="#5B5C5F" font-size="11" letter-spacing="3" font-family="Sora,Arial,sans-serif">SCHEMATISCH — GEEN KOERSEN, GEEN UITSLAG</text>
+    </svg>
+  </div>
+  <div class="shot__caps">
+    <p class="cap">Eerst wordt de liquiditeit opgehaald.</p>
+    <p class="cap">Dan blijft er een gap open.</p>
+    <p class="cap">Daar wordt op gewacht — met het risico al vast.</p>
+  </div>
+</section>
+
+<!-- ============ SHOT 05 — LIVE ============ -->
+<section class="shot wrap" id="live">
+  <div class="shot__tag"><i></i><b>05</b> Live trading<i></i></div>
+  <div class="shot__art">
+    <svg viewBox="0 0 720 260" role="img" aria-label="Een geluidsgolf van gouden staven binnen een ring">
+      <circle cx="360" cy="130" r="118" fill="none" stroke="rgba(215,179,100,.2)"/>
+      <circle cx="360" cy="130" r="86" fill="none" stroke="rgba(215,179,100,.12)"/>
+      <g stroke="#D7B364" stroke-width="3" stroke-linecap="round">
+        <path d="M120 130 V130"/><path d="M150 112 V148"/><path d="M180 88 V172"/><path d="M210 120 V140"/>
+        <path d="M240 70 V190"/><path d="M270 104 V156"/><path d="M300 126 V134"/><path d="M330 56 V204"/>
+        <path d="M360 96 V164"/><path d="M390 118 V142"/><path d="M420 62 V198"/><path d="M450 100 V160"/>
+        <path d="M480 124 V136"/><path d="M510 80 V180"/><path d="M540 110 V150"/><path d="M570 92 V168"/>
+        <path d="M600 122 V138"/>
+      </g>
+    </svg>
+  </div>
+  <div class="shot__caps">
+    <p class="cap cap--who"><span class="ring"><u></u><i></i></span> &nbsp;Live sessies in de server</p>
+    <p class="cap">De oprichter handelt live mee en vertelt wat hij ziet.</p>
+    <p class="cap cap--sm">Ook de sessies waarin hij niets doet. Tijden worden in de server aangekondigd.</p>
+    <div class="caps-cta">
+      <a class="cta cta--solid" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span>Stem af in Discord</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOT 06 — KANALEN ============ -->
+<section class="shot wrap" id="kanalen">
+  <div class="shot__tag"><i></i><b>06</b> De server<i></i></div>
+  <div class="shot__art">
+    <svg viewBox="0 0 720 240" role="img" aria-label="Vijftien staven in twee groepen">
+      <g fill="rgba(215,179,100,.55)">
+        <rect x="30" y="120" width="26" height="90"/><rect x="70" y="96" width="26" height="114"/>
+        <rect x="110" y="140" width="26" height="70"/><rect x="150" y="72" width="26" height="138"/>
+        <rect x="190" y="132" width="26" height="78"/><rect x="230" y="104" width="26" height="106"/>
+        <rect x="270" y="152" width="26" height="58"/><rect x="310" y="88" width="26" height="122"/>
+        <rect x="350" y="128" width="26" height="82"/>
+      </g>
+      <g fill="none" stroke="rgba(215,179,100,.5)" stroke-dasharray="5 5">
+        <rect x="420" y="110" width="26" height="100"/><rect x="460" y="80" width="26" height="130"/>
+        <rect x="500" y="136" width="26" height="74"/><rect x="540" y="100" width="26" height="110"/>
+        <rect x="580" y="124" width="26" height="86"/><rect x="620" y="92" width="26" height="118"/>
+      </g>
+      <path d="M20 216 H392" stroke="#D7B364" stroke-width="2"/>
+      <path d="M410 216 H660" stroke="rgba(215,179,100,.45)" stroke-width="2" stroke-dasharray="6 6"/>
+    </svg>
+  </div>
+  <div class="shot__caps">
+    <p class="cap">Vijftien kanalen.</p>
+    <div class="chan">
+      <div class="chan__g">
+        <div class="chan__h">Thuis — nu gratis</div>
+        <div class="chan__l">
+          <span>#nq-chart-ideeën</span><span>#es-chart-ideeën</span><span>#bitcoin</span>
+          <span>#altcoins</span><span>#markt</span><span>#vragen</span>
+          <span>#algemeen</span><span>#atlas-op-socials</span><span>#ondersteuning</span>
+        </div>
+      </div>
+      <div class="chan__g chan__g--p">
+        <div class="chan__h">Premium — opent later</div>
+        <div class="chan__l">
+          <span>#trade-setups</span><span>#marktupdates</span><span>#indicatoren</span>
+          <span>#sessie-opnames</span><span>#chart-ideeën</span><span>#premium-chat</span>
+        </div>
+        <p class="chan__n">Datum en prijs worden in de server aangekondigd.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOT 07 — TOEGANG ============ -->
+<section class="shot wrap" id="toegang">
+  <div class="shot__tag"><i></i><b>07</b> Toegang<i></i></div>
+  <div class="shot__art">
+    <svg viewBox="0 0 720 200" role="img" aria-label="Twee poorten, één open en één nog gesloten">
+      <g fill="none" stroke="#D7B364" stroke-width="2">
+        <path d="M120 190 V60 a80 80 0 0 1 160 0 V190"/>
+      </g>
+      <path d="M120 190 H280" stroke="rgba(215,179,100,.35)" stroke-width="2"/>
+      <g fill="none" stroke="rgba(215,179,100,.4)" stroke-width="2" stroke-dasharray="8 7">
+        <path d="M440 190 V60 a80 80 0 0 1 160 0 V190"/>
+      </g>
+      <path d="M440 190 H600" stroke="rgba(215,179,100,.2)" stroke-width="2"/>
+      <path d="M200 190 V120" stroke="rgba(215,179,100,.35)"/>
+      <path d="M520 190 V120" stroke="rgba(215,179,100,.16)"/>
+    </svg>
+  </div>
+  <div class="shot__caps">
+    <div class="two">
+      <div class="two__c two__c--now">
+        <span class="k">Nu</span>
+        <h3>Gratis</h3>
+        <ul>
+          <li>Alle Thuis-kanalen</li>
+          <li>De educatie over tien onderwerpen</li>
+          <li>Chart-ideeën voor NQ, ES, Bitcoin en altcoins</li>
+          <li>Live sessies meekijken</li>
+        </ul>
+        <div class="btnrow"><a class="cta cta--solid" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span>Nu binnenkomen</a></div>
+      </div>
+      <div class="two__c">
+        <span class="k">Later</span>
+        <h3>Premium</h3>
+        <ul>
+          <li>Trade-setups en marktupdates</li>
+          <li>Indicatoren en sessie-opnames</li>
+          <li>Eigen chart-ideeën en premium-chat</li>
+          <li>Datum en prijs volgen in de server</li>
+        </ul>
+        <div class="btnrow"><a class="cta" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Hoor het als eerste</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOT 08 — SLOT ============ -->
+<section class="shot wrap" id="slot" style="min-height:clamp(460px,70vh,700px);border-bottom:0">
+  <div class="shot__tag"><i></i><b>08</b> Slot<i></i></div>
+  <div class="shot__art">
+    <svg viewBox="0 0 720 180" role="img" aria-label="Een gouden lijn die uitloopt in een punt">
+      <path d="M40 140 H400 L520 60 H680" fill="none" stroke="#D7B364" stroke-width="2"/>
+      <circle cx="680" cy="60" r="7" fill="#E6CC8E"/>
+      <circle cx="680" cy="60" r="18" fill="none" stroke="rgba(215,179,100,.4)"/>
+    </svg>
+  </div>
+  <div class="shot__caps">
+    <p class="cap cap--big">De server staat open</p>
+    <p class="cap cap--sm">Gratis toegang. Proces, discipline en uitvoering — de rest is geduld.</p>
+    <div class="caps-cta">
+      <a class="cta cta--solid cta--lg" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener"><span class="cta__d"></span>Word lid van Discord</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="wrap">
+  <div class="foot">
+    <a class="wm" href="#top">
+      <svg viewBox="0 0 28 28" aria-hidden="true">
+        <circle cx="14" cy="14" r="13" fill="none" stroke="#D7B364"/>
+        <path d="M14 6 L21 21 H7 Z" fill="none" stroke="#E6CC8E" stroke-width="1.4"/>
+      </svg>
+      <span>Atlas Capital</span>
+    </a>
+    <div class="foot__l">
+      <a class="l" href="https://discord.gg/78Ff2GuSfW" target="_blank" rel="noopener">Discord</a>
+      <a class="l" href="https://www.tiktok.com/@atlascapitalbv" target="_blank" rel="noopener">TikTok @atlascapitalbv</a>
+      <a class="l" href="#educatie">Educatie</a>
+      <a class="l" href="#kanalen">Kanalen</a>
+    </div>
+  </div>
+  <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+</footer>
+
+</body>
+</html>

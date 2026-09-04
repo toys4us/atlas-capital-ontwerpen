@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 010 Kolomsprong</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   010 — KOLOMSPRONG
+   Two rivers, one gold seam. The left river is small, dense and mechanical;
+   the right river is enormous and almost empty. Bands of paper and ink cross
+   both of them without ever interrupting the seam. The same facts appear at
+   two wildly different weights — that jump is the design.
+   ========================================================================== */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --gold-dk:#8A6E2E;
+  --ink:#08090B;
+  --ink-2:#101114;
+  --paper:#F4F2EC;
+  --paper-2:#E8E5DC;
+  --muted:#A5A6A8;
+  --grey:#55565A;
+
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;
+  --sans:"Sora","Helvetica Neue",Helvetica,Arial,sans-serif;
+
+  --left:19%;
+  --pad-x:clamp(12px,2.2vw,34px);
+}
+
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.5;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+
+/* ---- the two rivers ----------------------------------------------------- */
+.band{width:100%}
+.band > .river{
+  max-width:1560px;margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr;
+}
+@media(min-width:820px){
+  .band > .river{grid-template-columns:var(--left) 1fr}
+}
+.L{
+  padding:clamp(18px,2.4vw,30px) var(--pad-x);
+  font-family:var(--mono);
+  font-size:10.5px;
+  line-height:1.62;
+  letter-spacing:.035em;
+  border-bottom:1px solid var(--gold-lo);
+}
+@media(min-width:820px){
+  .L{border-bottom:0;border-right:1px solid var(--gold-lo)}
+}
+.R{
+  padding:clamp(26px,4.4vw,72px) var(--pad-x);
+  min-width:0;
+}
+
+/* ---- band skins --------------------------------------------------------- */
+.ink{background:var(--ink);color:var(--paper)}
+.ink .L{color:#8B8C8F}
+.ink .L b{color:var(--gold)}
+.ink .L u{color:var(--paper)}
+.paper{background:var(--paper);color:var(--ink)}
+.paper .L{color:var(--grey)}
+.paper .L b{color:var(--gold-dk)}
+.paper .L u{color:var(--ink)}
+.ink2{background:var(--ink-2);color:var(--paper)}
+.ink2 .L{color:#8B8C8F}
+.ink2 .L b{color:var(--gold)}
+.ink2 .L u{color:var(--paper)}
+
+/* ---- left river typography --------------------------------------------- */
+.L b{font-weight:400;text-decoration:none;letter-spacing:.18em;text-transform:uppercase;display:block}
+.L u{text-decoration:none}
+.L .rule{height:1px;background:currentColor;margin:12px 0;opacity:.28}
+.L .set{margin-bottom:16px}
+.L .set:last-child{margin-bottom:0}
+.L li{padding:1px 0;word-break:break-word}
+.L .k{display:flex;justify-content:space-between;gap:8px}
+
+/* ---- right river typography -------------------------------------------- */
+.giant{
+  font-family:var(--sans);
+  font-weight:800;
+  font-size:clamp(2.4rem,8.6vw,7.4rem);
+  line-height:.94;
+  letter-spacing:-.045em;
+  margin:0;
+  overflow-wrap:break-word;
+}
+.big{
+  font-weight:800;
+  font-size:clamp(1.8rem,5.4vw,4.2rem);
+  line-height:.98;letter-spacing:-.04em;margin:0;
+  overflow-wrap:break-word;
+}
+.mid{font-weight:600;font-size:clamp(1.05rem,2vw,1.6rem);line-height:1.22;letter-spacing:-.02em;margin:0}
+.say{font-size:clamp(15px,1.35vw,18px);line-height:1.6;max-width:44ch;font-weight:400}
+.gold{color:var(--gold)}
+.golddk{color:var(--gold-dk)}
+.mut{color:var(--muted)}
+.grey{color:var(--grey)}
+.m12{margin-top:12px}.m20{margin-top:20px}.m32{margin-top:32px}
+.m48{margin-top:clamp(28px,4vw,52px)}.m72{margin-top:clamp(38px,6vw,80px)}
+
+/* ---- buttons ------------------------------------------------------------ */
+.btn{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  padding:15px 24px;
+  background:var(--gold);color:var(--ink);
+  border:1px solid var(--gold);
+  transition:background .16s ease,color .16s ease;
+  white-space:nowrap;
+}
+.btn:hover{background:transparent;color:var(--gold)}
+.paper .btn:hover{color:var(--gold-dk);border-color:var(--gold-dk)}
+.btn.big-b{padding:20px 34px;font-size:13px;letter-spacing:.24em}
+.btn.out{background:transparent;color:var(--gold);border-color:var(--gold-lo)}
+.btn.out:hover{background:var(--gold);color:var(--ink)}
+.paper .btn.out{color:var(--gold-dk);border-color:var(--gold-dk)}
+.paper .btn.out:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+
+/* ---- header band -------------------------------------------------------- */
+.head{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--gold-lo)}
+.head .L{padding-top:11px;padding-bottom:11px;border-bottom:0}
+.head .R{padding:9px var(--pad-x);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.mark{display:flex;align-items:center;gap:10px}
+.mark .sq{width:13px;height:13px;background:linear-gradient(135deg,var(--gold-hi),var(--gold-lo))}
+.mark b{font-weight:800;letter-spacing:-.01em;font-size:15px}
+.head .btn{padding:10px 18px;font-size:11px}
+
+/* ---- the jump list (10 onderwerpen, huge, alternating edge) ------------- */
+.jump li{
+  font-weight:800;
+  font-size:clamp(1.55rem,5.6vw,4.4rem);
+  line-height:1.0;
+  letter-spacing:-.045em;
+  padding:9px 0;
+  border-bottom:1px solid rgba(215,179,100,.26);
+  overflow-wrap:break-word;
+  transition:color .16s ease,padding .16s ease;
+}
+.jump li:nth-child(even){text-align:right;color:var(--gold)}
+.jump li:hover{color:var(--gold-hi)}
+.jump li:nth-child(even):hover{color:var(--paper)}
+
+/* ---- schematic ---------------------------------------------------------- */
+.scroller{overflow-x:auto}
+.scroller svg{display:block;width:100%;min-width:520px;height:auto}
+
+/* ---- seam accents ------------------------------------------------------- */
+.seamnote{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+}
+.stack-lines li{
+  padding:7px 0;border-bottom:1px solid rgba(215,179,100,.22);
+  font-size:clamp(15px,1.6vw,19px);font-weight:600;letter-spacing:-.015em;
+}
+.paper .stack-lines li{border-bottom-color:rgba(138,110,46,.3)}
+
+/* ---- responsive --------------------------------------------------------- */
+@media(max-width:819px){
+  .L{background:rgba(215,179,100,.05)}
+  .paper .L{background:var(--paper-2)}
+  .head .R{padding-top:12px;padding-bottom:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER BAND ================= -->
+<div class="band ink head">
+  <div class="river">
+    <div class="L"><b>Atlas Capital</b><u>NL</u></div>
+    <div class="R">
+      <div class="mark"><span class="sq" aria-hidden="true"></span><b>Atlas Capital</b></div>
+      <a class="btn" href="https://discord.gg/78Ff2GuSfW">Open Discord</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 01 — INK : HERO ================= -->
+<div class="band ink">
+  <div class="river">
+    <div class="L">
+      <div class="set">
+        <b>01 — Introductie</b>
+        <u>Atlas Capital</u><br>
+        Nederlandse trading-community
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        <b>Markten</b>
+        <ul>
+          <li class="k"><span>NQ</span><span>Nasdaq futures</span></li>
+          <li class="k"><span>ES</span><span>S&amp;P futures</span></li>
+          <li class="k"><span>BTC</span><span>Bitcoin</span></li>
+          <li class="k"><span>ALT</span><span>Altcoins</span></li>
+        </ul>
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        <b>Kern</b>
+        <u>Proces.</u><br><u>Discipline.</u><br><u>Uitvoering.</u>
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        <b>Toegang</b>
+        Nu gratis. Premium opent later; prijs en datum in de server.
+      </div>
+    </div>
+    <div class="R">
+      <p class="seamnote gold">Educatie · Markt · Live</p>
+      <h1 class="giant m20">Leer de<br>markt<br><span class="gold">lezen.</span></h1>
+      <p class="say m32 mut">Tien onderwerpen, vijftien kanalen, één Discord. Geen ruis.</p>
+      <p class="m48"><a class="btn big-b" href="https://discord.gg/78Ff2GuSfW">Word lid via Discord</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 02 — PAPER : DE OPRICHTER ================= -->
+<div class="band paper">
+  <div class="river">
+    <div class="L">
+      <div class="set">
+        <b>02 — De oprichter</b>
+        <u>10+ jaar in de markten</u>
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        winst<br>verlies<br>fouten<br>groei<br>lessen
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        <b>In zijn eigen woorden</b>
+        Geen snelle-rijk-verhalen.
+      </div>
+    </div>
+    <div class="R">
+      <p class="seamnote golddk">02 — De oprichter</p>
+      <p class="giant m20 golddk">10+</p>
+      <p class="mid m12">jaar actief in trading</p>
+      <p class="say m32">Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.</p>
+      <p class="say m20">Atlas Capital heb ik gebouwd om die ervaring te delen en te laten zien hoe ik de markten dagelijks benader.</p>
+      <p class="m32"><a class="btn out" href="https://discord.gg/78Ff2GuSfW">Volg de aanpak</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 03 — INK : EDUCATIE (de sprong) ================= -->
+<div class="band ink">
+  <div class="river">
+    <div class="L">
+      <div class="set">
+        <b>03 — Educatie</b>
+        <u>10 onderwerpen</u>
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        <ul>
+          <li class="k"><span>01</span><span>deviatie</span></li>
+          <li class="k"><span>02</span><span>SMT</span></li>
+          <li class="k"><span>03</span><span>FVG</span></li>
+          <li class="k"><span>04</span><span>IFVG</span></li>
+          <li class="k"><span>05</span><span>orderblocks</span></li>
+          <li class="k"><span>06</span><span>fibonacci</span></li>
+          <li class="k"><span>07</span><span>sessie-liq.</span></li>
+          <li class="k"><span>08</span><span>liquiditeit</span></li>
+          <li class="k"><span>09</span><span>risicobeheer</span></li>
+          <li class="k"><span>10</span><span>psychologie</span></li>
+        </ul>
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        Dezelfde tien, twee gewichten.
+      </div>
+    </div>
+    <div class="R">
+      <p class="seamnote gold">03 — Educatie</p>
+      <ul class="jump m20">
+        <li>deviatie</li>
+        <li>SMT</li>
+        <li>FVG</li>
+        <li>IFVG</li>
+        <li>orderblocks</li>
+        <li>fibonacci</li>
+        <li>sessie-liquiditeit</li>
+        <li>liquiditeit</li>
+        <li>risicobeheer</li>
+        <li>tradingpsychologie</li>
+      </ul>
+      <p class="m48"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Begin bij deviatie</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 04 — PAPER : HET MODEL ================= -->
+<div class="band paper">
+  <div class="river">
+    <div class="L">
+      <div class="set">
+        <b>04 — Het model</b>
+        <u>SMT</u><br>schematisch
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        <b>Legenda</b>
+        <ul>
+          <li class="k"><span>NQ</span><span>hogere top</span></li>
+          <li class="k"><span>ES</span><span>lagere top</span></li>
+        </ul>
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        Geen niveaus, geen datums, geen uitkomst. Alleen de vorm.
+      </div>
+    </div>
+    <div class="R">
+      <p class="seamnote golddk">04 — Het model</p>
+      <h2 class="big m20">Twee markten,<br>één verhaal.</h2>
+      <div class="scroller m32">
+        <svg viewBox="0 0 880 400" role="img" aria-label="Schematische weergave van SMT: de ene index maakt een hogere top terwijl de andere een lagere top maakt">
+          <g stroke="#08090B" stroke-width="1" opacity=".12">
+            <path d="M0 70H880M0 140H880M0 210H880M0 280H880M0 350H880"/>
+          </g>
+
+          <!-- reference levels -->
+          <path d="M300 92H840" stroke="#B9954A" stroke-width="1.4" stroke-dasharray="8 7"/>
+          <path d="M300 236H840" stroke="#B9954A" stroke-width="1.4" stroke-dasharray="8 7"/>
+
+          <!-- NQ : higher high -->
+          <path d="M40 176 L104 120 L152 158 L214 96 L266 140 L320 92 L376 148
+                   L432 118 L494 64 L552 126 L616 100 L682 158 L748 130 L820 176"
+                fill="none" stroke="#08090B" stroke-width="3" stroke-linejoin="miter"/>
+          <rect x="314" y="86" width="12" height="12" fill="#08090B"/>
+          <rect x="488" y="58" width="12" height="12" fill="#08090B"/>
+
+          <!-- ES : lower high -->
+          <path d="M40 320 L104 268 L152 300 L214 250 L266 288 L320 236 L376 292
+                   L432 266 L494 264 L552 300 L616 282 L682 322 L748 300 L820 336"
+                fill="none" stroke="#B9954A" stroke-width="3" stroke-linejoin="miter"/>
+          <rect x="314" y="230" width="12" height="12" fill="#B9954A"/>
+          <rect x="488" y="258" width="12" height="12" fill="#B9954A"/>
+
+          <!-- the divergence, marked -->
+          <rect x="470" y="44" width="48" height="248" fill="rgba(215,179,100,.20)"/>
+          <path d="M470 44V292M518 44V292" stroke="#B9954A" stroke-width="1.2"/>
+
+          <g stroke="#08090B" stroke-width="1" opacity=".6">
+            <path d="M494 44V22H560"/>
+          </g>
+          <g font-family="Sora,Helvetica,Arial,sans-serif" font-size="13" font-weight="600"
+             letter-spacing="2.4" fill="#08090B">
+            <text x="566" y="27">DIVERGENTIE</text>
+            <text x="828" y="180">NQ</text>
+            <text x="828" y="340">ES</text>
+          </g>
+        </svg>
+      </div>
+      <p class="say m20 grey">De ene maakt een nieuwe top, de andere niet. Dat verschil is het signaal om beter te kijken.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 05 — INK : KANALEN ================= -->
+<div class="band ink2">
+  <div class="river">
+    <div class="L">
+      <div class="set">
+        <b>05 — De server</b>
+        <u>15 kanalen</u>
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        <b>Thuis — nu gratis</b>
+        <ul>
+          <li>#nq-chart-ideeën</li>
+          <li>#es-chart-ideeën</li>
+          <li>#bitcoin</li>
+          <li>#altcoins</li>
+          <li>#markt</li>
+          <li>#vragen</li>
+          <li>#algemeen</li>
+          <li>#atlas-op-socials</li>
+          <li>#ondersteuning</li>
+        </ul>
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        <b>Premium — opent later</b>
+        <ul>
+          <li>#trade-setups</li>
+          <li>#marktupdates</li>
+          <li>#indicatoren</li>
+          <li>#sessie-opnames</li>
+          <li>#chart-ideeën</li>
+          <li>#premium-chat</li>
+        </ul>
+      </div>
+    </div>
+    <div class="R">
+      <p class="seamnote gold">05 — De server</p>
+      <h2 class="giant m20"><span class="gold">15</span><br>kanalen.</h2>
+      <ul class="stack-lines m32">
+        <li>Thuis — nu gratis</li>
+        <li class="mut">Premium — opent later</li>
+      </ul>
+      <p class="m32"><a class="btn" href="https://discord.gg/78Ff2GuSfW">Open de server</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 06 — PAPER : LIVE & TOEGANG ================= -->
+<div class="band paper">
+  <div class="river">
+    <div class="L">
+      <div class="set">
+        <b>06 — Live</b>
+        De oprichter handelt live mee in Discord. Tijden worden daar aangekondigd.
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        <b>07 — Toegang</b>
+        <u>Nu — gratis</u><br>
+        Alle thuis-kanalen, de educatie en de dagelijkse marktbespreking.
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        <u>Later — premium</u><br>
+        Zes extra kanalen. Prijs en datum in de server.
+      </div>
+    </div>
+    <div class="R">
+      <p class="seamnote golddk">06 — Live</p>
+      <h2 class="giant m20">Live<br>mee-<br>kijken.</h2>
+      <ul class="stack-lines m32">
+        <li>Nu — gratis</li>
+        <li class="grey">Later — premium</li>
+      </ul>
+      <p class="say m20 grey">De oprichter handelt live mee in de server. Tijden worden daar aangekondigd.</p>
+      <p class="m32"><a class="btn out" href="https://discord.gg/78Ff2GuSfW">Zit erbij</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 08 — INK : SLOT + FOOTER ================= -->
+<div class="band ink">
+  <div class="river">
+    <div class="L">
+      <div class="set">
+        <b>08 — Word lid</b>
+        <u>Gratis toegang</u>
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        <b>Links</b>
+        <a href="https://discord.gg/78Ff2GuSfW">Discord</a><br>
+        <a href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
+      </div>
+      <div class="rule"></div>
+      <div class="set">
+        Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.
+      </div>
+    </div>
+    <div class="R">
+      <p class="seamnote gold">08 — Word lid</p>
+      <h2 class="giant m20">Proces.<br>Discipline.<br><span class="gold">Uitvoering.</span></h2>
+      <p class="m48"><a class="btn big-b" href="https://discord.gg/78Ff2GuSfW">Open Discord</a></p>
+      <div class="m72">
+        <div class="mark"><span class="sq" aria-hidden="true"></span><b>Atlas Capital</b></div>
+        <p class="seamnote mut m20">
+          <a href="https://discord.gg/78Ff2GuSfW">Discord</a> &nbsp;·&nbsp;
+          <a href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
+        </p>
+        <p class="say m20 mut" style="font-size:12.5px;line-height:1.65">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

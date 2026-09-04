@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital — 060 Zwart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ATLAS CAPITAL — 060 ZWART
+   True black. One weight of type — Sora 300, nothing else.
+   No rules. No boxes. No borders. No shadows. No dividers.
+   Hierarchy is made of two things only: size and space.
+
+   Gold appears exactly three times on this page:
+     · the hero slab           (Discord)
+     · the gap in the schematic (the one thing worth drawing)
+     · the closing slab        (Discord)
+   Every other call to action is white type at a size you
+   cannot walk past. On a black page that is louder than gold.
+   ============================================================ */
+
+:root{
+  --black:#000000;
+  --white:#F2F1ED;
+  --near:#C6C7C9;
+  --grey:#87898D;
+  --faint:#4A4C50;
+  --ghost:#26282B;
+
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+
+  /* one rhythm unit; every space on the page is a multiple */
+  --u:8px;
+
+  /* an extreme scale, because size is the only tool left */
+  --t-mega:clamp(3rem, 1.1rem + 10.4vw, 9.5rem);
+  --t-big:clamp(2rem, 1.15rem + 4.2vw, 5rem);
+  --t-mid:clamp(1.375rem, 1.1rem + 1.5vw, 2.375rem);
+  --t-body:clamp(1.0625rem, 1rem + .3vw, 1.25rem);
+  --t-small:clamp(.9375rem, .91rem + .18vw, 1.0625rem);
+  --t-micro:clamp(.6875rem, .665rem + .1vw, .75rem);
+
+  --face:"Sora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+*,*::before,*::after{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--black);
+  color:var(--white);
+  font-family:var(--face);
+  font-weight:300;            /* the only weight used anywhere */
+  font-size:var(--t-body);
+  line-height:1.66;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{margin:0;font-weight:300}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+
+.col{
+  max-width:1280px;
+  margin-inline:auto;
+  padding-inline:clamp(22px, 6vw, 104px);
+}
+
+/* ------------------------------------------------------------
+   BLOCK — label hangs in the left gutter; content sits right.
+   No line between them. The alignment is the composition.
+   ------------------------------------------------------------ */
+.block{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:calc(var(--u)*3);
+  padding-block:clamp(72px, 13vh, 200px);
+}
+@media (min-width:900px){
+  .block{
+    grid-template-columns:12ch minmax(0,1fr);
+    column-gap:clamp(32px, 5vw, 88px);
+  }
+}
+
+.tag{
+  font-size:var(--t-micro);
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--faint);
+  line-height:1.9;
+}
+.tag b{font-weight:300;color:var(--grey);display:block}
+
+/* deliberate, unequal indents so nothing lines up by accident */
+.push-a{padding-left:0}
+@media (min-width:900px){
+  .push-b{padding-left:clamp(0px, 7vw, 128px)}
+  .push-c{padding-left:clamp(0px, 3.5vw, 64px)}
+}
+
+/* ------------------------------------------------------------
+   TYPE
+   ------------------------------------------------------------ */
+.mega{
+  font-size:var(--t-mega);
+  line-height:.86;
+  letter-spacing:-.05em;
+  text-wrap:balance;
+}
+.big{
+  font-size:var(--t-big);
+  line-height:.96;
+  letter-spacing:-.04em;
+  text-wrap:balance;
+}
+.mid{
+  font-size:var(--t-mid);
+  line-height:1.14;
+  letter-spacing:-.025em;
+  max-width:20ch;
+  text-wrap:balance;
+}
+.say{
+  max-width:42ch;
+  color:var(--near);
+  font-size:var(--t-small);
+  line-height:1.8;
+}
+.say.long{max-width:50ch}
+.quiet{color:var(--grey)}
+
+.s2{margin-top:calc(var(--u)*3)}
+.s3{margin-top:calc(var(--u)*5)}
+.s4{margin-top:calc(var(--u)*8)}
+.s5{margin-top:calc(var(--u)*12)}
+
+/* ------------------------------------------------------------
+   CALLS TO ACTION
+   two golds, and white type set large enough to shout
+   ------------------------------------------------------------ */
+.slab{
+  display:inline-flex;
+  align-items:center;
+  gap:.7em;
+  background:var(--gold);
+  color:var(--black);
+  font-size:clamp(1.0625rem, .92rem + .85vw, 1.75rem);
+  letter-spacing:-.015em;
+  padding:calc(var(--u)*2.75) calc(var(--u)*4.5);
+  transition:background .16s ease;
+}
+.slab:hover{background:var(--gold-hi)}
+.slab .a{font-size:.9em;transform:translateY(-.02em)}
+
+.loud{
+  display:inline-flex;
+  align-items:baseline;
+  gap:.5em;
+  color:var(--white);
+  font-size:clamp(1.5rem, 1.05rem + 2.1vw, 3rem);
+  letter-spacing:-.04em;
+  line-height:1.05;
+  transition:color .16s ease;
+}
+.loud .a{color:var(--grey);transition:color .16s ease}
+.loud:hover,.loud:hover .a{color:var(--near)}
+
+.plain{
+  display:inline-flex;
+  align-items:baseline;
+  gap:.45em;
+  color:var(--near);
+  font-size:var(--t-small);
+  letter-spacing:.06em;
+  transition:color .16s ease;
+}
+.plain:hover{color:var(--white)}
+
+/* ------------------------------------------------------------
+   HEADER
+   ------------------------------------------------------------ */
+.top{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:calc(var(--u)*3);
+  flex-wrap:wrap;
+  padding-block:clamp(28px,5vh,56px) 0;
+}
+.mark{
+  font-size:var(--t-small);
+  letter-spacing:.38em;
+  text-transform:uppercase;
+  color:var(--white);
+  white-space:nowrap;
+}
+
+/* ------------------------------------------------------------
+   THE TEN — size and space, nothing else
+   ------------------------------------------------------------ */
+.ten li{
+  display:flex;
+  align-items:baseline;
+  gap:clamp(14px, 2.4vw, 34px);
+  padding-block:calc(var(--u)*1.75);
+}
+.ten .n{
+  font-size:var(--t-micro);
+  letter-spacing:.24em;
+  color:var(--faint);
+  min-width:3ch;
+  flex:0 0 auto;
+}
+.ten .w{
+  font-size:clamp(1.375rem, 1.05rem + 1.9vw, 2.75rem);
+  letter-spacing:-.035em;
+  line-height:1.06;
+  color:var(--white);
+}
+.ten li:nth-child(even) .w{color:var(--near)}
+
+/* ------------------------------------------------------------
+   CHANNELS — two loose groups, no boxes
+   ------------------------------------------------------------ */
+.sets{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:calc(var(--u)*7);
+}
+@media (min-width:760px){.sets{grid-template-columns:1fr 1fr;gap:calc(var(--u)*9)}}
+.sets h3{
+  font-size:var(--t-micro);
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--faint);
+  margin-bottom:calc(var(--u)*3);
+}
+.sets li{
+  font-size:clamp(1rem, .95rem + .38vw, 1.25rem);
+  letter-spacing:-.01em;
+  padding-block:calc(var(--u)*1.1);
+  color:var(--near);
+}
+.sets .later li{color:var(--grey)}
+
+/* ------------------------------------------------------------
+   SCHEMATIC
+   ------------------------------------------------------------ */
+.plate{overflow-x:auto;margin-top:calc(var(--u)*5)}
+.plate svg{display:block;width:100%;min-width:320px;height:auto}
+.cap{
+  margin-top:calc(var(--u)*3);
+  font-size:var(--t-micro);
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--faint);
+}
+
+/* ------------------------------------------------------------
+   ACCESS
+   ------------------------------------------------------------ */
+.acc{display:grid;grid-template-columns:1fr;gap:calc(var(--u)*6);max-width:58ch}
+@media (min-width:720px){.acc{grid-template-columns:1fr 1fr;gap:calc(var(--u)*8)}}
+.acc dt{font-size:var(--t-micro);letter-spacing:.3em;text-transform:uppercase;color:var(--faint)}
+.acc dd{margin:calc(var(--u)*2) 0 0;font-size:clamp(1.25rem,1.05rem + 1vw,2rem);letter-spacing:-.035em;line-height:1.08;color:var(--white)}
+.acc dd.off{color:var(--grey)}
+.acc p{margin-top:calc(var(--u)*2);font-size:var(--t-small);line-height:1.8;color:var(--grey);max-width:30ch}
+
+/* ------------------------------------------------------------
+   FOOTER
+   ------------------------------------------------------------ */
+.end{padding-block:clamp(64px,9vh,120px) clamp(56px,8vh,112px)}
+.ends{display:flex;gap:clamp(20px,4vw,48px);flex-wrap:wrap}
+.risk{
+  margin-top:calc(var(--u)*6);
+  font-size:var(--t-micro);
+  line-height:2;
+  letter-spacing:.04em;
+  color:var(--faint);
+  max-width:56ch;
+}
+.sig{
+  margin-top:calc(var(--u)*5);
+  font-size:var(--t-micro);
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--ghost);
+}
+
+@media (max-width:520px){
+  .block{padding-block:clamp(56px,9vh,104px)}
+  .mega{letter-spacing:-.035em}
+  .slab{width:100%;justify-content:space-between}
+}
+
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+</style>
+</head>
+<body>
+
+<div class="col">
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="top">
+    <a class="mark" href="#h">Atlas Capital</a>
+    <a class="plain" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Open Discord <span aria-hidden="true">&#8594;</span></a>
+  </header>
+
+  <main>
+
+    <!-- ═══════════ 01 · HERO ═══════════ -->
+    <section class="block push-a" id="h" aria-labelledby="z1">
+      <p class="tag">01<b>Atlas Capital</b></p>
+      <div>
+        <h1 class="mega" id="z1">Proces.<br>Discipline.<br>Uitvoering.</h1>
+
+        <p class="say long s4">Nederlandse trading-community op Discord. Educatie voor NQ, ES, Bitcoin en altcoins — rustig uitgelegd, dagelijks toegepast.</p>
+
+        <!-- GOLD, ONCE -->
+        <p class="s4">
+          <a class="slab" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Kom binnen op Discord <span class="a" aria-hidden="true">&#8594;</span></a>
+        </p>
+
+        <p class="tag s3">Toegang is nu gratis</p>
+      </div>
+    </section>
+
+    <!-- ═══════════ 02 · DE OPRICHTER ═══════════ -->
+    <section class="block push-b" aria-labelledby="z2">
+      <p class="tag">02<b>Oprichter</b></p>
+      <div>
+        <h2 class="big" id="z2">10+ jaar.<br>Alles gezien.</h2>
+
+        <blockquote class="s4" style="margin:0">
+          <p class="say long">&ldquo;Ik ben inmiddels al meer dan 10 jaar actief in trading en heb in die jaren vrijwel alles meegemaakt: winst, verlies, fouten, groei en vooral heel veel lessen.&rdquo;</p>
+          <p class="say long s2">&ldquo;Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten zien hoe ik de markten dagelijks benader.&rdquo;</p>
+          <p class="say long s2">&ldquo;Geen snelle-rijk-verhalen, maar echte setups, educatie en een community die samen beter wil worden.&rdquo;</p>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ═══════════ 03 · EDUCATIE ═══════════ -->
+    <section class="block push-a" aria-labelledby="z3">
+      <p class="tag">03<b>Educatie</b></p>
+      <div>
+        <h2 class="mid" id="z3">10 onderwerpen die je zelf leert lezen.</h2>
+
+        <ol class="ten s4">
+          <li><span class="n">01</span><span class="w">deviatie</span></li>
+          <li><span class="n">02</span><span class="w">SMT</span></li>
+          <li><span class="n">03</span><span class="w">FVG</span></li>
+          <li><span class="n">04</span><span class="w">IFVG</span></li>
+          <li><span class="n">05</span><span class="w">orderblocks</span></li>
+          <li><span class="n">06</span><span class="w">fibonacci</span></li>
+          <li><span class="n">07</span><span class="w">sessie-liquiditeit</span></li>
+          <li><span class="n">08</span><span class="w">liquiditeit</span></li>
+          <li><span class="n">09</span><span class="w">risicobeheer</span></li>
+          <li><span class="n">10</span><span class="w">tradingpsychologie</span></li>
+        </ol>
+
+        <p class="s5">
+          <a class="loud" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Begin bij 01 in de server <span class="a" aria-hidden="true">&#8594;</span></a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════ 04 · HET MODEL ═══════════ -->
+    <section class="block push-c" aria-labelledby="z4">
+      <p class="tag">04<b>Model</b></p>
+      <div>
+        <h2 class="mid" id="z4">Sweep. Gap. Hertest. Steeds dezelfde vorm.</h2>
+
+        <div class="plate">
+          <svg viewBox="0 0 900 420" role="img" aria-label="Schematische weergave van een sweep van liquiditeit, een fair value gap en een hertest">
+            <!-- horizon marks, kept almost invisible -->
+            <g stroke="#1A1C1F" stroke-width="1">
+              <line x1="24" y1="80" x2="876" y2="80"/>
+              <line x1="24" y1="180" x2="876" y2="180"/>
+              <line x1="24" y1="280" x2="876" y2="280"/>
+              <line x1="24" y1="380" x2="876" y2="380"/>
+            </g>
+
+            <!-- resting liquidity -->
+            <line x1="24" y1="106" x2="876" y2="106" stroke="#4A4C50" stroke-width="1" stroke-dasharray="8 8"/>
+            <text x="24" y="96" font-family="Sora, Helvetica, Arial, sans-serif" font-size="12" font-weight="300" letter-spacing="2.6" fill="#87898D">LIQUIDITEIT</text>
+
+            <!-- GOLD, TWICE: the gap is the only coloured thing here -->
+            <rect x="352" y="212" width="524" height="54" fill="#D7B364" fill-opacity=".16"/>
+            <text x="364" y="204" font-family="Sora, Helvetica, Arial, sans-serif" font-size="12" font-weight="300" letter-spacing="2.6" fill="#87898D">FVG</text>
+
+            <!-- approach -->
+            <g stroke="#87898D" stroke-width="1" fill="none">
+              <line x1="72" y1="298" x2="72" y2="356"/><rect x="63" y="312" width="18" height="30"/>
+              <line x1="128" y1="278" x2="128" y2="342"/><rect x="119" y="292" width="18" height="34"/>
+              <line x1="184" y1="252" x2="184" y2="324"/><rect x="175" y="266" width="18" height="42"/>
+            </g>
+
+            <!-- the sweep -->
+            <g stroke="#F2F1ED" stroke-width="1" fill="none">
+              <line x1="240" y1="92" x2="240" y2="292"/><rect x="229" y="186" width="22" height="82"/>
+            </g>
+
+            <!-- displacement -->
+            <g stroke="#F2F1ED" stroke-width="1" fill="#F2F1ED">
+              <line x1="296" y1="156" x2="296" y2="306" stroke="#F2F1ED"/><rect x="285" y="172" width="22" height="114"/>
+              <line x1="352" y1="202" x2="352" y2="340" stroke="#F2F1ED"/><rect x="341" y="218" width="22" height="106"/>
+            </g>
+
+            <!-- base -->
+            <g stroke="#87898D" stroke-width="1" fill="none">
+              <line x1="408" y1="286" x2="408" y2="360"/><rect x="399" y="302" width="18" height="44"/>
+              <line x1="464" y1="260" x2="464" y2="338"/><rect x="455" y="276" width="18" height="46"/>
+              <line x1="520" y1="234" x2="520" y2="310"/><rect x="511" y="248" width="18" height="46"/>
+            </g>
+
+            <!-- the retest, reaching into the band -->
+            <g stroke="#F2F1ED" stroke-width="1" fill="none">
+              <line x1="576" y1="208" x2="576" y2="292"/><rect x="565" y="230" width="22" height="48"/>
+              <line x1="632" y1="216" x2="632" y2="300"/><rect x="621" y="242" width="22" height="44"/>
+            </g>
+
+            <!-- continuation away -->
+            <g stroke="#87898D" stroke-width="1" fill="none">
+              <line x1="688" y1="266" x2="688" y2="352"/><rect x="679" y="286" width="18" height="48"/>
+              <line x1="744" y1="292" x2="744" y2="378"/><rect x="735" y="312" width="18" height="50"/>
+              <line x1="800" y1="316" x2="800" y2="398"/><rect x="791" y="336" width="18" height="52"/>
+            </g>
+
+            <!-- callouts, in the same grey as the body -->
+            <g stroke="#4A4C50" stroke-width="1">
+              <line x1="240" y1="86" x2="240" y2="52"/><line x1="240" y1="52" x2="306" y2="52"/>
+            </g>
+            <text x="316" y="56" font-family="Sora, Helvetica, Arial, sans-serif" font-size="12" font-weight="300" letter-spacing="2.6" fill="#87898D">SWEEP</text>
+
+            <g stroke="#4A4C50" stroke-width="1">
+              <line x1="604" y1="252" x2="604" y2="408"/><line x1="604" y1="408" x2="668" y2="408"/>
+            </g>
+            <text x="678" y="412" font-family="Sora, Helvetica, Arial, sans-serif" font-size="12" font-weight="300" letter-spacing="2.6" fill="#87898D">HERTEST</text>
+          </svg>
+        </div>
+        <p class="cap">Schematisch. Geen prijzen, geen resultaat.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════ 05 · DE SERVER ═══════════ -->
+    <section class="block push-a" aria-labelledby="z5">
+      <p class="tag">05<b>Server</b></p>
+      <div>
+        <h2 class="mid" id="z5">15 kanalen. Eén plek.</h2>
+
+        <div class="sets s4">
+          <div>
+            <h3>Thuis — nu gratis</h3>
+            <ul>
+              <li>#nq-chart-ideeën</li>
+              <li>#es-chart-ideeën</li>
+              <li>#bitcoin</li>
+              <li>#altcoins</li>
+              <li>#markt</li>
+              <li>#vragen</li>
+              <li>#algemeen</li>
+              <li>#atlas-op-socials</li>
+              <li>#ondersteuning</li>
+            </ul>
+          </div>
+          <div class="later">
+            <h3>Premium — opent later</h3>
+            <ul>
+              <li>#trade-setups</li>
+              <li>#marktupdates</li>
+              <li>#indicatoren</li>
+              <li>#sessie-opnames</li>
+              <li>#chart-ideeën</li>
+              <li>#premium-chat</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="s5">
+          <a class="loud" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Open de server <span class="a" aria-hidden="true">&#8594;</span></a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════ 06 · LIVE ═══════════ -->
+    <section class="block push-b" aria-labelledby="z6">
+      <p class="tag">06<b>Live</b></p>
+      <div>
+        <h2 class="big" id="z6">Live in de<br>server.</h2>
+        <p class="say s4">De oprichter handelt live mee en denkt hardop. Tijden worden in Discord aangekondigd.</p>
+        <p class="s4">
+          <a class="loud" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Zit een sessie mee <span class="a" aria-hidden="true">&#8594;</span></a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════ 07 · TOEGANG ═══════════ -->
+    <section class="block push-a" aria-labelledby="z7">
+      <p class="tag">07<b>Toegang</b></p>
+      <div>
+        <h2 class="mid" id="z7">Nu gratis. Premium opent later.</h2>
+        <dl class="acc s4">
+          <div>
+            <dt>Thuis</dt>
+            <dd>Gratis, vanaf vandaag</dd>
+            <p>Educatie, chart-ideeën, markt en vragen — direct toegankelijk.</p>
+          </div>
+          <div>
+            <dt>Premium</dt>
+            <dd class="off">Opent later</dd>
+            <p>Prijs en datum worden in de server aangekondigd. Nergens anders.</p>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ═══════════ 08 · SLOT ═══════════ -->
+    <section class="block push-a" aria-labelledby="z8">
+      <p class="tag">08<b>Kom binnen</b></p>
+      <div>
+        <h2 class="mega" id="z8">Zwart op<br>wit: gratis.</h2>
+
+        <!-- GOLD, THREE TIMES. That is all the gold this page gets. -->
+        <p class="s5">
+          <a class="slab" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Open Discord <span class="a" aria-hidden="true">&#8594;</span></a>
+        </p>
+
+        <p class="tag s3">discord.gg/78Ff2GuSfW</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="end">
+    <div class="ends">
+      <a class="plain" href="https://discord.gg/78Ff2GuSfW" rel="noopener">Discord <span aria-hidden="true">&#8594;</span></a>
+      <a class="plain" href="https://www.tiktok.com/@atlascapitalbv" rel="noopener">TikTok <span aria-hidden="true">&#8594;</span></a>
+    </div>
+    <p class="risk">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</p>
+    <p class="sig">Atlas Capital</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
