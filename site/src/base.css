@@ -3,68 +3,271 @@
    Tokens, resets, the type scale and every component that more than one
    section uses. Section-specific rules live in sections/<id>.css and are
    namespaced under that section's root id.
+
+   Identity in one line: a film-credits roll set in a sharp editorial serif,
+   captions and tickers in a mono, gold only ever as a hairline, a mark or a
+   button — never a surface.
    ========================================================================== */
 
+/* ---------- tokens ---------------------------------------------------- */
 :root{
+  /* brand */
   --gold:#D7B364;
-  --gold-hi:#E6CC8E;
-  --gold-lo:#B9954A;
-  --ink:#08090B;
-  --panel:#15161A;
+  --gold-hi:#EAD6A2;      /* highlight edge, hover text            */
+  --gold-lo:#A9873F;      /* shadow edge, scrollbar thumb          */
+  --gold-ink:#14110A;     /* text set on a gold button             */
+  --green:#65C79C;        /* sparingly: an "up", a "live" dot      */
+
+  /* surfaces, darkest to lightest */
+  --bg-deep:#030304;      /* footer, lightbox                       */
+  --bg:#08090B;           /* the page                               */
+  --panel-lo:#0E0F12;     /* image mats, chart letterbox            */
+  --panel:#15161A;        /* cards                                  */
+  --panel-hi:#1C1D22;     /* card edge / hover                      */
+  --bg-glass:rgba(8,9,11,.82);
+
+  /* ink on dark, brightest to faintest */
   --paper:#F4F2EC;
-  --muted:#A5A6A8;
-  --f:"Space Grotesk", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
-html{color-scheme:dark; -webkit-text-size-adjust:100%}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  background:#050506;
-  color:#D9D7D2;
-  font-family:var(--f);
-  font-weight:300;
-  font-size:16px;
-  line-height:1.6;
-  overflow-x:hidden;
-}
-.page{position:relative; overflow:hidden}
-.grain{
-  position:absolute;inset:0;width:100%;height:100%;
-  z-index:40;opacity:.09;mix-blend-mode:overlay;pointer-events:none;
+  --ink-1:#E4E1DA;        /* values, quotes                         */
+  --ink-2:#C6C4BE;        /* body                                   */
+  --muted:#A5A6A8;        /* brand muted                            */
+  --ink-3:#8E8F94;        /* secondary prose                        */
+  --ink-4:#6B6C71;        /* labels, captions                       */
+  --ink-5:#4E4F54;        /* hints                                  */
+
+  /* gold hairlines: alpha steps of the same gold */
+  --line-1:rgba(215,179,100,.12);
+  --line-2:rgba(215,179,100,.22);
+  --line-3:rgba(215,179,100,.40);
+  --line-4:rgba(215,179,100,.62);
+  --glow:rgba(234,214,162,.14);
+
+  /* type */
+  --f-display:"Instrument Serif","Instrument Serif Fallback","Times New Roman",Times,serif;
+  --f-text:"Geist","Geist Fallback",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --f-mono:"Geist Mono","Geist Mono Fallback Win","Geist Mono Fallback Mac",ui-monospace,Consolas,Menlo,monospace;
+  --f:var(--f-text);
+
+  /* fluid scale: 390 → 1440 */
+  --t-display:clamp(64px,11vw,160px);    /* the end card                  */
+  --t-h1:clamp(40px,6.4vw,92px);         /* a section-sized line          */
+  --t-h2:clamp(24px,2.7vw,37px);         /* a quote                       */
+  --t-h3:clamp(21px,2.05vw,29px);        /* a credit value                */
+  --t-lead:clamp(17px,1.5vw,21px);       /* the line under a title        */
+  --t-body:clamp(15px,1.05vw,16.5px);
+  --t-small:clamp(12.5px,.9vw,13.5px);
+  --t-caption:11.5px;                    /* mono                          */
+  --t-micro:10px;                        /* mono, tracked caps            */
+  --t-nano:9px;                          /* the header button on a phone  */
+
+  /* tracking per size */
+  --trk-display:-.015em;
+  --trk-caps-wide:.36em;                 /* group titles                  */
+  --trk-caps:.26em;                      /* labels, buttons               */
+  --trk-caps-tight:.16em;                /* tickers, small caps           */
+  --trk-mono:.06em;
+
+  /* leading */
+  --lh-display:.94;
+  --lh-tight:1.12;
+  --lh-snug:1.28;
+  --lh-body:1.65;
+
+  /* measure */
+  --measure:60ch;
+  --measure-narrow:42ch;
+  --measure-quote:32ch;
+  --optical:-.04em;                      /* hang a big left-aligned line  */
+
+  /* spacing: a fixed ladder plus three fluid gaps */
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;--s9:96px;--s10:128px;
+  --gap-section:clamp(64px,9vw,128px);
+  --gap-block:clamp(32px,5vw,64px);
+  --gap-item:clamp(12px,1.6vw,20px);
+
+  /* radii: none. Corners are square everywhere. */
+  --r:0;
+
+  /* motion */
+  --d-fast:.18s;
+  --d:.4s;
+  --d-slow:.8s;
+  --d-reveal:.95s;
+  --e-out:cubic-bezier(.16,1,.3,1);       /* expo-out: fast start, long settle */
+  --e-inout:cubic-bezier(.65,0,.35,1);
+  --e-soft:cubic-bezier(.2,.6,.2,1);
+  --reveal-y:18px;
 }
 
-/* ===== button ===== */
+/* ---------- metric-matched fallbacks --------------------------------------
+   Measured from the served TTFs against the system faces they stand in for,
+   so a late swap moves nothing: Instrument Serif runs at 82% of Times' width,
+   Geist at 105% of Arial, Geist Mono at 109% of Consolas / 100% of Menlo. */
+@font-face{
+  font-family:"Instrument Serif Fallback";
+  src:local("Times New Roman"),local("TimesNewRomanPSMT");
+  size-adjust:82.1%;ascent-override:120.6%;descent-override:37.8%;line-gap-override:0%;
+}
+@font-face{
+  font-family:"Geist Fallback";
+  src:local("Arial"),local("ArialMT");
+  size-adjust:105.2%;ascent-override:95.5%;descent-override:28%;line-gap-override:0%;
+}
+@font-face{
+  font-family:"Geist Mono Fallback Win";
+  src:local("Consolas");
+  size-adjust:109.1%;ascent-override:92.1%;descent-override:27%;line-gap-override:0%;
+}
+@font-face{
+  font-family:"Geist Mono Fallback Mac";
+  src:local("Menlo"),local("Menlo-Regular");
+  size-adjust:99.6%;ascent-override:100.9%;descent-override:29.6%;line-gap-override:0%;
+}
+
+/* ---------- document ------------------------------------------------- */
+html{
+  color-scheme:dark;
+  -webkit-text-size-adjust:100%;
+  background:var(--bg);
+  scroll-behavior:smooth;
+  scroll-padding-top:72px;              /* the sticky header */
+  scrollbar-width:thin;
+  scrollbar-color:#3B321E var(--bg-deep);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink-2);
+  font-family:var(--f-text);
+  font-weight:400;
+  font-size:var(--t-body);
+  line-height:var(--lh-body);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  -webkit-tap-highlight-color:transparent;
+}
+.page{position:relative;overflow:hidden;isolation:isolate}
+img,svg{max-width:100%}
+img{height:auto}
+b,strong{font-weight:500}
+em,i{font-style:italic}
+h1,h2,h3,h4,p,figure,blockquote,dl{margin:0}
+p+p{margin-top:.8em}
+
+/* ---------- finishing -------------------------------------------------- */
+::selection{background:var(--gold);color:var(--gold-ink)}
+::-moz-selection{background:var(--gold);color:var(--gold-ink)}
+:focus{outline:0}
+:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg-deep)}
+::-webkit-scrollbar-thumb{background:#3B321E;border:3px solid var(--bg-deep)}
+::-webkit-scrollbar-thumb:hover{background:var(--gold-lo)}
+a{
+  color:var(--gold);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:.24em;
+  text-decoration-color:var(--line-3);
+  transition:color var(--d) var(--e-out),text-decoration-color var(--d) var(--e-out);
+}
+a:hover{color:var(--gold-hi);text-decoration-color:var(--gold)}
+button{font-family:inherit}
+small{font-size:var(--t-small)}
+figcaption{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spacing:var(--trk-mono)}
+figcaption small{font-family:var(--f-text);letter-spacing:0}
+
+/* ---------- grain -----------------------------------------------------
+   One 240px tile of fractal noise, repeated, so the grain is the same size
+   at the top of the page and 7000px down (a stretched full-page filter turns
+   into streaks). Screen blend at 5%: lifts the blacks a hair, never veils
+   a chart. The component transfer stretches the noise so a speck is a speck.
+   The "u" of url() inside the tile is percent-encoded on purpose. */
+.page::after{
+  content:"";
+  position:absolute;inset:0;
+  z-index:40;
+  pointer-events:none;
+  opacity:.08;
+  mix-blend-mode:screen;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch' seed='7'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.4' intercept='-.7'/%3E%3CfeFuncG type='linear' slope='2.4' intercept='-.7'/%3E%3CfeFuncB type='linear' slope='2.4' intercept='-.7'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='240' height='240' filter='%75rl(%23n)'/%3E%3C/svg%3E");
+  background-size:240px 240px;
+}
+
+/* ---------- button ----------------------------------------------------
+   A hairline in gold that fills from the left on hover. Nothing about the
+   text moves, so the label never jitters. */
 .cta{
-  display:inline-flex;align-items:center;gap:9px;
-  padding:11px 22px;
+  position:relative;
+  isolation:isolate;
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 24px;
   border:1px solid var(--gold);
   background:transparent;
   color:var(--gold);
-  font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;
+  font-family:var(--f-text);
+  font-size:var(--t-micro);
+  font-weight:500;
+  letter-spacing:var(--trk-caps);
+  line-height:1.2;
+  text-transform:uppercase;
   text-decoration:none;
-  transition:background .3s ease,color .3s ease,letter-spacing .3s ease;
+  white-space:nowrap;
+  cursor:pointer;
+  transition:color var(--d) var(--e-out),border-color var(--d) var(--e-out),transform var(--d-fast) var(--e-out);
 }
-.cta:hover{background:var(--gold);color:#0E0B05;letter-spacing:.32em}
+.cta::before{content:"";width:5px;height:5px;flex:0 0 auto;background:currentColor;transform:rotate(45deg);transition:transform var(--d) var(--e-out)}
+.cta::after{
+  content:"";
+  position:absolute;inset:-1px;
+  z-index:-1;
+  background:var(--gold);
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform var(--d) var(--e-out);
+}
+.cta:hover,.cta:focus-visible{color:var(--gold-ink)}
+.cta:hover::after,.cta:focus-visible::after{transform:scaleX(1)}
+.cta:hover::before{transform:rotate(225deg)}
+.cta:active{transform:translateY(1px)}
 .cta.solid{
   background:linear-gradient(180deg,var(--gold-hi),var(--gold-lo));
-  color:#0E0B05;border-color:transparent;
+  color:var(--gold-ink);
+  border-color:transparent;
+  box-shadow:0 0 0 0 var(--glow);
+  transition:box-shadow var(--d) var(--e-out),filter var(--d) var(--e-out),transform var(--d-fast) var(--e-out);
 }
-.cta.solid:hover{filter:brightness(1.1);background:linear-gradient(180deg,var(--gold-hi),var(--gold-lo));color:#0E0B05}
-.cta::before{content:"";width:5px;height:5px;background:currentColor;transform:rotate(45deg)}
+.cta.solid::after{background:var(--gold-hi)}
+.cta.solid:hover,.cta.solid:focus-visible{
+  filter:brightness(1.04);
+  box-shadow:0 0 0 1px var(--line-3),0 14px 32px -14px rgba(215,179,100,.55);
+}
 
-/* ===== sub-line under a title card (hero, closer) ===== */
+/* ---------- sub-line under a title card (hero, closer) ------------------ */
 .subtitle{
   position:relative;z-index:3;
   margin:clamp(20px,3vw,30px) auto 0;
-  max-width:40ch;
-  color:#B2B0AC;
-  font-size:clamp(14px,1.6vw,17px);
+  max-width:var(--measure-narrow);
+  font-family:var(--f-display);
+  font-style:italic;
+  font-size:var(--t-lead);
+  line-height:var(--lh-snug);
+  letter-spacing:.002em;
+  color:var(--ink-2);
+  text-wrap:balance;
 }
+.subtitle + .cta{margin-top:clamp(24px,3.4vw,36px)}
 
-/* ===== the roll =====
+/* ---------- the roll ----------------------------------------------------
    One centred column with a gold spine down the middle. The build wraps the
    sections production … access in <div class="roll">; the spine is drawn
-   once, so it runs unbroken from the first group to the last. */
+   once, so it runs unbroken from the first group to the last. With JS a
+   brighter 40vh "lead" rides the spine level with the middle of the
+   viewport (motion.js writes --spine-y), so the light you read by travels
+   down the reel with you. Without JS the spine is simply there. */
 .roll{
   position:relative;
   max-width:840px;
@@ -75,17 +278,27 @@ body{
   content:"";
   position:absolute;
   left:50%;top:0;bottom:0;width:1px;
-  background:linear-gradient(180deg,rgba(215,179,100,0) 0%,rgba(215,179,100,.30) 6%,rgba(215,179,100,.30) 94%,rgba(215,179,100,0) 100%);
+  background:linear-gradient(180deg,rgba(215,179,100,0) 0%,var(--line-2) 6%,var(--line-2) 94%,rgba(215,179,100,0) 100%);
 }
-@media (max-width:620px){ .roll::before{display:none} }
+.js .roll::after{
+  content:"";
+  position:absolute;
+  left:50%;width:1px;
+  top:var(--spine-y,0px);
+  height:40vh;
+  margin-top:-20vh;
+  background:linear-gradient(180deg,rgba(215,179,100,0),var(--line-4) 50%,rgba(215,179,100,0));
+  pointer-events:none;
+}
+@media (max-width:620px){ .roll::before,.js .roll::after{display:none} }
 
-/* ===== group heading ===== */
+/* ---------- group heading ---------------------------------------------
+   A slate: mono caps in gold on a hairline, like a title card between reels. */
 .grp{
   position:relative;
   text-align:center;
   margin:clamp(40px,6vw,84px) 0 clamp(18px,2.8vw,30px);
 }
-/* the first heading in the roll sits on the roll's own padding */
 .roll > :first-child > .grp:first-child{margin-top:0}
 .grp h2{
   position:relative;
@@ -93,11 +306,12 @@ body{
   display:inline-block;
   margin:0;
   padding:0 clamp(14px,3vw,26px);
-  background:#050506;
+  background:var(--bg);
+  font-family:var(--f-mono);
   font-weight:400;
-  font-size:clamp(9.5px,1.15vw,11.5px);
-  letter-spacing:.5em;
-  text-indent:.5em;
+  font-size:clamp(10px,1.05vw,11.5px);
+  letter-spacing:var(--trk-caps-wide);
+  text-indent:var(--trk-caps-wide);
   text-transform:uppercase;
   color:var(--gold);
 }
@@ -106,14 +320,17 @@ body{
   position:absolute;
   left:12%;right:12%;top:50%;
   height:1px;
-  background:rgba(215,179,100,.18);
+  background:var(--line-1);
   z-index:1;
 }
 
-/* ===== credit pairs ===== */
+/* ---------- credit pairs ------------------------------------------------
+   Label right of the spine in mono, value left of it in the serif; the two
+   share a baseline. */
 dl.pairs{
   display:grid;
   grid-template-columns:1fr 1fr;
+  align-items:baseline;
   column-gap:clamp(20px,5vw,58px);
   row-gap:clamp(10px,1.6vw,16px);
   margin:0;
@@ -121,30 +338,36 @@ dl.pairs{
 dl.pairs dt{
   grid-column:1;
   text-align:right;
-  font-size:clamp(9px,1.05vw,10.5px);
-  letter-spacing:.28em;
+  font-family:var(--f-mono);
+  font-size:var(--t-micro);
+  letter-spacing:var(--trk-caps);
   text-transform:uppercase;
-  color:#78797E;
-  padding-top:.62em;
+  color:var(--ink-4);
+  line-height:1.4;
 }
 dl.pairs dd{
   grid-column:2;
   margin:0;
   text-align:left;
-  font-size:clamp(16px,2.1vw,23px);
-  font-weight:300;
-  line-height:1.28;
-  color:#EAE8E3;
+  font-family:var(--f-display);
+  font-size:var(--t-h3);
+  font-weight:400;
+  line-height:var(--lh-tight);
+  letter-spacing:.002em;
+  color:var(--ink-1);
 }
 dl.pairs dd small{
   display:block;
-  font-size:clamp(10px,1.15vw,11.5px);
-  letter-spacing:.16em;
+  margin-top:5px;
+  font-family:var(--f-mono);
+  font-size:var(--t-caption);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.1em;
   text-transform:uppercase;
-  color:#77787C;
-  margin-top:3px;
+  line-height:1.5;
+  color:var(--ink-4);
 }
-dl.pairs dd em{font-style:normal;color:var(--gold)}
+dl.pairs dd em{font-style:italic;color:var(--gold)}
 dl.pairs .cont{grid-column:2}
 /* Ten topics or nine channels one under the other is a column of air;
    two columns reads the same and takes half the height. */
@@ -152,7 +375,7 @@ dl.pairs .cols{
   list-style:none;margin:0;padding:0;
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
   column-gap:clamp(14px,2.5vw,32px);row-gap:clamp(4px,.8vw,8px);
-  font-size:clamp(14px,1.55vw,18px);line-height:1.35;
+  font-size:clamp(17px,1.6vw,22px);line-height:1.3;
 }
 @media (max-width:620px){
   dl.pairs{grid-template-columns:1fr; row-gap:4px}
@@ -160,17 +383,18 @@ dl.pairs .cols{
   dl.pairs dd,dl.pairs .cont{grid-column:1;text-align:center}
 }
 
-/* ===== lede under a group heading =====
+/* ---------- lede under a group heading -----------------------------------
    .roll::before is the absolutely-positioned centre spine, so anything
    static underneath it gets a gold hairline drawn straight across; the
    lede carries its own background and sits above the spine. */
 .lesson-lede{
   position:relative;z-index:2;
-  max-width:56ch;margin:0 auto clamp(26px,4vw,42px);padding:0 12px;background:#050506;
-  text-align:center;font-size:clamp(13px,1.35vw,15px);line-height:1.7;color:#9A9BA0;
+  max-width:56ch;margin:0 auto clamp(26px,4vw,42px);padding:0 12px;background:var(--bg);
+  text-align:center;font-size:var(--t-small);line-height:1.7;color:var(--ink-3);
+  text-wrap:pretty;
 }
 
-/* ===== quote card ===== */
+/* ---------- quote card -------------------------------------------------- */
 .still{
   margin:clamp(52px,9vw,110px) auto;
   max-width:660px;
@@ -178,69 +402,110 @@ dl.pairs .cols{
 }
 .still blockquote{
   margin:0;
-  font-size:clamp(16px,2.15vw,23px);
-  font-weight:300;
-  line-height:1.5;
-  color:#E4E1DB;
+  font-family:var(--f-display);
+  font-size:var(--t-h2);
+  font-weight:400;
+  line-height:var(--lh-snug);
+  letter-spacing:-.005em;
+  color:var(--paper);
+  text-wrap:balance;
+  hanging-punctuation:first last;
 }
 .still .who{
-  margin-top:22px;
-  font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);
+  margin-top:var(--s5);
+  font-family:var(--f-mono);
+  font-size:var(--t-micro);letter-spacing:.32em;text-transform:uppercase;color:var(--gold);
 }
 .hair{
-  width:52px;height:1px;background:var(--gold);margin:0 auto clamp(22px,3.4vw,32px);
+  width:48px;height:1px;background:var(--gold);margin:0 auto clamp(22px,3.4vw,32px);
 }
 
-/* ===== interstitial cta ===== */
+/* ---------- interstitial cta -------------------------------------------- */
 .interstitial{
   text-align:center;
   margin:clamp(36px,5vw,64px) 0;
 }
 .interstitial p{
   margin:0 0 20px;
-  font-size:clamp(9.5px,1.1vw,11px);letter-spacing:.42em;text-transform:uppercase;color:#75767A;
+  font-family:var(--f-mono);
+  font-size:var(--t-micro);letter-spacing:.38em;text-indent:.38em;text-transform:uppercase;color:var(--ink-4);
 }
 
-/* ===== language ===== */
+/* ---------- language ----------------------------------------------------- */
 :root:not([data-lang="en"]) [lang="en"]{display:none!important}
 :root[data-lang="en"] [lang="nl"]{display:none!important}
+/* Two words, no box. The chosen one carries a gold point above it, the way
+   a projector marks the reel in play; the other waits in the label grey. */
 .langsw{
   display:inline-flex;
   align-items:stretch;
-  border:1px solid rgba(215,179,100,.55);
+  gap:18px;
 }
 .langsw button{
   appearance:none;
   -webkit-appearance:none;
+  position:relative;
   background:transparent;
   border:0;
-  padding:9px 12px;
-  font-family:var(--f);
-  font-size:9px;
+  padding:10px 2px 8px;
+  font-family:var(--f-mono);
+  font-size:var(--t-micro);
   font-weight:500;
   letter-spacing:.2em;
+  text-indent:.2em;
   text-transform:uppercase;
-  color:#7B7C80;
+  line-height:1;
+  color:var(--ink-4);
   cursor:pointer;
-  transition:background .3s ease,color .3s ease;
+  transition:color var(--d) var(--e-out);
 }
-.langsw button + button{border-left:1px solid rgba(215,179,100,.32)}
-.langsw button:hover{color:var(--gold-hi)}
-.langsw button[aria-pressed="true"]{background:rgba(215,179,100,.13);color:var(--gold)}
+.langsw button::before{
+  content:"";
+  position:absolute;
+  left:50%;top:0;
+  width:3px;height:3px;
+  margin-left:-1px;
+  background:var(--gold);
+  transform:scale(0);
+  transition:transform var(--d) var(--e-out);
+}
+.langsw button:hover{color:var(--paper)}
+.langsw button[aria-pressed="true"]{color:var(--gold);cursor:default}
+.langsw button[aria-pressed="true"]::before{transform:scale(1)}
+.langsw button:focus-visible{outline-offset:2px}
 
-/* ===== reveal contract =====
+/* ---------- reveal contract ---------------------------------------------
    The only place anything is allowed to be invisible. Rules:
      - only elements carrying .reveal
-     - only once motion.js has put class "js" on <html>
+     - only under html.js, which a one-line script in <head> sets before the
+       body is parsed (so the first paint already has the fold hidden and the
+       load sequence starts clean); motion.js sets it too if that line is
+       missing, behind .no-tr so the hide is a cut and not a fade
    so without JavaScript every element is on screen from the first paint.
    motion.js adds .is-in when the element scrolls into view; children of a
-   [data-stagger] container arrive one after another. */
+   [data-stagger] container arrive one after another; once the transition
+   has run motion.js drops the .reveal class so the element goes back to its
+   own cascade (a button keeps its hover transition). If motion.js throws it
+   takes .js off again, so a broken script is a visible page.
+
+   Variant: a .mask wrapper clips its .reveal child, which rises from below
+   the fold line instead of fading -- for display lines and quotes. */
 .js .reveal{
   opacity:0;
-  transform:translateY(16px);
-  transition:opacity .8s cubic-bezier(.2,.6,.2,1),transform .8s cubic-bezier(.2,.6,.2,1);
+  transform:translateY(var(--reveal-y));
+  transition:opacity var(--d-reveal) var(--e-out),transform var(--d-reveal) var(--e-out);
+  will-change:opacity,transform;
 }
 .js .reveal.is-in{opacity:1;transform:none}
+.no-tr .reveal{transition:none!important}
+.mask{overflow:hidden;padding-bottom:.18em;margin-bottom:-.18em}
+.js .mask > .reveal{opacity:1;transform:translateY(112%);transition:transform calc(var(--d-reveal) * 1.25) var(--e-out)}
+.js .mask > .reveal.is-in{transform:none}
+[data-parallax]{will-change:transform}
+
 @media (prefers-reduced-motion:reduce){
-  .js .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+  .js .reveal,.js .mask > .reveal{opacity:1;transform:none;transition:none;will-change:auto}
+  .js .roll::after{display:none}
+  .cta,.cta::before,.cta::after,a,.langsw button{transition:none}
 }

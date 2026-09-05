@@ -3,9 +3,10 @@
   position:sticky;top:0;z-index:50;
   display:flex;align-items:center;justify-content:space-between;gap:12px;
   padding:11px clamp(16px,4vw,40px);
-  background:rgba(5,5,6,.9);
-  border-bottom:1px solid rgba(215,179,100,.18);
-  backdrop-filter:blur(8px);
+  background:var(--bg-glass);
+  border-bottom:1px solid var(--line-1);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
 }
 /* space-between puts the middle item halfway between its neighbours, not
    halfway across the bar -- and the wordmark is 80px wider than the language
@@ -22,7 +23,7 @@
 #header .wm{display:flex;align-items:center;gap:10px;text-decoration:none}
 #header .wm__mark{display:block;width:22px;height:auto;flex:0 0 auto}
 #header .wm b{
-  font-weight:400;font-size:11px;letter-spacing:.36em;text-transform:uppercase;color:var(--paper);
+  font-weight:500;font-size:var(--t-micro);letter-spacing:.36em;text-transform:uppercase;color:var(--paper);
 }
-#header .cta{padding:9px 16px;font-size:9px;letter-spacing:.2em}
-#header .cta:hover{letter-spacing:.32em}
+#header .cta{padding:9px 16px;font-size:var(--t-nano);letter-spacing:.2em}
+#header .cta:hover{letter-spacing:.2em}

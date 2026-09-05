@@ -34,8 +34,8 @@
 #hero .filmtitle{
   position:relative;z-index:3;
   margin:0;
-  font-weight:300;
-  font-size:clamp(30px,7.4vw,84px);
+  font-weight:400;
+  font-size:var(--t-h1);
   line-height:1.02;
   letter-spacing:clamp(.10em,1.1vw,.22em);
   text-indent:clamp(.10em,1.1vw,.22em);

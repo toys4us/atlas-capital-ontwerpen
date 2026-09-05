@@ -11,8 +11,8 @@
 #material .lesson{margin:0}
 #material .lesson img{
   display:block;width:100%;height:auto;
-  border:1px solid rgba(215,179,100,.22);
-  background:#0B0C0E;
+  border:1px solid var(--line-2);
+  background:var(--panel-lo);
 }
 /* A pair is one lesson, not two: side by side wherever there is room, so the
    "same moment" reads before the caption does. */
@@ -23,17 +23,17 @@
      matched heights make it read as one moment seen twice. contain never
      crops an annotation, and the letterbox is the charts' own background. */
   #material .lesson__pair{grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
-  #material .lesson__pair img{height:100%;min-height:0;object-fit:contain;background:#0B0C0E}
+  #material .lesson__pair img{height:100%;min-height:0;object-fit:contain;background:var(--panel-lo)}
 }
 #material .lesson figcaption{
   display:flex;gap:14px;align-items:baseline;
   margin-top:12px;
-  font-size:clamp(10px,1.1vw,11.5px);letter-spacing:.2em;text-transform:uppercase;
+  font-size:var(--t-caption);letter-spacing:.2em;text-transform:uppercase;
 }
 #material .lesson figcaption b{color:var(--gold);font-weight:400;flex:0 0 auto}
 #material .lesson figcaption span{color:var(--paper);font-weight:400}
 #material .lesson figcaption small{
   display:block;margin-top:7px;
   letter-spacing:.04em;text-transform:none;
-  font-size:clamp(11.5px,1.25vw,13px);color:#78797E;line-height:1.6;
+  font-size:var(--t-small);color:var(--ink-3);line-height:1.6;
 }

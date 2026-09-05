@@ -2,9 +2,9 @@
  "id": "identity",
  "title": "Identity",
  "wave": 0,
- "round": 0,
- "status": "scaffolded",
- "updated_at": "2026-09-05T04:48:27+02:00",
+ "round": 1,
+ "status": "loss",
+ "updated_at": "2026-09-05T07:14:10+02:00",
  "history": [
   {
    "wave": 0,
@@ -18,6 +18,21 @@
    ],
    "note": "Structural changes needed for the split (render unchanged): hero root id 'top' -> 'hero' (header wordmark href updated to #hero; footer anchors #educatie/#kanalen still on the .grp elements, #trackrecord moved from the .grp to the section root, same scroll position because the margin collapses through the section); '.grp:first-child{margin-top:0}' became '.roll > :first-child > .grp:first-child{margin-top:0}' since every .grp is now first child of its own <section>; the lightbox <dialog>+script moved inside #trackrecord (top layer, so .page{overflow:hidden} is irrelevant).",
    "at": "2026-09-05T04:48:27+02:00"
+  },
+  {
+   "wave": 0,
+   "round": 1,
+   "ref": "izanami",
+   "status": "loss",
+   "score_ours": 5.5,
+   "score_ref": 7,
+   "wowed": false,
+   "gap": "The identity is a genre template, not a design: black ground, gradient-gold badge logo, gold-foil CTA repeated twice in the same viewport (header and hero), tracked mono labels, Playfair-italic tagline — every trading-Discord landing page looks exactly like this. At the bar the gold would be one hairline and one accent, the logo would sit as a mark not a poster, and the \"De leerstof\" grid would be cut for one consistent chart crop and scale instead of five mismatched TradingView screenshots (watermarks, wildly different candle zooms, right-hand chart running off its frame) with a centre spine that slices straight through the middle image of the 3-up row and through the CTA button, while caption \"02 Fibonacci, equal highs en sellside liquidity\" wraps to three lines of tracked caps.",
+   "motion": "Six identical frames — no reveal, no parallax, no scroll response; the only change is a header re-render glitch in frame 2. Absence, not restraint.",
+   "verdict": "B has a distinctive editorial voice — photographic atmosphere, dual clocks, quiet serif micro-type, a vertical mark, real scroll choreography — and even with its visible bugs it reads as a designed world; A is cleanly aligned but is a stock dark-and-gold trading template with a duplicated CTA, mismatched screenshot charts and a spine that cuts through its own content. Neither is shortlist-ready as-is, but B is a craft pass away from it while A needs a new idea.",
+   "confidence": 0.78,
+   "note": "IDENTITY ROUND 1 — gate PASS (0 failures, 0 notes) at 1440 and 390, NL and EN. Nothing committed.\n\nFILES OWNED\n- E:/ClaudeCode_GUI/atlas-designs/site/src/base.css (rewritten)\n- E:/ClaudeCode_GUI/atlas-designs/site/src/motion.js (rewritten)\n- E:/ClaudeCode_GUI/atlas-designs/site/src/index.tpl.html (fonts, meta, head script; inline grain SVG removed)\nToken-only swaps in sections: header.css, hero.css, material.css, trackrecord.css, closer.css. Reveal hooks added to 02-hero.html and 04-founder.html.\nJudging shots: _build/self (hero + full page), _build/self-founder (mask/stagger motion sh",
+   "at": "2026-09-05T07:14:10+02:00"
   }
  ]
 }
