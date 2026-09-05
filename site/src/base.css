@@ -6,18 +6,22 @@
 
    Identity in one line: a trader's journal set like the financial press --
    Newsreader for everything that is read, one flat gold (#D7B364) for the
-   mark, the hairlines, the one button and the ink the plates are printed
+   mark, the hairlines, the one call and the ink the plates are printed
    in, and a page that arrives as you read it. The opening spread is the
    idea: the tagline set large and flush left, a session drawn as a schema
    -- four zones, one line, hairlines of that gold -- on a band that enters
    from the right margin with no left edge drawn, and the last two words of
-   the title in front of it. Two things from two margins, one in front.
+   the title in front of it. Two things from two margins, one in front;
+   and everything that is read after the title -- the figure's caption, the
+   standfirst, the call -- on one line hung off the band's left edge, so
+   the spread has two columns and nothing floats.
 
    Where the gold goes (and nowhere else):
      - hairlines: the strip edges, the group rules, the language rule,
        the two rules of the band
      - one accent per screen: an italic value, the kicker's dash
-     - the one solid button (.cta.solid): never twice in a viewport
+     - the one call (.cta.solid): a longer rule and the arrow, never a
+       filled box, and never twice in a viewport
      - the plate: the figure's line and zones in the gold
    Two voices per block, never three: the serif (roman, italic, or small
    tracked caps for a label) and, only for what is counted next to a
@@ -67,9 +71,9 @@
   /* fluid scale, 390 → 1440. Newsreader has a small x-height, so every
      step sits a size above where a grotesk would. */
   --t-display:clamp(76px,12.5vw,184px);  /* the end card                   */
-  --t-hero:clamp(62px,min(11vw,17vh),158px); /* the spread: three lines, and
-                                            the button still above the fold
-                                            on a 768px laptop             */
+  --t-hero:clamp(62px,min(11vw,16vh),158px); /* the spread: three lines, and
+                                            the call under the band still
+                                            above the fold on a 768 laptop */
   --t-h1:clamp(44px,7vw,100px);          /* a section-sized line           */
   --t-h2:clamp(27px,3.2vw,46px);         /* a statement, a quote           */
   --t-h3:clamp(20px,1.95vw,27px);        /* a credit value                 */
@@ -114,6 +118,10 @@
      size of a line of text; the name is set in type. */
   --logo-nav:20px;
   --hdr-h:52px;
+  /* the arrow of the bar: a hairline glyph drawn once, used as a mask so
+     it takes whatever colour the link gives it (grey when quiet, the one
+     gold when it is the call) */
+  --arrow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M1 8 8 1M2.5 1H8v5.5' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
 
   /* the page's outer gutter and the width the spread and the bar share,
      so the wordmark and the first word of the title sit on one axis */
@@ -281,8 +289,8 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
   color:var(--ink-5);
 }
 .rail__now time{font-size:var(--t-caption);color:var(--ink-4)}
-/* a short laptop screen: the clocks would sit on the spread's button */
-@media (max-height:760px){ .rail .rail__now{display:none} }
+/* a short laptop screen: the clocks would sit in the row of the spread's call */
+@media (max-height:800px){ .rail .rail__now{display:none} }
 .rail__here{
   left:calc(var(--gutter) - 6px);
   top:50vh;
@@ -326,18 +334,21 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 @keyframes rail-scroll{ 0%{background-position:0 100%} 100%{background-position:0 -100%} }
 .rail.is-scrolled .rail__scroll{transform:translateY(90px)}
 
-/* ---------- button ----------------------------------------------------
-   Two kinds and only two. .cta is a hairline dash and a label, the way a
-   quiet link reads on a good site; on hover the dash lengthens and the
-   label warms. .cta.solid is the one gold button on the page: flat gold,
-   dark ink, no gradient, no glow, the same #D7B364 as every hairline and
-   the mark. The label is set in the page's label voice -- the serif, small,
-   tracked caps -- not in the mono, which is for what is counted. Nothing
-   about the text moves, so the label never jitters. */
+/* ---------- link / call ------------------------------------------------
+   One construction, two weights, and never a filled box. .cta is the
+   page's link: a hairline of the gold, then the label in the label voice
+   (the serif, small, tracked caps); on hover the rule lengthens and the
+   label warms. .cta.solid is the one call on a screen -- the same link,
+   its label in the paper, a longer rule, and the arrow of the bar after
+   it in the same gold. So the gold is a line everywhere it appears: the
+   mark, the hairlines, the rule, the arrow. Nothing about the text moves,
+   so the label never jitters. */
 .cta{
+  --rule:clamp(16px,3vw,26px);            /* the rule's length              */
+  --grow:18px;                            /* what it gains on hover, leftward */
   position:relative;
   display:inline-flex;align-items:center;gap:14px;
-  padding:10px 0;
+  padding:10px 0 10px calc(var(--rule) + 14px);
   border:0;
   background:transparent;
   color:var(--ink-1);
@@ -352,25 +363,37 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
   cursor:pointer;
   transition:color var(--d) var(--e-out);
 }
+/* the rule is placed, not flowed, so when it lengthens it grows into the
+   margin on the left and the label stays exactly where it was */
 .cta::before{
   content:"";
-  flex:0 0 auto;
-  width:clamp(16px,3vw,26px);height:1px;
+  position:absolute;
+  left:0;top:calc(50% - 1px);
+  width:var(--rule);height:1px;
   background:var(--gold);
-  transition:width var(--d) var(--e-out),background-color var(--d) var(--e-out);
+  transition:left var(--d) var(--e-out),width var(--d) var(--e-out),background-color var(--d) var(--e-out);
+}
+.cta::after{
+  content:"";
+  flex:0 0 auto;
+  display:none;
+  width:9px;height:9px;
+  margin-left:-3px;
+  background:var(--gold);
+  -webkit-mask:var(--arrow) center/9px 9px no-repeat;
+  mask:var(--arrow) center/9px 9px no-repeat;
+  transition:transform var(--d) var(--e-out),background-color var(--d) var(--e-out);
 }
 .cta:hover,.cta:focus-visible{color:var(--gold-hi)}
-.cta:hover::before,.cta:focus-visible::before{width:44px}
+/* the keyboard ring gets the colour change only: a rule growing past the
+   ring's edge would cut it */
+.cta:hover::before{left:calc(-1 * var(--grow));width:calc(var(--rule) + var(--grow))}
 .cta:active{transform:translateY(1px)}
-.cta.solid{
-  padding:15px 30px 14px;
-  background:var(--gold);
-  color:var(--gold-ink);
-  transition:background-color var(--d) var(--e-out),color var(--d) var(--e-out),transform var(--d-fast) var(--e-out);
-}
-.cta.solid::before{display:none}
-.cta.solid:hover,.cta.solid:focus-visible{background:var(--gold-hi);color:var(--gold-ink)}
-.cta.solid:active{background:var(--gold-lo)}
+.cta.solid{--rule:clamp(22px,3vw,36px);--grow:20px;color:var(--paper);font-size:13px;letter-spacing:.18em}
+.cta.solid::after{display:block}
+.cta.solid:hover,.cta.solid:focus-visible{color:var(--gold-hi)}
+.cta.solid:hover::after{transform:translate(2px,-2px)}
+.cta.solid:hover::after,.cta.solid:focus-visible::after{background:var(--gold-hi)}
 
 /* ---------- sub-line under a title card (hero, closer) ------------------
    The statement of the page, set roman at statement size: the one italic
@@ -574,15 +597,25 @@ dl.pairs .cols{
   text-wrap:pretty;
   hanging-punctuation:first last;
 }
+/* the attribution is a signature under the words, not a second label: the
+   row above already names the voice in the label column, so this is set
+   italic, at note size, with a dash -- the way a quotation is signed */
 .still .who{
-  grid-column:1;grid-row:2;
-  margin:0;
-  padding-top:calc(var(--t-h3) * .6);    /* the label's baseline on the first line's */
-  text-align:right;
+  grid-column:2;grid-row:3;
+  margin:clamp(14px,2vw,20px) 0 0;
+  padding:0;
+  text-align:left;
   font-family:var(--f-display);
-  font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;color:var(--ink-4);
+  font-style:italic;
+  font-size:var(--t-small);
+  letter-spacing:.01em;
+  text-transform:none;
+  color:var(--ink-3);
   line-height:1.5;
 }
+/* the signature arrives slowly, so it is not there before the words are */
+.js .still > .who.reveal{transition-duration:calc(var(--d-reveal) * 1.2)}
+.still .who::before{content:"—  ";color:var(--ink-4)}
 .hair{
   width:40px;height:1px;background:var(--line-4);margin:0 auto clamp(24px,3.6vw,36px);
 }
@@ -590,7 +623,7 @@ dl.pairs .cols{
   .still{display:block;max-width:34ch;margin-left:auto;margin-right:auto;text-align:center}
   .still .hair{margin:0 auto clamp(16px,2.2vw,24px)}
   .still blockquote{max-width:none}
-  .still .who{padding-top:var(--s5);text-align:center}
+  .still .who{margin-top:var(--s5);text-align:center}
 }
 
 /* ---------- interstitial cta --------------------------------------------

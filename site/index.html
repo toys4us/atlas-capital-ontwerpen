@@ -27,18 +27,22 @@
 
    Identity in one line: a trader's journal set like the financial press --
    Newsreader for everything that is read, one flat gold (#D7B364) for the
-   mark, the hairlines, the one button and the ink the plates are printed
+   mark, the hairlines, the one call and the ink the plates are printed
    in, and a page that arrives as you read it. The opening spread is the
    idea: the tagline set large and flush left, a session drawn as a schema
    -- four zones, one line, hairlines of that gold -- on a band that enters
    from the right margin with no left edge drawn, and the last two words of
-   the title in front of it. Two things from two margins, one in front.
+   the title in front of it. Two things from two margins, one in front;
+   and everything that is read after the title -- the figure's caption, the
+   standfirst, the call -- on one line hung off the band's left edge, so
+   the spread has two columns and nothing floats.
 
    Where the gold goes (and nowhere else):
      - hairlines: the strip edges, the group rules, the language rule,
        the two rules of the band
      - one accent per screen: an italic value, the kicker's dash
-     - the one solid button (.cta.solid): never twice in a viewport
+     - the one call (.cta.solid): a longer rule and the arrow, never a
+       filled box, and never twice in a viewport
      - the plate: the figure's line and zones in the gold
    Two voices per block, never three: the serif (roman, italic, or small
    tracked caps for a label) and, only for what is counted next to a
@@ -88,9 +92,9 @@
   /* fluid scale, 390 → 1440. Newsreader has a small x-height, so every
      step sits a size above where a grotesk would. */
   --t-display:clamp(76px,12.5vw,184px);  /* the end card                   */
-  --t-hero:clamp(62px,min(11vw,17vh),158px); /* the spread: three lines, and
-                                            the button still above the fold
-                                            on a 768px laptop             */
+  --t-hero:clamp(62px,min(11vw,16vh),158px); /* the spread: three lines, and
+                                            the call under the band still
+                                            above the fold on a 768 laptop */
   --t-h1:clamp(44px,7vw,100px);          /* a section-sized line           */
   --t-h2:clamp(27px,3.2vw,46px);         /* a statement, a quote           */
   --t-h3:clamp(20px,1.95vw,27px);        /* a credit value                 */
@@ -135,6 +139,10 @@
      size of a line of text; the name is set in type. */
   --logo-nav:20px;
   --hdr-h:52px;
+  /* the arrow of the bar: a hairline glyph drawn once, used as a mask so
+     it takes whatever colour the link gives it (grey when quiet, the one
+     gold when it is the call) */
+  --arrow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M1 8 8 1M2.5 1H8v5.5' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
 
   /* the page's outer gutter and the width the spread and the bar share,
      so the wordmark and the first word of the title sit on one axis */
@@ -302,8 +310,8 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
   color:var(--ink-5);
 }
 .rail__now time{font-size:var(--t-caption);color:var(--ink-4)}
-/* a short laptop screen: the clocks would sit on the spread's button */
-@media (max-height:760px){ .rail .rail__now{display:none} }
+/* a short laptop screen: the clocks would sit in the row of the spread's call */
+@media (max-height:800px){ .rail .rail__now{display:none} }
 .rail__here{
   left:calc(var(--gutter) - 6px);
   top:50vh;
@@ -347,18 +355,21 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 @keyframes rail-scroll{ 0%{background-position:0 100%} 100%{background-position:0 -100%} }
 .rail.is-scrolled .rail__scroll{transform:translateY(90px)}
 
-/* ---------- button ----------------------------------------------------
-   Two kinds and only two. .cta is a hairline dash and a label, the way a
-   quiet link reads on a good site; on hover the dash lengthens and the
-   label warms. .cta.solid is the one gold button on the page: flat gold,
-   dark ink, no gradient, no glow, the same #D7B364 as every hairline and
-   the mark. The label is set in the page's label voice -- the serif, small,
-   tracked caps -- not in the mono, which is for what is counted. Nothing
-   about the text moves, so the label never jitters. */
+/* ---------- link / call ------------------------------------------------
+   One construction, two weights, and never a filled box. .cta is the
+   page's link: a hairline of the gold, then the label in the label voice
+   (the serif, small, tracked caps); on hover the rule lengthens and the
+   label warms. .cta.solid is the one call on a screen -- the same link,
+   its label in the paper, a longer rule, and the arrow of the bar after
+   it in the same gold. So the gold is a line everywhere it appears: the
+   mark, the hairlines, the rule, the arrow. Nothing about the text moves,
+   so the label never jitters. */
 .cta{
+  --rule:clamp(16px,3vw,26px);            /* the rule's length              */
+  --grow:18px;                            /* what it gains on hover, leftward */
   position:relative;
   display:inline-flex;align-items:center;gap:14px;
-  padding:10px 0;
+  padding:10px 0 10px calc(var(--rule) + 14px);
   border:0;
   background:transparent;
   color:var(--ink-1);
@@ -373,25 +384,37 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
   cursor:pointer;
   transition:color var(--d) var(--e-out);
 }
+/* the rule is placed, not flowed, so when it lengthens it grows into the
+   margin on the left and the label stays exactly where it was */
 .cta::before{
   content:"";
-  flex:0 0 auto;
-  width:clamp(16px,3vw,26px);height:1px;
+  position:absolute;
+  left:0;top:calc(50% - 1px);
+  width:var(--rule);height:1px;
   background:var(--gold);
-  transition:width var(--d) var(--e-out),background-color var(--d) var(--e-out);
+  transition:left var(--d) var(--e-out),width var(--d) var(--e-out),background-color var(--d) var(--e-out);
+}
+.cta::after{
+  content:"";
+  flex:0 0 auto;
+  display:none;
+  width:9px;height:9px;
+  margin-left:-3px;
+  background:var(--gold);
+  -webkit-mask:var(--arrow) center/9px 9px no-repeat;
+  mask:var(--arrow) center/9px 9px no-repeat;
+  transition:transform var(--d) var(--e-out),background-color var(--d) var(--e-out);
 }
 .cta:hover,.cta:focus-visible{color:var(--gold-hi)}
-.cta:hover::before,.cta:focus-visible::before{width:44px}
+/* the keyboard ring gets the colour change only: a rule growing past the
+   ring's edge would cut it */
+.cta:hover::before{left:calc(-1 * var(--grow));width:calc(var(--rule) + var(--grow))}
 .cta:active{transform:translateY(1px)}
-.cta.solid{
-  padding:15px 30px 14px;
-  background:var(--gold);
-  color:var(--gold-ink);
-  transition:background-color var(--d) var(--e-out),color var(--d) var(--e-out),transform var(--d-fast) var(--e-out);
-}
-.cta.solid::before{display:none}
-.cta.solid:hover,.cta.solid:focus-visible{background:var(--gold-hi);color:var(--gold-ink)}
-.cta.solid:active{background:var(--gold-lo)}
+.cta.solid{--rule:clamp(22px,3vw,36px);--grow:20px;color:var(--paper);font-size:13px;letter-spacing:.18em}
+.cta.solid::after{display:block}
+.cta.solid:hover,.cta.solid:focus-visible{color:var(--gold-hi)}
+.cta.solid:hover::after{transform:translate(2px,-2px)}
+.cta.solid:hover::after,.cta.solid:focus-visible::after{background:var(--gold-hi)}
 
 /* ---------- sub-line under a title card (hero, closer) ------------------
    The statement of the page, set roman at statement size: the one italic
@@ -595,15 +618,25 @@ dl.pairs .cols{
   text-wrap:pretty;
   hanging-punctuation:first last;
 }
+/* the attribution is a signature under the words, not a second label: the
+   row above already names the voice in the label column, so this is set
+   italic, at note size, with a dash -- the way a quotation is signed */
 .still .who{
-  grid-column:1;grid-row:2;
-  margin:0;
-  padding-top:calc(var(--t-h3) * .6);    /* the label's baseline on the first line's */
-  text-align:right;
+  grid-column:2;grid-row:3;
+  margin:clamp(14px,2vw,20px) 0 0;
+  padding:0;
+  text-align:left;
   font-family:var(--f-display);
-  font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;color:var(--ink-4);
+  font-style:italic;
+  font-size:var(--t-small);
+  letter-spacing:.01em;
+  text-transform:none;
+  color:var(--ink-3);
   line-height:1.5;
 }
+/* the signature arrives slowly, so it is not there before the words are */
+.js .still > .who.reveal{transition-duration:calc(var(--d-reveal) * 1.2)}
+.still .who::before{content:"—  ";color:var(--ink-4)}
 .hair{
   width:40px;height:1px;background:var(--line-4);margin:0 auto clamp(24px,3.6vw,36px);
 }
@@ -611,7 +644,7 @@ dl.pairs .cols{
   .still{display:block;max-width:34ch;margin-left:auto;margin-right:auto;text-align:center}
   .still .hair{margin:0 auto clamp(16px,2.2vw,24px)}
   .still blockquote{max-width:none}
-  .still .who{padding-top:var(--s5);text-align:center}
+  .still .who{margin-top:var(--s5);text-align:center}
 }
 
 /* ---------- interstitial cta --------------------------------------------
@@ -766,13 +799,15 @@ dl.pairs .cols{
    transparent -- the spread owns the fold -- and it gains its ground and a
    hairline once the visitor has moved (motion.js toggles .is-top).
 
-   One gold button per viewport, always. While a gold button is on screen
-   (the spread's, the end card's) the link here is quiet: a word in the
-   label voice and a small arrow, no box. When none is, motion.js gives it
-   .solid and it becomes the gold button itself, with the full label. It
-   is the last thing in the bar, so when it grows it grows leftward into
-   free space and nothing else moves. Without JavaScript it stays quiet,
-   and the spread's button is the one. */
+   One gold call per viewport, always. While the spread's (or the end
+   card's) is on screen the link here is quiet: one word in the label grey
+   and the small arrow, also grey -- no gold in it at all. When neither is,
+   motion.js gives it .solid and it becomes the call itself: the gold rule
+   draws in front of the full label and the arrow turns gold, the same
+   construction as the spread's, moved up into the bar. It is the last
+   thing in the bar, so when the rule draws it grows leftward into free
+   space and nothing else moves. Without JavaScript it stays quiet, and
+   the spread's call is the one. */
 #header{
   position:sticky;top:0;z-index:50;
   padding:0 var(--gutter);
@@ -798,42 +833,42 @@ dl.pairs .cols{
 #header .bar{display:flex;align-items:center;gap:clamp(14px,2.4vw,30px);flex:0 0 auto}
 #header .cta{
   gap:9px;
-  padding:8px 0 7px;
-  border:1px solid transparent;
+  padding:8px 0 7px;                /* no room reserved for the rule: quiet, it has none */
   font-size:var(--t-micro);
   letter-spacing:var(--trk-caps);
-  color:var(--ink-2);
-  background:transparent;
-  transition:background-color .3s var(--e-out),border-color .3s var(--e-out),color .3s var(--e-out),padding .3s var(--e-out),transform var(--d-fast) var(--e-out);
+  color:var(--ink-3);
+  transition:color .3s var(--e-out),transform var(--d-fast) var(--e-out);
 }
-#header .cta::before{display:none}
+/* the rule is there in both states; quiet, it has no length (and takes
+   its gap with it), so the draw is one transition and not a cut */
+#header .cta::before{position:static;flex:0 0 auto;width:0;margin-right:-9px;transition:width .4s var(--e-out),margin-right .4s var(--e-out)}
+#header .cta::after{display:block;background:var(--ink-4);transition:transform var(--d) var(--e-out),background-color .3s var(--e-out)}
 #header .cta .l{display:none}
 #header .cta .s{display:inline}
-/* the arrow: a hairline in the one gold, drawn, not a glyph */
-#header .cta .arr{
-  display:block;width:9px;height:9px;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M1 8 8 1M2.5 1H8v5.5' fill='none' stroke='%23D7B364' stroke-width='1'/%3E%3C/svg%3E") center/9px 9px no-repeat;
-  transition:transform var(--d) var(--e-out);
-}
 #header .cta:hover,#header .cta:focus-visible{color:var(--paper)}
-#header .cta:hover .arr,#header .cta:focus-visible .arr{transform:translate(1px,-1px)}
-#header .cta.solid{padding:8px 14px 7px;background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+#header .cta:hover::after,#header .cta:focus-visible::after{transform:translate(1px,-1px);background:var(--gold)}
+#header .cta.solid{color:var(--paper);font-size:var(--t-micro);letter-spacing:var(--trk-caps)}
+#header .cta.solid::before{width:22px;margin-right:0}
+#header .cta.solid::after{background:var(--gold)}
 #header .cta.solid .l{display:inline}
-#header .cta.solid .s,#header .cta.solid .arr{display:none}
-#header .cta.solid:hover,#header .cta.solid:focus-visible{background:var(--gold-hi);border-color:var(--gold-hi);color:var(--gold-ink)}
-#header .cta.solid:active{background:var(--gold-lo);border-color:var(--gold-lo)}
+#header .cta.solid .s{display:none}
+#header .cta.solid:hover,#header .cta.solid:focus-visible{color:var(--gold-hi)}
+#header .cta.solid:hover::before,#header .cta.solid:focus-visible::before{width:34px;margin-right:0}
+#header .cta.solid:hover::after,#header .cta.solid:focus-visible::after{background:var(--gold-hi)}
 /* the bar does not arrive: it is the frame, and the picture arrives in it.
    (A fade on a sticky bar, or on anything inside one, promotes a layer that
    paints a box around the wordmark for as long as the transition lives.) */
 /* a phone: the same three things, tighter, and nothing wraps. The link
-   keeps its one word in both states. */
+   keeps its one word in both states; the rule is shorter. */
 @media (max-width:619px){
   #header .inner{gap:8px}
   #header .wm{gap:7px}
   #header .wm b{font-size:var(--t-nano);letter-spacing:.16em}
   #header .bar{gap:16px}
   #header .cta{font-size:var(--t-nano);letter-spacing:.12em;gap:7px}
-  #header .cta.solid{padding:7px 10px 6px}
+  #header .cta::before{margin-right:-7px}
+  #header .cta.solid{font-size:var(--t-nano);letter-spacing:.12em}
+  #header .cta.solid::before{width:16px;margin-right:0}
   #header .cta.solid .l{display:none}
   #header .cta.solid .s{display:inline}
   #header .langsw{gap:0}
@@ -843,46 +878,49 @@ dl.pairs .cols{
 
 /* ---- section:hero ---- */
 /* ===== hero: the opening spread =====
-   A spread, not a title card. Four corners: top left the kicker, top right
-   the standfirst, the three words of the tagline set large and hung on the
-   left gutter, and at the right a plate: a session drawn as a schema in
-   hairlines of the one gold -- four zones, one line, nothing else (the SVG
-   in the partial). The plate is a field, not a box: a mat one step up from
-   the page that enters from the right margin (it bleeds to the viewport's
-   edge) and has no left edge drawn at all -- the type enters from the left,
-   the plate from the right, and where they meet the type is in front and
-   the plate is behind. Two hairlines only, top and bottom, run from the
-   plate's left to the page's edge like the rules of a chart: the frame is
-   open on the side the words come in from, on purpose, so no letter ever
-   chops a line. The band the words cover is empty (the line opens low and
-   quiet there, the session happens in the right two thirds). A figure
-   caption sits under the plate at the lower right. Under the last word, the
-   one gold button of the screen.
+   A spread, not a title card. Two columns and nothing else. The left one
+   is the title's: the kicker, then the three words of the tagline set
+   large and hung on the gutter. The right one is the band's: a plate --
+   a session drawn as a schema in hairlines of the one gold, four zones,
+   one line (the SVG in the partial) -- that enters from the right margin,
+   bleeds to the viewport's edge and has no left edge drawn at all; the
+   last two words of the title run across it, in front. Under the band,
+   on the line of its left edge, everything that is read after the title
+   in the order it is read: the figure's caption, the standfirst, the
+   call. Two hairlines only, top and bottom of the band, run from its left
+   to the page's edge like the rules of a chart; the frame is open on the
+   side the words come in from, on purpose, so no letter ever chops a
+   line. The band the words cover is empty (the line opens low and quiet
+   there; the session happens in the right two thirds).
 
-   Everything on the plate is locked to the type in em of --t-hero, so the
-   relationships hold at every width and on a short laptop screen:
+   Everything is locked to the type in em of --t-hero, so the relationships
+   hold at every width and on a short laptop screen:
      top      .84em  (first baseline .703em + .137em of the line gap)
      height  2.35em  -> bottom at 3.19em; the third baseline is at 2.58em
-                        and its descender ends at 2.80em
-     left    3.30em  from the card's left edge: "Discipline." (4.31em)
-                     crosses by 1.0em, "Uitvoering." (4.66em) by 1.36em,
-                     "Execution." (4.44em) by 1.14em, "Process." (3.32em)
-                     clears the corner. Constant in em, so constant at
-                     every width. The figure stretches to the frame
-                     (preserveAspectRatio none); its strokes do not scale.
-   --kick    height of the kicker line plus its gap, so the plate's top can be
+                        and its descender ends at 2.80em; the title's box
+                        is 2.82em, so the column starts .37em below it
+     left    3.30em  from the card's left edge (--plate-x): "Discipline."
+                     (4.31em) crosses by 1.0em, "Uitvoering." (4.66em) by
+                     1.36em, "Execution." (4.44em) by 1.14em, "Process."
+                     (3.32em) clears the corner. Constant in em, so
+                     constant at every width. The figure stretches to the
+                     frame (preserveAspectRatio none); its strokes do not.
+   --kick    height of the kicker line plus its gap, so the band's top can be
              set from the card's top edge without measuring
    --bleed   from the card's right edge to the viewport's: the gutter plus
              half of what is left over once the card has its width (in vw,
              not cqw: a container unit inside the frame would measure the
              frame; a scrollbar's width of overshoot is clipped by .page)
    On load the mat comes up, the zones develop and the line draws itself
-   while the words rise out of their baselines; on scroll the title leads
-   (-.05) and the plate lags (.10), so the two layers part a little.    */
+   while the words rise out of their baselines; then the column under the
+   band arrives top to bottom. On scroll the title leads (-.05) and the
+   band lags a little (.04), so the two layers part; the column stays with
+   the page. */
 #hero{
   --kick:calc(17px + clamp(18px,2.4vw,32px));
   --card-w:min(100cqw,var(--wide));
-  --plate-w:min(calc(var(--card-w) - var(--t-hero) * 3.30),var(--card-w));
+  --plate-x:calc(var(--t-hero) * 3.30);
+  --plate-w:min(calc(var(--card-w) - var(--plate-x)),var(--card-w));
   --plate-h:calc(var(--t-hero) * 2.35);
   --bleed:calc(var(--gutter) + max(0px,(100vw - 2 * var(--gutter) - var(--wide)) / 2));
   --mat:#121318;                        /* between the letterbox and a card */
@@ -891,7 +929,7 @@ dl.pairs .cols{
   display:flex;flex-direction:column;justify-content:center;
   min-height:calc(100vh - var(--hdr-h));
   min-height:calc(100svh - var(--hdr-h));
-  padding:clamp(16px,4vh,40px) var(--gutter) clamp(56px,9vh,88px);
+  padding:clamp(16px,4vh,40px) var(--gutter) clamp(56px,10vh,96px);
 }
 #hero .card{
   position:relative;
@@ -913,10 +951,8 @@ dl.pairs .cols{
   white-space:nowrap;
 }
 #hero .kicker::before{content:"";flex:0 0 auto;width:26px;height:1px;margin-right:14px;background:var(--gold)}
-/* the kicker's second half goes when the standfirst shares its row (a
-   narrow desk) and on a phone */
-@media (max-width:1099px){ #hero .kicker > .kicker__more{display:none} }
-@media (min-width:620px) and (max-width:899px){ #hero .kicker > .kicker__more{display:inline} }
+/* the kicker's second half goes on a phone */
+@media (max-width:619px){ #hero .kicker > .kicker__more{display:none} }
 
 /* the title: three words, three lines, three masks, hung on the gutter */
 #hero .title{
@@ -938,7 +974,7 @@ dl.pairs .cols{
 #hero .subtitle{
   position:relative;z-index:2;
   margin:clamp(24px,4.6vh,44px) 0 0;
-  max-width:44ch;
+  max-width:var(--measure);
   text-align:left;
   font-size:var(--t-lead);
   line-height:1.45;
@@ -946,11 +982,12 @@ dl.pairs .cols{
   color:var(--ink-2);
   text-wrap:pretty;
 }
-#hero .cta{position:relative;z-index:3;margin-top:clamp(26px,4.2vh,40px)}
+#hero .cta{position:relative;z-index:3;margin-top:clamp(22px,3.6vh,34px)}
 
 /* the plate: a mat (the ::before, which is what bleeds) with the figure
    on it; a hairline along its top and its bottom, none down its sides */
-#hero .plate{margin:0;width:100%;z-index:1}
+#hero .plate{margin:0;width:100%}
+#hero .plate__px{position:relative;z-index:1}
 #hero .plate__frame{
   position:relative;
   container-type:inline-size;          /* the labels size from the frame */
@@ -989,17 +1026,19 @@ dl.pairs .cols{
 #hero .plate__tag--liq{right:2.2%;top:20%;transform:translateY(calc(-100% - 6px))}
 #hero .plate__tag--fvg{right:2.2%;top:40%;transform:translateY(6px)}
 #hero .plate__tag--ob{left:38.6%;top:89.8%;transform:translateY(4px)}
+/* the caption: the figure's number in the label voice, its note in the
+   serif at note size, one row, hung on the band's left edge */
 #hero .plate figcaption{
   display:flex;flex-wrap:wrap;align-items:baseline;
-  gap:4px clamp(14px,1.6vw,22px);
-  margin-top:11px;
+  gap:2px clamp(14px,1.6vw,22px);
+  margin-top:12px;
   font-family:var(--f-display);
   line-height:1.5;
 }
 #hero .plate__title{
   flex:0 0 auto;
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
-  color:var(--ink-2);
+  color:var(--ink-3);
 }
 #hero .plate__note{
   flex:1 1 20ch;min-width:0;
@@ -1027,34 +1066,31 @@ dl.pairs .cols{
   .js #hero .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
 }
 
-/* the desk: the plate tipped in at the right, the standfirst above it in
-   the top right corner, the last two words running across it */
+/* the desk: the band lifted out of the flow and tipped in at the right,
+   the last two words running across it; the figure stays in the flow, so
+   its caption lands under the band's bottom rule at the band's left edge,
+   and the standfirst and the call follow on that line */
 @media (min-width:900px){
-  #hero .card{min-height:calc(var(--kick) + var(--t-hero) * .84 + var(--plate-h) + 52px)}
-  #hero .plate{
+  #hero .plate{margin:calc(var(--t-hero) * .37 + 16px) 0 0 var(--plate-x);width:var(--plate-w)}
+  #hero .plate__px{
     position:absolute;right:0;
     top:calc(var(--kick) + var(--t-hero) * .84);
-    width:var(--plate-w);
+    width:var(--plate-w);height:var(--plate-h);
   }
-  #hero .plate__frame{aspect-ratio:auto;height:var(--plate-h)}
+  #hero .plate__frame{aspect-ratio:auto;height:100%}
   #hero .plate__frame::before{right:calc(-1 * var(--bleed))}
-  #hero .plate figcaption{justify-content:flex-end;text-align:right;margin-top:14px}
-  #hero .plate__note{flex:0 1 auto}
-  /* the button hangs from the plate's bottom rule: its top edge is on the
-     line (the title's box is 2.82em tall, the rule at 3.19em), so the
-     button and the caption make one row under the plate, and the caption's
-     baseline sits on the label's */
-  #hero .cta{margin-top:calc(var(--t-hero) * .37)}
+  #hero .plate figcaption{margin-top:0}
   #hero .subtitle{
-    position:absolute;right:0;
-    bottom:calc(100% - var(--kick) - var(--t-hero) * .84 + 30px);
-    width:min(38ch,40%);
-    margin:0;
-    font-size:clamp(16px,1.45vw,21px);
+    margin:clamp(20px,3vh,30px) 0 0 var(--plate-x);
+    max-width:min(52ch,var(--plate-w));
+    font-size:clamp(17px,1.4vw,21px);
+    line-height:1.5;
   }
+  #hero .cta{margin:clamp(20px,3vh,30px) 0 0 var(--plate-x)}
 }
-/* narrower: one column, the plate after the button; the band runs from
-   edge to edge of the screen, the figure stays inside the gutters */
+/* narrower: one column in reading order -- the words, the standfirst,
+   the call, then the band with its caption; the band runs from edge to
+   edge of the screen, the figure stays inside the gutters */
 @media (max-width:899px){
   #hero .plate{order:9;margin-top:clamp(34px,7vw,56px)}
   #hero .plate__frame::before{left:calc(-1 * var(--gutter));right:calc(-1 * var(--gutter))}
@@ -1264,7 +1300,7 @@ footer .risk{
         <button type="button" data-lang="nl" aria-pressed="true">NL</button>
         <button type="button" data-lang="en" aria-pressed="false">EN</button>
       </div>
-      <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="l"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></span><span class="s"><span lang="nl">Discord</span><span lang="en">Discord</span></span><span class="arr" aria-hidden="true"></span></a>
+      <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="l"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></span><span class="s"><span lang="nl">Discord</span><span lang="en">Discord</span></span></a>
     </div>
   </div>
 </header>
@@ -1279,8 +1315,6 @@ footer .risk{
       <span class="mask"><span class="title__line reveal" data-at="260"><span lang="nl">Discipline.</span><span lang="en">Discipline.</span></span></span>
       <span class="mask"><span class="title__line reveal" data-at="400"><span lang="nl">Uitvoering.</span><span lang="en">Execution.</span></span></span>
     </h1>
-    <p class="subtitle reveal" data-at="760"><span lang="nl">Educatie in tien onderwerpen, live trading door de oprichter en chart-idee&euml;n voor Nasdaq, S&amp;P&nbsp;500, goud, olie en crypto. Negen kanalen zijn nu gratis open.</span><span lang="en">Education in ten topics, live trading by the founder and chart ideas for the Nasdaq, S&amp;P&nbsp;500, gold, oil and crypto. Nine channels are open, free, right now.</span></p>
-    <a class="cta solid reveal" data-at="900" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
     <!-- the figure: a session drawn as a schema, in hairlines of the one
          gold. Four zones and one line, nothing else -- no price, no date, no
          entry, no outcome. The line opens low and quiet under the title
@@ -1288,25 +1322,33 @@ footer .risk{
          and the session happens in the right two thirds: a rally out of an
          orderblock, one sweep of the liquidity above the equal highs, the
          fall back through the gap it leaves. On load the line draws itself
-         while the zones develop. Labels are HTML so they stay label-sized. -->
-    <figure class="plate" data-parallax="0.10" data-parallax-top>
-      <div class="plate__frame reveal trace" data-at="300">
-        <svg class="fig" viewBox="0 0 1000 450" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-          <rect class="fig__zone fig__zone--ob" x="322" y="372" width="50" height="32"/>
-          <rect class="fig__zone fig__zone--fvg" x="770" y="154" width="230" height="26"/>
-          <line class="fig__zone fig__level" x1="580" y1="90" x2="1000" y2="90"/>
-          <line class="fig__zone fig__level" x1="620" y1="438" x2="1000" y2="438"/>
-          <path class="fig__line" pathLength="1" d="M0 412 60 410 120 414 180 411 240 415 300 410 322 398 336 388 348 396 372 362 396 350 424 300 442 318 480 250 500 270 540 196 556 214 584 130 600 96 616 122 630 150 646 118 660 96 676 128 690 160 706 118 724 62 740 100 748 92 762 148 776 214 792 202 812 262 828 250 852 308 868 298 896 350 914 340 946 380 964 372 1000 386"/>
-        </svg>
-        <i class="plate__tag plate__tag--liq"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></i>
-        <i class="plate__tag plate__tag--fvg">FVG</i>
-        <i class="plate__tag plate__tag--ob">Orderblock</i>
+         while the zones develop. Labels are HTML so they stay label-sized.
+         On a desk the frame is lifted out of the flow (it is the band the
+         title crosses); the caption stays in it, so it sits under the band
+         at the band's left edge, and the standfirst and the call follow it
+         on that same line. -->
+    <figure class="plate">
+      <div class="plate__px" data-parallax="0.04" data-parallax-top>
+        <div class="plate__frame reveal trace" data-at="300">
+          <svg class="fig" viewBox="0 0 1000 450" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <rect class="fig__zone fig__zone--ob" x="322" y="372" width="50" height="32"/>
+            <rect class="fig__zone fig__zone--fvg" x="770" y="154" width="230" height="26"/>
+            <line class="fig__zone fig__level" x1="580" y1="90" x2="1000" y2="90"/>
+            <line class="fig__zone fig__level" x1="620" y1="438" x2="1000" y2="438"/>
+            <path class="fig__line" pathLength="1" d="M0 412 60 410 120 414 180 411 240 415 300 410 322 398 336 388 348 396 372 362 396 350 424 300 442 318 480 250 500 270 540 196 556 214 584 130 600 96 616 122 630 150 646 118 660 96 676 128 690 160 706 118 724 62 740 100 748 92 762 148 776 214 792 202 812 262 828 250 852 308 868 298 896 350 914 340 946 380 964 372 1000 386"/>
+          </svg>
+          <i class="plate__tag plate__tag--liq"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></i>
+          <i class="plate__tag plate__tag--fvg">FVG</i>
+          <i class="plate__tag plate__tag--ob">Orderblock</i>
+        </div>
       </div>
-      <figcaption class="reveal" data-at="1150">
+      <figcaption class="reveal" data-at="760">
         <span class="plate__title"><span lang="nl">Figuur &mdash; Een sessie, schematisch</span><span lang="en">Figure &mdash; A session, as a schema</span></span>
         <span class="plate__note"><span lang="nl">Vier zones, &eacute;&eacute;n lijn. Geen koers, geen dag, geen uitslag.</span><span lang="en">Four zones, one line. No price, no day, no outcome.</span></span>
       </figcaption>
     </figure>
+    <p class="subtitle reveal" data-at="880"><span lang="nl">Educatie in tien onderwerpen, live trading door de oprichter en chart-idee&euml;n voor Nasdaq, S&amp;P&nbsp;500, goud, olie en crypto. Negen kanalen zijn nu gratis open.</span><span lang="en">Education in ten topics, live trading by the founder and chart ideas for the Nasdaq, S&amp;P&nbsp;500, gold, oil and crypto. Nine channels are open, free, right now.</span></p>
+    <a class="cta solid reveal" data-at="1020" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
   </div>
 </section>
 <!-- /section:hero -->
@@ -1711,7 +1753,7 @@ footer .risk{
     auto(".roll dl.pairs", null, ":scope > dt, :scope > dd", "reveal", 70);
     auto(".roll .lessons", null, ":scope > figure, :scope > *", "reveal", 110);
     auto(".roll .proofs", null, ":scope > figure, :scope > *", "reveal", 90);
-    auto(".roll .still", null, ".hair, blockquote, .who", "reveal", 180);
+    auto(".roll .still", null, ".hair, blockquote, .who", "reveal", 300); /* the signature waits for the words */
     auto(".roll .interstitial", null, ":scope > *", "reveal", 140);
     auto(".roll .proofs-hint, .roll .caveat", "reveal");
     wrapMask(document.querySelector("#closer .endword"));

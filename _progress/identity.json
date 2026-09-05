@@ -2,9 +2,9 @@
  "id": "identity",
  "title": "Identity",
  "wave": 0,
- "round": 7,
+ "round": 8,
  "status": "win",
- "updated_at": "2026-09-05T18:33:50+02:00",
+ "updated_at": "2026-09-05T19:06:39+02:00",
  "history": [
   {
    "wave": 0,
@@ -123,6 +123,21 @@
    "confidence": 0.72,
    "note": "hero.css: the plate is no longer a hairline box the title chops. It is a band: a mat one step up from the page (#121318) drawn by .plate__frame::before, with hairlines top and bottom only (line-3) and no side edges; on the desk it bleeds from the card's right edge to the viewport's (--bleed, in vw), on phones it runs edge to edge. \"Discipline.\"/\"Uitvoering.\" now sit in front of a field, and no letter crosses a line. Left edge moved from 3.45em to 3.30em (a fuller overlap).\nhero.css: the trace reveal moved onto the ::before (mat + rules come up while the line draws); reduced-motion branch",
    "at": "2026-09-05T18:33:50+02:00"
+  },
+  {
+   "wave": 0,
+   "round": 8,
+   "ref": "aebele",
+   "status": "win",
+   "score_ours": 7.4,
+   "score_ref": 6.8,
+   "wowed": false,
+   "gap": "The system is tight (hairlines, tracked small caps, numbered sections, figure captions, dual clocks) but the idiom is the stock premium-finance look, near-black plus gold plus high-contrast serif, so it reads as expensive rather than as this brand; the one owned device, the annotated schematic chart language, appears once and vanishes, and the mid-page founder quote is a narrow column marooned in dead space with two vertical hairlines doing all the work. At the bar, that chart vocabulary (orderblock boxes, dashed liquidity lines, FVG bands) would structure every section, and the quote block would be given a full-width rhythm or a second element to sit against.",
+   "motion": "Staggered bottom-up mask reveal of the three headline lines, chart path drawing in, then caption and body fading up in reading order: correctly sequenced and restrained, though fully settled by frame 4 so the tail of the scroll is dead.",
+   "verdict": "A has the more memorable single frame but loses on craft everywhere its hero isn't looking; B has no weak frame but also no frame that could only belong to it. B takes it narrowly on discipline, and neither reaches the shortlist as-is.",
+   "confidence": 0.6,
+   "note": "hero (02-hero.html + hero.css): the secondary layer now shares ONE x-line hung off the plate's left edge — the figure caption, the standfirst (52ch, 3 lines) and the call sit under the band in reading order; the plate frame is lifted out of flow (.plate__px, parallax .04) while the figure stays in flow so the caption lands under the bottom rule; mobile keeps words → standfirst → call → band. --t-hero 17vh→16vh so the column clears the fold on a 768 laptop.\nbase.css: CTA system rebuilt with no filled rectangles — .cta = gold hairline rule + serif caps label (rule absolutely placed, grows LEFT",
+   "at": "2026-09-05T19:06:39+02:00"
   }
  ]
 }

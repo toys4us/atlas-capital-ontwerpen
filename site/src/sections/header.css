@@ -6,13 +6,15 @@
    transparent -- the spread owns the fold -- and it gains its ground and a
    hairline once the visitor has moved (motion.js toggles .is-top).
 
-   One gold button per viewport, always. While a gold button is on screen
-   (the spread's, the end card's) the link here is quiet: a word in the
-   label voice and a small arrow, no box. When none is, motion.js gives it
-   .solid and it becomes the gold button itself, with the full label. It
-   is the last thing in the bar, so when it grows it grows leftward into
-   free space and nothing else moves. Without JavaScript it stays quiet,
-   and the spread's button is the one. */
+   One gold call per viewport, always. While the spread's (or the end
+   card's) is on screen the link here is quiet: one word in the label grey
+   and the small arrow, also grey -- no gold in it at all. When neither is,
+   motion.js gives it .solid and it becomes the call itself: the gold rule
+   draws in front of the full label and the arrow turns gold, the same
+   construction as the spread's, moved up into the bar. It is the last
+   thing in the bar, so when the rule draws it grows leftward into free
+   space and nothing else moves. Without JavaScript it stays quiet, and
+   the spread's call is the one. */
 #header{
   position:sticky;top:0;z-index:50;
   padding:0 var(--gutter);
@@ -38,42 +40,42 @@
 #header .bar{display:flex;align-items:center;gap:clamp(14px,2.4vw,30px);flex:0 0 auto}
 #header .cta{
   gap:9px;
-  padding:8px 0 7px;
-  border:1px solid transparent;
+  padding:8px 0 7px;                /* no room reserved for the rule: quiet, it has none */
   font-size:var(--t-micro);
   letter-spacing:var(--trk-caps);
-  color:var(--ink-2);
-  background:transparent;
-  transition:background-color .3s var(--e-out),border-color .3s var(--e-out),color .3s var(--e-out),padding .3s var(--e-out),transform var(--d-fast) var(--e-out);
+  color:var(--ink-3);
+  transition:color .3s var(--e-out),transform var(--d-fast) var(--e-out);
 }
-#header .cta::before{display:none}
+/* the rule is there in both states; quiet, it has no length (and takes
+   its gap with it), so the draw is one transition and not a cut */
+#header .cta::before{position:static;flex:0 0 auto;width:0;margin-right:-9px;transition:width .4s var(--e-out),margin-right .4s var(--e-out)}
+#header .cta::after{display:block;background:var(--ink-4);transition:transform var(--d) var(--e-out),background-color .3s var(--e-out)}
 #header .cta .l{display:none}
 #header .cta .s{display:inline}
-/* the arrow: a hairline in the one gold, drawn, not a glyph */
-#header .cta .arr{
-  display:block;width:9px;height:9px;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M1 8 8 1M2.5 1H8v5.5' fill='none' stroke='%23D7B364' stroke-width='1'/%3E%3C/svg%3E") center/9px 9px no-repeat;
-  transition:transform var(--d) var(--e-out);
-}
 #header .cta:hover,#header .cta:focus-visible{color:var(--paper)}
-#header .cta:hover .arr,#header .cta:focus-visible .arr{transform:translate(1px,-1px)}
-#header .cta.solid{padding:8px 14px 7px;background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+#header .cta:hover::after,#header .cta:focus-visible::after{transform:translate(1px,-1px);background:var(--gold)}
+#header .cta.solid{color:var(--paper);font-size:var(--t-micro);letter-spacing:var(--trk-caps)}
+#header .cta.solid::before{width:22px;margin-right:0}
+#header .cta.solid::after{background:var(--gold)}
 #header .cta.solid .l{display:inline}
-#header .cta.solid .s,#header .cta.solid .arr{display:none}
-#header .cta.solid:hover,#header .cta.solid:focus-visible{background:var(--gold-hi);border-color:var(--gold-hi);color:var(--gold-ink)}
-#header .cta.solid:active{background:var(--gold-lo);border-color:var(--gold-lo)}
+#header .cta.solid .s{display:none}
+#header .cta.solid:hover,#header .cta.solid:focus-visible{color:var(--gold-hi)}
+#header .cta.solid:hover::before,#header .cta.solid:focus-visible::before{width:34px;margin-right:0}
+#header .cta.solid:hover::after,#header .cta.solid:focus-visible::after{background:var(--gold-hi)}
 /* the bar does not arrive: it is the frame, and the picture arrives in it.
    (A fade on a sticky bar, or on anything inside one, promotes a layer that
    paints a box around the wordmark for as long as the transition lives.) */
 /* a phone: the same three things, tighter, and nothing wraps. The link
-   keeps its one word in both states. */
+   keeps its one word in both states; the rule is shorter. */
 @media (max-width:619px){
   #header .inner{gap:8px}
   #header .wm{gap:7px}
   #header .wm b{font-size:var(--t-nano);letter-spacing:.16em}
   #header .bar{gap:16px}
   #header .cta{font-size:var(--t-nano);letter-spacing:.12em;gap:7px}
-  #header .cta.solid{padding:7px 10px 6px}
+  #header .cta::before{margin-right:-7px}
+  #header .cta.solid{font-size:var(--t-nano);letter-spacing:.12em}
+  #header .cta.solid::before{width:16px;margin-right:0}
   #header .cta.solid .l{display:none}
   #header .cta.solid .s{display:inline}
   #header .langsw{gap:0}

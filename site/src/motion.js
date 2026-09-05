@@ -92,7 +92,7 @@
     auto(".roll dl.pairs", null, ":scope > dt, :scope > dd", "reveal", 70);
     auto(".roll .lessons", null, ":scope > figure, :scope > *", "reveal", 110);
     auto(".roll .proofs", null, ":scope > figure, :scope > *", "reveal", 90);
-    auto(".roll .still", null, ".hair, blockquote, .who", "reveal", 180);
+    auto(".roll .still", null, ".hair, blockquote, .who", "reveal", 300); /* the signature waits for the words */
     auto(".roll .interstitial", null, ":scope > *", "reveal", 140);
     auto(".roll .proofs-hint, .roll .caveat", "reveal");
     wrapMask(document.querySelector("#closer .endword"));

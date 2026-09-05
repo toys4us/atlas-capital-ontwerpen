@@ -1,44 +1,47 @@
 /* ===== hero: the opening spread =====
-   A spread, not a title card. Four corners: top left the kicker, top right
-   the standfirst, the three words of the tagline set large and hung on the
-   left gutter, and at the right a plate: a session drawn as a schema in
-   hairlines of the one gold -- four zones, one line, nothing else (the SVG
-   in the partial). The plate is a field, not a box: a mat one step up from
-   the page that enters from the right margin (it bleeds to the viewport's
-   edge) and has no left edge drawn at all -- the type enters from the left,
-   the plate from the right, and where they meet the type is in front and
-   the plate is behind. Two hairlines only, top and bottom, run from the
-   plate's left to the page's edge like the rules of a chart: the frame is
-   open on the side the words come in from, on purpose, so no letter ever
-   chops a line. The band the words cover is empty (the line opens low and
-   quiet there, the session happens in the right two thirds). A figure
-   caption sits under the plate at the lower right. Under the last word, the
-   one gold button of the screen.
+   A spread, not a title card. Two columns and nothing else. The left one
+   is the title's: the kicker, then the three words of the tagline set
+   large and hung on the gutter. The right one is the band's: a plate --
+   a session drawn as a schema in hairlines of the one gold, four zones,
+   one line (the SVG in the partial) -- that enters from the right margin,
+   bleeds to the viewport's edge and has no left edge drawn at all; the
+   last two words of the title run across it, in front. Under the band,
+   on the line of its left edge, everything that is read after the title
+   in the order it is read: the figure's caption, the standfirst, the
+   call. Two hairlines only, top and bottom of the band, run from its left
+   to the page's edge like the rules of a chart; the frame is open on the
+   side the words come in from, on purpose, so no letter ever chops a
+   line. The band the words cover is empty (the line opens low and quiet
+   there; the session happens in the right two thirds).
 
-   Everything on the plate is locked to the type in em of --t-hero, so the
-   relationships hold at every width and on a short laptop screen:
+   Everything is locked to the type in em of --t-hero, so the relationships
+   hold at every width and on a short laptop screen:
      top      .84em  (first baseline .703em + .137em of the line gap)
      height  2.35em  -> bottom at 3.19em; the third baseline is at 2.58em
-                        and its descender ends at 2.80em
-     left    3.30em  from the card's left edge: "Discipline." (4.31em)
-                     crosses by 1.0em, "Uitvoering." (4.66em) by 1.36em,
-                     "Execution." (4.44em) by 1.14em, "Process." (3.32em)
-                     clears the corner. Constant in em, so constant at
-                     every width. The figure stretches to the frame
-                     (preserveAspectRatio none); its strokes do not scale.
-   --kick    height of the kicker line plus its gap, so the plate's top can be
+                        and its descender ends at 2.80em; the title's box
+                        is 2.82em, so the column starts .37em below it
+     left    3.30em  from the card's left edge (--plate-x): "Discipline."
+                     (4.31em) crosses by 1.0em, "Uitvoering." (4.66em) by
+                     1.36em, "Execution." (4.44em) by 1.14em, "Process."
+                     (3.32em) clears the corner. Constant in em, so
+                     constant at every width. The figure stretches to the
+                     frame (preserveAspectRatio none); its strokes do not.
+   --kick    height of the kicker line plus its gap, so the band's top can be
              set from the card's top edge without measuring
    --bleed   from the card's right edge to the viewport's: the gutter plus
              half of what is left over once the card has its width (in vw,
              not cqw: a container unit inside the frame would measure the
              frame; a scrollbar's width of overshoot is clipped by .page)
    On load the mat comes up, the zones develop and the line draws itself
-   while the words rise out of their baselines; on scroll the title leads
-   (-.05) and the plate lags (.10), so the two layers part a little.    */
+   while the words rise out of their baselines; then the column under the
+   band arrives top to bottom. On scroll the title leads (-.05) and the
+   band lags a little (.04), so the two layers part; the column stays with
+   the page. */
 #hero{
   --kick:calc(17px + clamp(18px,2.4vw,32px));
   --card-w:min(100cqw,var(--wide));
-  --plate-w:min(calc(var(--card-w) - var(--t-hero) * 3.30),var(--card-w));
+  --plate-x:calc(var(--t-hero) * 3.30);
+  --plate-w:min(calc(var(--card-w) - var(--plate-x)),var(--card-w));
   --plate-h:calc(var(--t-hero) * 2.35);
   --bleed:calc(var(--gutter) + max(0px,(100vw - 2 * var(--gutter) - var(--wide)) / 2));
   --mat:#121318;                        /* between the letterbox and a card */
@@ -47,7 +50,7 @@
   display:flex;flex-direction:column;justify-content:center;
   min-height:calc(100vh - var(--hdr-h));
   min-height:calc(100svh - var(--hdr-h));
-  padding:clamp(16px,4vh,40px) var(--gutter) clamp(56px,9vh,88px);
+  padding:clamp(16px,4vh,40px) var(--gutter) clamp(56px,10vh,96px);
 }
 #hero .card{
   position:relative;
@@ -69,10 +72,8 @@
   white-space:nowrap;
 }
 #hero .kicker::before{content:"";flex:0 0 auto;width:26px;height:1px;margin-right:14px;background:var(--gold)}
-/* the kicker's second half goes when the standfirst shares its row (a
-   narrow desk) and on a phone */
-@media (max-width:1099px){ #hero .kicker > .kicker__more{display:none} }
-@media (min-width:620px) and (max-width:899px){ #hero .kicker > .kicker__more{display:inline} }
+/* the kicker's second half goes on a phone */
+@media (max-width:619px){ #hero .kicker > .kicker__more{display:none} }
 
 /* the title: three words, three lines, three masks, hung on the gutter */
 #hero .title{
@@ -94,7 +95,7 @@
 #hero .subtitle{
   position:relative;z-index:2;
   margin:clamp(24px,4.6vh,44px) 0 0;
-  max-width:44ch;
+  max-width:var(--measure);
   text-align:left;
   font-size:var(--t-lead);
   line-height:1.45;
@@ -102,11 +103,12 @@
   color:var(--ink-2);
   text-wrap:pretty;
 }
-#hero .cta{position:relative;z-index:3;margin-top:clamp(26px,4.2vh,40px)}
+#hero .cta{position:relative;z-index:3;margin-top:clamp(22px,3.6vh,34px)}
 
 /* the plate: a mat (the ::before, which is what bleeds) with the figure
    on it; a hairline along its top and its bottom, none down its sides */
-#hero .plate{margin:0;width:100%;z-index:1}
+#hero .plate{margin:0;width:100%}
+#hero .plate__px{position:relative;z-index:1}
 #hero .plate__frame{
   position:relative;
   container-type:inline-size;          /* the labels size from the frame */
@@ -145,17 +147,19 @@
 #hero .plate__tag--liq{right:2.2%;top:20%;transform:translateY(calc(-100% - 6px))}
 #hero .plate__tag--fvg{right:2.2%;top:40%;transform:translateY(6px)}
 #hero .plate__tag--ob{left:38.6%;top:89.8%;transform:translateY(4px)}
+/* the caption: the figure's number in the label voice, its note in the
+   serif at note size, one row, hung on the band's left edge */
 #hero .plate figcaption{
   display:flex;flex-wrap:wrap;align-items:baseline;
-  gap:4px clamp(14px,1.6vw,22px);
-  margin-top:11px;
+  gap:2px clamp(14px,1.6vw,22px);
+  margin-top:12px;
   font-family:var(--f-display);
   line-height:1.5;
 }
 #hero .plate__title{
   flex:0 0 auto;
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
-  color:var(--ink-2);
+  color:var(--ink-3);
 }
 #hero .plate__note{
   flex:1 1 20ch;min-width:0;
@@ -183,34 +187,31 @@
   .js #hero .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
 }
 
-/* the desk: the plate tipped in at the right, the standfirst above it in
-   the top right corner, the last two words running across it */
+/* the desk: the band lifted out of the flow and tipped in at the right,
+   the last two words running across it; the figure stays in the flow, so
+   its caption lands under the band's bottom rule at the band's left edge,
+   and the standfirst and the call follow on that line */
 @media (min-width:900px){
-  #hero .card{min-height:calc(var(--kick) + var(--t-hero) * .84 + var(--plate-h) + 52px)}
-  #hero .plate{
+  #hero .plate{margin:calc(var(--t-hero) * .37 + 16px) 0 0 var(--plate-x);width:var(--plate-w)}
+  #hero .plate__px{
     position:absolute;right:0;
     top:calc(var(--kick) + var(--t-hero) * .84);
-    width:var(--plate-w);
+    width:var(--plate-w);height:var(--plate-h);
   }
-  #hero .plate__frame{aspect-ratio:auto;height:var(--plate-h)}
+  #hero .plate__frame{aspect-ratio:auto;height:100%}
   #hero .plate__frame::before{right:calc(-1 * var(--bleed))}
-  #hero .plate figcaption{justify-content:flex-end;text-align:right;margin-top:14px}
-  #hero .plate__note{flex:0 1 auto}
-  /* the button hangs from the plate's bottom rule: its top edge is on the
-     line (the title's box is 2.82em tall, the rule at 3.19em), so the
-     button and the caption make one row under the plate, and the caption's
-     baseline sits on the label's */
-  #hero .cta{margin-top:calc(var(--t-hero) * .37)}
+  #hero .plate figcaption{margin-top:0}
   #hero .subtitle{
-    position:absolute;right:0;
-    bottom:calc(100% - var(--kick) - var(--t-hero) * .84 + 30px);
-    width:min(38ch,40%);
-    margin:0;
-    font-size:clamp(16px,1.45vw,21px);
+    margin:clamp(20px,3vh,30px) 0 0 var(--plate-x);
+    max-width:min(52ch,var(--plate-w));
+    font-size:clamp(17px,1.4vw,21px);
+    line-height:1.5;
   }
+  #hero .cta{margin:clamp(20px,3vh,30px) 0 0 var(--plate-x)}
 }
-/* narrower: one column, the plate after the button; the band runs from
-   edge to edge of the screen, the figure stays inside the gutters */
+/* narrower: one column in reading order -- the words, the standfirst,
+   the call, then the band with its caption; the band runs from edge to
+   edge of the screen, the figure stays inside the gutters */
 @media (max-width:899px){
   #hero .plate{order:9;margin-top:clamp(34px,7vw,56px)}
   #hero .plate__frame::before{left:calc(-1 * var(--gutter));right:calc(-1 * var(--gutter))}
