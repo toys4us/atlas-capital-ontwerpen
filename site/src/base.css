@@ -4,17 +4,23 @@
    section uses. Section-specific rules live in sections/<id>.css and are
    namespaced under that section's root id.
 
-   Identity in one line: a credits roll set like the financial press —
-   Newsreader for everything that is read, Fragment Mono for everything that
-   is counted, one flat gold (#D7B364) for the mark, the hairlines and the
-   one button, and a page that arrives as you read it.
+   Identity in one line: a trader's journal set like the financial press --
+   Newsreader for everything that is read, one flat gold (#D7B364) for the
+   mark, the hairlines, the one button and the ink the plates are printed
+   in, and a page that arrives as you read it. The opening spread is the
+   idea: the tagline set large and flush left, the founder's own chart
+   tipped in as a plate, the last two lines of the title running across
+   its edge.
 
    Where the gold goes (and nowhere else):
-     - hairlines: the strip edges, the group rules, the language dot
-     - one accent per screen: an italic value, the reading lead
+     - hairlines: the strip edges, the group rules, the language rule
+     - one accent per screen: an italic value, the kicker's dash
      - the one solid button (.cta.solid): never twice in a viewport
-   Labels are serif caps in grey, not tracked mono in gold. Numbers, dates,
-   amounts, tickers and clocks are mono, tabular, never uppercase.
+     - the plates: the founder's charts printed in gold ink on the black
+   Two voices per block, never three: the serif (roman, italic, or small
+   tracked caps for a label) and, only for what is counted next to a
+   clock or a figure number, Fragment Mono. A sub-line under a credit is
+   serif, whatever it says.
    ========================================================================== */
 
 /* ---------- tokens ---------------------------------------------------- */
@@ -59,7 +65,9 @@
   /* fluid scale, 390 → 1440. Newsreader has a small x-height, so every
      step sits a size above where a grotesk would. */
   --t-display:clamp(76px,12.5vw,184px);  /* the end card                   */
-  --t-hero:clamp(58px,9.2vw,132px);      /* the title card, three lines    */
+  --t-hero:clamp(62px,min(11vw,17vh),158px); /* the spread: three lines, and
+                                            the button still above the fold
+                                            on a 768px laptop             */
   --t-h1:clamp(44px,7vw,100px);          /* a section-sized line           */
   --t-h2:clamp(27px,3.2vw,46px);         /* a statement, a quote           */
   --t-h3:clamp(20px,1.95vw,27px);        /* a credit value                 */
@@ -73,7 +81,7 @@
 
   /* tracking per size */
   --trk-display:-.022em;
-  --trk-hero:-.024em;
+  --trk-hero:-.028em;
   --trk-h1:-.014em;
   --trk-caps-wide:.24em;                 /* group titles, the wordmark     */
   --trk-caps:.16em;                      /* labels                         */
@@ -100,11 +108,15 @@
   --gap-block:clamp(32px,5vw,64px);
   --gap-item:clamp(12px,1.6vw,20px);
 
-  /* the mark: a mark, not a poster. The hero shows the studio ident (the
-     triangle alone) at the size of a line of text; the name is set in type. */
-  --logo-hero:clamp(40px,4.4vw,58px);
+  /* the mark: a mark, not a poster. It appears once, in the bar, at the
+     size of a line of text; the name is set in type. */
   --logo-nav:20px;
   --hdr-h:52px;
+
+  /* the page's outer gutter and the width the spread and the bar share,
+     so the wordmark and the first word of the title sit on one axis */
+  --gutter:clamp(18px,4.5vw,64px);
+  --wide:1312px;
 
   /* radii: none. Corners are square everywhere. */
   --r:0;
@@ -251,9 +263,11 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
   display:none;
 }
 @media (min-width:1100px){ .rail{display:block} }
+/* a short laptop screen: the clocks would sit on the spread's button */
+@media (max-height:760px){ .rail__now{display:none} }
 .rail > *{position:absolute;margin:0}
 .rail__now{
-  left:clamp(24px,3vw,44px);
+  left:var(--gutter);
   top:calc(100vh - 44px);
   display:flex;gap:26px;
   white-space:nowrap;
@@ -267,7 +281,7 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 }
 .rail__now time{font-size:var(--t-caption);color:var(--ink-4)}
 .rail__here{
-  left:clamp(24px,3vw,44px);
+  left:calc(var(--gutter) - 6px);
   top:50vh;
   transform:translateY(-50%) rotate(180deg);
   writing-mode:vertical-rl;
@@ -290,7 +304,7 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 .rail__label.is-out{transform:translateY(-110%)}
 .rail__label.is-new{transform:translateY(110%);transition:none}
 .rail__scroll{
-  right:clamp(24px,3vw,44px);
+  right:var(--gutter);
   top:calc(100vh - 44px);
   display:flex;align-items:center;gap:12px;
   font-size:var(--t-nano);
@@ -434,10 +448,9 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 }
 .grp h2::before{
   content:counter(reel,decimal-leading-zero);
-  font-family:var(--f-mono);
-  letter-spacing:var(--trk-mono);
+  font-variant-numeric:tabular-nums;
   color:var(--ink-4);
-  margin-right:1.4em;
+  margin-right:1.6em;
 }
 .grp::before{
   content:"";
@@ -484,14 +497,14 @@ dl.pairs dd{
 }
 dl.pairs dd small{
   display:block;
-  margin-top:7px;
-  font-family:var(--f-mono);
-  font-size:var(--t-caption);
+  margin-top:5px;
+  font-family:var(--f-display);
+  font-size:var(--t-small);
   font-variant-numeric:tabular-nums;
-  letter-spacing:var(--trk-mono);
+  letter-spacing:.01em;
   text-transform:none;
-  line-height:1.55;
-  color:var(--ink-4);
+  line-height:1.5;
+  color:var(--ink-3);
 }
 dl.pairs dd em{font-style:italic;color:var(--gold)}
 dl.pairs .cont{grid-column:2}
@@ -613,7 +626,9 @@ dl.pairs .cols{
    so without JavaScript every element is on screen from the first paint.
    motion.js adds .is-in when the element scrolls into view; children of a
    [data-stagger] container arrive one after another (the attribute's value
-   is the step in ms); once the transition has run motion.js drops the
+   is the step in ms; a child with [data-at="ms"] takes that slot in the
+   sequence instead of the next one, so a plate can develop under the
+   words from the first beat whatever its place in the markup); once the transition has run motion.js drops the
    .reveal class so the element goes back to its own cascade (a button keeps
    its hover transition). If motion.js throws it takes .js off again, so a
    broken script is a visible page. The roll's own blocks (group titles,

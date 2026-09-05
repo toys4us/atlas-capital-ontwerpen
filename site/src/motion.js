@@ -7,8 +7,11 @@
    Reveal     .reveal gets .is-in once it is inside the viewport (measured
               8% in from the bottom edge). A [data-stagger] container
               reveals its .reveal children one after the other, STEP ms
-              apart (or the attribute's own value); on scroll the whole
-              sequence is capped so nothing waits behind its siblings.
+              apart (or the attribute's own value); a child with
+              [data-at="ms"] takes that slot instead of the next one (the
+              spread's plate develops from the first beat while the words
+              rise); on scroll the whole sequence is capped so nothing
+              waits behind its siblings.
               Whatever is on screen at load comes in as one sequence
               starting on the first frame, after the web fonts (never later
               than FONTS ms). When a reveal has run, the .reveal class is
@@ -51,11 +54,11 @@
 
   var STEP = 160;         /* ms between staggered siblings (default)      */
   var SCROLL_SPAN = 420;  /* on scroll a whole stagger fits in this        */
-  var GAP = 160;          /* ms between groups in the load sequence        */
+  var GAP = 110;          /* ms between groups in the load sequence        */
   var CAP = 900;          /* the load sequence never waits longer          */
   var FONTS = 350;        /* ms we are willing to wait for the web fonts   */
-  var BEAT = 520;         /* ms of light before the card comes in          */
-  var DUR = 1800;         /* >= the longest reveal transition in css       */
+  var BEAT = 140;         /* ms of black before the page comes in          */
+  var DUR = 2000;         /* >= the longest reveal transition in css       */
 
   /* ---- auto: tag the roll's blocks -------------------------------------
      Before anything is measured. Each entry: selector, what to add to the
@@ -125,11 +128,20 @@
     if (onScroll && n > 1) s = Math.min(s, Math.floor(SCROLL_SPAN / (n - 1)));
     return s;
   }
-  /* reveal a container's children in sequence; returns the delay after the last */
+  /* reveal a container's children in sequence; returns the delay after the
+     last. A child with data-at takes that slot (ms after the sequence
+     starts) and does not advance the sequence. */
   function stagger(box, base, onScroll){
-    var kids = box.querySelectorAll(".reveal"), i, d = base || 0, s = stepOf(box, kids.length, onScroll);
+    var kids = box.querySelectorAll(".reveal"), i, at, d = base || 0, s = stepOf(box, kids.length, onScroll);
     for (i = 0; i < kids.length; i++) {
       if (kids[i].classList.contains("is-in")) continue;
+      at = kids[i].getAttribute("data-at");
+      if (at !== null) {
+        at = parseInt(at, 10) || 0;
+        if (onScroll) at = Math.min(at, SCROLL_SPAN);
+        show(kids[i], (base || 0) + at);
+        continue;
+      }
       show(kids[i], d); d += s;
     }
     return d;
@@ -222,11 +234,11 @@
      body exists, so the fold is painted hidden from the first frame. If that
      line is missing, set it here behind .no-tr: the hide is then a cut, not
      a transition that the next frame would only reverse. Either way the
-     next frame starts the intro. Groups above the fold follow each other;
-     nothing waits past CAP. The intro itself waits one BEAT after the
-     fonts, so the first thing the visitor sees is the light coming on, then
-     the card arriving; the whole sequence is over inside two seconds and a
-     half, and the first thing in it is on screen within one. */
+     next frame starts the intro. Groups above the fold follow each other
+     (the bar first, then the spread); nothing waits past CAP. The intro
+     itself waits one BEAT after the fonts, so the page is black for a
+     breath and then arrives; the whole sequence is over inside two
+     seconds, and the first thing in it is on screen within half of one. */
   if (!root.classList.contains("js")) {
     root.classList.add("no-tr");
     root.classList.add("js");
@@ -256,13 +268,14 @@
           } else snap(fold[f]);
         }
       }
-      for (j = 0; j < boxes.length; j++) {
-        if (!inView(boxes[j])) continue;
-        d = Math.min(stagger(boxes[j], d, false) + GAP, CAP);
-      }
-      for (j = 0; j < all.length; j++) {
-        var el = all[j];
-        if (el.classList.contains("is-in") || el.closest("[data-stagger]") || !inView(el)) continue;
+      /* in document order: the bar, then the spread, then whatever else
+         the first screen holds; a box is one beat, a lone element another */
+      var seq = document.querySelectorAll("[data-stagger], .reveal");
+      for (j = 0; j < seq.length; j++) {
+        var el = seq[j];
+        if (!inView(el)) continue;
+        if (el.hasAttribute("data-stagger")) { d = Math.min(stagger(el, d, false) + GAP, CAP); continue; }
+        if (el.classList.contains("is-in") || el.closest("[data-stagger]")) continue;
         show(el, d); d = Math.min(d + GAP, CAP);
       }
       fold = [];

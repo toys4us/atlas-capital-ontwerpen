@@ -5,7 +5,7 @@
 <script>document.documentElement.classList.add("js")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Atlas Capital</title>
-<meta name="description" content="Atlas Capital — een Discord-community voor traders. Proces. Discipline. Uitvoering. Educatie, live trading en chart-ideeën voor Nasdaq, S&amp;P 500, goud, olie en crypto.">
+<meta name="description" content="Atlas Capital — een Discord-community voor traders, in het Nederlands en Engels. Proces. Discipline. Uitvoering. Educatie in tien onderwerpen, live trading door de oprichter en chart-ideeën voor Nasdaq, S&amp;P 500, goud, olie en crypto.">
 <meta property="og:title" content="Atlas Capital">
 <meta property="og:description" content="Proces. Discipline. Uitvoering. Een Discord-community voor traders: educatie, live trading en chart-ideeën.">
 <meta property="og:type" content="website">
@@ -25,17 +25,23 @@
    section uses. Section-specific rules live in sections/<id>.css and are
    namespaced under that section's root id.
 
-   Identity in one line: a credits roll set like the financial press —
-   Newsreader for everything that is read, Fragment Mono for everything that
-   is counted, one flat gold (#D7B364) for the mark, the hairlines and the
-   one button, and a page that arrives as you read it.
+   Identity in one line: a trader's journal set like the financial press --
+   Newsreader for everything that is read, one flat gold (#D7B364) for the
+   mark, the hairlines, the one button and the ink the plates are printed
+   in, and a page that arrives as you read it. The opening spread is the
+   idea: the tagline set large and flush left, the founder's own chart
+   tipped in as a plate, the last two lines of the title running across
+   its edge.
 
    Where the gold goes (and nowhere else):
-     - hairlines: the strip edges, the group rules, the language dot
-     - one accent per screen: an italic value, the reading lead
+     - hairlines: the strip edges, the group rules, the language rule
+     - one accent per screen: an italic value, the kicker's dash
      - the one solid button (.cta.solid): never twice in a viewport
-   Labels are serif caps in grey, not tracked mono in gold. Numbers, dates,
-   amounts, tickers and clocks are mono, tabular, never uppercase.
+     - the plates: the founder's charts printed in gold ink on the black
+   Two voices per block, never three: the serif (roman, italic, or small
+   tracked caps for a label) and, only for what is counted next to a
+   clock or a figure number, Fragment Mono. A sub-line under a credit is
+   serif, whatever it says.
    ========================================================================== */
 
 /* ---------- tokens ---------------------------------------------------- */
@@ -80,7 +86,9 @@
   /* fluid scale, 390 → 1440. Newsreader has a small x-height, so every
      step sits a size above where a grotesk would. */
   --t-display:clamp(76px,12.5vw,184px);  /* the end card                   */
-  --t-hero:clamp(58px,9.2vw,132px);      /* the title card, three lines    */
+  --t-hero:clamp(62px,min(11vw,17vh),158px); /* the spread: three lines, and
+                                            the button still above the fold
+                                            on a 768px laptop             */
   --t-h1:clamp(44px,7vw,100px);          /* a section-sized line           */
   --t-h2:clamp(27px,3.2vw,46px);         /* a statement, a quote           */
   --t-h3:clamp(20px,1.95vw,27px);        /* a credit value                 */
@@ -94,7 +102,7 @@
 
   /* tracking per size */
   --trk-display:-.022em;
-  --trk-hero:-.024em;
+  --trk-hero:-.028em;
   --trk-h1:-.014em;
   --trk-caps-wide:.24em;                 /* group titles, the wordmark     */
   --trk-caps:.16em;                      /* labels                         */
@@ -121,11 +129,15 @@
   --gap-block:clamp(32px,5vw,64px);
   --gap-item:clamp(12px,1.6vw,20px);
 
-  /* the mark: a mark, not a poster. The hero shows the studio ident (the
-     triangle alone) at the size of a line of text; the name is set in type. */
-  --logo-hero:clamp(40px,4.4vw,58px);
+  /* the mark: a mark, not a poster. It appears once, in the bar, at the
+     size of a line of text; the name is set in type. */
   --logo-nav:20px;
   --hdr-h:52px;
+
+  /* the page's outer gutter and the width the spread and the bar share,
+     so the wordmark and the first word of the title sit on one axis */
+  --gutter:clamp(18px,4.5vw,64px);
+  --wide:1312px;
 
   /* radii: none. Corners are square everywhere. */
   --r:0;
@@ -272,9 +284,11 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
   display:none;
 }
 @media (min-width:1100px){ .rail{display:block} }
+/* a short laptop screen: the clocks would sit on the spread's button */
+@media (max-height:760px){ .rail__now{display:none} }
 .rail > *{position:absolute;margin:0}
 .rail__now{
-  left:clamp(24px,3vw,44px);
+  left:var(--gutter);
   top:calc(100vh - 44px);
   display:flex;gap:26px;
   white-space:nowrap;
@@ -288,7 +302,7 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 }
 .rail__now time{font-size:var(--t-caption);color:var(--ink-4)}
 .rail__here{
-  left:clamp(24px,3vw,44px);
+  left:calc(var(--gutter) - 6px);
   top:50vh;
   transform:translateY(-50%) rotate(180deg);
   writing-mode:vertical-rl;
@@ -311,7 +325,7 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 .rail__label.is-out{transform:translateY(-110%)}
 .rail__label.is-new{transform:translateY(110%);transition:none}
 .rail__scroll{
-  right:clamp(24px,3vw,44px);
+  right:var(--gutter);
   top:calc(100vh - 44px);
   display:flex;align-items:center;gap:12px;
   font-size:var(--t-nano);
@@ -455,10 +469,9 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 }
 .grp h2::before{
   content:counter(reel,decimal-leading-zero);
-  font-family:var(--f-mono);
-  letter-spacing:var(--trk-mono);
+  font-variant-numeric:tabular-nums;
   color:var(--ink-4);
-  margin-right:1.4em;
+  margin-right:1.6em;
 }
 .grp::before{
   content:"";
@@ -505,14 +518,14 @@ dl.pairs dd{
 }
 dl.pairs dd small{
   display:block;
-  margin-top:7px;
-  font-family:var(--f-mono);
-  font-size:var(--t-caption);
+  margin-top:5px;
+  font-family:var(--f-display);
+  font-size:var(--t-small);
   font-variant-numeric:tabular-nums;
-  letter-spacing:var(--trk-mono);
+  letter-spacing:.01em;
   text-transform:none;
-  line-height:1.55;
-  color:var(--ink-4);
+  line-height:1.5;
+  color:var(--ink-3);
 }
 dl.pairs dd em{font-style:italic;color:var(--gold)}
 dl.pairs .cont{grid-column:2}
@@ -634,7 +647,9 @@ dl.pairs .cols{
    so without JavaScript every element is on screen from the first paint.
    motion.js adds .is-in when the element scrolls into view; children of a
    [data-stagger] container arrive one after another (the attribute's value
-   is the step in ms); once the transition has run motion.js drops the
+   is the step in ms; a child with [data-at="ms"] takes that slot in the
+   sequence instead of the next one, so a plate can develop under the
+   words from the first beat whatever its place in the markup); once the transition has run motion.js drops the
    .reveal class so the element goes back to its own cascade (a button keeps
    its hover transition). If motion.js throws it takes .js off again, so a
    broken script is a visible page. The roll's own blocks (group titles,
@@ -685,33 +700,28 @@ dl.pairs .cols{
 
 /* ---- section:header ---- */
 /* ===== header =====
-   One bar, three things: the mark and the name, the one link that matters,
-   the two languages. At the top of the page it is transparent -- the title
-   card owns the fold -- and it gains its ground and hairline once the
-   visitor has moved (motion.js toggles .is-top). The link is quiet text
-   while a gold button is on screen (the title card's, the end card's) and
-   becomes that button itself when none is: one gold button per viewport,
-   always (motion.js toggles .solid on it). */
+   One bar, three things: the mark and the name on the left, and on the
+   right the one link that matters and the two languages. The bar shares
+   the spread's gutter and width, so the wordmark sits on the same axis as
+   the first word of the title below it. At the top of the page the bar is
+   transparent -- the spread owns the fold -- and it gains its ground and a
+   hairline once the visitor has moved (motion.js toggles .is-top). The
+   link is a hairline box while a gold button is on screen (the spread's,
+   the end card's) and becomes the gold button itself when none is: one
+   gold button per viewport, always (motion.js toggles .solid on it). The
+   box is the same in both states, so the swap is a fill, not a jump. */
 #header{
   position:sticky;top:0;z-index:50;
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  min-height:var(--hdr-h);
-  padding:0 clamp(14px,4vw,40px);
-  background:rgba(8,9,11,.94);
+  padding:0 var(--gutter);
+  background:var(--bg);
   border-bottom:1px solid var(--line-1);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  transition:background-color var(--d-slow) var(--e-out),border-color var(--d-slow) var(--e-out);
+  transition:background-color .25s var(--e-out),border-color .25s var(--e-out);
 }
-.js #header.is-top{background:rgba(8,9,11,0);border-bottom-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
-/* space-between puts the middle item halfway between its neighbours, not
-   halfway across the bar -- and the wordmark is wider than the language
-   switch. Two equal outer tracks centre the link on the page's own axis. */
-@media (min-width:620px){
-  #header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
-  #header > .wm{justify-self:start}
-  #header > .cta{justify-self:center}
-  #header > .langsw{justify-self:end}
+.js #header.is-top{background:rgba(8,9,11,0);border-bottom-color:transparent}
+#header .inner{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  min-height:var(--hdr-h);
+  max-width:var(--wide);margin:0 auto;
 }
 #header .wm{display:inline-flex;align-items:center;gap:10px;text-decoration:none;flex:0 0 auto;min-width:0}
 #header .wm__mark{display:block;width:var(--logo-nav);height:auto;flex:0 0 auto}
@@ -722,87 +732,95 @@ dl.pairs .cols{
   transition:color var(--d) var(--e-out);
 }
 #header .wm:hover b{color:var(--gold-hi)}
-/* the link: same box in both states, so the swap is a fill, not a jump */
+#header .bar{display:flex;align-items:center;gap:clamp(8px,2vw,22px);flex:0 0 auto}
 #header .cta{
-  padding:10px 14px 9px;
+  padding:8px 14px 7px;
+  border:1px solid var(--line-3);
   font-size:var(--t-micro);
   letter-spacing:var(--trk-caps);
   color:var(--ink-2);
   background:transparent;
-  transition:background-color var(--d-slow) var(--e-out),color var(--d-slow) var(--e-out),transform var(--d-fast) var(--e-out);
+  transition:background-color .3s var(--e-out),border-color .3s var(--e-out),color .3s var(--e-out),transform var(--d-fast) var(--e-out);
 }
 #header .cta::before{display:none}
-#header .cta:hover,#header .cta:focus-visible{color:var(--paper)}
-#header .cta.solid{background:var(--gold);color:var(--gold-ink)}
-#header .cta.solid:hover,#header .cta.solid:focus-visible{background:var(--gold-hi);color:var(--gold-ink)}
-#header .cta.solid:active{background:var(--gold-lo)}
-/* a phone: the same three things, tighter, and nothing wraps */
+#header .cta .s{display:none}
+#header .cta:hover,#header .cta:focus-visible{color:var(--paper);border-color:var(--gold)}
+#header .cta.solid{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+#header .cta.solid:hover,#header .cta.solid:focus-visible{background:var(--gold-hi);border-color:var(--gold-hi);color:var(--gold-ink)}
+#header .cta.solid:active{background:var(--gold-lo);border-color:var(--gold-lo)}
+/* the bar does not arrive: it is the frame, and the picture arrives in it.
+   (A fade on a sticky bar, or on anything inside one, promotes a layer that
+   paints a box around the wordmark for as long as the transition lives.) */
+/* a phone: the same three things, tighter, and nothing wraps. The link
+   keeps its box and loses three words. */
 @media (max-width:619px){
-  #header{gap:6px}
-  #header .wm{gap:8px}
+  #header .inner{gap:8px}
+  #header .wm{gap:7px}
   #header .wm b{font-size:var(--t-nano);letter-spacing:.16em}
-  #header .cta{padding:10px 8px 9px;font-size:var(--t-nano);letter-spacing:.11em}
-  #header .langsw{gap:2px}
-  #header .langsw button{padding:8px 4px;font-size:var(--t-nano)}
-  #header .langsw button::after{left:4px;right:calc(4px + var(--trk-caps))}
+  #header .bar{gap:6px}
+  #header .cta{padding:7px 10px 6px;font-size:var(--t-nano);letter-spacing:.12em}
+  #header .cta .l{display:none}
+  #header .cta .s{display:inline}
+  #header .langsw{gap:0}
+  #header .langsw button{padding:8px 5px;font-size:var(--t-nano)}
+  #header .langsw button::after{left:5px;right:calc(5px + var(--trk-caps))}
 }
 
 /* ---- section:hero ---- */
-/* ===== hero: the title card =====
-   One viewport, nothing else in it. The projector comes on, the studio
-   ident appears in the beam, then the three words of the title rise one
-   after another out of their own baselines, then the sub-line and the one
-   gold button. Everything is centred on the page's axis, like a card
-   between reels; the scale contrast is the design -- a mark the size of a
-   line of text under a title that fills the width of a phone. */
+/* ===== hero: the opening spread =====
+   Not a title card: a spread. Left, the three words of the tagline set
+   large and flush left, the way a journal opens. Right, one real artefact:
+   the founder's own session chart, tipped in as a plate -- a hairline
+   frame, a figure caption -- and the last two lines of the title run
+   across its edge, the type in front. The chart is the founder's,
+   untouched but for its ink: it is printed in the one gold on the page's
+   black, so the plate and the type are made of the same two inks. Under
+   the title, one paragraph of what is actually in the server, and the one
+   gold button. On load the plate develops under the words while the words
+   rise out of their baselines; on scroll the title leads and the plate
+   lags a little, so the two layers part.
+
+   --kick    height of the kicker line plus its gap, so the plate's top can
+             be set from the card's top edge without measuring
+   --plate-w the plate's share of the spread on a desk
+   The plate is locked to the type: its top edge is the first baseline
+   (.703em below the line box at Newsreader's metrics), its bottom edge
+   the third (two lines of .94), whatever the width.                      */
 #hero{
+  --kick:calc(17px + clamp(18px,2.4vw,32px));
+  --plate-w:54%;
   position:relative;
   display:flex;flex-direction:column;justify-content:center;
   min-height:calc(100vh - var(--hdr-h));
   min-height:calc(100svh - var(--hdr-h));
-  padding:clamp(28px,5vw,56px) 20px clamp(64px,9vw,112px);
-  text-align:center;
-  overflow:hidden;
+  padding:clamp(16px,4vh,48px) var(--gutter) clamp(56px,10vh,104px);
 }
-#hero .card{position:relative;z-index:3;width:100%}
-/* the beam: a cone of light from above the frame, switched on before
-   anything is in it, and never quite still */
-#hero .beam{
-  position:absolute;
-  left:50%;top:-6%;
-  width:min(150vw,1500px);
-  height:132%;
-  transform:translateX(-50%);
-  background:
-    conic-gradient(from 172deg at 50% 0%,
-      rgba(0,0,0,0) 0deg,
-      rgba(230,204,142,.08) 6deg,
-      rgba(230,204,142,.15) 8deg,
-      rgba(230,204,142,.05) 11deg,
-      rgba(0,0,0,0) 16deg);
-  filter:blur(2px);
-  opacity:.9;
-  pointer-events:none;
+#hero .card{
+  position:relative;
+  width:100%;max-width:var(--wide);margin:0 auto;
+  display:flex;flex-direction:column;align-items:flex-start;
 }
-.js #hero .beam{animation:beam-on 1.8s var(--e-reveal) both,flicker 6.5s ease-in-out 1.8s infinite alternate}
-@keyframes beam-on{ 0%{opacity:0} 100%{opacity:.72} }
-@keyframes flicker{
-  0%{opacity:.72}
-  40%{opacity:.95}
-  62%{opacity:.8}
-  100%{opacity:1}
-}
-@media (prefers-reduced-motion: reduce){ .js #hero .beam{animation:none} }
 
-/* the studio ident: the mark alone, the size of a line of text */
-#hero .ident{display:block;width:var(--logo-hero);margin:0 auto clamp(26px,3.6vw,44px)}
-#hero .ident__mark{display:block;width:100%;height:auto}
-.js #hero .ident__mark.reveal{transform:translateY(8px);transition:opacity var(--d-slow) var(--e-reveal),transform var(--d-reveal) var(--e-reveal)}
-.js #hero .ident__mark.reveal.is-in{transform:none}
+/* the kicker: what this is, in the page's label voice, with the one
+   gold dash of the screen in front of it */
+#hero .kicker{
+  display:flex;align-items:center;
+  margin:0 0 clamp(18px,2.4vw,32px);
+  font-family:var(--f-display);
+  font-size:var(--t-micro);
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--ink-3);
+  white-space:nowrap;
+}
+#hero .kicker::before{content:"";flex:0 0 auto;width:26px;height:1px;margin-right:14px;background:var(--gold)}
+@media (max-width:619px){ #hero .kicker > .kicker__more{display:none} }
 
-/* the title: three words, three lines, three masks */
+/* the title: three words, three lines, three masks, hung on the gutter */
 #hero .title{
-  margin:0;
+  position:relative;z-index:2;
+  margin:0 0 0 var(--optical);
   font-family:var(--f-display);
   font-weight:400;
   font-size:var(--t-hero);
@@ -811,20 +829,89 @@ dl.pairs .cols{
   color:var(--paper);
   text-wrap:balance;
 }
-#hero .title .mask{display:block;padding-bottom:.18em;margin-bottom:-.18em}
+#hero .title .mask{display:block;padding-bottom:.2em;margin-bottom:-.2em}
 #hero .title__line{display:block}
 #hero .title__line > span{display:inline-block}
 
-/* the sub-line: read, not declaimed */
+/* the paragraph: read, not declaimed; left, on the title's axis */
 #hero .subtitle{
-  margin:clamp(24px,3.4vw,40px) auto 0;
-  max-width:40ch;
+  position:relative;z-index:2;
+  margin:clamp(24px,4.6vh,44px) 0 0;
+  max-width:44ch;
+  text-align:left;
   font-size:var(--t-lead);
-  line-height:1.4;
+  line-height:1.45;
   letter-spacing:0;
-  color:var(--ink-3);
+  color:var(--ink-2);
+  text-wrap:pretty;
 }
-#hero .cta{margin-top:clamp(26px,3.6vw,40px)}
+#hero .cta{position:relative;z-index:2;margin-top:clamp(24px,4.2vh,40px)}
+
+/* the plate */
+#hero .plate{margin:0;width:100%;z-index:1}
+#hero .plate__frame{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  border:1px solid var(--line-3);
+  background:var(--panel-lo);
+  aspect-ratio:1400/639;
+}
+#hero .plate__frame img{
+  display:block;width:100%;height:100%;
+  object-fit:cover;
+  filter:grayscale(1) brightness(.88) contrast(1.12);
+}
+/* gold ink: the greys of the chart multiplied by the one gold, so the
+   candles print in gold and the ground stays the page's black */
+#hero .plate__frame::after{
+  content:"";
+  position:absolute;inset:0;
+  background:var(--gold);
+  mix-blend-mode:multiply;
+  pointer-events:none;
+}
+#hero .plate figcaption{
+  display:flex;flex-wrap:wrap;align-items:baseline;
+  gap:4px clamp(14px,1.6vw,22px);
+  margin-top:11px;
+  font-family:var(--f-display);
+  line-height:1.5;
+}
+#hero .plate__title{
+  flex:0 0 auto;
+  font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
+  color:var(--ink-2);
+}
+#hero .plate__note{
+  flex:1 1 20ch;min-width:0;
+  font-size:var(--t-small);color:var(--ink-4);
+  text-wrap:pretty;
+}
+/* the plate develops rather than rises: a slow fade from a hair larger */
+.js #hero .plate__frame.reveal{transform:scale(1.012);transition:opacity 1.1s var(--e-reveal),transform 1.9s var(--e-reveal)}
+.js #hero .plate__frame.reveal.is-in{transform:none}
+@media (prefers-reduced-motion:reduce){ .js #hero .plate__frame.reveal{transform:none;transition:none} }
+
+/* the desk: the plate tipped in at the right, its top a line below the
+   first word, the second and third words running across its edge */
+@media (min-width:900px){
+  #hero .plate{
+    position:absolute;right:0;
+    top:calc(var(--kick) + var(--t-hero) * .703);
+    width:var(--plate-w);
+  }
+  #hero .plate__frame{aspect-ratio:auto;height:calc(var(--t-hero) * 1.88)}
+  /* the legend sits at the plate's outer corner, clear of the descenders
+     of the word that crosses it */
+  #hero .plate figcaption{justify-content:flex-end;text-align:right}
+  #hero .plate__note{flex:0 1 auto}
+  #hero .subtitle{max-width:min(44ch,calc(100% - var(--plate-w) - 40px))}
+}
+/* narrower: one column, the plate after the button, full width */
+@media (max-width:899px){
+  #hero .plate{order:9;margin-top:clamp(34px,7vw,56px)}
+}
 
 /* ---- section:production ---- */
 /* ===== production =====
@@ -1020,33 +1107,40 @@ footer .risk{
 </aside>
 <!-- section:header -->
 <header id="header">
-  <a class="wm" href="#hero" aria-label="Atlas Capital">
-    <img class="wm__mark" src="assets/logo-mark.svg" alt="" width="420" height="342">
-    <b>Atlas&nbsp;Capital</b>
-  </a>
-  <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
-  <div class="langsw" role="group" aria-label="Taal / Language">
-    <button type="button" data-lang="nl" aria-pressed="true">NL</button>
-    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  <div class="inner">
+    <a class="wm" href="#hero" aria-label="Atlas Capital">
+      <img class="wm__mark" src="assets/logo-mark.svg" alt="" width="420" height="342">
+      <b>Atlas&nbsp;Capital</b>
+    </a>
+    <div class="bar">
+      <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="l"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></span><span class="s"><span lang="nl">Discord</span><span lang="en">Discord</span></span></a>
+      <div class="langsw" role="group" aria-label="Taal / Language">
+        <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
   </div>
 </header>
 <!-- /section:header -->
 
 <!-- section:hero -->
-<section class="gate" id="hero" data-stagger="170">
-  <span class="beam" aria-hidden="true"></span>
-
+<section class="spread" id="hero" data-stagger="150">
   <div class="card">
-    <span class="ident" data-parallax="0.16" data-parallax-top>
-      <img class="ident__mark reveal" src="assets/logo-mark.svg" alt="Atlas Capital" width="420" height="342">
-    </span>
-    <h1 class="title">
+    <p class="kicker reveal"><span lang="nl">Discord-community voor traders</span><span lang="en">A Discord community for traders</span><span class="kicker__more"><span lang="nl">&nbsp;&middot; Nederlands en Engels</span><span lang="en">&nbsp;&middot; Dutch and English</span></span></p>
+    <h1 class="title" data-parallax="-0.05" data-parallax-top>
       <span class="mask"><span class="title__line reveal"><span lang="nl">Proces.</span><span lang="en">Process.</span></span></span>
       <span class="mask"><span class="title__line reveal"><span lang="nl">Discipline.</span><span lang="en">Discipline.</span></span></span>
       <span class="mask"><span class="title__line reveal"><span lang="nl">Uitvoering.</span><span lang="en">Execution.</span></span></span>
     </h1>
-    <p class="subtitle reveal"><span lang="nl">Alles wat erin zit, in de vorm waarin het hoort: een lijst, rustig, zonder ruis.</span><span lang="en">Everything in it, in the form it belongs in: a list, calm, no noise.</span></p>
+    <p class="subtitle reveal"><span lang="nl">Educatie in tien onderwerpen, live trading door de oprichter en chart-idee&euml;n voor Nasdaq, S&amp;P&nbsp;500, goud, olie en crypto. Negen kanalen zijn nu gratis open.</span><span lang="en">Education in ten topics, live trading by the founder and chart ideas for the Nasdaq, S&amp;P&nbsp;500, gold, oil and crypto. Nine channels are open, free, right now.</span></p>
     <a class="cta solid reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
+    <figure class="plate" data-parallax="0.10" data-parallax-top>
+      <div class="plate__frame reveal" data-at="0"><img src="assets/charts/05.webp" alt="The session as a whole: every zone marked on one chart" width="1400" height="639" decoding="async" fetchpriority="high"></div>
+      <figcaption class="reveal" data-at="720">
+        <span class="plate__title"><span lang="nl">Plaat 04 &mdash; De sessie als geheel</span><span lang="en">Plate 04 &mdash; The session as a whole</span></span>
+        <span class="plate__note"><span lang="nl">Alle zones op &eacute;&eacute;n kaart. Geen instap, geen uitslag.</span><span lang="en">Every zone on one map. No entry, no outcome.</span></span>
+      </figcaption>
+    </figure>
   </div>
 </section>
 <!-- /section:hero -->
@@ -1366,8 +1460,11 @@ footer .risk{
    Reveal     .reveal gets .is-in once it is inside the viewport (measured
               8% in from the bottom edge). A [data-stagger] container
               reveals its .reveal children one after the other, STEP ms
-              apart (or the attribute's own value); on scroll the whole
-              sequence is capped so nothing waits behind its siblings.
+              apart (or the attribute's own value); a child with
+              [data-at="ms"] takes that slot instead of the next one (the
+              spread's plate develops from the first beat while the words
+              rise); on scroll the whole sequence is capped so nothing
+              waits behind its siblings.
               Whatever is on screen at load comes in as one sequence
               starting on the first frame, after the web fonts (never later
               than FONTS ms). When a reveal has run, the .reveal class is
@@ -1410,11 +1507,11 @@ footer .risk{
 
   var STEP = 160;         /* ms between staggered siblings (default)      */
   var SCROLL_SPAN = 420;  /* on scroll a whole stagger fits in this        */
-  var GAP = 160;          /* ms between groups in the load sequence        */
+  var GAP = 110;          /* ms between groups in the load sequence        */
   var CAP = 900;          /* the load sequence never waits longer          */
   var FONTS = 350;        /* ms we are willing to wait for the web fonts   */
-  var BEAT = 520;         /* ms of light before the card comes in          */
-  var DUR = 1800;         /* >= the longest reveal transition in css       */
+  var BEAT = 140;         /* ms of black before the page comes in          */
+  var DUR = 2000;         /* >= the longest reveal transition in css       */
 
   /* ---- auto: tag the roll's blocks -------------------------------------
      Before anything is measured. Each entry: selector, what to add to the
@@ -1484,11 +1581,20 @@ footer .risk{
     if (onScroll && n > 1) s = Math.min(s, Math.floor(SCROLL_SPAN / (n - 1)));
     return s;
   }
-  /* reveal a container's children in sequence; returns the delay after the last */
+  /* reveal a container's children in sequence; returns the delay after the
+     last. A child with data-at takes that slot (ms after the sequence
+     starts) and does not advance the sequence. */
   function stagger(box, base, onScroll){
-    var kids = box.querySelectorAll(".reveal"), i, d = base || 0, s = stepOf(box, kids.length, onScroll);
+    var kids = box.querySelectorAll(".reveal"), i, at, d = base || 0, s = stepOf(box, kids.length, onScroll);
     for (i = 0; i < kids.length; i++) {
       if (kids[i].classList.contains("is-in")) continue;
+      at = kids[i].getAttribute("data-at");
+      if (at !== null) {
+        at = parseInt(at, 10) || 0;
+        if (onScroll) at = Math.min(at, SCROLL_SPAN);
+        show(kids[i], (base || 0) + at);
+        continue;
+      }
       show(kids[i], d); d += s;
     }
     return d;
@@ -1581,11 +1687,11 @@ footer .risk{
      body exists, so the fold is painted hidden from the first frame. If that
      line is missing, set it here behind .no-tr: the hide is then a cut, not
      a transition that the next frame would only reverse. Either way the
-     next frame starts the intro. Groups above the fold follow each other;
-     nothing waits past CAP. The intro itself waits one BEAT after the
-     fonts, so the first thing the visitor sees is the light coming on, then
-     the card arriving; the whole sequence is over inside two seconds and a
-     half, and the first thing in it is on screen within one. */
+     next frame starts the intro. Groups above the fold follow each other
+     (the bar first, then the spread); nothing waits past CAP. The intro
+     itself waits one BEAT after the fonts, so the page is black for a
+     breath and then arrives; the whole sequence is over inside two
+     seconds, and the first thing in it is on screen within half of one. */
   if (!root.classList.contains("js")) {
     root.classList.add("no-tr");
     root.classList.add("js");
@@ -1615,13 +1721,14 @@ footer .risk{
           } else snap(fold[f]);
         }
       }
-      for (j = 0; j < boxes.length; j++) {
-        if (!inView(boxes[j])) continue;
-        d = Math.min(stagger(boxes[j], d, false) + GAP, CAP);
-      }
-      for (j = 0; j < all.length; j++) {
-        var el = all[j];
-        if (el.classList.contains("is-in") || el.closest("[data-stagger]") || !inView(el)) continue;
+      /* in document order: the bar, then the spread, then whatever else
+         the first screen holds; a box is one beat, a lone element another */
+      var seq = document.querySelectorAll("[data-stagger], .reveal");
+      for (j = 0; j < seq.length; j++) {
+        var el = seq[j];
+        if (!inView(el)) continue;
+        if (el.hasAttribute("data-stagger")) { d = Math.min(stagger(el, d, false) + GAP, CAP); continue; }
+        if (el.classList.contains("is-in") || el.closest("[data-stagger]")) continue;
         show(el, d); d = Math.min(d + GAP, CAP);
       }
       fold = [];

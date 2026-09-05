@@ -2,9 +2,9 @@
  "id": "identity",
  "title": "Identity",
  "wave": 0,
- "round": 3,
+ "round": 4,
  "status": "loss",
- "updated_at": "2026-09-05T16:30:52+02:00",
+ "updated_at": "2026-09-05T17:01:10+02:00",
  "history": [
   {
    "wave": 0,
@@ -63,6 +63,21 @@
    "confidence": 0.8,
    "note": "src/base.css: one flat gold everywhere (mark = hairlines = button); --t-hero/--trk-hero/--lh-hero display step; --d-fade (quick appearance) vs --d-reveal (slow settle); .reveal.card variant (group rule draws from centre, title fades); [data-parallax-top] anchor; .cta label now the page's serif-caps voice, not mono; language switch re-set (same box both states, gold rule tethered under the chosen word, even spacing); favicon-grade tokens --hdr-h/--logo-nav/--logo-hero.\nsrc/motion.js: auto-tags the roll's blocks at runtime (group titles, credit pairs, plates, proofs, ledes, end card, footer) s",
    "at": "2026-09-05T16:30:52+02:00"
+  },
+  {
+   "wave": 0,
+   "round": 4,
+   "ref": "aebele",
+   "status": "loss",
+   "score_ours": 6.3,
+   "score_ref": 7.5,
+   "wowed": false,
+   "gap": "The hero is unresolved: the headline laps into the chart plate without conviction (the \"g\" descender runs into the caption baseline, the full stop of \"Discipline.\" sits on the frame line, the chart is clipped on its left edge), the plate itself is a dimmed, olive-muddy screenshot, and \"OPEN DE DISCORD\" appears twice inside one fold. At the bar the chart is a hairline-drawn plate in the site's own gold-on-black palette with deliberate clearance for the caption, the headline either fully overlaps it as a layered composition or stands clear, and there is one CTA. Below the fold the section rhythm is competent but generic: dark, gold rules, tracked serif caps and a centred quote is the default \"premium\" template and nothing in it is specific to this brand.",
+   "motion": "Load-in only: headline lines rise with a blurred stagger, chart and button fade in behind; frames 3-6 are identical, so no scroll choreography is visible at all.",
+   "verdict": "A is the more authored object: an oversized Didone wordmark layered over photography, a confident side nav, a mobile fold that holds, and real parallax and letter choreography on scroll, held back only by a formulaic script-overlay contact section and one off-voice kicker. B is a coherent dark-and-gold editorial system with good mobile hierarchy, but a colliding hero, a muddy chart plate, duplicated CTAs and no motion beyond the intro keep it at competent rather than distinctive.",
+   "confidence": 0.8,
+   "note": "src/sections/02-hero.html + hero.css: the title card and beam are gone; the hero is an opening spread — kicker (gold dash + \"Discord-community voor traders · NL/EN\"), the tagline set flush left at clamp(62px,min(11vw,17vh),158px), and the founder's real session chart (assets/charts/05.webp, untouched) tipped in as a plate printed in the one gold (grayscale + gold multiply), hairline frame, two-voice legend; the plate locks between baseline 1 and baseline 3 (top .703em, height 1.88em) so \"Discipline.\" and \"Uitvoering.\" run across its edge; below, one concrete paragraph built only from fa",
+   "at": "2026-09-05T17:01:10+02:00"
   }
  ]
 }

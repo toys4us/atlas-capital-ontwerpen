@@ -1,31 +1,26 @@
 /* ===== header =====
-   One bar, three things: the mark and the name, the one link that matters,
-   the two languages. At the top of the page it is transparent -- the title
-   card owns the fold -- and it gains its ground and hairline once the
-   visitor has moved (motion.js toggles .is-top). The link is quiet text
-   while a gold button is on screen (the title card's, the end card's) and
-   becomes that button itself when none is: one gold button per viewport,
-   always (motion.js toggles .solid on it). */
+   One bar, three things: the mark and the name on the left, and on the
+   right the one link that matters and the two languages. The bar shares
+   the spread's gutter and width, so the wordmark sits on the same axis as
+   the first word of the title below it. At the top of the page the bar is
+   transparent -- the spread owns the fold -- and it gains its ground and a
+   hairline once the visitor has moved (motion.js toggles .is-top). The
+   link is a hairline box while a gold button is on screen (the spread's,
+   the end card's) and becomes the gold button itself when none is: one
+   gold button per viewport, always (motion.js toggles .solid on it). The
+   box is the same in both states, so the swap is a fill, not a jump. */
 #header{
   position:sticky;top:0;z-index:50;
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  min-height:var(--hdr-h);
-  padding:0 clamp(14px,4vw,40px);
-  background:rgba(8,9,11,.94);
+  padding:0 var(--gutter);
+  background:var(--bg);
   border-bottom:1px solid var(--line-1);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  transition:background-color var(--d-slow) var(--e-out),border-color var(--d-slow) var(--e-out);
+  transition:background-color .25s var(--e-out),border-color .25s var(--e-out);
 }
-.js #header.is-top{background:rgba(8,9,11,0);border-bottom-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
-/* space-between puts the middle item halfway between its neighbours, not
-   halfway across the bar -- and the wordmark is wider than the language
-   switch. Two equal outer tracks centre the link on the page's own axis. */
-@media (min-width:620px){
-  #header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
-  #header > .wm{justify-self:start}
-  #header > .cta{justify-self:center}
-  #header > .langsw{justify-self:end}
+.js #header.is-top{background:rgba(8,9,11,0);border-bottom-color:transparent}
+#header .inner{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  min-height:var(--hdr-h);
+  max-width:var(--wide);margin:0 auto;
 }
 #header .wm{display:inline-flex;align-items:center;gap:10px;text-decoration:none;flex:0 0 auto;min-width:0}
 #header .wm__mark{display:block;width:var(--logo-nav);height:auto;flex:0 0 auto}
@@ -36,27 +31,36 @@
   transition:color var(--d) var(--e-out);
 }
 #header .wm:hover b{color:var(--gold-hi)}
-/* the link: same box in both states, so the swap is a fill, not a jump */
+#header .bar{display:flex;align-items:center;gap:clamp(8px,2vw,22px);flex:0 0 auto}
 #header .cta{
-  padding:10px 14px 9px;
+  padding:8px 14px 7px;
+  border:1px solid var(--line-3);
   font-size:var(--t-micro);
   letter-spacing:var(--trk-caps);
   color:var(--ink-2);
   background:transparent;
-  transition:background-color var(--d-slow) var(--e-out),color var(--d-slow) var(--e-out),transform var(--d-fast) var(--e-out);
+  transition:background-color .3s var(--e-out),border-color .3s var(--e-out),color .3s var(--e-out),transform var(--d-fast) var(--e-out);
 }
 #header .cta::before{display:none}
-#header .cta:hover,#header .cta:focus-visible{color:var(--paper)}
-#header .cta.solid{background:var(--gold);color:var(--gold-ink)}
-#header .cta.solid:hover,#header .cta.solid:focus-visible{background:var(--gold-hi);color:var(--gold-ink)}
-#header .cta.solid:active{background:var(--gold-lo)}
-/* a phone: the same three things, tighter, and nothing wraps */
+#header .cta .s{display:none}
+#header .cta:hover,#header .cta:focus-visible{color:var(--paper);border-color:var(--gold)}
+#header .cta.solid{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+#header .cta.solid:hover,#header .cta.solid:focus-visible{background:var(--gold-hi);border-color:var(--gold-hi);color:var(--gold-ink)}
+#header .cta.solid:active{background:var(--gold-lo);border-color:var(--gold-lo)}
+/* the bar does not arrive: it is the frame, and the picture arrives in it.
+   (A fade on a sticky bar, or on anything inside one, promotes a layer that
+   paints a box around the wordmark for as long as the transition lives.) */
+/* a phone: the same three things, tighter, and nothing wraps. The link
+   keeps its box and loses three words. */
 @media (max-width:619px){
-  #header{gap:6px}
-  #header .wm{gap:8px}
+  #header .inner{gap:8px}
+  #header .wm{gap:7px}
   #header .wm b{font-size:var(--t-nano);letter-spacing:.16em}
-  #header .cta{padding:10px 8px 9px;font-size:var(--t-nano);letter-spacing:.11em}
-  #header .langsw{gap:2px}
-  #header .langsw button{padding:8px 4px;font-size:var(--t-nano)}
-  #header .langsw button::after{left:4px;right:calc(4px + var(--trk-caps))}
+  #header .bar{gap:6px}
+  #header .cta{padding:7px 10px 6px;font-size:var(--t-nano);letter-spacing:.12em}
+  #header .cta .l{display:none}
+  #header .cta .s{display:inline}
+  #header .langsw{gap:0}
+  #header .langsw button{padding:8px 5px;font-size:var(--t-nano)}
+  #header .langsw button::after{left:5px;right:calc(5px + var(--trk-caps))}
 }
