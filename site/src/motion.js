@@ -315,6 +315,27 @@
   for (j = 0; j < all.length; j++) {
     if (!all[j].closest("[data-stagger]")) io.observe(all[j]);
   }
+  /* The last things on the page live inside the observer's bottom margin
+     once the page can scroll no further, so they would never qualify. At
+     the end of the page, anything still hidden that is on screen comes in. */
+  function sweep(){
+    var h = W.innerHeight || root.clientHeight, k, r;
+    for (k = 0; k < boxes.length; k++) {
+      r = boxes[k].getBoundingClientRect();
+      if (r.top < h && r.bottom > 0 && boxes[k].querySelector(".reveal:not(.is-in)")) { stagger(boxes[k], 0, true); bio.unobserve(boxes[k]); }
+    }
+    for (k = 0; k < all.length; k++) {
+      if (all[k].classList.contains("is-in") || all[k].closest("[data-stagger]")) continue;
+      r = all[k].getBoundingClientRect();
+      if (r.top < h && r.bottom > 0) { show(all[k], 0); io.unobserve(all[k]); }
+    }
+  }
+  function atEnd(){
+    var h = W.innerHeight || root.clientHeight, sy = W.scrollY || W.pageYOffset || 0;
+    return sy + h >= root.scrollHeight - 4;
+  }
+  W.addEventListener("scroll", function(){ if (atEnd()) sweep(); }, { passive: true });
+  W.addEventListener("resize", function(){ if (atEnd()) sweep(); });
 
   /* ---- scroll-linked: parallax, the lead, the rail ---------------------- */
   var px = document.querySelectorAll("[data-parallax]");

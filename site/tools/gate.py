@@ -496,12 +496,19 @@ def browser_checks(rep):
                 if not hero.get("ok"):
                     rep.f("hero", "%s %s: hero heading/logo not visible 1.5s after load (%s)"
                           % (tag, lang, hero.get("why")))
-                total = pg.evaluate("() => document.documentElement.scrollHeight")
+                # the page may grow while it is scrolled (lazy images, revealed
+                # blocks), so the end is re-measured every step, not read once
                 y = 0
-                while y < total:
+                guard = 0
+                while True:
+                    total = pg.evaluate("() => document.documentElement.scrollHeight")
+                    if y >= total or guard > 400:
+                        break
                     y = min(y + 600, total)
                     pg.evaluate("y => window.scrollTo(0, y)", y)
                     pg.wait_for_timeout(150)
+                    guard += 1
+                pg.evaluate("() => window.scrollTo(0, document.documentElement.scrollHeight)")
                 pg.wait_for_timeout(900)   # let the last transition finish
                 stuck = pg.evaluate(PROBE_STUCK, SECTION_SEL)
                 for s in stuck:
