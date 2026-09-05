@@ -2,20 +2,23 @@
   <div class="grp" id="kanalen"><h2><span lang="nl">Locaties · 15 kanalen</span><span lang="en">Locations · 15 channels</span></h2></div>
 
   <!-- The server as a device. A sidebar the way Discord draws one -- the
-       server's name, two categories, the fifteen channels as they stand --
-       beside a message pane that holds no messages: skeleton lines only,
-       and in one of them a chart drawn as a schema (one line, one
-       orderblock, one gap, one level; no price, no day). The selected row
-       is a fair value gap band; the boundary of Premium is a dashed
-       liquidity line; the locks are hairlines of the gold. Selecting a
-       channel moves the band and names the channel in the pane. The pane
-       is decoration (aria-hidden); the list is content. -->
+       server's name, two categories, the fifteen channels as they stand,
+       and at its foot the place a member's own panel sits -- beside a
+       message pane that holds no messages: skeleton lines only, and in
+       one of them a chart drawn as a schema (one line, one orderblock,
+       one gap, one level; no price, no day). The selected row is a fair
+       value gap band; the boundary of Premium is a dashed liquidity line;
+       the locks are hairlines of the gold; the row numbers sit at the
+       right like the levels of a price scale. Selecting a channel moves
+       the band and names the channel in the pane. The pane and the foot
+       are decoration (aria-hidden); the list is content. Nothing here is
+       a name, a count or a message. -->
   <figure class="dv" data-stagger="40">
     <div class="dv__frame">
       <div class="dv__side">
         <div class="dv__server reveal"><span>Atlas Capital</span><i class="dv__chev" aria-hidden="true"></i></div>
         <div class="dv__list">
-          <p class="dv__cat reveal"><span lang="nl">Thuis &middot; nu gratis</span><span lang="en">Home &middot; free right now</span></p>
+          <p class="dv__cat reveal"><span lang="nl">Gratis &middot; voorlopig</span><span lang="en">Free &middot; for now</span></p>
           <button type="button" class="dv__ch reveal" data-kind="chart" aria-pressed="true"><span class="dv__hash">#</span><span class="dv__chname">nq-chart-ideeën</span><span class="dv__n">01</span></button>
           <button type="button" class="dv__ch reveal" data-kind="chart" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">es-chart-ideeën</span><span class="dv__n">02</span></button>
           <button type="button" class="dv__ch reveal" data-kind="chart" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">bitcoin</span><span class="dv__n">03</span></button>
@@ -33,6 +36,10 @@
           <button type="button" class="dv__ch reveal" data-kind="lock" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">chart-ideeën</span><i class="dv__lock" aria-hidden="true"></i><span class="dv__n">14</span></button>
           <button type="button" class="dv__ch reveal" data-kind="lock" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">premium-chat</span><i class="dv__lock" aria-hidden="true"></i><span class="dv__n">15</span></button>
         </div>
+        <!-- the member's own panel, as Discord sets it under the list: an
+             avatar, a name, three controls -- drawn as skeleton, so it is a
+             place and not a person -->
+        <div class="dv__me reveal" aria-hidden="true"><i class="dv__av"></i><i class="dv__ln dv__ln--name"></i><i class="dv__ctl"></i><i class="dv__ctl"></i><i class="dv__ctl"></i></div>
       </div>
       <div class="dv__pane" data-kind="chart" aria-hidden="true">
         <div class="dv__head reveal" data-at="0"><span class="dv__hash">#</span><span class="dv__name">nq-chart-ideeën</span></div>
@@ -60,7 +67,7 @@
     </div>
     <figcaption class="reveal">
       <span class="dv__title"><span lang="nl">Figuur &mdash; De server, schematisch</span><span lang="en">Figure &mdash; The server, as a schema</span></span>
-      <span class="dv__note"><span lang="nl">De kanalen zoals ze in de server staan. Geen berichten; die lees je daar.</span><span lang="en">The channels as they stand in the server. No messages; those you read there.</span></span>
+      <span class="dv__note"><span lang="nl">De kanalen zoals ze in de server staan. Geen berichten; die lees je daar.</span><span lang="en">The channels as they stand in the server. No messages; you read those there.</span></span>
     </figcaption>
   </figure>
   <p class="dv__call"><a class="cta reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom binnen op Discord</span><span lang="en">Step inside the Discord</span></a></p>
@@ -79,7 +86,7 @@
       pane.setAttribute("data-kind", b.getAttribute("data-kind") || "chat");
     }
     list.addEventListener("click", function(e){ var b = rowOf(e.target); if (b) pick(b); });
-    /* the cue at the sidebar's foot: only while the list has more below */
+    /* the cue at the list's foot: only while the list has more below */
     var side = s.querySelector(".dv__side");
     function cue(){ if (side) side.classList.toggle("is-more", list.scrollHeight - list.clientHeight - list.scrollTop > 4); }
     list.addEventListener("scroll", cue, { passive: true });

@@ -802,12 +802,22 @@ dl.pairs .cols{
 
    At the top of the page the bar is transparent and 52px tall: the spread
    owns the fold, and the bar is its frame. Once the visitor has moved it
-   lifts 8px (a transform, so the document never reflows), takes its glass
-   and its blur, and draws the one hairline under itself. The anchor whose
-   section holds the upper part of the viewport carries a dashed gold
-   hairline under the word: the liquidity line of the figure, the width of
-   the word, drawn from the left; the chosen language carries the solid
-   one. Both are rules under words, so the bar has one idiom.
+   lifts 8px (a transform, so the document never reflows), takes its
+   ground, and its one hairline draws itself under it from the left, the
+   way every rule on the page is drawn. The ground is the page's own
+   black, a shade short of opaque, with the glass declared for the
+   browsers that honour it: a backdrop blur inside .page never renders in
+   Chromium (the isolation on .page makes it the backdrop root and the
+   scrolled content is not in it), and a bar that is see-through without
+   its blur shows sharp type passing under it, which reads as a fault.
+
+   The anchors are levels. The one whose section holds the upper part of
+   the viewport carries the figure's liquidity line under the word -- the
+   3-on-5 dashed hairline every section draws its levels with, in the
+   gold, the width of the word, drawn from the left. Pointing at another
+   draws the same line under it in the label grey: a level being watched,
+   not the one in play. The chosen language carries the solid rule. All
+   of them are rules under words, so the bar has one idiom.
 
    One gold call per viewport, always. While the spread's (or the end
    card's) is on screen the link here is quiet: one word in the label grey
@@ -818,31 +828,46 @@ dl.pairs .cols{
    of the two and nothing beside it moves. Without JavaScript it stays
    quiet, and the spread's call is the one.
 
-   Narrower than the full row the anchors live in a drawer under the bar:
-   the four sections set as levels -- the reel number in mono at the left
-   like a price on an axis, the name in the serif -- one hairline between
-   each, the current one's a dashed gold line. On a phone the switch goes
-   in with them and the bar is three things: the name, the call, Menu. */
+   Narrower than the full row the anchors live in a drawer under the bar,
+   on the page's own black: the four sections set as levels -- the name in
+   the serif at credit size, a hairline under it, and on the right gutter,
+   where the spread's labels sit like the axis of a chart, the reel number
+   in mono. The current one's hairline is the liquidity line and its
+   number is in the gold; the one under the pointer (or the keyboard) is a
+   zone, the fair value gap band of the figure, and the band is the ring.
+   The switch and the one social link take the last line. On a phone the
+   bar is three things: the name, the call, Menu. */
 #header{
   --bar:var(--hdr-h);                 /* the visible height of the bar    */
   --lift:8px;                          /* what it loses once scrolled      */
+  --level:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,rgba(215,179,100,0) 3px 8px);
+  --level-watch:repeating-linear-gradient(90deg,var(--ink-4) 0 3px,rgba(110,111,116,0) 3px 8px);
+  --band:rgba(215,179,100,.07);        /* the fair value gap band          */
+  --band-edge:rgba(215,179,100,.36);
   position:sticky;top:0;z-index:50;
   padding:0 var(--gutter);
   background:var(--bg);
-  border-bottom:1px solid var(--line-2);
-  /* no backdrop-filter at rest, not even blur(0): a backdrop root over the
-     grain's screen blend lifts the band a shade. none interpolates. */
-  transition:transform .5s var(--e-out),background-color .35s var(--e-out),border-color .35s var(--e-out),
-             -webkit-backdrop-filter .35s var(--e-out),backdrop-filter .35s var(--e-out);
+  transition:transform .5s var(--e-out),background-color .35s var(--e-out);
 }
-.js #header.is-top{background:rgba(8,9,11,0);border-bottom-color:transparent}
+/* the hairline: drawn from the left once the page has moved, gone again
+   at the top; simply there without JavaScript */
+#header::after{
+  content:"";
+  position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--line-2);
+  transform-origin:left center;
+  transition:transform .7s var(--e-out);
+}
+.js #header.is-top{background:rgba(8,9,11,0)}
+.js #header.is-top::after{transform:scaleX(0)}
 .js #header:not(.is-top){
   --bar:calc(var(--hdr-h) - var(--lift));
   transform:translateY(calc(-1 * var(--lift)));
-  background:var(--bg-glass);
+  background:rgba(8,9,11,.97);
   -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
 }
-.js #header.is-open{background:rgba(8,9,11,.96);border-bottom-color:var(--line-2);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+.js #header.is-open{background:var(--bg);-webkit-backdrop-filter:none;backdrop-filter:none}
+.js #header.is-open::after{transform:none}
 
 /* the row: a grid, the call in an auto track between equal flexible ones */
 #header .inner{
@@ -945,61 +970,80 @@ dl.pairs .cols{
     font-family:var(--f-display);font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;line-height:1;
     color:var(--ink-3);white-space:nowrap;
   }
+  #header .nav .n{display:none}
   #header .foot{display:flex;align-items:center;gap:22px;margin-left:auto}
-  /* with it, a panel under the bar, the height of what is left of the screen */
+  /* with it, a panel under the bar, the height of what is left of the
+     screen, on the page's own black: nothing passes under a menu */
   .js #header .nav{
+    --bleed:12px;                                   /* the band past the text */
     display:none;
     position:absolute;left:0;right:0;top:100%;
     height:calc(100vh - var(--bar));height:calc(100svh - var(--bar));
-    padding:clamp(18px,4vh,40px) var(--gutter) clamp(18px,3vh,28px);
+    padding:clamp(22px,5vh,48px) var(--gutter) clamp(18px,3vh,28px);
     flex-direction:column;flex-wrap:nowrap;align-items:stretch;
-    background:rgba(8,9,11,.96);
-    -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
-    overflow:auto;overscroll-behavior:contain;
+    background:var(--bg);
+    overflow:auto;overscroll-behavior:contain;touch-action:pan-y;
     clip-path:inset(0 0 100% 0);
     transition:clip-path .6s var(--e-out);
   }
   .js #header .nav.is-open{display:flex}
   .js #header .nav.is-in{clip-path:inset(0)}
-  .js #header .lv{display:block;max-width:560px}
-  /* the levels: the number on the axis, the name, a hairline under each */
+  .js #header .lv{display:block}
+  /* the levels: the name, the number on the gutter, a hairline under each */
   .js #header .nav a[href^="#"]{
-    position:relative;
-    display:flex;align-items:baseline;gap:clamp(16px,3vw,24px);
-    padding:clamp(14px,2.4vh,20px) 0;
-    font-family:var(--f-display);font-size:clamp(26px,4.6vw,34px);font-weight:400;
+    position:relative;z-index:0;
+    display:flex;align-items:baseline;justify-content:space-between;gap:clamp(16px,3vw,24px);
+    margin:0 calc(-1 * var(--bleed));
+    padding:clamp(16px,2.8vh,24px) var(--bleed);
+    font-family:var(--f-display);font-size:clamp(27px,4.8vw,34px);font-weight:400;
     letter-spacing:-.008em;text-transform:none;line-height:1.1;
     color:var(--ink-1);white-space:nowrap;
-    border-bottom:1px solid var(--line-1);
     transform:translateY(16px);
-    transition:transform .8s var(--e-reveal),color .3s var(--e-out),border-color .3s var(--e-out);
+    transition:transform .8s var(--e-reveal),color .3s var(--e-out);
   }
   .js #header .nav.is-in a[href^="#"]{transform:none}
   .js #header .lv--l a:nth-child(2){transition-delay:.06s}
   .js #header .lv--r a:nth-child(1){transition-delay:.12s}
   .js #header .lv--r a:nth-child(2){transition-delay:.18s}
-  .js #header .nav a[href^="#"] .n{
-    display:block;flex:0 0 2.6em;
+  /* the level: a hairline the width of the text, under the row */
+  .js #header .nav a[href^="#"]::before{
+    content:"";position:absolute;left:var(--bleed);right:var(--bleed);bottom:0;height:1px;
+    background:var(--line-1);
+  }
+  /* the band: a layer under the row, lit when the row is pointed at */
+  .js #header .nav a[href^="#"]::after{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:rgba(215,179,100,0);
+    box-shadow:inset 0 1px 0 rgba(215,179,100,0),inset 0 -1px 0 rgba(215,179,100,0);
+    transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out);
+  }
+  .js #header .nav a[href^="#"] .lv__name{min-width:0;transition:color .3s var(--e-out)}
+  .js #header .nav .n{
+    display:block;flex:0 0 auto;
     font-family:var(--f-mono);font-size:var(--t-caption);font-weight:400;letter-spacing:var(--trk-mono);
     font-variant-numeric:tabular-nums;
     color:var(--ink-4);
+    transition:color .3s var(--e-out);
   }
+  .js #header .nav .n:empty{display:none}
   .js #header .nav a[href^="#"]:hover,.js #header .nav a[href^="#"]:focus-visible{color:var(--paper)}
-  .js #header .nav a[href^="#"]:focus-visible{outline-offset:-4px}
-  /* the current one: its hairline is the liquidity line */
-  .js #header .nav a[aria-current]{color:var(--paper);border-bottom-color:transparent}
-  .js #header .nav a[aria-current]::after{
-    content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
-    background:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+  .js #header .nav a[href^="#"]:hover .n,.js #header .nav a[href^="#"]:focus-visible .n{color:var(--ink-2)}
+  .js #header .nav a[href^="#"]:focus-visible{outline:0}        /* the band is the ring */
+  .js #header .nav a[href^="#"]:hover::after,.js #header .nav a[href^="#"]:focus-visible::after{
+    background:var(--band);
+    box-shadow:inset 0 1px 0 var(--band-edge),inset 0 -1px 0 var(--band-edge);
   }
+  /* the current one: its hairline is the liquidity line, its number in the gold */
+  .js #header .nav a[aria-current]{color:var(--paper)}
+  .js #header .nav a[aria-current]::before{background:var(--level)}
   .js #header .nav a[aria-current] .n{color:var(--gold)}
   /* the foot: the switch and the one social link, on the last line */
   .js #header .foot{
-    margin:auto 0 0;max-width:560px;
+    margin:auto 0 0;
     display:flex;align-items:center;justify-content:space-between;gap:22px;
     padding-top:clamp(18px,3vh,28px);
   }
-  .js #header .foot .langsw{gap:10px}
+  .js #header .foot .langsw{gap:10px;margin-left:-6px}
   .js #header .foot .langsw button{padding:8px 6px;font-size:var(--t-caption)}
   .js #header .foot .langsw button::after{left:6px;right:calc(6px + var(--trk-caps))}
   .js #header .tk{
@@ -1028,7 +1072,7 @@ dl.pairs .cols{
 @media (min-width:1120px){
   #header .inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto minmax(0,1fr) minmax(0,1fr)}
   #header .nav,#header .foot{display:contents}
-  #header .menu,#header .tk{display:none}
+  #header .menu,#header .tk,#header .n{display:none}
   #header .lv{display:flex;align-items:center;gap:clamp(18px,2.2vw,30px)}
   /* every item pinned to the one row: the flanks come after the call in
      the markup but sit before it, and auto-placement would give them a
@@ -1045,17 +1089,20 @@ dl.pairs .cols{
     color:var(--ink-3);white-space:nowrap;
     transition:color .3s var(--e-out);
   }
-  #header .lv a .n{display:none}
-  /* the marker: a dashed hairline the width of the word, drawn from the left */
-  #header .lv a::after{
+  /* two levels under the word, each the width of the word, each drawn from
+     the left: the watched one in the label grey (::after, on hover), the
+     one in play in the gold (::before, the current section), on top */
+  #header .lv a::before,#header .lv a::after{
     content:"";position:absolute;left:0;right:var(--trk-caps);bottom:3px;height:1px;
-    background:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
     transform:scaleX(0);transform-origin:left center;
     transition:transform .55s var(--e-out);
   }
+  #header .lv a::after{background:var(--level-watch)}
+  #header .lv a::before{background:var(--level);z-index:1}
   #header .lv a:hover,#header .lv a:focus-visible{color:var(--paper)}
+  #header .lv a:hover::after{transform:none}
   #header .lv a[aria-current]{color:var(--paper)}
-  #header .lv a[aria-current]::after{transform:none}
+  #header .lv a[aria-current]::before{transform:none}
 }
 
 /* ---- a phone: three things, tighter, the short label in both states ----- */
@@ -1064,7 +1111,9 @@ dl.pairs .cols{
   #header .wm{gap:7px}
   #header .wm b{font-size:var(--t-nano);letter-spacing:.16em}
   #header .cta{font-size:var(--t-nano);letter-spacing:.12em}
-  #header .cta .r--l{display:none}
+  /* the full label is kept for the reader and clipped for the eye, and
+     takes no room in the cell; the short row is the one shown */
+  #header .cta .r--l{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
   #header .cta .r--s{padding-left:23px;gap:7px}       /* room for a 16px rule */
   #header .cta .r--s::before{
     content:"";position:absolute;left:0;top:calc(50% - .5px);
@@ -1084,8 +1133,9 @@ dl.pairs .cols{
 }
 
 @media (prefers-reduced-motion:reduce){
-  #header,#header .inner,#header .cta .r,#header .cta .r::before,#header .cta .r::after,#header .lv a::after,
-  .js #header .nav,.js #header .nav a[href^="#"]{transition:none}
+  #header,#header::after,#header .inner,#header .cta .r,#header .cta .r::before,#header .cta .r::after,
+  #header .lv a::before,#header .lv a::after,#header .nav .n,
+  .js #header .nav,.js #header .nav a[href^="#"],.js #header .nav a[href^="#"]::after{transition:none}
 }
 
 /* ---- section:hero ---- */
@@ -1104,6 +1154,14 @@ dl.pairs .cols{
    open on the side the words come in from, on purpose, so no letter ever
    chops a line. The band the words cover is empty (the line opens low and
    quiet there; the session happens in the right three quarters).
+
+   The zones are the page's own hairlines, not strokes in the SVG: the two
+   levels are the 3-on-5 dashed line every later section draws its rules
+   with, the gap is a band with a rule above and below, the orderblock a
+   box. They run past the line's end into the bleed, to the edge of the
+   page -- a level is drawn forward; the line stops where the present is.
+   Their labels sit on the page's right gutter, the axis of the chart, on
+   the same vertical the bar's language switch and the rail's hint keep.
 
    The mark leads from the bar, which is transparent over this screen (see
    header.css): a mark, not a poster. Here the tagline is the statement.
@@ -1126,11 +1184,13 @@ dl.pairs .cols{
              half of what is left over once the card has its width (in vw,
              not cqw: a container unit inside the frame would measure the
              frame; a scrollbar's width of overshoot is clipped by .page)
-   On load the mat comes up, the zones develop and the line draws itself
-   while the words rise out of their baselines; then the column under the
-   band arrives top to bottom, the one line resolving out of a blur. On
-   scroll the title leads (-.05) and the band lags a little (.04), so the
-   two layers part; the column stays with the page. */
+   --edge    what the mat and the levels overhang the frame by on the
+             right: the bleed on a desk, the gutter everywhere else
+   On load the mat comes up, the zones draw out of the left and the line
+   draws itself while the words rise out of their baselines; then the
+   column under the band arrives top to bottom, the one line resolving out
+   of a blur. On scroll the title leads (-.05) and the band lags a little
+   (.04), so the two layers part; the column stays with the page. */
 #hero{
   --kick:calc(17px + clamp(18px,2.4vw,32px));
   --card-w:min(100cqw,var(--wide));
@@ -1138,6 +1198,7 @@ dl.pairs .cols{
   --plate-w:min(calc(var(--card-w) - var(--plate-x)),var(--card-w));
   --plate-h:calc(var(--t-hero) * 2.35);
   --bleed:calc(var(--gutter) + max(0px,(100vw - 2 * var(--gutter) - var(--wide)) / 2));
+  --edge:var(--gutter);
   --mat:#121318;                        /* between the letterbox and a card */
   position:relative;
   container-type:inline-size;
@@ -1216,6 +1277,7 @@ dl.pairs .cols{
 }
 #hero .calls .cta{margin:0}
 #hero .aside{
+  position:relative;
   font-family:var(--f-display);
   font-style:italic;
   font-size:var(--t-small);
@@ -1224,8 +1286,23 @@ dl.pairs .cols{
   color:var(--ink-3);
   text-decoration-color:var(--line-3);
   text-underline-offset:.26em;
+  transition:color var(--d) var(--e-out),text-decoration-color var(--d) var(--e-out);
 }
-#hero .aside:hover,#hero .aside:focus-visible{color:var(--gold-hi);text-decoration-color:var(--gold)}
+/* pointed at, the aside is the figure's gap: a band fills behind the line
+   from the left, two rules and the faint gold, and the underline goes */
+#hero .aside::before{
+  content:"";
+  position:absolute;left:-7px;right:-7px;top:-1px;bottom:-1px;
+  background:var(--line-1);
+  border-top:1px solid var(--line-2);
+  border-bottom:1px solid var(--line-2);
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform var(--d) var(--e-out);
+  pointer-events:none;
+}
+#hero .aside:hover,#hero .aside:focus-visible{color:var(--gold-hi);text-decoration-color:transparent}
+#hero .aside:hover::before,#hero .aside:focus-visible::before{transform:none}
 
 /* the plate: a mat (the ::before, which is what bleeds) with the figure
    on it; a hairline along its top and its bottom, none down its sides */
@@ -1238,7 +1315,7 @@ dl.pairs .cols{
 }
 #hero .plate__frame::before{
   content:"";
-  position:absolute;top:0;bottom:0;left:0;right:0;
+  position:absolute;top:0;bottom:0;left:0;right:calc(-1 * var(--edge));
   background:var(--mat);
   border-top:1px solid var(--line-3);
   border-bottom:1px solid var(--line-3);
@@ -1247,20 +1324,43 @@ dl.pairs .cols{
 #hero .fig{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 #hero .fig *{vector-effect:non-scaling-stroke}
 #hero .fig__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:round}
-#hero .fig__zone{stroke:var(--gold);stroke-width:1;stroke-opacity:.36;fill:var(--gold);fill-opacity:.07}
-#hero .fig__level{stroke-opacity:.55;stroke-dasharray:3 5;stroke-linecap:butt}
+/* the zones, placed in the figure's own percentages (the SVG is stretched
+   to the frame, so a percentage of the frame is a coordinate of the
+   drawing: y 128 of 450 is 28.4%). The two levels and the band run on
+   past the frame's right edge by --edge, to the edge of the mat. */
+#hero .plate__ob,#hero .plate__band,#hero .plate__lvl{
+  position:absolute;display:block;
+  pointer-events:none;
+}
+#hero .plate__ob{
+  left:38.4%;top:83.1%;width:4.8%;height:7.6%;
+  border:1px solid var(--line-3);
+  background:rgba(215,179,100,.07);
+}
+#hero .plate__band{
+  left:49.6%;right:calc(-1 * var(--edge));top:58.2%;height:4.9%;
+  border-top:1px solid var(--line-3);
+  border-bottom:1px solid var(--line-3);
+  background:rgba(215,179,100,.07);
+}
+#hero .plate__lvl{
+  left:59%;right:calc(-1 * var(--edge));top:28.4%;height:1px;
+  background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
+}
+#hero .plate__lvl--lo{left:69%;top:95.6%}
 /* labels: the page's label voice, positioned in the figure's own
    percentages so they stay with their zones at every width; they scale a
-   little with the plate so a phone's figure is not all label. The two
-   levels are labelled above their right ends, in one column at the
-   band's right edge like the axis of a chart; the orderblock's label sits
+   little with the plate so a phone's figure is not all label, and never
+   under 9px. The two levels are labelled above their right ends, on the
+   page's right gutter -- the axis of the chart, in the bleed on a wide
+   screen, on the content edge on a phone; the orderblock's label sits
    under its box, where nothing is drawn. */
 #hero .plate__tag{
   position:absolute;
   display:block;
   font-family:var(--f-display);
   font-style:normal;
-  font-size:clamp(8px,1.35cqw,var(--t-nano));
+  font-size:clamp(9px,1.35cqw,var(--t-nano));
   letter-spacing:var(--trk-caps);
   text-transform:uppercase;
   line-height:1;
@@ -1269,9 +1369,9 @@ dl.pairs .cols{
   pointer-events:none;
   transition:opacity var(--d-fade) var(--e-reveal);
 }
-#hero .plate__tag--liq{right:2.2%;top:28.4%;transform:translateY(calc(-100% - 6px))}
-#hero .plate__tag--fvg{right:2.2%;top:58.2%;transform:translateY(calc(-100% - 6px))}
-#hero .plate__tag--ob{left:38.4%;top:90.7%;transform:translateY(3px)}
+#hero .plate__tag--liq{right:calc(var(--gutter) - var(--edge));top:28.4%;transform:translateY(calc(-100% - 6px))}
+#hero .plate__tag--fvg{right:calc(var(--gutter) - var(--edge));top:58.2%;transform:translateY(calc(-100% - 6px))}
+#hero .plate__tag--ob{left:38.4%;top:90.7%;transform:translateY(4px)}
 /* the caption: the figure's number in the label voice, its note in the
    serif at note size, one row, hung on the band's left edge */
 #hero .plate figcaption{
@@ -1293,25 +1393,73 @@ dl.pairs .cols{
 }
 
 /* the trace: the plate's own reveal. Under .js, until motion.js marks it
-   .is-in, the frame is bare (no line, the mat still black), the zones and
-   labels wait, and the line is drawn back to nothing (pathLength 1, so the
-   dash is the whole path). In: the frame and mat come up, the zones develop
-   and the line draws itself left to right over the slow settle. Never a
-   transform, never opacity on the frame itself -- the probe sees the plate
-   at once; the motion is in the ink. */
+   .is-in, the frame is bare (no line, the mat still black), the zones are
+   drawn back to nothing at their left ends, the labels wait, and the line
+   is drawn back to nothing (pathLength 1, so the dash is the whole path).
+   In: the frame and mat come up, the zones draw out of the left and the
+   line draws itself left to right over the slow settle; the labels come
+   last, once their levels are under them. Never a transform, never
+   opacity on the frame itself -- the probe sees the plate at once; the
+   motion is in the ink. */
 .js #hero .reveal.trace{opacity:1;transform:none}
 .js #hero .reveal.trace::before{border-color:transparent;background-color:var(--bg)}
-.js #hero .reveal.trace .fig__zone,.js #hero .reveal.trace .plate__tag{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) .5s}
+.js #hero .reveal.trace .plate__ob,.js #hero .reveal.trace .plate__band,.js #hero .reveal.trace .plate__lvl{
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform 1.6s var(--e-reveal) .35s;
+}
+.js #hero .reveal.trace .plate__tag{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) 1.1s}
 .js #hero .reveal.trace .fig__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.9s var(--e-reveal)}
 .js #hero .reveal.trace.is-in::before{border-color:var(--line-3);background-color:var(--mat)}
-.js #hero .reveal.trace.is-in .fig__zone,.js #hero .reveal.trace.is-in .plate__tag{opacity:1}
+.js #hero .reveal.trace.is-in .plate__ob,.js #hero .reveal.trace.is-in .plate__band,.js #hero .reveal.trace.is-in .plate__lvl{transform:none}
+.js #hero .reveal.trace.is-in .plate__tag{opacity:1}
 .js #hero .reveal.trace.is-in .fig__line{stroke-dashoffset:0}
+
+/* the scroll hint, where the rail is not: the rail's construction (see
+   base.css .rail__scroll) on the gutter at the foot of the screen. Where
+   the browser can drive an animation from the scroll, it clips away over
+   the first 160px of it -- a clip, never opacity, so nothing with a word
+   in it is ever invisible; elsewhere it simply scrolls off with the page. */
+#hero .cue{
+  position:absolute;
+  left:var(--gutter);bottom:clamp(20px,3.2vh,30px);
+  z-index:3;
+  display:flex;align-items:center;gap:12px;
+  margin:0;
+  font-family:var(--f-display);
+  font-size:var(--t-nano);
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--ink-5);
+  pointer-events:none;
+}
+#hero .cue::after{
+  content:"";
+  width:1px;height:34px;
+  background:linear-gradient(180deg,var(--line-1),var(--line-3) 50%,var(--line-1));
+  background-size:100% 200%;
+  animation:hero-cue 2.6s var(--e-inout) infinite;
+}
+@keyframes hero-cue{ 0%{background-position:0 100%} 100%{background-position:0 -100%} }
+@keyframes hero-cue-out{ to{clip-path:inset(0 0 100% 0)} }
+@supports (animation-timeline:scroll()){
+  #hero .cue{
+    clip-path:inset(0);
+    animation:hero-cue-out linear both;
+    animation-timeline:scroll(root);
+    animation-range:0 160px;
+  }
+}
+@media (min-width:1100px){ #hero .cue{display:none} }
+
 @media (prefers-reduced-motion:reduce){
   .js #hero .reveal.trace::before{border-color:var(--line-3);background-color:var(--mat)}
-  .js #hero .reveal.trace .fig__zone,.js #hero .reveal.trace .plate__tag{opacity:1;transition:none}
+  .js #hero .reveal.trace .plate__ob,.js #hero .reveal.trace .plate__band,.js #hero .reveal.trace .plate__lvl{transform:none;transition:none}
+  .js #hero .reveal.trace .plate__tag{opacity:1;transition:none}
   .js #hero .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
   .js #hero .subtitle.reveal{filter:none;transition:none}
-  #hero .aside{transition:none}
+  #hero .aside,#hero .aside::before{transition:none}
+  #hero .cue,#hero .cue::after{animation:none;clip-path:none}
 }
 
 /* the desk: the band lifted out of the flow and tipped in at the right,
@@ -1319,6 +1467,7 @@ dl.pairs .cols{
    its caption lands under the band's bottom rule at the band's left edge,
    and the one line and the calls follow on that line */
 @media (min-width:900px){
+  #hero{--edge:var(--bleed)}
   #hero .plate{margin:calc(var(--t-hero) * .37 + 16px) 0 0 var(--plate-x);width:var(--plate-w)}
   #hero .plate__px{
     position:absolute;right:0;
@@ -1326,7 +1475,6 @@ dl.pairs .cols{
     width:var(--plate-w);height:var(--plate-h);
   }
   #hero .plate__frame{aspect-ratio:auto;height:100%}
-  #hero .plate__frame::before{right:calc(-1 * var(--bleed))}
   #hero .plate figcaption{margin-top:0}
   #hero .subtitle{
     margin:clamp(20px,3vh,30px) 0 0 var(--plate-x);
@@ -1342,7 +1490,7 @@ dl.pairs .cols{
    the first screen of a phone */
 @media (max-width:899px){
   #hero .plate{margin-top:clamp(30px,6vw,48px)}
-  #hero .plate__frame::before{left:calc(-1 * var(--gutter));right:calc(-1 * var(--gutter))}
+  #hero .plate__frame::before{left:calc(-1 * var(--gutter))}
   #hero .subtitle{margin-top:clamp(22px,4vh,36px)}
 }
 /* a phone: the aside drops under the call and starts where the call's
@@ -1354,52 +1502,70 @@ dl.pairs .cols{
 
 /* ---- section:production ---- */
 /* ===== production =====
-   The credits, typeset as a ledger and drawn as a chart. The four rows sit
-   on the shared axis of base.css (dl.pairs: the label right of the axis in
-   tracked caps, the value left of it at credit size, one baseline) and
-   under every value runs a level: a dashed hairline of the one gold that
-   starts at the axis and runs to the column's edge -- the liquidity line
-   of the opening plate, used as a rule. Nothing is drawn down the axis;
-   the label column stays a margin. The rows are spaced by padding, not by
-   the grid's gap, so a level sits exactly between two rows and the first
-   row keeps the group title's distance.
+   The credits, set as a ledger and drawn as a ladder. Four rows on the
+   shared axis of base.css (dl.pairs: the label right of the axis in
+   tracked caps, the value left of it at credit size, one baseline). Each
+   label is the tag at the end of a price level: a dashed hairline of the
+   one gold runs to it from the strip's left edge, the way the liquidity
+   line of the opening plate runs to its tag and the way the founder's
+   numeral sits at the end of its level on the next reel -- so the four
+   credits read as the leaders of a contents page and, at once, as the
+   ladder that the "10+" below completes. The value column carries type
+   and nothing else: no rule runs under a value, nothing is drawn down
+   the axis, and the four levels together are quieter than the one that
+   follows them (line-3 here, line-4 there). Schema only: no number, no
+   instrument, no date.
 
    The one small fact that is a code -- the server's address -- is set in
-   the mono, quiet, and is the link; on hover a band fills behind the line
-   from the axis to the column's edge, in the plate's own gold (the FVG,
-   as a hover state). Never a number, never a name of an instrument.
+   the mono under its value, quiet, and is the link; pointed at, a band
+   fills behind it, from just left of the value to the column's edge, in
+   the plate's own gold with a hairline along its top and its bottom (the
+   FVG, as a hover state). The row keeps two voices, serif and mono, and
+   no third.
 
-   Reveal: motion.js tags the rows itself (a stagger of dt, dd). Each
-   level draws itself out of the axis under its value, on the same beat as
-   the value's fade (transition-delay inherited from the row) and over the
-   slow settle, so the value is there first and the level arrives under
-   it. Never opacity, so a probe sees the rule at once. */
+   Reveal: motion.js tags the rows itself (a stagger of dt, dd). A label
+   fades in place while its level draws out of the strip's edge to meet
+   it -- scale, never opacity, so a probe sees the rule at once, and on
+   the label's own beat (the delay is inherited from the row) -- and the
+   value rises in on the next. On a phone, where the credits centre, the
+   ladder goes and the rows are set by air alone; the founder's level,
+   edge to edge, carries the idiom there. */
 #production dl.pairs{
-  --row-pad:clamp(14px,1.9vw,20px);
-  row-gap:0;
+  row-gap:clamp(16px,2.4vw,28px);
 }
-#production dl.pairs > dd{
-  position:relative;
-  padding:var(--row-pad) 0;
+
+/* the tag: a flex row so the level takes whatever width the label
+   leaves; the level opts out of baseline alignment, so the row's
+   baseline is the label's and the grid hangs the value on it */
+#production dl.pairs > dt{
+  display:flex;align-items:baseline;justify-content:flex-end;
+  gap:clamp(10px,1.4vw,14px);
+  min-width:0;
+  margin-left:calc(-1 * clamp(18px,4vw,40px));   /* the level starts at the strip's edge (the roll's padding) */
+  white-space:nowrap;
 }
-#production dl.pairs > dd:first-of-type{padding-top:0}
-#production dl.pairs > dd::after{
+#production dl.pairs > dt::before{
   content:"";
-  position:absolute;
-  left:0;right:0;bottom:0;
+  flex:1 1 auto;
+  align-self:flex-start;
+  margin-top:.64em;                     /* the middle of the caps          */
   height:1px;
-  background:repeating-linear-gradient(90deg,var(--line-3) 0 3px,transparent 3px 8px);
-  pointer-events:none;
+  min-width:24px;
+  /* the figure's liquidity line, 3 on 5 off, anchored right so a dash
+     ends at the label */
+  background:linear-gradient(90deg,transparent 0 5px,var(--line-3) 5px 8px) right center/8px 1px repeat-x;
 }
-/* the draw: hidden by scale, never by opacity; the delay is the row's own,
+/* the draw: the label only fades (its level does the moving); the level
+   is hidden by scale, never by opacity, and takes the row's own delay,
    so the level of the fourth credit waits with the fourth credit */
-.js #production dl.pairs > dd.reveal::after{
+.js #production dl.pairs > dt.reveal{transform:none}
+.js #production dl.pairs > dt.reveal::before{
   transform:scaleX(0);
   transform-origin:left center;
-  transition:transform calc(var(--d-reveal) * 1.3) var(--e-reveal);
+  transition:transform calc(var(--d-reveal) * 1.2) var(--e-reveal);
   transition-delay:inherit;
 }
-.js #production dl.pairs > dd.reveal.is-in::after{transform:none}
+.js #production dl.pairs > dt.reveal.is-in::before{transform:none}
 
 /* the address: the mono, at caption size, in the secondary grey (it is a
    link, so a step above a label); the link colour is the line's, so the
@@ -1421,7 +1587,7 @@ dl.pairs .cols{
   text-decoration-color:var(--line-2);
 }
 #production .addr a:hover,#production .addr a:focus-visible{color:var(--gold-hi);text-decoration-color:var(--gold)}
-/* the band: a gap filled, from the axis to the column's edge */
+/* the band: a gap filled, from just left of the value to the column's edge */
 #production .addr::before{
   content:"";
   position:absolute;
@@ -1437,46 +1603,49 @@ dl.pairs .cols{
 #production .addr:has(> a:hover)::before,
 #production .addr:has(> a:focus-visible)::before{transform:none}
 
-/* a phone: the credits centre (base.css), so a level runs the width of
-   the group rule, inset the same 6%; the label carries the row's top
-   distance, the value the bottom */
+/* a phone: the credits centre (base.css); the ladder goes, the label
+   carries the row's distance from the one above, and the address band
+   starts on the column's edge */
 @media (max-width:620px){
-  #production dl.pairs{--row-pad:18px}
-  #production dl.pairs > dt{padding-top:var(--row-pad)}
-  #production dl.pairs > dt:first-of-type{padding-top:0}
-  #production dl.pairs > dd,#production dl.pairs > dd:first-of-type{padding:0 0 var(--row-pad)}
-  #production dl.pairs > dd::after{left:6%;right:6%}
+  #production dl.pairs{row-gap:4px}
+  #production dl.pairs > dt{display:block;margin:0;padding-top:30px;white-space:normal}
+  #production dl.pairs > dt:first-of-type{padding-top:22px}
+  #production dl.pairs > dt::before{display:none}
   #production .addr::before{left:0}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .js #production dl.pairs > dd.reveal::after{transform:none;transition:none}
+  .js #production dl.pairs > dt.reveal::before{transform:none;transition:none}
   #production .addr::before{transition:none}
 }
 
 /* ---- section:founder ---- */
 /* ===== founder: the credit as a level, the words as a pull-quote =====
-   Two blocks on the reel, each hung on one edge and nothing floating.
+   Two blocks on the reel, each hung on a line the reel already has.
 
-   The credit (.ten) keeps the reel's axis: the numeral "10+" is the tag at
-   the end of a price level -- set large in the serif, right against the
-   gutter where every label sits, a dashed hairline of the gold running to
-   it from the strip's left edge (the liquidity line of the opening plate,
-   as furniture) -- and "jaar actief in trading" takes the value column on
-   the numeral's baseline, its five-word sub-line under it. The level
-   draws itself from the left while the numeral rises out of its baseline;
-   then the words, then the sub-line. One number, no instrument, no date:
-   a schema, not a chart.
+   The credit (.ten) is a level. The numeral "10+" hangs on the strip's
+   left edge, set large in the serif and a step quieter than the words --
+   a typographic object, not a headline -- and from its right side one
+   dashed hairline of the gold (the liquidity line of the opening plate,
+   used as furniture) runs at the height of the figures to the strip's
+   right edge, the way a level runs from its tag. "jaar actief in trading"
+   takes the value column on the numeral's baseline with every other value
+   on the reel, under the level like a caption under a rule, the five
+   words cut from his first sentence under it. The level draws itself out
+   of the numeral while the numeral rises out of its baseline; then the
+   words, then the sub-line. One number, no instrument, no date.
 
-   The words (.word) leave the axis on purpose. A quote at credit size in
-   the value column is a quote marooned in a narrow column; at pull-quote
-   size it needs the strip's width, so it hangs on the left edge with the
-   hair above it and the signature under it on that same line -- the
-   signature the only naming of the voice (the group title names the
-   role). On a phone, where the credits centre, both blocks centre with
-   them and the level runs both sides of the numeral, the way the group
-   title sits on its rule. */
-#founder{--n:clamp(58px,7.2vw,96px)}       /* the numeral: a size the scale lacks */
+   The words (.word) leave the axis on purpose: a quote at credit size in
+   the value column is a quote marooned in a narrow column, and at
+   pull-quote size it needs the strip's width. So it hangs on the strip's
+   left edge -- the numeral's line -- with the hair above it and the
+   signature under it, and the signature is the only naming of the voice
+   (the group title names the role). So the section has the reel's two
+   lines and no third: the edge (numeral, hair, quote, signature) and the
+   axis (the words, the sub-line). On a phone, where the credits centre,
+   both blocks centre and the level runs from one edge of the screen to
+   the other with the tag in the middle of it. */
+#founder{--n:clamp(72px,9.4vw,132px)}      /* the numeral: a size the scale lacks */
 
 /* ---- the credit ------------------------------------------------------- */
 #founder .ten{
@@ -1485,44 +1654,52 @@ dl.pairs .cols{
   grid-template-columns:var(--axis-l) var(--axis-r);
   column-gap:var(--axis-gap);
   align-items:baseline;
-  margin:clamp(8px,1.6vw,18px) 0 0;
+  margin:clamp(6px,1.4vw,16px) 0 0;
   text-align:left;
 }
-/* the tag: a flex row so the level takes whatever width the numeral
-   leaves; the level opts out of baseline alignment, so the row's
-   baseline is the numeral's and the grid hangs the words on it */
+/* the level: the strip's width, at the middle of the figures (the row's
+   top is the numeral's box, so the height is in the numeral's em); 3 on,
+   5 off, like the plate's. It runs under the numeral too; the numeral's
+   ground covers it there, so it is seen from the tag's right side on. */
+#founder .ten__lvl{
+  position:absolute;left:0;right:0;
+  top:calc(var(--n) * .40);
+  height:1px;
+  background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,rgba(215,179,100,0) 3px 8px);
+  pointer-events:none;
+}
+/* the tag: a flex row so its baseline is the numeral's and the grid hangs
+   the words on it; above the level, so the numeral's ground covers it.
+   The 1 carries a wide left bearing, so the figures are pulled out a
+   little to sit optically on the edge with the hair and the quote. */
 #founder .ten__n{
   grid-column:1;
-  display:flex;align-items:baseline;justify-content:flex-end;
-  gap:16px;
+  position:relative;z-index:1;
+  display:flex;align-items:baseline;justify-content:flex-start;
   min-width:0;
-  margin-left:calc(-1 * clamp(18px,4vw,40px));   /* the level starts at the strip's edge (the roll's padding) */
+  margin-left:-.13em;
   font-family:var(--f-display);
   font-size:var(--n);
   font-weight:400;
   line-height:1;
   letter-spacing:var(--trk-h1);
   font-variant-numeric:lining-nums;
-  color:var(--ink-1);
-}
-#founder .ten__lvl{
-  flex:1 1 auto;
-  align-self:flex-start;
-  margin-top:.40em;                     /* the middle of the figures       */
-  height:1px;
-  min-width:24px;
-  background:linear-gradient(90deg,transparent 0 5px,var(--line-4) 5px 8px) right center/8px 1px repeat-x;
+  color:var(--ink-2);
 }
 #founder .ten__n .mask{flex:0 0 auto;padding-bottom:.12em;margin-bottom:-.12em}
-#founder .ten__num{display:inline-block;padding:0 .04em 0 .06em}
-/* the plus as a superior: half size, its top on the cap line, so the
+#founder .ten__num{
+  display:inline-block;
+  padding:0 .12em 0 .05em;                  /* the gap between the tag and its level */
+  background:var(--bg);
+}
+/* the plus as a superior: under half size, its top on the cap line, so the
    numeral is two figures and a small sign, not a cross */
 #founder .ten__plus{
   display:inline-block;
-  font-size:.46em;
+  font-size:.44em;
   line-height:1;
   vertical-align:baseline;
-  position:relative;top:-.98em;
+  position:relative;top:-1.02em;
   margin-left:.06em;
 }
 #founder .ten__v{
@@ -1550,7 +1727,7 @@ dl.pairs .cols{
 /* ---- the words --------------------------------------------------------- */
 #founder .word{
   position:relative;z-index:2;
-  margin:clamp(40px,5.6vw,68px) 0 0;
+  margin:clamp(44px,6vw,72px) 0 0;
   text-align:left;
 }
 #founder .word .hair{display:block;width:40px;margin:0 0 clamp(18px,2.6vw,28px)}
@@ -1560,13 +1737,13 @@ dl.pairs .cols{
   font-family:var(--f-display);
   font-size:var(--t-quote);
   font-weight:400;
-  line-height:1.28;
+  line-height:1.3;
   letter-spacing:-.012em;
   color:var(--ink-1);
   hanging-punctuation:first last;
 }
 #founder .word blockquote p{margin:0;text-wrap:pretty}
-#founder .word .nb{white-space:nowrap}       /* a hyphenated compound stays whole */
+#founder .word .nb{white-space:nowrap}       /* a hyphenated compound stays whole on a desk */
 /* the signature: italic at note size with a dash, the way a quotation is
    signed -- it arrives last and slowly, so it is never there before the
    words are */
@@ -1584,160 +1761,186 @@ dl.pairs .cols{
 
 /* ---- a phone: everything centres with the reel ------------------------- */
 @media (max-width:620px){
-  #founder .ten{display:block;text-align:center;margin-top:8px}
-  /* the level runs from one edge of the screen to the other, the tag on it */
-  #founder .ten__n{justify-content:center;gap:14px;margin:0 calc(-1 * clamp(18px,4vw,40px))}
-  #founder .ten__n::after{                /* the level continues past the tag */
-    content:"";
-    flex:1 1 auto;align-self:flex-start;
-    margin-top:.40em;height:1px;min-width:24px;
-    background:linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px) left center/8px 1px repeat-x;
-  }
-  #founder .ten__lvl{flex:1 1 auto}
-  .js #founder .ten__lvl.draw{transform:none;transition:none}   /* both sides simply there */
+  #founder .ten{display:block;text-align:center;margin-top:10px}
+  /* the level runs from one edge of the screen to the other, the tag on
+     it in the middle, and draws from the middle outward */
+  #founder .ten__lvl{left:calc(-1 * clamp(18px,4vw,40px));right:calc(-1 * clamp(18px,4vw,40px))}
+  .js #founder .ten__lvl.draw{transform-origin:center}
+  #founder .ten__n{justify-content:center;margin-left:0}
+  #founder .ten__num{padding:0 .14em 0 .08em}
   #founder .ten__v{margin-top:clamp(10px,3vw,16px)}
   #founder .word{max-width:34ch;margin-left:auto;margin-right:auto;text-align:center}
   #founder .word .hair{margin-left:auto;margin-right:auto}
   #founder .word blockquote{max-width:none}
+  #founder .word .nb{white-space:normal}     /* on a phone it may break at its own hyphen */
 }
 
 /* ---- section:education ---- */
-/* ===== education: the syllabus =====
-   The ten topics set as an index, in the vocabulary of the opening figure.
-   Each row is numbered the way a price axis is: the count in mono, small,
-   in the label grey, and a hairline tick from it to the term; the term
-   itself at the value size the credits use. On a desk the index runs in
-   two columns of five, read down and then down again; narrower, in one.
-   Point at a row and it becomes a zone -- the fair value gap of the
-   figure, the gold at seven percent with a hairline along its top and
-   its bottom -- while a one-line gloss rises under the term on the term's
-   own left edge: what the word means, in dictionary voice, never what the
-   course does with it. The line of the gloss is reserved, so nothing on
-   the page moves when you point. Under the index one dashed level, the
-   figure's liquidity line, draws itself, with the hint at its right end
-   where the figure's tags sit. Without a pointer, or below the width at
-   which the two columns hold a gloss on one line, every gloss is simply
-   there and the hint is not.
+/* ===== education: the syllabus as ten levels =====
+   The ten topics set as an index, in the vocabulary of the opening figure
+   and on the axis of the reel. Each row is a price level: the count in
+   mono at the left, the way a scale is labelled; a hairline of the gold
+   running from it to the term (so the ten levels have ten lengths, and
+   the block reads as a schema of levels and tags, not as a list with
+   dashes); the term ending on the gutter where every label of the reel
+   ends; and on the value side, at note size, the gloss -- what the word
+   means, in dictionary voice, never what the course does with it. The
+   term is the credit (value size), the gloss its sub-line; the number is
+   the only thing counted, so the only mono.
+
+   Point at a row and it becomes a zone: the fair value gap band of the
+   figure, the gold at seven percent with a hairline along its top and its
+   bottom, its level lit in the full gold, the term in the paper, the
+   gloss brought forward to the ink; the other rows recede a step, so the
+   one you read is the one in the light. Nothing moves and nothing is
+   reserved, so nothing on the page shifts when you point. Focus does the
+   same for a keyboard, and the band is the ring.
+
+   On arrival the rows settle in sequence and each level draws itself
+   from its number to its term (transition-delay:inherit takes the row's
+   own slot in the stagger). Under the index the figure's liquidity line
+   draws itself; the call sits below it. On a phone the level is a short
+   tick and the gloss hangs under the term on the term's left edge.
    Schema only: the count is the only number, and it counts topics. */
-#education .syllabus{position:relative;z-index:2}
-#education .index{
-  --num:15px;                                 /* the digits                 */
-  --tick:14px;                                /* the tick to the term       */
-  --tgap:8px;                                 /* either side of it          */
-  --lead:calc(var(--num) + var(--tgap) * 2 + var(--tick)); /* the term's edge */
-  display:grid;
-  grid-template-columns:minmax(0,1fr);
-  row-gap:clamp(2px,.5vw,4px);
-  margin:0;
+#education .syllabus{
+  --bleed:12px;                               /* the band past the text     */
+  --band:rgba(215,179,100,.07);               /* the fair value gap band    */
+  --band-edge:rgba(215,179,100,.36);
+  position:relative;z-index:2;
 }
-@media (min-width:840px){
-  #education .index{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    grid-template-rows:repeat(5,auto);
-    grid-auto-flow:column;                    /* 01-05 down, then 06-10     */
-    column-gap:clamp(24px,4vw,44px);
-  }
-}
-/* a row: the band is drawn on the row itself. It starts a little left of
-   the number, so the digits never touch its edge, and ends on the
-   column's edge -- on the right column that is where the level under the
-   index ends, so band and rule finish on one line */
+#education .index{display:block;margin:clamp(6px,1.2vw,14px) 0 0}
+
+/* ---- a row: two columns on the reel's axis, baselines shared ---------- */
 #education .row{
+  --reveal-y:10px;                            /* a row settles, it does not travel */
   position:relative;
-  margin:0 0 0 -10px;
-  padding:6px 12px 7px 10px;
+  display:grid;
+  grid-template-columns:var(--axis-l) var(--axis-r);
+  column-gap:var(--axis-gap);
+  align-items:baseline;
+  margin:0 calc(-1 * var(--bleed));
+  padding:9px var(--bleed) 10px;
+}
+/* the band is a layer under the row, so its transition never touches the
+   row's own (the reveal's) */
+#education .row::before{
+  content:"";
+  position:absolute;inset:0;z-index:-1;
   background:rgba(215,179,100,0);
   box-shadow:inset 0 1px 0 rgba(215,179,100,0),inset 0 -1px 0 rgba(215,179,100,0);
-  outline-offset:2px;
+  transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out);
 }
-/* the hover transition is declared only once the reveal has run, so the
-   reveal's own transition (opacity, transform) is never overridden */
-#education .row:not(.reveal){transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out)}
-#education .row:hover,#education .row:focus-visible{
-  background:rgba(215,179,100,.07);
-  box-shadow:inset 0 1px 0 rgba(215,179,100,.36),inset 0 -1px 0 rgba(215,179,100,.36);
+#education .row:focus-visible{outline:0}    /* the band is the ring */
+#education .row:hover::before,#education .row:focus-visible::before{
+  background:var(--band);
+  box-shadow:inset 0 1px 0 var(--band-edge),inset 0 -1px 0 var(--band-edge);
 }
-#education dt{display:flex;align-items:baseline;margin:0;min-width:0}
+
+/* the level: count, hairline, term */
+#education dt{
+  grid-column:1;
+  display:flex;align-items:baseline;
+  min-width:0;
+  margin:0;
+  font-family:var(--f-display);
+  font-size:var(--t-h3);
+  line-height:var(--lh-tight);
+}
 #education .num{
-  position:relative;
-  flex:0 0 var(--lead);
-  padding-right:calc(var(--tgap) * 2 + var(--tick));
-  text-align:right;
+  flex:0 0 auto;
   font-family:var(--f-mono);
   font-size:var(--t-caption);
   font-weight:400;
   letter-spacing:var(--trk-mono);
   font-variant-numeric:tabular-nums;
-  line-height:1.5;
+  line-height:1;
   color:var(--ink-4);
-}
-#education .num::after{
-  content:"";
-  position:absolute;
-  right:var(--tgap);top:calc(50% - 1px);
-  width:var(--tick);height:1px;
-  background:var(--line-3);
-  transition:background-color var(--d) var(--e-out);
-}
-#education .row:hover .num::after,#education .row:focus-visible .num::after{background:var(--gold)}
-#education .term{
-  min-width:0;
-  font-family:var(--f-display);
-  font-size:var(--t-h3);
-  font-weight:400;
-  line-height:var(--lh-tight);
-  letter-spacing:-.006em;
-  color:var(--ink-1);
   transition:color var(--d) var(--e-out);
 }
-#education .row:hover .term,#education .row:focus-visible .term{color:var(--paper)}
-/* the gloss hangs on the term's left edge, in the sub-line voice */
+/* the hairline sits on the baseline (an empty box's baseline is its
+   bottom edge) and is lifted to the middle of the x-height */
+#education .lvl{
+  flex:1 1 auto;
+  min-width:14px;
+  height:1px;
+  margin:0 12px;
+  position:relative;top:-.24em;
+  background:var(--line-2);
+  transform-origin:left center;
+  transition:background-color var(--d) var(--e-out);
+}
+#education .term{
+  flex:0 1 auto;
+  min-width:0;
+  text-align:right;
+  font-weight:400;
+  letter-spacing:-.006em;
+  color:var(--ink-1);
+  text-wrap:balance;
+  transition:color var(--d) var(--e-out);
+}
+/* the gloss: the sub-line voice, on the value side */
 #education dd{
-  margin:3px 0 0 var(--lead);
+  grid-column:2;
+  margin:0;
+  min-width:0;
   font-family:var(--f-display);
   font-size:var(--t-small);
   line-height:1.45;
   letter-spacing:.01em;
   color:var(--ink-3);
   text-wrap:pretty;
+  transition:color var(--d) var(--e-out);
 }
-#education .gloss{display:block}
 
-/* the level under the index: one dashed hairline of the gold (the
-   figure's liquidity line: 3 on, 5 off), the hint above its right end */
-#education .level{position:relative;height:1px;margin-top:clamp(20px,3vw,32px)}
+/* ---- the lit row, and the others a step back ---------------------------- */
+#education .row:hover .num,#education .row:focus-visible .num{color:var(--ink-2)}
+#education .row:hover .lvl,#education .row:focus-visible .lvl{background:var(--gold)}
+#education .row:hover .term,#education .row:focus-visible .term{color:var(--paper)}
+#education .row:hover dd,#education .row:focus-visible dd{color:var(--ink-1)}
+@media (hover:hover){
+  #education .index:hover .row:not(:hover):not(:focus-visible) .term{color:var(--ink-3)}
+  #education .index:hover .row:not(:hover):not(:focus-visible) dd{color:var(--ink-4)}
+}
+
+/* ---- the level draws itself in the row's own slot of the stagger -------- */
+.js #education .row .lvl{transform:scaleX(0)}
+.js #education .row.is-in .lvl{
+  transform:none;
+  transition:transform var(--d-reveal) var(--e-reveal),background-color var(--d) var(--e-out);
+  transition-delay:inherit;
+}
+
+/* ---- the liquidity line under the index ---------------------------------
+   on the content's own edges, with the group rule above it; only the band
+   (a zone, and only while pointed at) runs past them */
+#education .level{
+  position:relative;
+  height:1px;
+  margin:clamp(18px,2.6vw,28px) 0 0;
+}
 #education .level__line{
+  display:block;
   position:absolute;inset:0;
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,rgba(215,179,100,0) 3px 8px);
 }
-#education .level__tag{
-  display:none;
-  position:absolute;right:0;bottom:7px;
-  margin:0;
-  font-family:var(--f-display);
-  font-size:var(--t-nano);
-  letter-spacing:var(--trk-caps);
-  text-transform:uppercase;
-  line-height:1;
-  color:var(--ink-4);                         /* the figure's tag grey     */
-  white-space:nowrap;
-}
-
-/* with a pointer, at the width where the two columns hold a gloss on one
-   line: the line is reserved and the gloss is clipped to nothing in its
-   place (a clip, not a transform: a displaced layer under an overflow
-   clip leaks in a beyond-viewport capture); it prints on, top to bottom,
-   when the row is pointed at or focused -- the way the opening plate
-   prints on */
-@media (hover:hover) and (min-width:840px){
-  #education .gloss{clip-path:inset(0 0 100% 0)}
-  #education .row:not(.reveal) .gloss{transition:clip-path var(--d) var(--e-out)}
-  #education .row:hover .gloss,#education .row:focus-visible .gloss{clip-path:inset(0)}
-  #education .level__tag{display:block}
-}
 
 @media (prefers-reduced-motion:reduce){
-  #education .row:not(.reveal),#education .row:not(.reveal) .gloss,#education .term,#education .num::after{transition:none}
+  .js #education .row .lvl{transform:none;transition:none}
+  #education .row::before,#education .num,#education .lvl,#education .term,#education dd{transition:none}
+}
+
+/* ---- a phone: one column, the level a tick, the gloss under the term ---- */
+@media (max-width:620px){
+  #education .syllabus{--bleed:10px}
+  #education .index{--lead:calc(2ch + 10px + 14px + 10px)}
+  #education .row{display:block;padding:9px var(--bleed) 11px}
+  #education dt{align-items:baseline}
+  #education .num{flex:0 0 2ch}
+  #education .lvl{flex:0 0 14px;min-width:0;margin:0 10px}
+  #education .term{flex:1 1 auto;text-align:left;text-wrap:pretty}
+  #education dd{margin:3px 0 0 var(--lead)}
+  #education .level{margin-top:clamp(16px,4vw,24px)}
 }
 
 /* ---- section:channels ---- */
@@ -1746,24 +1949,29 @@ dl.pairs .cols{
    coloured the way this page colours everything: the sidebar a step darker
    than the pane, hairlines of the gold for every edge, square corners. The
    two headers (the server's name, the channel's name) share one height so
-   the rule under them runs unbroken across the device. The chart
-   vocabulary of the spread is the furniture here: the selected row is a
-   fair value gap band (the gold at .07 with its two edges at .38, exactly
-   the zone on the plate), a hover is the same band at half strength, the
-   boundary of Premium is a dashed liquidity line, the row numbers sit at
-   the right like the levels of a price scale, and one skeleton message
-   carries a chart as a schema. The pane holds no messages -- lines only.
-   On a phone the two panes stay side by side, smaller; the list scrolls
-   inside the device only when the screen is too short for it, and the
-   device is never taller than the screen, so the page is never trapped. */
+   the rule under them runs unbroken across the device; the two feet (the
+   member's panel under the list, the composer under the messages) share
+   one height too, so the rule over the one and the top edge of the other
+   sit on a second line. The chart vocabulary of the spread is the
+   furniture here: the selected row is a fair value gap band (the gold at
+   .07 with its two edges at .38, exactly the zone on the plate), a hover
+   is the same band at half strength, the boundary of Premium is a dashed
+   liquidity line, the row numbers sit at the right like the levels of a
+   price scale, and one skeleton message carries a chart as a schema. The
+   pane holds no messages -- lines only. On a phone the two panes stay
+   side by side, smaller; the list scrolls inside the device only when the
+   screen is too short for it, and the device is never taller than the
+   screen, so the page is never trapped. */
 #channels .dv{
   --side:244px;                 /* the sidebar's width                    */
   --hd:48px;                    /* both headers                           */
+  --foot:60px;                  /* both feet: the panel, and the composer
+                                   with its margin                        */
   --row:28px;                   /* one channel                            */
   --pad-x:16px;                 /* the sidebar's inner margin             */
   --pane-x:22px;                /* the pane's inner margin                */
-  --sk:rgba(244,242,236,.055);  /* a skeleton line                        */
-  --sk-hi:rgba(244,242,236,.085);   /* an avatar, a name line             */
+  --sk:rgba(244,242,236,.07);   /* a skeleton line                        */
+  --sk-hi:rgba(244,242,236,.11);    /* an avatar, a name line             */
   --band:rgba(215,179,100,.07); /* the fair value gap band                */
   --band-lo:rgba(215,179,100,.035);
   --chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 3 4 5.5 6.5 3' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
@@ -1778,6 +1986,7 @@ dl.pairs .cols{
 #channels .dv__frame{
   position:relative;
   display:flex;
+  max-height:min(720px,84vh);
   max-height:min(720px,84svh);
   border:1px solid var(--line-2);
   background:var(--panel);
@@ -1790,12 +1999,12 @@ dl.pairs .cols{
   background:var(--panel-lo);
   border-right:1px solid var(--line-2);
 }
-/* while the list has more below (a short screen), its foot fades; the
-   script toggles the class, and drops it at the end of the list */
+/* while the list has more below (a short screen), its foot fades into the
+   panel under it; the script toggles the class, and drops it at the end */
 #channels .dv__side::after{
   content:"";
   display:none;
-  position:absolute;left:0;right:0;bottom:0;height:44px;
+  position:absolute;left:0;right:0;bottom:var(--foot);height:44px;
   background:linear-gradient(180deg,rgba(14,15,18,0),var(--panel-lo));
   pointer-events:none;
 }
@@ -1841,7 +2050,7 @@ dl.pairs .cols{
   color:var(--ink-4);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-/* Premium sits above a liquidity line */
+/* Premium sits above a liquidity line: 3 on, 5 off, as the spread draws it */
 #channels .dv__cat--prem{margin-top:10px;padding-top:17px}
 #channels .dv__cat--prem::before{
   content:"";
@@ -1849,7 +2058,10 @@ dl.pairs .cols{
   height:1px;
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
 }
-/* a row: the hash in the icon column, the name, the lock, the number */
+/* a row: the hash in the icon column, the name, the lock, the number.
+   Its own transition is declared only once the reveal has run, so the
+   reveal's (opacity, transform) is never overridden and the row settles
+   instead of cutting in. */
 #channels .dv__ch{
   display:flex;align-items:center;gap:8px;
   width:100%;height:var(--row);
@@ -1864,8 +2076,8 @@ dl.pairs .cols{
   letter-spacing:0;
   text-align:left;
   cursor:pointer;
-  transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out),color var(--d) var(--e-out);
 }
+#channels .dv__ch:not(.reveal){transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out),color var(--d) var(--e-out)}
 #channels .dv__hash{
   flex:0 0 auto;width:11px;
   font-size:1.06em;
@@ -1879,6 +2091,7 @@ dl.pairs .cols{
   -webkit-mask:var(--lock) center/9px 11px no-repeat;
   mask:var(--lock) center/9px 11px no-repeat;
 }
+/* the number: the level's tag on the scale -- mono, small, at the right */
 #channels .dv__n{
   flex:0 0 auto;
   min-width:2ch;text-align:right;
@@ -1886,9 +2099,13 @@ dl.pairs .cols{
   font-size:var(--t-nano);
   letter-spacing:var(--trk-mono);
   font-variant-numeric:tabular-nums;
-  color:var(--ink-5);
+  color:var(--ink-4);
+  transition:color var(--d) var(--e-out);
 }
-#channels .dv__ch:hover{background:var(--band-lo);color:var(--ink-2)}
+@media (hover:hover){
+  #channels .dv__ch:hover{background:var(--band-lo);color:var(--ink-2)}
+  #channels .dv__ch:hover .dv__n{color:var(--ink-3)}
+}
 #channels .dv__ch[aria-pressed="true"]{
   background:var(--band);
   box-shadow:inset 0 1px var(--line-3),inset 0 -1px var(--line-3);
@@ -1896,7 +2113,20 @@ dl.pairs .cols{
   cursor:default;
 }
 #channels .dv__ch[aria-pressed="true"] .dv__hash{color:var(--gold)}
+#channels .dv__ch[aria-pressed="true"] .dv__n{color:var(--ink-2)}
 #channels .dv__ch:focus-visible{outline-offset:-3px}
+/* the member's panel: the avatar, the name, three controls, all skeleton */
+#channels .dv__me{
+  flex:0 0 auto;
+  height:var(--foot);
+  display:flex;align-items:center;gap:8px;
+  padding:0 var(--pad-x);
+  border-top:1px solid var(--line-2);
+  background:var(--panel-lo);
+}
+#channels .dv__me .dv__av{width:24px;height:24px;margin-right:2px}
+#channels .dv__me .dv__ln--name{width:58px;margin-right:auto}
+#channels .dv__ctl{display:block;width:8px;height:8px;background:var(--sk)}
 
 /* ---- the pane: lifted out of the flow, so the sidebar sets the height ---- */
 #channels .dv__pane{
@@ -1941,7 +2171,8 @@ dl.pairs .cols{
   align-items:start;
 }
 #channels .dv__msg > *{grid-column:2}
-#channels .dv__av{grid-column:1;grid-row:1/span 6;display:block;width:28px;height:28px;background:var(--sk-hi)}
+#channels .dv__av{display:block;width:28px;height:28px;background:var(--sk-hi)}
+#channels .dv__msg .dv__av{grid-column:1;grid-row:1/span 6}
 #channels .dv__ln{display:block;height:7px;max-width:100%;background:var(--sk)}
 #channels .dv__ln--name{height:8px;background:var(--sk-hi)}
 /* the chart in the message: the spread's plate, small */
@@ -1958,11 +2189,12 @@ dl.pairs .cols{
 #channels .dv__zone{stroke:var(--gold);stroke-width:1;stroke-opacity:.36;fill:var(--gold);fill-opacity:.07}
 #channels .dv__level{stroke-opacity:.55;stroke-dasharray:3 5;stroke-linecap:butt}
 #channels .dv__pane:not([data-kind="chart"]) .dv__plate{display:none}
-/* the composer: a box, a plus, no words */
+/* the composer: a box, a plus, no words; its top edge on the line of the
+   member's panel across the device */
 #channels .dv__composer{
   flex:0 0 auto;
   height:40px;
-  margin:0 var(--pane-x) 20px;
+  margin:0 var(--pane-x) calc(var(--foot) - 40px);
   display:flex;align-items:center;gap:14px;
   padding:0 14px;
   border:1px solid var(--line-2);
@@ -2012,17 +2244,21 @@ dl.pairs .cols{
 .js #channels .reveal.is-in .dv__line{stroke-dashoffset:0}
 @media (prefers-reduced-motion:reduce){
   .js #channels .reveal .dv__line{stroke-dashoffset:0;transition:none}
-  #channels .dv__ch,#channels .dv__hash{transition:none}
+  #channels .dv__ch:not(.reveal),#channels .dv__hash,#channels .dv__n{transition:none}
 }
 
 /* ---- a phone: the same device, smaller, and never taller than the screen ---- */
 @media (max-width:620px){
-  #channels .dv{--side:58%;--hd:44px;--row:28px;--pad-x:11px;--pane-x:14px}
-  #channels .dv__frame{max-height:min(600px,74svh)}
+  #channels .dv{--side:58%;--hd:44px;--foot:48px;--row:28px;--pad-x:11px;--pane-x:14px}
+  #channels .dv__frame{max-height:min(640px,78vh);max-height:min(640px,78svh)}
   #channels .dv__server{letter-spacing:var(--trk-caps);font-size:var(--t-nano)}
   #channels .dv__cat{letter-spacing:var(--trk-caps-tight);padding-right:4px}
   #channels .dv__ch{gap:7px}
   #channels .dv__hash{width:10px}
+  #channels .dv__me{gap:7px}
+  #channels .dv__me .dv__av{width:20px;height:20px;margin-right:1px}
+  #channels .dv__me .dv__ln--name{width:44px}
+  #channels .dv__ctl{width:7px;height:7px}
   #channels .dv__head{gap:6px;padding:0 12px;font-size:12.5px}
   #channels .dv__head .dv__hash{width:9px}
   #channels .dv__body{gap:18px;padding:16px var(--pane-x) 14px}
@@ -2030,100 +2266,91 @@ dl.pairs .cols{
   #channels .dv__av{width:22px;height:22px}
   #channels .dv__ln{height:6px}
   #channels .dv__ln--name{height:7px}
-  #channels .dv__composer{height:34px;margin:0 var(--pane-x) 14px;padding:0 10px}
+  #channels .dv__composer{height:34px;margin:0 var(--pane-x) calc(var(--foot) - 34px);padding:0 10px}
   #channels .dv figcaption{margin-top:14px}
 }
 
 /* ---- section:markets ---- */
 /* ===== markets: the board, then live =====
-   The instruments as a desk board with the numbers left off: one row per
-   instrument, the name in the serif at list size, the ticker (where the
-   client gave one) in the mono at the row's right edge, a hairline under
-   each row. Each group is one credit on the reel's axis -- the label right
-   of the gutter, its rows left of it, the two sharing the first baseline
-   like every other credit pair -- and closes on a dashed level run across
-   the whole strip: the liquidity line of the opening spread, used here as
-   the rule between groups. Pointed at, a row becomes the spread's other
-   zone: the gap band, a hair of the gold between two gold hairlines, that
-   overhangs the column the way the box overhangs the line. Nothing on the
-   board can be read as data; the note under it says so, hung on the
-   board's left edge. Live is three plain credits and the reel's own
-   interstitial. */
-#markets .board{position:relative;z-index:2;margin:0}
-#markets .board__grp{
-  display:grid;
-  grid-template-columns:var(--axis-l) var(--axis-r);
-  column-gap:var(--axis-gap);
+   The instruments as a desk board with the numbers left off. The board
+   keeps the reel's axis (base.css dl.pairs): each group is one credit --
+   the label right of the gutter in the label voice, its instruments left
+   of it, three across on the label's baseline at the list size the
+   credits use for a column of names -- and every row closes on one
+   hairline that starts at the axis and runs to the column's edge. Nothing
+   is drawn down the axis; the label column stays a margin. Beside a name,
+   where the client gave one, the ticker in the mono: small, in the label
+   grey, the one thing on the board that is counted. No price, no change,
+   no dash where a number would sit -- the note under the board, on the
+   board's own column line, says so.
+
+   The spread's vocabulary as furniture, and no more of it than this: the
+   rows are levels (hairlines, not the dashed line, which the reel has
+   already used above and below), a name pointed at becomes the gap band
+   -- the gold at seven percent with a hairline along its top and bottom,
+   exactly the zone on the plate -- and the ticker beside it warms. Live
+   is one plain credit with its sub-line, and the reel's own interstitial. */
+#markets .board{
+  --row-pad:clamp(12px,1.7vw,18px);
+  position:relative;z-index:2;
   row-gap:0;
-  align-items:baseline;
-  margin-bottom:clamp(16px,2.4vw,26px);
 }
-#markets .board__grp:last-child{margin-bottom:0}
-#markets .board dt{
-  grid-column:1;
-  text-align:right;
-  font-family:var(--f-display);
-  font-size:var(--t-micro);
-  letter-spacing:var(--trk-caps);
-  text-transform:uppercase;
-  line-height:1.5;
-  color:var(--ink-4);
-}
-#markets .board dd{
+#markets .board .reveal{--reveal-y:12px}        /* a row settles, it does not travel */
+#markets .board > dd{
   position:relative;
-  grid-column:2;
-  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
-  margin:0;
-  padding:clamp(9px,1.2vw,12px) 0 clamp(10px,1.3vw,13px);
-  border-bottom:1px solid var(--line-1);
-  font-family:var(--f-display);
-  font-size:clamp(17px,1.5vw,21px);
-  font-weight:400;
-  line-height:1.3;
-  letter-spacing:-.006em;
-  color:var(--ink-1);
+  padding:var(--row-pad) 0;
 }
-#markets .board dd:last-of-type{border-bottom-color:transparent}
-#markets .board__name{min-width:0;text-wrap:balance}
-/* the ticker: what is counted is mono -- small, quiet, at the right edge */
-#markets .board dd .num{
-  flex:0 0 auto;
-  font-size:var(--t-caption);
-  letter-spacing:.06em;
-  color:var(--ink-3);
-  transition:color var(--d) var(--e-out);
-}
-/* the level: 3 on 5, as the spread draws it. Between the columns it runs
-   under nothing, on purpose -- a level is a line across the chart, not a
-   rule under a column. It draws itself from the left (.reveal.draw) once
-   its group's rows are in. */
-#markets .board__level{
-  grid-column:1/-1;
-  height:1px;
-  margin-top:-1px;                        /* on the last row's own line */
-  background:repeating-linear-gradient(90deg,rgba(215,179,100,.5) 0 3px,transparent 3px 8px);
-}
-/* the gap band: the row, pointed at, is the spread's FVG -- the fill at
-   the zone's opacity, a hairline at the top and the bottom over the row's
-   own lines, ten pixels past the column either side. Behind the text
-   (z-index -1 inside the board's own context), and only where a pointer
-   can hover. */
-#markets .board dd::before{
+#markets .board > dd:first-of-type{padding-top:0}
+#markets .board > dd::after{
   content:"";
   position:absolute;
-  left:-10px;right:-10px;top:-1px;bottom:-1px;
-  z-index:-1;
-  border-top:1px solid transparent;
-  border-bottom:1px solid transparent;
-  background:transparent;
+  left:0;right:0;bottom:0;
+  height:1px;
+  background:var(--line-2);
   pointer-events:none;
-  transition:background-color var(--d) var(--e-out),border-color var(--d) var(--e-out);
 }
+/* three across; the shared .cols sizes stay (the list size, the leading) */
+#markets .board .cols{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  column-gap:clamp(12px,1.6vw,20px);
+  row-gap:clamp(4px,.8vw,8px);
+}
+/* a name: the band is drawn on the row itself and the row is the width
+   of its words (not of its cell, so the band is a zone around a name and
+   not a cell of a table), eight pixels past them either side so the text
+   never touches its edge; the ticker sits on the name's baseline after a
+   half em */
+#markets .board li{
+  position:relative;
+  justify-self:start;
+  display:flex;align-items:baseline;gap:.5em;
+  min-width:0;max-width:calc(100% + 16px);
+  margin:0 -8px;padding:3px 8px;
+  white-space:nowrap;
+  color:var(--ink-1);
+  background:rgba(215,179,100,0);
+  box-shadow:inset 0 1px 0 rgba(215,179,100,0),inset 0 -1px 0 rgba(215,179,100,0);
+}
+#markets .board__name{min-width:0;letter-spacing:-.006em}
+#markets .board .num{
+  flex:0 0 auto;
+  font-size:var(--t-caption);
+  font-weight:400;
+  color:var(--ink-3);
+}
+/* the hover transition is declared only once the reveal has run, so the
+   reveal's own transition (opacity, transform) is never overridden */
+#markets .board li:not(.reveal){transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out)}
+#markets .board li:not(.reveal) .num{transition:color var(--d) var(--e-out)}
 @media (hover:hover){
-  #markets .board dd:hover::before{background:rgba(215,179,100,.06);border-color:rgba(215,179,100,.36)}
-  #markets .board dd:hover .num{color:var(--ink-1)}
+  #markets .board li:hover{
+    background:rgba(215,179,100,.07);
+    box-shadow:inset 0 1px 0 rgba(215,179,100,.36),inset 0 -1px 0 rgba(215,179,100,.36);
+  }
+  #markets .board li:hover .num{color:var(--ink-1)}
 }
-/* the note: read after the board, on the board's left edge */
+
+/* the note: read after the board, on the board's column line */
 #markets .board__note{
   position:relative;z-index:2;
   display:grid;
@@ -2137,18 +2364,30 @@ dl.pairs .cols{
   max-width:44ch;
   font-size:var(--t-small);
   line-height:1.6;
+  letter-spacing:.01em;
   color:var(--ink-4);
   text-wrap:pretty;
 }
-/* a phone: the label above its rows, on the rows' left edge; the levels
-   still run edge to edge. The credits below centre as they do everywhere;
-   the board, like the plates, stays a left-read table. */
+
+/* narrower than the width at which three names sit on one line: two */
+@media (max-width:760px){
+  #markets .board .cols{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* a phone: the board stays a left-read table (the credits under it centre
+   as they do everywhere). The label above its row on the row's left edge,
+   the hairline still closing each group. */
 @media (max-width:620px){
-  #markets .board__grp{display:block;margin-bottom:clamp(18px,4vw,24px)}
-  #markets .board dt{text-align:left;padding-bottom:6px}
-  #markets .board dd::before{left:-8px;right:-8px}
+  #markets .board{row-gap:0}
+  #markets .board > dt{text-align:left;padding-top:clamp(20px,5.4vw,26px)}
+  #markets .board > dt:first-of-type{padding-top:0}
+  #markets .board > dd,#markets .board > dd:first-of-type{text-align:left;padding:4px 0 14px}
+  #markets .board .cols{column-gap:16px;row-gap:2px}
   #markets .board__note{display:block}
   #markets .board__note p{max-width:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  #markets .board li:not(.reveal),#markets .board li:not(.reveal) .num{transition:none}
 }
 
 /* ---- section:material ---- */
@@ -2309,41 +2548,82 @@ dl.pairs .cols{
    A ledger, then the evidence, then what the evidence does not say.
 
    The ledger: six credits on the reel's one axis, in date order, 2023 to
-   2026 -- the firm in the label column, what was earned in the value
-   column, the amount or the date in the serif under it. Under each row a
-   level: a dashed hairline of the gold, the way a chart marks a liquidity
-   line, running from the strip's left edge to the row's number at the
-   right, where a chart keeps its price axis. The numbers count rows and
-   nothing else; the lines carry no value. On scroll the rows rise and
-   each level prints on left to right under its row.
+   2026. The strip's left edge is the time axis and every row is a tick
+   off it: the row's number in mono at the axis, a dashed level -- the
+   liquidity line of the opening schema, same dash -- running from the
+   number to the firm's name at the gutter, and what was earned in the
+   value column on that same baseline, the amount or the date in the serif
+   under it. Nothing is drawn down the gutter and nothing runs under a row;
+   the levels live in the label column, the way a chart's tags live in its
+   margin. The two years already on the page bracket the column, first and
+   last, as an axis carries its first and last figure. The numbers count
+   rows and nothing else; the levels carry no value. On scroll each tick
+   draws itself from the axis, then the row rises.
 
-   The evidence: the same six, in the same order, as plates -- small,
-   uniform, monochrome until pointed at, the number of their row on each.
-   They print on from the left like the spread's plate; a click opens the
-   untouched original.
+   The evidence: the same six, in the same order, printed as plates -- one
+   size, one mat, one hairline, one grey -- with the number of their row on
+   each; only the one under the pointer is allowed its colour. They print
+   on from the left like the spread's plate; a tap opens the untouched
+   original in the page's one lightbox.
 
    The caveat: not small print. Set as the founder's quote is set -- the
-   label in the margin, a short rule, the words a step under lead size in
-   the ink of a value -- because it is the most important paragraph on the
-   page.
+   label in the margin, a short rule, the words at lead size in the ink of
+   a value -- because it is the most important paragraph on the page.
    .roll::before is the strip's edge, so every block sits above it (z:2). */
+#trackrecord{--mat:var(--panel-lo);--inset:clamp(6px,1vw,10px)}
 
 /* ---------- the ledger ---------------------------------------------------- */
-#trackrecord .ledger{
-  position:relative;z-index:2;
+#trackrecord .ledger{position:relative;z-index:2;margin:0}
+#trackrecord .ledger__rows{
   list-style:none;margin:0;padding:0;
+  display:grid;
+  row-gap:clamp(22px,3.2vw,36px);
 }
-#trackrecord .ledger li{
-  position:relative;
+#trackrecord .ledger__rows li{
   display:grid;
   grid-template-columns:var(--axis-l) var(--axis-r);
   column-gap:var(--axis-gap);
   align-items:baseline;
-  padding:clamp(18px,2.4vw,26px) 0 clamp(14px,2vw,20px);
+  min-width:0;
 }
-#trackrecord .ledger li:first-child{padding-top:0}
+/* the tick and the label share the label column: a flex row on one
+   baseline, the number at the axis, the level taking whatever the name
+   leaves, the name ending at the gutter with every other label */
+#trackrecord .ledger__tick{
+  grid-column:1;grid-row:1;
+  display:flex;align-items:baseline;
+  gap:clamp(12px,1.8vw,20px);
+  min-width:0;
+  font-family:var(--f-display);
+  font-size:var(--t-micro);
+  line-height:1.5;
+}
+#trackrecord .ledger__n{
+  flex:0 0 auto;
+  font-family:var(--f-mono);
+  font-weight:400;
+  font-size:var(--t-caption);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:var(--trk-mono);
+  color:var(--ink-4);
+}
+/* the level: the dash of the spread's liquidity lines (3 on, 5 off) in
+   the hairline gold, lifted from the baseline to the middle of the caps.
+   A relative offset, not a transform: the .draw reveal owns the
+   transform; and the gold's alpha is in the token, never an opacity,
+   so a probe sees the level as fully there. */
+#trackrecord .ledger__lv{
+  flex:1 1 auto;
+  min-width:16px;
+  align-self:baseline;
+  position:relative;top:-.34em;
+  height:1px;
+  font-size:var(--t-micro);
+  background:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+}
 #trackrecord .ledger__firm{
-  grid-column:1;
+  flex:0 1 auto;
+  min-width:0;
   text-align:right;
   font-family:var(--f-display);
   font-size:var(--t-micro);
@@ -2351,11 +2631,11 @@ dl.pairs .cols{
   text-transform:uppercase;
   line-height:1.5;
   color:var(--ink-4);
+  text-wrap:balance;
 }
 #trackrecord .ledger__val{
-  grid-column:2;
+  grid-column:2;grid-row:1;
   min-width:0;
-  padding-right:48px;                    /* clear of the number's column */
   font-family:var(--f-display);
   font-size:var(--t-h3);
   font-weight:400;
@@ -2373,44 +2653,61 @@ dl.pairs .cols{
   line-height:1.5;
   color:var(--ink-3);
 }
-/* the level: a dashed hairline to the number. A background, not a border,
-   so the dash is the figure's dash (3 on, 5 off) and a wipe reveals it
-   without stretching it. */
-#trackrecord .ledger__lv{
-  position:absolute;left:0;right:30px;bottom:0;
-  height:1px;
-  background:repeating-linear-gradient(90deg,var(--line-3) 0 3px,transparent 3px 8px);
-}
-/* the number sits on the line, at the right, the way a level is tagged on
-   the price axis: mono, tabular, in the label grey */
-#trackrecord .ledger__n{
-  position:absolute;right:0;bottom:-.5em;
+/* the axis ends: the first and the last year, right of the label column
+   against the gutter, in the mono of everything counted, in the faintest
+   readable grey -- the range of the ledger, not a seventh row */
+#trackrecord .ledger__axis{
+  width:calc((100% - var(--axis-gap)) * 2 / 5);
+  margin:0;
+  text-align:right;
   font-family:var(--f-mono);
-  font-weight:400;
   font-size:var(--t-caption);
   font-variant-numeric:tabular-nums;
   letter-spacing:var(--trk-mono);
   line-height:1;
-  color:var(--ink-4);
+  color:var(--ink-5);
 }
+#trackrecord .ledger__axis time{font-size:inherit;letter-spacing:inherit}
+#trackrecord .ledger__axis--from{margin-bottom:clamp(16px,2.4vw,26px)}
+#trackrecord .ledger__axis--to{margin-top:clamp(16px,2.4vw,26px)}
+
+/* a phone: every row centres with the reel, the tick on its own line --
+   the number and the name between two levels that run to the edges of
+   the screen, the way the founder's numeral sits on its level -- and the
+   value and its sub-line under them. Both levels are simply there. */
 @media (max-width:620px){
-  #trackrecord .ledger li{display:block;text-align:center;padding:22px 0 20px}
-  #trackrecord .ledger li:first-child{padding-top:4px}
-  #trackrecord .ledger__firm{display:block;margin-bottom:5px;text-align:center}
-  #trackrecord .ledger__val{padding:0}
-  #trackrecord .ledger__lv{left:6%;right:calc(6% + 28px)}   /* inset as the group rule is */
-  #trackrecord .ledger__n{right:6%}
+  #trackrecord .ledger__rows{row-gap:clamp(26px,7vw,34px)}
+  #trackrecord .ledger__rows li{display:block;text-align:center}
+  #trackrecord .ledger__tick{
+    justify-content:center;
+    gap:14px;
+    margin:0 calc(-1 * clamp(18px,4vw,40px));
+  }
+  #trackrecord .ledger__tick::after{
+    content:"";
+    flex:1 1 auto;min-width:16px;
+    align-self:baseline;
+    position:relative;top:-.34em;
+    height:1px;
+    background:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+  }
+  #trackrecord .ledger__lv{order:-1}
+  #trackrecord .ledger__n{padding-left:6px}
+  #trackrecord .ledger__firm{flex:0 0 auto;text-align:center;padding-right:6px}
+  .js #trackrecord .ledger__lv.draw{transform:none;transition:none}
+  #trackrecord .ledger__val{margin-top:clamp(8px,2.4vw,12px)}
+  #trackrecord .ledger__axis{width:auto;text-align:center}
 }
 
 /* ---------- the evidence -------------------------------------------------- */
-/* the caption of the grid, hung on its left edge: the title in the label
+/* the caption of the wall, hung on its left edge: the title in the label
    voice, the note in the serif at note size, one row -- as the spread
    captions its plate */
 #trackrecord .proofs-hint{
   position:relative;z-index:2;
   display:flex;flex-wrap:wrap;align-items:baseline;
   gap:2px clamp(14px,1.6vw,22px);
-  margin:clamp(44px,6vw,72px) 0 clamp(12px,1.6vw,18px);
+  margin:clamp(48px,6.5vw,80px) 0 clamp(12px,1.6vw,18px);
   font-family:var(--f-display);
   line-height:1.5;
 }
@@ -2433,40 +2730,63 @@ dl.pairs .cols{
 @media (min-width:720px){ #trackrecord .proofs{grid-template-columns:repeat(3,minmax(0,1fr))} }
 #trackrecord .proofs figure{margin:0;min-width:0}
 /* six firms, six house styles, none of them ours: the plates are one
-   size, on one mat, in one grey, and only the one under the pointer is
-   allowed its colour. The whole figure is the hover target, so pointing
-   at a caption lights its plate. */
+   size, on one mat inside one hairline, in one grey, and only the one
+   under the pointer is allowed its colour. The whole figure is the hover
+   target, so pointing at a caption lights its plate. The hover transition
+   waits until the reveal has run: an id-scoped transition would outrank
+   the .wipe's own and the plate would snap on instead of printing on. */
 #trackrecord .tile{
-  display:block;width:100%;padding:0;margin:0;
+  display:block;width:100%;margin:0;padding:var(--inset);
   border:1px solid var(--line-2);
-  background:var(--panel-lo);
+  background:var(--mat);
   cursor:zoom-in;
-  transition:border-color var(--d) var(--e-out);
 }
-#trackrecord .tile img{
-  display:block;width:100%;height:auto;
-  aspect-ratio:4/3;object-fit:contain;
-  filter:grayscale(1) brightness(.76) contrast(.9);
-  transition:filter var(--d) var(--e-out);
+#trackrecord .tile:not(.reveal){transition:border-color var(--d) var(--e-out)}
+#trackrecord .pic{display:block;position:relative;width:100%;aspect-ratio:4/3;overflow:hidden}
+#trackrecord .pic img{
+  display:block;width:100%;height:100%;
+  object-fit:contain;
+  filter:grayscale(1) brightness(.78) contrast(.9);
+  transition:filter var(--d-slow) var(--e-out);
 }
-#trackrecord .proofs figure:hover .tile,
-#trackrecord .tile:focus-visible{border-color:var(--line-4)}
-#trackrecord .proofs figure:hover .tile img,
-#trackrecord .tile:focus-visible img{filter:none}
-#trackrecord .tile:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
-/* the caption as the teaching plates are captioned: the number in mono,
-   the firm in the label voice, the note in the serif under it */
+/* six papers, one grey: a veil in the mat's own colour over every plate,
+   so a light certificate and a dark one print at the same depth; it
+   lifts with the colour when the plate is pointed at */
+#trackrecord .pic::after{
+  content:"";position:absolute;inset:0;
+  background:rgba(14,15,18,.18);
+  pointer-events:none;
+  transition:background-color var(--d-slow) var(--e-out);
+}
+@media (hover:hover){
+  #trackrecord .proofs figure:hover .tile{border-color:var(--line-4)}
+  #trackrecord .proofs figure:hover .pic img{filter:none}
+  #trackrecord .proofs figure:hover .pic::after{background:rgba(14,15,18,0)}
+  #trackrecord .proofs figure:hover figcaption > b{color:var(--gold)}
+}
+#trackrecord .tile:focus-visible{outline:1px solid var(--gold);outline-offset:3px;border-color:var(--line-4)}
+#trackrecord .tile:focus-visible .pic img{filter:none}
+#trackrecord .tile:focus-visible .pic::after{background:rgba(14,15,18,0)}
+/* the caption as the plates are captioned: the number in mono, the firm
+   in the label voice, the note in the serif under it on the firm's line */
 #trackrecord .proofs figcaption,
 #trackrecord .zoom figcaption{
   display:flex;gap:14px;align-items:baseline;
-  margin-top:12px;
+  margin-top:clamp(10px,1.4vw,14px);
+  font-family:var(--f-display);
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
   line-height:1.5;
 }
 #trackrecord .proofs figcaption > b,
-#trackrecord .zoom figcaption > b{color:var(--ink-4);font-weight:400;flex:0 0 auto;transition:color var(--d) var(--e-out)}
+#trackrecord .zoom figcaption > b{
+  flex:0 0 auto;
+  font-family:var(--f-mono);font-weight:400;font-size:var(--t-caption);
+  letter-spacing:var(--trk-mono);text-transform:none;
+  color:var(--ink-4);
+  transition:color var(--d) var(--e-out);
+}
 #trackrecord .proofs figcaption > span,
-#trackrecord .zoom figcaption > span{min-width:0;color:var(--paper)}
+#trackrecord .zoom figcaption > span{min-width:0;color:var(--ink-1)}
 #trackrecord .proofs figcaption small,
 #trackrecord .zoom figcaption small{
   display:block;margin-top:6px;
@@ -2474,8 +2794,7 @@ dl.pairs .cols{
   font-size:var(--t-small);color:var(--ink-3);line-height:1.55;
   text-wrap:pretty;
 }
-#trackrecord .proofs figure:hover figcaption > b{color:var(--gold)}
-@media (max-width:620px){
+@media (max-width:719px){
   /* two narrow columns: the number leads the firm's name as text, so a
      long name wraps under it instead of beside it */
   #trackrecord .proofs figcaption{display:block}
@@ -2485,8 +2804,8 @@ dl.pairs .cols{
 @media (max-width:480px){
   /* a phone: one plate per row, the width of the column, so a certificate
      can be read where it stands and the caption has its own line */
-  #trackrecord .proofs{grid-template-columns:minmax(0,1fr);row-gap:28px}
-  #trackrecord .tile img{aspect-ratio:3/2}
+  #trackrecord .proofs{grid-template-columns:minmax(0,1fr);row-gap:clamp(28px,8vw,36px)}
+  #trackrecord .pic{aspect-ratio:3/2}
   #trackrecord .proofs figcaption{display:flex}
   #trackrecord .proofs figcaption > b{margin-right:0}
   #trackrecord .proofs figcaption > span{display:block}
@@ -2500,13 +2819,14 @@ dl.pairs .cols{
   column-gap:var(--axis-gap);
   row-gap:0;
   align-items:start;
-  margin:clamp(52px,7.5vw,96px) 0 0;
+  margin:clamp(56px,8vw,104px) 0 0;
   text-align:left;
 }
 #trackrecord .caveat .hair{grid-column:2;grid-row:1;width:40px;margin:0 0 clamp(16px,2.2vw,24px)}
+#trackrecord{--t-caveat:clamp(17.5px,1.5vw,21.5px)}
 #trackrecord .caveat__label{
   grid-column:1;grid-row:2;
-  padding-top:calc(clamp(17px,1.45vw,21px) * .47 - 1px);   /* its baseline on the first line's */
+  padding-top:calc(var(--t-caveat) * .47 - 1px);   /* its baseline on the first line's */
   text-align:right;
   font-family:var(--f-display);
   font-weight:400;
@@ -2514,20 +2834,20 @@ dl.pairs .cols{
   letter-spacing:var(--trk-caps);
   text-transform:uppercase;
   line-height:1.5;
-  color:var(--ink-4);
+  color:var(--ink-3);
 }
 #trackrecord .caveat__body{grid-column:2;grid-row:2;min-width:0;max-width:42ch}
 #trackrecord .caveat__body p{
   margin:0;
   font-family:var(--f-display);
-  font-size:clamp(17px,1.45vw,21px);
+  font-size:var(--t-caveat);
   line-height:1.45;
   letter-spacing:-.004em;
   color:var(--ink-1);
   text-wrap:pretty;
   hanging-punctuation:first last;
 }
-#trackrecord .caveat__body p + p{margin-top:.7em}
+#trackrecord .caveat__body p + p{margin-top:.75em}
 @media (max-width:620px){
   #trackrecord .caveat{display:block;max-width:34ch;margin-left:auto;margin-right:auto;text-align:center}
   #trackrecord .caveat .hair{margin:0 auto clamp(16px,2.2vw,24px)}
@@ -2541,7 +2861,8 @@ dl.pairs .cols{
    edge as the plate's is, and the page's one link construction to close
    it on that same line. The box is the image's width; overflow is
    visible so the link's rule can grow into the margin as it does
-   everywhere else. */
+   everywhere else. It arrives as the page does: a quick appearance, a
+   slow settle (the animation is the only place it is ever not there). */
 #trackrecord .zoom{
   border:0;padding:0;
   background:transparent;
@@ -2552,46 +2873,61 @@ dl.pairs .cols{
   overflow:visible;
   text-align:left;
 }
+#trackrecord .zoom[open]{animation:tr-zoom var(--d-slow) var(--e-reveal) both}
+#trackrecord .zoom[open]::backdrop{animation:tr-veil var(--d-slow) var(--e-reveal) both}
 #trackrecord .zoom::backdrop{background:rgba(3,3,4,.97)}
+@keyframes tr-zoom{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes tr-veil{from{opacity:0}to{opacity:1}}
 #trackrecord .zoom figure{margin:0;width:fit-content;max-width:100%}
 #trackrecord .zoom img{
   display:block;max-width:100%;max-height:76vh;width:auto;height:auto;
   border:1px solid var(--line-3);
-  background:var(--panel-lo);
+  background:var(--mat);
 }
 #trackrecord .zoom figcaption{margin-top:14px}
 #trackrecord .zoom figcaption small{max-width:60ch}
 #trackrecord .zoom .close{margin:clamp(14px,2.4vh,24px) 0 0}
 
 @media (prefers-reduced-motion:reduce){
-  #trackrecord .tile,#trackrecord .tile img,#trackrecord .proofs figcaption > b{transition:none}
+  #trackrecord .tile,#trackrecord .pic img,#trackrecord .pic::after,#trackrecord .proofs figcaption > b{transition:none}
+  #trackrecord .zoom[open],#trackrecord .zoom[open]::backdrop{animation:none}
 }
 
 /* ---- section:access ---- */
-/* ===== access: two levels =====
+/* ===== access: two levels, one path =====
    The two ways in, set as two levels on the reel's one axis instead of as
-   two columns of a price table. The label column is the chart's margin and
-   the gutter is its scale: each label sits on the axis the way a price tag
-   sits on a level, with the level drawn out to its left in the hairline
-   gold of the spread's plate. The open level is a solid line with the path
-   riding it (this is where things are); the one that opens later is the
-   dashed liquidity line of the spread -- drawn, not yet run through. Right
-   of the axis, on the value column with every other credit: what the level
-   holds, one line under it, and the link. The open level carries the one
-   call of the screen; the other a quiet link, the page's ordinary one.
-   Nothing is a price, a day or an instrument; the caption says so. */
+   two columns of a price table. The label column is the chart's margin
+   and the gutter is its price axis: each tag sits on the axis the way a
+   level is tagged, its level drawn out to the left from the strip's edge
+   in the hairline gold of the spread's plate. The open level is the one
+   the path has reached -- the single hairline path of the spread comes in
+   low from the margin, climbs in two legs and holds the level up to the
+   tag (this is where things are). The level that opens later is the
+   dashed liquidity line of the spread: drawn, not yet run through; point
+   at its link and it draws itself solid, left to right, the way every
+   rule on the page draws. Right of the axis, on the value column with
+   every other credit: what the level holds, at statement size because
+   these two words are the reel's last answer; one line under it; the
+   link. The open level carries the one call of the screen; the other a
+   quiet link, the page's ordinary one. Nothing is a price, a day or an
+   instrument; the caption says so.
+   .roll::before is the strip's edge, so the block sits above it (z:2). */
+#access{--edge:clamp(18px,4vw,40px)}   /* the roll's padding: the strip's edge is this far left */
+
 #access .levels{position:relative;z-index:2}
-#access .levels__grid{
+
+/* a level is one credit row on the reel's axis */
+#access .level{
   display:grid;
   grid-template-columns:var(--axis-l) var(--axis-r);
   column-gap:var(--axis-gap);
-  row-gap:clamp(34px,4.6vw,56px);
   align-items:baseline;
 }
-#access .level{display:contents}
+#access .level + .level{margin-top:clamp(44px,6vw,80px)}
 
-/* the scale: the figure is placed across the whole cell and the tag sits on
-   top of it, on the page's ground, so the line runs up to the word and stops */
+/* the scale: the figure is placed across the whole cell from the strip's
+   edge, and the tag sits on top of its end, on the page's ground, so the
+   line runs up to the word and stops */
 #access .level__scale{
   grid-column:1;
   position:relative;
@@ -2605,18 +2941,31 @@ dl.pairs .cols{
   white-space:nowrap;
 }
 #access .level__fig{
-  position:absolute;left:0;
-  top:calc(50% - 17px);height:32px;
-  width:calc(100% - 3px);                  /* a replaced box does not stretch
+  position:absolute;
+  left:calc(-1 * var(--edge));
+  width:calc(100% + var(--edge) - 3px);    /* a replaced box does not stretch
                                               between left and right: sized, so
                                               the line ends under the tag and
                                               its round cap never shows past it */
   display:block;overflow:visible;
 }
+/* the open level: 84px of figure hung on the tag -- the level at y12, on
+   the tag's middle, and the path climbing to it from 62px below */
+#access .level--now .level__fig{top:calc(50% - 12px);height:84px}
+#access .level--later .level__fig{top:calc(50% - 16px);height:32px}
 #access .level__fig *{vector-effect:non-scaling-stroke}
-#access .fig__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-opacity:.8;stroke-linejoin:round;stroke-linecap:round}
-#access .fig__level{stroke:var(--gold);stroke-width:1;stroke-opacity:.28;stroke-linecap:butt}
+#access .fig__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-opacity:.85;stroke-linejoin:round;stroke-linecap:round}
+#access .fig__level{stroke:var(--gold);stroke-width:1;stroke-opacity:.34;stroke-linecap:butt}
 #access .fig__level--open{stroke-opacity:.55;stroke-dasharray:3 5}
+/* the same level, solid, drawn back to nothing; on the row's hover (or the
+   link's focus) it draws itself left to right over the dashes */
+#access .fig__level--set{
+  stroke-opacity:.62;
+  stroke-dasharray:1;stroke-dashoffset:1;
+  transition:stroke-dashoffset var(--d-slow) var(--e-out);
+}
+#access .level--later:hover .fig__level--set,
+#access .level--later:focus-within .fig__level--set{stroke-dashoffset:0}
 #access .level__tag{
   position:relative;
   display:inline-block;
@@ -2624,34 +2973,33 @@ dl.pairs .cols{
   background:var(--bg);
 }
 
-/* the credit: the value column's own sizes, so the row reads as one more
-   credit on the reel */
+/* the credit: the value column, at statement size */
 #access .level__body{grid-column:2;min-width:0}
 #access .level__value{
   margin:0;
   font-family:var(--f-display);
-  font-size:var(--t-h3);
+  font-size:var(--t-h2);
   font-weight:400;
   line-height:var(--lh-tight);
-  letter-spacing:-.006em;
+  letter-spacing:-.012em;
   color:var(--ink-1);
+  text-wrap:balance;
 }
 #access .level__value em{font-style:italic;color:var(--gold)}
 #access .level__note{
-  margin:6px 0 0;
+  margin:clamp(8px,1.2vw,12px) 0 0;
   max-width:var(--measure-narrow);
-  font-size:var(--t-small);
+  font-size:var(--t-body);
   line-height:1.5;
-  letter-spacing:.01em;
   color:var(--ink-3);
   text-wrap:pretty;
 }
-#access .level__body .cta{margin-top:clamp(12px,1.6vw,18px)}
+#access .level__body .cta{margin-top:clamp(14px,2vw,22px)}
 
 /* the caption, on the figure's own column, against the axis */
 #access .levels__cap{
   width:calc((100% - var(--axis-gap)) * 2 / 5);
-  margin:clamp(16px,2.2vw,26px) 0 0;
+  margin:clamp(20px,3vw,36px) 0 0;
   text-align:right;
   font-family:var(--f-display);
   font-size:var(--t-micro);
@@ -2667,33 +3015,48 @@ dl.pairs .cols{
    settle and the level comes up under it. Never opacity on the figure
    itself, so the probe sees it at once; the motion is in the ink. */
 .js #access .reveal.trace{opacity:1;transform:none;transition:none}
-.js #access .reveal.trace .fig__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.9s var(--e-reveal)}
-.js #access .reveal.trace .fig__level{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) .5s}
+.js #access .reveal.trace .fig__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.2s var(--e-reveal)}
+.js #access .reveal.trace .fig__level{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) .6s}
 .js #access .reveal.trace.is-in .fig__line{stroke-dashoffset:0}
 .js #access .reveal.trace.is-in .fig__level{opacity:1}
 @media (prefers-reduced-motion:reduce){
   .js #access .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
   .js #access .reveal.trace .fig__level{opacity:1;transition:none}
+  #access .fig__level--set{transition:none}
 }
 
-/* a phone: one column, each level its own block. The tag moves to the left
-   end of its line so that everything the level holds hangs on the one
-   edge under it, like the spread; the line runs from the tag to the
-   right edge and the figure is in the flow, so nothing needs covering. */
+/* a phone: the credits centre, so each level centres with them the way
+   the founder's does -- the level runs from one edge of the screen to
+   the other with the tag on it, the path climbing to the tag from the
+   left, the level going on past it to the right; what the level holds
+   sits centred under it. The figure is in the flow, so nothing needs
+   covering. */
 @media (max-width:620px){
-  #access .levels__grid{grid-template-columns:minmax(0,1fr);row-gap:clamp(36px,9vw,48px)}
-  #access .level{display:block}
-  #access .level__scale,#access .level__body{grid-column:auto}
+  #access .level{display:block;text-align:center}
+  #access .level + .level{margin-top:clamp(44px,11vw,56px)}
   #access .level__scale{
-    display:grid;grid-template-columns:auto minmax(0,1fr);
-    align-items:center;column-gap:14px;
-    text-align:left;
+    display:flex;align-items:flex-start;justify-content:center;
+    gap:14px;
+    margin:0 calc(-1 * var(--edge));
+    text-align:center;
   }
-  #access .level__tag{order:1;padding:0;background:transparent}
-  #access .level__fig{order:2;position:static;top:auto;height:32px;width:100%}
-  #access .level__body{margin-top:14px}
-  #access .level__note{max-width:none}
-  #access .levels__cap{width:auto;text-align:left}
+  #access .level__fig{position:static;flex:1 1 0;min-width:0;width:auto}
+  /* the open figure squeezed to two thirds of its height (the viewBox
+     stretches), so the climb is 40px and not half the screen: y12 lands
+     at 8px, the tag's middle */
+  #access .level--now .level__fig{height:56px;margin-top:0}
+  #access .level--later .level__fig{margin-top:-8px}   /* y16 on the tag's middle */
+  #access .level__tag{flex:0 0 auto;padding:0;background:transparent}
+  /* the level continues past the tag */
+  #access .level__scale::after{content:"";flex:1 1 0;height:1px;margin-top:8px}
+  #access .level--now .level__scale::after{background:rgba(215,179,100,.34)}
+  #access .level--later .level__scale::after{background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px)}
+  /* the words sit close under their tag: the path's low run is at the
+     far left, the centred value clears it */
+  #access .level__body{margin-top:8px}
+  #access .level--now .level__body{margin-top:-14px}
+  #access .level__note{margin-left:auto;margin-right:auto}
+  #access .levels__cap{width:auto;text-align:center}
 }
 
 /* ---- section:closer ---- */
@@ -2705,22 +3068,25 @@ dl.pairs .cols{
    word's baseline. The path is one hairline of the gold. It comes in
    from the left margin, the word rises out of it (the mask clips at the
    line, so the letters come up through it), and at the right, under the
-   line, the path does its last move: two equal lows on a dashed level,
-   one sweep beneath it, and back up to the line as it leaves the page.
-   One label names the level and says the figure is a schema. Nothing
-   else is drawn.
+   line, the path does its last move: a fall in two legs, two equal lows
+   on a dashed level, one sweep beneath it, and back up to the line in
+   three legs as it leaves the page. One caption under the figure says it
+   is a schema. Nothing else is drawn.
 
    Everything in the figure is placed in em of the display size (--D),
    so the drawing is the same drawing at 390 and at 1440:
      --base   .6902em + 1.5px   the word's baseline from the top of its
                                 box (Newsreader, line-height .92), plus a
                                 pixel and a half of air: the line's top
-     width    2.6em             the action, anchored to the page's right
+     width    3.2em             the action, anchored to the page's right
                                 edge, bleeding past the card like the
-                                opening band
-     level    .30em below the line, the last 1.6em of the width, the
+                                opening band; the svg is 100 units per em
+     level    .30em below the line, from 1.0em in to the page's edge, the
               3-on-5 dashes every other level on the page is drawn with
-     depth    .40em             the sweep's low
+     depth    .41em             the sweep's low; the box is .5em deep
+     caption  under the box, ending on the card's right edge (the header's
+              link ends there too) -- below everything drawn, so no move
+              of the line can run through it at any width
    The sub-line and the one call hang under the word on the axis, left
    of the action; on a phone, where there is no room beside it, they
    wait below the figure. The footer: the signature (a hair and the
@@ -2729,7 +3095,7 @@ dl.pairs .cols{
 #closer{
   --D:var(--t-display);
   --base:calc(.6902 * var(--D) + 1.5px);
-  --act:calc(2.6 * var(--D));            /* the action's width            */
+  --act:calc(3.2 * var(--D));            /* the action's width            */
   --bleed:calc(var(--gutter) + max(0px,(100vw - 2 * var(--gutter) - var(--wide)) / 2));
   position:relative;
   padding:clamp(48px,7vw,104px) var(--gutter) clamp(72px,9vw,128px);
@@ -2742,6 +3108,7 @@ dl.pairs .cols{
 /* ---- the word on the line --------------------------------------------- */
 #closer .end__row{
   position:relative;
+  display:flow-root;                      /* the mask's negative margin stays inside: the row is the line's box */
   margin:0;
   height:var(--base);
   font-family:var(--f-display);
@@ -2752,12 +3119,15 @@ dl.pairs .cols{
   color:var(--paper);
 }
 /* the mask clips at the line, not .3em under the box: the word comes up
-   through the line, and the space under the baseline is the figure's */
+   through the line, and the space under the baseline is the figure's.
+   Above the box it is open by .12em (padding, taken back with a negative
+   margin so the row's height is still the line's), because the serif's
+   ascenders and the dot of the i stand a little above the line box. */
 #closer .end__row .mask{
   display:block;
-  height:var(--base);
-  padding:0;
-  margin:0 0 0 var(--optical);
+  height:calc(var(--base) + .12 * var(--D));
+  padding:calc(.12 * var(--D)) 0 0;
+  margin:calc(-.12 * var(--D)) 0 0 var(--optical);
   overflow:hidden;
 }
 #closer .end__word{display:block;white-space:nowrap}
@@ -2795,19 +3165,19 @@ dl.pairs .cols{
   height:1px;
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.5) 0 3px,transparent 3px 8px);
 }
-/* the label: the page's label voice, under the level's right end, ending
-   on the card's right edge (the header's link ends there too) */
+/* the caption: the page's label voice, under the figure's box, ending on
+   the card's right edge; the faintest readable, as the reel's captions */
 #closer .end__tag{
   position:absolute;
   right:var(--bleed);
-  top:calc(.30 * var(--D) + 9px);
+  top:calc(.48 * var(--D) + 8px);
   font-family:var(--f-display);
   font-style:normal;
   font-size:var(--t-nano);
   letter-spacing:var(--trk-caps);
   text-transform:uppercase;
   line-height:1;
-  color:var(--ink-4);
+  color:var(--ink-5);
   white-space:nowrap;
 }
 
@@ -2827,12 +3197,14 @@ dl.pairs .cols{
    The box itself never fades or moves (a probe sees it at once); the
    motion is in the ink. In: the line draws itself in one stroke -- the
    flat run crosses the page in the fast start of the curve, the move
-   under the line takes the long settle -- and the level and its label
-   come up under it once the line is past them. The word's own mask
-   rise starts on the third beat, when the line is under it. */
+   under the line takes the long settle -- the level comes up under it
+   once the line has reached it, and the caption last, when the sweep is
+   drawn. The word's own mask rise starts on the third beat, when the
+   line is under it; the sentence and the call follow. */
 .js #closer .reveal.trace{opacity:1;transform:none;transition:none}
 .js #closer .reveal.trace .fig__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2s var(--e-out)}
-.js #closer .reveal.trace .end__lvl,.js #closer .reveal.trace .end__tag{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) .55s}
+.js #closer .reveal.trace .end__lvl{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) .5s}
+.js #closer .reveal.trace .end__tag{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) 1s}
 .js #closer .reveal.trace.is-in .fig__line{stroke-dashoffset:0}
 .js #closer .reveal.trace.is-in .end__lvl,.js #closer .reveal.trace.is-in .end__tag{opacity:1}
 @media (prefers-reduced-motion:reduce){
@@ -2842,7 +3214,7 @@ dl.pairs .cols{
 
 /* ---- a phone: the figure has the width, the words wait under it ------- */
 @media (max-width:619px){
-  #closer .end__col{margin-top:calc(.40 * var(--D) + 9px + 11px + clamp(28px,7vw,40px))}
+  #closer .end__col{margin-top:calc(.48 * var(--D) + 8px + 11px + clamp(28px,7vw,40px))}
   #closer .subtitle{max-width:var(--measure-quote)}
 }
 
@@ -2888,11 +3260,12 @@ footer .fsig small{
 /* the lists: the reading voice, no rule under a word until it is pointed
    at -- then the band of the opening plate's gap comes up behind it,
    ten pixels past the word either side, the way a pointed-at row on the
-   markets board does */
+   markets board does. A link that leaves the page carries the bar's
+   arrow after it, grey until pointed at, as in the header. */
 footer .fnav{list-style:none;margin:0;padding:0;display:grid;row-gap:clamp(4px,.6vw,8px);justify-items:start}
 footer .fnav a{
   position:relative;z-index:0;            /* its own context, so the band sits under the word and over the ground */
-  display:inline-block;
+  display:inline-flex;align-items:center;gap:9px;
   padding:2px 0;
   font-family:var(--f-display);
   font-size:var(--t-body);
@@ -2911,9 +3284,20 @@ footer .fnav a::before{
   border-bottom:1px solid transparent;
   transition:background-color var(--d) var(--e-out),border-color var(--d) var(--e-out);
 }
+footer .fnav a[href^="http"]::after{
+  content:"";
+  flex:0 0 auto;
+  width:9px;height:9px;
+  background:var(--ink-4);
+  -webkit-mask:var(--arrow) center/9px 9px no-repeat;
+  mask:var(--arrow) center/9px 9px no-repeat;
+  transition:background-color var(--d) var(--e-out),transform var(--d) var(--e-out);
+}
 footer .fnav a:hover,footer .fnav a:focus-visible{color:var(--gold-hi)}
+footer .fnav a:hover::after,footer .fnav a:focus-visible::after{background:var(--gold)}
 @media (hover:hover){
   footer .fnav a:hover::before{background:rgba(215,179,100,.07);border-color:rgba(215,179,100,.36)}
+  footer .fnav a:hover::after{transform:translate(1px,-1px)}
 }
 footer .frule{
   display:block;
@@ -2927,18 +3311,21 @@ footer .fbase{
   column-gap:var(--axis-gap);
   align-items:start;
 }
+/* the two lines that go under everything: secondary prose, not a hint --
+   they are read */
 footer .legal{max-width:74ch}
 footer .legal p{
   margin:0;
   font-size:var(--t-small);
   line-height:1.7;
   letter-spacing:.01em;
-  color:var(--ink-4);
+  color:var(--ink-3);
   text-wrap:pretty;
 }
 footer .legal p + p{margin-top:2px}
 /* the time: the rail's construction, as content. Without a script there
-   is no time, so there is no line. */
+   is no time, so there is no line; and if the script could not write one
+   (no Intl), the line goes too rather than naming a city with no time. */
 footer .ftime{
   margin:0;
   padding-top:5px;                        /* its baseline on the first legal line's */
@@ -2947,6 +3334,7 @@ footer .ftime{
   white-space:nowrap;
 }
 html:not(.js) footer .ftime{display:none}
+footer .ftime:has(time:empty){display:none}
 footer .ftime__city{
   font-family:var(--f-display);
   font-size:var(--t-nano);
@@ -2955,6 +3343,10 @@ footer .ftime__city{
   color:var(--ink-5);
 }
 footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
+
+@media (prefers-reduced-motion:reduce){
+  footer .fnav a,footer .fnav a::before,footer .fnav a::after{transition:none}
+}
 
 @media (max-width:619px){
   footer .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -2983,25 +3375,29 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
          its rule and arrow when none is (motion.js toggles .solid); the
          swap slides along the reading axis like the rail's label. Both
          rows share one cell, so the box is as wide as the wider row and
-         nothing beside it ever moves. -->
+         nothing beside it ever moves. The short row is a visual state
+         (aria-hidden); the full one is the link's name everywhere, on a
+         phone too, where it is kept for the reader and clipped for the eye. -->
     <a class="cta" href="https://discord.gg/78Ff2GuSfW">
       <span class="cta__track">
-        <span class="r r--s">Discord</span>
+        <span class="r r--s" aria-hidden="true">Discord</span>
         <span class="r r--l"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></span>
       </span>
     </a>
     <!-- the contents line: two anchors either side of the call on a desk,
-         a drawer of levels under the bar everywhere else. The reel number
-         in each row is read off the page's own group titles by the script
-         below, so it is never typed twice; the row is empty without it. -->
+         a drawer of levels under the bar everywhere else. Each row is a
+         level: the name, a hairline, and on the right gutter -- the axis of
+         the page, where the spread's labels sit -- the reel number, read
+         off the page's own group titles by the script below so it is
+         never typed twice; the tag is empty without it. -->
     <nav class="nav" id="hdr-nav" aria-label="Secties / Sections">
       <div class="lv lv--l">
-        <a href="#educatie"><b class="n" aria-hidden="true"></b><span lang="nl">Educatie</span><span lang="en">Education</span></a>
-        <a href="#kanalen"><b class="n" aria-hidden="true"></b><span lang="nl">Kanalen</span><span lang="en">Channels</span></a>
+        <a href="#educatie"><span class="lv__name"><span lang="nl">Educatie</span><span lang="en">Education</span></span><b class="n" aria-hidden="true"></b></a>
+        <a href="#kanalen"><span class="lv__name"><span lang="nl">Kanalen</span><span lang="en">Channels</span></span><b class="n" aria-hidden="true"></b></a>
       </div>
       <div class="lv lv--r">
-        <a href="#trackrecord"><b class="n" aria-hidden="true"></b><span lang="nl">Trackrecord</span><span lang="en">Track record</span></a>
-        <a href="#access"><b class="n" aria-hidden="true"></b><span lang="nl">Toegang</span><span lang="en">Access</span></a>
+        <a href="#trackrecord"><span class="lv__name"><span lang="nl">Trackrecord</span><span lang="en">Track record</span></span><b class="n" aria-hidden="true"></b></a>
+        <a href="#access"><span class="lv__name"><span lang="nl">Toegang</span><span lang="en">Access</span></span><b class="n" aria-hidden="true"></b></a>
       </div>
       <div class="foot">
         <div class="langsw" role="group" aria-label="Taal / Language">
@@ -3066,14 +3462,16 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
     W.addEventListener("scroll", ask, { passive: true });
     W.addEventListener("resize", ask);
     frame();
-    /* the drawer */
+    /* the drawer. The page is held still under it by locking the body,
+       never the root: overflow on <html> re-roots the scroller and a
+       sticky bar lets go of the top. */
     var open = false;
     function focusables(){
       return Array.prototype.filter.call(hdr.querySelectorAll("a[href],button"), function(el){
         return el.offsetParent !== null || el.getClientRects().length;
       });
     }
-    function setOpen(v){
+    function setOpen(v, back){
       if (v === open) return;
       open = v;
       hdr.classList.toggle("is-open", v);
@@ -3082,12 +3480,13 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
         nav.classList.add("is-open");
         void nav.offsetHeight;
         nav.classList.add("is-in");
-        root.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
         try { links[0].focus({ preventScroll: true }); } catch(e) {}
       } else {
         nav.classList.remove("is-in");
         nav.classList.remove("is-open");
-        root.style.overflow = "";
+        document.body.style.overflow = "";
+        if (back) { try { btn.focus({ preventScroll: true }); } catch(e) {} }
       }
     }
     btn.addEventListener("click", function(){ setOpen(!open); });
@@ -3096,7 +3495,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
     });
     document.addEventListener("keydown", function(e){
       if (!open) return;
-      if (e.key === "Escape" || e.key === "Esc") { setOpen(false); btn.focus(); return; }
+      if (e.key === "Escape" || e.key === "Esc") { setOpen(false, true); return; }
       if (e.key !== "Tab") return;
       var f = focusables(), first = f[0], last = f[f.length - 1];
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
@@ -3125,9 +3524,15 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
          dips once below the range out of an orderblock, rallies in three
          legs and leaves a gap (the FVG band), meets two equal highs under
          the liquidity line, sweeps it once, and falls back through the gap
-         towards the level below. Every point is placed, so the line reads as
-         a drawing and not as a feed. On load the line draws itself while
-         the zones develop. Labels are HTML so they stay label-sized.
+         towards the level below. It stops short of the right edge: that is
+         now. The zones are HTML, not SVG, so they are the same hairlines
+         every other section draws its levels with (a 3-on-5 dashed line,
+         a band with two rules) and so they can run on past the line, into
+         the band's bleed, to the edge of the page -- a level is drawn
+         forward, a line is drawn up to the present. Every point is placed,
+         so the line reads as a drawing and not as a feed. On load the line
+         draws itself while the zones draw out of the left. Labels sit on the
+         page's right gutter like the axis of a chart.
          On a desk the frame is lifted out of the flow (it is the band the
          title crosses); the caption stays in it, so it sits under the band
          at the band's left edge, and the standfirst and the calls follow it
@@ -3136,12 +3541,12 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
     <figure class="plate">
       <div class="plate__px" data-parallax="0.04" data-parallax-top>
         <div class="plate__frame reveal trace" data-at="300">
+          <i class="plate__ob"></i>
+          <i class="plate__band"></i>
+          <i class="plate__lvl plate__lvl--hi"></i>
+          <i class="plate__lvl plate__lvl--lo"></i>
           <svg class="fig" viewBox="0 0 1000 450" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <rect class="fig__zone fig__zone--ob" x="384" y="374" width="48" height="34"/>
-            <rect class="fig__zone fig__zone--fvg" x="500" y="262" width="500" height="22"/>
-            <line class="fig__zone fig__level" x1="600" y1="128" x2="1000" y2="128"/>
-            <line class="fig__zone fig__level" x1="700" y1="430" x2="1000" y2="430"/>
-            <path class="fig__line" pathLength="1" d="M0 392 70 388 140 394 210 389 280 393 320 386 350 392 376 384 388 380 410 404 446 342 462 356 520 236 540 254 648 128 672 160 700 128 720 168 748 92 770 148 786 136 830 240 846 228 884 306 900 296 944 366 962 356 1000 372"/>
+            <path class="fig__line" pathLength="1" d="M0 392 70 388 140 394 210 389 280 393 320 386 350 392 376 384 388 380 410 404 446 342 462 356 516 236 536 254 630 128 652 162 680 128 700 168 724 96 746 150 762 138 804 240 820 228 856 306 872 296 912 362 928 352 950 368"/>
           </svg>
           <i class="plate__tag plate__tag--liq"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></i>
           <i class="plate__tag plate__tag--fvg">FVG</i>
@@ -3159,6 +3564,15 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       <a class="aside reveal" data-at="1160" href="#educatie"><span lang="nl">of bekijk eerst de tien onderwerpen</span><span lang="en">or see the ten topics first</span></a>
     </p>
   </div>
+  <!-- the scroll hint for the widths where the rail is not shown (under
+       1100px): the rail's own construction -- the word in the faintest grey
+       and a hairline that runs down it -- on the gutter at the foot of the
+       screen. It leaves as the page moves (a clip along the scroll, where
+       the browser can drive one; otherwise it simply scrolls away). Not
+       content: aria-hidden, one word in both languages. Not a .reveal: on
+       a phone it sits under the observer's line at load, and a hint that
+       waits for a scroll to appear is no hint. -->
+  <p class="cue" aria-hidden="true">Scroll</p>
 </section>
 <!-- /section:hero -->
 
@@ -3166,10 +3580,12 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <!-- section:production -->
 <section id="production">
   <div class="grp"><h2><span lang="nl">Productie</span><span lang="en">Production</span></h2></div>
-  <!-- four credits on the shared axis (base.css dl.pairs); production.css
-       draws a level under every value -- the liquidity line of the opening
-       plate, used as a rule -- and sets the one small fact that is a code,
-       the server's address, in the mono. motion.js tags the rows itself. -->
+  <!-- four credits on the shared axis (base.css dl.pairs). production.css
+       draws each label as the tag at the end of a price level -- a dashed
+       hairline of the gold that runs to it from the strip's left edge, the
+       liquidity line of the opening plate used as a leader -- and sets the
+       one small fact that is a code, the server's address, in the mono.
+       The value column is type only. motion.js tags the rows itself. -->
   <dl class="pairs">
     <dt>Community</dt><dd>Atlas Capital</dd>
     <dt>Tagline</dt><dd><em><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></em></dd>
@@ -3183,24 +3599,27 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <section id="founder">
   <div class="grp"><h2><span lang="nl">Hoofdrol</span><span lang="en">Starring</span></h2></div>
 
-  <!-- the credit, set as a level: the numeral sits on the axis like the
-       tag at the end of a price level and the dashed line runs to it from
-       the left edge; the words and the five-word sub-line take the value
-       column on the same baseline. No label -- the group title names the
-       role, the signature under the quote names the voice. -->
+  <!-- the credit, drawn as a level: one dashed hairline of the gold runs
+       the width of the strip and the numeral sits on it at the axis, the
+       way a price tag sits on a level -- large, quiet, the plus a small
+       superior. The words take the value column on the numeral's baseline,
+       the five words cut from his first sentence under them. No label: the
+       group title names the role, the signature under the quote names the
+       voice. One number, no instrument, no date: a schema, not a chart. -->
   <p class="ten" data-stagger="120">
-    <span class="ten__n"><i class="ten__lvl reveal draw" aria-hidden="true"></i><span class="mask"><span class="ten__num reveal">10<span class="ten__plus">+</span></span></span></span>
+    <i class="ten__lvl reveal draw" aria-hidden="true"></i>
+    <span class="ten__n"><span class="mask"><span class="ten__num reveal">10<span class="ten__plus">+</span></span></span></span>
     <span class="ten__v"><span class="ten__words reveal"><span lang="nl">jaar actief in trading</span><span lang="en">years active in trading</span></span><small class="ten__sub reveal"><span lang="nl">winst, verlies, fouten, groei, lessen</span><span lang="en">wins, losses, mistakes, growth, lessons</span></small></span>
   </p>
 
-  <!-- the founder's own words at pull-quote size, hung on the left edge of
-       the strip with the hair above and the signature under them on that
-       same line -->
+  <!-- the founder's own words at pull-quote size, hung on the strip's left
+       edge with the hair above and the signature under them on that same
+       line. NL as on the page; EN is the official text, verbatim. -->
   <figure class="word" data-stagger="300">
     <i class="hair reveal draw" aria-hidden="true"></i>
     <blockquote class="reveal"><p>
       <span lang="nl">Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten
-      zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups,
+      zien hoe ik de markten dagelijks benader. Geen <span class="nb">snelle-rijk-verhalen</span>, maar echte setups,
       educatie en een community die samen beter wil worden.</span><span lang="en">I built Atlas Capital to share that experience, bring traders together, and show how I
       approach the markets on a daily basis. No <span class="nb">get-rich-quick</span> promises, just real setups,
       education, and a community focused on improving together.</span>
@@ -3214,61 +3633,64 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <section id="education">
   <div class="grp" id="educatie"><h2><span lang="nl">Educatie · 10 onderwerpen</span><span lang="en">Education · 10 topics</span></h2></div>
 
-  <!-- the syllabus: ten terms as an index. The number is a count (mono),
-       the term is the credit, the gloss under it is a dictionary line --
-       what the word means, never what the course does with it. Ten rows,
-       then one dashed level with the hint at its end. -->
+  <!-- the syllabus: ten terms set as ten levels on the reel's axis. The
+       count is a tag at the left in mono, a hairline level runs from it to
+       the term, the term ends on the gutter where every label of the reel
+       ends, and the gloss takes the value column -- what the word means,
+       in dictionary voice, never what the course does with it. Pointing
+       at a row makes it a zone (the fair value gap band of the figure)
+       and lights its level. On a phone the level is a short tick and the
+       gloss sits under the term. -->
   <div class="syllabus" data-stagger="70">
     <dl class="index">
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">01</b><span class="term"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span></dt>
-        <dd><span class="gloss"><span lang="nl">een korte uitbraak die weer terugkeert</span><span lang="en">a brief breakout that comes back in</span></span></dd>
+        <dt><b class="num">01</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span></dt>
+        <dd><span lang="nl">een uitbraak die in de range terugkeert</span><span lang="en">a breakout that returns into the range</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">02</b><span class="term">SMT</span></dt>
-        <dd><span class="gloss"><span lang="nl">divergentie tussen twee markten</span><span lang="en">divergence between two markets</span></span></dd>
+        <dt><b class="num">02</b><i class="lvl" aria-hidden="true"></i><span class="term">SMT</span></dt>
+        <dd><span lang="nl">divergentie tussen twee verwante markten</span><span lang="en">divergence between two related markets</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">03</b><span class="term">FVG</span></dt>
-        <dd><span class="gloss"><span lang="nl">fair value gap: het gat na een impuls</span><span lang="en">fair value gap: the gap after an impulse</span></span></dd>
+        <dt><b class="num">03</b><i class="lvl" aria-hidden="true"></i><span class="term">FVG</span></dt>
+        <dd><span lang="nl">fair value gap: het gat dat een impuls achterlaat</span><span lang="en">fair value gap: the gap an impulse leaves behind</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">04</b><span class="term">IFVG</span></dt>
-        <dd><span class="gloss"><span lang="nl">inverse fair value gap: een doorbroken FVG</span><span lang="en">inverse fair value gap: a broken FVG</span></span></dd>
+        <dt><b class="num">04</b><i class="lvl" aria-hidden="true"></i><span class="term">IFVG</span></dt>
+        <dd><span lang="nl">inverse fair value gap: een doorbroken FVG</span><span lang="en">inverse fair value gap: a broken FVG</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">05</b><span class="term">Orderblocks</span></dt>
-        <dd><span class="gloss"><span lang="nl">laatste tegengestelde candle v&oacute;&oacute;r een impuls</span><span lang="en">the last opposing candle before an impulse</span></span></dd>
+        <dt><b class="num">05</b><i class="lvl" aria-hidden="true"></i><span class="term">Orderblocks</span></dt>
+        <dd><span lang="nl">de laatste tegengestelde candle v&oacute;&oacute;r een impuls</span><span lang="en">the last opposing candle before an impulse</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">06</b><span class="term">Fibonacci</span></dt>
-        <dd><span class="gloss"><span lang="nl">niveaus naar verhouding tussen low en high</span><span lang="en">levels by ratio between a low and a high</span></span></dd>
+        <dt><b class="num">06</b><i class="lvl" aria-hidden="true"></i><span class="term">Fibonacci</span></dt>
+        <dd><span lang="nl">vaste verhoudingen tussen een low en een high</span><span lang="en">fixed ratios between a low and a high</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">07</b><span class="term"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span></dt>
-        <dd><span class="gloss"><span lang="nl">de highs en lows die een sessie achterlaat</span><span lang="en">the highs and lows a session leaves behind</span></span></dd>
+        <dt><b class="num">07</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span></dt>
+        <dd><span lang="nl">de highs en lows die een sessie achterlaat</span><span lang="en">the highs and lows a session leaves behind</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">08</b><span class="term"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span></dt>
-        <dd><span class="gloss"><span lang="nl">orders boven highs en onder lows</span><span lang="en">orders resting above highs and below lows</span></span></dd>
+        <dt><b class="num">08</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span></dt>
+        <dd><span lang="nl">orders die boven highs en onder lows liggen</span><span lang="en">orders resting above highs and below lows</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">09</b><span class="term"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span></dt>
-        <dd><span class="gloss"><span lang="nl">positiegrootte en wat &eacute;&eacute;n trade mag kosten</span><span lang="en">position size and what one trade may cost</span></span></dd>
+        <dt><b class="num">09</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span></dt>
+        <dd><span lang="nl">positiegrootte en wat &eacute;&eacute;n trade mag kosten</span><span lang="en">position size and what one trade may cost</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">10</b><span class="term"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span></dt>
-        <dd><span class="gloss"><span lang="nl">gedrag en emotie bij het beslissen</span><span lang="en">behaviour and emotion when deciding</span></span></dd>
+        <dt><b class="num">10</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span></dt>
+        <dd><span lang="nl">gedrag en emotie bij het beslissen</span><span lang="en">behaviour and emotion when deciding</span></dd>
       </div>
     </dl>
-    <div class="level">
-      <div class="level__line reveal draw" aria-hidden="true"></div>
-      <p class="level__tag reveal"><span lang="nl">Wijs een begrip aan voor de betekenis</span><span lang="en">Point at a term to read what it means</span></p>
-    </div>
+    <!-- the liquidity line of the figure, under the ten levels: the index
+         ends here, the call sits below it -->
+    <div class="level" aria-hidden="true"><i class="level__line reveal draw"></i></div>
   </div>
 
   <div class="interstitial">
-    <p><span lang="nl">De educatie staat in de server</span><span lang="en">The education lives in the server</span></p>
+    <p><span lang="nl">De educatie staat in de server</span><span lang="en">The teaching is in the server</span></p>
     <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom erbij op Discord</span><span lang="en">Join us on Discord</span></a>
   </div>
 </section>
@@ -3279,20 +3701,23 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   <div class="grp" id="kanalen"><h2><span lang="nl">Locaties · 15 kanalen</span><span lang="en">Locations · 15 channels</span></h2></div>
 
   <!-- The server as a device. A sidebar the way Discord draws one -- the
-       server's name, two categories, the fifteen channels as they stand --
-       beside a message pane that holds no messages: skeleton lines only,
-       and in one of them a chart drawn as a schema (one line, one
-       orderblock, one gap, one level; no price, no day). The selected row
-       is a fair value gap band; the boundary of Premium is a dashed
-       liquidity line; the locks are hairlines of the gold. Selecting a
-       channel moves the band and names the channel in the pane. The pane
-       is decoration (aria-hidden); the list is content. -->
+       server's name, two categories, the fifteen channels as they stand,
+       and at its foot the place a member's own panel sits -- beside a
+       message pane that holds no messages: skeleton lines only, and in
+       one of them a chart drawn as a schema (one line, one orderblock,
+       one gap, one level; no price, no day). The selected row is a fair
+       value gap band; the boundary of Premium is a dashed liquidity line;
+       the locks are hairlines of the gold; the row numbers sit at the
+       right like the levels of a price scale. Selecting a channel moves
+       the band and names the channel in the pane. The pane and the foot
+       are decoration (aria-hidden); the list is content. Nothing here is
+       a name, a count or a message. -->
   <figure class="dv" data-stagger="40">
     <div class="dv__frame">
       <div class="dv__side">
         <div class="dv__server reveal"><span>Atlas Capital</span><i class="dv__chev" aria-hidden="true"></i></div>
         <div class="dv__list">
-          <p class="dv__cat reveal"><span lang="nl">Thuis &middot; nu gratis</span><span lang="en">Home &middot; free right now</span></p>
+          <p class="dv__cat reveal"><span lang="nl">Gratis &middot; voorlopig</span><span lang="en">Free &middot; for now</span></p>
           <button type="button" class="dv__ch reveal" data-kind="chart" aria-pressed="true"><span class="dv__hash">#</span><span class="dv__chname">nq-chart-ideeën</span><span class="dv__n">01</span></button>
           <button type="button" class="dv__ch reveal" data-kind="chart" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">es-chart-ideeën</span><span class="dv__n">02</span></button>
           <button type="button" class="dv__ch reveal" data-kind="chart" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">bitcoin</span><span class="dv__n">03</span></button>
@@ -3310,6 +3735,10 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
           <button type="button" class="dv__ch reveal" data-kind="lock" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">chart-ideeën</span><i class="dv__lock" aria-hidden="true"></i><span class="dv__n">14</span></button>
           <button type="button" class="dv__ch reveal" data-kind="lock" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">premium-chat</span><i class="dv__lock" aria-hidden="true"></i><span class="dv__n">15</span></button>
         </div>
+        <!-- the member's own panel, as Discord sets it under the list: an
+             avatar, a name, three controls -- drawn as skeleton, so it is a
+             place and not a person -->
+        <div class="dv__me reveal" aria-hidden="true"><i class="dv__av"></i><i class="dv__ln dv__ln--name"></i><i class="dv__ctl"></i><i class="dv__ctl"></i><i class="dv__ctl"></i></div>
       </div>
       <div class="dv__pane" data-kind="chart" aria-hidden="true">
         <div class="dv__head reveal" data-at="0"><span class="dv__hash">#</span><span class="dv__name">nq-chart-ideeën</span></div>
@@ -3337,7 +3766,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
     </div>
     <figcaption class="reveal">
       <span class="dv__title"><span lang="nl">Figuur &mdash; De server, schematisch</span><span lang="en">Figure &mdash; The server, as a schema</span></span>
-      <span class="dv__note"><span lang="nl">De kanalen zoals ze in de server staan. Geen berichten; die lees je daar.</span><span lang="en">The channels as they stand in the server. No messages; those you read there.</span></span>
+      <span class="dv__note"><span lang="nl">De kanalen zoals ze in de server staan. Geen berichten; die lees je daar.</span><span lang="en">The channels as they stand in the server. No messages; you read those there.</span></span>
     </figcaption>
   </figure>
   <p class="dv__call"><a class="cta reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom binnen op Discord</span><span lang="en">Step inside the Discord</span></a></p>
@@ -3356,7 +3785,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       pane.setAttribute("data-kind", b.getAttribute("data-kind") || "chat");
     }
     list.addEventListener("click", function(e){ var b = rowOf(e.target); if (b) pick(b); });
-    /* the cue at the sidebar's foot: only while the list has more below */
+    /* the cue at the list's foot: only while the list has more below */
     var side = s.querySelector(".dv__side");
     function cue(){ if (side) side.classList.toggle("is-more", list.scrollHeight - list.clientHeight - list.scrollTop > 4); }
     list.addEventListener("scroll", cue, { passive: true });
@@ -3381,48 +3810,56 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <section id="markets">
   <div class="grp"><h2><span lang="nl">Markten</span><span lang="en">Markets</span></h2></div>
 
-  <!-- the board: the instruments set like a desk board, and nothing a desk
-       board would show next to them. Each group is a credit row on the reel's
-       axis (the label right of the gutter, the rows left of it); every row
-       ends on a hairline, and every group closes on a dashed level -- the
-       liquidity line of the opening spread, run across the strip. The one
-       mono voice is the ticker, and only where the client gave one: NQ, ES,
-       XAUUSD. No price, no change, no dash where a number would sit. -->
-  <dl class="board" data-stagger="70">
-    <div class="board__grp">
-      <dt class="reveal"><span lang="nl">Indices</span><span lang="en">Indices</span></dt>
-      <dd class="reveal"><span class="board__name">Nasdaq</span><span class="num">NQ</span></dd>
-      <dd class="reveal"><span class="board__name">S&amp;P&nbsp;500</span><span class="num">ES</span></dd>
-      <dd class="reveal"><span class="board__name">Dow Jones</span></dd>
-      <div class="board__level reveal draw" aria-hidden="true"></div>
-    </div>
-    <div class="board__grp">
-      <dt class="reveal"><span lang="nl">Metalen</span><span lang="en">Metals</span></dt>
-      <dd class="reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><span class="num">XAUUSD</span></dd>
-      <dd class="reveal"><span class="board__name"><span lang="nl">Zilver</span><span lang="en">Silver</span></span></dd>
-      <div class="board__level reveal draw" aria-hidden="true"></div>
-    </div>
-    <div class="board__grp">
-      <dt class="reveal"><span lang="nl">Energie</span><span lang="en">Energy</span></dt>
-      <dd class="reveal"><span class="board__name"><span lang="nl">Olie</span><span lang="en">Oil</span></span></dd>
-      <div class="board__level reveal draw" aria-hidden="true"></div>
-    </div>
-    <div class="board__grp">
-      <dt class="reveal"><span lang="nl">Crypto</span><span lang="en">Crypto</span></dt>
-      <dd class="reveal"><span class="board__name">Bitcoin</span></dd>
-      <dd class="reveal"><span class="board__name">Altcoins</span></dd>
-      <div class="board__level reveal draw" aria-hidden="true"></div>
-    </div>
+  <!-- the board: the instruments set like a desk board, with everything a
+       desk board would show next to them left off. One row per group on
+       the reel's axis (the label right of the gutter, the instruments left
+       of it, three across, on the label's baseline), a hairline under each
+       row, and the ticker in the mono beside the name -- only where the
+       client gave one: NQ, ES, XAUUSD. No price, no change, no dash where a
+       number would sit. The dl carries its own stagger so the names arrive
+       one after another across the rows, like a board filling. -->
+  <dl class="pairs board" data-stagger="55">
+    <dt class="reveal">Indices</dt>
+    <dd>
+      <ul class="cols">
+        <li class="reveal"><span class="board__name">Nasdaq</span><b class="num">NQ</b></li>
+        <li class="reveal"><span class="board__name">S&amp;P&nbsp;500</span><b class="num">ES</b></li>
+        <li class="reveal"><span class="board__name">Dow Jones</span></li>
+      </ul>
+    </dd>
+    <dt class="reveal"><span lang="nl">Metalen</span><span lang="en">Metals</span></dt>
+    <dd>
+      <ul class="cols">
+        <li class="reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><b class="num">XAUUSD</b></li>
+        <li class="reveal"><span class="board__name"><span lang="nl">Zilver</span><span lang="en">Silver</span></span></li>
+      </ul>
+    </dd>
+    <dt class="reveal"><span lang="nl">Energie</span><span lang="en">Energy</span></dt>
+    <dd>
+      <ul class="cols">
+        <li class="reveal"><span class="board__name"><span lang="nl">Olie</span><span lang="en">Oil</span></span></li>
+      </ul>
+    </dd>
+    <dt class="reveal">Crypto</dt>
+    <dd>
+      <ul class="cols">
+        <li class="reveal"><span class="board__name">Bitcoin</span></li>
+        <li class="reveal"><span class="board__name">Altcoins</span></li>
+      </ul>
+    </dd>
   </dl>
+  <!-- read after the board, on the board's own column line -->
   <div class="board__note">
-    <p class="reveal"><span lang="nl">De markten waar het in de server over gaat. Geen koersen, geen verschillen.</span><span lang="en">The markets the server is about. No prices, no changes.</span></p>
+    <p class="reveal"><span lang="nl">De markten waar het in de server over gaat. Zonder koersen: dit is een lijst, geen feed.</span><span lang="en">The markets the server is about. No prices: this is a list, not a feed.</span></p>
   </div>
 
   <div class="grp" id="live"><h2>Live</h2></div>
+  <!-- one credit, the reel's own: what happens, and under it where and
+       when -- which is announced in the server and nowhere else, so
+       nothing here is a time -->
   <dl class="pairs">
-    <dt><span lang="nl">Wat</span><span lang="en">What</span></dt><dd><span lang="nl">Live trading door de oprichter</span><span lang="en">Live trading by the founder</span></dd>
-    <dt><span lang="nl">Waar</span><span lang="en">Where</span></dt><dd><span lang="nl">In de server</span><span lang="en">In the server</span></dd>
-    <dt><span lang="nl">Wanneer</span><span lang="en">When</span></dt><dd><span lang="nl">Wordt daar aangekondigd</span><span lang="en">Announced there</span></dd>
+    <dt><span lang="nl">Wat</span><span lang="en">What</span></dt>
+    <dd><span lang="nl">De oprichter handelt live</span><span lang="en">The founder trades live</span><small><span lang="nl">In de server, op tijden die daar worden aangekondigd.</span><span lang="en">In the server, at times announced there.</span></small></dd>
   </dl>
 
   <div class="interstitial">
@@ -3545,58 +3982,56 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   </p>
 
   <!-- the ledger: six credits in date order, first to last, on the reel's
-       one axis. Under each row a level -- a dashed hairline, the way a chart
-       marks a liquidity line -- running to the row's number at the right,
-       where a chart keeps its price axis. The numbers count rows; the lines
-       carry no value. The same numbers are on the certificates below. -->
-  <ol class="ledger" data-stagger="70">
-    <li>
-      <span class="ledger__firm reveal">Funded Trading Plus</span>
-      <div class="ledger__val reveal"><span lang="nl">Funded trading account</span><span lang="en">Funded trading account</span><small><span lang="nl">10 juli 2023</span><span lang="en">10 July 2023</span></small></div>
-      <span class="ledger__lv reveal wipe" aria-hidden="true"></span>
-      <b class="ledger__n reveal" aria-hidden="true">01</b>
-    </li>
-    <li>
-      <span class="ledger__firm reveal">FundingPips</span>
-      <div class="ledger__val reveal"><span lang="nl">Negen fase-certificaten</span><span lang="en">Nine phase certificates</span><small>$3,844.80 &middot; $4,820.80 &middot; $6,209.60 &middot; $1,244.80</small></div>
-      <span class="ledger__lv reveal wipe" aria-hidden="true"></span>
-      <b class="ledger__n reveal" aria-hidden="true">02</b>
-    </li>
-    <li>
-      <span class="ledger__firm reveal">FTMO</span>
-      <div class="ledger__val reveal"><span lang="nl">Challenge en Verification</span><span lang="en">Challenge and Verification</span><small>Rewards $3,381.37 &middot; $2,498.72</small></div>
-      <span class="ledger__lv reveal wipe" aria-hidden="true"></span>
-      <b class="ledger__n reveal" aria-hidden="true">03</b>
-    </li>
-    <li>
-      <span class="ledger__firm reveal">Topstep</span>
-      <div class="ledger__val reveal"><span lang="nl">Trading Combine, 23 keer</span><span lang="en">Trading Combine, 23 times</span><small><span lang="nl">14 uitbetalingen &middot; dec 2025 &ndash; mei 2026</span><span lang="en">14 payouts &middot; Dec 2025 &ndash; May 2026</span></small></div>
-      <span class="ledger__lv reveal wipe" aria-hidden="true"></span>
-      <b class="ledger__n reveal" aria-hidden="true">04</b>
-    </li>
-    <li>
-      <span class="ledger__firm reveal">Lucid Trading</span>
-      <div class="ledger__val reveal">Funded accounts<small><span lang="nl">Uitbetalingen</span><span lang="en">Payouts</span> $5,181 &middot; $2,523</small></div>
-      <span class="ledger__lv reveal wipe" aria-hidden="true"></span>
-      <b class="ledger__n reveal" aria-hidden="true">05</b>
-    </li>
-    <li>
-      <span class="ledger__firm reveal">FundedNext Futures</span>
-      <div class="ledger__val reveal">Champion Trader &middot; Rising Trader<small><span lang="nl">augustus 2026</span><span lang="en">August 2026</span></small></div>
-      <span class="ledger__lv reveal wipe" aria-hidden="true"></span>
-      <b class="ledger__n reveal" aria-hidden="true">06</b>
-    </li>
-  </ol>
+       one axis. The strip's left edge is the time axis; each row is a tick
+       off it -- the row's number in mono at the axis, a dashed level (the
+       liquidity line of the opening schema) running from the number to the
+       firm's name at the gutter -- and what was earned takes the value
+       column on the same baseline. The two years already on the page
+       bracket the label column, first and last, the way an axis carries
+       its first and last figure. The numbers count rows and nothing else;
+       the levels carry no value. The same numbers are on the certificates
+       below. -->
+  <div class="ledger" data-stagger="70">
+    <p class="ledger__axis ledger__axis--from reveal" aria-hidden="true"><time>2023</time></p>
+    <ol class="ledger__rows">
+      <li>
+        <span class="ledger__tick"><b class="ledger__n reveal" aria-hidden="true">01</b><i class="ledger__lv reveal draw" aria-hidden="true"></i><span class="ledger__firm reveal">Funded Trading Plus</span></span>
+        <div class="ledger__val reveal"><span lang="nl">Funded trading account</span><span lang="en">Funded trading account</span><small><span lang="nl">10 juli 2023</span><span lang="en">10 July 2023</span></small></div>
+      </li>
+      <li>
+        <span class="ledger__tick"><b class="ledger__n reveal" aria-hidden="true">02</b><i class="ledger__lv reveal draw" aria-hidden="true"></i><span class="ledger__firm reveal">FundingPips</span></span>
+        <div class="ledger__val reveal"><span lang="nl">Negen fase-certificaten</span><span lang="en">Nine phase certificates</span><small>$3,844.80 &middot; $4,820.80 &middot; $6,209.60 &middot; $1,244.80</small></div>
+      </li>
+      <li>
+        <span class="ledger__tick"><b class="ledger__n reveal" aria-hidden="true">03</b><i class="ledger__lv reveal draw" aria-hidden="true"></i><span class="ledger__firm reveal">FTMO</span></span>
+        <div class="ledger__val reveal"><span lang="nl">Challenge en Verification</span><span lang="en">Challenge and Verification</span><small>Rewards $3,381.37 &middot; $2,498.72</small></div>
+      </li>
+      <li>
+        <span class="ledger__tick"><b class="ledger__n reveal" aria-hidden="true">04</b><i class="ledger__lv reveal draw" aria-hidden="true"></i><span class="ledger__firm reveal">Topstep</span></span>
+        <div class="ledger__val reveal"><span lang="nl">Trading Combine, 23 keer</span><span lang="en">Trading Combine, 23 times</span><small><span lang="nl">14 uitbetalingen &middot; dec 2025 &ndash; mei 2026</span><span lang="en">14 payouts &middot; Dec 2025 &ndash; May 2026</span></small></div>
+      </li>
+      <li>
+        <span class="ledger__tick"><b class="ledger__n reveal" aria-hidden="true">05</b><i class="ledger__lv reveal draw" aria-hidden="true"></i><span class="ledger__firm reveal">Lucid Trading</span></span>
+        <div class="ledger__val reveal">Funded accounts<small><span lang="nl">Uitbetalingen</span><span lang="en">Payouts</span> $5,181 &middot; $2,523</small></div>
+      </li>
+      <li>
+        <span class="ledger__tick"><b class="ledger__n reveal" aria-hidden="true">06</b><i class="ledger__lv reveal draw" aria-hidden="true"></i><span class="ledger__firm reveal">FundedNext Futures</span></span>
+        <div class="ledger__val reveal">Champion Trader &middot; Rising Trader<small><span lang="nl">augustus 2026</span><span lang="en">August 2026</span></small></div>
+      </li>
+    </ol>
+    <p class="ledger__axis ledger__axis--to reveal" aria-hidden="true"><time>2026</time></p>
+  </div>
 
   <!-- the evidence: the same six, in the same order, numbered as the rows
-       are. Monochrome until pointed at; a click opens the untouched original. -->
+       are, printed as plates on one mat. Monochrome until pointed at; a
+       tap opens the untouched original. -->
   <p class="proofs-hint">
     <span class="proofs-hint__t"><span lang="nl">Zes certificaten, op datum</span><span lang="en">Six certificates, in date order</span></span>
     <span class="proofs-hint__n"><span lang="nl">Tik op een certificaat voor het origineel.</span><span lang="en">Tap a certificate for the original.</span></span>
   </p>
   <div class="proofs" data-stagger="90">
     <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><img src="assets/proof/ftp-200k.webp" alt="Funded Trading Plus &mdash; Funded trading account" loading="lazy" decoding="async"></button>
+      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/ftp-200k.webp" alt="Funded Trading Plus &mdash; Funded trading account" loading="lazy" decoding="async" width="880" height="622"></span></button>
       <figcaption class="reveal"><b>01</b>
         <span><span class="firm">Funded Trading Plus</span>
           <small><span lang="nl">Funded trading account &middot; 10 juli 2023</span><span lang="en">Funded trading account &middot; 10 July 2023</span></small>
@@ -3604,7 +4039,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       </figcaption>
     </figure>
     <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><img src="assets/proof/fpips-reward.webp" alt="FundingPips &mdash; Performance rewards" loading="lazy" decoding="async"></button>
+      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/fpips-reward.webp" alt="FundingPips &mdash; Performance rewards" loading="lazy" decoding="async" width="900" height="606"></span></button>
       <figcaption class="reveal"><b>02</b>
         <span><span class="firm">FundingPips</span>
           <small><span lang="nl">Performance rewards &middot; mei en juni 2024. Het ROI-cijfer onderaan is het rendement op de inschrijfkosten, niet op de rekening.</span><span lang="en">Performance rewards &middot; May and June 2024. The ROI figure at the foot is the return on the entry fee, not on the account.</span></small>
@@ -3612,7 +4047,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       </figcaption>
     </figure>
     <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><img src="assets/proof/ftmo-chal.webp" alt="FTMO &mdash; Challenge passed" loading="lazy" decoding="async"></button>
+      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/ftmo-chal.webp" alt="FTMO &mdash; Challenge passed" loading="lazy" decoding="async" width="760" height="760"></span></button>
       <figcaption class="reveal"><b>03</b>
         <span><span class="firm">FTMO</span>
           <small><span lang="nl">Challenge behaald &middot; 26 oktober 2025</span><span lang="en">Challenge passed &middot; 26 October 2025</span></small>
@@ -3620,7 +4055,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       </figcaption>
     </figure>
     <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><img src="assets/proof/topstep-payout.webp" alt="Topstep &mdash; Proof of Payout" loading="lazy" decoding="async"></button>
+      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/topstep-payout.webp" alt="Topstep &mdash; Proof of Payout" loading="lazy" decoding="async" width="760" height="760"></span></button>
       <figcaption class="reveal"><b>04</b>
         <span><span class="firm">Topstep</span>
           <small><span lang="nl">Proof of Payout &middot; 8 januari 2026</span><span lang="en">Proof of Payout &middot; 8 January 2026</span></small>
@@ -3628,7 +4063,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       </figcaption>
     </figure>
     <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><img src="assets/proof/lucid-payout.webp" alt="Lucid Trading &mdash; Payout certificate" loading="lazy" decoding="async"></button>
+      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/lucid-payout.webp" alt="Lucid Trading &mdash; Payout certificate" loading="lazy" decoding="async" width="880" height="621"></span></button>
       <figcaption class="reveal"><b>05</b>
         <span><span class="firm">Lucid Trading</span>
           <small><span lang="nl">Payout certificate &middot; 7 augustus 2026</span><span lang="en">Payout certificate &middot; 7 August 2026</span></small>
@@ -3636,7 +4071,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       </figcaption>
     </figure>
     <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><img src="assets/proof/fnext-rising.webp" alt="FundedNext Futures &mdash; Rising Trader" loading="lazy" decoding="async"></button>
+      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/fnext-rising.webp" alt="FundedNext Futures &mdash; Rising Trader" loading="lazy" decoding="async" width="868" height="603"></span></button>
       <figcaption class="reveal"><b>06</b>
         <span><span class="firm">FundedNext Futures</span>
           <small><span lang="nl">Rising Trader &middot; 14 augustus 2026</span><span lang="en">Rising Trader &middot; 14 August 2026</span></small>
@@ -3700,19 +4135,26 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <section id="access">
   <div class="grp"><h2><span lang="nl">Toegang</span><span lang="en">Access</span></h2></div>
 
-  <!-- Two levels on the one axis. The label column is the chart's margin,
-       the gutter is its scale, and the two labels sit on it the way a price
-       tag sits on a level. Right of the axis, what each level holds. The
-       open level is a hairline with the path riding it; the one that opens
-       later is dashed -- the level is drawn, nothing runs through it yet.
-       Schema only: no price, no day, no instrument. -->
+  <!-- The two ways in, as two levels on the reel's one axis -- not two
+       columns of a price table. The label column is the chart's margin and
+       the gutter is its price axis: each tag sits on the axis the way a
+       level is tagged, its level drawn out to the left from the strip's
+       edge in the hairline gold of the spread's plate. The open level is
+       the one the path has reached: it comes in low from the margin,
+       climbs in two legs and holds the level to the tag. The level that
+       opens later is drawn and not yet run through -- the dashed
+       liquidity line of the spread; point at its link and it draws itself
+       solid. Right of the axis, on the value column with every other
+       credit: what the level holds, one line under it, the link. The open
+       level carries the one call of the screen; the other a quiet link.
+       Nothing here is a price, a day or an instrument; the caption says
+       so. -->
   <div class="levels" data-stagger="110">
-   <div class="levels__grid">
     <div class="level level--now">
       <div class="level__scale">
-        <svg class="level__fig reveal trace" viewBox="0 0 300 32" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-          <line class="fig__level" x1="0" y1="16" x2="300" y2="16"/>
-          <path class="fig__line" pathLength="1" d="M0 27 34 24 60 28 96 20 122 24 156 16 170 19 184 16 300 16"/>
+        <svg class="level__fig reveal trace" viewBox="0 0 300 84" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <line class="fig__level" x1="0" y1="12" x2="300" y2="12"/>
+          <path class="fig__line" pathLength="1" d="M0 74 12 71 20 77 34 69 46 73 58 66 70 70 80 64 94 46 100 52 112 38 126 30 134 36 150 16 158 20 168 12 180 9.5 190 13 210 11 232 13.5 256 11 280 13 300 12"/>
         </svg>
         <span class="level__tag reveal"><span lang="nl">Nu</span><span lang="en">Now</span></span>
       </div>
@@ -3727,17 +4169,18 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       <div class="level__scale">
         <svg class="level__fig reveal draw" height="32" aria-hidden="true" focusable="false">
           <line class="fig__level fig__level--open" x1="0" y1="16" x2="100%" y2="16"/>
+          <line class="fig__level fig__level--set" x1="0" y1="16" x2="100%" y2="16" pathLength="1"/>
         </svg>
         <span class="level__tag reveal"><span lang="nl">Later</span><span lang="en">Later</span></span>
       </div>
       <div class="level__body reveal">
-        <p class="level__value"><span lang="nl">Premium opent</span><span lang="en">Premium opens</span></p>
-        <p class="level__note"><span lang="nl">Zes kanalen erbij. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Six more channels. Price and date are announced in the server.</span></p>
+        <p class="level__value"><span lang="nl">Premium</span><span lang="en">Premium</span></p>
+        <p class="level__note"><span lang="nl">Zes kanalen erbij zodra het opent. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Six more channels once it opens. The price and the date will be announced in the server.</span></p>
         <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Volg het in de server</span><span lang="en">Follow it in the server</span></a>
       </div>
     </div>
-   </div>
-   <p class="levels__cap reveal"><span lang="nl">Twee niveaus, schematisch</span><span lang="en">Two levels, as a schema</span></p>
+
+    <p class="levels__cap reveal"><span lang="nl">Twee niveaus, schematisch</span><span lang="en">Two levels, as a schema</span></p>
   </div>
 </section>
 <!-- /section:access -->
@@ -3749,32 +4192,36 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
      standing on the line -- the price path of the opening plate, run
      across the whole page as a rule. The line comes in from the left
      margin, the word rises out of it, and at the right, under the line,
-     the path does its last move: two equal lows on a dashed level, one
-     sweep beneath it, and back up to the line as it leaves the page --
-     the session is over; except that it turns up and goes on, which is
-     what the sub-line says. No price, no day, no outcome; the one label
-     names the level and says so. Everything in the figure is placed in
-     em of the display size, so the drawing is the same drawing at every
-     width. The sub-line and the one call hang under the word on the
-     axis; on a phone they wait below the figure. -->
+     the path does its last move: a fall in two legs, two equal lows on a
+     dashed level, one sweep beneath it, and back up to the line in three
+     legs as it leaves the page -- the session is over; except that it
+     turns up and goes on, which is what the sub-line says. No price, no
+     day, no outcome; the one caption says the figure is a schema.
+     Everything in the figure is placed in em of the display size, so the
+     drawing is the same drawing at every width. The sub-line and the one
+     call hang under the word on the axis; on a phone they wait below the
+     figure. The whole card is one sequence: the line first, the word out
+     of it, then the sentence and the call. -->
 <section class="leader" id="closer">
-  <div class="card">
-    <p class="end__row" data-stagger="120">
+  <div class="card" data-stagger="120">
+    <p class="end__row">
       <span class="mask"><span class="end__word reveal" data-at="300"><span lang="nl">Einde</span><span lang="en">The End</span></span></span>
       <span class="end__fig reveal trace" data-at="0" aria-hidden="true">
         <!-- data-parallax="0": the figure is the word's ground and does
              not drift (motion.js would otherwise give the first svg of
-             the end card a lag of its own) -->
-        <svg class="fig" viewBox="0 0 260 50" data-parallax="0" aria-hidden="true" focusable="false">
-          <path class="fig__line" pathLength="1" d="M-900 0 H0 L24 0 40 3 52 9 62 6 76 16 86 12 100 24 110 20 122 30 132 24 146 30 156 23 168 40 178 28 190 20 200 24 214 12 224 15 240 5 252 1 260 0"/>
+             the end card a lag of its own). The flat run starts far left
+             of the box so it reaches the viewport's edge on any screen;
+             .page clips it there. -->
+        <svg class="fig" viewBox="0 0 320 50" data-parallax="0" aria-hidden="true" focusable="false">
+          <path class="fig__line" pathLength="1" d="M-2400 0 H0 L28 0 58 14 70 9 96 24 106 20 118 30 134 20 148 30 160 41 178 22 190 27 214 10 226 14 254 4 280 1 320 0"/>
         </svg>
         <i class="end__lvl"></i>
         <i class="end__tag"><span lang="nl">Liquiditeit, schematisch</span><span lang="en">Liquidity, as a schema</span></i>
       </span>
     </p>
-    <div class="end__col" data-stagger="140">
-      <p class="subtitle reveal"><span lang="nl">Behalve in de server. Daar begint het.</span><span lang="en">Except in the server. That is where it starts.</span></p>
-      <a class="cta solid reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
+    <div class="end__col">
+      <p class="subtitle reveal" data-at="420"><span lang="nl">Behalve in de server. Daar begint het.</span><span lang="en">Except in the server. That is where it starts.</span></p>
+      <a class="cta solid reveal" data-at="560" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
     </div>
   </div>
 </section>
@@ -3783,7 +4230,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
      two lines that go under everything on this page -- the risk line and
      the past-performance line, each on its own line, exactly as they read
      in the record. The clock is written by motion.js into [data-clock];
-     without a script the line is not shown at all. -->
+     without a script (or without a time) the line is not shown at all. -->
 <footer data-stagger="90">
   <div class="inner">
     <div class="fgrid">

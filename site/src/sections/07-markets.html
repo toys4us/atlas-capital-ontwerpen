@@ -1,48 +1,56 @@
 <section id="markets">
   <div class="grp"><h2><span lang="nl">Markten</span><span lang="en">Markets</span></h2></div>
 
-  <!-- the board: the instruments set like a desk board, and nothing a desk
-       board would show next to them. Each group is a credit row on the reel's
-       axis (the label right of the gutter, the rows left of it); every row
-       ends on a hairline, and every group closes on a dashed level -- the
-       liquidity line of the opening spread, run across the strip. The one
-       mono voice is the ticker, and only where the client gave one: NQ, ES,
-       XAUUSD. No price, no change, no dash where a number would sit. -->
-  <dl class="board" data-stagger="70">
-    <div class="board__grp">
-      <dt class="reveal"><span lang="nl">Indices</span><span lang="en">Indices</span></dt>
-      <dd class="reveal"><span class="board__name">Nasdaq</span><span class="num">NQ</span></dd>
-      <dd class="reveal"><span class="board__name">S&amp;P&nbsp;500</span><span class="num">ES</span></dd>
-      <dd class="reveal"><span class="board__name">Dow Jones</span></dd>
-      <div class="board__level reveal draw" aria-hidden="true"></div>
-    </div>
-    <div class="board__grp">
-      <dt class="reveal"><span lang="nl">Metalen</span><span lang="en">Metals</span></dt>
-      <dd class="reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><span class="num">XAUUSD</span></dd>
-      <dd class="reveal"><span class="board__name"><span lang="nl">Zilver</span><span lang="en">Silver</span></span></dd>
-      <div class="board__level reveal draw" aria-hidden="true"></div>
-    </div>
-    <div class="board__grp">
-      <dt class="reveal"><span lang="nl">Energie</span><span lang="en">Energy</span></dt>
-      <dd class="reveal"><span class="board__name"><span lang="nl">Olie</span><span lang="en">Oil</span></span></dd>
-      <div class="board__level reveal draw" aria-hidden="true"></div>
-    </div>
-    <div class="board__grp">
-      <dt class="reveal"><span lang="nl">Crypto</span><span lang="en">Crypto</span></dt>
-      <dd class="reveal"><span class="board__name">Bitcoin</span></dd>
-      <dd class="reveal"><span class="board__name">Altcoins</span></dd>
-      <div class="board__level reveal draw" aria-hidden="true"></div>
-    </div>
+  <!-- the board: the instruments set like a desk board, with everything a
+       desk board would show next to them left off. One row per group on
+       the reel's axis (the label right of the gutter, the instruments left
+       of it, three across, on the label's baseline), a hairline under each
+       row, and the ticker in the mono beside the name -- only where the
+       client gave one: NQ, ES, XAUUSD. No price, no change, no dash where a
+       number would sit. The dl carries its own stagger so the names arrive
+       one after another across the rows, like a board filling. -->
+  <dl class="pairs board" data-stagger="55">
+    <dt class="reveal">Indices</dt>
+    <dd>
+      <ul class="cols">
+        <li class="reveal"><span class="board__name">Nasdaq</span><b class="num">NQ</b></li>
+        <li class="reveal"><span class="board__name">S&amp;P&nbsp;500</span><b class="num">ES</b></li>
+        <li class="reveal"><span class="board__name">Dow Jones</span></li>
+      </ul>
+    </dd>
+    <dt class="reveal"><span lang="nl">Metalen</span><span lang="en">Metals</span></dt>
+    <dd>
+      <ul class="cols">
+        <li class="reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><b class="num">XAUUSD</b></li>
+        <li class="reveal"><span class="board__name"><span lang="nl">Zilver</span><span lang="en">Silver</span></span></li>
+      </ul>
+    </dd>
+    <dt class="reveal"><span lang="nl">Energie</span><span lang="en">Energy</span></dt>
+    <dd>
+      <ul class="cols">
+        <li class="reveal"><span class="board__name"><span lang="nl">Olie</span><span lang="en">Oil</span></span></li>
+      </ul>
+    </dd>
+    <dt class="reveal">Crypto</dt>
+    <dd>
+      <ul class="cols">
+        <li class="reveal"><span class="board__name">Bitcoin</span></li>
+        <li class="reveal"><span class="board__name">Altcoins</span></li>
+      </ul>
+    </dd>
   </dl>
+  <!-- read after the board, on the board's own column line -->
   <div class="board__note">
-    <p class="reveal"><span lang="nl">De markten waar het in de server over gaat. Geen koersen, geen verschillen.</span><span lang="en">The markets the server is about. No prices, no changes.</span></p>
+    <p class="reveal"><span lang="nl">De markten waar het in de server over gaat. Zonder koersen: dit is een lijst, geen feed.</span><span lang="en">The markets the server is about. No prices: this is a list, not a feed.</span></p>
   </div>
 
   <div class="grp" id="live"><h2>Live</h2></div>
+  <!-- one credit, the reel's own: what happens, and under it where and
+       when -- which is announced in the server and nowhere else, so
+       nothing here is a time -->
   <dl class="pairs">
-    <dt><span lang="nl">Wat</span><span lang="en">What</span></dt><dd><span lang="nl">Live trading door de oprichter</span><span lang="en">Live trading by the founder</span></dd>
-    <dt><span lang="nl">Waar</span><span lang="en">Where</span></dt><dd><span lang="nl">In de server</span><span lang="en">In the server</span></dd>
-    <dt><span lang="nl">Wanneer</span><span lang="en">When</span></dt><dd><span lang="nl">Wordt daar aangekondigd</span><span lang="en">Announced there</span></dd>
+    <dt><span lang="nl">Wat</span><span lang="en">What</span></dt>
+    <dd><span lang="nl">De oprichter handelt live</span><span lang="en">The founder trades live</span><small><span lang="nl">In de server, op tijden die daar worden aangekondigd.</span><span lang="en">In the server, at times announced there.</span></small></dd>
   </dl>
 
   <div class="interstitial">

@@ -9,12 +9,22 @@
 
    At the top of the page the bar is transparent and 52px tall: the spread
    owns the fold, and the bar is its frame. Once the visitor has moved it
-   lifts 8px (a transform, so the document never reflows), takes its glass
-   and its blur, and draws the one hairline under itself. The anchor whose
-   section holds the upper part of the viewport carries a dashed gold
-   hairline under the word: the liquidity line of the figure, the width of
-   the word, drawn from the left; the chosen language carries the solid
-   one. Both are rules under words, so the bar has one idiom.
+   lifts 8px (a transform, so the document never reflows), takes its
+   ground, and its one hairline draws itself under it from the left, the
+   way every rule on the page is drawn. The ground is the page's own
+   black, a shade short of opaque, with the glass declared for the
+   browsers that honour it: a backdrop blur inside .page never renders in
+   Chromium (the isolation on .page makes it the backdrop root and the
+   scrolled content is not in it), and a bar that is see-through without
+   its blur shows sharp type passing under it, which reads as a fault.
+
+   The anchors are levels. The one whose section holds the upper part of
+   the viewport carries the figure's liquidity line under the word -- the
+   3-on-5 dashed hairline every section draws its levels with, in the
+   gold, the width of the word, drawn from the left. Pointing at another
+   draws the same line under it in the label grey: a level being watched,
+   not the one in play. The chosen language carries the solid rule. All
+   of them are rules under words, so the bar has one idiom.
 
    One gold call per viewport, always. While the spread's (or the end
    card's) is on screen the link here is quiet: one word in the label grey
@@ -25,31 +35,46 @@
    of the two and nothing beside it moves. Without JavaScript it stays
    quiet, and the spread's call is the one.
 
-   Narrower than the full row the anchors live in a drawer under the bar:
-   the four sections set as levels -- the reel number in mono at the left
-   like a price on an axis, the name in the serif -- one hairline between
-   each, the current one's a dashed gold line. On a phone the switch goes
-   in with them and the bar is three things: the name, the call, Menu. */
+   Narrower than the full row the anchors live in a drawer under the bar,
+   on the page's own black: the four sections set as levels -- the name in
+   the serif at credit size, a hairline under it, and on the right gutter,
+   where the spread's labels sit like the axis of a chart, the reel number
+   in mono. The current one's hairline is the liquidity line and its
+   number is in the gold; the one under the pointer (or the keyboard) is a
+   zone, the fair value gap band of the figure, and the band is the ring.
+   The switch and the one social link take the last line. On a phone the
+   bar is three things: the name, the call, Menu. */
 #header{
   --bar:var(--hdr-h);                 /* the visible height of the bar    */
   --lift:8px;                          /* what it loses once scrolled      */
+  --level:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,rgba(215,179,100,0) 3px 8px);
+  --level-watch:repeating-linear-gradient(90deg,var(--ink-4) 0 3px,rgba(110,111,116,0) 3px 8px);
+  --band:rgba(215,179,100,.07);        /* the fair value gap band          */
+  --band-edge:rgba(215,179,100,.36);
   position:sticky;top:0;z-index:50;
   padding:0 var(--gutter);
   background:var(--bg);
-  border-bottom:1px solid var(--line-2);
-  /* no backdrop-filter at rest, not even blur(0): a backdrop root over the
-     grain's screen blend lifts the band a shade. none interpolates. */
-  transition:transform .5s var(--e-out),background-color .35s var(--e-out),border-color .35s var(--e-out),
-             -webkit-backdrop-filter .35s var(--e-out),backdrop-filter .35s var(--e-out);
+  transition:transform .5s var(--e-out),background-color .35s var(--e-out);
 }
-.js #header.is-top{background:rgba(8,9,11,0);border-bottom-color:transparent}
+/* the hairline: drawn from the left once the page has moved, gone again
+   at the top; simply there without JavaScript */
+#header::after{
+  content:"";
+  position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--line-2);
+  transform-origin:left center;
+  transition:transform .7s var(--e-out);
+}
+.js #header.is-top{background:rgba(8,9,11,0)}
+.js #header.is-top::after{transform:scaleX(0)}
 .js #header:not(.is-top){
   --bar:calc(var(--hdr-h) - var(--lift));
   transform:translateY(calc(-1 * var(--lift)));
-  background:var(--bg-glass);
+  background:rgba(8,9,11,.97);
   -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
 }
-.js #header.is-open{background:rgba(8,9,11,.96);border-bottom-color:var(--line-2);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+.js #header.is-open{background:var(--bg);-webkit-backdrop-filter:none;backdrop-filter:none}
+.js #header.is-open::after{transform:none}
 
 /* the row: a grid, the call in an auto track between equal flexible ones */
 #header .inner{
@@ -152,61 +177,80 @@
     font-family:var(--f-display);font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;line-height:1;
     color:var(--ink-3);white-space:nowrap;
   }
+  #header .nav .n{display:none}
   #header .foot{display:flex;align-items:center;gap:22px;margin-left:auto}
-  /* with it, a panel under the bar, the height of what is left of the screen */
+  /* with it, a panel under the bar, the height of what is left of the
+     screen, on the page's own black: nothing passes under a menu */
   .js #header .nav{
+    --bleed:12px;                                   /* the band past the text */
     display:none;
     position:absolute;left:0;right:0;top:100%;
     height:calc(100vh - var(--bar));height:calc(100svh - var(--bar));
-    padding:clamp(18px,4vh,40px) var(--gutter) clamp(18px,3vh,28px);
+    padding:clamp(22px,5vh,48px) var(--gutter) clamp(18px,3vh,28px);
     flex-direction:column;flex-wrap:nowrap;align-items:stretch;
-    background:rgba(8,9,11,.96);
-    -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
-    overflow:auto;overscroll-behavior:contain;
+    background:var(--bg);
+    overflow:auto;overscroll-behavior:contain;touch-action:pan-y;
     clip-path:inset(0 0 100% 0);
     transition:clip-path .6s var(--e-out);
   }
   .js #header .nav.is-open{display:flex}
   .js #header .nav.is-in{clip-path:inset(0)}
-  .js #header .lv{display:block;max-width:560px}
-  /* the levels: the number on the axis, the name, a hairline under each */
+  .js #header .lv{display:block}
+  /* the levels: the name, the number on the gutter, a hairline under each */
   .js #header .nav a[href^="#"]{
-    position:relative;
-    display:flex;align-items:baseline;gap:clamp(16px,3vw,24px);
-    padding:clamp(14px,2.4vh,20px) 0;
-    font-family:var(--f-display);font-size:clamp(26px,4.6vw,34px);font-weight:400;
+    position:relative;z-index:0;
+    display:flex;align-items:baseline;justify-content:space-between;gap:clamp(16px,3vw,24px);
+    margin:0 calc(-1 * var(--bleed));
+    padding:clamp(16px,2.8vh,24px) var(--bleed);
+    font-family:var(--f-display);font-size:clamp(27px,4.8vw,34px);font-weight:400;
     letter-spacing:-.008em;text-transform:none;line-height:1.1;
     color:var(--ink-1);white-space:nowrap;
-    border-bottom:1px solid var(--line-1);
     transform:translateY(16px);
-    transition:transform .8s var(--e-reveal),color .3s var(--e-out),border-color .3s var(--e-out);
+    transition:transform .8s var(--e-reveal),color .3s var(--e-out);
   }
   .js #header .nav.is-in a[href^="#"]{transform:none}
   .js #header .lv--l a:nth-child(2){transition-delay:.06s}
   .js #header .lv--r a:nth-child(1){transition-delay:.12s}
   .js #header .lv--r a:nth-child(2){transition-delay:.18s}
-  .js #header .nav a[href^="#"] .n{
-    display:block;flex:0 0 2.6em;
+  /* the level: a hairline the width of the text, under the row */
+  .js #header .nav a[href^="#"]::before{
+    content:"";position:absolute;left:var(--bleed);right:var(--bleed);bottom:0;height:1px;
+    background:var(--line-1);
+  }
+  /* the band: a layer under the row, lit when the row is pointed at */
+  .js #header .nav a[href^="#"]::after{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:rgba(215,179,100,0);
+    box-shadow:inset 0 1px 0 rgba(215,179,100,0),inset 0 -1px 0 rgba(215,179,100,0);
+    transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out);
+  }
+  .js #header .nav a[href^="#"] .lv__name{min-width:0;transition:color .3s var(--e-out)}
+  .js #header .nav .n{
+    display:block;flex:0 0 auto;
     font-family:var(--f-mono);font-size:var(--t-caption);font-weight:400;letter-spacing:var(--trk-mono);
     font-variant-numeric:tabular-nums;
     color:var(--ink-4);
+    transition:color .3s var(--e-out);
   }
+  .js #header .nav .n:empty{display:none}
   .js #header .nav a[href^="#"]:hover,.js #header .nav a[href^="#"]:focus-visible{color:var(--paper)}
-  .js #header .nav a[href^="#"]:focus-visible{outline-offset:-4px}
-  /* the current one: its hairline is the liquidity line */
-  .js #header .nav a[aria-current]{color:var(--paper);border-bottom-color:transparent}
-  .js #header .nav a[aria-current]::after{
-    content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
-    background:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+  .js #header .nav a[href^="#"]:hover .n,.js #header .nav a[href^="#"]:focus-visible .n{color:var(--ink-2)}
+  .js #header .nav a[href^="#"]:focus-visible{outline:0}        /* the band is the ring */
+  .js #header .nav a[href^="#"]:hover::after,.js #header .nav a[href^="#"]:focus-visible::after{
+    background:var(--band);
+    box-shadow:inset 0 1px 0 var(--band-edge),inset 0 -1px 0 var(--band-edge);
   }
+  /* the current one: its hairline is the liquidity line, its number in the gold */
+  .js #header .nav a[aria-current]{color:var(--paper)}
+  .js #header .nav a[aria-current]::before{background:var(--level)}
   .js #header .nav a[aria-current] .n{color:var(--gold)}
   /* the foot: the switch and the one social link, on the last line */
   .js #header .foot{
-    margin:auto 0 0;max-width:560px;
+    margin:auto 0 0;
     display:flex;align-items:center;justify-content:space-between;gap:22px;
     padding-top:clamp(18px,3vh,28px);
   }
-  .js #header .foot .langsw{gap:10px}
+  .js #header .foot .langsw{gap:10px;margin-left:-6px}
   .js #header .foot .langsw button{padding:8px 6px;font-size:var(--t-caption)}
   .js #header .foot .langsw button::after{left:6px;right:calc(6px + var(--trk-caps))}
   .js #header .tk{
@@ -235,7 +279,7 @@
 @media (min-width:1120px){
   #header .inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto minmax(0,1fr) minmax(0,1fr)}
   #header .nav,#header .foot{display:contents}
-  #header .menu,#header .tk{display:none}
+  #header .menu,#header .tk,#header .n{display:none}
   #header .lv{display:flex;align-items:center;gap:clamp(18px,2.2vw,30px)}
   /* every item pinned to the one row: the flanks come after the call in
      the markup but sit before it, and auto-placement would give them a
@@ -252,17 +296,20 @@
     color:var(--ink-3);white-space:nowrap;
     transition:color .3s var(--e-out);
   }
-  #header .lv a .n{display:none}
-  /* the marker: a dashed hairline the width of the word, drawn from the left */
-  #header .lv a::after{
+  /* two levels under the word, each the width of the word, each drawn from
+     the left: the watched one in the label grey (::after, on hover), the
+     one in play in the gold (::before, the current section), on top */
+  #header .lv a::before,#header .lv a::after{
     content:"";position:absolute;left:0;right:var(--trk-caps);bottom:3px;height:1px;
-    background:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
     transform:scaleX(0);transform-origin:left center;
     transition:transform .55s var(--e-out);
   }
+  #header .lv a::after{background:var(--level-watch)}
+  #header .lv a::before{background:var(--level);z-index:1}
   #header .lv a:hover,#header .lv a:focus-visible{color:var(--paper)}
+  #header .lv a:hover::after{transform:none}
   #header .lv a[aria-current]{color:var(--paper)}
-  #header .lv a[aria-current]::after{transform:none}
+  #header .lv a[aria-current]::before{transform:none}
 }
 
 /* ---- a phone: three things, tighter, the short label in both states ----- */
@@ -271,7 +318,9 @@
   #header .wm{gap:7px}
   #header .wm b{font-size:var(--t-nano);letter-spacing:.16em}
   #header .cta{font-size:var(--t-nano);letter-spacing:.12em}
-  #header .cta .r--l{display:none}
+  /* the full label is kept for the reader and clipped for the eye, and
+     takes no room in the cell; the short row is the one shown */
+  #header .cta .r--l{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
   #header .cta .r--s{padding-left:23px;gap:7px}       /* room for a 16px rule */
   #header .cta .r--s::before{
     content:"";position:absolute;left:0;top:calc(50% - .5px);
@@ -291,6 +340,7 @@
 }
 
 @media (prefers-reduced-motion:reduce){
-  #header,#header .inner,#header .cta .r,#header .cta .r::before,#header .cta .r::after,#header .lv a::after,
-  .js #header .nav,.js #header .nav a[href^="#"]{transition:none}
+  #header,#header::after,#header .inner,#header .cta .r,#header .cta .r::before,#header .cta .r::after,
+  #header .lv a::before,#header .lv a::after,#header .nav .n,
+  .js #header .nav,.js #header .nav a[href^="#"],.js #header .nav a[href^="#"]::after{transition:none}
 }

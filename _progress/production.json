@@ -19,6 +19,21 @@
    "confidence": 0.74,
    "note": "production (E:/ClaudeCode_GUI/atlas-designs/site/src/sections/03-production.html + production.css), wave 1 round 1:\n- Kept the shared dl.pairs axis (label right of the axis in caps, value left of it) so the roll's rhythm holds into founder/education.\n- Under every value a \"level\": a dashed gold hairline (3/5 dash rhythm of the hero plate's liquidity line, --line-3) that starts at the axis and runs to the column's edge, ending on the group rule's line. Nothing drawn down the axis; the label column stays a margin.\n- Rows spaced by padding on dd (row-gap 0) so each level sits exactly betwee",
    "ts": "2026-09-05T19:24:43"
+  },
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.8,
+   "score_ref": 4.3,
+   "wowed": false,
+   "gap": "The production block is a well-set but modest four-row spec list, and its one system (dotted gold leaders running from the frame rule into right-aligned small-cap labels) is thrown away on mobile for a generic centred stack; keep the label/leader logic at 390px (label left in small caps, value on the next line with the leader still terminating at a rule) so the section reads as the same object. Also fix the rhythm details: the \"Discord\" row with its underlined mono URL is taller than the other three and the \"01 PRODUCTIE\" rules start inboard of the vertical frame lines and are not symmetric about the label; at the bar the hairlines meet the frame and every row sits on the same baseline grid.",
+   "motion": "Restrained blur-in fades, staggered row reveals and a nav label that morphs to \"OPEN DE DISCORD\" on scroll; competent, though the hero heading collides with the chart panel mid-scroll.",
+   "verdict": "A wins on discipline: tight small-cap tracking, a considered leader system, a gold accent used once, and no visible bugs, even if the section is essentially a handsome data table rather than a designed moment. B reaches for a mood A never attempts, but unreadable copy, colliding rail labels, a struck-through mobile nav and a dead zone are disqualifying at Site of the Day level.",
+   "confidence": 0.9,
+   "note": "Rebuilt the credits as a ladder: each label is now the tag at the end of a price level — a dashed hairline (3 on / 5 off, line-3, anchored so a dash ends at the label) drawn from the strip's left edge to the label, the same construction the founder's \"10+\" uses once and larger on the next reel, so the four small levels arrive at the big one; they also read as contents-page leaders, i.e. typeset.\nValue column is now type only: removed the four dashed rules under the values (they were brighter than the group rule and read as table borders, five rules in 700px on a phone). Rows are set by the",
+   "ts": "2026-09-05T21:11:16"
   }
  ]
 }

@@ -1,92 +1,83 @@
 /* ===== markets: the board, then live =====
-   The instruments as a desk board with the numbers left off: one row per
-   instrument, the name in the serif at list size, the ticker (where the
-   client gave one) in the mono at the row's right edge, a hairline under
-   each row. Each group is one credit on the reel's axis -- the label right
-   of the gutter, its rows left of it, the two sharing the first baseline
-   like every other credit pair -- and closes on a dashed level run across
-   the whole strip: the liquidity line of the opening spread, used here as
-   the rule between groups. Pointed at, a row becomes the spread's other
-   zone: the gap band, a hair of the gold between two gold hairlines, that
-   overhangs the column the way the box overhangs the line. Nothing on the
-   board can be read as data; the note under it says so, hung on the
-   board's left edge. Live is three plain credits and the reel's own
-   interstitial. */
-#markets .board{position:relative;z-index:2;margin:0}
-#markets .board__grp{
-  display:grid;
-  grid-template-columns:var(--axis-l) var(--axis-r);
-  column-gap:var(--axis-gap);
+   The instruments as a desk board with the numbers left off. The board
+   keeps the reel's axis (base.css dl.pairs): each group is one credit --
+   the label right of the gutter in the label voice, its instruments left
+   of it, three across on the label's baseline at the list size the
+   credits use for a column of names -- and every row closes on one
+   hairline that starts at the axis and runs to the column's edge. Nothing
+   is drawn down the axis; the label column stays a margin. Beside a name,
+   where the client gave one, the ticker in the mono: small, in the label
+   grey, the one thing on the board that is counted. No price, no change,
+   no dash where a number would sit -- the note under the board, on the
+   board's own column line, says so.
+
+   The spread's vocabulary as furniture, and no more of it than this: the
+   rows are levels (hairlines, not the dashed line, which the reel has
+   already used above and below), a name pointed at becomes the gap band
+   -- the gold at seven percent with a hairline along its top and bottom,
+   exactly the zone on the plate -- and the ticker beside it warms. Live
+   is one plain credit with its sub-line, and the reel's own interstitial. */
+#markets .board{
+  --row-pad:clamp(12px,1.7vw,18px);
+  position:relative;z-index:2;
   row-gap:0;
-  align-items:baseline;
-  margin-bottom:clamp(16px,2.4vw,26px);
 }
-#markets .board__grp:last-child{margin-bottom:0}
-#markets .board dt{
-  grid-column:1;
-  text-align:right;
-  font-family:var(--f-display);
-  font-size:var(--t-micro);
-  letter-spacing:var(--trk-caps);
-  text-transform:uppercase;
-  line-height:1.5;
-  color:var(--ink-4);
-}
-#markets .board dd{
+#markets .board .reveal{--reveal-y:12px}        /* a row settles, it does not travel */
+#markets .board > dd{
   position:relative;
-  grid-column:2;
-  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
-  margin:0;
-  padding:clamp(9px,1.2vw,12px) 0 clamp(10px,1.3vw,13px);
-  border-bottom:1px solid var(--line-1);
-  font-family:var(--f-display);
-  font-size:clamp(17px,1.5vw,21px);
-  font-weight:400;
-  line-height:1.3;
-  letter-spacing:-.006em;
-  color:var(--ink-1);
+  padding:var(--row-pad) 0;
 }
-#markets .board dd:last-of-type{border-bottom-color:transparent}
-#markets .board__name{min-width:0;text-wrap:balance}
-/* the ticker: what is counted is mono -- small, quiet, at the right edge */
-#markets .board dd .num{
-  flex:0 0 auto;
-  font-size:var(--t-caption);
-  letter-spacing:.06em;
-  color:var(--ink-3);
-  transition:color var(--d) var(--e-out);
-}
-/* the level: 3 on 5, as the spread draws it. Between the columns it runs
-   under nothing, on purpose -- a level is a line across the chart, not a
-   rule under a column. It draws itself from the left (.reveal.draw) once
-   its group's rows are in. */
-#markets .board__level{
-  grid-column:1/-1;
-  height:1px;
-  margin-top:-1px;                        /* on the last row's own line */
-  background:repeating-linear-gradient(90deg,rgba(215,179,100,.5) 0 3px,transparent 3px 8px);
-}
-/* the gap band: the row, pointed at, is the spread's FVG -- the fill at
-   the zone's opacity, a hairline at the top and the bottom over the row's
-   own lines, ten pixels past the column either side. Behind the text
-   (z-index -1 inside the board's own context), and only where a pointer
-   can hover. */
-#markets .board dd::before{
+#markets .board > dd:first-of-type{padding-top:0}
+#markets .board > dd::after{
   content:"";
   position:absolute;
-  left:-10px;right:-10px;top:-1px;bottom:-1px;
-  z-index:-1;
-  border-top:1px solid transparent;
-  border-bottom:1px solid transparent;
-  background:transparent;
+  left:0;right:0;bottom:0;
+  height:1px;
+  background:var(--line-2);
   pointer-events:none;
-  transition:background-color var(--d) var(--e-out),border-color var(--d) var(--e-out);
 }
+/* three across; the shared .cols sizes stay (the list size, the leading) */
+#markets .board .cols{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  column-gap:clamp(12px,1.6vw,20px);
+  row-gap:clamp(4px,.8vw,8px);
+}
+/* a name: the band is drawn on the row itself and the row is the width
+   of its words (not of its cell, so the band is a zone around a name and
+   not a cell of a table), eight pixels past them either side so the text
+   never touches its edge; the ticker sits on the name's baseline after a
+   half em */
+#markets .board li{
+  position:relative;
+  justify-self:start;
+  display:flex;align-items:baseline;gap:.5em;
+  min-width:0;max-width:calc(100% + 16px);
+  margin:0 -8px;padding:3px 8px;
+  white-space:nowrap;
+  color:var(--ink-1);
+  background:rgba(215,179,100,0);
+  box-shadow:inset 0 1px 0 rgba(215,179,100,0),inset 0 -1px 0 rgba(215,179,100,0);
+}
+#markets .board__name{min-width:0;letter-spacing:-.006em}
+#markets .board .num{
+  flex:0 0 auto;
+  font-size:var(--t-caption);
+  font-weight:400;
+  color:var(--ink-3);
+}
+/* the hover transition is declared only once the reveal has run, so the
+   reveal's own transition (opacity, transform) is never overridden */
+#markets .board li:not(.reveal){transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out)}
+#markets .board li:not(.reveal) .num{transition:color var(--d) var(--e-out)}
 @media (hover:hover){
-  #markets .board dd:hover::before{background:rgba(215,179,100,.06);border-color:rgba(215,179,100,.36)}
-  #markets .board dd:hover .num{color:var(--ink-1)}
+  #markets .board li:hover{
+    background:rgba(215,179,100,.07);
+    box-shadow:inset 0 1px 0 rgba(215,179,100,.36),inset 0 -1px 0 rgba(215,179,100,.36);
+  }
+  #markets .board li:hover .num{color:var(--ink-1)}
 }
-/* the note: read after the board, on the board's left edge */
+
+/* the note: read after the board, on the board's column line */
 #markets .board__note{
   position:relative;z-index:2;
   display:grid;
@@ -100,16 +91,28 @@
   max-width:44ch;
   font-size:var(--t-small);
   line-height:1.6;
+  letter-spacing:.01em;
   color:var(--ink-4);
   text-wrap:pretty;
 }
-/* a phone: the label above its rows, on the rows' left edge; the levels
-   still run edge to edge. The credits below centre as they do everywhere;
-   the board, like the plates, stays a left-read table. */
+
+/* narrower than the width at which three names sit on one line: two */
+@media (max-width:760px){
+  #markets .board .cols{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* a phone: the board stays a left-read table (the credits under it centre
+   as they do everywhere). The label above its row on the row's left edge,
+   the hairline still closing each group. */
 @media (max-width:620px){
-  #markets .board__grp{display:block;margin-bottom:clamp(18px,4vw,24px)}
-  #markets .board dt{text-align:left;padding-bottom:6px}
-  #markets .board dd::before{left:-8px;right:-8px}
+  #markets .board{row-gap:0}
+  #markets .board > dt{text-align:left;padding-top:clamp(20px,5.4vw,26px)}
+  #markets .board > dt:first-of-type{padding-top:0}
+  #markets .board > dd,#markets .board > dd:first-of-type{text-align:left;padding:4px 0 14px}
+  #markets .board .cols{column-gap:16px;row-gap:2px}
   #markets .board__note{display:block}
   #markets .board__note p{max-width:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  #markets .board li:not(.reveal),#markets .board li:not(.reveal) .num{transition:none}
 }

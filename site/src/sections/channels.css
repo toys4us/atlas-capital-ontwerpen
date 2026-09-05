@@ -3,24 +3,29 @@
    coloured the way this page colours everything: the sidebar a step darker
    than the pane, hairlines of the gold for every edge, square corners. The
    two headers (the server's name, the channel's name) share one height so
-   the rule under them runs unbroken across the device. The chart
-   vocabulary of the spread is the furniture here: the selected row is a
-   fair value gap band (the gold at .07 with its two edges at .38, exactly
-   the zone on the plate), a hover is the same band at half strength, the
-   boundary of Premium is a dashed liquidity line, the row numbers sit at
-   the right like the levels of a price scale, and one skeleton message
-   carries a chart as a schema. The pane holds no messages -- lines only.
-   On a phone the two panes stay side by side, smaller; the list scrolls
-   inside the device only when the screen is too short for it, and the
-   device is never taller than the screen, so the page is never trapped. */
+   the rule under them runs unbroken across the device; the two feet (the
+   member's panel under the list, the composer under the messages) share
+   one height too, so the rule over the one and the top edge of the other
+   sit on a second line. The chart vocabulary of the spread is the
+   furniture here: the selected row is a fair value gap band (the gold at
+   .07 with its two edges at .38, exactly the zone on the plate), a hover
+   is the same band at half strength, the boundary of Premium is a dashed
+   liquidity line, the row numbers sit at the right like the levels of a
+   price scale, and one skeleton message carries a chart as a schema. The
+   pane holds no messages -- lines only. On a phone the two panes stay
+   side by side, smaller; the list scrolls inside the device only when the
+   screen is too short for it, and the device is never taller than the
+   screen, so the page is never trapped. */
 #channels .dv{
   --side:244px;                 /* the sidebar's width                    */
   --hd:48px;                    /* both headers                           */
+  --foot:60px;                  /* both feet: the panel, and the composer
+                                   with its margin                        */
   --row:28px;                   /* one channel                            */
   --pad-x:16px;                 /* the sidebar's inner margin             */
   --pane-x:22px;                /* the pane's inner margin                */
-  --sk:rgba(244,242,236,.055);  /* a skeleton line                        */
-  --sk-hi:rgba(244,242,236,.085);   /* an avatar, a name line             */
+  --sk:rgba(244,242,236,.07);   /* a skeleton line                        */
+  --sk-hi:rgba(244,242,236,.11);    /* an avatar, a name line             */
   --band:rgba(215,179,100,.07); /* the fair value gap band                */
   --band-lo:rgba(215,179,100,.035);
   --chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 3 4 5.5 6.5 3' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
@@ -35,6 +40,7 @@
 #channels .dv__frame{
   position:relative;
   display:flex;
+  max-height:min(720px,84vh);
   max-height:min(720px,84svh);
   border:1px solid var(--line-2);
   background:var(--panel);
@@ -47,12 +53,12 @@
   background:var(--panel-lo);
   border-right:1px solid var(--line-2);
 }
-/* while the list has more below (a short screen), its foot fades; the
-   script toggles the class, and drops it at the end of the list */
+/* while the list has more below (a short screen), its foot fades into the
+   panel under it; the script toggles the class, and drops it at the end */
 #channels .dv__side::after{
   content:"";
   display:none;
-  position:absolute;left:0;right:0;bottom:0;height:44px;
+  position:absolute;left:0;right:0;bottom:var(--foot);height:44px;
   background:linear-gradient(180deg,rgba(14,15,18,0),var(--panel-lo));
   pointer-events:none;
 }
@@ -98,7 +104,7 @@
   color:var(--ink-4);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-/* Premium sits above a liquidity line */
+/* Premium sits above a liquidity line: 3 on, 5 off, as the spread draws it */
 #channels .dv__cat--prem{margin-top:10px;padding-top:17px}
 #channels .dv__cat--prem::before{
   content:"";
@@ -106,7 +112,10 @@
   height:1px;
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
 }
-/* a row: the hash in the icon column, the name, the lock, the number */
+/* a row: the hash in the icon column, the name, the lock, the number.
+   Its own transition is declared only once the reveal has run, so the
+   reveal's (opacity, transform) is never overridden and the row settles
+   instead of cutting in. */
 #channels .dv__ch{
   display:flex;align-items:center;gap:8px;
   width:100%;height:var(--row);
@@ -121,8 +130,8 @@
   letter-spacing:0;
   text-align:left;
   cursor:pointer;
-  transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out),color var(--d) var(--e-out);
 }
+#channels .dv__ch:not(.reveal){transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out),color var(--d) var(--e-out)}
 #channels .dv__hash{
   flex:0 0 auto;width:11px;
   font-size:1.06em;
@@ -136,6 +145,7 @@
   -webkit-mask:var(--lock) center/9px 11px no-repeat;
   mask:var(--lock) center/9px 11px no-repeat;
 }
+/* the number: the level's tag on the scale -- mono, small, at the right */
 #channels .dv__n{
   flex:0 0 auto;
   min-width:2ch;text-align:right;
@@ -143,9 +153,13 @@
   font-size:var(--t-nano);
   letter-spacing:var(--trk-mono);
   font-variant-numeric:tabular-nums;
-  color:var(--ink-5);
+  color:var(--ink-4);
+  transition:color var(--d) var(--e-out);
 }
-#channels .dv__ch:hover{background:var(--band-lo);color:var(--ink-2)}
+@media (hover:hover){
+  #channels .dv__ch:hover{background:var(--band-lo);color:var(--ink-2)}
+  #channels .dv__ch:hover .dv__n{color:var(--ink-3)}
+}
 #channels .dv__ch[aria-pressed="true"]{
   background:var(--band);
   box-shadow:inset 0 1px var(--line-3),inset 0 -1px var(--line-3);
@@ -153,7 +167,20 @@
   cursor:default;
 }
 #channels .dv__ch[aria-pressed="true"] .dv__hash{color:var(--gold)}
+#channels .dv__ch[aria-pressed="true"] .dv__n{color:var(--ink-2)}
 #channels .dv__ch:focus-visible{outline-offset:-3px}
+/* the member's panel: the avatar, the name, three controls, all skeleton */
+#channels .dv__me{
+  flex:0 0 auto;
+  height:var(--foot);
+  display:flex;align-items:center;gap:8px;
+  padding:0 var(--pad-x);
+  border-top:1px solid var(--line-2);
+  background:var(--panel-lo);
+}
+#channels .dv__me .dv__av{width:24px;height:24px;margin-right:2px}
+#channels .dv__me .dv__ln--name{width:58px;margin-right:auto}
+#channels .dv__ctl{display:block;width:8px;height:8px;background:var(--sk)}
 
 /* ---- the pane: lifted out of the flow, so the sidebar sets the height ---- */
 #channels .dv__pane{
@@ -198,7 +225,8 @@
   align-items:start;
 }
 #channels .dv__msg > *{grid-column:2}
-#channels .dv__av{grid-column:1;grid-row:1/span 6;display:block;width:28px;height:28px;background:var(--sk-hi)}
+#channels .dv__av{display:block;width:28px;height:28px;background:var(--sk-hi)}
+#channels .dv__msg .dv__av{grid-column:1;grid-row:1/span 6}
 #channels .dv__ln{display:block;height:7px;max-width:100%;background:var(--sk)}
 #channels .dv__ln--name{height:8px;background:var(--sk-hi)}
 /* the chart in the message: the spread's plate, small */
@@ -215,11 +243,12 @@
 #channels .dv__zone{stroke:var(--gold);stroke-width:1;stroke-opacity:.36;fill:var(--gold);fill-opacity:.07}
 #channels .dv__level{stroke-opacity:.55;stroke-dasharray:3 5;stroke-linecap:butt}
 #channels .dv__pane:not([data-kind="chart"]) .dv__plate{display:none}
-/* the composer: a box, a plus, no words */
+/* the composer: a box, a plus, no words; its top edge on the line of the
+   member's panel across the device */
 #channels .dv__composer{
   flex:0 0 auto;
   height:40px;
-  margin:0 var(--pane-x) 20px;
+  margin:0 var(--pane-x) calc(var(--foot) - 40px);
   display:flex;align-items:center;gap:14px;
   padding:0 14px;
   border:1px solid var(--line-2);
@@ -269,17 +298,21 @@
 .js #channels .reveal.is-in .dv__line{stroke-dashoffset:0}
 @media (prefers-reduced-motion:reduce){
   .js #channels .reveal .dv__line{stroke-dashoffset:0;transition:none}
-  #channels .dv__ch,#channels .dv__hash{transition:none}
+  #channels .dv__ch:not(.reveal),#channels .dv__hash,#channels .dv__n{transition:none}
 }
 
 /* ---- a phone: the same device, smaller, and never taller than the screen ---- */
 @media (max-width:620px){
-  #channels .dv{--side:58%;--hd:44px;--row:28px;--pad-x:11px;--pane-x:14px}
-  #channels .dv__frame{max-height:min(600px,74svh)}
+  #channels .dv{--side:58%;--hd:44px;--foot:48px;--row:28px;--pad-x:11px;--pane-x:14px}
+  #channels .dv__frame{max-height:min(640px,78vh);max-height:min(640px,78svh)}
   #channels .dv__server{letter-spacing:var(--trk-caps);font-size:var(--t-nano)}
   #channels .dv__cat{letter-spacing:var(--trk-caps-tight);padding-right:4px}
   #channels .dv__ch{gap:7px}
   #channels .dv__hash{width:10px}
+  #channels .dv__me{gap:7px}
+  #channels .dv__me .dv__av{width:20px;height:20px;margin-right:1px}
+  #channels .dv__me .dv__ln--name{width:44px}
+  #channels .dv__ctl{width:7px;height:7px}
   #channels .dv__head{gap:6px;padding:0 12px;font-size:12.5px}
   #channels .dv__head .dv__hash{width:9px}
   #channels .dv__body{gap:18px;padding:16px var(--pane-x) 14px}
@@ -287,6 +320,6 @@
   #channels .dv__av{width:22px;height:22px}
   #channels .dv__ln{height:6px}
   #channels .dv__ln--name{height:7px}
-  #channels .dv__composer{height:34px;margin:0 var(--pane-x) 14px;padding:0 10px}
+  #channels .dv__composer{height:34px;margin:0 var(--pane-x) calc(var(--foot) - 34px);padding:0 10px}
   #channels .dv figcaption{margin-top:14px}
 }

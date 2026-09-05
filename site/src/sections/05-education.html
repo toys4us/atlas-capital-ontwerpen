@@ -1,61 +1,64 @@
 <section id="education">
   <div class="grp" id="educatie"><h2><span lang="nl">Educatie · 10 onderwerpen</span><span lang="en">Education · 10 topics</span></h2></div>
 
-  <!-- the syllabus: ten terms as an index. The number is a count (mono),
-       the term is the credit, the gloss under it is a dictionary line --
-       what the word means, never what the course does with it. Ten rows,
-       then one dashed level with the hint at its end. -->
+  <!-- the syllabus: ten terms set as ten levels on the reel's axis. The
+       count is a tag at the left in mono, a hairline level runs from it to
+       the term, the term ends on the gutter where every label of the reel
+       ends, and the gloss takes the value column -- what the word means,
+       in dictionary voice, never what the course does with it. Pointing
+       at a row makes it a zone (the fair value gap band of the figure)
+       and lights its level. On a phone the level is a short tick and the
+       gloss sits under the term. -->
   <div class="syllabus" data-stagger="70">
     <dl class="index">
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">01</b><span class="term"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span></dt>
-        <dd><span class="gloss"><span lang="nl">een korte uitbraak die weer terugkeert</span><span lang="en">a brief breakout that comes back in</span></span></dd>
+        <dt><b class="num">01</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span></dt>
+        <dd><span lang="nl">een uitbraak die in de range terugkeert</span><span lang="en">a breakout that returns into the range</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">02</b><span class="term">SMT</span></dt>
-        <dd><span class="gloss"><span lang="nl">divergentie tussen twee markten</span><span lang="en">divergence between two markets</span></span></dd>
+        <dt><b class="num">02</b><i class="lvl" aria-hidden="true"></i><span class="term">SMT</span></dt>
+        <dd><span lang="nl">divergentie tussen twee verwante markten</span><span lang="en">divergence between two related markets</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">03</b><span class="term">FVG</span></dt>
-        <dd><span class="gloss"><span lang="nl">fair value gap: het gat na een impuls</span><span lang="en">fair value gap: the gap after an impulse</span></span></dd>
+        <dt><b class="num">03</b><i class="lvl" aria-hidden="true"></i><span class="term">FVG</span></dt>
+        <dd><span lang="nl">fair value gap: het gat dat een impuls achterlaat</span><span lang="en">fair value gap: the gap an impulse leaves behind</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">04</b><span class="term">IFVG</span></dt>
-        <dd><span class="gloss"><span lang="nl">inverse fair value gap: een doorbroken FVG</span><span lang="en">inverse fair value gap: a broken FVG</span></span></dd>
+        <dt><b class="num">04</b><i class="lvl" aria-hidden="true"></i><span class="term">IFVG</span></dt>
+        <dd><span lang="nl">inverse fair value gap: een doorbroken FVG</span><span lang="en">inverse fair value gap: a broken FVG</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">05</b><span class="term">Orderblocks</span></dt>
-        <dd><span class="gloss"><span lang="nl">laatste tegengestelde candle v&oacute;&oacute;r een impuls</span><span lang="en">the last opposing candle before an impulse</span></span></dd>
+        <dt><b class="num">05</b><i class="lvl" aria-hidden="true"></i><span class="term">Orderblocks</span></dt>
+        <dd><span lang="nl">de laatste tegengestelde candle v&oacute;&oacute;r een impuls</span><span lang="en">the last opposing candle before an impulse</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">06</b><span class="term">Fibonacci</span></dt>
-        <dd><span class="gloss"><span lang="nl">niveaus naar verhouding tussen low en high</span><span lang="en">levels by ratio between a low and a high</span></span></dd>
+        <dt><b class="num">06</b><i class="lvl" aria-hidden="true"></i><span class="term">Fibonacci</span></dt>
+        <dd><span lang="nl">vaste verhoudingen tussen een low en een high</span><span lang="en">fixed ratios between a low and a high</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">07</b><span class="term"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span></dt>
-        <dd><span class="gloss"><span lang="nl">de highs en lows die een sessie achterlaat</span><span lang="en">the highs and lows a session leaves behind</span></span></dd>
+        <dt><b class="num">07</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span></dt>
+        <dd><span lang="nl">de highs en lows die een sessie achterlaat</span><span lang="en">the highs and lows a session leaves behind</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">08</b><span class="term"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span></dt>
-        <dd><span class="gloss"><span lang="nl">orders boven highs en onder lows</span><span lang="en">orders resting above highs and below lows</span></span></dd>
+        <dt><b class="num">08</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span></dt>
+        <dd><span lang="nl">orders die boven highs en onder lows liggen</span><span lang="en">orders resting above highs and below lows</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">09</b><span class="term"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span></dt>
-        <dd><span class="gloss"><span lang="nl">positiegrootte en wat &eacute;&eacute;n trade mag kosten</span><span lang="en">position size and what one trade may cost</span></span></dd>
+        <dt><b class="num">09</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span></dt>
+        <dd><span lang="nl">positiegrootte en wat &eacute;&eacute;n trade mag kosten</span><span lang="en">position size and what one trade may cost</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">10</b><span class="term"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span></dt>
-        <dd><span class="gloss"><span lang="nl">gedrag en emotie bij het beslissen</span><span lang="en">behaviour and emotion when deciding</span></span></dd>
+        <dt><b class="num">10</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span></dt>
+        <dd><span lang="nl">gedrag en emotie bij het beslissen</span><span lang="en">behaviour and emotion when deciding</span></dd>
       </div>
     </dl>
-    <div class="level">
-      <div class="level__line reveal draw" aria-hidden="true"></div>
-      <p class="level__tag reveal"><span lang="nl">Wijs een begrip aan voor de betekenis</span><span lang="en">Point at a term to read what it means</span></p>
-    </div>
+    <!-- the liquidity line of the figure, under the ten levels: the index
+         ends here, the call sits below it -->
+    <div class="level" aria-hidden="true"><i class="level__line reveal draw"></i></div>
   </div>
 
   <div class="interstitial">
-    <p><span lang="nl">De educatie staat in de server</span><span lang="en">The education lives in the server</span></p>
+    <p><span lang="nl">De educatie staat in de server</span><span lang="en">The teaching is in the server</span></p>
     <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom erbij op Discord</span><span lang="en">Join us on Discord</span></a>
   </div>
 </section>

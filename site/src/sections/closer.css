@@ -6,22 +6,25 @@
    word's baseline. The path is one hairline of the gold. It comes in
    from the left margin, the word rises out of it (the mask clips at the
    line, so the letters come up through it), and at the right, under the
-   line, the path does its last move: two equal lows on a dashed level,
-   one sweep beneath it, and back up to the line as it leaves the page.
-   One label names the level and says the figure is a schema. Nothing
-   else is drawn.
+   line, the path does its last move: a fall in two legs, two equal lows
+   on a dashed level, one sweep beneath it, and back up to the line in
+   three legs as it leaves the page. One caption under the figure says it
+   is a schema. Nothing else is drawn.
 
    Everything in the figure is placed in em of the display size (--D),
    so the drawing is the same drawing at 390 and at 1440:
      --base   .6902em + 1.5px   the word's baseline from the top of its
                                 box (Newsreader, line-height .92), plus a
                                 pixel and a half of air: the line's top
-     width    2.6em             the action, anchored to the page's right
+     width    3.2em             the action, anchored to the page's right
                                 edge, bleeding past the card like the
-                                opening band
-     level    .30em below the line, the last 1.6em of the width, the
+                                opening band; the svg is 100 units per em
+     level    .30em below the line, from 1.0em in to the page's edge, the
               3-on-5 dashes every other level on the page is drawn with
-     depth    .40em             the sweep's low
+     depth    .41em             the sweep's low; the box is .5em deep
+     caption  under the box, ending on the card's right edge (the header's
+              link ends there too) -- below everything drawn, so no move
+              of the line can run through it at any width
    The sub-line and the one call hang under the word on the axis, left
    of the action; on a phone, where there is no room beside it, they
    wait below the figure. The footer: the signature (a hair and the
@@ -30,7 +33,7 @@
 #closer{
   --D:var(--t-display);
   --base:calc(.6902 * var(--D) + 1.5px);
-  --act:calc(2.6 * var(--D));            /* the action's width            */
+  --act:calc(3.2 * var(--D));            /* the action's width            */
   --bleed:calc(var(--gutter) + max(0px,(100vw - 2 * var(--gutter) - var(--wide)) / 2));
   position:relative;
   padding:clamp(48px,7vw,104px) var(--gutter) clamp(72px,9vw,128px);
@@ -43,6 +46,7 @@
 /* ---- the word on the line --------------------------------------------- */
 #closer .end__row{
   position:relative;
+  display:flow-root;                      /* the mask's negative margin stays inside: the row is the line's box */
   margin:0;
   height:var(--base);
   font-family:var(--f-display);
@@ -53,12 +57,15 @@
   color:var(--paper);
 }
 /* the mask clips at the line, not .3em under the box: the word comes up
-   through the line, and the space under the baseline is the figure's */
+   through the line, and the space under the baseline is the figure's.
+   Above the box it is open by .12em (padding, taken back with a negative
+   margin so the row's height is still the line's), because the serif's
+   ascenders and the dot of the i stand a little above the line box. */
 #closer .end__row .mask{
   display:block;
-  height:var(--base);
-  padding:0;
-  margin:0 0 0 var(--optical);
+  height:calc(var(--base) + .12 * var(--D));
+  padding:calc(.12 * var(--D)) 0 0;
+  margin:calc(-.12 * var(--D)) 0 0 var(--optical);
   overflow:hidden;
 }
 #closer .end__word{display:block;white-space:nowrap}
@@ -96,19 +103,19 @@
   height:1px;
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.5) 0 3px,transparent 3px 8px);
 }
-/* the label: the page's label voice, under the level's right end, ending
-   on the card's right edge (the header's link ends there too) */
+/* the caption: the page's label voice, under the figure's box, ending on
+   the card's right edge; the faintest readable, as the reel's captions */
 #closer .end__tag{
   position:absolute;
   right:var(--bleed);
-  top:calc(.30 * var(--D) + 9px);
+  top:calc(.48 * var(--D) + 8px);
   font-family:var(--f-display);
   font-style:normal;
   font-size:var(--t-nano);
   letter-spacing:var(--trk-caps);
   text-transform:uppercase;
   line-height:1;
-  color:var(--ink-4);
+  color:var(--ink-5);
   white-space:nowrap;
 }
 
@@ -128,12 +135,14 @@
    The box itself never fades or moves (a probe sees it at once); the
    motion is in the ink. In: the line draws itself in one stroke -- the
    flat run crosses the page in the fast start of the curve, the move
-   under the line takes the long settle -- and the level and its label
-   come up under it once the line is past them. The word's own mask
-   rise starts on the third beat, when the line is under it. */
+   under the line takes the long settle -- the level comes up under it
+   once the line has reached it, and the caption last, when the sweep is
+   drawn. The word's own mask rise starts on the third beat, when the
+   line is under it; the sentence and the call follow. */
 .js #closer .reveal.trace{opacity:1;transform:none;transition:none}
 .js #closer .reveal.trace .fig__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2s var(--e-out)}
-.js #closer .reveal.trace .end__lvl,.js #closer .reveal.trace .end__tag{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) .55s}
+.js #closer .reveal.trace .end__lvl{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) .5s}
+.js #closer .reveal.trace .end__tag{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) 1s}
 .js #closer .reveal.trace.is-in .fig__line{stroke-dashoffset:0}
 .js #closer .reveal.trace.is-in .end__lvl,.js #closer .reveal.trace.is-in .end__tag{opacity:1}
 @media (prefers-reduced-motion:reduce){
@@ -143,7 +152,7 @@
 
 /* ---- a phone: the figure has the width, the words wait under it ------- */
 @media (max-width:619px){
-  #closer .end__col{margin-top:calc(.40 * var(--D) + 9px + 11px + clamp(28px,7vw,40px))}
+  #closer .end__col{margin-top:calc(.48 * var(--D) + 8px + 11px + clamp(28px,7vw,40px))}
   #closer .subtitle{max-width:var(--measure-quote)}
 }
 
@@ -189,11 +198,12 @@ footer .fsig small{
 /* the lists: the reading voice, no rule under a word until it is pointed
    at -- then the band of the opening plate's gap comes up behind it,
    ten pixels past the word either side, the way a pointed-at row on the
-   markets board does */
+   markets board does. A link that leaves the page carries the bar's
+   arrow after it, grey until pointed at, as in the header. */
 footer .fnav{list-style:none;margin:0;padding:0;display:grid;row-gap:clamp(4px,.6vw,8px);justify-items:start}
 footer .fnav a{
   position:relative;z-index:0;            /* its own context, so the band sits under the word and over the ground */
-  display:inline-block;
+  display:inline-flex;align-items:center;gap:9px;
   padding:2px 0;
   font-family:var(--f-display);
   font-size:var(--t-body);
@@ -212,9 +222,20 @@ footer .fnav a::before{
   border-bottom:1px solid transparent;
   transition:background-color var(--d) var(--e-out),border-color var(--d) var(--e-out);
 }
+footer .fnav a[href^="http"]::after{
+  content:"";
+  flex:0 0 auto;
+  width:9px;height:9px;
+  background:var(--ink-4);
+  -webkit-mask:var(--arrow) center/9px 9px no-repeat;
+  mask:var(--arrow) center/9px 9px no-repeat;
+  transition:background-color var(--d) var(--e-out),transform var(--d) var(--e-out);
+}
 footer .fnav a:hover,footer .fnav a:focus-visible{color:var(--gold-hi)}
+footer .fnav a:hover::after,footer .fnav a:focus-visible::after{background:var(--gold)}
 @media (hover:hover){
   footer .fnav a:hover::before{background:rgba(215,179,100,.07);border-color:rgba(215,179,100,.36)}
+  footer .fnav a:hover::after{transform:translate(1px,-1px)}
 }
 footer .frule{
   display:block;
@@ -228,18 +249,21 @@ footer .fbase{
   column-gap:var(--axis-gap);
   align-items:start;
 }
+/* the two lines that go under everything: secondary prose, not a hint --
+   they are read */
 footer .legal{max-width:74ch}
 footer .legal p{
   margin:0;
   font-size:var(--t-small);
   line-height:1.7;
   letter-spacing:.01em;
-  color:var(--ink-4);
+  color:var(--ink-3);
   text-wrap:pretty;
 }
 footer .legal p + p{margin-top:2px}
 /* the time: the rail's construction, as content. Without a script there
-   is no time, so there is no line. */
+   is no time, so there is no line; and if the script could not write one
+   (no Intl), the line goes too rather than naming a city with no time. */
 footer .ftime{
   margin:0;
   padding-top:5px;                        /* its baseline on the first legal line's */
@@ -248,6 +272,7 @@ footer .ftime{
   white-space:nowrap;
 }
 html:not(.js) footer .ftime{display:none}
+footer .ftime:has(time:empty){display:none}
 footer .ftime__city{
   font-family:var(--f-display);
   font-size:var(--t-nano);
@@ -256,6 +281,10 @@ footer .ftime__city{
   color:var(--ink-5);
 }
 footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
+
+@media (prefers-reduced-motion:reduce){
+  footer .fnav a,footer .fnav a::before,footer .fnav a::after{transition:none}
+}
 
 @media (max-width:619px){
   footer .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}

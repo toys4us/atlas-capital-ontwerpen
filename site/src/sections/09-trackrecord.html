@@ -7,58 +7,56 @@
   </p>
 
   <!-- the ledger: six credits in date order, first to last, on the reel's
-       one axis. Under each row a level -- a dashed hairline, the way a chart
-       marks a liquidity line -- running to the row's number at the right,
-       where a chart keeps its price axis. The numbers count rows; the lines
-       carry no value. The same numbers are on the certificates below. -->
-  <ol class="ledger" data-stagger="70">
-    <li>
-      <span class="ledger__firm reveal">Funded Trading Plus</span>
-      <div class="ledger__val reveal"><span lang="nl">Funded trading account</span><span lang="en">Funded trading account</span><small><span lang="nl">10 juli 2023</span><span lang="en">10 July 2023</span></small></div>
-      <span class="ledger__lv reveal wipe" aria-hidden="true"></span>
-      <b class="ledger__n reveal" aria-hidden="true">01</b>
-    </li>
-    <li>
-      <span class="ledger__firm reveal">FundingPips</span>
-      <div class="ledger__val reveal"><span lang="nl">Negen fase-certificaten</span><span lang="en">Nine phase certificates</span><small>$3,844.80 &middot; $4,820.80 &middot; $6,209.60 &middot; $1,244.80</small></div>
-      <span class="ledger__lv reveal wipe" aria-hidden="true"></span>
-      <b class="ledger__n reveal" aria-hidden="true">02</b>
-    </li>
-    <li>
-      <span class="ledger__firm reveal">FTMO</span>
-      <div class="ledger__val reveal"><span lang="nl">Challenge en Verification</span><span lang="en">Challenge and Verification</span><small>Rewards $3,381.37 &middot; $2,498.72</small></div>
-      <span class="ledger__lv reveal wipe" aria-hidden="true"></span>
-      <b class="ledger__n reveal" aria-hidden="true">03</b>
-    </li>
-    <li>
-      <span class="ledger__firm reveal">Topstep</span>
-      <div class="ledger__val reveal"><span lang="nl">Trading Combine, 23 keer</span><span lang="en">Trading Combine, 23 times</span><small><span lang="nl">14 uitbetalingen &middot; dec 2025 &ndash; mei 2026</span><span lang="en">14 payouts &middot; Dec 2025 &ndash; May 2026</span></small></div>
-      <span class="ledger__lv reveal wipe" aria-hidden="true"></span>
-      <b class="ledger__n reveal" aria-hidden="true">04</b>
-    </li>
-    <li>
-      <span class="ledger__firm reveal">Lucid Trading</span>
-      <div class="ledger__val reveal">Funded accounts<small><span lang="nl">Uitbetalingen</span><span lang="en">Payouts</span> $5,181 &middot; $2,523</small></div>
-      <span class="ledger__lv reveal wipe" aria-hidden="true"></span>
-      <b class="ledger__n reveal" aria-hidden="true">05</b>
-    </li>
-    <li>
-      <span class="ledger__firm reveal">FundedNext Futures</span>
-      <div class="ledger__val reveal">Champion Trader &middot; Rising Trader<small><span lang="nl">augustus 2026</span><span lang="en">August 2026</span></small></div>
-      <span class="ledger__lv reveal wipe" aria-hidden="true"></span>
-      <b class="ledger__n reveal" aria-hidden="true">06</b>
-    </li>
-  </ol>
+       one axis. The strip's left edge is the time axis; each row is a tick
+       off it -- the row's number in mono at the axis, a dashed level (the
+       liquidity line of the opening schema) running from the number to the
+       firm's name at the gutter -- and what was earned takes the value
+       column on the same baseline. The two years already on the page
+       bracket the label column, first and last, the way an axis carries
+       its first and last figure. The numbers count rows and nothing else;
+       the levels carry no value. The same numbers are on the certificates
+       below. -->
+  <div class="ledger" data-stagger="70">
+    <p class="ledger__axis ledger__axis--from reveal" aria-hidden="true"><time>2023</time></p>
+    <ol class="ledger__rows">
+      <li>
+        <span class="ledger__tick"><b class="ledger__n reveal" aria-hidden="true">01</b><i class="ledger__lv reveal draw" aria-hidden="true"></i><span class="ledger__firm reveal">Funded Trading Plus</span></span>
+        <div class="ledger__val reveal"><span lang="nl">Funded trading account</span><span lang="en">Funded trading account</span><small><span lang="nl">10 juli 2023</span><span lang="en">10 July 2023</span></small></div>
+      </li>
+      <li>
+        <span class="ledger__tick"><b class="ledger__n reveal" aria-hidden="true">02</b><i class="ledger__lv reveal draw" aria-hidden="true"></i><span class="ledger__firm reveal">FundingPips</span></span>
+        <div class="ledger__val reveal"><span lang="nl">Negen fase-certificaten</span><span lang="en">Nine phase certificates</span><small>$3,844.80 &middot; $4,820.80 &middot; $6,209.60 &middot; $1,244.80</small></div>
+      </li>
+      <li>
+        <span class="ledger__tick"><b class="ledger__n reveal" aria-hidden="true">03</b><i class="ledger__lv reveal draw" aria-hidden="true"></i><span class="ledger__firm reveal">FTMO</span></span>
+        <div class="ledger__val reveal"><span lang="nl">Challenge en Verification</span><span lang="en">Challenge and Verification</span><small>Rewards $3,381.37 &middot; $2,498.72</small></div>
+      </li>
+      <li>
+        <span class="ledger__tick"><b class="ledger__n reveal" aria-hidden="true">04</b><i class="ledger__lv reveal draw" aria-hidden="true"></i><span class="ledger__firm reveal">Topstep</span></span>
+        <div class="ledger__val reveal"><span lang="nl">Trading Combine, 23 keer</span><span lang="en">Trading Combine, 23 times</span><small><span lang="nl">14 uitbetalingen &middot; dec 2025 &ndash; mei 2026</span><span lang="en">14 payouts &middot; Dec 2025 &ndash; May 2026</span></small></div>
+      </li>
+      <li>
+        <span class="ledger__tick"><b class="ledger__n reveal" aria-hidden="true">05</b><i class="ledger__lv reveal draw" aria-hidden="true"></i><span class="ledger__firm reveal">Lucid Trading</span></span>
+        <div class="ledger__val reveal">Funded accounts<small><span lang="nl">Uitbetalingen</span><span lang="en">Payouts</span> $5,181 &middot; $2,523</small></div>
+      </li>
+      <li>
+        <span class="ledger__tick"><b class="ledger__n reveal" aria-hidden="true">06</b><i class="ledger__lv reveal draw" aria-hidden="true"></i><span class="ledger__firm reveal">FundedNext Futures</span></span>
+        <div class="ledger__val reveal">Champion Trader &middot; Rising Trader<small><span lang="nl">augustus 2026</span><span lang="en">August 2026</span></small></div>
+      </li>
+    </ol>
+    <p class="ledger__axis ledger__axis--to reveal" aria-hidden="true"><time>2026</time></p>
+  </div>
 
   <!-- the evidence: the same six, in the same order, numbered as the rows
-       are. Monochrome until pointed at; a click opens the untouched original. -->
+       are, printed as plates on one mat. Monochrome until pointed at; a
+       tap opens the untouched original. -->
   <p class="proofs-hint">
     <span class="proofs-hint__t"><span lang="nl">Zes certificaten, op datum</span><span lang="en">Six certificates, in date order</span></span>
     <span class="proofs-hint__n"><span lang="nl">Tik op een certificaat voor het origineel.</span><span lang="en">Tap a certificate for the original.</span></span>
   </p>
   <div class="proofs" data-stagger="90">
     <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><img src="assets/proof/ftp-200k.webp" alt="Funded Trading Plus &mdash; Funded trading account" loading="lazy" decoding="async"></button>
+      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/ftp-200k.webp" alt="Funded Trading Plus &mdash; Funded trading account" loading="lazy" decoding="async" width="880" height="622"></span></button>
       <figcaption class="reveal"><b>01</b>
         <span><span class="firm">Funded Trading Plus</span>
           <small><span lang="nl">Funded trading account &middot; 10 juli 2023</span><span lang="en">Funded trading account &middot; 10 July 2023</span></small>
@@ -66,7 +64,7 @@
       </figcaption>
     </figure>
     <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><img src="assets/proof/fpips-reward.webp" alt="FundingPips &mdash; Performance rewards" loading="lazy" decoding="async"></button>
+      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/fpips-reward.webp" alt="FundingPips &mdash; Performance rewards" loading="lazy" decoding="async" width="900" height="606"></span></button>
       <figcaption class="reveal"><b>02</b>
         <span><span class="firm">FundingPips</span>
           <small><span lang="nl">Performance rewards &middot; mei en juni 2024. Het ROI-cijfer onderaan is het rendement op de inschrijfkosten, niet op de rekening.</span><span lang="en">Performance rewards &middot; May and June 2024. The ROI figure at the foot is the return on the entry fee, not on the account.</span></small>
@@ -74,7 +72,7 @@
       </figcaption>
     </figure>
     <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><img src="assets/proof/ftmo-chal.webp" alt="FTMO &mdash; Challenge passed" loading="lazy" decoding="async"></button>
+      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/ftmo-chal.webp" alt="FTMO &mdash; Challenge passed" loading="lazy" decoding="async" width="760" height="760"></span></button>
       <figcaption class="reveal"><b>03</b>
         <span><span class="firm">FTMO</span>
           <small><span lang="nl">Challenge behaald &middot; 26 oktober 2025</span><span lang="en">Challenge passed &middot; 26 October 2025</span></small>
@@ -82,7 +80,7 @@
       </figcaption>
     </figure>
     <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><img src="assets/proof/topstep-payout.webp" alt="Topstep &mdash; Proof of Payout" loading="lazy" decoding="async"></button>
+      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/topstep-payout.webp" alt="Topstep &mdash; Proof of Payout" loading="lazy" decoding="async" width="760" height="760"></span></button>
       <figcaption class="reveal"><b>04</b>
         <span><span class="firm">Topstep</span>
           <small><span lang="nl">Proof of Payout &middot; 8 januari 2026</span><span lang="en">Proof of Payout &middot; 8 January 2026</span></small>
@@ -90,7 +88,7 @@
       </figcaption>
     </figure>
     <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><img src="assets/proof/lucid-payout.webp" alt="Lucid Trading &mdash; Payout certificate" loading="lazy" decoding="async"></button>
+      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/lucid-payout.webp" alt="Lucid Trading &mdash; Payout certificate" loading="lazy" decoding="async" width="880" height="621"></span></button>
       <figcaption class="reveal"><b>05</b>
         <span><span class="firm">Lucid Trading</span>
           <small><span lang="nl">Payout certificate &middot; 7 augustus 2026</span><span lang="en">Payout certificate &middot; 7 August 2026</span></small>
@@ -98,7 +96,7 @@
       </figcaption>
     </figure>
     <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><img src="assets/proof/fnext-rising.webp" alt="FundedNext Futures &mdash; Rising Trader" loading="lazy" decoding="async"></button>
+      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/fnext-rising.webp" alt="FundedNext Futures &mdash; Rising Trader" loading="lazy" decoding="async" width="868" height="603"></span></button>
       <figcaption class="reveal"><b>06</b>
         <span><span class="firm">FundedNext Futures</span>
           <small><span lang="nl">Rising Trader &middot; 14 augustus 2026</span><span lang="en">Rising Trader &middot; 14 August 2026</span></small>

@@ -1,50 +1,68 @@
 /* ===== production =====
-   The credits, typeset as a ledger and drawn as a chart. The four rows sit
-   on the shared axis of base.css (dl.pairs: the label right of the axis in
-   tracked caps, the value left of it at credit size, one baseline) and
-   under every value runs a level: a dashed hairline of the one gold that
-   starts at the axis and runs to the column's edge -- the liquidity line
-   of the opening plate, used as a rule. Nothing is drawn down the axis;
-   the label column stays a margin. The rows are spaced by padding, not by
-   the grid's gap, so a level sits exactly between two rows and the first
-   row keeps the group title's distance.
+   The credits, set as a ledger and drawn as a ladder. Four rows on the
+   shared axis of base.css (dl.pairs: the label right of the axis in
+   tracked caps, the value left of it at credit size, one baseline). Each
+   label is the tag at the end of a price level: a dashed hairline of the
+   one gold runs to it from the strip's left edge, the way the liquidity
+   line of the opening plate runs to its tag and the way the founder's
+   numeral sits at the end of its level on the next reel -- so the four
+   credits read as the leaders of a contents page and, at once, as the
+   ladder that the "10+" below completes. The value column carries type
+   and nothing else: no rule runs under a value, nothing is drawn down
+   the axis, and the four levels together are quieter than the one that
+   follows them (line-3 here, line-4 there). Schema only: no number, no
+   instrument, no date.
 
    The one small fact that is a code -- the server's address -- is set in
-   the mono, quiet, and is the link; on hover a band fills behind the line
-   from the axis to the column's edge, in the plate's own gold (the FVG,
-   as a hover state). Never a number, never a name of an instrument.
+   the mono under its value, quiet, and is the link; pointed at, a band
+   fills behind it, from just left of the value to the column's edge, in
+   the plate's own gold with a hairline along its top and its bottom (the
+   FVG, as a hover state). The row keeps two voices, serif and mono, and
+   no third.
 
-   Reveal: motion.js tags the rows itself (a stagger of dt, dd). Each
-   level draws itself out of the axis under its value, on the same beat as
-   the value's fade (transition-delay inherited from the row) and over the
-   slow settle, so the value is there first and the level arrives under
-   it. Never opacity, so a probe sees the rule at once. */
+   Reveal: motion.js tags the rows itself (a stagger of dt, dd). A label
+   fades in place while its level draws out of the strip's edge to meet
+   it -- scale, never opacity, so a probe sees the rule at once, and on
+   the label's own beat (the delay is inherited from the row) -- and the
+   value rises in on the next. On a phone, where the credits centre, the
+   ladder goes and the rows are set by air alone; the founder's level,
+   edge to edge, carries the idiom there. */
 #production dl.pairs{
-  --row-pad:clamp(14px,1.9vw,20px);
-  row-gap:0;
+  row-gap:clamp(16px,2.4vw,28px);
 }
-#production dl.pairs > dd{
-  position:relative;
-  padding:var(--row-pad) 0;
+
+/* the tag: a flex row so the level takes whatever width the label
+   leaves; the level opts out of baseline alignment, so the row's
+   baseline is the label's and the grid hangs the value on it */
+#production dl.pairs > dt{
+  display:flex;align-items:baseline;justify-content:flex-end;
+  gap:clamp(10px,1.4vw,14px);
+  min-width:0;
+  margin-left:calc(-1 * clamp(18px,4vw,40px));   /* the level starts at the strip's edge (the roll's padding) */
+  white-space:nowrap;
 }
-#production dl.pairs > dd:first-of-type{padding-top:0}
-#production dl.pairs > dd::after{
+#production dl.pairs > dt::before{
   content:"";
-  position:absolute;
-  left:0;right:0;bottom:0;
+  flex:1 1 auto;
+  align-self:flex-start;
+  margin-top:.64em;                     /* the middle of the caps          */
   height:1px;
-  background:repeating-linear-gradient(90deg,var(--line-3) 0 3px,transparent 3px 8px);
-  pointer-events:none;
+  min-width:24px;
+  /* the figure's liquidity line, 3 on 5 off, anchored right so a dash
+     ends at the label */
+  background:linear-gradient(90deg,transparent 0 5px,var(--line-3) 5px 8px) right center/8px 1px repeat-x;
 }
-/* the draw: hidden by scale, never by opacity; the delay is the row's own,
+/* the draw: the label only fades (its level does the moving); the level
+   is hidden by scale, never by opacity, and takes the row's own delay,
    so the level of the fourth credit waits with the fourth credit */
-.js #production dl.pairs > dd.reveal::after{
+.js #production dl.pairs > dt.reveal{transform:none}
+.js #production dl.pairs > dt.reveal::before{
   transform:scaleX(0);
   transform-origin:left center;
-  transition:transform calc(var(--d-reveal) * 1.3) var(--e-reveal);
+  transition:transform calc(var(--d-reveal) * 1.2) var(--e-reveal);
   transition-delay:inherit;
 }
-.js #production dl.pairs > dd.reveal.is-in::after{transform:none}
+.js #production dl.pairs > dt.reveal.is-in::before{transform:none}
 
 /* the address: the mono, at caption size, in the secondary grey (it is a
    link, so a step above a label); the link colour is the line's, so the
@@ -66,7 +84,7 @@
   text-decoration-color:var(--line-2);
 }
 #production .addr a:hover,#production .addr a:focus-visible{color:var(--gold-hi);text-decoration-color:var(--gold)}
-/* the band: a gap filled, from the axis to the column's edge */
+/* the band: a gap filled, from just left of the value to the column's edge */
 #production .addr::before{
   content:"";
   position:absolute;
@@ -82,19 +100,18 @@
 #production .addr:has(> a:hover)::before,
 #production .addr:has(> a:focus-visible)::before{transform:none}
 
-/* a phone: the credits centre (base.css), so a level runs the width of
-   the group rule, inset the same 6%; the label carries the row's top
-   distance, the value the bottom */
+/* a phone: the credits centre (base.css); the ladder goes, the label
+   carries the row's distance from the one above, and the address band
+   starts on the column's edge */
 @media (max-width:620px){
-  #production dl.pairs{--row-pad:18px}
-  #production dl.pairs > dt{padding-top:var(--row-pad)}
-  #production dl.pairs > dt:first-of-type{padding-top:0}
-  #production dl.pairs > dd,#production dl.pairs > dd:first-of-type{padding:0 0 var(--row-pad)}
-  #production dl.pairs > dd::after{left:6%;right:6%}
+  #production dl.pairs{row-gap:4px}
+  #production dl.pairs > dt{display:block;margin:0;padding-top:30px;white-space:normal}
+  #production dl.pairs > dt:first-of-type{padding-top:22px}
+  #production dl.pairs > dt::before{display:none}
   #production .addr::before{left:0}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .js #production dl.pairs > dd.reveal::after{transform:none;transition:none}
+  .js #production dl.pairs > dt.reveal::before{transform:none;transition:none}
   #production .addr::before{transition:none}
 }

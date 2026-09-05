@@ -1,137 +1,166 @@
-/* ===== education: the syllabus =====
-   The ten topics set as an index, in the vocabulary of the opening figure.
-   Each row is numbered the way a price axis is: the count in mono, small,
-   in the label grey, and a hairline tick from it to the term; the term
-   itself at the value size the credits use. On a desk the index runs in
-   two columns of five, read down and then down again; narrower, in one.
-   Point at a row and it becomes a zone -- the fair value gap of the
-   figure, the gold at seven percent with a hairline along its top and
-   its bottom -- while a one-line gloss rises under the term on the term's
-   own left edge: what the word means, in dictionary voice, never what the
-   course does with it. The line of the gloss is reserved, so nothing on
-   the page moves when you point. Under the index one dashed level, the
-   figure's liquidity line, draws itself, with the hint at its right end
-   where the figure's tags sit. Without a pointer, or below the width at
-   which the two columns hold a gloss on one line, every gloss is simply
-   there and the hint is not.
+/* ===== education: the syllabus as ten levels =====
+   The ten topics set as an index, in the vocabulary of the opening figure
+   and on the axis of the reel. Each row is a price level: the count in
+   mono at the left, the way a scale is labelled; a hairline of the gold
+   running from it to the term (so the ten levels have ten lengths, and
+   the block reads as a schema of levels and tags, not as a list with
+   dashes); the term ending on the gutter where every label of the reel
+   ends; and on the value side, at note size, the gloss -- what the word
+   means, in dictionary voice, never what the course does with it. The
+   term is the credit (value size), the gloss its sub-line; the number is
+   the only thing counted, so the only mono.
+
+   Point at a row and it becomes a zone: the fair value gap band of the
+   figure, the gold at seven percent with a hairline along its top and its
+   bottom, its level lit in the full gold, the term in the paper, the
+   gloss brought forward to the ink; the other rows recede a step, so the
+   one you read is the one in the light. Nothing moves and nothing is
+   reserved, so nothing on the page shifts when you point. Focus does the
+   same for a keyboard, and the band is the ring.
+
+   On arrival the rows settle in sequence and each level draws itself
+   from its number to its term (transition-delay:inherit takes the row's
+   own slot in the stagger). Under the index the figure's liquidity line
+   draws itself; the call sits below it. On a phone the level is a short
+   tick and the gloss hangs under the term on the term's left edge.
    Schema only: the count is the only number, and it counts topics. */
-#education .syllabus{position:relative;z-index:2}
-#education .index{
-  --num:15px;                                 /* the digits                 */
-  --tick:14px;                                /* the tick to the term       */
-  --tgap:8px;                                 /* either side of it          */
-  --lead:calc(var(--num) + var(--tgap) * 2 + var(--tick)); /* the term's edge */
-  display:grid;
-  grid-template-columns:minmax(0,1fr);
-  row-gap:clamp(2px,.5vw,4px);
-  margin:0;
+#education .syllabus{
+  --bleed:12px;                               /* the band past the text     */
+  --band:rgba(215,179,100,.07);               /* the fair value gap band    */
+  --band-edge:rgba(215,179,100,.36);
+  position:relative;z-index:2;
 }
-@media (min-width:840px){
-  #education .index{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    grid-template-rows:repeat(5,auto);
-    grid-auto-flow:column;                    /* 01-05 down, then 06-10     */
-    column-gap:clamp(24px,4vw,44px);
-  }
-}
-/* a row: the band is drawn on the row itself. It starts a little left of
-   the number, so the digits never touch its edge, and ends on the
-   column's edge -- on the right column that is where the level under the
-   index ends, so band and rule finish on one line */
+#education .index{display:block;margin:clamp(6px,1.2vw,14px) 0 0}
+
+/* ---- a row: two columns on the reel's axis, baselines shared ---------- */
 #education .row{
+  --reveal-y:10px;                            /* a row settles, it does not travel */
   position:relative;
-  margin:0 0 0 -10px;
-  padding:6px 12px 7px 10px;
+  display:grid;
+  grid-template-columns:var(--axis-l) var(--axis-r);
+  column-gap:var(--axis-gap);
+  align-items:baseline;
+  margin:0 calc(-1 * var(--bleed));
+  padding:9px var(--bleed) 10px;
+}
+/* the band is a layer under the row, so its transition never touches the
+   row's own (the reveal's) */
+#education .row::before{
+  content:"";
+  position:absolute;inset:0;z-index:-1;
   background:rgba(215,179,100,0);
   box-shadow:inset 0 1px 0 rgba(215,179,100,0),inset 0 -1px 0 rgba(215,179,100,0);
-  outline-offset:2px;
+  transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out);
 }
-/* the hover transition is declared only once the reveal has run, so the
-   reveal's own transition (opacity, transform) is never overridden */
-#education .row:not(.reveal){transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out)}
-#education .row:hover,#education .row:focus-visible{
-  background:rgba(215,179,100,.07);
-  box-shadow:inset 0 1px 0 rgba(215,179,100,.36),inset 0 -1px 0 rgba(215,179,100,.36);
+#education .row:focus-visible{outline:0}    /* the band is the ring */
+#education .row:hover::before,#education .row:focus-visible::before{
+  background:var(--band);
+  box-shadow:inset 0 1px 0 var(--band-edge),inset 0 -1px 0 var(--band-edge);
 }
-#education dt{display:flex;align-items:baseline;margin:0;min-width:0}
+
+/* the level: count, hairline, term */
+#education dt{
+  grid-column:1;
+  display:flex;align-items:baseline;
+  min-width:0;
+  margin:0;
+  font-family:var(--f-display);
+  font-size:var(--t-h3);
+  line-height:var(--lh-tight);
+}
 #education .num{
-  position:relative;
-  flex:0 0 var(--lead);
-  padding-right:calc(var(--tgap) * 2 + var(--tick));
-  text-align:right;
+  flex:0 0 auto;
   font-family:var(--f-mono);
   font-size:var(--t-caption);
   font-weight:400;
   letter-spacing:var(--trk-mono);
   font-variant-numeric:tabular-nums;
-  line-height:1.5;
+  line-height:1;
   color:var(--ink-4);
-}
-#education .num::after{
-  content:"";
-  position:absolute;
-  right:var(--tgap);top:calc(50% - 1px);
-  width:var(--tick);height:1px;
-  background:var(--line-3);
-  transition:background-color var(--d) var(--e-out);
-}
-#education .row:hover .num::after,#education .row:focus-visible .num::after{background:var(--gold)}
-#education .term{
-  min-width:0;
-  font-family:var(--f-display);
-  font-size:var(--t-h3);
-  font-weight:400;
-  line-height:var(--lh-tight);
-  letter-spacing:-.006em;
-  color:var(--ink-1);
   transition:color var(--d) var(--e-out);
 }
-#education .row:hover .term,#education .row:focus-visible .term{color:var(--paper)}
-/* the gloss hangs on the term's left edge, in the sub-line voice */
+/* the hairline sits on the baseline (an empty box's baseline is its
+   bottom edge) and is lifted to the middle of the x-height */
+#education .lvl{
+  flex:1 1 auto;
+  min-width:14px;
+  height:1px;
+  margin:0 12px;
+  position:relative;top:-.24em;
+  background:var(--line-2);
+  transform-origin:left center;
+  transition:background-color var(--d) var(--e-out);
+}
+#education .term{
+  flex:0 1 auto;
+  min-width:0;
+  text-align:right;
+  font-weight:400;
+  letter-spacing:-.006em;
+  color:var(--ink-1);
+  text-wrap:balance;
+  transition:color var(--d) var(--e-out);
+}
+/* the gloss: the sub-line voice, on the value side */
 #education dd{
-  margin:3px 0 0 var(--lead);
+  grid-column:2;
+  margin:0;
+  min-width:0;
   font-family:var(--f-display);
   font-size:var(--t-small);
   line-height:1.45;
   letter-spacing:.01em;
   color:var(--ink-3);
   text-wrap:pretty;
+  transition:color var(--d) var(--e-out);
 }
-#education .gloss{display:block}
 
-/* the level under the index: one dashed hairline of the gold (the
-   figure's liquidity line: 3 on, 5 off), the hint above its right end */
-#education .level{position:relative;height:1px;margin-top:clamp(20px,3vw,32px)}
+/* ---- the lit row, and the others a step back ---------------------------- */
+#education .row:hover .num,#education .row:focus-visible .num{color:var(--ink-2)}
+#education .row:hover .lvl,#education .row:focus-visible .lvl{background:var(--gold)}
+#education .row:hover .term,#education .row:focus-visible .term{color:var(--paper)}
+#education .row:hover dd,#education .row:focus-visible dd{color:var(--ink-1)}
+@media (hover:hover){
+  #education .index:hover .row:not(:hover):not(:focus-visible) .term{color:var(--ink-3)}
+  #education .index:hover .row:not(:hover):not(:focus-visible) dd{color:var(--ink-4)}
+}
+
+/* ---- the level draws itself in the row's own slot of the stagger -------- */
+.js #education .row .lvl{transform:scaleX(0)}
+.js #education .row.is-in .lvl{
+  transform:none;
+  transition:transform var(--d-reveal) var(--e-reveal),background-color var(--d) var(--e-out);
+  transition-delay:inherit;
+}
+
+/* ---- the liquidity line under the index ---------------------------------
+   on the content's own edges, with the group rule above it; only the band
+   (a zone, and only while pointed at) runs past them */
+#education .level{
+  position:relative;
+  height:1px;
+  margin:clamp(18px,2.6vw,28px) 0 0;
+}
 #education .level__line{
+  display:block;
   position:absolute;inset:0;
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,rgba(215,179,100,0) 3px 8px);
 }
-#education .level__tag{
-  display:none;
-  position:absolute;right:0;bottom:7px;
-  margin:0;
-  font-family:var(--f-display);
-  font-size:var(--t-nano);
-  letter-spacing:var(--trk-caps);
-  text-transform:uppercase;
-  line-height:1;
-  color:var(--ink-4);                         /* the figure's tag grey     */
-  white-space:nowrap;
-}
-
-/* with a pointer, at the width where the two columns hold a gloss on one
-   line: the line is reserved and the gloss is clipped to nothing in its
-   place (a clip, not a transform: a displaced layer under an overflow
-   clip leaks in a beyond-viewport capture); it prints on, top to bottom,
-   when the row is pointed at or focused -- the way the opening plate
-   prints on */
-@media (hover:hover) and (min-width:840px){
-  #education .gloss{clip-path:inset(0 0 100% 0)}
-  #education .row:not(.reveal) .gloss{transition:clip-path var(--d) var(--e-out)}
-  #education .row:hover .gloss,#education .row:focus-visible .gloss{clip-path:inset(0)}
-  #education .level__tag{display:block}
-}
 
 @media (prefers-reduced-motion:reduce){
-  #education .row:not(.reveal),#education .row:not(.reveal) .gloss,#education .term,#education .num::after{transition:none}
+  .js #education .row .lvl{transform:none;transition:none}
+  #education .row::before,#education .num,#education .lvl,#education .term,#education dd{transition:none}
+}
+
+/* ---- a phone: one column, the level a tick, the gloss under the term ---- */
+@media (max-width:620px){
+  #education .syllabus{--bleed:10px}
+  #education .index{--lead:calc(2ch + 10px + 14px + 10px)}
+  #education .row{display:block;padding:9px var(--bleed) 11px}
+  #education dt{align-items:baseline}
+  #education .num{flex:0 0 2ch}
+  #education .lvl{flex:0 0 14px;min-width:0;margin:0 10px}
+  #education .term{flex:1 1 auto;text-align:left;text-wrap:pretty}
+  #education dd{margin:3px 0 0 var(--lead)}
+  #education .level{margin-top:clamp(16px,4vw,24px)}
 }

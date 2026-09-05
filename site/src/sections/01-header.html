@@ -9,25 +9,29 @@
          its rule and arrow when none is (motion.js toggles .solid); the
          swap slides along the reading axis like the rail's label. Both
          rows share one cell, so the box is as wide as the wider row and
-         nothing beside it ever moves. -->
+         nothing beside it ever moves. The short row is a visual state
+         (aria-hidden); the full one is the link's name everywhere, on a
+         phone too, where it is kept for the reader and clipped for the eye. -->
     <a class="cta" href="https://discord.gg/78Ff2GuSfW">
       <span class="cta__track">
-        <span class="r r--s">Discord</span>
+        <span class="r r--s" aria-hidden="true">Discord</span>
         <span class="r r--l"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></span>
       </span>
     </a>
     <!-- the contents line: two anchors either side of the call on a desk,
-         a drawer of levels under the bar everywhere else. The reel number
-         in each row is read off the page's own group titles by the script
-         below, so it is never typed twice; the row is empty without it. -->
+         a drawer of levels under the bar everywhere else. Each row is a
+         level: the name, a hairline, and on the right gutter -- the axis of
+         the page, where the spread's labels sit -- the reel number, read
+         off the page's own group titles by the script below so it is
+         never typed twice; the tag is empty without it. -->
     <nav class="nav" id="hdr-nav" aria-label="Secties / Sections">
       <div class="lv lv--l">
-        <a href="#educatie"><b class="n" aria-hidden="true"></b><span lang="nl">Educatie</span><span lang="en">Education</span></a>
-        <a href="#kanalen"><b class="n" aria-hidden="true"></b><span lang="nl">Kanalen</span><span lang="en">Channels</span></a>
+        <a href="#educatie"><span class="lv__name"><span lang="nl">Educatie</span><span lang="en">Education</span></span><b class="n" aria-hidden="true"></b></a>
+        <a href="#kanalen"><span class="lv__name"><span lang="nl">Kanalen</span><span lang="en">Channels</span></span><b class="n" aria-hidden="true"></b></a>
       </div>
       <div class="lv lv--r">
-        <a href="#trackrecord"><b class="n" aria-hidden="true"></b><span lang="nl">Trackrecord</span><span lang="en">Track record</span></a>
-        <a href="#access"><b class="n" aria-hidden="true"></b><span lang="nl">Toegang</span><span lang="en">Access</span></a>
+        <a href="#trackrecord"><span class="lv__name"><span lang="nl">Trackrecord</span><span lang="en">Track record</span></span><b class="n" aria-hidden="true"></b></a>
+        <a href="#access"><span class="lv__name"><span lang="nl">Toegang</span><span lang="en">Access</span></span><b class="n" aria-hidden="true"></b></a>
       </div>
       <div class="foot">
         <div class="langsw" role="group" aria-label="Taal / Language">
@@ -92,14 +96,16 @@
     W.addEventListener("scroll", ask, { passive: true });
     W.addEventListener("resize", ask);
     frame();
-    /* the drawer */
+    /* the drawer. The page is held still under it by locking the body,
+       never the root: overflow on <html> re-roots the scroller and a
+       sticky bar lets go of the top. */
     var open = false;
     function focusables(){
       return Array.prototype.filter.call(hdr.querySelectorAll("a[href],button"), function(el){
         return el.offsetParent !== null || el.getClientRects().length;
       });
     }
-    function setOpen(v){
+    function setOpen(v, back){
       if (v === open) return;
       open = v;
       hdr.classList.toggle("is-open", v);
@@ -108,12 +114,13 @@
         nav.classList.add("is-open");
         void nav.offsetHeight;
         nav.classList.add("is-in");
-        root.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
         try { links[0].focus({ preventScroll: true }); } catch(e) {}
       } else {
         nav.classList.remove("is-in");
         nav.classList.remove("is-open");
-        root.style.overflow = "";
+        document.body.style.overflow = "";
+        if (back) { try { btn.focus({ preventScroll: true }); } catch(e) {} }
       }
     }
     btn.addEventListener("click", function(){ setOpen(!open); });
@@ -122,7 +129,7 @@
     });
     document.addEventListener("keydown", function(e){
       if (!open) return;
-      if (e.key === "Escape" || e.key === "Esc") { setOpen(false); btn.focus(); return; }
+      if (e.key === "Escape" || e.key === "Esc") { setOpen(false, true); return; }
       if (e.key !== "Tab") return;
       var f = focusables(), first = f[0], last = f[f.length - 1];
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }

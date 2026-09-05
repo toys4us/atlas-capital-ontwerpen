@@ -1,19 +1,26 @@
 <section id="access">
   <div class="grp"><h2><span lang="nl">Toegang</span><span lang="en">Access</span></h2></div>
 
-  <!-- Two levels on the one axis. The label column is the chart's margin,
-       the gutter is its scale, and the two labels sit on it the way a price
-       tag sits on a level. Right of the axis, what each level holds. The
-       open level is a hairline with the path riding it; the one that opens
-       later is dashed -- the level is drawn, nothing runs through it yet.
-       Schema only: no price, no day, no instrument. -->
+  <!-- The two ways in, as two levels on the reel's one axis -- not two
+       columns of a price table. The label column is the chart's margin and
+       the gutter is its price axis: each tag sits on the axis the way a
+       level is tagged, its level drawn out to the left from the strip's
+       edge in the hairline gold of the spread's plate. The open level is
+       the one the path has reached: it comes in low from the margin,
+       climbs in two legs and holds the level to the tag. The level that
+       opens later is drawn and not yet run through -- the dashed
+       liquidity line of the spread; point at its link and it draws itself
+       solid. Right of the axis, on the value column with every other
+       credit: what the level holds, one line under it, the link. The open
+       level carries the one call of the screen; the other a quiet link.
+       Nothing here is a price, a day or an instrument; the caption says
+       so. -->
   <div class="levels" data-stagger="110">
-   <div class="levels__grid">
     <div class="level level--now">
       <div class="level__scale">
-        <svg class="level__fig reveal trace" viewBox="0 0 300 32" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-          <line class="fig__level" x1="0" y1="16" x2="300" y2="16"/>
-          <path class="fig__line" pathLength="1" d="M0 27 34 24 60 28 96 20 122 24 156 16 170 19 184 16 300 16"/>
+        <svg class="level__fig reveal trace" viewBox="0 0 300 84" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <line class="fig__level" x1="0" y1="12" x2="300" y2="12"/>
+          <path class="fig__line" pathLength="1" d="M0 74 12 71 20 77 34 69 46 73 58 66 70 70 80 64 94 46 100 52 112 38 126 30 134 36 150 16 158 20 168 12 180 9.5 190 13 210 11 232 13.5 256 11 280 13 300 12"/>
         </svg>
         <span class="level__tag reveal"><span lang="nl">Nu</span><span lang="en">Now</span></span>
       </div>
@@ -28,16 +35,17 @@
       <div class="level__scale">
         <svg class="level__fig reveal draw" height="32" aria-hidden="true" focusable="false">
           <line class="fig__level fig__level--open" x1="0" y1="16" x2="100%" y2="16"/>
+          <line class="fig__level fig__level--set" x1="0" y1="16" x2="100%" y2="16" pathLength="1"/>
         </svg>
         <span class="level__tag reveal"><span lang="nl">Later</span><span lang="en">Later</span></span>
       </div>
       <div class="level__body reveal">
-        <p class="level__value"><span lang="nl">Premium opent</span><span lang="en">Premium opens</span></p>
-        <p class="level__note"><span lang="nl">Zes kanalen erbij. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Six more channels. Price and date are announced in the server.</span></p>
+        <p class="level__value"><span lang="nl">Premium</span><span lang="en">Premium</span></p>
+        <p class="level__note"><span lang="nl">Zes kanalen erbij zodra het opent. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Six more channels once it opens. The price and the date will be announced in the server.</span></p>
         <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Volg het in de server</span><span lang="en">Follow it in the server</span></a>
       </div>
     </div>
-   </div>
-   <p class="levels__cap reveal"><span lang="nl">Twee niveaus, schematisch</span><span lang="en">Two levels, as a schema</span></p>
+
+    <p class="levels__cap reveal"><span lang="nl">Twee niveaus, schematisch</span><span lang="en">Two levels, as a schema</span></p>
   </div>
 </section>
