@@ -1,65 +1,260 @@
 /* ===== track record =====
-   Six firms, six house styles, none of them ours. The certificates are
-   evidence, not decoration: small, uniform, monochrome until pointed at,
-   and a click opens the untouched original -- checkable, but quiet. */
+   A ledger, then the evidence, then what the evidence does not say.
+
+   The ledger: six credits on the reel's one axis, in date order, 2023 to
+   2026 -- the firm in the label column, what was earned in the value
+   column, the amount or the date in the serif under it. Under each row a
+   level: a dashed hairline of the gold, the way a chart marks a liquidity
+   line, running from the strip's left edge to the row's number at the
+   right, where a chart keeps its price axis. The numbers count rows and
+   nothing else; the lines carry no value. On scroll the rows rise and
+   each level prints on left to right under its row.
+
+   The evidence: the same six, in the same order, as plates -- small,
+   uniform, monochrome until pointed at, the number of their row on each.
+   They print on from the left like the spread's plate; a click opens the
+   untouched original.
+
+   The caveat: not small print. Set as the founder's quote is set -- the
+   label in the margin, a short rule, the words at lead size in the ink of
+   a value -- because it is the most important paragraph on the page.
+   .roll::before is the strip's edge, so every block sits above it (z:2). */
+
+/* ---------- the ledger ---------------------------------------------------- */
+#trackrecord .ledger{
+  position:relative;z-index:2;
+  list-style:none;margin:0;padding:0;
+}
+#trackrecord .ledger li{
+  position:relative;
+  display:grid;
+  grid-template-columns:var(--axis-l) var(--axis-r);
+  column-gap:var(--axis-gap);
+  align-items:baseline;
+  padding:clamp(18px,2.4vw,26px) 0 clamp(14px,2vw,20px);
+}
+#trackrecord .ledger li:first-child{padding-top:0}
+#trackrecord .ledger__firm{
+  grid-column:1;
+  text-align:right;
+  font-family:var(--f-display);
+  font-size:var(--t-micro);
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--ink-4);
+}
+#trackrecord .ledger__val{
+  grid-column:2;
+  min-width:0;
+  padding-right:48px;                    /* clear of the number's column */
+  font-family:var(--f-display);
+  font-size:var(--t-h3);
+  font-weight:400;
+  line-height:var(--lh-tight);
+  letter-spacing:-.006em;
+  color:var(--ink-1);
+}
+#trackrecord .ledger__val small{
+  display:block;
+  margin-top:5px;
+  font-family:var(--f-display);
+  font-size:var(--t-small);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.01em;
+  line-height:1.5;
+  color:var(--ink-3);
+}
+/* the level: a dashed hairline to the number. A background, not a border,
+   so the dash is the figure's dash (3 on, 5 off) and a wipe reveals it
+   without stretching it. */
+#trackrecord .ledger__lv{
+  position:absolute;left:0;right:30px;bottom:0;
+  height:1px;
+  background:repeating-linear-gradient(90deg,var(--line-3) 0 3px,transparent 3px 8px);
+}
+/* the number sits on the line, at the right, the way a level is tagged on
+   the price axis: mono, tabular, in the faintest readable grey */
+#trackrecord .ledger__n{
+  position:absolute;right:0;bottom:-.5em;
+  font-family:var(--f-mono);
+  font-weight:400;
+  font-size:var(--t-caption);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:var(--trk-mono);
+  line-height:1;
+  color:var(--ink-4);
+}
+@media (max-width:620px){
+  #trackrecord .ledger li{display:block;text-align:center;padding:22px 0 20px}
+  #trackrecord .ledger li:first-child{padding-top:4px}
+  #trackrecord .ledger__firm{display:block;margin-bottom:5px;text-align:center}
+  #trackrecord .ledger__val{padding:0}
+  #trackrecord .ledger__lv{left:6%;right:calc(6% + 28px)}   /* inset as the group rule is */
+  #trackrecord .ledger__n{right:6%}
+}
+
+/* ---------- the evidence -------------------------------------------------- */
+/* the caption of the grid, hung on its left edge: the title in the label
+   voice, the note in the serif at note size, one row -- as the spread
+   captions its plate */
+#trackrecord .proofs-hint{
+  position:relative;z-index:2;
+  display:flex;flex-wrap:wrap;align-items:baseline;
+  gap:2px clamp(14px,1.6vw,22px);
+  margin:clamp(44px,6vw,72px) 0 clamp(12px,1.6vw,18px);
+  font-family:var(--f-display);
+  line-height:1.5;
+}
+#trackrecord .proofs-hint__t{
+  flex:0 0 auto;
+  font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
+  color:var(--ink-3);
+}
+#trackrecord .proofs-hint__n{
+  flex:1 1 20ch;min-width:0;
+  font-size:var(--t-small);color:var(--ink-4);
+  text-wrap:pretty;
+}
 #trackrecord .proofs{
   position:relative;z-index:2;
-  display:grid;gap:clamp(10px,1.6vw,16px);
+  display:grid;
+  gap:clamp(18px,2.6vw,28px) clamp(10px,1.6vw,16px);
   grid-template-columns:repeat(2,minmax(0,1fr));
 }
 @media (min-width:720px){ #trackrecord .proofs{grid-template-columns:repeat(3,minmax(0,1fr))} }
 #trackrecord .proofs figure{margin:0;min-width:0}
+/* six firms, six house styles, none of them ours: the plates are one
+   size, on one mat, in one grey, and only the one under the pointer is
+   allowed its colour. The whole figure is the hover target, so pointing
+   at a caption lights its plate. */
 #trackrecord .tile{
   display:block;width:100%;padding:0;margin:0;
   border:1px solid var(--line-2);
-  background:var(--panel-lo);cursor:zoom-in;
+  background:var(--panel-lo);
+  cursor:zoom-in;
+  transition:border-color var(--d) var(--e-out);
 }
 #trackrecord .tile img{
   display:block;width:100%;height:auto;
-  aspect-ratio:3/2;object-fit:contain;
-  filter:grayscale(1) brightness(.82) contrast(.92);
-  transition:filter .25s ease;
+  aspect-ratio:4/3;object-fit:contain;
+  filter:grayscale(1) brightness(.76) contrast(.9);
+  transition:filter var(--d) var(--e-out);
 }
-#trackrecord .tile:hover img,#trackrecord .tile:focus-visible img{filter:none}
-#trackrecord .tile:focus-visible{outline:1px solid var(--gold);outline-offset:2px}
-#trackrecord .proofs figcaption{
-  margin-top:8px;
-  font-size:var(--t-micro);
-  letter-spacing:var(--trk-caps);text-transform:uppercase;color:var(--ink-1);
+#trackrecord .proofs figure:hover .tile,
+#trackrecord .tile:focus-visible{border-color:var(--line-4)}
+#trackrecord .proofs figure:hover .tile img,
+#trackrecord .tile:focus-visible img{filter:none}
+#trackrecord .tile:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+/* the caption as the teaching plates are captioned: the number in mono,
+   the firm in the label voice, the note in the serif under it */
+#trackrecord .proofs figcaption,
+#trackrecord .zoom figcaption{
+  display:flex;gap:14px;align-items:baseline;
+  margin-top:12px;
+  font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
+  line-height:1.5;
 }
-#trackrecord .proofs figcaption small{
-  display:block;margin-top:4px;
-  letter-spacing:.02em;text-transform:none;
-  font-size:var(--t-small);color:var(--ink-3);line-height:1.5;
+#trackrecord .proofs figcaption > b,
+#trackrecord .zoom figcaption > b{color:var(--ink-4);font-weight:400;flex:0 0 auto;transition:color var(--d) var(--e-out)}
+#trackrecord .proofs figcaption > span,
+#trackrecord .zoom figcaption > span{min-width:0;color:var(--paper)}
+#trackrecord .proofs figcaption small,
+#trackrecord .zoom figcaption small{
+  display:block;margin-top:6px;
+  letter-spacing:0;text-transform:none;
+  font-size:var(--t-small);color:var(--ink-3);line-height:1.55;
+  text-wrap:pretty;
 }
-#trackrecord .proofs-hint{
-  position:relative;z-index:2;
-  margin:clamp(26px,3.6vw,40px) 0 clamp(14px,2vw,20px);text-align:center;
-  font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;color:var(--ink-5);
+#trackrecord .proofs figure:hover figcaption > b{color:var(--gold)}
+@media (max-width:620px){
+  /* two narrow columns: the number leads the firm's name as text, so a
+     long name wraps under it instead of beside it */
+  #trackrecord .proofs figcaption{display:block}
+  #trackrecord .proofs figcaption > b{margin-right:10px}
+  #trackrecord .proofs figcaption > span{display:inline}
 }
+@media (max-width:480px){
+  /* a phone: one plate per row, the width of the column, so a certificate
+     can be read where it stands and the caption has its own line */
+  #trackrecord .proofs{grid-template-columns:minmax(0,1fr);row-gap:28px}
+  #trackrecord .tile img{aspect-ratio:3/2}
+  #trackrecord .proofs figcaption{display:flex}
+  #trackrecord .proofs figcaption > b{margin-right:0}
+  #trackrecord .proofs figcaption > span{display:block}
+}
+
+/* ---------- the caveat ---------------------------------------------------- */
 #trackrecord .caveat{
   position:relative;z-index:2;
-  max-width:60ch;margin:clamp(34px,5vw,54px) auto 0;
-  padding:0 clamp(14px,3vw,28px);
-  background:var(--bg);
-  text-align:center;
-  font-size:var(--t-small);line-height:1.75;color:var(--ink-3);
+  display:grid;
+  grid-template-columns:var(--axis-l) var(--axis-r);
+  column-gap:var(--axis-gap);
+  row-gap:0;
+  align-items:start;
+  margin:clamp(52px,7.5vw,96px) 0 0;
+  text-align:left;
 }
-#trackrecord .caveat b{
-  display:block;margin-bottom:12px;
-  color:var(--ink-1);font-weight:400;
-  font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
+#trackrecord .caveat .hair{grid-column:2;grid-row:1;width:40px;margin:0 0 clamp(16px,2.2vw,24px)}
+#trackrecord .caveat__label{
+  grid-column:1;grid-row:2;
+  padding-top:calc(clamp(17px,1.45vw,21px) * .47 - 1px);   /* its baseline on the first line's */
+  text-align:right;
+  font-family:var(--f-display);
+  font-weight:400;
+  font-size:var(--t-micro);
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--ink-4);
 }
-#trackrecord .caveat p{margin:0 0 .8em}
-#trackrecord .caveat p:last-child{margin-bottom:0}
+#trackrecord .caveat__body{grid-column:2;grid-row:2;min-width:0;max-width:42ch}
+#trackrecord .caveat__body p{
+  margin:0;
+  font-family:var(--f-display);
+  font-size:clamp(17px,1.45vw,21px);
+  line-height:1.45;
+  letter-spacing:-.004em;
+  color:var(--ink-1);
+  text-wrap:pretty;
+  hanging-punctuation:first last;
+}
+#trackrecord .caveat__body p + p{margin-top:.7em}
+@media (max-width:620px){
+  #trackrecord .caveat{display:block;max-width:34ch;margin-left:auto;margin-right:auto;text-align:center}
+  #trackrecord .caveat .hair{margin:0 auto clamp(16px,2.2vw,24px)}
+  #trackrecord .caveat__label{display:block;padding:0;margin-bottom:14px;text-align:center}
+  #trackrecord .caveat__body{max-width:none}
+}
 
-/* the original, full size (a <dialog>, so it renders in the top layer) */
-#trackrecord .zoom{border:0;padding:0;background:transparent;max-width:min(96vw,1100px);max-height:96vh}
-#trackrecord .zoom::backdrop{background:rgba(3,3,4,.94)}
-#trackrecord .zoom img{display:block;max-width:100%;max-height:84vh;width:auto;height:auto;margin:0 auto;border:1px solid var(--line-3)}
-#trackrecord .zoom p{margin:12px auto 0;max-width:60ch;text-align:center;font-size:var(--t-small);line-height:1.5;color:var(--ink-3)}
-#trackrecord .zoom .close{
-  display:block;margin:14px auto 0;padding:8px 18px;
-  border:1px solid var(--line-3);background:transparent;color:var(--gold);
-  font:inherit;font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;cursor:pointer;
+/* ---------- the original -------------------------------------------------- */
+/* a <dialog>, so it renders in the top layer over everything, on the
+   footer's black. The image on a hairline, its caption hung on its left
+   edge as the plate's is, and the page's one link construction to close
+   it on that same line. The box is the image's width; overflow is
+   visible so the link's rule can grow into the margin as it does
+   everywhere else. */
+#trackrecord .zoom{
+  border:0;padding:0;
+  background:transparent;
+  color:var(--ink-2);
+  width:fit-content;
+  max-width:min(calc(100vw - 2 * var(--gutter)),1100px);
+  max-height:none;
+  overflow:visible;
+  text-align:left;
+}
+#trackrecord .zoom::backdrop{background:rgba(3,3,4,.97)}
+#trackrecord .zoom figure{margin:0;width:fit-content;max-width:100%}
+#trackrecord .zoom img{
+  display:block;max-width:100%;max-height:76vh;width:auto;height:auto;
+  border:1px solid var(--line-3);
+  background:var(--panel-lo);
+}
+#trackrecord .zoom figcaption{margin-top:14px}
+#trackrecord .zoom figcaption small{max-width:60ch}
+#trackrecord .zoom .close{margin:clamp(14px,2.4vh,24px) 0 0}
+
+@media (prefers-reduced-motion:reduce){
+  #trackrecord .tile,#trackrecord .tile img,#trackrecord .proofs figcaption > b{transition:none}
 }

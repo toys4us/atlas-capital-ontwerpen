@@ -1,4 +1,145 @@
-/* ===== founder =====
-   Nothing section-specific yet: this piece is built from the shared
-   components in base.css (.grp, dl.pairs, .still, .interstitial, .cta).
-   Add rules here, namespaced under #founder. */
+/* ===== founder: the credit as a level, the words as a pull-quote =====
+   Two blocks on the reel, each hung on one edge and nothing floating.
+
+   The credit (.ten) keeps the reel's axis: the numeral "10+" is the tag at
+   the end of a price level -- set large in the serif, right against the
+   gutter where every label sits, a dashed hairline of the gold running to
+   it from the strip's left edge (the liquidity line of the opening plate,
+   as furniture) -- and "jaar actief in trading" takes the value column on
+   the numeral's baseline, its five-word sub-line under it. The level
+   draws itself from the left while the numeral rises out of its baseline;
+   then the words, then the sub-line. One number, no instrument, no date:
+   a schema, not a chart.
+
+   The words (.word) leave the axis on purpose. A quote at credit size in
+   the value column is a quote marooned in a narrow column; at pull-quote
+   size it needs the strip's width, so it hangs on the left edge with the
+   hair above it and the signature under it on that same line -- the
+   signature the only naming of the voice (the group title names the
+   role). On a phone, where the credits centre, both blocks centre with
+   them and the level runs both sides of the numeral, the way the group
+   title sits on its rule. */
+#founder{--n:clamp(58px,7.2vw,96px)}       /* the numeral: a size the scale lacks */
+
+/* ---- the credit ------------------------------------------------------- */
+#founder .ten{
+  position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:var(--axis-l) var(--axis-r);
+  column-gap:var(--axis-gap);
+  align-items:baseline;
+  margin:clamp(8px,1.6vw,18px) 0 0;
+  text-align:left;
+}
+/* the tag: a flex row so the level takes whatever width the numeral
+   leaves; the level opts out of baseline alignment, so the row's
+   baseline is the numeral's and the grid hangs the words on it */
+#founder .ten__n{
+  grid-column:1;
+  display:flex;align-items:baseline;justify-content:flex-end;
+  gap:16px;
+  min-width:0;
+  margin-left:calc(-1 * clamp(18px,4vw,40px));   /* the level starts at the strip's edge (the roll's padding) */
+  font-family:var(--f-display);
+  font-size:var(--n);
+  font-weight:400;
+  line-height:1;
+  letter-spacing:var(--trk-h1);
+  font-variant-numeric:lining-nums;
+  color:var(--ink-1);
+}
+#founder .ten__lvl{
+  flex:1 1 auto;
+  align-self:flex-start;
+  margin-top:.40em;                     /* the middle of the figures       */
+  height:1px;
+  min-width:24px;
+  background:linear-gradient(90deg,transparent 0 5px,var(--line-4) 5px 8px) right center/8px 1px repeat-x;
+}
+#founder .ten__n .mask{flex:0 0 auto;padding-bottom:.12em;margin-bottom:-.12em}
+#founder .ten__num{display:inline-block;padding:0 .04em 0 .06em}
+/* the plus as a superior: half size, its top on the cap line, so the
+   numeral is two figures and a small sign, not a cross */
+#founder .ten__plus{
+  display:inline-block;
+  font-size:.46em;
+  line-height:1;
+  vertical-align:baseline;
+  position:relative;top:-.98em;
+  margin-left:.06em;
+}
+#founder .ten__v{
+  grid-column:2;
+  display:block;
+  min-width:0;
+  font-family:var(--f-display);
+  font-size:var(--t-h3);
+  line-height:var(--lh-tight);
+  letter-spacing:-.006em;
+  color:var(--ink-1);
+}
+#founder .ten__words{display:block}
+#founder .ten__sub{
+  display:block;
+  margin-top:6px;
+  font-family:var(--f-display);
+  font-size:var(--t-small);
+  letter-spacing:.01em;
+  line-height:1.5;
+  color:var(--ink-3);
+  text-wrap:pretty;
+}
+
+/* ---- the words --------------------------------------------------------- */
+#founder .word{
+  position:relative;z-index:2;
+  margin:clamp(40px,5.6vw,68px) 0 0;
+  text-align:left;
+}
+#founder .word .hair{display:block;width:40px;margin:0 0 clamp(18px,2.6vw,28px)}
+#founder .word blockquote{
+  margin:0;
+  max-width:31ch;
+  font-family:var(--f-display);
+  font-size:var(--t-quote);
+  font-weight:400;
+  line-height:1.28;
+  letter-spacing:-.012em;
+  color:var(--ink-1);
+  hanging-punctuation:first last;
+}
+#founder .word blockquote p{margin:0;text-wrap:pretty}
+#founder .word .nb{white-space:nowrap}       /* a hyphenated compound stays whole */
+/* the signature: italic at note size with a dash, the way a quotation is
+   signed -- it arrives last and slowly, so it is never there before the
+   words are */
+#founder .word .who{
+  margin:clamp(16px,2.2vw,24px) 0 0;
+  font-family:var(--f-display);
+  font-style:italic;
+  font-size:var(--t-small);
+  letter-spacing:.01em;
+  line-height:1.5;
+  color:var(--ink-3);
+}
+#founder .word .who::before{content:"\2014\00A0\00A0";color:var(--ink-4)}
+.js #founder .word > .who.reveal{transition-duration:calc(var(--d-reveal) * 1.2)}
+
+/* ---- a phone: everything centres with the reel ------------------------- */
+@media (max-width:620px){
+  #founder .ten{display:block;text-align:center;margin-top:8px}
+  /* the level runs from one edge of the screen to the other, the tag on it */
+  #founder .ten__n{justify-content:center;gap:14px;margin:0 calc(-1 * clamp(18px,4vw,40px))}
+  #founder .ten__n::after{                /* the level continues past the tag */
+    content:"";
+    flex:1 1 auto;align-self:flex-start;
+    margin-top:.40em;height:1px;min-width:24px;
+    background:linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px) left center/8px 1px repeat-x;
+  }
+  #founder .ten__lvl{flex:1 1 auto}
+  .js #founder .ten__lvl.draw{transform:none;transition:none}   /* both sides simply there */
+  #founder .ten__v{margin-top:clamp(10px,3vw,16px)}
+  #founder .word{max-width:34ch;margin-left:auto;margin-right:auto;text-align:center}
+  #founder .word .hair{margin-left:auto;margin-right:auto}
+  #founder .word blockquote{max-width:none}
+}

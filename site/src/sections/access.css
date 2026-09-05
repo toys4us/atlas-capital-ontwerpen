@@ -1,4 +1,127 @@
-/* ===== access =====
-   Nothing section-specific yet: this piece is built from the shared
-   components in base.css (.grp, dl.pairs, .still, .interstitial, .cta).
-   Add rules here, namespaced under #access. */
+/* ===== access: two levels =====
+   The two ways in, set as two levels on the reel's one axis instead of as
+   two columns of a price table. The label column is the chart's margin and
+   the gutter is its scale: each label sits on the axis the way a price tag
+   sits on a level, with the level drawn out to its left in the hairline
+   gold of the spread's plate. The open level is a solid line with the path
+   riding it (this is where things are); the one that opens later is the
+   dashed liquidity line of the spread -- drawn, not yet run through. Right
+   of the axis, on the value column with every other credit: what the level
+   holds, one line under it, and the link. The open level carries the one
+   call of the screen; the other a quiet link, the page's ordinary one.
+   Nothing is a price, a day or an instrument; the caption says so. */
+#access .levels{position:relative;z-index:2}
+#access .levels__grid{
+  display:grid;
+  grid-template-columns:var(--axis-l) var(--axis-r);
+  column-gap:var(--axis-gap);
+  row-gap:clamp(34px,4.6vw,56px);
+  align-items:baseline;
+}
+#access .level{display:contents}
+
+/* the scale: the figure is placed across the whole cell and the tag sits on
+   top of it, on the page's ground, so the line runs up to the word and stops */
+#access .level__scale{
+  grid-column:1;
+  position:relative;
+  text-align:right;
+  font-family:var(--f-display);
+  font-size:var(--t-micro);
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--ink-4);
+  white-space:nowrap;
+}
+#access .level__fig{
+  position:absolute;left:0;
+  top:calc(50% - 17px);height:32px;
+  width:calc(100% - 3px);                  /* a replaced box does not stretch
+                                              between left and right: sized, so
+                                              the line ends under the tag and
+                                              its round cap never shows past it */
+  display:block;overflow:visible;
+}
+#access .level__fig *{vector-effect:non-scaling-stroke}
+#access .fig__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-opacity:.8;stroke-linejoin:round;stroke-linecap:round}
+#access .fig__level{stroke:var(--gold);stroke-width:1;stroke-opacity:.28;stroke-linecap:butt}
+#access .fig__level--open{stroke-opacity:.55;stroke-dasharray:3 5}
+#access .level__tag{
+  position:relative;
+  display:inline-block;
+  padding-left:14px;
+  background:var(--bg);
+}
+
+/* the credit: the value column's own sizes, so the row reads as one more
+   credit on the reel */
+#access .level__body{grid-column:2;min-width:0}
+#access .level__value{
+  margin:0;
+  font-family:var(--f-display);
+  font-size:var(--t-h3);
+  font-weight:400;
+  line-height:var(--lh-tight);
+  letter-spacing:-.006em;
+  color:var(--ink-1);
+}
+#access .level__value em{font-style:italic;color:var(--gold)}
+#access .level__note{
+  margin:6px 0 0;
+  max-width:var(--measure-narrow);
+  font-size:var(--t-small);
+  line-height:1.5;
+  letter-spacing:.01em;
+  color:var(--ink-3);
+  text-wrap:pretty;
+}
+#access .level__body .cta{margin-top:clamp(12px,1.6vw,18px)}
+
+/* the caption, on the figure's own column, against the axis */
+#access .levels__cap{
+  width:calc((100% - var(--axis-gap)) * 2 / 5);
+  margin:clamp(16px,2.2vw,26px) 0 0;
+  text-align:right;
+  font-family:var(--f-display);
+  font-size:var(--t-micro);
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--ink-5);
+}
+
+/* the trace: the open level's own reveal, as on the spread. Under .js,
+   until motion.js marks it .is-in, the path is drawn back to nothing and
+   the level waits; in, the path draws itself left to right over the slow
+   settle and the level comes up under it. Never opacity on the figure
+   itself, so the probe sees it at once; the motion is in the ink. */
+.js #access .reveal.trace{opacity:1;transform:none;transition:none}
+.js #access .reveal.trace .fig__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.9s var(--e-reveal)}
+.js #access .reveal.trace .fig__level{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) .5s}
+.js #access .reveal.trace.is-in .fig__line{stroke-dashoffset:0}
+.js #access .reveal.trace.is-in .fig__level{opacity:1}
+@media (prefers-reduced-motion:reduce){
+  .js #access .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
+  .js #access .reveal.trace .fig__level{opacity:1;transition:none}
+}
+
+/* a phone: one column, each level its own block. The tag moves to the left
+   end of its line so that everything the level holds hangs on the one
+   edge under it, like the spread; the line runs from the tag to the
+   right edge and the figure is in the flow, so nothing needs covering. */
+@media (max-width:620px){
+  #access .levels__grid{grid-template-columns:minmax(0,1fr);row-gap:clamp(36px,9vw,48px)}
+  #access .level{display:block}
+  #access .level__scale,#access .level__body{grid-column:auto}
+  #access .level__scale{
+    display:grid;grid-template-columns:auto minmax(0,1fr);
+    align-items:center;column-gap:14px;
+    text-align:left;
+  }
+  #access .level__tag{order:1;padding:0;background:transparent}
+  #access .level__fig{order:2;position:static;top:auto;height:32px;width:100%}
+  #access .level__body{margin-top:14px}
+  #access .level__note{max-width:none}
+  #access .levels__cap{width:auto;text-align:left}
+}

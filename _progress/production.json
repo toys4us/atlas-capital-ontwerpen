@@ -1,8 +1,24 @@
 {
  "id": "production",
  "title": "Production",
- "wave": 0,
- "round": 0,
- "status": "queued",
- "history": []
+ "wave": 1,
+ "round": 1,
+ "status": "win",
+ "history": [
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.5,
+   "score_ref": 5,
+   "wowed": false,
+   "gap": "The spec table is tidy but generic: tracked small-cap labels, dashed rules and a gold italic are a competent editorial kit, not a signature. The hairlines are not even consistent — the dashed rule under the Discord row runs ~40px further right than the three above it, and only the tagline rule carries the gold tint, so the grid reads as accidental. At the bar, every rule would end on the same column, the label column would be tied to a real grid module, and one element (the tagline, the mono link, the 01 marker) would be pushed hard enough to be the thing you remember.",
+   "motion": "Staggered row fades and a blur-to-sharp reveal with a slow gold progress hairline — restrained and readable, though frame 1 shows the chart panel slicing through the headline mid-transition.",
+   "verdict": "A is a quiet, well-typeset spec table with a few hairline inconsistencies and no real signature; B is far more ambitious but arrives with clipped labels, nav artifacts, a mobile dead zone and broken word spacing, none of which survive a Site of the Day jury. A wins on execution; neither is shortlist-ready as-is.",
+   "confidence": 0.74,
+   "note": "production (E:/ClaudeCode_GUI/atlas-designs/site/src/sections/03-production.html + production.css), wave 1 round 1:\n- Kept the shared dl.pairs axis (label right of the axis in caps, value left of it) so the roll's rhythm holds into founder/education.\n- Under every value a \"level\": a dashed gold hairline (3/5 dash rhythm of the hero plate's liquidity line, --line-3) that starts at the axis and runs to the column's edge, ending on the group rule's line. Nothing drawn down the axis; the label column stays a margin.\n- Rows spaced by padding on dd (row-gap 0) so each level sits exactly betwee",
+   "ts": "2026-09-05T19:24:43"
+  }
+ ]
 }

@@ -7,12 +7,15 @@
    bleeds to the viewport's edge and has no left edge drawn at all; the
    last two words of the title run across it, in front. Under the band,
    on the line of its left edge, everything that is read after the title
-   in the order it is read: the figure's caption, the standfirst, the
-   call. Two hairlines only, top and bottom of the band, run from its left
-   to the page's edge like the rules of a chart; the frame is open on the
-   side the words come in from, on purpose, so no letter ever chops a
-   line. The band the words cover is empty (the line opens low and quiet
-   there; the session happens in the right two thirds).
+   in the order it is read: the figure's caption, the one line, the call
+   and its quiet aside. Two hairlines only, top and bottom of the band, run
+   from its left to the page's edge like the rules of a chart; the frame is
+   open on the side the words come in from, on purpose, so no letter ever
+   chops a line. The band the words cover is empty (the line opens low and
+   quiet there; the session happens in the right three quarters).
+
+   The mark leads from the bar, which is transparent over this screen (see
+   header.css): a mark, not a poster. Here the tagline is the statement.
 
    Everything is locked to the type in em of --t-hero, so the relationships
    hold at every width and on a short laptop screen:
@@ -34,9 +37,9 @@
              frame; a scrollbar's width of overshoot is clipped by .page)
    On load the mat comes up, the zones develop and the line draws itself
    while the words rise out of their baselines; then the column under the
-   band arrives top to bottom. On scroll the title leads (-.05) and the
-   band lags a little (.04), so the two layers part; the column stays with
-   the page. */
+   band arrives top to bottom, the one line resolving out of a blur. On
+   scroll the title leads (-.05) and the band lags a little (.04), so the
+   two layers part; the column stays with the page. */
 #hero{
   --kick:calc(17px + clamp(18px,2.4vw,32px));
   --card-w:min(100cqw,var(--wide));
@@ -91,7 +94,8 @@
 #hero .title__line{display:block}
 #hero .title__line > span{display:inline-block}
 
-/* the standfirst: read, not declaimed */
+/* the one line: read, not declaimed. It arrives out of a soft blur as it
+   rises -- the only blur on the page, for the one sentence. */
 #hero .subtitle{
   position:relative;z-index:2;
   margin:clamp(24px,4.6vh,44px) 0 0;
@@ -103,7 +107,34 @@
   color:var(--ink-2);
   text-wrap:pretty;
 }
-#hero .cta{position:relative;z-index:3;margin-top:clamp(22px,3.6vh,34px)}
+.js #hero .subtitle.reveal{
+  filter:blur(6px);
+  transition:opacity var(--d-fade) var(--e-reveal),transform var(--d-reveal) var(--e-reveal),filter var(--d-reveal) var(--e-reveal);
+}
+.js #hero .subtitle.reveal.is-in{filter:blur(0)}
+
+/* the calls: the one gold call, and after it, in the reading voice, the
+   quiet way in for someone who wants to read first. Two voices on one
+   line, and the second is not a second button: an italic sentence-half
+   with the page's ordinary underline. */
+#hero .calls{
+  position:relative;z-index:3;
+  display:flex;flex-wrap:wrap;align-items:baseline;
+  gap:6px clamp(18px,2.4vw,30px);
+  margin:clamp(22px,3.6vh,34px) 0 0;
+}
+#hero .calls .cta{margin:0}
+#hero .aside{
+  font-family:var(--f-display);
+  font-style:italic;
+  font-size:var(--t-small);
+  letter-spacing:.01em;
+  line-height:1.5;
+  color:var(--ink-3);
+  text-decoration-color:var(--line-3);
+  text-underline-offset:.26em;
+}
+#hero .aside:hover,#hero .aside:focus-visible{color:var(--gold-hi);text-decoration-color:var(--gold)}
 
 /* the plate: a mat (the ::before, which is what bleeds) with the figure
    on it; a hairline along its top and its bottom, none down its sides */
@@ -129,7 +160,10 @@
 #hero .fig__level{stroke-opacity:.55;stroke-dasharray:3 5;stroke-linecap:butt}
 /* labels: the page's label voice, positioned in the figure's own
    percentages so they stay with their zones at every width; they scale a
-   little with the plate so a phone's figure is not all label */
+   little with the plate so a phone's figure is not all label. The two
+   levels are labelled above their right ends, in one column at the
+   band's right edge like the axis of a chart; the orderblock's label sits
+   under its box, where nothing is drawn. */
 #hero .plate__tag{
   position:absolute;
   display:block;
@@ -144,9 +178,9 @@
   pointer-events:none;
   transition:opacity var(--d-fade) var(--e-reveal);
 }
-#hero .plate__tag--liq{right:2.2%;top:20%;transform:translateY(calc(-100% - 6px))}
-#hero .plate__tag--fvg{right:2.2%;top:40%;transform:translateY(6px)}
-#hero .plate__tag--ob{left:38.6%;top:89.8%;transform:translateY(4px)}
+#hero .plate__tag--liq{right:2.2%;top:28.4%;transform:translateY(calc(-100% - 6px))}
+#hero .plate__tag--fvg{right:2.2%;top:58.2%;transform:translateY(calc(-100% - 6px))}
+#hero .plate__tag--ob{left:38.4%;top:90.7%;transform:translateY(3px)}
 /* the caption: the figure's number in the label voice, its note in the
    serif at note size, one row, hung on the band's left edge */
 #hero .plate figcaption{
@@ -185,12 +219,14 @@
   .js #hero .reveal.trace::before{border-color:var(--line-3);background-color:var(--mat)}
   .js #hero .reveal.trace .fig__zone,.js #hero .reveal.trace .plate__tag{opacity:1;transition:none}
   .js #hero .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
+  .js #hero .subtitle.reveal{filter:none;transition:none}
+  #hero .aside{transition:none}
 }
 
 /* the desk: the band lifted out of the flow and tipped in at the right,
    the last two words running across it; the figure stays in the flow, so
    its caption lands under the band's bottom rule at the band's left edge,
-   and the standfirst and the call follow on that line */
+   and the one line and the calls follow on that line */
 @media (min-width:900px){
   #hero .plate{margin:calc(var(--t-hero) * .37 + 16px) 0 0 var(--plate-x);width:var(--plate-w)}
   #hero .plate__px{
@@ -207,12 +243,20 @@
     font-size:clamp(17px,1.4vw,21px);
     line-height:1.5;
   }
-  #hero .cta{margin:clamp(20px,3vh,30px) 0 0 var(--plate-x)}
+  #hero .calls{margin:clamp(20px,3vh,30px) 0 0 var(--plate-x)}
 }
-/* narrower: one column in reading order -- the words, the standfirst,
-   the call, then the band with its caption; the band runs from edge to
-   edge of the screen, the figure stays inside the gutters */
+/* narrower: one column in reading order -- the words, then the band with
+   its caption, the one line, the calls; the band runs from edge to edge of
+   the screen, the figure stays inside the gutters, and the whole of it is
+   the first screen of a phone */
 @media (max-width:899px){
-  #hero .plate{order:9;margin-top:clamp(34px,7vw,56px)}
+  #hero .plate{margin-top:clamp(30px,6vw,48px)}
   #hero .plate__frame::before{left:calc(-1 * var(--gutter));right:calc(-1 * var(--gutter))}
+  #hero .subtitle{margin-top:clamp(22px,4vh,36px)}
+}
+/* a phone: the aside drops under the call and starts where the call's
+   label starts, after the rule, so the two read as one sentence */
+@media (max-width:619px){
+  #hero .calls{flex-direction:column;align-items:flex-start;gap:2px}
+  #hero .aside{margin-left:calc(clamp(22px,3vw,36px) + 14px)}
 }

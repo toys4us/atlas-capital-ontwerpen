@@ -4,12 +4,129 @@
       <img class="wm__mark" src="assets/logo-mark.svg" alt="" width="420" height="342">
       <b>Atlas&nbsp;Capital</b>
     </a>
-    <div class="bar">
-      <div class="langsw" role="group" aria-label="Taal / Language">
-        <button type="button" data-lang="nl" aria-pressed="true">NL</button>
-        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    <!-- the one call, dead-centre of the bar. Two labels in one mask: the
+         short one while another gold call is on screen, the full one with
+         its rule and arrow when none is (motion.js toggles .solid); the
+         swap slides along the reading axis like the rail's label. Both
+         rows share one cell, so the box is as wide as the wider row and
+         nothing beside it ever moves. -->
+    <a class="cta" href="https://discord.gg/78Ff2GuSfW">
+      <span class="cta__track">
+        <span class="r r--s">Discord</span>
+        <span class="r r--l"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></span>
+      </span>
+    </a>
+    <!-- the contents line: two anchors either side of the call on a desk,
+         a drawer of levels under the bar everywhere else. The reel number
+         in each row is read off the page's own group titles by the script
+         below, so it is never typed twice; the row is empty without it. -->
+    <nav class="nav" id="hdr-nav" aria-label="Secties / Sections">
+      <div class="lv lv--l">
+        <a href="#educatie"><b class="n" aria-hidden="true"></b><span lang="nl">Educatie</span><span lang="en">Education</span></a>
+        <a href="#kanalen"><b class="n" aria-hidden="true"></b><span lang="nl">Kanalen</span><span lang="en">Channels</span></a>
       </div>
-      <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="l"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></span><span class="s"><span lang="nl">Discord</span><span lang="en">Discord</span></span></a>
-    </div>
+      <div class="lv lv--r">
+        <a href="#trackrecord"><b class="n" aria-hidden="true"></b><span lang="nl">Trackrecord</span><span lang="en">Track record</span></a>
+        <a href="#access"><b class="n" aria-hidden="true"></b><span lang="nl">Toegang</span><span lang="en">Access</span></a>
+      </div>
+      <div class="foot">
+        <div class="langsw" role="group" aria-label="Taal / Language">
+          <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="tk" href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
+      </div>
+    </nav>
+    <button class="menu" type="button" aria-expanded="false" aria-controls="hdr-nav">
+      <span class="menu__open"><span lang="nl">Menu</span><span lang="en">Menu</span></span>
+      <span class="menu__close"><span lang="nl">Sluiten</span><span lang="en">Close</span></span>
+    </button>
   </div>
+  <script>
+  /* the bar's own state: .is-top (transparent over the spread; motion.js
+     sets the same class by the same rule, this runs first so the first
+     paint is right), the drawer under the bar on anything narrower than
+     the full row, and aria-current on the anchor whose section holds the
+     upper part of the viewport. One passive listener, one rAF. */
+  (function(){
+    var hdr = document.getElementById("header"); if (!hdr) return;
+    var W = window, root = document.documentElement;
+    var nav = hdr.querySelector(".nav"), btn = hdr.querySelector(".menu");
+    var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+    var wide = W.matchMedia("(min-width: 1120px)");
+    function pad(n){ return n < 10 ? "0" + n : "" + n; }
+    /* which section each anchor leads to, and its reel number */
+    var secs = [];
+    (function(){
+      var grps = Array.prototype.slice.call(document.querySelectorAll(".roll .grp")), i, t, g, n;
+      for (i = 0; i < links.length; i++) {
+        try { t = document.querySelector(links[i].getAttribute("href")); } catch(e) { t = null; }
+        if (!t) { secs.push(null); continue; }
+        secs.push(t.closest("section") || t);
+        g = t.classList.contains("grp") ? t : t.querySelector(".grp");
+        n = links[i].querySelector(".n");
+        if (g && n && grps.indexOf(g) >= 0) n.textContent = pad(grps.indexOf(g) + 1);
+      }
+    })();
+    var cur = null;
+    function frame(){
+      ticking = false;
+      var y = W.scrollY || W.pageYOffset || 0;
+      hdr.classList.toggle("is-top", y < 8);
+      var line = (W.innerHeight || root.clientHeight) * 0.4, at = null, i, r;
+      for (i = 0; i < secs.length; i++) {
+        if (!secs[i]) continue;
+        r = secs[i].getBoundingClientRect();
+        if (r.top <= line && r.bottom > line) at = links[i];
+      }
+      if (at === cur) return;
+      if (cur) cur.removeAttribute("aria-current");
+      if (at) at.setAttribute("aria-current", "location");
+      cur = at;
+    }
+    var ticking = false;
+    function ask(){ if (!ticking) { ticking = true; W.requestAnimationFrame(frame); } }
+    W.addEventListener("scroll", ask, { passive: true });
+    W.addEventListener("resize", ask);
+    frame();
+    /* the drawer */
+    var open = false;
+    function focusables(){
+      return Array.prototype.filter.call(hdr.querySelectorAll("a[href],button"), function(el){
+        return el.offsetParent !== null || el.getClientRects().length;
+      });
+    }
+    function setOpen(v){
+      if (v === open) return;
+      open = v;
+      hdr.classList.toggle("is-open", v);
+      btn.setAttribute("aria-expanded", v ? "true" : "false");
+      if (v) {
+        nav.classList.add("is-open");
+        void nav.offsetHeight;
+        nav.classList.add("is-in");
+        root.style.overflow = "hidden";
+        try { links[0].focus({ preventScroll: true }); } catch(e) {}
+      } else {
+        nav.classList.remove("is-in");
+        nav.classList.remove("is-open");
+        root.style.overflow = "";
+      }
+    }
+    btn.addEventListener("click", function(){ setOpen(!open); });
+    nav.addEventListener("click", function(e){
+      if (e.target.closest && e.target.closest('a[href^="#"]')) setOpen(false);
+    });
+    document.addEventListener("keydown", function(e){
+      if (!open) return;
+      if (e.key === "Escape" || e.key === "Esc") { setOpen(false); btn.focus(); return; }
+      if (e.key !== "Tab") return;
+      var f = focusables(), first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+    function onWide(){ if (wide.matches) setOpen(false); }
+    if (wide.addEventListener) wide.addEventListener("change", onWide); else if (wide.addListener) wide.addListener(onWide);
+  })();
+  </script>
 </header>

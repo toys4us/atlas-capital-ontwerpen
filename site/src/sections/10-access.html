@@ -1,7 +1,43 @@
 <section id="access">
   <div class="grp"><h2><span lang="nl">Toegang</span><span lang="en">Access</span></h2></div>
-  <dl class="pairs">
-    <dt><span lang="nl">Nu</span><span lang="en">Now</span></dt><dd><em><span lang="nl">Gratis</span><span lang="en">Free</span></em><small><span lang="nl">negen open kanalen en de educatie</span><span lang="en">nine open channels and the education</span></small></dd>
-    <dt>Later</dt><dd><span lang="nl">Premium opent</span><span lang="en">Premium opens</span><small><span lang="nl">prijs en datum worden in de server aangekondigd</span><span lang="en">price and date are announced in the server</span></small></dd>
-  </dl>
+
+  <!-- Two levels on the one axis. The label column is the chart's margin,
+       the gutter is its scale, and the two labels sit on it the way a price
+       tag sits on a level. Right of the axis, what each level holds. The
+       open level is a hairline with the path riding it; the one that opens
+       later is dashed -- the level is drawn, nothing runs through it yet.
+       Schema only: no price, no day, no instrument. -->
+  <div class="levels" data-stagger="110">
+   <div class="levels__grid">
+    <div class="level level--now">
+      <div class="level__scale">
+        <svg class="level__fig reveal trace" viewBox="0 0 300 32" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <line class="fig__level" x1="0" y1="16" x2="300" y2="16"/>
+          <path class="fig__line" pathLength="1" d="M0 27 34 24 60 28 96 20 122 24 156 16 170 19 184 16 300 16"/>
+        </svg>
+        <span class="level__tag reveal"><span lang="nl">Nu</span><span lang="en">Now</span></span>
+      </div>
+      <div class="level__body reveal">
+        <p class="level__value"><em><span lang="nl">Gratis</span><span lang="en">Free</span></em></p>
+        <p class="level__note"><span lang="nl">Negen open kanalen en de educatie in tien onderwerpen.</span><span lang="en">Nine open channels and the education in ten topics.</span></p>
+        <a class="cta solid" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom binnen</span><span lang="en">Come in</span></a>
+      </div>
+    </div>
+
+    <div class="level level--later">
+      <div class="level__scale">
+        <svg class="level__fig reveal draw" height="32" aria-hidden="true" focusable="false">
+          <line class="fig__level fig__level--open" x1="0" y1="16" x2="100%" y2="16"/>
+        </svg>
+        <span class="level__tag reveal"><span lang="nl">Later</span><span lang="en">Later</span></span>
+      </div>
+      <div class="level__body reveal">
+        <p class="level__value"><span lang="nl">Premium opent</span><span lang="en">Premium opens</span></p>
+        <p class="level__note"><span lang="nl">Zes kanalen erbij. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Six more channels. Price and date are announced in the server.</span></p>
+        <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Volg het in de server</span><span lang="en">Follow it in the server</span></a>
+      </div>
+    </div>
+   </div>
+   <p class="levels__cap reveal"><span lang="nl">Fig. &mdash; Twee niveaus, schematisch</span><span lang="en">Fig. &mdash; Two levels, as a schema</span></p>
+  </div>
 </section>

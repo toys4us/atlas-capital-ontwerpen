@@ -1,84 +1,291 @@
 /* ===== header =====
-   One bar, three things: the mark and the name on the left, and on the
-   right the two languages and the one link that matters. The bar shares
-   the spread's gutter and width, so the wordmark sits on the same axis as
-   the first word of the title below it. At the top of the page the bar is
-   transparent -- the spread owns the fold -- and it gains its ground and a
-   hairline once the visitor has moved (motion.js toggles .is-top).
+   A running head, set like the page: the mark and the name on the left,
+   the two languages on the right, and dead-centre between them the one
+   call. On a desk the contents line sits either side of the call -- two
+   anchors left, two right -- so the call is the spine of the bar the way
+   the title is the spine of the spread. The four flexible tracks are
+   equal (minmax(0,1fr) each), so the call is centred whatever the width
+   of the name, the anchors or the switch, in either language.
+
+   At the top of the page the bar is transparent and 52px tall: the spread
+   owns the fold, and the bar is its frame. Once the visitor has moved it
+   lifts 8px (a transform, so the document never reflows), takes its glass
+   and its blur, and draws the one hairline under itself. The anchor whose
+   section holds the upper part of the viewport carries a dashed gold
+   hairline under the word: the liquidity line of the figure, the width of
+   the word, drawn from the left; the chosen language carries the solid
+   one. Both are rules under words, so the bar has one idiom.
 
    One gold call per viewport, always. While the spread's (or the end
    card's) is on screen the link here is quiet: one word in the label grey
-   and the small arrow, also grey -- no gold in it at all. When neither is,
-   motion.js gives it .solid and it becomes the call itself: the gold rule
-   draws in front of the full label and the arrow turns gold, the same
-   construction as the spread's, moved up into the bar. It is the last
-   thing in the bar, so when the rule draws it grows leftward into free
-   space and nothing else moves. Without JavaScript it stays quiet, and
-   the spread's call is the one. */
+   and the small arrow, also grey. When neither is, motion.js gives it
+   .solid and the full label slides up into the mask with its rule drawn
+   and its arrow gold -- the same construction as the spread's, moved up
+   into the bar. The two labels share one cell, so the box is the wider
+   of the two and nothing beside it moves. Without JavaScript it stays
+   quiet, and the spread's call is the one.
+
+   Narrower than the full row the anchors live in a drawer under the bar:
+   the four sections set as levels -- the reel number in mono at the left
+   like a price on an axis, the name in the serif -- one hairline between
+   each, the current one's a dashed gold line. On a phone the switch goes
+   in with them and the bar is three things: the name, the call, Menu. */
 #header{
+  --bar:var(--hdr-h);                 /* the visible height of the bar    */
+  --lift:8px;                          /* what it loses once scrolled      */
   position:sticky;top:0;z-index:50;
   padding:0 var(--gutter);
   background:var(--bg);
-  border-bottom:1px solid var(--line-1);
-  transition:background-color .25s var(--e-out),border-color .25s var(--e-out);
+  border-bottom:1px solid var(--line-2);
+  -webkit-backdrop-filter:blur(0);backdrop-filter:blur(0);
+  transition:transform .5s var(--e-out),background-color .35s var(--e-out),border-color .35s var(--e-out),
+             -webkit-backdrop-filter .35s var(--e-out),backdrop-filter .35s var(--e-out);
 }
 .js #header.is-top{background:rgba(8,9,11,0);border-bottom-color:transparent}
+.js #header:not(.is-top){
+  --bar:calc(var(--hdr-h) - var(--lift));
+  transform:translateY(calc(-1 * var(--lift)));
+  background:var(--bg-glass);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+}
+.js #header.is-open{background:rgba(8,9,11,.96);border-bottom-color:var(--line-2);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+
+/* the row: a grid, the call in an auto track between equal flexible ones */
 #header .inner{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto auto;   /* a phone: name, call, menu */
+  align-items:center;
+  column-gap:clamp(14px,2.4vw,32px);
   min-height:var(--hdr-h);
   max-width:var(--wide);margin:0 auto;
+  transition:padding .5s var(--e-out);
 }
-#header .wm{display:inline-flex;align-items:center;gap:10px;text-decoration:none;flex:0 0 auto;min-width:0}
+.js #header:not(.is-top) .inner{padding-top:var(--lift)}
+
+/* the mark and the name */
+#header .wm{grid-column:1;justify-self:start;display:inline-flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
 #header .wm__mark{display:block;width:var(--logo-nav);height:auto;flex:0 0 auto}
 #header .wm b{
-  display:block;
-  white-space:nowrap;
-  font-weight:500;font-size:var(--t-micro);letter-spacing:var(--trk-caps-wide);text-transform:uppercase;color:var(--paper);
+  display:block;white-space:nowrap;
+  font-weight:500;font-size:var(--t-micro);letter-spacing:var(--trk-caps-wide);text-transform:uppercase;line-height:1;
+  color:var(--paper);
   transition:color var(--d) var(--e-out);
 }
 #header .wm:hover b{color:var(--gold-hi)}
-#header .bar{display:flex;align-items:center;gap:clamp(14px,2.4vw,30px);flex:0 0 auto}
+
+/* the call: two rows in one cell, one of them in the mask at a time */
 #header .cta{
-  gap:9px;
-  padding:8px 0 7px;                /* no room reserved for the rule: quiet, it has none */
-  font-size:var(--t-micro);
-  letter-spacing:var(--trk-caps);
+  grid-column:2;
+  display:block;padding:0;
+  font-size:var(--t-micro);letter-spacing:var(--trk-caps);line-height:1;
   color:var(--ink-3);
   transition:color .3s var(--e-out),transform var(--d-fast) var(--e-out);
 }
-/* the rule is there in both states; quiet, it has no length (and takes
-   its gap with it), so the draw is one transition and not a cut */
-#header .cta::before{position:static;flex:0 0 auto;width:0;margin-right:-9px;transition:width .4s var(--e-out),margin-right .4s var(--e-out)}
-#header .cta::after{display:block;background:var(--ink-4);transition:transform var(--d) var(--e-out),background-color .3s var(--e-out)}
-#header .cta .l{display:none}
-#header .cta .s{display:inline}
-#header .cta:hover,#header .cta:focus-visible{color:var(--paper)}
-#header .cta:hover::after,#header .cta:focus-visible::after{transform:translate(1px,-1px);background:var(--gold)}
+#header .cta::before,#header .cta::after{content:none;display:none}
+#header .cta__track{display:grid;overflow:hidden;padding:0 16px;margin:0 -16px}   /* room for the rule to grow */
+#header .cta .r{
+  grid-area:1/1;
+  position:relative;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:8px 0;
+  white-space:nowrap;
+  transition:transform .6s var(--e-out);
+}
+#header .cta .r::after{
+  content:"";flex:0 0 auto;
+  width:9px;height:9px;margin-left:-2px;
+  background:var(--ink-4);
+  -webkit-mask:var(--arrow) center/9px 9px no-repeat;mask:var(--arrow) center/9px 9px no-repeat;
+  transition:transform var(--d) var(--e-out),background-color .3s var(--e-out);
+}
+/* the rule is placed, not flowed; it draws from the label leftward */
+#header .cta .r--l{padding-left:34px}
+#header .cta .r--l::before{
+  content:"";position:absolute;left:0;top:calc(50% - .5px);
+  width:22px;height:1px;
+  background:var(--gold);
+  transform:scaleX(0);transform-origin:right center;
+  transition:transform .55s var(--e-out),background-color .3s var(--e-out);
+}
+#header .cta .r--l{transform:translateY(110%)}
+#header .cta.solid .r--s{transform:translateY(-110%)}
+#header .cta.solid .r--l{transform:none}
+#header .cta.solid .r--l::before{transform:none}
 #header .cta.solid{color:var(--paper);font-size:var(--t-micro);letter-spacing:var(--trk-caps)}
-#header .cta.solid::before{width:22px;margin-right:0}
-#header .cta.solid::after{background:var(--gold)}
-#header .cta.solid .l{display:inline}
-#header .cta.solid .s{display:none}
+#header .cta.solid .r::after{background:var(--gold)}
+#header .cta:hover,#header .cta:focus-visible{color:var(--paper)}
+#header .cta:hover .r::after,#header .cta:focus-visible .r::after{transform:translate(1px,-1px);background:var(--gold)}
 #header .cta.solid:hover,#header .cta.solid:focus-visible{color:var(--gold-hi)}
-#header .cta.solid:hover::before,#header .cta.solid:focus-visible::before{width:34px;margin-right:0}
-#header .cta.solid:hover::after,#header .cta.solid:focus-visible::after{background:var(--gold-hi)}
-/* the bar does not arrive: it is the frame, and the picture arrives in it.
-   (A fade on a sticky bar, or on anything inside one, promotes a layer that
-   paints a box around the wordmark for as long as the transition lives.) */
-/* a phone: the same three things, tighter, and nothing wraps. The link
-   keeps its one word in both states; the rule is shorter. */
+#header .cta.solid:hover .r--l::before,#header .cta.solid:focus-visible .r--l::before{transform:scaleX(1.5);background:var(--gold-hi)}
+#header .cta.solid:hover .r::after,#header .cta.solid:focus-visible .r::after{background:var(--gold-hi)}
+
+/* the menu word */
+#header .menu{
+  grid-column:3;justify-self:end;
+  appearance:none;-webkit-appearance:none;
+  background:transparent;border:0;margin:0;padding:8px 0;
+  font-family:var(--f-display);font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;line-height:1;
+  color:var(--ink-3);
+  cursor:pointer;
+  transition:color .3s var(--e-out);
+}
+#header .menu:hover,#header .menu:focus-visible{color:var(--paper)}
+#header .menu__close{display:none}
+#header.is-open .menu__open{display:none}
+#header.is-open .menu__close{display:inline}
+
+/* the anchors, wherever they are: no number until the script writes one */
+#header .nav a{text-decoration:none}
+#header .n:empty{display:none}
+
+/* ---- the drawer: everything narrower than the full row ---------------- */
+@media (max-width:1119px){
+  /* without JavaScript the contents line is simply a second row of the bar */
+  #header .nav{
+    grid-column:1/-1;grid-row:2;
+    display:flex;flex-wrap:wrap;align-items:center;column-gap:22px;row-gap:6px;
+    padding:2px 0 12px;
+  }
+  #header .lv{display:contents}
+  #header .nav a,#header .tk{
+    font-family:var(--f-display);font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;line-height:1;
+    color:var(--ink-3);white-space:nowrap;
+  }
+  #header .foot{display:flex;align-items:center;gap:22px;margin-left:auto}
+  /* with it, a panel under the bar, the height of what is left of the screen */
+  .js #header .nav{
+    display:none;
+    position:absolute;left:0;right:0;top:100%;
+    height:calc(100vh - var(--bar));height:calc(100svh - var(--bar));
+    padding:clamp(18px,4vh,40px) var(--gutter) clamp(18px,3vh,28px);
+    flex-direction:column;flex-wrap:nowrap;align-items:stretch;
+    background:rgba(8,9,11,.96);
+    -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+    overflow:auto;overscroll-behavior:contain;
+    clip-path:inset(0 0 100% 0);
+    transition:clip-path .6s var(--e-out);
+  }
+  .js #header .nav.is-open{display:flex}
+  .js #header .nav.is-in{clip-path:inset(0)}
+  .js #header .lv{display:block;max-width:560px}
+  /* the levels: the number on the axis, the name, a hairline under each */
+  .js #header .nav a[href^="#"]{
+    position:relative;
+    display:flex;align-items:baseline;gap:clamp(16px,3vw,24px);
+    padding:clamp(14px,2.4vh,20px) 0;
+    font-family:var(--f-display);font-size:clamp(26px,4.6vw,34px);font-weight:400;
+    letter-spacing:-.008em;text-transform:none;line-height:1.1;
+    color:var(--ink-1);white-space:nowrap;
+    border-bottom:1px solid var(--line-1);
+    transform:translateY(16px);
+    transition:transform .8s var(--e-reveal),color .3s var(--e-out),border-color .3s var(--e-out);
+  }
+  .js #header .nav.is-in a[href^="#"]{transform:none}
+  .js #header .lv--l a:nth-child(2){transition-delay:.06s}
+  .js #header .lv--r a:nth-child(1){transition-delay:.12s}
+  .js #header .lv--r a:nth-child(2){transition-delay:.18s}
+  .js #header .nav a[href^="#"] .n{
+    display:block;flex:0 0 2.6em;
+    font-family:var(--f-mono);font-size:var(--t-caption);font-weight:400;letter-spacing:var(--trk-mono);
+    font-variant-numeric:tabular-nums;
+    color:var(--ink-4);
+  }
+  .js #header .nav a[href^="#"]:hover,.js #header .nav a[href^="#"]:focus-visible{color:var(--paper)}
+  .js #header .nav a[href^="#"]:focus-visible{outline-offset:-4px}
+  /* the current one: its hairline is the liquidity line */
+  .js #header .nav a[aria-current]{color:var(--paper);border-bottom-color:transparent}
+  .js #header .nav a[aria-current]::after{
+    content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
+    background:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+  }
+  .js #header .nav a[aria-current] .n{color:var(--gold)}
+  /* the foot: the switch and the one social link, on the last line */
+  .js #header .foot{
+    margin:auto 0 0;max-width:560px;
+    display:flex;align-items:center;justify-content:space-between;gap:22px;
+    padding-top:clamp(18px,3vh,28px);
+  }
+  .js #header .foot .langsw{gap:10px}
+  .js #header .foot .langsw button{padding:8px 6px;font-size:var(--t-caption)}
+  .js #header .foot .langsw button::after{left:6px;right:calc(6px + var(--trk-caps))}
+  .js #header .tk{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:8px 0;
+    font-size:var(--t-caption);
+    color:var(--ink-3);text-decoration:none;
+    transition:color .3s var(--e-out);
+  }
+  .js #header .tk::after{
+    content:"";width:9px;height:9px;
+    background:var(--ink-4);
+    -webkit-mask:var(--arrow) center/9px 9px no-repeat;mask:var(--arrow) center/9px 9px no-repeat;
+    transition:background-color .3s var(--e-out);
+  }
+  .js #header .tk:hover,.js #header .tk:focus-visible{color:var(--paper)}
+  .js #header .tk:hover::after{background:var(--gold)}
+}
+
+/* ---- the middle: the call centred, the menu word at the right ----------- */
+@media (min-width:620px) and (max-width:1119px){
+  #header .inner{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
+}
+
+/* ---- the full row ------------------------------------------------------- */
+@media (min-width:1120px){
+  #header .inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto minmax(0,1fr) minmax(0,1fr)}
+  #header .nav,#header .foot{display:contents}
+  #header .menu,#header .tk{display:none}
+  #header .lv{display:flex;align-items:center;gap:clamp(18px,2.2vw,30px)}
+  #header .lv--l{grid-column:2;justify-self:end}
+  #header .cta{grid-column:3}
+  #header .lv--r{grid-column:4;justify-self:start}
+  #header .langsw{grid-column:5;justify-self:end}
+  #header .lv a{
+    position:relative;display:block;
+    padding:8px 0;
+    font-family:var(--f-display);font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;line-height:1;
+    color:var(--ink-3);white-space:nowrap;
+    transition:color .3s var(--e-out);
+  }
+  #header .lv a .n{display:none}
+  /* the marker: a dashed hairline the width of the word, drawn from the left */
+  #header .lv a::after{
+    content:"";position:absolute;left:0;right:var(--trk-caps);bottom:3px;height:1px;
+    background:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+    transform:scaleX(0);transform-origin:left center;
+    transition:transform .55s var(--e-out);
+  }
+  #header .lv a:hover,#header .lv a:focus-visible{color:var(--paper)}
+  #header .lv a[aria-current]{color:var(--paper)}
+  #header .lv a[aria-current]::after{transform:none}
+}
+
+/* ---- a phone: three things, tighter, the short label in both states ----- */
 @media (max-width:619px){
-  #header .inner{gap:8px}
+  #header .inner{column-gap:14px}
   #header .wm{gap:7px}
   #header .wm b{font-size:var(--t-nano);letter-spacing:.16em}
-  #header .bar{gap:16px}
-  #header .cta{font-size:var(--t-nano);letter-spacing:.12em;gap:7px}
-  #header .cta::before{margin-right:-7px}
-  #header .cta.solid{font-size:var(--t-nano);letter-spacing:.12em}
-  #header .cta.solid::before{width:16px;margin-right:0}
-  #header .cta.solid .l{display:none}
-  #header .cta.solid .s{display:inline}
-  #header .langsw{gap:0}
-  #header .langsw button{padding:8px 5px;font-size:var(--t-nano)}
-  #header .langsw button::after{left:5px;right:calc(5px + var(--trk-caps))}
+  #header .cta{font-size:var(--t-nano);letter-spacing:.12em}
+  #header .cta .r--l{display:none}
+  #header .cta .r--s{padding-left:23px;gap:7px}       /* room for a 16px rule */
+  #header .cta .r--s::before{
+    content:"";position:absolute;left:0;top:calc(50% - .5px);
+    width:16px;height:1px;
+    background:var(--gold);
+    transform:scaleX(0);transform-origin:right center;
+    transition:transform .55s var(--e-out),background-color .3s var(--e-out);
+  }
+  #header .cta.solid .r--s{transform:none}
+  #header .cta.solid .r--s::before{transform:none}
+  #header .cta.solid:hover .r--s::before{transform:scaleX(1.5)}
+  /* the drawer covers the spread's call: the bar's is the one while it is open */
+  #header.is-open .cta{color:var(--paper)}
+  #header.is-open .cta .r--s::before{transform:none}
+  #header.is-open .cta .r::after{background:var(--gold)}
+  #header .menu{font-size:var(--t-nano);letter-spacing:.14em}
+}
+
+@media (prefers-reduced-motion:reduce){
+  #header,#header .inner,#header .cta .r,#header .cta .r::before,#header .cta .r::after,#header .lv a::after,
+  .js #header .nav,.js #header .nav a[href^="#"]{transition:none}
 }

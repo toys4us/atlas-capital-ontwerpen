@@ -1,23 +1,52 @@
 <section id="markets">
   <div class="grp"><h2><span lang="nl">Markten</span><span lang="en">Markets</span></h2></div>
-  <dl class="pairs">
-    <dt><span lang="nl">Indices</span><span lang="en">Indices</span></dt><dd>Nasdaq<small>NQ</small></dd>
-    <dd class="cont">S&amp;P 500<small>ES</small></dd>
-    <dd class="cont">Dow Jones</dd>
-    <dt><span lang="nl">Metalen</span><span lang="en">Metals</span></dt><dd><span lang="nl">Goud</span><span lang="en">Gold</span><small>XAUUSD</small></dd>
-    <dd class="cont"><span lang="nl">Zilver</span><span lang="en">Silver</span></dd>
-    <dt><span lang="nl">Energie</span><span lang="en">Energy</span></dt><dd><span lang="nl">Olie</span><span lang="en">Oil</span></dd>
-    <dt>Crypto</dt><dd>Bitcoin</dd>
-    <dd class="cont">Altcoins</dd>
+
+  <!-- the board: the instruments set like a desk board, and nothing a desk
+       board would show next to them. Each group is a credit row on the reel's
+       axis (the label right of the gutter, the rows left of it); every row
+       ends on a hairline, and every group closes on a dashed level -- the
+       liquidity line of the opening spread, run across the strip. The one
+       mono voice is the ticker, and only where the client gave one: NQ, ES,
+       XAUUSD. No price, no change, no dash where a number would sit. -->
+  <dl class="board" data-stagger="70">
+    <div class="board__grp">
+      <dt class="reveal"><span lang="nl">Indices</span><span lang="en">Indices</span></dt>
+      <dd class="reveal"><span class="board__name">Nasdaq</span><span class="num">NQ</span></dd>
+      <dd class="reveal"><span class="board__name">S&amp;P&nbsp;500</span><span class="num">ES</span></dd>
+      <dd class="reveal"><span class="board__name">Dow Jones</span></dd>
+      <div class="board__level reveal draw" aria-hidden="true"></div>
+    </div>
+    <div class="board__grp">
+      <dt class="reveal"><span lang="nl">Metalen</span><span lang="en">Metals</span></dt>
+      <dd class="reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><span class="num">XAUUSD</span></dd>
+      <dd class="reveal"><span class="board__name"><span lang="nl">Zilver</span><span lang="en">Silver</span></span></dd>
+      <div class="board__level reveal draw" aria-hidden="true"></div>
+    </div>
+    <div class="board__grp">
+      <dt class="reveal"><span lang="nl">Energie</span><span lang="en">Energy</span></dt>
+      <dd class="reveal"><span class="board__name"><span lang="nl">Olie</span><span lang="en">Oil</span></span></dd>
+      <div class="board__level reveal draw" aria-hidden="true"></div>
+    </div>
+    <div class="board__grp">
+      <dt class="reveal"><span lang="nl">Crypto</span><span lang="en">Crypto</span></dt>
+      <dd class="reveal"><span class="board__name">Bitcoin</span></dd>
+      <dd class="reveal"><span class="board__name">Altcoins</span></dd>
+      <div class="board__level reveal draw" aria-hidden="true"></div>
+    </div>
   </dl>
+  <div class="board__note">
+    <p class="reveal"><span lang="nl">De markten waar het in de server over gaat. Geen koersen, geen verschillen.</span><span lang="en">The markets the server is about. No prices, no changes.</span></p>
+  </div>
 
   <div class="grp" id="live"><h2>Live</h2></div>
   <dl class="pairs">
-    <dt>Live trading</dt><dd><span lang="nl">De oprichter handelt live in de server</span><span lang="en">The founder trades live in the server</span><small><span lang="nl">tijden worden daar aangekondigd</span><span lang="en">times are announced there</span></small></dd>
+    <dt><span lang="nl">Wat</span><span lang="en">What</span></dt><dd><span lang="nl">Live trading door de oprichter</span><span lang="en">Live trading by the founder</span></dd>
+    <dt><span lang="nl">Waar</span><span lang="en">Where</span></dt><dd><span lang="nl">In de server</span><span lang="en">In the server</span></dd>
+    <dt><span lang="nl">Wanneer</span><span lang="en">When</span></dt><dd><span lang="nl">Wordt daar aangekondigd</span><span lang="en">Announced there</span></dd>
   </dl>
 
   <div class="interstitial">
-    <p><span lang="nl">Zit erbij als het live gaat</span><span lang="en">Sit in when it goes live</span></p>
+    <p><span lang="nl">Zit erbij als het live gaat</span><span lang="en">Be there when it goes live</span></p>
     <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Naar de server</span><span lang="en">To the server</span></a>
   </div>
 </section>

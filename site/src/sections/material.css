@@ -1,39 +1,148 @@
-/* ===== material: teaching plates =====
-   Two real charts, not one drawn figure: the old rule pinned an SVG at
-   min-width:520px inside a 332px box on a phone, so a third of the model was
-   hidden behind a sideways scroll. Images scale, so nothing is hidden.
-   .roll::before is the centre spine, so the grid sits above it (z-index:2). */
-#material .lessons{position:relative;z-index:2;display:grid;gap:clamp(18px,3vw,32px);
-  grid-template-columns:repeat(3,minmax(0,1fr))}
-#material .lesson--pair{grid-column:1/-1}
-@media (min-width:760px){ #material .lesson:not(.lesson--pair) img{aspect-ratio:4/3;object-fit:contain} }
-@media (max-width:759px){ #material .lessons{grid-template-columns:minmax(0,1fr)} }
-#material .lesson{margin:0}
-#material .lesson img{
-  display:block;width:100%;height:auto;
-  border:1px solid var(--line-2);
-  background:var(--panel-lo);
-}
-/* A pair is one lesson, not two: side by side wherever there is room, so the
-   "same moment" reads before the caption does. */
-#material .lesson__pair{display:grid;gap:10px}
-@media (min-width:760px){
-  /* The two charts are different windows, so their natural heights differ.
-     Left aligned only at the top, the pair reads as two separate pictures;
-     matched heights make it read as one moment seen twice. contain never
-     crops an annotation, and the letterbox is the charts' own background. */
-  #material .lesson__pair{grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
-  #material .lesson__pair img{height:100%;min-height:0;object-fit:contain;background:var(--panel-lo)}
-}
-#material .lesson figcaption{
-  display:flex;gap:14px;align-items:baseline;
-  margin-top:12px;
+/* ===== material: the plates =====
+   Five exhibits on one wall, each the width of the strip, one under the
+   other, so a chart is read the way a plate in a book is: alone, at the
+   size it needs. Every picture is the founder's own annotated screenshot
+   and the lightbox opens the file untouched; on the wall it is printed as
+   a plate, and the plate is what makes seven screenshots one set:
+     - one frame: a hairline of the gold with a narrow mat inside it
+     - one height per row: a single is 2:1, a pair is two squares, and the
+       chart is letterboxed on the mat with nothing cropped
+     - one surface: the mat is the charts' own floor -- #0f0f0f in every
+       file, measured -- so the box and the picture never show a seam
+     - one tone: the colour is held back until the plate is pointed at,
+       the way the certificates are grey until pointed at
+     - the platform's mark under the two SMT charts is covered with that
+       same floor; nothing in a chart is redrawn or added
+   The label under a plate is a museum label: the figure number in mono,
+   the title in the label voice, and from the title a dashed level runs to
+   the plate's right edge -- the liquidity line of the opening schema, same
+   dash, so the numbers of the wall sit on levels. The note is the serif,
+   under the title, on the title's column line.
+   .roll::before is the strip's edge, so the wall sits above it (z-index). */
+#material{--mat:#0f0f0f;--inset:clamp(6px,1vw,10px)}
+#material .lesson-lede{margin-bottom:clamp(10px,1.4vw,14px)}
+#material .plates-hint{
+  position:relative;z-index:2;
+  margin:0 0 clamp(30px,4.4vw,48px);
+  text-align:center;
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
+  color:var(--ink-5);
 }
-#material .lesson figcaption b{color:var(--ink-4);font-weight:400;flex:0 0 auto}
-#material .lesson figcaption span{color:var(--paper);font-weight:400}
-#material .lesson figcaption small{
-  display:block;margin-top:7px;
-  letter-spacing:0;text-transform:none;
-  font-size:var(--t-small);color:var(--ink-3);line-height:1.6;
+#material .plates{
+  position:relative;z-index:2;
+  display:grid;gap:clamp(40px,5.6vw,68px);
+}
+#material .plate{
+  margin:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  min-width:0;
+}
+#material .plate .tile,#material .plate figcaption{grid-column:1/-1}
+#material .plate--pair .tile{grid-column:auto}
+#material .plate--pair .tile + .tile{border-left:0}
+
+/* the frame: a button, since a tap opens the original */
+#material .tile{
+  display:block;width:100%;margin:0;padding:var(--inset);
+  border:1px solid var(--line-2);
+  background:var(--mat);
+  cursor:zoom-in;
+  transition:border-color var(--d) var(--e-out);
+}
+#material .pic{
+  display:block;position:relative;width:100%;
+  aspect-ratio:2/1;
+  overflow:hidden;
+}
+#material .plate--pair .pic{aspect-ratio:1/1}
+#material .pic img{
+  display:block;width:100%;height:100%;
+  object-fit:contain;
+  filter:saturate(.42) brightness(.96);
+  transition:filter var(--d-slow) var(--e-out);
+}
+/* the platform's mark: a patch of the floor over it. The two SMT charts
+   sit in squares by contain, so the patch is placed in the square:
+     01.png 780x624 paints 80.0% tall from 10.0% down; the mark is at
+            x 417-455, y 555-589 of the file (measured), a pixel added
+     02.png 741x675 paints 91.1% tall from  4.5% down; the mark is at
+            x 383-421, y 571-605
+   The sellside line just above each (y 551 / 554) is untouched. */
+#material .pic::after{content:"";position:absolute;display:none;background:var(--mat)}
+#material .pic--wm-a::after{display:block;left:53.2%;top:80.9%;width:5.6%;height:5.1%}
+#material .pic--wm-b::after{display:block;left:51.4%;top:81.2%;width:5.8%;height:5.3%}
+
+/* pointed at: the frame warms, the chart takes its colour back */
+@media (hover:hover){
+  #material .plate:hover .tile{border-color:var(--line-4)}
+  #material .plate:hover .pic img{filter:none}
+}
+#material .tile:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+#material .tile:focus-visible .pic img{filter:none}
+
+/* the label: a grid, so the same four pieces -- number, title, level,
+   note -- can sit two ways. On a desk: the number, the title and the
+   level on one row, the note under the title on the title's column line.
+   On a phone (below): the number and the level on one row, the title and
+   the note under them, flush with the plate, so a two-line title never
+   leaves a stub of level beside it. */
+#material .plate figcaption{
+  display:grid;grid-template-columns:auto auto minmax(32px,1fr);
+  column-gap:clamp(12px,1.8vw,20px);
+  align-items:baseline;
+  margin-top:clamp(12px,1.6vw,16px);
+  font-family:var(--f-display);
+}
+#material .plate figcaption > b{
+  grid-column:1;grid-row:1;
+  font-family:var(--f-mono);font-weight:400;font-size:var(--t-caption);
+  letter-spacing:var(--trk-mono);
+  color:var(--ink-4);
+}
+#material .plate__title{
+  grid-column:2;grid-row:1;min-width:0;
+  font-size:var(--t-micro);letter-spacing:var(--trk-caps);
+  text-transform:uppercase;line-height:1.5;
+  color:var(--ink-1);
+  text-wrap:balance;
+}
+/* the level: from the title to the plate's edge, the dash of the hero's
+   liquidity lines (3 on, 5 off), lifted to the middle of the caps */
+#material .plate__level{
+  grid-column:3;grid-row:1;
+  display:block;height:1px;
+  align-self:baseline;
+  transform:translateY(-.34em);
+  font-size:var(--t-micro);
+  background:repeating-linear-gradient(90deg,var(--gold) 0 3px,transparent 3px 8px);
+  opacity:.55;
+  transition:opacity var(--d) var(--e-out);
+}
+@media (hover:hover){ #material .plate:hover .plate__level{opacity:.9} }
+#material .plate figcaption small{
+  grid-column:2/-1;grid-row:2;
+  display:block;margin-top:6px;max-width:58ch;
+  font-size:var(--t-small);line-height:1.6;letter-spacing:0;
+  color:var(--ink-3);
+  text-wrap:pretty;
+}
+
+/* a phone: a pair stacks, the second picture under the first with the
+   shared hairline between them. Every plate takes its chart's own
+   proportion here -- one to a row, there is no height to match, and the
+   column is narrow enough that a letterbox would only cost picture. The
+   patches move with the picture: at its own proportion the file paints
+   the whole box, so they sit where they sit in the file. */
+@media (max-width:619px){
+  #material .plate{grid-template-columns:minmax(0,1fr)}
+  #material .plate--pair .tile{grid-column:1/-1}
+  #material .plate--pair .tile + .tile{border-left:1px solid var(--line-2);border-top:0}
+  #material .pic,#material .plate--pair .pic{aspect-ratio:auto}
+  #material .pic img{height:auto}
+  #material .pic--wm-a::after{left:53.2%;top:88.6%;width:5.6%;height:6.4%}
+  #material .pic--wm-b::after{left:51.4%;top:84.3%;width:5.8%;height:5.8%}
+  #material .plate figcaption{grid-template-columns:auto minmax(32px,1fr);column-gap:14px}
+  #material .plate__level{grid-column:2;grid-row:1}
+  #material .plate__title{grid-column:1/-1;grid-row:2;margin-top:8px}
+  #material .plate figcaption small{grid-column:1/-1;grid-row:3}
 }
