@@ -1,0 +1,246 @@
+/* ==========================================================================
+   Atlas Capital — base
+   Tokens, resets, the type scale and every component that more than one
+   section uses. Section-specific rules live in sections/<id>.css and are
+   namespaced under that section's root id.
+   ========================================================================== */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --panel:#15161A;
+  --paper:#F4F2EC;
+  --muted:#A5A6A8;
+  --f:"Space Grotesk", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+html{color-scheme:dark; -webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#050506;
+  color:#D9D7D2;
+  font-family:var(--f);
+  font-weight:300;
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+.page{position:relative; overflow:hidden}
+.grain{
+  position:absolute;inset:0;width:100%;height:100%;
+  z-index:40;opacity:.09;mix-blend-mode:overlay;pointer-events:none;
+}
+
+/* ===== button ===== */
+.cta{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:11px 22px;
+  border:1px solid var(--gold);
+  background:transparent;
+  color:var(--gold);
+  font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;
+  text-decoration:none;
+  transition:background .3s ease,color .3s ease,letter-spacing .3s ease;
+}
+.cta:hover{background:var(--gold);color:#0E0B05;letter-spacing:.32em}
+.cta.solid{
+  background:linear-gradient(180deg,var(--gold-hi),var(--gold-lo));
+  color:#0E0B05;border-color:transparent;
+}
+.cta.solid:hover{filter:brightness(1.1);background:linear-gradient(180deg,var(--gold-hi),var(--gold-lo));color:#0E0B05}
+.cta::before{content:"";width:5px;height:5px;background:currentColor;transform:rotate(45deg)}
+
+/* ===== sub-line under a title card (hero, closer) ===== */
+.subtitle{
+  position:relative;z-index:3;
+  margin:clamp(20px,3vw,30px) auto 0;
+  max-width:40ch;
+  color:#B2B0AC;
+  font-size:clamp(14px,1.6vw,17px);
+}
+
+/* ===== the roll =====
+   One centred column with a gold spine down the middle. The build wraps the
+   sections production … access in <div class="roll">; the spine is drawn
+   once, so it runs unbroken from the first group to the last. */
+.roll{
+  position:relative;
+  max-width:840px;
+  margin:0 auto;
+  padding:clamp(30px,6vw,70px) clamp(18px,4vw,40px) clamp(50px,8vw,110px);
+}
+.roll::before{
+  content:"";
+  position:absolute;
+  left:50%;top:0;bottom:0;width:1px;
+  background:linear-gradient(180deg,rgba(215,179,100,0) 0%,rgba(215,179,100,.30) 6%,rgba(215,179,100,.30) 94%,rgba(215,179,100,0) 100%);
+}
+@media (max-width:620px){ .roll::before{display:none} }
+
+/* ===== group heading ===== */
+.grp{
+  position:relative;
+  text-align:center;
+  margin:clamp(40px,6vw,84px) 0 clamp(18px,2.8vw,30px);
+}
+/* the first heading in the roll sits on the roll's own padding */
+.roll > :first-child > .grp:first-child{margin-top:0}
+.grp h2{
+  position:relative;
+  z-index:2;
+  display:inline-block;
+  margin:0;
+  padding:0 clamp(14px,3vw,26px);
+  background:#050506;
+  font-weight:400;
+  font-size:clamp(9.5px,1.15vw,11.5px);
+  letter-spacing:.5em;
+  text-indent:.5em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+.grp::before{
+  content:"";
+  position:absolute;
+  left:12%;right:12%;top:50%;
+  height:1px;
+  background:rgba(215,179,100,.18);
+  z-index:1;
+}
+
+/* ===== credit pairs ===== */
+dl.pairs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:clamp(20px,5vw,58px);
+  row-gap:clamp(10px,1.6vw,16px);
+  margin:0;
+}
+dl.pairs dt{
+  grid-column:1;
+  text-align:right;
+  font-size:clamp(9px,1.05vw,10.5px);
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:#78797E;
+  padding-top:.62em;
+}
+dl.pairs dd{
+  grid-column:2;
+  margin:0;
+  text-align:left;
+  font-size:clamp(16px,2.1vw,23px);
+  font-weight:300;
+  line-height:1.28;
+  color:#EAE8E3;
+}
+dl.pairs dd small{
+  display:block;
+  font-size:clamp(10px,1.15vw,11.5px);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#77787C;
+  margin-top:3px;
+}
+dl.pairs dd em{font-style:normal;color:var(--gold)}
+dl.pairs .cont{grid-column:2}
+/* Ten topics or nine channels one under the other is a column of air;
+   two columns reads the same and takes half the height. */
+dl.pairs .cols{
+  list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:clamp(14px,2.5vw,32px);row-gap:clamp(4px,.8vw,8px);
+  font-size:clamp(14px,1.55vw,18px);line-height:1.35;
+}
+@media (max-width:620px){
+  dl.pairs{grid-template-columns:1fr; row-gap:4px}
+  dl.pairs dt{grid-column:1;text-align:center;padding-top:22px}
+  dl.pairs dd,dl.pairs .cont{grid-column:1;text-align:center}
+}
+
+/* ===== lede under a group heading =====
+   .roll::before is the absolutely-positioned centre spine, so anything
+   static underneath it gets a gold hairline drawn straight across; the
+   lede carries its own background and sits above the spine. */
+.lesson-lede{
+  position:relative;z-index:2;
+  max-width:56ch;margin:0 auto clamp(26px,4vw,42px);padding:0 12px;background:#050506;
+  text-align:center;font-size:clamp(13px,1.35vw,15px);line-height:1.7;color:#9A9BA0;
+}
+
+/* ===== quote card ===== */
+.still{
+  margin:clamp(52px,9vw,110px) auto;
+  max-width:660px;
+  text-align:center;
+}
+.still blockquote{
+  margin:0;
+  font-size:clamp(16px,2.15vw,23px);
+  font-weight:300;
+  line-height:1.5;
+  color:#E4E1DB;
+}
+.still .who{
+  margin-top:22px;
+  font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);
+}
+.hair{
+  width:52px;height:1px;background:var(--gold);margin:0 auto clamp(22px,3.4vw,32px);
+}
+
+/* ===== interstitial cta ===== */
+.interstitial{
+  text-align:center;
+  margin:clamp(36px,5vw,64px) 0;
+}
+.interstitial p{
+  margin:0 0 20px;
+  font-size:clamp(9.5px,1.1vw,11px);letter-spacing:.42em;text-transform:uppercase;color:#75767A;
+}
+
+/* ===== language ===== */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.langsw{
+  display:inline-flex;
+  align-items:stretch;
+  border:1px solid rgba(215,179,100,.55);
+}
+.langsw button{
+  appearance:none;
+  -webkit-appearance:none;
+  background:transparent;
+  border:0;
+  padding:9px 12px;
+  font-family:var(--f);
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#7B7C80;
+  cursor:pointer;
+  transition:background .3s ease,color .3s ease;
+}
+.langsw button + button{border-left:1px solid rgba(215,179,100,.32)}
+.langsw button:hover{color:var(--gold-hi)}
+.langsw button[aria-pressed="true"]{background:rgba(215,179,100,.13);color:var(--gold)}
+
+/* ===== reveal contract =====
+   The only place anything is allowed to be invisible. Rules:
+     - only elements carrying .reveal
+     - only once motion.js has put class "js" on <html>
+   so without JavaScript every element is on screen from the first paint.
+   motion.js adds .is-in when the element scrolls into view; children of a
+   [data-stagger] container arrive one after another. */
+.js .reveal{
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .8s cubic-bezier(.2,.6,.2,1),transform .8s cubic-bezier(.2,.6,.2,1);
+}
+.js .reveal.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .js .reveal{opacity:1;transform:none;transition:none}
+}

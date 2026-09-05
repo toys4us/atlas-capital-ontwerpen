@@ -1,0 +1,39 @@
+/* ===== material: teaching plates =====
+   Two real charts, not one drawn figure: the old rule pinned an SVG at
+   min-width:520px inside a 332px box on a phone, so a third of the model was
+   hidden behind a sideways scroll. Images scale, so nothing is hidden.
+   .roll::before is the centre spine, so the grid sits above it (z-index:2). */
+#material .lessons{position:relative;z-index:2;display:grid;gap:clamp(18px,3vw,32px);
+  grid-template-columns:repeat(3,minmax(0,1fr))}
+#material .lesson--pair{grid-column:1/-1}
+@media (min-width:760px){ #material .lesson:not(.lesson--pair) img{aspect-ratio:4/3;object-fit:contain} }
+@media (max-width:759px){ #material .lessons{grid-template-columns:minmax(0,1fr)} }
+#material .lesson{margin:0}
+#material .lesson img{
+  display:block;width:100%;height:auto;
+  border:1px solid rgba(215,179,100,.22);
+  background:#0B0C0E;
+}
+/* A pair is one lesson, not two: side by side wherever there is room, so the
+   "same moment" reads before the caption does. */
+#material .lesson__pair{display:grid;gap:10px}
+@media (min-width:760px){
+  /* The two charts are different windows, so their natural heights differ.
+     Left aligned only at the top, the pair reads as two separate pictures;
+     matched heights make it read as one moment seen twice. contain never
+     crops an annotation, and the letterbox is the charts' own background. */
+  #material .lesson__pair{grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
+  #material .lesson__pair img{height:100%;min-height:0;object-fit:contain;background:#0B0C0E}
+}
+#material .lesson figcaption{
+  display:flex;gap:14px;align-items:baseline;
+  margin-top:12px;
+  font-size:clamp(10px,1.1vw,11.5px);letter-spacing:.2em;text-transform:uppercase;
+}
+#material .lesson figcaption b{color:var(--gold);font-weight:400;flex:0 0 auto}
+#material .lesson figcaption span{color:var(--paper);font-weight:400}
+#material .lesson figcaption small{
+  display:block;margin-top:7px;
+  letter-spacing:.04em;text-transform:none;
+  font-size:clamp(11.5px,1.25vw,13px);color:#78797E;line-height:1.6;
+}

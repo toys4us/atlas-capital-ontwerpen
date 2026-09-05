@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="nl" data-lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas Capital</title>
+<meta name="description" content="Atlas Capital — een Discord-community voor traders. Proces. Discipline. Uitvoering. Educatie, live trading en chart-ideeën voor Nasdaq, S&amp;P 500, goud, olie en crypto.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ---- base.css ---- */
+/* ==========================================================================
+   Atlas Capital — base
+   Tokens, resets, the type scale and every component that more than one
+   section uses. Section-specific rules live in sections/<id>.css and are
+   namespaced under that section's root id.
+   ========================================================================== */
+
+:root{
+  --gold:#D7B364;
+  --gold-hi:#E6CC8E;
+  --gold-lo:#B9954A;
+  --ink:#08090B;
+  --panel:#15161A;
+  --paper:#F4F2EC;
+  --muted:#A5A6A8;
+  --f:"Space Grotesk", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+html{color-scheme:dark; -webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#050506;
+  color:#D9D7D2;
+  font-family:var(--f);
+  font-weight:300;
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+.page{position:relative; overflow:hidden}
+.grain{
+  position:absolute;inset:0;width:100%;height:100%;
+  z-index:40;opacity:.09;mix-blend-mode:overlay;pointer-events:none;
+}
+
+/* ===== button ===== */
+.cta{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:11px 22px;
+  border:1px solid var(--gold);
+  background:transparent;
+  color:var(--gold);
+  font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;
+  text-decoration:none;
+  transition:background .3s ease,color .3s ease,letter-spacing .3s ease;
+}
+.cta:hover{background:var(--gold);color:#0E0B05;letter-spacing:.32em}
+.cta.solid{
+  background:linear-gradient(180deg,var(--gold-hi),var(--gold-lo));
+  color:#0E0B05;border-color:transparent;
+}
+.cta.solid:hover{filter:brightness(1.1);background:linear-gradient(180deg,var(--gold-hi),var(--gold-lo));color:#0E0B05}
+.cta::before{content:"";width:5px;height:5px;background:currentColor;transform:rotate(45deg)}
+
+/* ===== sub-line under a title card (hero, closer) ===== */
+.subtitle{
+  position:relative;z-index:3;
+  margin:clamp(20px,3vw,30px) auto 0;
+  max-width:40ch;
+  color:#B2B0AC;
+  font-size:clamp(14px,1.6vw,17px);
+}
+
+/* ===== the roll =====
+   One centred column with a gold spine down the middle. The build wraps the
+   sections production … access in <div class="roll">; the spine is drawn
+   once, so it runs unbroken from the first group to the last. */
+.roll{
+  position:relative;
+  max-width:840px;
+  margin:0 auto;
+  padding:clamp(30px,6vw,70px) clamp(18px,4vw,40px) clamp(50px,8vw,110px);
+}
+.roll::before{
+  content:"";
+  position:absolute;
+  left:50%;top:0;bottom:0;width:1px;
+  background:linear-gradient(180deg,rgba(215,179,100,0) 0%,rgba(215,179,100,.30) 6%,rgba(215,179,100,.30) 94%,rgba(215,179,100,0) 100%);
+}
+@media (max-width:620px){ .roll::before{display:none} }
+
+/* ===== group heading ===== */
+.grp{
+  position:relative;
+  text-align:center;
+  margin:clamp(40px,6vw,84px) 0 clamp(18px,2.8vw,30px);
+}
+/* the first heading in the roll sits on the roll's own padding */
+.roll > :first-child > .grp:first-child{margin-top:0}
+.grp h2{
+  position:relative;
+  z-index:2;
+  display:inline-block;
+  margin:0;
+  padding:0 clamp(14px,3vw,26px);
+  background:#050506;
+  font-weight:400;
+  font-size:clamp(9.5px,1.15vw,11.5px);
+  letter-spacing:.5em;
+  text-indent:.5em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+.grp::before{
+  content:"";
+  position:absolute;
+  left:12%;right:12%;top:50%;
+  height:1px;
+  background:rgba(215,179,100,.18);
+  z-index:1;
+}
+
+/* ===== credit pairs ===== */
+dl.pairs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:clamp(20px,5vw,58px);
+  row-gap:clamp(10px,1.6vw,16px);
+  margin:0;
+}
+dl.pairs dt{
+  grid-column:1;
+  text-align:right;
+  font-size:clamp(9px,1.05vw,10.5px);
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:#78797E;
+  padding-top:.62em;
+}
+dl.pairs dd{
+  grid-column:2;
+  margin:0;
+  text-align:left;
+  font-size:clamp(16px,2.1vw,23px);
+  font-weight:300;
+  line-height:1.28;
+  color:#EAE8E3;
+}
+dl.pairs dd small{
+  display:block;
+  font-size:clamp(10px,1.15vw,11.5px);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#77787C;
+  margin-top:3px;
+}
+dl.pairs dd em{font-style:normal;color:var(--gold)}
+dl.pairs .cont{grid-column:2}
+/* Ten topics or nine channels one under the other is a column of air;
+   two columns reads the same and takes half the height. */
+dl.pairs .cols{
+  list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:clamp(14px,2.5vw,32px);row-gap:clamp(4px,.8vw,8px);
+  font-size:clamp(14px,1.55vw,18px);line-height:1.35;
+}
+@media (max-width:620px){
+  dl.pairs{grid-template-columns:1fr; row-gap:4px}
+  dl.pairs dt{grid-column:1;text-align:center;padding-top:22px}
+  dl.pairs dd,dl.pairs .cont{grid-column:1;text-align:center}
+}
+
+/* ===== lede under a group heading =====
+   .roll::before is the absolutely-positioned centre spine, so anything
+   static underneath it gets a gold hairline drawn straight across; the
+   lede carries its own background and sits above the spine. */
+.lesson-lede{
+  position:relative;z-index:2;
+  max-width:56ch;margin:0 auto clamp(26px,4vw,42px);padding:0 12px;background:#050506;
+  text-align:center;font-size:clamp(13px,1.35vw,15px);line-height:1.7;color:#9A9BA0;
+}
+
+/* ===== quote card ===== */
+.still{
+  margin:clamp(52px,9vw,110px) auto;
+  max-width:660px;
+  text-align:center;
+}
+.still blockquote{
+  margin:0;
+  font-size:clamp(16px,2.15vw,23px);
+  font-weight:300;
+  line-height:1.5;
+  color:#E4E1DB;
+}
+.still .who{
+  margin-top:22px;
+  font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);
+}
+.hair{
+  width:52px;height:1px;background:var(--gold);margin:0 auto clamp(22px,3.4vw,32px);
+}
+
+/* ===== interstitial cta ===== */
+.interstitial{
+  text-align:center;
+  margin:clamp(36px,5vw,64px) 0;
+}
+.interstitial p{
+  margin:0 0 20px;
+  font-size:clamp(9.5px,1.1vw,11px);letter-spacing:.42em;text-transform:uppercase;color:#75767A;
+}
+
+/* ===== language ===== */
+:root:not([data-lang="en"]) [lang="en"]{display:none!important}
+:root[data-lang="en"] [lang="nl"]{display:none!important}
+.langsw{
+  display:inline-flex;
+  align-items:stretch;
+  border:1px solid rgba(215,179,100,.55);
+}
+.langsw button{
+  appearance:none;
+  -webkit-appearance:none;
+  background:transparent;
+  border:0;
+  padding:9px 12px;
+  font-family:var(--f);
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#7B7C80;
+  cursor:pointer;
+  transition:background .3s ease,color .3s ease;
+}
+.langsw button + button{border-left:1px solid rgba(215,179,100,.32)}
+.langsw button:hover{color:var(--gold-hi)}
+.langsw button[aria-pressed="true"]{background:rgba(215,179,100,.13);color:var(--gold)}
+
+/* ===== reveal contract =====
+   The only place anything is allowed to be invisible. Rules:
+     - only elements carrying .reveal
+     - only once motion.js has put class "js" on <html>
+   so without JavaScript every element is on screen from the first paint.
+   motion.js adds .is-in when the element scrolls into view; children of a
+   [data-stagger] container arrive one after another. */
+.js .reveal{
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .8s cubic-bezier(.2,.6,.2,1),transform .8s cubic-bezier(.2,.6,.2,1);
+}
+.js .reveal.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .js .reveal{opacity:1;transform:none;transition:none}
+}
+
+/* ---- section:header ---- */
+/* ===== header ===== */
+#header{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:11px clamp(16px,4vw,40px);
+  background:rgba(5,5,6,.9);
+  border-bottom:1px solid rgba(215,179,100,.18);
+  backdrop-filter:blur(8px);
+}
+/* space-between puts the middle item halfway between its neighbours, not
+   halfway across the bar -- and the wordmark is 80px wider than the language
+   switch, so the Discord button sat 40px right of centre on a page whose
+   every other element is centred. Two equal outer tracks fix it. Measured:
+   the symmetric layout needs ~580px, so it only engages once there is room;
+   below that the row stays space-between, which is right on a phone. */
+@media (min-width:620px){
+  #header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
+  #header > .wm{justify-self:start}
+  #header > .cta{justify-self:center}
+  #header > .langsw{justify-self:end}
+}
+#header .wm{display:flex;align-items:center;gap:10px;text-decoration:none}
+#header .wm__mark{display:block;width:22px;height:auto;flex:0 0 auto}
+#header .wm b{
+  font-weight:400;font-size:11px;letter-spacing:.36em;text-transform:uppercase;color:var(--paper);
+}
+#header .cta{padding:9px 16px;font-size:9px;letter-spacing:.2em}
+#header .cta:hover{letter-spacing:.32em}
+
+/* ---- section:hero ---- */
+/* ===== hero: the projector gate ===== */
+#hero{
+  position:relative;
+  padding:clamp(46px,9vw,110px) 20px clamp(28px,5vw,54px);
+  text-align:center;
+  overflow:hidden;
+}
+#hero .beam{
+  position:absolute;
+  left:50%;top:-6%;
+  width:min(150vw,1500px);
+  height:132%;
+  transform:translateX(-50%);
+  background:
+    conic-gradient(from 172deg at 50% 0%,
+      rgba(0,0,0,0) 0deg,
+      rgba(230,204,142,.10) 6deg,
+      rgba(230,204,142,.18) 8deg,
+      rgba(230,204,142,.06) 11deg,
+      rgba(0,0,0,0) 16deg);
+  filter:blur(2px);
+  opacity:.9;
+  animation:flicker 6.5s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+@keyframes flicker{
+  0%{opacity:.72}
+  40%{opacity:.95}
+  62%{opacity:.8}
+  100%{opacity:1}
+}
+@media (prefers-reduced-motion: reduce){ #hero .beam{animation:none} }
+
+#hero .filmtitle{
+  position:relative;z-index:3;
+  margin:0;
+  font-weight:300;
+  font-size:clamp(30px,7.4vw,84px);
+  line-height:1.02;
+  letter-spacing:clamp(.10em,1.1vw,.22em);
+  text-indent:clamp(.10em,1.1vw,.22em);
+  text-transform:uppercase;
+  color:var(--paper);
+}
+#hero .filmtitle span{display:block;color:var(--gold)}
+/* The lockup carries the name, so the title card is the mark itself and the
+   letterspaced sub-line stays as the credit beneath it. */
+#hero .filmtitle__logo{
+  display:block;margin:0 auto;
+  width:clamp(180px,32vw,340px);height:auto;
+}
+#hero .cta{margin-top:clamp(26px,4vw,38px);position:relative;z-index:3}
+
+/* ---- section:production ---- */
+/* ===== production =====
+   Nothing section-specific yet: this piece is built from the shared
+   components in base.css (.grp, dl.pairs, .still, .interstitial, .cta).
+   Add rules here, namespaced under #production. */
+
+/* ---- section:founder ---- */
+/* ===== founder =====
+   Nothing section-specific yet: this piece is built from the shared
+   components in base.css (.grp, dl.pairs, .still, .interstitial, .cta).
+   Add rules here, namespaced under #founder. */
+
+/* ---- section:education ---- */
+/* ===== education =====
+   Nothing section-specific yet: this piece is built from the shared
+   components in base.css (.grp, dl.pairs, .still, .interstitial, .cta).
+   Add rules here, namespaced under #education. */
+
+/* ---- section:channels ---- */
+/* ===== channels =====
+   Nothing section-specific yet: this piece is built from the shared
+   components in base.css (.grp, dl.pairs, .still, .interstitial, .cta).
+   Add rules here, namespaced under #channels. */
+
+/* ---- section:markets ---- */
+/* ===== markets =====
+   Nothing section-specific yet: this piece is built from the shared
+   components in base.css (.grp, dl.pairs, .still, .interstitial, .cta).
+   Add rules here, namespaced under #markets. */
+
+/* ---- section:material ---- */
+/* ===== material: teaching plates =====
+   Two real charts, not one drawn figure: the old rule pinned an SVG at
+   min-width:520px inside a 332px box on a phone, so a third of the model was
+   hidden behind a sideways scroll. Images scale, so nothing is hidden.
+   .roll::before is the centre spine, so the grid sits above it (z-index:2). */
+#material .lessons{position:relative;z-index:2;display:grid;gap:clamp(18px,3vw,32px);
+  grid-template-columns:repeat(3,minmax(0,1fr))}
+#material .lesson--pair{grid-column:1/-1}
+@media (min-width:760px){ #material .lesson:not(.lesson--pair) img{aspect-ratio:4/3;object-fit:contain} }
+@media (max-width:759px){ #material .lessons{grid-template-columns:minmax(0,1fr)} }
+#material .lesson{margin:0}
+#material .lesson img{
+  display:block;width:100%;height:auto;
+  border:1px solid rgba(215,179,100,.22);
+  background:#0B0C0E;
+}
+/* A pair is one lesson, not two: side by side wherever there is room, so the
+   "same moment" reads before the caption does. */
+#material .lesson__pair{display:grid;gap:10px}
+@media (min-width:760px){
+  /* The two charts are different windows, so their natural heights differ.
+     Left aligned only at the top, the pair reads as two separate pictures;
+     matched heights make it read as one moment seen twice. contain never
+     crops an annotation, and the letterbox is the charts' own background. */
+  #material .lesson__pair{grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
+  #material .lesson__pair img{height:100%;min-height:0;object-fit:contain;background:#0B0C0E}
+}
+#material .lesson figcaption{
+  display:flex;gap:14px;align-items:baseline;
+  margin-top:12px;
+  font-size:clamp(10px,1.1vw,11.5px);letter-spacing:.2em;text-transform:uppercase;
+}
+#material .lesson figcaption b{color:var(--gold);font-weight:400;flex:0 0 auto}
+#material .lesson figcaption span{color:var(--paper);font-weight:400}
+#material .lesson figcaption small{
+  display:block;margin-top:7px;
+  letter-spacing:.04em;text-transform:none;
+  font-size:clamp(11.5px,1.25vw,13px);color:#78797E;line-height:1.6;
+}
+
+/* ---- section:trackrecord ---- */
+/* ===== track record =====
+   Six firms, six house styles, none of them ours. The certificates are
+   evidence, not decoration: small, uniform, monochrome until pointed at,
+   and a click opens the untouched original -- checkable, but quiet. */
+#trackrecord .proofs{
+  position:relative;z-index:2;
+  display:grid;gap:clamp(10px,1.6vw,16px);
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+@media (min-width:720px){ #trackrecord .proofs{grid-template-columns:repeat(3,minmax(0,1fr))} }
+#trackrecord .proofs figure{margin:0;min-width:0}
+#trackrecord .tile{
+  display:block;width:100%;padding:0;margin:0;
+  border:1px solid rgba(215,179,100,.18);
+  background:#0B0C0E;cursor:zoom-in;
+}
+#trackrecord .tile img{
+  display:block;width:100%;height:auto;
+  aspect-ratio:3/2;object-fit:contain;
+  filter:grayscale(1) brightness(.82) contrast(.92);
+  transition:filter .25s ease;
+}
+#trackrecord .tile:hover img,#trackrecord .tile:focus-visible img{filter:none}
+#trackrecord .tile:focus-visible{outline:1px solid var(--gold);outline-offset:2px}
+#trackrecord .proofs figcaption{
+  margin-top:8px;
+  font-size:clamp(9px,1vw,10px);
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+}
+#trackrecord .proofs figcaption small{
+  display:block;margin-top:4px;
+  letter-spacing:.02em;text-transform:none;
+  font-size:clamp(11px,1.15vw,12px);color:#78797E;line-height:1.5;
+}
+#trackrecord .proofs-hint{
+  position:relative;z-index:2;
+  margin:clamp(26px,3.6vw,40px) 0 clamp(14px,2vw,20px);text-align:center;
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#5E5F64;
+}
+#trackrecord .caveat{
+  position:relative;z-index:2;
+  max-width:60ch;margin:clamp(34px,5vw,54px) auto 0;
+  padding:0 clamp(14px,3vw,28px);
+  background:#050506;
+  text-align:center;
+  font-size:clamp(11.5px,1.25vw,13px);line-height:1.75;color:#8A8B90;
+}
+#trackrecord .caveat b{
+  display:block;margin-bottom:12px;
+  color:var(--gold);font-weight:400;
+  font-size:clamp(9px,1.05vw,10.5px);letter-spacing:.28em;text-transform:uppercase;
+}
+#trackrecord .caveat p{margin:0 0 .8em}
+#trackrecord .caveat p:last-child{margin-bottom:0}
+
+/* the original, full size (a <dialog>, so it renders in the top layer) */
+#trackrecord .zoom{border:0;padding:0;background:transparent;max-width:min(96vw,1100px);max-height:96vh}
+#trackrecord .zoom::backdrop{background:rgba(5,5,6,.94)}
+#trackrecord .zoom img{display:block;max-width:100%;max-height:84vh;width:auto;height:auto;margin:0 auto;border:1px solid rgba(215,179,100,.3)}
+#trackrecord .zoom p{margin:12px auto 0;max-width:60ch;text-align:center;font-size:12px;line-height:1.5;color:#9A9BA0}
+#trackrecord .zoom .close{
+  display:block;margin:14px auto 0;padding:8px 18px;
+  border:1px solid rgba(215,179,100,.4);background:transparent;color:var(--gold);
+  font:inherit;font-size:10px;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;
+}
+
+/* ---- section:access ---- */
+/* ===== access =====
+   Nothing section-specific yet: this piece is built from the shared
+   components in base.css (.grp, dl.pairs, .still, .interstitial, .cta).
+   Add rules here, namespaced under #access. */
+
+/* ---- section:closer ---- */
+/* ===== closer: leader / end ===== */
+#closer{
+  text-align:center;
+  padding:clamp(50px,8vw,100px) 20px clamp(60px,9vw,120px);
+  border-top:1px solid rgba(215,179,100,.14);
+  position:relative;
+}
+#closer svg{width:min(180px,36vw);height:auto;display:block;margin:0 auto clamp(26px,4vw,40px)}
+#closer .endword{
+  margin:0;
+  font-weight:300;
+  font-size:clamp(34px,9vw,110px);
+  letter-spacing:clamp(.12em,1.6vw,.3em);
+  text-indent:clamp(.12em,1.6vw,.3em);
+  text-transform:uppercase;
+  color:var(--paper);
+  line-height:1;
+}
+#closer .subtitle{margin-top:22px}
+
+/* ===== footer (the second root of the closer piece) ===== */
+footer{
+  background:#000;
+  padding:clamp(30px,5vw,54px) clamp(18px,4vw,40px) 44px;
+  text-align:center;
+  border-top:1px solid rgba(215,179,100,.2);
+}
+footer .flinks{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
+footer .flinks a{
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
+  text-decoration:none;border-bottom:1px solid rgba(215,179,100,.3);padding-bottom:4px;
+}
+footer .flinks a:hover{color:var(--gold-hi)}
+footer .risk{
+  max-width:74ch;margin:0 auto;
+  font-size:10.5px;line-height:1.75;letter-spacing:.04em;color:#65666A;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <svg class="grain" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 400 400">
+    <filter id="grain28">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="400" height="400" filter="url(#grain28)"/>
+  </svg>
+
+<!-- section:header -->
+<header id="header">
+  <a class="wm" href="#hero">
+    <img class="wm__mark" src="assets/logo-mark.webp" alt="" width="420" height="342">
+    <b>Atlas Capital</b>
+  </a>
+  <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
+  <div class="langsw" role="group" aria-label="Taal / Language">
+    <button type="button" data-lang="nl" aria-pressed="true">NL</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+<!-- /section:header -->
+
+<!-- section:hero -->
+<section class="gate" id="hero">
+  <span class="beam" aria-hidden="true"></span>
+
+
+  <h1 class="filmtitle">
+    <img class="filmtitle__logo" src="assets/logo.webp" alt="Atlas Capital"
+         width="760" height="694">
+  </h1>
+  <p class="subtitle"><span lang="nl">Alles wat erin zit, in de vorm waarin het hoort: een lijst, rustig, zonder ruis.</span><span lang="en">Everything in it, in the form it belongs in: a list, calm, no noise.</span></p>
+  <a class="cta solid" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
+</section>
+<!-- /section:hero -->
+
+<div class="roll">
+<!-- section:production -->
+<section id="production">
+  <div class="grp"><h2><span lang="nl">Productie</span><span lang="en">Production</span></h2></div>
+  <dl class="pairs">
+    <dt>Community</dt><dd>Atlas Capital</dd>
+    <dt>Tagline</dt><dd><em><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></em></dd>
+    <dt><span lang="nl">Taal</span><span lang="en">Language</span></dt><dd><span lang="nl">Nederlands en Engels</span><span lang="en">Dutch and English</span></dd>
+    <dt><span lang="nl">Locatie</span><span lang="en">Location</span></dt><dd>Discord<small><span lang="nl">de server is de plek</span><span lang="en">the server is the place</span></small></dd>
+  </dl>
+</section>
+<!-- /section:production -->
+
+<!-- section:founder -->
+<section id="founder">
+  <div class="grp"><h2><span lang="nl">Hoofdrol</span><span lang="en">Starring</span></h2></div>
+  <dl class="pairs">
+    <dt><span lang="nl">Oprichter</span><span lang="en">Founder</span></dt><dd><span lang="nl">10+ jaar actief in trading</span><span lang="en">10+ years active in trading</span><small><span lang="nl">winst, verlies, fouten, groei, lessen</span><span lang="en">wins, losses, mistakes, growth, lessons</span></small></dd>
+  </dl>
+
+  <div class="still">
+    <div class="hair" aria-hidden="true"></div>
+    <blockquote>
+      <span lang="nl">Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten
+      zien hoe ik de markten dagelijks benader. Geen snelle-rijk-verhalen, maar echte setups,
+      educatie en een community die samen beter wil worden.</span><span lang="en">I built Atlas Capital to share that experience, bring traders together, and show how I
+      approach the markets on a daily basis. No get-rich-quick promises, just real setups,
+      education, and a community focused on improving together.</span>
+    </blockquote>
+    <p class="who"><span lang="nl">De oprichter</span><span lang="en">The founder</span></p>
+  </div>
+</section>
+<!-- /section:founder -->
+
+<!-- section:education -->
+<section id="education">
+  <div class="grp" id="educatie"><h2><span lang="nl">Educatie · 10 onderwerpen</span><span lang="en">Education · 10 topics</span></h2></div>
+  <dl class="pairs">
+    <dt><span lang="nl">Onderwerpen</span><span lang="en">Topics</span></dt><dd><ul class="cols"><li><span lang="nl">Deviatie</span><span lang="en">Deviation</span></li><li>SMT</li><li>FVG</li><li>IFVG</li><li>Orderblocks</li><li>Fibonacci</li><li><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></li><li><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></li><li><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></li><li><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></li></ul></dd>
+  </dl>
+
+  <div class="interstitial">
+    <p><span lang="nl">De educatie staat in de server</span><span lang="en">The education lives in the server</span></p>
+    <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom erbij op Discord</span><span lang="en">Join in on Discord</span></a>
+  </div>
+</section>
+<!-- /section:education -->
+
+<!-- section:channels -->
+<section id="channels">
+  <div class="grp" id="kanalen"><h2><span lang="nl">Locaties · 15 kanalen</span><span lang="en">Locations · 15 channels</span></h2></div>
+  <dl class="pairs">
+    <dt><span lang="nl">Thuis &middot; nu gratis</span><span lang="en">Home &middot; free right now</span></dt><dd><ul class="cols"><li>#nq-chart-ideeën</li><li>#es-chart-ideeën</li><li>#bitcoin</li><li>#altcoins</li><li>#markt</li><li>#vragen</li><li>#algemeen</li><li>#atlas-op-socials</li><li>#ondersteuning</li></ul></dd>
+    <dt><span lang="nl">Premium &middot; opent later</span><span lang="en">Premium &middot; opens later</span></dt><dd><ul class="cols"><li>#trade-setups</li><li>#marktupdates</li><li>#indicatoren</li><li>#sessie-opnames</li><li>#chart-ideeën</li><li>#premium-chat</li></ul></dd>
+  </dl>
+</section>
+<!-- /section:channels -->
+
+<!-- section:markets -->
+<section id="markets">
+  <div class="grp"><h2><span lang="nl">Markten</span><span lang="en">Markets</span></h2></div>
+  <dl class="pairs">
+    <dt><span lang="nl">Indices</span><span lang="en">Indices</span></dt><dd>Nasdaq<small>NQ</small></dd>
+    <dd class="cont">S&amp;P 500<small>ES</small></dd>
+    <dd class="cont">Dow Jones</dd>
+    <dt><span lang="nl">Metalen</span><span lang="en">Metals</span></dt><dd><span lang="nl">Goud</span><span lang="en">Gold</span><small>XAUUSD</small></dd>
+    <dd class="cont"><span lang="nl">Zilver</span><span lang="en">Silver</span></dd>
+    <dt><span lang="nl">Energie</span><span lang="en">Energy</span></dt><dd><span lang="nl">Olie</span><span lang="en">Oil</span></dd>
+    <dt>Crypto</dt><dd>Bitcoin</dd>
+    <dd class="cont">Altcoins</dd>
+  </dl>
+
+  <div class="grp" id="live"><h2>Live</h2></div>
+  <dl class="pairs">
+    <dt>Live trading</dt><dd><span lang="nl">De oprichter handelt live in de server</span><span lang="en">The founder trades live in the server</span><small><span lang="nl">tijden worden daar aangekondigd</span><span lang="en">times are announced there</span></small></dd>
+  </dl>
+
+  <div class="interstitial">
+    <p><span lang="nl">Zit erbij als het live gaat</span><span lang="en">Sit in when it goes live</span></p>
+    <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Naar de server</span><span lang="en">To the server</span></a>
+  </div>
+</section>
+<!-- /section:markets -->
+
+<!-- section:material -->
+<section id="material">
+  <div class="grp"><h2><span lang="nl">De leerstof</span><span lang="en">The material</span></h2></div>
+  <p class="lesson-lede">
+    <span lang="nl">Dit is wat je in Premium leert lezen. Geen uitslagen, geen instapmomenten &mdash;
+      de onderdelen zelf, aangetekend op de chart.</span><span lang="en">This is what you learn to read in Premium. No outcomes, no entries &mdash;
+      the elements themselves, marked up on the chart.</span>
+  </p>
+  <div class="lessons">
+    <figure class="lesson lesson--pair">
+      <div class="lesson__pair">
+        <img src="assets/charts/01.png" alt="Fair value gap, SMT and sellside liquidity" loading="lazy" decoding="async">
+        <img src="assets/charts/02.png" alt="The same idea, another day" loading="lazy" decoding="async">
+      </div>
+      <figcaption>
+        <b>01</b>
+        <span><span lang="nl">SMT &mdash; twee markten, hetzelfde moment</span><span lang="en">SMT &mdash; two markets, the same moment</span>
+          <small><span lang="nl">NQ en ES op precies hetzelfde moment. De ene neemt de high, de andere
+            niet. Dat verschil is de divergentie.</span><span lang="en">NQ and ES at exactly the same moment. One takes the high, the other
+            does not. That difference is the divergence.</span></small>
+        </span>
+      </figcaption>
+    </figure>
+    <figure class="lesson">
+      <img src="assets/charts/03.png" alt="Fibonacci, equal highs and sellside liquidity" loading="lazy" decoding="async">
+      <figcaption>
+        <b>02</b>
+        <span><span lang="nl">Fibonacci, equal highs en sellside liquidity</span><span lang="en">Fibonacci, equal highs and sellside liquidity</span>
+          <small><span lang="nl">Waar de niveaus vandaan komen en waarom de highs gelijk liggen.</span><span lang="en">Where the levels come from, and why the highs sit level.</span></small>
+        </span>
+      </figcaption>
+    </figure>
+    <figure class="lesson">
+      <img src="assets/charts/04.png" alt="Trendline liquidity into equal highs" loading="lazy" decoding="async">
+      <figcaption>
+        <b>03</b>
+        <span><span lang="nl">Trendline liquidity naar equal highs</span><span lang="en">Trendline liquidity into equal highs</span>
+          <small><span lang="nl">Een trendlijn is zelf liquiditeit. Met de fair value gap eronder.</span><span lang="en">A trendline is liquidity in itself. With the fair value gap beneath it.</span></small>
+        </span>
+      </figcaption>
+    </figure>
+    <figure class="lesson">
+      <img src="assets/charts/05.webp" alt="The session as a whole" loading="lazy" decoding="async">
+      <figcaption>
+        <b>04</b>
+        <span><span lang="nl">De sessie als geheel</span><span lang="en">The session as a whole</span>
+          <small><span lang="nl">Alle zones op een kaart: hoe de losse onderdelen een dag vormen.</span><span lang="en">Every zone on one map: how the separate parts make a day.</span></small>
+        </span>
+      </figcaption>
+    </figure>
+    <figure class="lesson lesson--pair" id="model">
+      <div class="lesson__pair">
+        <img src="assets/charts/ob1.png" alt="Market structure break with the orderblock beneath it" loading="lazy" decoding="async">
+        <img src="assets/charts/ob2.png" alt="The breaker above, sellside liquidity below" loading="lazy" decoding="async">
+      </div>
+      <figcaption>
+        <b>05</b>
+        <span><span lang="nl">Het model &mdash; orderblock en breaker</span><span lang="en">The model &mdash; orderblock and breaker</span>
+          <small><span lang="nl">Structuurbreuk met de orderblock eronder; de breaker erboven, sellside liquidity eronder. Geen instap, geen uitslag.</span><span lang="en">Structure break with the orderblock beneath it; the breaker above, sellside liquidity below. No entry, no outcome.</span></small>
+        </span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+<!-- /section:material -->
+
+<!-- section:trackrecord -->
+<section id="trackrecord">
+  <div class="grp"><h2><span lang="nl">Trackrecord</span><span lang="en">Track record</span></h2></div>
+  <p class="lesson-lede">
+    <span lang="nl">De uitslagen van de oprichter zelf. Zes prop-firms, 2023 tot 2026 &mdash; elk certificaat
+      draagt een verificatiecode.</span><span lang="en">The founder's own results. Six prop firms, 2023 to 2026 &mdash; every certificate
+      carries a verification code.</span>
+  </p>
+
+  <dl class="pairs">
+    <dt>Funded Trading Plus</dt><dd><span lang="nl">Funded trading account</span><span lang="en">Funded trading account</span><small><span lang="nl">10 juli 2023</span><span lang="en">10 July 2023</span></small></dd>
+    <dt>FTMO</dt><dd><span lang="nl">Challenge en Verification</span><span lang="en">Challenge and Verification</span><small>Rewards $3,381.37 &middot; $2,498.72</small></dd>
+    <dt>FundingPips</dt><dd><span lang="nl">Negen fase-certificaten</span><span lang="en">Nine phase certificates</span><small>$3,844.80 &middot; $4,820.80 &middot; $6,209.60 &middot; $1,244.80</small></dd>
+    <dt>Topstep</dt><dd><span lang="nl">Trading Combine, 23 keer</span><span lang="en">Trading Combine, 23 times</span><small><span lang="nl">14 uitbetalingen &middot; dec 2025 &ndash; mei 2026</span><span lang="en">14 payouts &middot; Dec 2025 &ndash; May 2026</span></small></dd>
+    <dt>FundedNext Futures</dt><dd>Champion Trader &middot; Rising Trader<small><span lang="nl">augustus 2026</span><span lang="en">August 2026</span></small></dd>
+    <dt>Lucid Trading</dt><dd>Funded accounts<small><span lang="nl">Uitbetalingen</span><span lang="en">Payouts</span> $5,181 &middot; $2,523</small></dd>
+  </dl>
+
+  <p class="proofs-hint"><span lang="nl">Tik op een certificaat voor het origineel</span><span lang="en">Tap a certificate for the original</span></p>
+  <div class="proofs">
+    <figure>
+      <button type="button" class="tile"><img src="assets/proof/ftmo-chal.webp" alt="FTMO &mdash; Challenge passed" loading="lazy" decoding="async"></button>
+      <figcaption>FTMO
+        <small><span lang="nl">Challenge behaald &middot; 26 oktober 2025</span><span lang="en">Challenge passed &middot; 26 October 2025</span></small>
+      </figcaption>
+    </figure>
+    <figure>
+      <button type="button" class="tile"><img src="assets/proof/topstep-payout.webp" alt="Topstep &mdash; Proof of Payout" loading="lazy" decoding="async"></button>
+      <figcaption>Topstep
+        <small><span lang="nl">Proof of Payout &middot; 8 januari 2026</span><span lang="en">Proof of Payout &middot; 8 January 2026</span></small>
+      </figcaption>
+    </figure>
+    <figure>
+      <button type="button" class="tile"><img src="assets/proof/lucid-payout.webp" alt="Lucid Trading &mdash; Payout certificate" loading="lazy" decoding="async"></button>
+      <figcaption>Lucid Trading
+        <small><span lang="nl">Payout certificate &middot; 7 augustus 2026</span><span lang="en">Payout certificate &middot; 7 August 2026</span></small>
+      </figcaption>
+    </figure>
+    <figure>
+      <button type="button" class="tile"><img src="assets/proof/fnext-rising.webp" alt="FundedNext Futures &mdash; Rising Trader" loading="lazy" decoding="async"></button>
+      <figcaption>FundedNext Futures
+        <small><span lang="nl">Rising Trader &middot; 14 augustus 2026</span><span lang="en">Rising Trader &middot; 14 August 2026</span></small>
+      </figcaption>
+    </figure>
+    <figure>
+      <button type="button" class="tile"><img src="assets/proof/ftp-200k.webp" alt="Funded Trading Plus &mdash; Funded trading account" loading="lazy" decoding="async"></button>
+      <figcaption>Funded Trading Plus
+        <small><span lang="nl">Funded trading account &middot; 10 juli 2023</span><span lang="en">Funded trading account &middot; 10 July 2023</span></small>
+      </figcaption>
+    </figure>
+    <figure>
+      <button type="button" class="tile"><img src="assets/proof/fpips-reward.webp" alt="FundingPips &mdash; Performance rewards" loading="lazy" decoding="async"></button>
+      <figcaption>FundingPips
+        <small><span lang="nl">Performance rewards &middot; mei en juni 2024. Het ROI-cijfer onderaan is het rendement op de inschrijfkosten, niet op de rekening.</span><span lang="en">Performance rewards &middot; May and June 2024. The ROI figure at the foot is the return on the entry fee, not on the account.</span></small>
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="caveat">
+    <div class="hair"></div>
+    <b><span lang="nl">Wat dit niet zegt</span><span lang="en">What this does not say</span></b>
+    <p><span lang="nl">Dit zijn de resultaten van &eacute;&eacute;n handelaar: de oprichter. Ze zeggen niets over wat een
+      lid van Atlas Capital gaat verdienen.</span><span lang="en">These are one trader's results: the founder's. They say nothing about what a
+      member of Atlas Capital will earn.</span></p>
+    <p><span lang="nl">Uitbetalingen van prop-firms zijn bruto. De inschrijfkosten van de evaluaties die aan deze
+      rekeningen voorafgingen zijn er niet van afgetrokken, en de bedragen hierboven zijn niet
+      opgeteld tot een totaal.</span><span lang="en">Prop-firm payouts are gross. The entry fees for the evaluations behind these accounts
+      are not netted off, and the amounts above are not summed into a total.</span></p>
+    <p><span lang="nl">Resultaten uit het verleden bieden geen garantie voor de toekomst.</span><span lang="en">Past results are no guarantee of future results.</span></p>
+  </div>
+
+  <!-- lightbox: the untouched original of a certificate -->
+  <dialog class="zoom" id="zoom">
+    <img src="data:," alt="">
+    <p></p>
+    <button type="button" class="close"><span lang="nl">Sluiten</span><span lang="en">Close</span></button>
+  </dialog>
+  <script>
+  (function(){
+    var d = document.getElementById("zoom"); if (!d || !d.showModal) return;
+    var im = d.querySelector("img"), cap = d.querySelector("p");
+    document.addEventListener("click", function(e){
+      var t = e.target.closest(".tile");
+      if (t) {
+        var i = t.querySelector("img"), fc = t.parentNode.querySelector("figcaption");
+        im.src = i.src; im.alt = i.alt;
+        cap.textContent = fc ? fc.innerText.replace(/\s+/g, " ").trim() : "";
+        d.showModal(); return;
+      }
+      if (e.target === d || e.target.closest(".zoom .close")) d.close();
+    });
+  })();
+  </script>
+</section>
+<!-- /section:trackrecord -->
+
+<!-- section:access -->
+<section id="access">
+  <div class="grp"><h2><span lang="nl">Toegang</span><span lang="en">Access</span></h2></div>
+  <dl class="pairs">
+    <dt><span lang="nl">Nu</span><span lang="en">Now</span></dt><dd><em><span lang="nl">Gratis</span><span lang="en">Free</span></em><small><span lang="nl">negen open kanalen en de educatie</span><span lang="en">nine open channels and the education</span></small></dd>
+    <dt>Later</dt><dd><span lang="nl">Premium opent</span><span lang="en">Premium opens</span><small><span lang="nl">prijs en datum worden in de server aangekondigd</span><span lang="en">price and date are announced in the server</span></small></dd>
+  </dl>
+</section>
+<!-- /section:access -->
+
+</div>
+<!-- section:closer -->
+<section class="leader" id="closer">
+  <svg viewBox="0 0 200 200" aria-hidden="true">
+    <circle cx="100" cy="100" r="96" fill="none" stroke="#D7B364" stroke-width="1" opacity=".35"/>
+    <circle cx="100" cy="100" r="74" fill="none" stroke="#D7B364" stroke-width="1" opacity=".55"/>
+    <circle cx="100" cy="100" r="52" fill="none" stroke="#D7B364" stroke-width="1" opacity=".75"/>
+    <path d="M100 0 V200 M0 100 H200" stroke="#D7B364" stroke-width=".8" opacity=".5"/>
+    <path d="M100 100 L100 4 A96 96 0 0 1 196 100 Z" fill="#D7B364" opacity=".10"/>
+    <path d="M100 82 L112 100 L100 118 L88 100 Z" fill="#E6CC8E"/>
+  </svg>
+  <p class="endword"><span lang="nl">Einde</span><span lang="en">The End</span></p>
+  <p class="subtitle"><span lang="nl">Behalve in de server. Daar begint het.</span><span lang="en">Except in the server. That is where it starts.</span></p>
+  <a class="cta solid" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
+</section>
+
+<footer>
+  <div class="flinks">
+    <a href="https://discord.gg/78Ff2GuSfW">Discord</a>
+    <a href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
+    <a href="#educatie"><span lang="nl">Educatie</span><span lang="en">Education</span></a>
+    <a href="#kanalen"><span lang="nl">Kanalen</span><span lang="en">Channels</span></a>
+    <a href="#trackrecord"><span lang="nl">Trackrecord</span><span lang="en">Track record</span></a>
+  </div>
+  <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee. Resultaten uit het verleden bieden geen garantie voor de toekomst.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss. Past results are no guarantee of future results.</span></p>
+</footer>
+<!-- /section:closer -->
+
+</div>
+<script>
+(function(){
+  var r = document.documentElement, KEY = "atlas.lang";
+  function set(l, save){
+    r.setAttribute("data-lang", l);
+    r.setAttribute("lang", l);
+    var bs = document.querySelectorAll(".langsw button");
+    for (var i = 0; i < bs.length; i++)
+      bs[i].setAttribute("aria-pressed", bs[i].dataset.lang === l ? "true" : "false");
+    if (save) { try { localStorage.setItem(KEY, l); } catch(e){} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  set(saved === "en" ? "en" : "nl", false);
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".langsw button");
+    if (b) set(b.dataset.lang, true);
+  });
+})();
+</script>
+<script>
+/* Reveal-on-scroll.
+   The contract (see base.css): nothing is hidden unless <html> carries the
+   class "js", and only elements with .reveal are affected. So a visitor
+   without JavaScript, or with a script that failed, sees everything.
+   An element gets .is-in once 15% of it is inside the viewport (measured
+   8% in from the bottom edge). A [data-stagger] container reveals its
+   .reveal children one after the other. */
+(function(){
+  var root = document.documentElement;
+  var reduce = false;
+  try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e){}
+
+  var all = document.querySelectorAll(".reveal");
+  function show(el){ el.classList.add("is-in"); }
+  function inView(el){
+    var r = el.getBoundingClientRect(), h = window.innerHeight || root.clientHeight;
+    return r.bottom > 0 && r.top < h * 0.92 + 1;
+  }
+  function stagger(box){
+    var kids = box.querySelectorAll(".reveal"), i, d = 0, step = 90;
+    for (i = 0; i < kids.length; i++) {
+      if (kids[i].classList.contains("is-in")) continue;
+      kids[i].style.transitionDelay = d + "ms"; d += step;
+      show(kids[i]);
+    }
+  }
+
+  if (reduce || !("IntersectionObserver" in window)) {
+    for (var i = 0; i < all.length; i++) show(all[i]);
+    root.classList.add("js");
+    return;
+  }
+
+  /* Anything already on screen is marked before the class goes on, so the
+     first paint never shows a blank fold. */
+  var boxes = document.querySelectorAll("[data-stagger]"), j;
+  for (j = 0; j < boxes.length; j++) if (inView(boxes[j])) stagger(boxes[j]);
+  for (j = 0; j < all.length; j++) if (inView(all[j])) show(all[j]);
+  root.classList.add("js");
+
+  var io = new IntersectionObserver(function(entries){
+    for (var k = 0; k < entries.length; k++) {
+      var en = entries[k];
+      if (!en.isIntersecting) continue;
+      var el = en.target;
+      if (el.hasAttribute("data-stagger")) stagger(el); else show(el);
+      io.unobserve(el);
+    }
+  }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+
+  for (j = 0; j < boxes.length; j++) io.observe(boxes[j]);
+  for (j = 0; j < all.length; j++) {
+    if (!all[j].classList.contains("is-in") && !all[j].closest("[data-stagger]")) io.observe(all[j]);
+  }
+})();
+</script>
+</body>
+</html>

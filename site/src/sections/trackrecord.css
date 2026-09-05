@@ -1,0 +1,65 @@
+/* ===== track record =====
+   Six firms, six house styles, none of them ours. The certificates are
+   evidence, not decoration: small, uniform, monochrome until pointed at,
+   and a click opens the untouched original -- checkable, but quiet. */
+#trackrecord .proofs{
+  position:relative;z-index:2;
+  display:grid;gap:clamp(10px,1.6vw,16px);
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+@media (min-width:720px){ #trackrecord .proofs{grid-template-columns:repeat(3,minmax(0,1fr))} }
+#trackrecord .proofs figure{margin:0;min-width:0}
+#trackrecord .tile{
+  display:block;width:100%;padding:0;margin:0;
+  border:1px solid rgba(215,179,100,.18);
+  background:#0B0C0E;cursor:zoom-in;
+}
+#trackrecord .tile img{
+  display:block;width:100%;height:auto;
+  aspect-ratio:3/2;object-fit:contain;
+  filter:grayscale(1) brightness(.82) contrast(.92);
+  transition:filter .25s ease;
+}
+#trackrecord .tile:hover img,#trackrecord .tile:focus-visible img{filter:none}
+#trackrecord .tile:focus-visible{outline:1px solid var(--gold);outline-offset:2px}
+#trackrecord .proofs figcaption{
+  margin-top:8px;
+  font-size:clamp(9px,1vw,10px);
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+}
+#trackrecord .proofs figcaption small{
+  display:block;margin-top:4px;
+  letter-spacing:.02em;text-transform:none;
+  font-size:clamp(11px,1.15vw,12px);color:#78797E;line-height:1.5;
+}
+#trackrecord .proofs-hint{
+  position:relative;z-index:2;
+  margin:clamp(26px,3.6vw,40px) 0 clamp(14px,2vw,20px);text-align:center;
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#5E5F64;
+}
+#trackrecord .caveat{
+  position:relative;z-index:2;
+  max-width:60ch;margin:clamp(34px,5vw,54px) auto 0;
+  padding:0 clamp(14px,3vw,28px);
+  background:#050506;
+  text-align:center;
+  font-size:clamp(11.5px,1.25vw,13px);line-height:1.75;color:#8A8B90;
+}
+#trackrecord .caveat b{
+  display:block;margin-bottom:12px;
+  color:var(--gold);font-weight:400;
+  font-size:clamp(9px,1.05vw,10.5px);letter-spacing:.28em;text-transform:uppercase;
+}
+#trackrecord .caveat p{margin:0 0 .8em}
+#trackrecord .caveat p:last-child{margin-bottom:0}
+
+/* the original, full size (a <dialog>, so it renders in the top layer) */
+#trackrecord .zoom{border:0;padding:0;background:transparent;max-width:min(96vw,1100px);max-height:96vh}
+#trackrecord .zoom::backdrop{background:rgba(5,5,6,.94)}
+#trackrecord .zoom img{display:block;max-width:100%;max-height:84vh;width:auto;height:auto;margin:0 auto;border:1px solid rgba(215,179,100,.3)}
+#trackrecord .zoom p{margin:12px auto 0;max-width:60ch;text-align:center;font-size:12px;line-height:1.5;color:#9A9BA0}
+#trackrecord .zoom .close{
+  display:block;margin:14px auto 0;padding:8px 18px;
+  border:1px solid rgba(215,179,100,.4);background:transparent;color:var(--gold);
+  font:inherit;font-size:10px;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;
+}

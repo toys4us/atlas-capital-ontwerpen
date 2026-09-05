@@ -19,3 +19,9 @@ assets/charts/src-*.png
 assets/charts/_check.png
 assets/charts/LEESMIJ.txt
 _thumbs_sm/
+site/_refs/
+
+# builder scratch: reference shots, judge output, build smoke tests
+site/_refs/
+site/_judge/
+site/_build/

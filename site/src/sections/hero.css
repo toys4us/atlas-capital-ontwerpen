@@ -1,0 +1,52 @@
+/* ===== hero: the projector gate ===== */
+#hero{
+  position:relative;
+  padding:clamp(46px,9vw,110px) 20px clamp(28px,5vw,54px);
+  text-align:center;
+  overflow:hidden;
+}
+#hero .beam{
+  position:absolute;
+  left:50%;top:-6%;
+  width:min(150vw,1500px);
+  height:132%;
+  transform:translateX(-50%);
+  background:
+    conic-gradient(from 172deg at 50% 0%,
+      rgba(0,0,0,0) 0deg,
+      rgba(230,204,142,.10) 6deg,
+      rgba(230,204,142,.18) 8deg,
+      rgba(230,204,142,.06) 11deg,
+      rgba(0,0,0,0) 16deg);
+  filter:blur(2px);
+  opacity:.9;
+  animation:flicker 6.5s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+@keyframes flicker{
+  0%{opacity:.72}
+  40%{opacity:.95}
+  62%{opacity:.8}
+  100%{opacity:1}
+}
+@media (prefers-reduced-motion: reduce){ #hero .beam{animation:none} }
+
+#hero .filmtitle{
+  position:relative;z-index:3;
+  margin:0;
+  font-weight:300;
+  font-size:clamp(30px,7.4vw,84px);
+  line-height:1.02;
+  letter-spacing:clamp(.10em,1.1vw,.22em);
+  text-indent:clamp(.10em,1.1vw,.22em);
+  text-transform:uppercase;
+  color:var(--paper);
+}
+#hero .filmtitle span{display:block;color:var(--gold)}
+/* The lockup carries the name, so the title card is the mark itself and the
+   letterspaced sub-line stays as the credit beneath it. */
+#hero .filmtitle__logo{
+  display:block;margin:0 auto;
+  width:clamp(180px,32vw,340px);height:auto;
+}
+#hero .cta{margin-top:clamp(26px,4vw,38px);position:relative;z-index:3}

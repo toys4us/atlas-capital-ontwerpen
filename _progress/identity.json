@@ -1,0 +1,23 @@
+{
+ "id": "identity",
+ "title": "Identity",
+ "wave": 0,
+ "round": 0,
+ "status": "scaffolded",
+ "updated_at": "2026-09-05T04:48:27+02:00",
+ "history": [
+  {
+   "wave": 0,
+   "round": 0,
+   "status": "scaffolded",
+   "refs": [
+    "IZANAMI (baqemono.inc)",
+    "MONOLOG (Huy Nguyen)",
+    "Exo Ape (Roermond, NL)",
+    "Aebele Interiors (site by Exo Ape)"
+   ],
+   "note": "Structural changes needed for the split (render unchanged): hero root id 'top' -> 'hero' (header wordmark href updated to #hero; footer anchors #educatie/#kanalen still on the .grp elements, #trackrecord moved from the .grp to the section root, same scroll position because the margin collapses through the section); '.grp:first-child{margin-top:0}' became '.roll > :first-child > .grp:first-child{margin-top:0}' since every .grp is now first child of its own <section>; the lightbox <dialog>+script moved inside #trackrecord (top layer, so .page{overflow:hidden} is irrelevant).",
+   "at": "2026-09-05T04:48:27+02:00"
+  }
+ ]
+}
