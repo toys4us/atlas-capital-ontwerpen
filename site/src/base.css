@@ -9,14 +9,14 @@
    mark, the hairlines, the one button and the ink the plates are printed
    in, and a page that arrives as you read it. The opening spread is the
    idea: the tagline set large and flush left, the founder's own chart
-   tipped in as a plate, the last two lines of the title running across
-   its edge.
+   tipped in as a plate -- printed as a hairline engraving in that gold --
+   and the last two words of the title running right across it.
 
    Where the gold goes (and nowhere else):
      - hairlines: the strip edges, the group rules, the language rule
      - one accent per screen: an italic value, the kicker's dash
      - the one solid button (.cta.solid): never twice in a viewport
-     - the plates: the founder's charts printed in gold ink on the black
+     - the plate: the founder's chart printed in gold ink on the black
    Two voices per block, never three: the serif (roman, italic, or small
    tracked caps for a label) and, only for what is counted next to a
    clock or a figure number, Fragment Mono. A sub-line under a credit is
@@ -263,15 +263,14 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
   display:none;
 }
 @media (min-width:1100px){ .rail{display:block} }
-/* a short laptop screen: the clocks would sit on the spread's button */
-@media (max-height:760px){ .rail__now{display:none} }
 .rail > *{position:absolute;margin:0}
 .rail__now{
   left:var(--gutter);
   top:calc(100vh - 44px);
-  display:flex;gap:26px;
+  display:none;gap:26px;             /* a clock with no script is two dashes */
   white-space:nowrap;
 }
+.js .rail__now{display:flex}
 .rail__now > span{display:inline-flex;align-items:baseline;gap:9px}
 .rail__city{
   font-size:var(--t-nano);
@@ -280,6 +279,8 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
   color:var(--ink-5);
 }
 .rail__now time{font-size:var(--t-caption);color:var(--ink-4)}
+/* a short laptop screen: the clocks would sit on the spread's button */
+@media (max-height:760px){ .rail .rail__now{display:none} }
 .rail__here{
   left:calc(var(--gutter) - 6px);
   top:50vh;
@@ -643,7 +644,9 @@ dl.pairs .cols{
      .reveal.draw      a rule that draws itself from the left (or from the
                        centre with .draw.from-centre) -- for .hair and rules
      .reveal.card      a group title: the rule draws from the centre while
-                       the title itself fades in on it */
+                       the title itself fades in on it
+     .reveal.wipe      a plate that prints on from the left (clip-path, no
+                       opacity) -- for the spread's plate */
 .js .reveal{
   opacity:0;
   transform:translateY(var(--reveal-y));
@@ -652,7 +655,7 @@ dl.pairs .cols{
 .js .reveal.is-in{opacity:1;transform:none}
 .no-tr .reveal,.no-tr .reveal::before,.no-tr .reveal *,.reveal.no-tr,.reveal.no-tr::before,.reveal.no-tr *{transition:none!important}
 .mask{overflow:hidden;padding-bottom:.3em;margin-bottom:-.3em}
-.js .mask > .reveal{opacity:1;transform:translateY(112%);transition:transform calc(var(--d-reveal) * 1.1) var(--e-reveal)}
+.js .mask > .reveal{opacity:1;transform:translateY(132%);transition:transform calc(var(--d-reveal) * 1.1) var(--e-reveal)}
 .js .mask > .reveal.is-in{transform:none}
 .js .reveal.draw{opacity:1;transform:scaleX(0);transform-origin:left center;transition:transform var(--d-reveal) var(--e-reveal)}
 .js .reveal.draw.from-centre{transform-origin:center}
@@ -662,6 +665,8 @@ dl.pairs .cols{
 .js .reveal.card > h2{opacity:0;transform:translateY(10px);transition:opacity var(--d-fade) var(--e-reveal),transform var(--d-reveal) var(--e-reveal)}
 .js .reveal.card.is-in::before{transform:none}
 .js .reveal.card.is-in > h2{opacity:1;transform:none}
+.js .reveal.wipe{opacity:1;transform:none;clip-path:inset(0 100% 0 0);transition:clip-path calc(var(--d-reveal) * 1.15) var(--e-reveal)}
+.js .reveal.wipe.is-in{clip-path:inset(0)}
 /* [data-parallax="0.12"] drifts at that fraction of the scroll distance from
    the viewport centre; with [data-parallax-top] it drifts from where it sits
    at the top of the page instead (for the fold, so the load layout holds). */
@@ -670,6 +675,7 @@ dl.pairs .cols{
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js .reveal,.js .mask > .reveal,.js .reveal.draw,.js .reveal.card > h2{opacity:1;transform:none;transition:none}
+  .js .reveal.wipe{clip-path:none;transition:none}
   .js .reveal.card::before{transform:none;transition:none}
   [data-parallax]{transform:none!important}
   .js .roll::before{background:linear-gradient(180deg,rgba(215,179,100,0) 0,var(--line-2) 220px,var(--line-2) calc(100% - 220px),rgba(215,179,100,0) 100%)}

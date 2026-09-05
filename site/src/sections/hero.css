@@ -1,30 +1,44 @@
 /* ===== hero: the opening spread =====
-   Not a title card: a spread. Left, the three words of the tagline set
-   large and flush left, the way a journal opens. Right, one real artefact:
-   the founder's own session chart, tipped in as a plate -- a hairline
-   frame, a figure caption -- and the last two lines of the title run
-   across its edge, the type in front. The chart is the founder's,
-   untouched but for its ink: it is printed in the one gold on the page's
-   black, so the plate and the type are made of the same two inks. Under
-   the title, one paragraph of what is actually in the server, and the one
-   gold button. On load the plate develops under the words while the words
-   rise out of their baselines; on scroll the title leads and the plate
-   lags a little, so the two layers part.
+   A spread, not a title card. Four corners: top left the kicker, top right
+   the standfirst, the three words of the tagline set large and hung on the
+   left gutter, and the founder's own session chart tipped in as a plate on
+   the right -- printed as a hairline engraving in the one gold on the
+   page's black (an SVG filter in the partial: edges and strokes of the
+   untouched screenshot, coloured #D7B364), a hairline frame, a figure
+   caption outside the frame at its lower right. The composition is layered
+   on purpose: the second and third words run right across the plate, the
+   type in front, the plate's top edge parked in the gap between the first
+   baseline and the second cap line, its bottom edge a clear quarter-em
+   under the deepest descender -- nothing lands on a line. Under the last
+   word, the one gold button of the screen.
 
-   --kick    height of the kicker line plus its gap, so the plate's top can
-             be set from the card's top edge without measuring
-   --plate-w the plate's share of the spread on a desk
-   The plate is locked to the type: its top edge is the first baseline
-   (.703em below the line box at Newsreader's metrics), its bottom edge
-   the third (two lines of .94), whatever the width.                      */
+   Everything on the plate is locked to the type in em of --t-hero, so the
+   relationships hold at every width and on a short laptop screen:
+     top      .84em  (first baseline .703em + .137em of the line gap)
+     width   5.15em  -> height 2.35em at the chart's own 1400:639, so the
+                        bottom edge sits at 3.19em; the third baseline is at
+                        2.58em and its descender ends at 2.80em
+     left    never further right than 3.9em from the card's left edge, so
+             the third word (4.55em wide) always runs at least .65em into
+             the plate -- on a short screen the type shrinks with 17vh and
+             the plate widens to keep the overlap (the section is a size
+             container, so 100cqw is the card's width)
+   --kick    height of the kicker line plus its gap, so the plate's top can be
+             set from the card's top edge without measuring
+   On load the plate wipes on from the left like a print while the words
+   rise out of their baselines; on scroll the title leads (-.05) and the
+   plate lags (.10), so the two layers part a little.                     */
 #hero{
   --kick:calc(17px + clamp(18px,2.4vw,32px));
-  --plate-w:54%;
+  --card-w:min(100cqw,var(--wide));
+  --plate-w:min(max(calc(var(--t-hero) * 5.15),calc(var(--card-w) - var(--t-hero) * 3.9)),var(--card-w));
+  --plate-h:calc(var(--plate-w) * .4564);
   position:relative;
+  container-type:inline-size;
   display:flex;flex-direction:column;justify-content:center;
   min-height:calc(100vh - var(--hdr-h));
   min-height:calc(100svh - var(--hdr-h));
-  padding:clamp(16px,4vh,48px) var(--gutter) clamp(56px,10vh,104px);
+  padding:clamp(16px,4vh,40px) var(--gutter) clamp(56px,9vh,88px);
 }
 #hero .card{
   position:relative;
@@ -32,8 +46,8 @@
   display:flex;flex-direction:column;align-items:flex-start;
 }
 
-/* the kicker: what this is, in the page's label voice, with the one
-   gold dash of the screen in front of it */
+/* the kicker: what this is, in the page's label voice, the one gold dash
+   of the screen in front of it */
 #hero .kicker{
   display:flex;align-items:center;
   margin:0 0 clamp(18px,2.4vw,32px);
@@ -46,7 +60,10 @@
   white-space:nowrap;
 }
 #hero .kicker::before{content:"";flex:0 0 auto;width:26px;height:1px;margin-right:14px;background:var(--gold)}
-@media (max-width:619px){ #hero .kicker > .kicker__more{display:none} }
+/* the kicker's second half goes when the standfirst shares its row (a
+   narrow desk) and on a phone */
+@media (max-width:1099px){ #hero .kicker > .kicker__more{display:none} }
+@media (min-width:620px) and (max-width:899px){ #hero .kicker > .kicker__more{display:inline} }
 
 /* the title: three words, three lines, three masks, hung on the gutter */
 #hero .title{
@@ -60,11 +77,11 @@
   color:var(--paper);
   text-wrap:balance;
 }
-#hero .title .mask{display:block;padding-bottom:.2em;margin-bottom:-.2em}
+#hero .title .mask{display:block;padding-bottom:.22em;margin-bottom:-.22em}
 #hero .title__line{display:block}
 #hero .title__line > span{display:inline-block}
 
-/* the paragraph: read, not declaimed; left, on the title's axis */
+/* the standfirst: read, not declaimed */
 #hero .subtitle{
   position:relative;z-index:2;
   margin:clamp(24px,4.6vh,44px) 0 0;
@@ -76,31 +93,19 @@
   color:var(--ink-2);
   text-wrap:pretty;
 }
-#hero .cta{position:relative;z-index:2;margin-top:clamp(24px,4.2vh,40px)}
+#hero .cta{position:relative;z-index:3;margin-top:clamp(26px,4.2vh,40px)}
 
 /* the plate */
 #hero .plate{margin:0;width:100%;z-index:1}
 #hero .plate__frame{
   position:relative;
-  isolation:isolate;
   overflow:hidden;
   border:1px solid var(--line-3);
-  background:var(--panel-lo);
-  aspect-ratio:1400/639;
+  background:var(--bg);
 }
 #hero .plate__frame img{
-  display:block;width:100%;height:100%;
-  object-fit:cover;
-  filter:grayscale(1) brightness(.88) contrast(1.12);
-}
-/* gold ink: the greys of the chart multiplied by the one gold, so the
-   candles print in gold and the ground stays the page's black */
-#hero .plate__frame::after{
-  content:"";
-  position:absolute;inset:0;
-  background:var(--gold);
-  mix-blend-mode:multiply;
-  pointer-events:none;
+  display:block;width:100%;height:auto;
+  filter:url(#gold-ink);
 }
 #hero .plate figcaption{
   display:flex;flex-wrap:wrap;align-items:baseline;
@@ -119,25 +124,26 @@
   font-size:var(--t-small);color:var(--ink-4);
   text-wrap:pretty;
 }
-/* the plate develops rather than rises: a slow fade from a hair larger */
-.js #hero .plate__frame.reveal{transform:scale(1.012);transition:opacity 1.1s var(--e-reveal),transform 1.9s var(--e-reveal)}
-.js #hero .plate__frame.reveal.is-in{transform:none}
-@media (prefers-reduced-motion:reduce){ .js #hero .plate__frame.reveal{transform:none;transition:none} }
+#hero .ink{position:absolute;width:0;height:0;overflow:hidden}
 
-/* the desk: the plate tipped in at the right, its top a line below the
-   first word, the second and third words running across its edge */
+/* the desk: the plate tipped in at the right, the standfirst above it in
+   the top right corner, the second and third words running across it */
 @media (min-width:900px){
+  #hero .card{min-height:calc(var(--kick) + var(--t-hero) * .84 + var(--plate-h) + 52px)}
   #hero .plate{
     position:absolute;right:0;
-    top:calc(var(--kick) + var(--t-hero) * .703);
+    top:calc(var(--kick) + var(--t-hero) * .84);
     width:var(--plate-w);
   }
-  #hero .plate__frame{aspect-ratio:auto;height:calc(var(--t-hero) * 1.88)}
-  /* the legend sits at the plate's outer corner, clear of the descenders
-     of the word that crosses it */
   #hero .plate figcaption{justify-content:flex-end;text-align:right}
   #hero .plate__note{flex:0 1 auto}
-  #hero .subtitle{max-width:min(44ch,calc(100% - var(--plate-w) - 40px))}
+  #hero .subtitle{
+    position:absolute;right:0;
+    bottom:calc(100% - var(--kick) - var(--t-hero) * .84 + 30px);
+    width:min(38ch,40%);
+    margin:0;
+    font-size:clamp(16px,1.45vw,21px);
+  }
 }
 /* narrower: one column, the plate after the button, full width */
 @media (max-width:899px){

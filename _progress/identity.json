@@ -2,9 +2,9 @@
  "id": "identity",
  "title": "Identity",
  "wave": 0,
- "round": 4,
- "status": "loss",
- "updated_at": "2026-09-05T17:01:10+02:00",
+ "round": 5,
+ "status": "win",
+ "updated_at": "2026-09-05T17:41:13+02:00",
  "history": [
   {
    "wave": 0,
@@ -78,6 +78,21 @@
    "confidence": 0.8,
    "note": "src/sections/02-hero.html + hero.css: the title card and beam are gone; the hero is an opening spread — kicker (gold dash + \"Discord-community voor traders · NL/EN\"), the tagline set flush left at clamp(62px,min(11vw,17vh),158px), and the founder's real session chart (assets/charts/05.webp, untouched) tipped in as a plate printed in the one gold (grayscale + gold multiply), hairline frame, two-voice legend; the plate locks between baseline 1 and baseline 3 (top .703em, height 1.88em) so \"Discipline.\" and \"Uitvoering.\" run across its edge; below, one concrete paragraph built only from fa",
    "at": "2026-09-05T17:01:10+02:00"
+  },
+  {
+   "wave": 0,
+   "round": 5,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 7.2,
+   "score_ref": 5.8,
+   "wowed": false,
+   "gap": "The hero chart: a busy, faintly pixelated raster of gold price lines that the display serif has to sit on top of, so the tail of \"Uitvoering.\" collides with zone lines and the whole right half reads as noise rather than as a considered graphic. At the bar this is a purpose-drawn, sparse SVG hairline figure (three or four zones, one price line) with the type either clearing it or overlapping at a deliberate, single point — and the same discipline should retire the generic centred pull-quote block in section 02, which is a template pattern floating in dead space.",
+   "motion": "Line-by-line mask reveal of the headline with a left-to-right chart wipe, then copy and CTA fade in — controlled and coherent, but a stock editorial sequence with slightly heavy easing and no surprise after the first beat.",
+   "verdict": "A is the more finished object: a consistent dark-and-gold editorial system with confident scale contrast, tracked small caps, hairlines and captions that all align, even if the concept is a familiar luxury-finance register and the chart graphic drags it down. B has the more distinctive, cinematic identity and better photography, but unreadable copy, overlapping nav, a mobile nav bug and typos put it below SOTD craft, so A takes it without either reaching the shortlist.",
+   "confidence": 0.78,
+   "note": "IDENTITY ROUND 5 — gate PASS (0 failures, 0 notes) at 1440/390, NL+EN. Nothing committed. Judging shots refreshed: E:/ClaudeCode_GUI/atlas-designs/site/_build/self (hero: desk-fold, mob-fold, motion, full-*) and _build/self-mid (founder).\n- src/sections/02-hero.html + hero.css: the plate is now the founder's real chart (assets/charts/05.webp, untouched) printed as a gold hairline ENGRAVING via an inline SVG filter (luminance -> edge kernel + strokes, dilate .5px, coloured exactly #D7B364 on #08090B) — no more olive multiply, no crop (native 1400:639). Composition is deliberately layered: pla",
+   "at": "2026-09-05T17:41:13+02:00"
   }
  ]
 }

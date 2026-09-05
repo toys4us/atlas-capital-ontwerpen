@@ -56,8 +56,8 @@
   var SCROLL_SPAN = 420;  /* on scroll a whole stagger fits in this        */
   var GAP = 110;          /* ms between groups in the load sequence        */
   var CAP = 900;          /* the load sequence never waits longer          */
-  var FONTS = 350;        /* ms we are willing to wait for the web fonts   */
-  var BEAT = 140;         /* ms of black before the page comes in          */
+  var FONTS = 650;        /* ms we are willing to wait for the web fonts   */
+  var BEAT = 160;         /* ms of black before the page comes in          */
   var DUR = 2000;         /* >= the longest reveal transition in css       */
 
   /* ---- auto: tag the roll's blocks -------------------------------------

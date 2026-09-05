@@ -1,14 +1,18 @@
 /* ===== header =====
    One bar, three things: the mark and the name on the left, and on the
-   right the one link that matters and the two languages. The bar shares
+   right the two languages and the one link that matters. The bar shares
    the spread's gutter and width, so the wordmark sits on the same axis as
    the first word of the title below it. At the top of the page the bar is
    transparent -- the spread owns the fold -- and it gains its ground and a
-   hairline once the visitor has moved (motion.js toggles .is-top). The
-   link is a hairline box while a gold button is on screen (the spread's,
-   the end card's) and becomes the gold button itself when none is: one
-   gold button per viewport, always (motion.js toggles .solid on it). The
-   box is the same in both states, so the swap is a fill, not a jump. */
+   hairline once the visitor has moved (motion.js toggles .is-top).
+
+   One gold button per viewport, always. While a gold button is on screen
+   (the spread's, the end card's) the link here is quiet: a word in the
+   label voice and a small arrow, no box. When none is, motion.js gives it
+   .solid and it becomes the gold button itself, with the full label. It
+   is the last thing in the bar, so when it grows it grows leftward into
+   free space and nothing else moves. Without JavaScript it stays quiet,
+   and the spread's button is the one. */
 #header{
   position:sticky;top:0;z-index:50;
   padding:0 var(--gutter);
@@ -31,35 +35,47 @@
   transition:color var(--d) var(--e-out);
 }
 #header .wm:hover b{color:var(--gold-hi)}
-#header .bar{display:flex;align-items:center;gap:clamp(8px,2vw,22px);flex:0 0 auto}
+#header .bar{display:flex;align-items:center;gap:clamp(14px,2.4vw,30px);flex:0 0 auto}
 #header .cta{
-  padding:8px 14px 7px;
-  border:1px solid var(--line-3);
+  gap:9px;
+  padding:8px 0 7px;
+  border:1px solid transparent;
   font-size:var(--t-micro);
   letter-spacing:var(--trk-caps);
   color:var(--ink-2);
   background:transparent;
-  transition:background-color .3s var(--e-out),border-color .3s var(--e-out),color .3s var(--e-out),transform var(--d-fast) var(--e-out);
+  transition:background-color .3s var(--e-out),border-color .3s var(--e-out),color .3s var(--e-out),padding .3s var(--e-out),transform var(--d-fast) var(--e-out);
 }
 #header .cta::before{display:none}
-#header .cta .s{display:none}
-#header .cta:hover,#header .cta:focus-visible{color:var(--paper);border-color:var(--gold)}
-#header .cta.solid{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+#header .cta .l{display:none}
+#header .cta .s{display:inline}
+/* the arrow: a hairline in the one gold, drawn, not a glyph */
+#header .cta .arr{
+  display:block;width:9px;height:9px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M1 8 8 1M2.5 1H8v5.5' fill='none' stroke='%23D7B364' stroke-width='1'/%3E%3C/svg%3E") center/9px 9px no-repeat;
+  transition:transform var(--d) var(--e-out);
+}
+#header .cta:hover,#header .cta:focus-visible{color:var(--paper)}
+#header .cta:hover .arr,#header .cta:focus-visible .arr{transform:translate(1px,-1px)}
+#header .cta.solid{padding:8px 14px 7px;background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+#header .cta.solid .l{display:inline}
+#header .cta.solid .s,#header .cta.solid .arr{display:none}
 #header .cta.solid:hover,#header .cta.solid:focus-visible{background:var(--gold-hi);border-color:var(--gold-hi);color:var(--gold-ink)}
 #header .cta.solid:active{background:var(--gold-lo);border-color:var(--gold-lo)}
 /* the bar does not arrive: it is the frame, and the picture arrives in it.
    (A fade on a sticky bar, or on anything inside one, promotes a layer that
    paints a box around the wordmark for as long as the transition lives.) */
 /* a phone: the same three things, tighter, and nothing wraps. The link
-   keeps its box and loses three words. */
+   keeps its one word in both states. */
 @media (max-width:619px){
   #header .inner{gap:8px}
   #header .wm{gap:7px}
   #header .wm b{font-size:var(--t-nano);letter-spacing:.16em}
-  #header .bar{gap:6px}
-  #header .cta{padding:7px 10px 6px;font-size:var(--t-nano);letter-spacing:.12em}
-  #header .cta .l{display:none}
-  #header .cta .s{display:inline}
+  #header .bar{gap:16px}
+  #header .cta{font-size:var(--t-nano);letter-spacing:.12em;gap:7px}
+  #header .cta.solid{padding:7px 10px 6px}
+  #header .cta.solid .l{display:none}
+  #header .cta.solid .s{display:inline}
   #header .langsw{gap:0}
   #header .langsw button{padding:8px 5px;font-size:var(--t-nano)}
   #header .langsw button::after{left:5px;right:calc(5px + var(--trk-caps))}
