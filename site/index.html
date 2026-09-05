@@ -29,15 +29,15 @@
    Newsreader for everything that is read, one flat gold (#D7B364) for the
    mark, the hairlines, the one button and the ink the plates are printed
    in, and a page that arrives as you read it. The opening spread is the
-   idea: the tagline set large and flush left, the founder's own chart
-   tipped in as a plate -- printed as a hairline engraving in that gold --
-   and the last two words of the title running right across it.
+   idea: the tagline set large and flush left, a session drawn as a schema
+   -- four zones, one line, hairlines of that gold -- tipped in as a plate,
+   and the last two words of the title running across its edge.
 
    Where the gold goes (and nowhere else):
      - hairlines: the strip edges, the group rules, the language rule
      - one accent per screen: an italic value, the kicker's dash
      - the one solid button (.cta.solid): never twice in a viewport
-     - the plate: the founder's chart printed in gold ink on the black
+     - the plate: the figure's line and zones, hairlines in the gold
    Two voices per block, never three: the serif (roman, italic, or small
    tracked caps for a label) and, only for what is counted next to a
    clock or a figure number, Fragment Mono. A sub-line under a credit is
@@ -146,7 +146,7 @@
   --d-fast:.18s;
   --d:.45s;
   --d-slow:.9s;
-  --d-reveal:1.4s;                        /* the settle (transform)            */
+  --d-reveal:1.25s;                       /* the settle (transform)            */
   --d-fade:.7s;                           /* the appearance (opacity)          */
   --e-out:cubic-bezier(.16,1,.3,1);       /* expo-out: fast start, long settle */
   --e-reveal:cubic-bezier(.33,1,.68,1);   /* cubic-out: a calm arrival          */
@@ -552,44 +552,85 @@ dl.pairs .cols{
   text-wrap:pretty;
 }
 
-/* ---------- quote card -------------------------------------------------- */
+/* ---------- quote card --------------------------------------------------
+   The founder's own words, set as a credit and not as a pull-quote: the
+   label sits in the left column with every other label, the words in the
+   value column at value size, a short rule above them -- so the quote
+   stands on the same axis as the rows above and below it instead of
+   floating centred in the dark. On a phone, where the credits centre, the
+   quote centres with them. */
 .still{
-  margin:clamp(56px,9vw,116px) auto;
-  max-width:680px;
-  text-align:center;
+  position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:clamp(22px,5vw,60px);
+  row-gap:0;
+  align-items:start;
+  margin:clamp(36px,5vw,60px) 0 clamp(8px,1.5vw,16px);
+  text-align:left;
 }
+.still .hair{grid-column:2;grid-row:1;margin:0 0 clamp(16px,2.2vw,24px);width:40px}
+.still .mask{grid-column:2;grid-row:2;min-width:0}
 .still blockquote{
   margin:0;
+  max-width:30ch;
   font-family:var(--f-display);
-  font-size:var(--t-quote);
+  font-size:var(--t-h3);
   font-weight:400;
-  line-height:var(--lh-snug);
-  letter-spacing:-.01em;
-  color:var(--paper);
-  text-wrap:balance;
+  line-height:1.32;
+  letter-spacing:-.006em;
+  color:var(--ink-1);
+  text-wrap:pretty;
   hanging-punctuation:first last;
 }
 .still .who{
-  margin-top:var(--s5);
+  grid-column:1;grid-row:2;
+  margin:0;
+  padding-top:calc(var(--t-h3) * .6);    /* the label's baseline on the first line's */
+  text-align:right;
   font-family:var(--f-display);
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;color:var(--ink-4);
+  line-height:1.5;
 }
 .hair{
   width:40px;height:1px;background:var(--line-4);margin:0 auto clamp(24px,3.6vw,36px);
 }
+@media (max-width:620px){
+  .still{display:block;max-width:34ch;margin-left:auto;margin-right:auto;text-align:center}
+  .still .hair{margin:0 auto clamp(16px,2.2vw,24px)}
+  .still blockquote{max-width:none}
+  .still .who{padding-top:var(--s5);text-align:center}
+}
 
-/* ---------- interstitial cta -------------------------------------------- */
+/* ---------- interstitial cta --------------------------------------------
+   A prompt and the link that answers it, set as one more credit row: the
+   prompt in italic, right of the gutter with the labels; the link left of
+   it with the values. On a phone it centres with the rest. */
 .interstitial{
-  text-align:center;
+  position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:clamp(22px,5vw,60px);
+  align-items:start;
   margin:clamp(40px,5.5vw,72px) 0;
+  text-align:left;
 }
 .interstitial p{
-  margin:0 0 14px;
+  grid-column:1;
+  margin:0;
+  padding-top:4px;                        /* its baseline on the link's */
+  text-align:right;
   font-family:var(--f-display);
   font-style:italic;
   font-size:var(--t-lead);
   line-height:var(--lh-snug);
   color:var(--ink-3);
+  text-wrap:balance;
+}
+.interstitial .cta{grid-column:2;justify-self:start;margin:0}
+@media (max-width:620px){
+  .interstitial{display:block;text-align:center}
+  .interstitial p{padding:0;margin:0 0 14px;text-align:center}
 }
 
 /* ---------- language ----------------------------------------------------- */
@@ -792,38 +833,40 @@ dl.pairs .cols{
 /* ===== hero: the opening spread =====
    A spread, not a title card. Four corners: top left the kicker, top right
    the standfirst, the three words of the tagline set large and hung on the
-   left gutter, and the founder's own session chart tipped in as a plate on
-   the right -- printed as a hairline engraving in the one gold on the
-   page's black (an SVG filter in the partial: edges and strokes of the
-   untouched screenshot, coloured #D7B364), a hairline frame, a figure
-   caption outside the frame at its lower right. The composition is layered
-   on purpose: the second and third words run right across the plate, the
-   type in front, the plate's top edge parked in the gap between the first
+   left gutter, and at the right a plate: a session drawn as a schema in
+   hairlines of the one gold -- four zones, one line, nothing else (the SVG
+   in the partial) -- in a hairline frame on a mat one step up from the
+   page, a figure caption outside the frame at its lower right. The
+   composition is layered on purpose, and at one place only: the last two
+   words run across the plate's left edge, and the band they cover is empty
+   -- the line opens low and quiet under them, the session happens in the
+   right two thirds -- so the type sits on a calm field and crosses one
+   hairline. The plate's top edge is parked in the gap between the first
    baseline and the second cap line, its bottom edge a clear quarter-em
-   under the deepest descender -- nothing lands on a line. Under the last
+   under the deepest descender: nothing lands on a line. Under the last
    word, the one gold button of the screen.
 
    Everything on the plate is locked to the type in em of --t-hero, so the
    relationships hold at every width and on a short laptop screen:
      top      .84em  (first baseline .703em + .137em of the line gap)
-     width   5.15em  -> height 2.35em at the chart's own 1400:639, so the
-                        bottom edge sits at 3.19em; the third baseline is at
-                        2.58em and its descender ends at 2.80em
-     left    never further right than 3.9em from the card's left edge, so
-             the third word (4.55em wide) always runs at least .65em into
-             the plate -- on a short screen the type shrinks with 17vh and
-             the plate widens to keep the overlap (the section is a size
-             container, so 100cqw is the card's width)
+     height  2.35em  -> bottom at 3.19em; the third baseline is at 2.58em
+                        and its descender ends at 2.80em
+     left    3.45em  from the card's left edge: "Discipline." (4.31em)
+                     crosses by .86em, "Uitvoering." (4.66em) by 1.21em,
+                     "Execution." (4.44em) by .99em, "Process." (3.32em)
+                     clears the corner. Constant in em, so constant at
+                     every width. The figure stretches to the frame
+                     (preserveAspectRatio none); its strokes do not scale.
    --kick    height of the kicker line plus its gap, so the plate's top can be
              set from the card's top edge without measuring
-   On load the plate wipes on from the left like a print while the words
-   rise out of their baselines; on scroll the title leads (-.05) and the
-   plate lags (.10), so the two layers part a little.                     */
+   On load the frame appears, the zones develop and the line draws itself
+   while the words rise out of their baselines; on scroll the title leads
+   (-.05) and the plate lags (.10), so the two layers part a little.    */
 #hero{
   --kick:calc(17px + clamp(18px,2.4vw,32px));
   --card-w:min(100cqw,var(--wide));
-  --plate-w:min(max(calc(var(--t-hero) * 5.15),calc(var(--card-w) - var(--t-hero) * 3.9)),var(--card-w));
-  --plate-h:calc(var(--plate-w) * .4564);
+  --plate-w:min(calc(var(--card-w) - var(--t-hero) * 3.45),var(--card-w));
+  --plate-h:calc(var(--t-hero) * 2.35);
   position:relative;
   container-type:inline-size;
   display:flex;flex-direction:column;justify-content:center;
@@ -891,13 +934,37 @@ dl.pairs .cols{
 #hero .plate__frame{
   position:relative;
   overflow:hidden;
+  container-type:inline-size;          /* the labels size from the frame */
+  aspect-ratio:1000/450;
   border:1px solid var(--line-3);
-  background:var(--bg);
+  background:var(--panel-lo);
+  transition:border-color var(--d-fade) var(--e-reveal),background-color var(--d-fade) var(--e-reveal);
 }
-#hero .plate__frame img{
-  display:block;width:100%;height:auto;
-  filter:url(#gold-ink);
+#hero .fig{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#hero .fig *{vector-effect:non-scaling-stroke}
+#hero .fig__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:round}
+#hero .fig__zone{stroke:var(--gold);stroke-width:1;stroke-opacity:.36;fill:var(--gold);fill-opacity:.07}
+#hero .fig__level{stroke-opacity:.55;stroke-dasharray:3 5;stroke-linecap:butt}
+/* labels: the page's label voice, positioned in the figure's own
+   percentages so they stay with their zones at every width; they scale a
+   little with the plate so a phone's figure is not all label */
+#hero .plate__tag{
+  position:absolute;
+  display:block;
+  font-family:var(--f-display);
+  font-style:normal;
+  font-size:clamp(8px,1.35cqw,var(--t-nano));
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--ink-4);
+  white-space:nowrap;
+  pointer-events:none;
+  transition:opacity var(--d-fade) var(--e-reveal);
 }
+#hero .plate__tag--liq{right:2.2%;top:20%;transform:translateY(calc(-100% - 6px))}
+#hero .plate__tag--fvg{right:2.2%;top:40%;transform:translateY(6px)}
+#hero .plate__tag--ob{left:38.6%;top:89.8%;transform:translateY(4px)}
 #hero .plate figcaption{
   display:flex;flex-wrap:wrap;align-items:baseline;
   gap:4px clamp(14px,1.6vw,22px);
@@ -915,10 +982,28 @@ dl.pairs .cols{
   font-size:var(--t-small);color:var(--ink-4);
   text-wrap:pretty;
 }
-#hero .ink{position:absolute;width:0;height:0;overflow:hidden}
+
+/* the trace: the plate's own reveal. Under .js, until motion.js marks it
+   .is-in, the frame is bare (no line, the mat still black), the zones and
+   labels wait, and the line is drawn back to nothing (pathLength 1, so the
+   dash is the whole path). In: the frame and mat come up, the zones develop
+   and the line draws itself left to right over the slow settle. Never a
+   transform, never opacity on the frame itself -- the probe sees the plate
+   at once; the motion is in the ink. */
+.js #hero .reveal.trace{opacity:1;transform:none;border-color:transparent;background-color:var(--bg);transition:border-color var(--d-fade) var(--e-reveal),background-color var(--d-fade) var(--e-reveal)}
+.js #hero .reveal.trace .fig__zone,.js #hero .reveal.trace .plate__tag{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) .5s}
+.js #hero .reveal.trace .fig__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.9s var(--e-reveal)}
+.js #hero .reveal.trace.is-in{border-color:var(--line-3);background-color:var(--panel-lo)}
+.js #hero .reveal.trace.is-in .fig__zone,.js #hero .reveal.trace.is-in .plate__tag{opacity:1}
+.js #hero .reveal.trace.is-in .fig__line{stroke-dashoffset:0}
+@media (prefers-reduced-motion:reduce){
+  .js #hero .reveal.trace{border-color:var(--line-3);background-color:var(--panel-lo)}
+  .js #hero .reveal.trace .fig__zone,.js #hero .reveal.trace .plate__tag{opacity:1;transition:none}
+  .js #hero .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
+}
 
 /* the desk: the plate tipped in at the right, the standfirst above it in
-   the top right corner, the second and third words running across it */
+   the top right corner, the last two words running across it */
 @media (min-width:900px){
   #hero .card{min-height:calc(var(--kick) + var(--t-hero) * .84 + var(--plate-h) + 52px)}
   #hero .plate{
@@ -926,6 +1011,7 @@ dl.pairs .cols{
     top:calc(var(--kick) + var(--t-hero) * .84);
     width:var(--plate-w);
   }
+  #hero .plate__frame{aspect-ratio:auto;height:var(--plate-h)}
   #hero .plate figcaption{justify-content:flex-end;text-align:right}
   #hero .plate__note{flex:0 1 auto}
   #hero .subtitle{
@@ -1162,38 +1248,33 @@ footer .risk{
     </h1>
     <p class="subtitle reveal" data-at="900"><span lang="nl">Educatie in tien onderwerpen, live trading door de oprichter en chart-idee&euml;n voor Nasdaq, S&amp;P&nbsp;500, goud, olie en crypto. Negen kanalen zijn nu gratis open.</span><span lang="en">Education in ten topics, live trading by the founder and chart ideas for the Nasdaq, S&amp;P&nbsp;500, gold, oil and crypto. Nine channels are open, free, right now.</span></p>
     <a class="cta solid reveal" data-at="1080" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
+    <!-- the figure: a session drawn as a schema, in hairlines of the one
+         gold. Four zones and one line, nothing else -- no price, no date, no
+         entry, no outcome. The line opens low and quiet under the title
+         (the left band of the plate is what the last two words run across)
+         and the session happens in the right two thirds: a rally out of an
+         orderblock, one sweep of the liquidity above the equal highs, the
+         fall back through the gap it leaves. On load the line draws itself
+         while the zones develop. Labels are HTML so they stay label-sized. -->
     <figure class="plate" data-parallax="0.10" data-parallax-top>
-      <div class="plate__frame reveal wipe" data-at="340"><img src="assets/charts/05.webp" alt="The session as a whole: every zone marked on one chart" width="1400" height="639" decoding="async" fetchpriority="high"></div>
+      <div class="plate__frame reveal trace" data-at="340">
+        <svg class="fig" viewBox="0 0 1000 450" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <rect class="fig__zone fig__zone--ob" x="322" y="372" width="50" height="32"/>
+          <rect class="fig__zone fig__zone--fvg" x="770" y="154" width="230" height="26"/>
+          <line class="fig__zone fig__level" x1="580" y1="90" x2="1000" y2="90"/>
+          <line class="fig__zone fig__level" x1="620" y1="438" x2="1000" y2="438"/>
+          <path class="fig__line" pathLength="1" d="M0 412 60 410 120 414 180 411 240 415 300 410 322 398 336 388 348 396 372 362 396 350 424 300 442 318 480 250 500 270 540 196 556 214 584 130 600 96 616 122 630 150 646 118 660 96 676 128 690 160 706 118 724 62 740 100 748 92 762 148 776 214 792 202 812 262 828 250 852 308 868 298 896 350 914 340 946 380 964 372 1000 386"/>
+        </svg>
+        <i class="plate__tag plate__tag--liq"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></i>
+        <i class="plate__tag plate__tag--fvg">FVG</i>
+        <i class="plate__tag plate__tag--ob">Orderblock</i>
+      </div>
       <figcaption class="reveal" data-at="1400">
-        <span class="plate__title"><span lang="nl">Plaat 04 &mdash; De sessie als geheel</span><span lang="en">Plate 04 &mdash; The session as a whole</span></span>
-        <span class="plate__note"><span lang="nl">Alle zones op &eacute;&eacute;n kaart. Geen instap, geen uitslag.</span><span lang="en">Every zone on one map. No entry, no outcome.</span></span>
+        <span class="plate__title"><span lang="nl">Figuur &mdash; Een sessie, schematisch</span><span lang="en">Figure &mdash; A session, as a schema</span></span>
+        <span class="plate__note"><span lang="nl">Vier zones, &eacute;&eacute;n lijn. Geen koers, geen dag, geen uitslag.</span><span lang="en">Four zones, one line. No price, no day, no outcome.</span></span>
       </figcaption>
     </figure>
   </div>
-  <!-- the gold ink: the founder's chart, untouched, printed as a hairline
-       engraving in the one gold. Luminance -> edges (every zone becomes its
-       outline, every candle a stroke) lightened by the strokes themselves,
-       then coloured #D7B364 on the page's own black. Defined after the
-       title so the first thing in this section is the headline. -->
-  <svg class="ink" width="0" height="0" aria-hidden="true" focusable="false">
-    <filter id="gold-ink" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%">
-      <feColorMatrix in="SourceGraphic" type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0" result="lum"/>
-      <feConvolveMatrix in="lum" order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" divisor="1.2" bias="0" preserveAlpha="true" result="edges"/>
-      <feComponentTransfer in="lum" result="strokes">
-        <feFuncR type="table" tableValues="0 0 0.1 0.5 1 1 1"/>
-        <feFuncG type="table" tableValues="0 0 0.1 0.5 1 1 1"/>
-        <feFuncB type="table" tableValues="0 0 0.1 0.5 1 1 1"/>
-      </feComponentTransfer>
-      <feBlend in="edges" in2="strokes" mode="lighten" result="ink"/>
-      <feMorphology in="ink" operator="dilate" radius="0.5" result="line"/>
-      <feComponentTransfer in="line" result="ink2">
-        <feFuncR type="table" tableValues="0 0.1 0.85 1 1"/>
-        <feFuncG type="table" tableValues="0 0.1 0.85 1 1"/>
-        <feFuncB type="table" tableValues="0 0.1 0.85 1 1"/>
-      </feComponentTransfer>
-      <feColorMatrix in="ink2" type="matrix" values="0.71 0 0 0 0.031  0 0.585 0 0 0.035  0 0 0.305 0 0.043  0 0 0 1 0"/>
-    </filter>
-  </svg>
 </section>
 <!-- /section:hero -->
 

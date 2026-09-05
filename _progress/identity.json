@@ -2,9 +2,9 @@
  "id": "identity",
  "title": "Identity",
  "wave": 0,
- "round": 5,
- "status": "win",
- "updated_at": "2026-09-05T17:41:13+02:00",
+ "round": 6,
+ "status": "loss",
+ "updated_at": "2026-09-05T18:07:10+02:00",
  "history": [
   {
    "wave": 0,
@@ -93,6 +93,21 @@
    "confidence": 0.78,
    "note": "IDENTITY ROUND 5 — gate PASS (0 failures, 0 notes) at 1440/390, NL+EN. Nothing committed. Judging shots refreshed: E:/ClaudeCode_GUI/atlas-designs/site/_build/self (hero: desk-fold, mob-fold, motion, full-*) and _build/self-mid (founder).\n- src/sections/02-hero.html + hero.css: the plate is now the founder's real chart (assets/charts/05.webp, untouched) printed as a gold hairline ENGRAVING via an inline SVG filter (luminance -> edge kernel + strokes, dilate .5px, coloured exactly #D7B364 on #08090B) — no more olive multiply, no crop (native 1400:639). Composition is deliberately layered: pla",
    "at": "2026-09-05T17:41:13+02:00"
+  },
+  {
+   "wave": 0,
+   "round": 6,
+   "ref": "monolog",
+   "status": "loss",
+   "score_ours": 6.7,
+   "score_ref": 7.4,
+   "wowed": false,
+   "gap": "\"Discipline.\" and \"Uitvoering.\" run over the figure's hairline frame, so the chart's left edge is chopped by letterforms and the fold reads as a layout collision rather than a deliberate overlap. At the bar you either commit to it (headline clearly in front, figure set back in tone with its frame broken on purpose) or give the figure its own column. Beyond that, navy + gold + Didone-ish serif + tracked small caps is the default dark-luxury kit, so identity rests on execution alone, and the mid section is a spec sheet with a half-empty left column.",
+   "motion": "Load choreography only: headline lines rise through masks, chart path draws in, paragraph, CTA and caption stagger last while the clocks tick live; disciplined and well-sequenced, but nothing visibly happens on scroll.",
+   "verdict": "A has a genuine identity: a custom wordmark, a monochrome grain finish and confident scale shifts that make the page feel authored, even if the hero copy, caption legibility and a mobile nav glitch keep it off the shortlist. B is tastefully set and finely detailed (hairlines, captions, clocks, tracking), but it wears an off-the-shelf dark-gold serif costume and its one bold compositional move, the headline over the figure, currently looks like an accident.",
+   "confidence": 0.64,
+   "note": "E:/ClaudeCode_GUI/atlas-designs/site/src/sections/02-hero.html — the raster plate (charts/05.webp + the gold-ink SVG filter) is gone; the plate is now a purpose-drawn SVG schema in hairlines of the one gold: four zones (equal-highs liquidity level, FVG band, orderblock, lower liquidity level) and one price line, three label-sized HTML tags (Liquiditeit/Liquidity, FVG, Orderblock), caption \"Figuur — Een sessie, schematisch · Vier zones, één lijn. Geen koers, geen dag, geen uitslag.\" (EN paired). No price, date, entry or outcome; the founder's real charts in 08 are untouched.\nE:/ClaudeCode_G",
+   "at": "2026-09-05T18:07:10+02:00"
   }
  ]
 }

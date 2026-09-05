@@ -1,38 +1,40 @@
 /* ===== hero: the opening spread =====
    A spread, not a title card. Four corners: top left the kicker, top right
    the standfirst, the three words of the tagline set large and hung on the
-   left gutter, and the founder's own session chart tipped in as a plate on
-   the right -- printed as a hairline engraving in the one gold on the
-   page's black (an SVG filter in the partial: edges and strokes of the
-   untouched screenshot, coloured #D7B364), a hairline frame, a figure
-   caption outside the frame at its lower right. The composition is layered
-   on purpose: the second and third words run right across the plate, the
-   type in front, the plate's top edge parked in the gap between the first
+   left gutter, and at the right a plate: a session drawn as a schema in
+   hairlines of the one gold -- four zones, one line, nothing else (the SVG
+   in the partial) -- in a hairline frame on a mat one step up from the
+   page, a figure caption outside the frame at its lower right. The
+   composition is layered on purpose, and at one place only: the last two
+   words run across the plate's left edge, and the band they cover is empty
+   -- the line opens low and quiet under them, the session happens in the
+   right two thirds -- so the type sits on a calm field and crosses one
+   hairline. The plate's top edge is parked in the gap between the first
    baseline and the second cap line, its bottom edge a clear quarter-em
-   under the deepest descender -- nothing lands on a line. Under the last
+   under the deepest descender: nothing lands on a line. Under the last
    word, the one gold button of the screen.
 
    Everything on the plate is locked to the type in em of --t-hero, so the
    relationships hold at every width and on a short laptop screen:
      top      .84em  (first baseline .703em + .137em of the line gap)
-     width   5.15em  -> height 2.35em at the chart's own 1400:639, so the
-                        bottom edge sits at 3.19em; the third baseline is at
-                        2.58em and its descender ends at 2.80em
-     left    never further right than 3.9em from the card's left edge, so
-             the third word (4.55em wide) always runs at least .65em into
-             the plate -- on a short screen the type shrinks with 17vh and
-             the plate widens to keep the overlap (the section is a size
-             container, so 100cqw is the card's width)
+     height  2.35em  -> bottom at 3.19em; the third baseline is at 2.58em
+                        and its descender ends at 2.80em
+     left    3.45em  from the card's left edge: "Discipline." (4.31em)
+                     crosses by .86em, "Uitvoering." (4.66em) by 1.21em,
+                     "Execution." (4.44em) by .99em, "Process." (3.32em)
+                     clears the corner. Constant in em, so constant at
+                     every width. The figure stretches to the frame
+                     (preserveAspectRatio none); its strokes do not scale.
    --kick    height of the kicker line plus its gap, so the plate's top can be
              set from the card's top edge without measuring
-   On load the plate wipes on from the left like a print while the words
-   rise out of their baselines; on scroll the title leads (-.05) and the
-   plate lags (.10), so the two layers part a little.                     */
+   On load the frame appears, the zones develop and the line draws itself
+   while the words rise out of their baselines; on scroll the title leads
+   (-.05) and the plate lags (.10), so the two layers part a little.    */
 #hero{
   --kick:calc(17px + clamp(18px,2.4vw,32px));
   --card-w:min(100cqw,var(--wide));
-  --plate-w:min(max(calc(var(--t-hero) * 5.15),calc(var(--card-w) - var(--t-hero) * 3.9)),var(--card-w));
-  --plate-h:calc(var(--plate-w) * .4564);
+  --plate-w:min(calc(var(--card-w) - var(--t-hero) * 3.45),var(--card-w));
+  --plate-h:calc(var(--t-hero) * 2.35);
   position:relative;
   container-type:inline-size;
   display:flex;flex-direction:column;justify-content:center;
@@ -100,13 +102,37 @@
 #hero .plate__frame{
   position:relative;
   overflow:hidden;
+  container-type:inline-size;          /* the labels size from the frame */
+  aspect-ratio:1000/450;
   border:1px solid var(--line-3);
-  background:var(--bg);
+  background:var(--panel-lo);
+  transition:border-color var(--d-fade) var(--e-reveal),background-color var(--d-fade) var(--e-reveal);
 }
-#hero .plate__frame img{
-  display:block;width:100%;height:auto;
-  filter:url(#gold-ink);
+#hero .fig{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#hero .fig *{vector-effect:non-scaling-stroke}
+#hero .fig__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:round}
+#hero .fig__zone{stroke:var(--gold);stroke-width:1;stroke-opacity:.36;fill:var(--gold);fill-opacity:.07}
+#hero .fig__level{stroke-opacity:.55;stroke-dasharray:3 5;stroke-linecap:butt}
+/* labels: the page's label voice, positioned in the figure's own
+   percentages so they stay with their zones at every width; they scale a
+   little with the plate so a phone's figure is not all label */
+#hero .plate__tag{
+  position:absolute;
+  display:block;
+  font-family:var(--f-display);
+  font-style:normal;
+  font-size:clamp(8px,1.35cqw,var(--t-nano));
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--ink-4);
+  white-space:nowrap;
+  pointer-events:none;
+  transition:opacity var(--d-fade) var(--e-reveal);
 }
+#hero .plate__tag--liq{right:2.2%;top:20%;transform:translateY(calc(-100% - 6px))}
+#hero .plate__tag--fvg{right:2.2%;top:40%;transform:translateY(6px)}
+#hero .plate__tag--ob{left:38.6%;top:89.8%;transform:translateY(4px)}
 #hero .plate figcaption{
   display:flex;flex-wrap:wrap;align-items:baseline;
   gap:4px clamp(14px,1.6vw,22px);
@@ -124,10 +150,28 @@
   font-size:var(--t-small);color:var(--ink-4);
   text-wrap:pretty;
 }
-#hero .ink{position:absolute;width:0;height:0;overflow:hidden}
+
+/* the trace: the plate's own reveal. Under .js, until motion.js marks it
+   .is-in, the frame is bare (no line, the mat still black), the zones and
+   labels wait, and the line is drawn back to nothing (pathLength 1, so the
+   dash is the whole path). In: the frame and mat come up, the zones develop
+   and the line draws itself left to right over the slow settle. Never a
+   transform, never opacity on the frame itself -- the probe sees the plate
+   at once; the motion is in the ink. */
+.js #hero .reveal.trace{opacity:1;transform:none;border-color:transparent;background-color:var(--bg);transition:border-color var(--d-fade) var(--e-reveal),background-color var(--d-fade) var(--e-reveal)}
+.js #hero .reveal.trace .fig__zone,.js #hero .reveal.trace .plate__tag{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) .5s}
+.js #hero .reveal.trace .fig__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.9s var(--e-reveal)}
+.js #hero .reveal.trace.is-in{border-color:var(--line-3);background-color:var(--panel-lo)}
+.js #hero .reveal.trace.is-in .fig__zone,.js #hero .reveal.trace.is-in .plate__tag{opacity:1}
+.js #hero .reveal.trace.is-in .fig__line{stroke-dashoffset:0}
+@media (prefers-reduced-motion:reduce){
+  .js #hero .reveal.trace{border-color:var(--line-3);background-color:var(--panel-lo)}
+  .js #hero .reveal.trace .fig__zone,.js #hero .reveal.trace .plate__tag{opacity:1;transition:none}
+  .js #hero .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
+}
 
 /* the desk: the plate tipped in at the right, the standfirst above it in
-   the top right corner, the second and third words running across it */
+   the top right corner, the last two words running across it */
 @media (min-width:900px){
   #hero .card{min-height:calc(var(--kick) + var(--t-hero) * .84 + var(--plate-h) + 52px)}
   #hero .plate{
@@ -135,6 +179,7 @@
     top:calc(var(--kick) + var(--t-hero) * .84);
     width:var(--plate-w);
   }
+  #hero .plate__frame{aspect-ratio:auto;height:var(--plate-h)}
   #hero .plate figcaption{justify-content:flex-end;text-align:right}
   #hero .plate__note{flex:0 1 auto}
   #hero .subtitle{

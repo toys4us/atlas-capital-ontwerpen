@@ -8,15 +8,15 @@
    Newsreader for everything that is read, one flat gold (#D7B364) for the
    mark, the hairlines, the one button and the ink the plates are printed
    in, and a page that arrives as you read it. The opening spread is the
-   idea: the tagline set large and flush left, the founder's own chart
-   tipped in as a plate -- printed as a hairline engraving in that gold --
-   and the last two words of the title running right across it.
+   idea: the tagline set large and flush left, a session drawn as a schema
+   -- four zones, one line, hairlines of that gold -- tipped in as a plate,
+   and the last two words of the title running across its edge.
 
    Where the gold goes (and nowhere else):
      - hairlines: the strip edges, the group rules, the language rule
      - one accent per screen: an italic value, the kicker's dash
      - the one solid button (.cta.solid): never twice in a viewport
-     - the plate: the founder's chart printed in gold ink on the black
+     - the plate: the figure's line and zones, hairlines in the gold
    Two voices per block, never three: the serif (roman, italic, or small
    tracked caps for a label) and, only for what is counted next to a
    clock or a figure number, Fragment Mono. A sub-line under a credit is
@@ -125,7 +125,7 @@
   --d-fast:.18s;
   --d:.45s;
   --d-slow:.9s;
-  --d-reveal:1.4s;                        /* the settle (transform)            */
+  --d-reveal:1.25s;                       /* the settle (transform)            */
   --d-fade:.7s;                           /* the appearance (opacity)          */
   --e-out:cubic-bezier(.16,1,.3,1);       /* expo-out: fast start, long settle */
   --e-reveal:cubic-bezier(.33,1,.68,1);   /* cubic-out: a calm arrival          */
@@ -531,44 +531,85 @@ dl.pairs .cols{
   text-wrap:pretty;
 }
 
-/* ---------- quote card -------------------------------------------------- */
+/* ---------- quote card --------------------------------------------------
+   The founder's own words, set as a credit and not as a pull-quote: the
+   label sits in the left column with every other label, the words in the
+   value column at value size, a short rule above them -- so the quote
+   stands on the same axis as the rows above and below it instead of
+   floating centred in the dark. On a phone, where the credits centre, the
+   quote centres with them. */
 .still{
-  margin:clamp(56px,9vw,116px) auto;
-  max-width:680px;
-  text-align:center;
+  position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:clamp(22px,5vw,60px);
+  row-gap:0;
+  align-items:start;
+  margin:clamp(36px,5vw,60px) 0 clamp(8px,1.5vw,16px);
+  text-align:left;
 }
+.still .hair{grid-column:2;grid-row:1;margin:0 0 clamp(16px,2.2vw,24px);width:40px}
+.still .mask{grid-column:2;grid-row:2;min-width:0}
 .still blockquote{
   margin:0;
+  max-width:30ch;
   font-family:var(--f-display);
-  font-size:var(--t-quote);
+  font-size:var(--t-h3);
   font-weight:400;
-  line-height:var(--lh-snug);
-  letter-spacing:-.01em;
-  color:var(--paper);
-  text-wrap:balance;
+  line-height:1.32;
+  letter-spacing:-.006em;
+  color:var(--ink-1);
+  text-wrap:pretty;
   hanging-punctuation:first last;
 }
 .still .who{
-  margin-top:var(--s5);
+  grid-column:1;grid-row:2;
+  margin:0;
+  padding-top:calc(var(--t-h3) * .6);    /* the label's baseline on the first line's */
+  text-align:right;
   font-family:var(--f-display);
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;color:var(--ink-4);
+  line-height:1.5;
 }
 .hair{
   width:40px;height:1px;background:var(--line-4);margin:0 auto clamp(24px,3.6vw,36px);
 }
+@media (max-width:620px){
+  .still{display:block;max-width:34ch;margin-left:auto;margin-right:auto;text-align:center}
+  .still .hair{margin:0 auto clamp(16px,2.2vw,24px)}
+  .still blockquote{max-width:none}
+  .still .who{padding-top:var(--s5);text-align:center}
+}
 
-/* ---------- interstitial cta -------------------------------------------- */
+/* ---------- interstitial cta --------------------------------------------
+   A prompt and the link that answers it, set as one more credit row: the
+   prompt in italic, right of the gutter with the labels; the link left of
+   it with the values. On a phone it centres with the rest. */
 .interstitial{
-  text-align:center;
+  position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:clamp(22px,5vw,60px);
+  align-items:start;
   margin:clamp(40px,5.5vw,72px) 0;
+  text-align:left;
 }
 .interstitial p{
-  margin:0 0 14px;
+  grid-column:1;
+  margin:0;
+  padding-top:4px;                        /* its baseline on the link's */
+  text-align:right;
   font-family:var(--f-display);
   font-style:italic;
   font-size:var(--t-lead);
   line-height:var(--lh-snug);
   color:var(--ink-3);
+  text-wrap:balance;
+}
+.interstitial .cta{grid-column:2;justify-self:start;margin:0}
+@media (max-width:620px){
+  .interstitial{display:block;text-align:center}
+  .interstitial p{padding:0;margin:0 0 14px;text-align:center}
 }
 
 /* ---------- language ----------------------------------------------------- */

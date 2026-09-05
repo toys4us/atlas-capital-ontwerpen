@@ -8,36 +8,31 @@
     </h1>
     <p class="subtitle reveal" data-at="900"><span lang="nl">Educatie in tien onderwerpen, live trading door de oprichter en chart-idee&euml;n voor Nasdaq, S&amp;P&nbsp;500, goud, olie en crypto. Negen kanalen zijn nu gratis open.</span><span lang="en">Education in ten topics, live trading by the founder and chart ideas for the Nasdaq, S&amp;P&nbsp;500, gold, oil and crypto. Nine channels are open, free, right now.</span></p>
     <a class="cta solid reveal" data-at="1080" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
+    <!-- the figure: a session drawn as a schema, in hairlines of the one
+         gold. Four zones and one line, nothing else -- no price, no date, no
+         entry, no outcome. The line opens low and quiet under the title
+         (the left band of the plate is what the last two words run across)
+         and the session happens in the right two thirds: a rally out of an
+         orderblock, one sweep of the liquidity above the equal highs, the
+         fall back through the gap it leaves. On load the line draws itself
+         while the zones develop. Labels are HTML so they stay label-sized. -->
     <figure class="plate" data-parallax="0.10" data-parallax-top>
-      <div class="plate__frame reveal wipe" data-at="340"><img src="assets/charts/05.webp" alt="The session as a whole: every zone marked on one chart" width="1400" height="639" decoding="async" fetchpriority="high"></div>
+      <div class="plate__frame reveal trace" data-at="340">
+        <svg class="fig" viewBox="0 0 1000 450" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <rect class="fig__zone fig__zone--ob" x="322" y="372" width="50" height="32"/>
+          <rect class="fig__zone fig__zone--fvg" x="770" y="154" width="230" height="26"/>
+          <line class="fig__zone fig__level" x1="580" y1="90" x2="1000" y2="90"/>
+          <line class="fig__zone fig__level" x1="620" y1="438" x2="1000" y2="438"/>
+          <path class="fig__line" pathLength="1" d="M0 412 60 410 120 414 180 411 240 415 300 410 322 398 336 388 348 396 372 362 396 350 424 300 442 318 480 250 500 270 540 196 556 214 584 130 600 96 616 122 630 150 646 118 660 96 676 128 690 160 706 118 724 62 740 100 748 92 762 148 776 214 792 202 812 262 828 250 852 308 868 298 896 350 914 340 946 380 964 372 1000 386"/>
+        </svg>
+        <i class="plate__tag plate__tag--liq"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></i>
+        <i class="plate__tag plate__tag--fvg">FVG</i>
+        <i class="plate__tag plate__tag--ob">Orderblock</i>
+      </div>
       <figcaption class="reveal" data-at="1400">
-        <span class="plate__title"><span lang="nl">Plaat 04 &mdash; De sessie als geheel</span><span lang="en">Plate 04 &mdash; The session as a whole</span></span>
-        <span class="plate__note"><span lang="nl">Alle zones op &eacute;&eacute;n kaart. Geen instap, geen uitslag.</span><span lang="en">Every zone on one map. No entry, no outcome.</span></span>
+        <span class="plate__title"><span lang="nl">Figuur &mdash; Een sessie, schematisch</span><span lang="en">Figure &mdash; A session, as a schema</span></span>
+        <span class="plate__note"><span lang="nl">Vier zones, &eacute;&eacute;n lijn. Geen koers, geen dag, geen uitslag.</span><span lang="en">Four zones, one line. No price, no day, no outcome.</span></span>
       </figcaption>
     </figure>
   </div>
-  <!-- the gold ink: the founder's chart, untouched, printed as a hairline
-       engraving in the one gold. Luminance -> edges (every zone becomes its
-       outline, every candle a stroke) lightened by the strokes themselves,
-       then coloured #D7B364 on the page's own black. Defined after the
-       title so the first thing in this section is the headline. -->
-  <svg class="ink" width="0" height="0" aria-hidden="true" focusable="false">
-    <filter id="gold-ink" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%">
-      <feColorMatrix in="SourceGraphic" type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0" result="lum"/>
-      <feConvolveMatrix in="lum" order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" divisor="1.2" bias="0" preserveAlpha="true" result="edges"/>
-      <feComponentTransfer in="lum" result="strokes">
-        <feFuncR type="table" tableValues="0 0 0.1 0.5 1 1 1"/>
-        <feFuncG type="table" tableValues="0 0 0.1 0.5 1 1 1"/>
-        <feFuncB type="table" tableValues="0 0 0.1 0.5 1 1 1"/>
-      </feComponentTransfer>
-      <feBlend in="edges" in2="strokes" mode="lighten" result="ink"/>
-      <feMorphology in="ink" operator="dilate" radius="0.5" result="line"/>
-      <feComponentTransfer in="line" result="ink2">
-        <feFuncR type="table" tableValues="0 0.1 0.85 1 1"/>
-        <feFuncG type="table" tableValues="0 0.1 0.85 1 1"/>
-        <feFuncB type="table" tableValues="0 0.1 0.85 1 1"/>
-      </feComponentTransfer>
-      <feColorMatrix in="ink2" type="matrix" values="0.71 0 0 0 0.031  0 0.585 0 0 0.035  0 0 0.305 0 0.043  0 0 0 1 0"/>
-    </filter>
-  </svg>
 </section>
