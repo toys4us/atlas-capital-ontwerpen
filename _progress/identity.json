@@ -2,9 +2,9 @@
  "id": "identity",
  "title": "Identity",
  "wave": 0,
- "round": 6,
- "status": "loss",
- "updated_at": "2026-09-05T18:07:10+02:00",
+ "round": 7,
+ "status": "win",
+ "updated_at": "2026-09-05T18:33:50+02:00",
  "history": [
   {
    "wave": 0,
@@ -108,6 +108,21 @@
    "confidence": 0.64,
    "note": "E:/ClaudeCode_GUI/atlas-designs/site/src/sections/02-hero.html — the raster plate (charts/05.webp + the gold-ink SVG filter) is gone; the plate is now a purpose-drawn SVG schema in hairlines of the one gold: four zones (equal-highs liquidity level, FVG band, orderblock, lower liquidity level) and one price line, three label-sized HTML tags (Liquiditeit/Liquidity, FVG, Orderblock), caption \"Figuur — Een sessie, schematisch · Vier zones, één lijn. Geen koers, geen dag, geen uitslag.\" (EN paired). No price, date, entry or outcome; the founder's real charts in 08 are untouched.\nE:/ClaudeCode_G",
    "at": "2026-09-05T18:07:10+02:00"
+  },
+  {
+   "wave": 0,
+   "round": 7,
+   "ref": "exo-ape",
+   "status": "win",
+   "score_ours": 7.3,
+   "score_ref": 6.2,
+   "wowed": false,
+   "gap": "The hero's secondary layer is not on the same grid as its hero move: the intro paragraph floats at x≈937 with no relationship to the chart panel's edge or the headline column, the caption row hangs off the panel while the flat gold CTA slab sits alone in the left void, and the mid section repeats \"OPRICHTER / DE OPRICHTER\" as two labels for one voice. At the bar the paragraph, caption and CTA would share one column line hung off the panel, and the CTA would be a typographic gold-rule link with the arrow already used in the nav rather than a filled rectangle. The charcoal-and-gold trading palette is also the genre's default costume, so everything else has to be flawless to earn distinctiveness.",
+   "motion": "Staggered clip-mask rise of the three-word headline while the chart line draws in and the paragraph fades up — controlled and restrained, but a conventional load reveal with no scroll choreography visible.",
+   "verdict": "A wins on typographic identity, composition discipline and a mobile fold that holds together as well as desktop; its faults are grid alignment and a cliché palette, not craft failures. B has the more ambitious motion and a genuinely handsome desktop fold, but strip the photograph and there is no system underneath, and the mid-page and mobile captures expose it.",
+   "confidence": 0.72,
+   "note": "hero.css: the plate is no longer a hairline box the title chops. It is a band: a mat one step up from the page (#121318) drawn by .plate__frame::before, with hairlines top and bottom only (line-3) and no side edges; on the desk it bleeds from the card's right edge to the viewport's (--bleed, in vw), on phones it runs edge to edge. \"Discipline.\"/\"Uitvoering.\" now sit in front of a field, and no letter crosses a line. Left edge moved from 3.45em to 3.30em (a fuller overlap).\nhero.css: the trace reveal moved onto the ::before (mat + rules come up while the line draws); reduced-motion branch",
+   "at": "2026-09-05T18:33:50+02:00"
   }
  ]
 }

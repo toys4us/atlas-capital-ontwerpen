@@ -9,14 +9,16 @@
    mark, the hairlines, the one button and the ink the plates are printed
    in, and a page that arrives as you read it. The opening spread is the
    idea: the tagline set large and flush left, a session drawn as a schema
-   -- four zones, one line, hairlines of that gold -- tipped in as a plate,
-   and the last two words of the title running across its edge.
+   -- four zones, one line, hairlines of that gold -- on a band that enters
+   from the right margin with no left edge drawn, and the last two words of
+   the title in front of it. Two things from two margins, one in front.
 
    Where the gold goes (and nowhere else):
-     - hairlines: the strip edges, the group rules, the language rule
+     - hairlines: the strip edges, the group rules, the language rule,
+       the two rules of the band
      - one accent per screen: an italic value, the kicker's dash
      - the one solid button (.cta.solid): never twice in a viewport
-     - the plate: the figure's line and zones, hairlines in the gold
+     - the plate: the figure's line and zones in the gold
    Two voices per block, never three: the serif (roman, italic, or small
    tracked caps for a label) and, only for what is counted next to a
    clock or a figure number, Fragment Mono. A sub-line under a credit is
@@ -466,12 +468,22 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 /* ---------- credit pairs ------------------------------------------------
    Label right of the gutter in serif caps, value left of it in the serif at
    credit size; the two share a baseline. The gutter is the axis -- nothing
-   is drawn down it. */
+   is drawn down it. The axis sits left of centre (the label column is a
+   margin for sidenotes, two fifths; the values get three), so a run of
+   short credits is a column of text with a margin beside it, not a page
+   split down the middle with one half empty. .still and .interstitial share
+   the columns (--axis-l / --axis-r) so every row on the reel keeps the
+   one axis. */
+:root{
+  --axis-l:minmax(0,2fr);
+  --axis-r:minmax(0,3fr);
+  --axis-gap:clamp(22px,4vw,44px);
+}
 dl.pairs{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:var(--axis-l) var(--axis-r);
   align-items:baseline;
-  column-gap:clamp(22px,5vw,60px);
+  column-gap:var(--axis-gap);
   row-gap:clamp(12px,1.8vw,18px);
   margin:0;
 }
@@ -541,8 +553,8 @@ dl.pairs .cols{
 .still{
   position:relative;z-index:2;
   display:grid;
-  grid-template-columns:1fr 1fr;
-  column-gap:clamp(22px,5vw,60px);
+  grid-template-columns:var(--axis-l) var(--axis-r);
+  column-gap:var(--axis-gap);
   row-gap:0;
   align-items:start;
   margin:clamp(36px,5vw,60px) 0 clamp(8px,1.5vw,16px);
@@ -588,8 +600,8 @@ dl.pairs .cols{
 .interstitial{
   position:relative;z-index:2;
   display:grid;
-  grid-template-columns:1fr 1fr;
-  column-gap:clamp(22px,5vw,60px);
+  grid-template-columns:var(--axis-l) var(--axis-r);
+  column-gap:var(--axis-gap);
   align-items:start;
   margin:clamp(40px,5.5vw,72px) 0;
   text-align:left;
