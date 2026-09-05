@@ -1,8 +1,24 @@
 {
  "id": "access",
  "title": "Access",
- "wave": 0,
- "round": 0,
- "status": "queued",
- "history": []
+ "wave": 1,
+ "round": 1,
+ "status": "win",
+ "history": [
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 7.2,
+   "score_ref": 5.3,
+   "wowed": false,
+   "gap": "The left \"schematic\" column is a dead zone: the gold sparkline hugs the top, the dotted LATER rule sits 250px below with nothing between, and the caption \"TWEE NIVEAUS, SCHEMATISCH\" falls off the bottom of the viewport while the 09 TOEGANG hairline starts 40px right of the chart axis it should share. At the bar the diagram is sized to the copy column, the NU line and LATER line sit on the Gratis and Premium baselines so the graph literally is the two tiers, and the two CTA rules are the same length (they are 38px vs 25px now). On mobile the sparkline crashing into the NU hairline is a collision, not a composition.",
+   "motion": "Restrained and coherent: rows fade up in sequence, the sparkline draws itself in over two frames, nav compacts on scroll; nothing overshoots.",
+   "verdict": "A is a disciplined gold-on-charcoal editorial with real typographic hierarchy (italic Gratis against roman Premium, tracked small caps, hairline CTAs) let down by an under-designed chart column and a clipped caption. B has the more cinematic material but ships unreadable copy, a logo collision, a struck-through mobile nav and broken text animation, which no amount of fog forgives.",
+   "confidence": 0.86,
+   "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/10-access.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/access.css\n- Rebuilt \"Toegang\" as two levels on the reel's one axis, each level its own credit row (grid, not display:contents, so the row is a hover/focus unit); the level is drawn from the strip's edge to its tag on the axis, like the founder's credit.\n- The open level now carries the spread's path for real: an 84px figure, the hairline comes in low from the margin, climbs in two legs and holds the level to the \"Nu\" tag; on reveal the path draws itself (2.2s) and",
+   "timestamp": "2026-09-05T21:21:10+02:00"
+  }
+ ]
 }

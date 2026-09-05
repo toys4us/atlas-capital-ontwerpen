@@ -43,8 +43,9 @@
    in mono. The current one's hairline is the liquidity line and its
    number is in the gold; the one under the pointer (or the keyboard) is a
    zone, the fair value gap band of the figure, and the band is the ring.
-   The switch and the one social link take the last line. On a phone the
-   bar is three things: the name, the call, Menu. */
+   At the foot, where the rail is not shown, the rail's two market clocks;
+   under them the switch and the one social link take the last line. On a
+   phone the bar is three things: the name, the call, Menu. */
 #header{
   --bar:var(--hdr-h);                 /* the visible height of the bar    */
   --lift:8px;                          /* what it loses once scrolled      */
@@ -145,8 +146,9 @@
 #header .cta.solid:hover .r--l::before,#header .cta.solid:focus-visible .r--l::before{transform:scaleX(1.5);background:var(--gold-hi)}
 #header .cta.solid:hover .r::after,#header .cta.solid:focus-visible .r::after{background:var(--gold-hi)}
 
-/* the menu word */
+/* the menu word: only with the script that opens the drawer */
 #header .menu{
+  display:none;
   grid-column:3;justify-self:end;
   appearance:none;-webkit-appearance:none;
   background:transparent;border:0;margin:0;padding:8px 0;
@@ -163,9 +165,12 @@
 /* the anchors, wherever they are: no number until the script writes one */
 #header .nav a{text-decoration:none}
 #header .n:empty{display:none}
+/* the clocks: only in the drawer, only with the script that ticks them */
+#header .now{display:none}
 
 /* ---- the drawer: everything narrower than the full row ---------------- */
 @media (max-width:1119px){
+  .js #header .menu{display:inline-block}
   /* without JavaScript the contents line is simply a second row of the bar */
   #header .nav{
     grid-column:1/-1;grid-row:2;
@@ -249,9 +254,24 @@
   .js #header .nav a[aria-current][href]:hover::after,.js #header .nav a[aria-current][href]:focus-visible::after{
     box-shadow:inset 0 1px 0 var(--band-edge),inset 0 -1px 0 rgba(215,179,100,0);
   }
+  /* the clocks: the rail's construction, stacked, at the foot of the drawer */
+  .js #header .now{
+    display:flex;flex-direction:column;gap:6px;
+    margin:auto 0 0;
+    padding-top:clamp(28px,5vh,48px);
+    white-space:nowrap;
+  }
+  .js #header .now > span{display:inline-flex;align-items:baseline;gap:9px}
+  .js #header .now__city{
+    font-size:var(--t-nano);
+    letter-spacing:var(--trk-caps);
+    text-transform:uppercase;
+    color:var(--ink-5);
+  }
+  .js #header .now time{font-size:var(--t-caption);color:var(--ink-4)}
   /* the foot: the switch and the one social link, on the last line */
   .js #header .foot{
-    margin:auto 0 0;
+    margin:0;
     display:flex;align-items:center;justify-content:space-between;gap:22px;
     padding-top:clamp(18px,3vh,28px);
   }

@@ -142,7 +142,7 @@
    line takes the long settle: the front is past the word in a third of
    a second, at the action after two thirds, and creeps out at the right
    edge. The level comes up under the line once the front has reached it,
-   the caption last, when the sweep is drawn. The word's own mask rise
+   the caption last, when the front is past it. The word's own mask rise
    starts on the third beat, when the line is under it; the sentence and
    the call follow. (Not a dash on the path: with a non-scaling stroke,
    Chromium runs a pathLength dash the wrong way.) The insets are open by
@@ -150,7 +150,7 @@
    halved. */
 .js #closer .reveal.trace{opacity:1;transform:none;clip-path:inset(-2px 100% -2px 0);transition:clip-path 2.2s var(--e-reveal)}
 .js #closer .reveal.trace .end__lvl{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) .5s}
-.js #closer .reveal.trace .end__tag{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) 1s}
+.js #closer .reveal.trace .end__tag{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) 1.3s}
 .js #closer .reveal.trace.is-in{clip-path:inset(-2px 0 -2px 0)}
 .js #closer .reveal.trace.is-in .end__lvl,.js #closer .reveal.trace.is-in .end__tag{opacity:1}
 @media (prefers-reduced-motion:reduce){

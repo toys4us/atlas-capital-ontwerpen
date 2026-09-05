@@ -33,6 +33,11 @@
         <a href="#trackrecord"><span class="lv__name"><span lang="nl">Trackrecord</span><span lang="en">Track record</span></span><b class="n" aria-hidden="true"></b></a>
         <a href="#access"><span class="lv__name"><span lang="nl">Toegang</span><span lang="en">Access</span></span><b class="n" aria-hidden="true"></b></a>
       </div>
+      <!-- the rail's two market clocks, for the widths where there is no
+           rail: motion.js writes the time into [data-clock]. Decoration
+           for the eye, not content (aria-hidden), and only with the
+           script that makes them tick. -->
+      <p class="now" aria-hidden="true"><span><span class="now__city">Amsterdam</span> <time data-clock="Europe/Amsterdam">--:--:--</time></span><span><span class="now__city">New York</span> <time data-clock="America/New_York">--:--:--</time></span></p>
       <div class="foot">
         <div class="langsw" role="group" aria-label="Taal / Language">
           <button type="button" data-lang="nl" aria-pressed="true">NL</button>
