@@ -223,7 +223,7 @@
   left:61%;right:calc(-1 * var(--edge));top:24.5%;height:1px;
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
 }
-#hero .plate__lvl--lo{left:70%;top:96.5%}
+#hero .plate__lvl--lo{left:78%;top:96.5%}
 /* labels: the page's label voice, positioned in the figure's own
    percentages so they stay with their zones at every width; they scale a
    little with the plate so a phone's figure is not all label, and never
@@ -387,9 +387,10 @@
   #hero .plate__frame::before{left:calc(-1 * var(--gutter))}
   #hero .subtitle{margin-top:clamp(22px,4vh,36px)}
 }
-/* a phone: the aside drops under the call and starts where the call's
-   label starts, after the rule, so the two read as one sentence */
-@media (max-width:619px){
+/* where the row would break -- a phone, and a desk narrower than the row
+   beside the caption -- the aside drops under the call and starts where
+   the call's label starts, after the rule, so the two read as one sentence */
+@media (max-width:619px),(min-width:900px) and (max-width:1179px){
   #hero .calls{flex-direction:column;align-items:flex-start;gap:2px}
   #hero .aside{margin-left:calc(clamp(22px,3vw,36px) + 14px)}
 }

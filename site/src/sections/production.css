@@ -190,5 +190,6 @@
 
 @media (prefers-reduced-motion:reduce){
   .js #production .lvl.reveal.wipe,.js #production .tag.reveal,.js #production .addr.reveal{transition:none}
+  .js #production .mask > .val.reveal{transform:none;transition:none}
   #production .addr::before{transition:none}
 }

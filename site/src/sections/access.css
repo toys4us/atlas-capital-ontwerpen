@@ -33,7 +33,7 @@
 #access{
   --edge:clamp(18px,4vw,40px);            /* the roll's padding, the strip's edge is this far left */
   --tag:calc(4.5em + 14px);               /* the tag column: one width, so both levels end on one line */
-  --rows:clamp(44px,6vw,80px);            /* between the two levels */
+  --rows:clamp(40px,5vw,64px);            /* between the two levels */
   /* the plate: from the open level down to the gap before the next --
      the first row (a value line, the note's two lines, the link) plus
      the gap between the rows; the path's low run stays above its foot */
@@ -110,8 +110,8 @@
    the copy; y0 of the drawing is the level, so the path holds it */
 #access .fig{
   position:absolute;
-  left:0;right:0;top:0;
-  height:var(--plate-h);
+  left:0;top:0;
+  width:100%;height:var(--plate-h);
   display:block;overflow:visible;
   pointer-events:none;
 }

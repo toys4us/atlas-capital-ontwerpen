@@ -2,7 +2,7 @@
  "id": "founder",
  "title": "Founder",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -34,6 +34,21 @@
    "confidence": 0.74,
    "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/04-founder.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/founder.css.\n- The credit is now a proper level: \"10+\" hangs on the strip's left edge (the quote's line), set large (clamp 72–132px, ink-2 so it stays a step under the quote) with the plus as a small superior; one dashed gold hairline (3 on/5 off at .55, the hero's level) runs from the tag to the strip's right edge at the height of the figures; the numeral's ground covers the line, so the tag sits on it.\n- \"jaar actief in trading\" / \"years active in trading\" hang",
    "ts": "2026-09-05T19:13:53+00:00"
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 7,
+   "score_ref": 5,
+   "wowed": false,
+   "gap": "The leader rule under \"jaar actief in trading\" runs straight off the right edge of the mobile viewport instead of stopping at the column edge, and the grey sub-caption beneath it (\"winst, verlies, fouten…\") is set too small and too low-contrast to survive on a dark ground — at the bar the rule terminates flush with the text column and the caption is one step larger or one step lighter, never both small and dim. Structurally the region is still just a stat plus a pull quote with an anonymous \"de oprichter\" credit; a founder section at SOTD level needs one anchoring element beyond type — a portrait, a signature, a dated document — to keep it from feeling like a well-set template.",
+   "motion": "Staggered line-mask reveals with hairlines drawing in and a live city clock; restrained editorial choreography, though the first frame catches half-faded glyph fragments from the prior hero.",
+   "verdict": "B wins on typographic craft — hanging punctuation, a properly weighted Didone numeral with a superscript plus, tracked small-cap section markers and leader rules give it a distinct editorial voice, undermined only by a rule that bleeds off the mobile viewport and a caption set too faint. A has one strong image-in-type hero moment but its actual founder block is a template pattern, and the mobile capture shows text colliding under the nav, which alone keeps it off any shortlist.",
+   "confidence": 0.8,
+   "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/04-founder.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/founder.css (only these two).\n- The credit is now one composed level, measured in the browser (Newsreader baseline .735em, descent .265em): the numeral \"10+\" (proportional figures, so \"10\" closes from 155 to 136px at 132px) hangs on the strip's edge with its \"1\" ink at the quote's edge (±1px); the dashed gold level is a grid item baseline-aligned to the numeral, so it sits ON the numeral's baseline (row 157 vs baseline 158) and runs to the strip's right hairline; ",
+   "ts": "2026-09-05T19:37:30+00:00"
   }
  ]
 }

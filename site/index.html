@@ -812,40 +812,49 @@ dl.pairs .cols{
    The bar is transparent where nothing passes under it -- at the top --
    and solid where things do.
 
+   One gold call per viewport, always. The call has one measured slot and
+   one row: the word and its arrow, and before them a prefix -- the rule
+   and the verb -- that is a grid track. While the spread's (or the end
+   card's) gold call is on screen the track is 0fr: the slot is exactly
+   the width of DISCORD and its arrow, in the label grey, spaced like the
+   anchors either side of it. When neither is on screen motion.js gives
+   the link .solid, the track goes to 1fr, and the label grows from the
+   dash -- the rule, then the verb, written out leftwards of the word --
+   while the equal tracks either side re-centre the row in one eased
+   move. Nothing is reserved and nothing jumps. Without JavaScript the
+   prefix stays folded, and the spread's call is the one.
+
    The anchors are levels. The one whose section holds the upper part of
    the viewport carries the figure's liquidity line under the word -- the
    3-on-5 dashed hairline every section draws its levels with, in the
-   gold, the width of the word, drawn from the left. Pointing at another
-   draws the same line under it in the label grey: a level being watched,
-   not the one in play. The chosen language carries the solid rule. All
-   of them are rules under words, so the bar has one idiom.
-
-   One gold call per viewport, always. While the spread's (or the end
-   card's) is on screen the link here is quiet: one word in the label grey
-   and the small arrow, also grey. When neither is, motion.js gives it
-   .solid and the full label slides up into the mask with its rule drawn
-   and its arrow gold -- the same construction as the spread's, moved up
-   into the bar. The two labels share one cell, so the box is the wider
-   of the two and nothing beside it moves. Without JavaScript it stays
-   quiet, and the spread's call is the one.
+   gold, the width of the word. It is drawn forward from the left when the
+   section is reached and leaves to the right when it is passed, the way a
+   level is swept. Pointing at another (or landing on it with the
+   keyboard) fills the figure's gap behind the word: a band of the faint
+   gold between two rules, drawn from the left -- the fair value gap of
+   the spread's plate, the same band the spread's aside has. The chosen
+   language carries the solid rule. Levels, a band and rules under words:
+   the bar has one idiom, and it is the plate's.
 
    Narrower than the full row the anchors live in a drawer under the bar,
    on the page's own black: the four sections set as levels -- the name in
    the serif at credit size, a hairline under it, and on the right gutter,
    where the spread's labels sit like the axis of a chart, the reel number
    in mono. The current one's hairline is the liquidity line and its
-   number is in the gold; the one under the pointer (or the keyboard) is a
-   zone, the fair value gap band of the figure, and the band is the ring.
-   At the foot, where the rail is not shown, the rail's two market clocks;
-   under them the switch and the one social link take the last line. On a
-   phone the bar is three things: the name, the call, Menu. */
+   number is in the gold; the one under the pointer (or the keyboard) is
+   the band, and the band is the ring. At the foot, where the rail is not
+   shown, the rail's two market clocks; under them the switch and the one
+   social link take the last line. On a phone the bar is three things:
+   the name, the call, Menu. */
 #header{
   --bar:var(--hdr-h);                 /* the visible height of the bar    */
   --lift:8px;                          /* what it loses once scrolled      */
+  --nav-gap:clamp(18px,2.3vw,32px);    /* one gap between every item       */
   --level:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,rgba(215,179,100,0) 3px 8px);
-  --level-watch:repeating-linear-gradient(90deg,var(--ink-4) 0 3px,rgba(110,111,116,0) 3px 8px);
   --band:rgba(215,179,100,.07);        /* the fair value gap band          */
   --band-edge:rgba(215,179,100,.36);
+  --rule:22px;                         /* the call's rule                  */
+  --grow:16px;                         /* what it gains on hover, leftward */
   position:sticky;top:0;z-index:50;
   padding:0 var(--gutter);
   background:var(--bg);
@@ -875,7 +884,7 @@ dl.pairs .cols{
   display:grid;
   grid-template-columns:minmax(0,1fr) auto auto;   /* a phone: name, call, menu */
   align-items:center;
-  column-gap:clamp(14px,2.4vw,32px);
+  column-gap:var(--nav-gap);
   min-height:var(--hdr-h);
   max-width:var(--wide);margin:0 auto;
   transition:padding .5s var(--e-out);
@@ -893,51 +902,67 @@ dl.pairs .cols{
 }
 #header .wm:hover b{color:var(--gold-hi)}
 
-/* the call: two rows in one cell, one of them in the mask at a time */
+/* ---- the call: one slot, a prefix track that opens ---------------------- */
 #header .cta{
   grid-column:2;
-  display:block;padding:0;
+  display:grid;
+  grid-template-columns:0fr auto;
+  align-items:center;
+  padding:0;
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);line-height:1;
   color:var(--ink-3);
-  transition:color .3s var(--e-out),transform var(--d-fast) var(--e-out);
+  transition:grid-template-columns .65s var(--e-out),color .3s var(--e-out);
 }
 #header .cta::before,#header .cta::after{content:none;display:none}
-#header .cta__track{display:grid;overflow:hidden;padding:0 16px;margin:0 -16px}   /* room for the rule to grow */
-#header .cta .r{
-  grid-area:1/1;
-  position:relative;
-  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+/* the prefix: clipped to its track. The padding on the left, taken back
+   by the margin, is room outside the slot for the rule to grow into on
+   hover -- into the gap, where nothing sits -- without the slot changing */
+#header .cta__pre{
+  min-width:0;overflow:hidden;
+  display:flex;align-items:center;gap:12px;
+  margin-left:calc(-1 * var(--grow));
+  padding:8px 12px 8px var(--grow);
+  white-space:nowrap;
+}
+#header .cta__rule{
+  flex:0 0 auto;
+  width:var(--rule);height:1px;
+  background:var(--gold);
+  transform-origin:right center;
+  transition:transform var(--d) var(--e-out),background-color .3s var(--e-out);
+}
+#header .cta__verb{display:block}
+#header .cta__word{
+  display:inline-flex;align-items:center;gap:10px;
   padding:8px 0;
   white-space:nowrap;
-  transition:transform .6s var(--e-out);
 }
-#header .cta .r::after{
+#header .cta__word::after{
   content:"";flex:0 0 auto;
   width:9px;height:9px;margin-left:-2px;
   background:var(--ink-4);
   -webkit-mask:var(--arrow) center/9px 9px no-repeat;mask:var(--arrow) center/9px 9px no-repeat;
   transition:transform var(--d) var(--e-out),background-color .3s var(--e-out);
 }
-/* the rule is placed, not flowed; it draws from the label leftward */
-#header .cta .r--l{padding-left:34px}
-#header .cta .r--l::before{
-  content:"";position:absolute;left:0;top:calc(50% - .5px);
-  width:22px;height:1px;
-  background:var(--gold);
-  transform:scaleX(0);transform-origin:right center;
-  transition:transform .55s var(--e-out),background-color .3s var(--e-out);
+/* open: the track goes to 1fr and the label is the page's call, in the
+   paper, its rule and its arrow in the gold */
+#header .cta.solid,#header.is-open .cta{
+  grid-template-columns:1fr auto;
+  color:var(--paper);
+  font-size:var(--t-micro);letter-spacing:var(--trk-caps);
 }
-#header .cta .r--l{transform:translateY(110%)}
-#header .cta.solid .r--s{transform:translateY(-110%)}
-#header .cta.solid .r--l{transform:none}
-#header .cta.solid .r--l::before{transform:none}
-#header .cta.solid{color:var(--paper);font-size:var(--t-micro);letter-spacing:var(--trk-caps)}
-#header .cta.solid .r::after{background:var(--gold)}
+#header .cta.solid .cta__word::after,#header.is-open .cta .cta__word::after{background:var(--gold)}
+/* quiet, pointed at: the word warms and the arrow goes gold and lifts;
+   open, pointed at: the rule lengthens into the gap and everything warms */
 #header .cta:hover,#header .cta:focus-visible{color:var(--paper)}
-#header .cta:hover .r::after,#header .cta:focus-visible .r::after{transform:translate(1px,-1px);background:var(--gold)}
-#header .cta.solid:hover,#header .cta.solid:focus-visible{color:var(--gold-hi)}
-#header .cta.solid:hover .r--l::before,#header .cta.solid:focus-visible .r--l::before{transform:scaleX(1.5);background:var(--gold-hi)}
-#header .cta.solid:hover .r::after,#header .cta.solid:focus-visible .r::after{background:var(--gold-hi)}
+#header .cta:hover .cta__word::after,#header .cta:focus-visible .cta__word::after{transform:translate(1px,-1px);background:var(--gold)}
+#header .cta.solid:hover,#header .cta.solid:focus-visible,
+#header.is-open .cta:hover,#header.is-open .cta:focus-visible{color:var(--gold-hi)}
+#header .cta.solid:hover .cta__rule,#header .cta.solid:focus-visible .cta__rule,
+#header.is-open .cta:hover .cta__rule{transform:scaleX(calc((var(--rule) + var(--grow)) / var(--rule)));background:var(--gold-hi)}
+#header .cta.solid:hover .cta__word::after,#header .cta.solid:focus-visible .cta__word::after,
+#header.is-open .cta:hover .cta__word::after{background:var(--gold-hi)}
+#header .cta:active{transform:translateY(1px)}
 
 /* the menu word: only with the script that opens the drawer */
 #header .menu{
@@ -1098,7 +1123,7 @@ dl.pairs .cols{
   #header .inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto minmax(0,1fr) minmax(0,1fr)}
   #header .nav,#header .foot{display:contents}
   #header .menu,#header .tk,#header .n{display:none}
-  #header .lv{display:flex;align-items:center;gap:clamp(18px,2.2vw,30px)}
+  #header .lv{display:flex;align-items:center;gap:var(--nav-gap)}
   /* every item pinned to the one row: the flanks come after the call in
      the markup but sit before it, and auto-placement would give them a
      second row */
@@ -1108,58 +1133,62 @@ dl.pairs .cols{
   #header .lv--r{grid-column:4;justify-self:start}
   #header .langsw{grid-column:5;justify-self:end}
   #header .lv a{
-    position:relative;display:block;
+    position:relative;z-index:0;display:block;
     padding:8px 0;
     font-family:var(--f-display);font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;line-height:1;
     color:var(--ink-3);white-space:nowrap;
     transition:color .3s var(--e-out);
   }
-  /* two levels under the word, each the width of the word, each drawn from
-     the left: the watched one in the label grey (::after, on hover), the
-     one in play in the gold (::before, the current section), on top */
-  #header .lv a::before,#header .lv a::after{
-    content:"";position:absolute;left:0;right:var(--trk-caps);bottom:3px;height:1px;
-    transform:scaleX(0);transform-origin:left center;
-    transition:transform .55s var(--e-out);
+  /* the level under the word, the width of the word: drawn from the left
+     as the section is reached, and off to the right once it is passed */
+  #header .lv a::before{
+    content:"";position:absolute;left:0;right:var(--trk-caps);bottom:2px;height:1px;
+    background:var(--level);
+    transform:scaleX(0);transform-origin:right center;
+    transition:transform .6s var(--e-out);
   }
-  #header .lv a::after{background:var(--level-watch)}
-  #header .lv a::before{background:var(--level);z-index:1}
-  #header .lv a:hover,#header .lv a:focus-visible{color:var(--paper)}
-  #header .lv a:hover::after{transform:none}
   #header .lv a[aria-current]{color:var(--paper)}
-  #header .lv a[aria-current]::before{transform:none}
+  #header .lv a[aria-current]::before{transform:none;transform-origin:left center}
+  /* the band behind the word, drawn from the left when pointed at: two
+     rules and the faint gold, the plate's gap. On the keyboard the band
+     is the ring, its edges a shade firmer. */
+  #header .lv a::after{
+    content:"";position:absolute;z-index:-1;
+    left:-7px;right:calc(var(--trk-caps) - 7px);top:1px;bottom:1px;
+    background:var(--line-1);
+    border-top:1px solid var(--line-2);
+    border-bottom:1px solid var(--line-2);
+    transform:scaleX(0);transform-origin:left center;
+    transition:transform var(--d) var(--e-out),border-color var(--d) var(--e-out);
+    pointer-events:none;
+  }
+  #header .lv a:hover,#header .lv a:focus-visible{color:var(--paper)}
+  #header .lv a:hover::after,#header .lv a:focus-visible::after{transform:none}
+  #header .lv a:focus-visible{outline:0}
+  #header .lv a:focus-visible::after{border-color:var(--band-edge)}
+  /* the current one, pointed at: the band's lower rule yields to the level */
+  #header .lv a[aria-current]:hover::after,#header .lv a[aria-current]:focus-visible::after{border-bottom-color:transparent}
 }
 
-/* ---- a phone: three things, tighter, the short label in both states ----- */
+/* ---- a phone: three things, tighter, the word alone in both states ------ */
 @media (max-width:619px){
+  #header{--rule:16px;--grow:0px}
   #header .inner{column-gap:14px}
   #header .wm{gap:7px}
   #header .wm b{font-size:var(--t-nano);letter-spacing:.16em}
   #header .cta{font-size:var(--t-nano);letter-spacing:.12em}
-  /* the full label is kept for the reader and clipped for the eye, and
-     takes no room in the cell; the short row is the one shown */
-  #header .cta .r--l{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-  #header .cta .r--s{padding-left:23px;gap:7px}       /* room for a 16px rule */
-  #header .cta .r--s::before{
-    content:"";position:absolute;left:0;top:calc(50% - .5px);
-    width:16px;height:1px;
-    background:var(--gold);
-    transform:scaleX(0);transform-origin:right center;
-    transition:transform .55s var(--e-out),background-color .3s var(--e-out);
-  }
-  #header .cta.solid .r--s{transform:none}
-  #header .cta.solid .r--s::before{transform:none}
-  #header .cta.solid:hover .r--s::before{transform:scaleX(1.5)}
-  /* the drawer covers the spread's call: the bar's is the one while it is open */
-  #header.is-open .cta{color:var(--paper)}
-  #header.is-open .cta .r--s::before{transform:none}
-  #header.is-open .cta .r::after{background:var(--gold)}
+  /* the verb is kept for the reader and clipped for the eye; the rule is
+     what opens before the word, and it takes no room until it does */
+  #header .cta__verb{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  #header .cta__pre{position:relative;gap:0;padding:8px 7px 8px 0;margin-left:0}
+  #header .cta__word{gap:7px}
+  #header .cta.solid,#header.is-open .cta{font-size:var(--t-nano);letter-spacing:.12em}
   #header .menu{font-size:var(--t-nano);letter-spacing:.14em}
 }
 
 @media (prefers-reduced-motion:reduce){
-  #header,#header::after,#header .inner,#header .cta .r,#header .cta .r::before,#header .cta .r::after,
-  #header .lv a::before,#header .lv a::after,#header .nav .n,
+  #header,#header::after,#header .inner,#header .cta,#header .cta__rule,#header .cta__word::after,
+  #header .lv a,#header .lv a::before,#header .lv a::after,#header .nav .n,
   .js #header .nav,.js #header .nav a[href^="#"],.js #header .nav a[href^="#"]::after{transition:none}
 }
 
@@ -1389,7 +1418,7 @@ dl.pairs .cols{
   left:61%;right:calc(-1 * var(--edge));top:24.5%;height:1px;
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
 }
-#hero .plate__lvl--lo{left:70%;top:96.5%}
+#hero .plate__lvl--lo{left:78%;top:96.5%}
 /* labels: the page's label voice, positioned in the figure's own
    percentages so they stay with their zones at every width; they scale a
    little with the plate so a phone's figure is not all label, and never
@@ -1553,9 +1582,10 @@ dl.pairs .cols{
   #hero .plate__frame::before{left:calc(-1 * var(--gutter))}
   #hero .subtitle{margin-top:clamp(22px,4vh,36px)}
 }
-/* a phone: the aside drops under the call and starts where the call's
-   label starts, after the rule, so the two read as one sentence */
-@media (max-width:619px){
+/* where the row would break -- a phone, and a desk narrower than the row
+   beside the caption -- the aside drops under the call and starts where
+   the call's label starts, after the rule, so the two read as one sentence */
+@media (max-width:619px),(min-width:900px) and (max-width:1179px){
   #hero .calls{flex-direction:column;align-items:flex-start;gap:2px}
   #hero .aside{margin-left:calc(clamp(22px,3vw,36px) + 14px)}
 }
@@ -1660,11 +1690,13 @@ dl.pairs .cols{
    the leader: off the edge fast, the settle long (expo-out); the wipe's
    clip stays put so the dashes are revealed, not scaled */
 .js #production .lvl.reveal.wipe{transition:clip-path 1.15s var(--e-out)}
-/* the label: opacity only -- its leader does the moving -- on a curve
-   that starts slow, so it surfaces as the line arrives */
-.js #production .tag.reveal{transform:none;transition:opacity 1.05s var(--e-inout)}
-/* the value: the mask rise of base.css, a shade quicker than a title line */
-.js #production .mask > .val.reveal{transition-duration:1.2s}
+/* the label: opacity only -- its leader does the moving -- and quick, so
+   it is there as the line arrives and before its value is */
+.js #production .tag.reveal{transform:none;transition:opacity .75s var(--e-reveal)}
+/* the value: the mask rise of base.css, a shade quicker than a title line,
+   from a little deeper so no ascender shows before the rise has begun */
+.js #production .mask > .val.reveal{transform:translateY(145%);transition-duration:1.2s}
+.js #production .mask > .val.reveal.is-in{transform:none}
 /* the address: in place, and slowly, so it is not there before the word is */
 .js #production .addr.reveal{transform:none;transition:opacity 1.3s var(--e-inout)}
 
@@ -1751,6 +1783,7 @@ dl.pairs .cols{
 
 @media (prefers-reduced-motion:reduce){
   .js #production .lvl.reveal.wipe,.js #production .tag.reveal,.js #production .addr.reveal{transition:none}
+  .js #production .mask > .val.reveal{transform:none;transition:none}
   #production .addr::before{transition:none}
 }
 
@@ -3333,7 +3366,7 @@ dl.pairs .cols{
 #access{
   --edge:clamp(18px,4vw,40px);            /* the roll's padding, the strip's edge is this far left */
   --tag:calc(4.5em + 14px);               /* the tag column: one width, so both levels end on one line */
-  --rows:clamp(44px,6vw,80px);            /* between the two levels */
+  --rows:clamp(40px,5vw,64px);            /* between the two levels */
   /* the plate: from the open level down to the gap before the next --
      the first row (a value line, the note's two lines, the link) plus
      the gap between the rows; the path's low run stays above its foot */
@@ -3410,8 +3443,8 @@ dl.pairs .cols{
    the copy; y0 of the drawing is the level, so the path holds it */
 #access .fig{
   position:absolute;
-  left:0;right:0;top:0;
-  height:var(--plate-h);
+  left:0;top:0;
+  width:100%;height:var(--plate-h);
   display:block;overflow:visible;
   pointer-events:none;
 }
@@ -5013,9 +5046,9 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       <div class="level__scale">
         <i class="lvl lvl--now reveal trace" aria-hidden="true">
           <svg class="fig" viewBox="0 0 240 240" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <rect class="fig__zone" x="180" y="0.5" width="60" height="14"/>
-            <path class="fig__line fig__line--tall" pathLength="1" d="M0 197 12 193 22 200 34 191 46 197 58 188 68 194 80 186 90 191 100 156 108 164 122 112 130 122 146 60 154 70 166 10 172 16 180 0.5 H240"/>
-            <path class="fig__line fig__line--flat" pathLength="1" d="M0 176 16 168 30 180 46 166 60 172 76 150 86 158 104 112 114 122 134 58 142 68 158 12 166 20 176 0.5 H240"/>
+            <rect class="fig__zone" x="190" y="0.5" width="50" height="14"/>
+            <path class="fig__line fig__line--tall" pathLength="1" d="M0 152 8 148 18 156 28 147 38 153 46 146 54 150 62 168 70 197 78 184 100 118 108 134 140 62 148 80 172 22 178 30 190 0.5 H240"/>
+            <path class="fig__line fig__line--flat" pathLength="1" d="M0 150 10 146 22 156 34 144 44 150 54 170 62 196 70 182 96 120 104 134 136 60 144 76 170 20 176 28 188 0.5 H240"/>
           </svg>
         </i>
         <span class="level__tag reveal"><span lang="nl">Nu</span><span lang="en">Now</span></span>
