@@ -2,7 +2,7 @@
  "id": "markets",
  "title": "Markets & Live",
  "wave": 1,
- "round": 2,
+ "round": 1,
  "status": "win",
  "history": [
   {
@@ -49,6 +49,21 @@
    "confidence": 0.8,
    "note": "markets (E:/ClaudeCode_GUI/atlas-designs/site/src/sections/07-markets.html + markets.css), round 2:\n- Rebuilt the list as a desk board on the strip's two edges, off the reel's axis: eight instruments one per row, names at quote size (24–38px) hung on the strip's left edge (the founder's line), tickers NQ/ES/XAUUSD in Fragment Mono at the strip's right edge — a true second column, right-aligned, on the name's baseline, like tags on a price scale. Hairline level under every row; untagged rows stay untagged (no dash where a number would sit). Groups (Indices/Metalen/Energie/Crypto) are caps hea",
    "timestamp": "2026-09-05T21:32:50+02:00"
+  },
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.5,
+   "score_ref": 5,
+   "wowed": false,
+   "gap": "The markets list is typeset, not designed: eight serif names on identical hairlines, with the right-hand ticker slot filled on only three of eight rows (NQ, ES, XAUUSD) so five rows trail an empty 700px hairline like a table missing its data, and group dividers carry the same weight as row dividers so the only hierarchy is spacing. At the bar, every row owns a consistent right-hand counterpart (code, session, or a tiny index numeral) or none do, group breaks get a heavier or gold rule against grey row hairlines, and the section earns one designed moment (a large numeral, a two-column measure, a real caption block) instead of reading as a settings list in a nice serif on a 760px column with dead gutters either side.",
+   "motion": "Staggered row fade with hairlines drawing in on scroll; restrained and legible, but stock scroll-reveal with no choreography specific to the content.",
+   "verdict": "A is a disciplined, quiet editorial list that never rises above competent, but every hairline lands and every word is readable on both breakpoints. B has the atmosphere and imagery of a shortlist candidate yet fails the basic bar of legible copy, un-overlapped labels, a sane mobile nav and no dead viewport, so the mood cannot rescue it.",
+   "confidence": 0.72,
+   "note": "Rebuilt markets as a compact desk board on the reel's own axis (base.css dl.pairs, not a fork): each group is one credit row — label right of the gutter, its instruments three across on the label's baseline at the shared .cols list size, one hairline (line-2) closing each row in the value column, nothing drawn down the axis.\nTickers (NQ, ES, XAUUSD — only where the client gave one) now sit beside their names in the mono at caption size, ink-3, instead of stranded 430px away at the row's right edge; no ticker, no dash, for the other five.\nDropped the four bright dashed levels (the dashed liq",
+   "timestamp": "2026-09-06T01:58:59+02:00"
   }
  ]
 }
