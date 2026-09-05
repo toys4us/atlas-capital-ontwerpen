@@ -1,8 +1,24 @@
 {
  "id": "hero",
  "title": "Hero",
- "wave": 0,
- "round": 0,
- "status": "queued",
- "history": []
+ "wave": 1,
+ "round": 1,
+ "status": "win",
+ "history": [
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 7,
+   "score_ref": 5.5,
+   "wowed": false,
+   "gap": "The desktop composition leaves the whole lower-left quadrant (under \"Uitvoering.\", roughly 470x280px) dead while the right column carries caption, lede and CTA, and the chart panel's top hairline slices arbitrarily between line 1 and line 2 of the heading, so the overlap reads as accident rather than intent. At the bar, the heading either sits fully clear of the panel or overlaps it decisively (a full line, not a descender), and the lede/CTA drop into that empty left column so the eye has a path instead of a diagonal jump. Also fix the nav rhythm: the three clusters (EDUCATIE/KANALEN, DISCORD, TRACKRECORD/TOEGANG) align to nothing below them.",
+   "motion": "Masked line-by-line heading reveal, chart line drawing in parallel, blur-in caption and lede; well paced and restrained, but the italic secondary link appears in frame 1 before the primary CTA and lede, an ordering slip.",
+   "verdict": "A is a confident dark editorial hero with real typographic conviction, one accent colour, a bespoke schematic and good small craft (mono clocks, hairline captions), let down by a dead lower-left zone, an uncommitted heading/panel overlap and a cliché three-word headline. B is atmospheric but the design is the photograph; strip the image and nothing remains, and the strikethrough nav, missing spaces and cluttered scroll frames show the craft is not there yet.",
+   "confidence": 0.74,
+   "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/02-hero.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/hero.css\n- Decision kept: the tagline leads, the mark stays in the bar (base.css identity: \"a mark, not a poster\"); composition (spread, band, column under the band) unchanged.\n- The four zones left the SVG and are now HTML hairlines: two 3-on-5 dashed levels, the FVG band (two rules + 7% fill), the orderblock box -- the exact idiom every other section copies from the hero. They now run past the line's end into the mat's bleed to the page edge (before, they stopped dead",
+   "timestamp": "2026-09-05T21:18:03+02:00"
+  }
+ ]
 }

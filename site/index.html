@@ -1511,49 +1511,68 @@ dl.pairs .cols{
    shared axis of base.css (dl.pairs: the label right of the axis in
    tracked caps, the value left of it at credit size, one baseline). Each
    label is the tag at the end of a price level: a dashed hairline of the
-   one gold runs to it from the strip's left edge, the way the liquidity
-   line of the opening plate runs to its tag and the way the founder's
-   numeral sits at the end of its level on the next reel -- so the four
-   credits read as the leaders of a contents page and, at once, as the
-   ladder that the "10+" below completes. The value column carries type
-   and nothing else: no rule runs under a value, nothing is drawn down
-   the axis, and the four levels together are quieter than the one that
-   follows them (line-3 here, line-4 there). Schema only: no number, no
-   instrument, no date.
+   one gold runs to it from the strip's left edge -- the frame line -- the
+   way the liquidity line of the opening plate runs to its tag and the way
+   the founder's numeral sits at the end of its level on the next reel. So
+   the four credits read as the leaders of a contents page and, at once,
+   as the ladder that the "10+" below completes. The value column carries
+   type and nothing else: no rule runs under a value, nothing is drawn
+   down the axis. Schema only: no number, no instrument, no date.
 
-   The one small fact that is a code -- the server's address -- is set in
-   the mono under its value, quiet, and is the link; pointed at, a band
-   fills behind it, from just left of the value to the column's edge, in
-   the plate's own gold with a hairline along its top and its bottom (the
-   FVG, as a hover state). The row keeps two voices, serif and mono, and
-   no third.
+   Every row is the same row. The one small fact that is a code -- the
+   server's address -- sits in the mono on the value's own baseline, after
+   the word, the way a role follows a name in a credit; so the fourth row
+   is as tall as the first three and the four sit on one grid. Pointed at,
+   a band fills behind the address, a hairline along its top and its
+   bottom (the FVG, as a hover state). Two voices, serif and mono, no third.
+
+   The title card: the rule runs from frame line to frame line (the
+   strip's edges, not the column's), and the title is set in three cells,
+   the numeral in the first and an empty cell of the numeral's width in the
+   last, so the word is centred on the page and the two rules are symmetric
+   about it -- the numeral hangs in the left gap like a folio.
 
    Reveal: motion.js tags the rows itself (a stagger of dt, dd). A label
-   fades in place while its level draws out of the strip's edge to meet
-   it -- scale, never opacity, so a probe sees the rule at once, and on
-   the label's own beat (the delay is inherited from the row) -- and the
-   value rises in on the next. On a phone, where the credits centre, the
-   ladder goes and the rows are set by air alone; the founder's level,
-   edge to edge, carries the idiom there. */
+   fades in place while its level draws out of the frame to meet it --
+   scale, never opacity, so a probe sees the rule at once, on the label's
+   own beat (the delay is inherited from the row) -- and the value rises
+   in on the next. On a phone the same object, read the other way: the
+   label leads, left, in the same caps; the level runs out of it to the
+   column's edge and ends on a short vertical rule (the strip's edge, which
+   the phone does not draw); the value takes the next line on the label's
+   left edge. */
 #production dl.pairs{
   row-gap:clamp(16px,2.4vw,28px);
 }
 
-/* the tag: a flex row so the level takes whatever width the label
-   leaves; the level opts out of baseline alignment, so the row's
-   baseline is the label's and the grid hangs the value on it */
+/* ---- the title card: rule to the frame, title symmetric ----------------- */
+#production .grp::before{
+  left:calc(-1 * clamp(18px,4vw,40px));           /* the roll's padding: out to the frame line */
+  right:calc(-1 * clamp(18px,4vw,40px));
+}
+#production .grp h2{
+  display:inline-grid;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  align-items:baseline;
+}
+#production .grp h2::before{grid-column:1;text-align:left}
+#production .grp h2 > span{grid-column:2}
+
+/* ---- the rows ------------------------------------------------------------
+   the tag: a flex row so the level takes whatever width the label leaves;
+   the level opts out of baseline alignment, so the row's baseline is the
+   label's and the grid hangs the value on it */
 #production dl.pairs > dt{
   display:flex;align-items:baseline;justify-content:flex-end;
-  gap:clamp(10px,1.4vw,14px);
   min-width:0;
-  margin-left:calc(-1 * clamp(18px,4vw,40px));   /* the level starts at the strip's edge (the roll's padding) */
+  margin-left:calc(-1 * clamp(18px,4vw,40px));   /* the level starts on the frame line */
   white-space:nowrap;
 }
 #production dl.pairs > dt::before{
   content:"";
   flex:1 1 auto;
   align-self:flex-start;
-  margin-top:.64em;                     /* the middle of the caps          */
+  margin:.64em clamp(10px,1.4vw,14px) 0 0;     /* the middle of the caps; the gap to the label */
   height:1px;
   min-width:24px;
   /* the figure's liquidity line, 3 on 5 off, anchored right so a dash
@@ -1573,17 +1592,18 @@ dl.pairs .cols{
 .js #production dl.pairs > dt.reveal.is-in::before{transform:none}
 
 /* the address: the mono, at caption size, in the secondary grey (it is a
-   link, so a step above a label); the link colour is the line's, so the
-   row has two voices (serif, mono) and no third */
+   link, so a step above a label), on the value's baseline after the word */
 #production .addr{
   position:relative;
-  display:block;
-  margin-top:7px;
+  display:inline-block;
+  vertical-align:baseline;
+  margin:0 0 0 clamp(12px,1.6vw,18px);
   font-family:var(--f-mono);
   font-size:var(--t-caption);
   font-variant-numeric:tabular-nums;
   letter-spacing:var(--trk-mono);
   line-height:1.6;
+  white-space:nowrap;
   color:var(--ink-3);
 }
 #production .addr a{
@@ -1592,11 +1612,11 @@ dl.pairs .cols{
   text-decoration-color:var(--line-2);
 }
 #production .addr a:hover,#production .addr a:focus-visible{color:var(--gold-hi);text-decoration-color:var(--gold)}
-/* the band: a gap filled, from just left of the value to the column's edge */
+/* the band: a gap filled, a little wider than the address, between two hairlines */
 #production .addr::before{
   content:"";
   position:absolute;
-  left:-6px;right:0;top:-1px;bottom:-1px;
+  left:-6px;right:-6px;top:-1px;bottom:-1px;
   background:var(--line-1);
   border-top:1px solid var(--line-2);
   border-bottom:1px solid var(--line-2);
@@ -1608,15 +1628,39 @@ dl.pairs .cols{
 #production .addr:has(> a:hover)::before,
 #production .addr:has(> a:focus-visible)::before{transform:none}
 
-/* a phone: the credits centre (base.css); the ladder goes, the label
-   carries the row's distance from the one above, and the address band
-   starts on the column's edge */
+/* ---- a phone: the same object, the tag leading -------------------------
+   The title card's rule ends 6% in from the column on a phone (base.css);
+   the ledger sits between those two verticals, so the labels start where
+   the rule starts and the levels end where it ends. Label left in the
+   caps, the level out of it to the right, a dash starting at the label,
+   ending on a short vertical hairline; the value on the next line, on the
+   label's left edge; the rows set by air. */
 @media (max-width:620px){
-  #production dl.pairs{row-gap:4px}
-  #production dl.pairs > dt{display:block;margin:0;padding-top:30px;white-space:normal}
+  #production dl.pairs{row-gap:0;margin:0 6%}
+  #production dl.pairs > dt{
+    justify-content:flex-start;
+    margin:0;
+    padding-top:clamp(26px,7.5vw,32px);
+    text-align:left;
+  }
   #production dl.pairs > dt:first-of-type{padding-top:22px}
-  #production dl.pairs > dt::before{display:none}
-  #production .addr::before{left:0}
+  #production dl.pairs > dt::before{
+    order:2;
+    margin:.64em 0 0 clamp(10px,3vw,14px);
+    background:linear-gradient(90deg,var(--line-3) 0 3px,transparent 3px 8px) left center/8px 1px repeat-x;
+  }
+  #production dl.pairs > dt::after{
+    content:"";
+    order:3;
+    flex:0 0 auto;
+    align-self:flex-start;
+    width:1px;height:9px;
+    margin-top:calc(.64em - 4px);
+    background:var(--line-3);
+  }
+  #production dl.pairs > dd{text-align:left;margin-top:5px}
+  #production .addr{margin-left:12px}
+  #production .addr::before{left:-4px;right:-4px}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -3673,7 +3717,10 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
        draws each label as the tag at the end of a price level -- a dashed
        hairline of the gold that runs to it from the strip's left edge, the
        liquidity line of the opening plate used as a leader -- and sets the
-       one small fact that is a code, the server's address, in the mono.
+       one small fact that is a code, the server's address, in the mono on
+       the value's own baseline, so the four rows are four equal rows. On a
+       phone the tag leads: label left, the level runs out of it to the
+       column's edge and ends on a short rule, the value on the next line.
        The value column is type only. motion.js tags the rows itself. -->
   <dl class="pairs">
     <dt>Community</dt><dd>Atlas Capital</dd>
