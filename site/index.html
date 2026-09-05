@@ -2019,43 +2019,46 @@ dl.pairs .cols{
    coloured the way this page colours everything: the sidebar a step darker
    than the pane, hairlines of the gold for every edge, square corners. The
    two headers (the server's name, the channel's name) share one height so
-   the rule under them runs unbroken across the device; the two feet (the
-   member's panel under the list, the composer under the messages) share
-   one height too, so the rule over the one and the top edge of the other
-   sit on a second line. The chart vocabulary of the spread is the
-   furniture here: the selected row is a fair value gap band (the gold at
-   .07 with its two edges at .38, exactly the zone on the plate), a hover
-   is the same band at half strength, the boundary of Premium is a dashed
-   liquidity line, the row numbers sit at the right like the levels of a
-   price scale, and one skeleton message carries a chart as a schema. The
-   pane holds no messages -- lines only. On a phone the two panes stay
-   side by side, smaller; the list scrolls inside the device only when the
-   screen is too short for it, and the device is never taller than the
-   screen, so the page is never trapped. */
+   the rule under them runs unbroken across the device. Under the channel's
+   name the pane is the figure of the spread, drawn again at the pane's
+   full width: the line in the gold, the zones the page's own hairlines
+   (the 3-on-5 dashed level, the band with two rules, the box), the tags in
+   the label voice on the pane's right margin, the axis of a chart. No
+   message, no line of one; the figure is the content of the pane.
+
+   The chart vocabulary is the furniture of the list too: the selected row
+   is a fair value gap band (the gold at .07 with its two edges at .38,
+   exactly the zone on the plate), a hover is the same band at half
+   strength, the boundary of Premium is a dashed liquidity line, the row
+   numbers sit at the right like the levels of a price scale. A Premium
+   channel dims the figure under its lock and the one sentence that is
+   true of it.
+
+   The frame is one flex line, so the pane takes the sidebar's height and
+   the figure fills what is under the channel's name; on a short screen the
+   frame is capped, the list scrolls inside the device and chains to the
+   page at its ends. On a phone the device stacks: the sidebar, then the
+   pane at the full width of the column, the figure at a set proportion. */
 #channels .dv{
   --side:244px;                 /* the sidebar's width                    */
   --hd:48px;                    /* both headers                           */
-  --foot:60px;                  /* both feet: the panel, and the composer
-                                   with its margin                        */
   --row:28px;                   /* one channel                            */
   --pad-x:16px;                 /* the sidebar's inner margin             */
-  --pane-x:22px;                /* the pane's inner margin                */
-  --sk:rgba(244,242,236,.07);   /* a skeleton line                        */
-  --sk-hi:rgba(244,242,236,.11);    /* an avatar, a name line             */
+  --pane-x:22px;                /* the pane's inner margin (the tags)     */
   --band:rgba(215,179,100,.07); /* the fair value gap band                */
   --band-lo:rgba(215,179,100,.035);
   --chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 3 4 5.5 6.5 3' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
   --lock:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 11'%3E%3Crect x='.5' y='5' width='8' height='5.5' fill='none' stroke='%23000'/%3E%3Cpath d='M2.5 5V3.2a2 2 0 0 1 4 0V5' fill='none' stroke='%23000'/%3E%3C/svg%3E");
-  --plus:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5 1v8M1 5h8' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
   position:relative;z-index:2;
   margin:0;
 }
 #channels .dv .reveal{--reveal-y:10px}      /* a row settles, it does not travel */
 
-/* ---- the frame ---- */
+/* ---- the frame: one flex line, capped on a short screen ---- */
 #channels .dv__frame{
   position:relative;
   display:flex;
+  align-items:stretch;
   max-height:min(720px,84vh);
   max-height:min(720px,84svh);
   border:1px solid var(--line-2);
@@ -2070,11 +2073,11 @@ dl.pairs .cols{
   border-right:1px solid var(--line-2);
 }
 /* while the list has more below (a short screen), its foot fades into the
-   panel under it; the script toggles the class, and drops it at the end */
+   sidebar; the script toggles the class, and drops it at the end */
 #channels .dv__side::after{
   content:"";
   display:none;
-  position:absolute;left:0;right:0;bottom:var(--foot);height:44px;
+  position:absolute;left:0;right:0;bottom:0;height:48px;
   background:linear-gradient(180deg,rgba(14,15,18,0),var(--panel-lo));
   pointer-events:none;
 }
@@ -2103,7 +2106,7 @@ dl.pairs .cols{
    at its ends the scroll chains to the page, so nothing is trapped */
 #channels .dv__list{
   flex:1 1 auto;min-height:0;
-  padding:6px 0 10px;
+  padding:6px 0 12px;
   overflow-y:auto;overflow-x:hidden;
   overscroll-behavior-y:auto;
   scrollbar-width:thin;
@@ -2185,24 +2188,12 @@ dl.pairs .cols{
 #channels .dv__ch[aria-pressed="true"] .dv__hash{color:var(--gold)}
 #channels .dv__ch[aria-pressed="true"] .dv__n{color:var(--ink-2)}
 #channels .dv__ch:focus-visible{outline-offset:-3px}
-/* the member's panel: the avatar, the name, three controls, all skeleton */
-#channels .dv__me{
-  flex:0 0 auto;
-  height:var(--foot);
-  display:flex;align-items:center;gap:8px;
-  padding:0 var(--pad-x);
-  border-top:1px solid var(--line-2);
-  background:var(--panel-lo);
-}
-#channels .dv__me .dv__av{width:24px;height:24px;margin-right:2px}
-#channels .dv__me .dv__ln--name{width:58px;margin-right:auto}
-#channels .dv__ctl{display:block;width:8px;height:8px;background:var(--sk)}
 
-/* ---- the pane: lifted out of the flow, so the sidebar sets the height ---- */
+/* ---- the pane: the channel's name, then the figure ---- */
 #channels .dv__pane{
-  position:absolute;top:0;bottom:0;right:0;left:var(--side);
+  flex:1 1 auto;
   display:flex;flex-direction:column;
-  min-width:0;
+  min-width:0;min-height:0;
 }
 #channels .dv__head{
   flex:0 0 auto;
@@ -2218,80 +2209,89 @@ dl.pairs .cols{
 }
 #channels .dv__head .dv__hash{color:var(--ink-4)}
 #channels .dv__name{overflow:hidden;text-overflow:ellipsis;padding-bottom:1px}
-/* messages stack from the bottom, as in a chat; what does not fit is
-   clipped at the top under a fade to the pane */
-#channels .dv__body{
-  position:relative;
-  flex:1 1 auto;min-height:0;
-  display:flex;flex-direction:column;justify-content:flex-end;gap:20px;
-  padding:20px var(--pane-x) 18px;
-  overflow:hidden;
-}
-#channels .dv__body::before{
-  content:"";
-  position:absolute;left:0;right:0;top:0;height:64px;
-  background:linear-gradient(180deg,var(--panel),rgba(21,22,26,0));
-  pointer-events:none;
-  z-index:1;
-}
-#channels .dv__msg{
-  flex:0 0 auto;
-  display:grid;grid-template-columns:28px minmax(0,1fr);
-  column-gap:12px;row-gap:8px;
-  align-items:start;
-}
-#channels .dv__msg > *{grid-column:2}
-#channels .dv__av{display:block;width:28px;height:28px;background:var(--sk-hi)}
-#channels .dv__msg .dv__av{grid-column:1;grid-row:1/span 6}
-#channels .dv__ln{display:block;height:7px;max-width:100%;background:var(--sk)}
-#channels .dv__ln--name{height:8px;background:var(--sk-hi)}
-/* the chart in the message: the spread's plate, small */
+/* the plate fills what is under the name; the tags size from its width */
 #channels .dv__plate{
   position:relative;
-  width:min(100%,300px);aspect-ratio:300/120;
-  margin-top:2px;
-  border:1px solid var(--line-2);
-  background:var(--panel-lo);
+  flex:1 1 auto;min-height:0;
+  container-type:inline-size;
+  overflow:hidden;
+}
+#channels .dv__ink{
+  position:absolute;inset:0;
+  transition:opacity var(--d) var(--e-out);
 }
 #channels .dv__fig{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 #channels .dv__fig *{vector-effect:non-scaling-stroke}
 #channels .dv__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:round}
-#channels .dv__zone{stroke:var(--gold);stroke-width:1;stroke-opacity:.36;fill:var(--gold);fill-opacity:.07}
-#channels .dv__level{stroke-opacity:.55;stroke-dasharray:3 5;stroke-linecap:butt}
-#channels .dv__pane:not([data-kind="chart"]) .dv__plate{display:none}
-/* the composer: a box, a plus, no words; its top edge on the line of the
-   member's panel across the device */
-#channels .dv__composer{
-  flex:0 0 auto;
-  height:40px;
-  margin:0 var(--pane-x) calc(var(--foot) - 40px);
-  display:flex;align-items:center;gap:14px;
-  padding:0 14px;
-  border:1px solid var(--line-2);
-  background:var(--panel-lo);
+/* the zones, placed in the figure's own percentages (the SVG is stretched
+   to the plate, so a percentage of the plate is a coordinate of the
+   drawing: y 82 of 520 is 15.8%). The band and the two levels run on to
+   the pane's right edge -- a level is drawn forward. */
+#channels .dv__ob,#channels .dv__band,#channels .dv__lvl{position:absolute;display:block;pointer-events:none}
+#channels .dv__ob{
+  left:26.7%;top:72.7%;width:6%;height:5.8%;
+  border:1px solid var(--line-3);
+  background:rgba(215,179,100,.07);
 }
-#channels .dv__composer::before{
-  content:"";width:10px;height:10px;
-  background:var(--ink-5);
-  -webkit-mask:var(--plus) center/10px 10px no-repeat;
-  mask:var(--plus) center/10px 10px no-repeat;
+#channels .dv__band{
+  left:48%;right:0;top:43.5%;height:4.2%;
+  border-top:1px solid var(--line-3);
+  border-bottom:1px solid var(--line-3);
+  background:rgba(215,179,100,.07);
 }
-#channels .dv__composer::after{content:"";width:34%;height:7px;background:var(--sk)}
-/* Premium: the lines dim, a lock and two words in the label voice */
+#channels .dv__lvl{
+  left:50%;right:0;top:15.8%;height:1px;
+  background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
+}
+#channels .dv__lvl--lo{left:56.7%;top:88%}
+/* the tags: the label voice, on the pane's right margin above the right
+   ends of the two levels, and under the orderblock's box; they scale a
+   little with the plate and never go under 9px */
+#channels .dv__tag{
+  position:absolute;
+  display:block;
+  font-family:var(--f-display);
+  font-style:normal;
+  font-size:clamp(9px,2cqw,var(--t-nano));
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--ink-4);
+  white-space:nowrap;
+  pointer-events:none;
+}
+#channels .dv__tag--liq{right:var(--pane-x);top:15.8%;transform:translateY(calc(-100% - 6px))}
+#channels .dv__tag--fvg{right:var(--pane-x);top:43.5%;transform:translateY(calc(-100% - 6px))}
+#channels .dv__tag--ob{left:26.7%;top:78.5%;transform:translateY(5px)}
+
+/* Premium: the figure recedes, a lock and the one true sentence on it */
 #channels .dv__locked{
   display:none;
   position:absolute;inset:0;z-index:2;
-  align-items:center;justify-content:center;flex-direction:column;gap:14px;
+  align-items:center;justify-content:center;flex-direction:column;gap:12px;
+  padding:0 var(--pane-x);
+  text-align:center;
+}
+#channels .dv__locked .dv__lock{width:13px;height:16px;margin-bottom:6px;background:var(--gold);-webkit-mask-size:13px 16px;mask-size:13px 16px}
+#channels .dv__locked-t{
   font-family:var(--f-display);
   font-size:var(--t-micro);
   letter-spacing:var(--trk-caps);
   text-indent:var(--trk-caps);
   text-transform:uppercase;
-  color:var(--ink-3);
+  line-height:1.5;
+  color:var(--ink-1);
 }
-#channels .dv__locked .dv__lock{width:13px;height:16px;background:var(--gold);-webkit-mask-size:13px 16px;mask-size:13px 16px}
+#channels .dv__locked-n{
+  max-width:28ch;
+  font-family:var(--f-display);
+  font-size:var(--t-small);
+  line-height:1.5;
+  color:var(--ink-3);
+  text-wrap:balance;
+}
 #channels .dv__pane[data-kind="lock"] .dv__locked{display:flex}
-#channels .dv__pane[data-kind="lock"] .dv__msg,#channels .dv__pane[data-kind="lock"] .dv__composer{opacity:.3}
+#channels .dv__pane[data-kind="lock"] .dv__ink{opacity:.28}
 
 /* ---- the caption and the call, hung on the device's left edge ---- */
 #channels .dv figcaption{
@@ -2309,128 +2309,174 @@ dl.pairs .cols{
 #channels .dv__note{flex:1 1 20ch;min-width:0;font-size:var(--t-small);color:var(--ink-4);text-wrap:balance}
 #channels .dv__call{position:relative;z-index:2;margin:clamp(16px,2.4vw,26px) 0 0}
 
-/* ---- the line draws itself as its message arrives ---- */
-.js #channels .reveal .dv__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s var(--e-reveal) .25s}
-.js #channels .reveal.is-in .dv__line{stroke-dashoffset:0}
+/* ---- the trace: the plate's own reveal --------------------------------
+   Under .js, until motion.js marks it .is-in, the plate is bare: the
+   zones are drawn back to nothing at their left ends, the tags wait, and
+   the line is drawn back to nothing (pathLength 1, so the dash is the
+   whole path). In: the zones draw out of the left and the line draws
+   itself left to right over the slow settle while the rows of the list
+   settle beside it; the tags come last, once their levels are under
+   them. Never a transform, never opacity on the plate itself -- the
+   probe sees the plate at once; the motion is in the ink. */
+.js #channels .reveal.trace{opacity:1;transform:none}
+.js #channels .reveal.trace .dv__ob,.js #channels .reveal.trace .dv__band,.js #channels .reveal.trace .dv__lvl{
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform 1.6s var(--e-reveal) .35s;
+}
+.js #channels .reveal.trace .dv__tag{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) 1.1s}
+.js #channels .reveal.trace .dv__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.9s var(--e-reveal)}
+.js #channels .reveal.trace.is-in .dv__ob,.js #channels .reveal.trace.is-in .dv__band,.js #channels .reveal.trace.is-in .dv__lvl{transform:none}
+.js #channels .reveal.trace.is-in .dv__tag{opacity:1}
+.js #channels .reveal.trace.is-in .dv__line{stroke-dashoffset:0}
 @media (prefers-reduced-motion:reduce){
-  .js #channels .reveal .dv__line{stroke-dashoffset:0;transition:none}
-  #channels .dv__ch:not(.reveal),#channels .dv__hash,#channels .dv__n{transition:none}
+  .js #channels .reveal.trace .dv__ob,.js #channels .reveal.trace .dv__band,.js #channels .reveal.trace .dv__lvl{transform:none;transition:none}
+  .js #channels .reveal.trace .dv__tag{opacity:1;transition:none}
+  .js #channels .reveal.trace .dv__line{stroke-dashoffset:0;transition:none}
+  #channels .dv__ch:not(.reveal),#channels .dv__hash,#channels .dv__n,#channels .dv__ink{transition:none}
 }
 
-/* ---- a phone: the same device, smaller, and never taller than the screen ---- */
+/* ---- a phone: the device stacks, one column -----------------------------
+   The sidebar first at the column's full width (the list scrolls inside
+   only on a screen too short for it), then the pane under it with the
+   figure at a set proportion. */
 @media (max-width:620px){
-  #channels .dv{--side:58%;--hd:44px;--foot:48px;--row:28px;--pad-x:11px;--pane-x:14px}
-  #channels .dv__frame{max-height:min(640px,78vh);max-height:min(640px,78svh)}
-  #channels .dv__server{letter-spacing:var(--trk-caps);font-size:var(--t-nano)}
-  #channels .dv__cat{letter-spacing:var(--trk-caps-tight);padding-right:4px}
-  #channels .dv__ch{gap:7px}
-  #channels .dv__hash{width:10px}
-  #channels .dv__me{gap:7px}
-  #channels .dv__me .dv__av{width:20px;height:20px;margin-right:1px}
-  #channels .dv__me .dv__ln--name{width:44px}
-  #channels .dv__ctl{width:7px;height:7px}
-  #channels .dv__head{gap:6px;padding:0 12px;font-size:12.5px}
-  #channels .dv__head .dv__hash{width:9px}
-  #channels .dv__body{gap:18px;padding:16px var(--pane-x) 14px}
-  #channels .dv__msg{grid-template-columns:22px minmax(0,1fr);column-gap:9px;row-gap:7px}
-  #channels .dv__av{width:22px;height:22px}
-  #channels .dv__ln{height:6px}
-  #channels .dv__ln--name{height:7px}
-  #channels .dv__composer{height:34px;margin:0 var(--pane-x) calc(var(--foot) - 34px);padding:0 10px}
+  #channels .dv{--hd:44px;--pad-x:14px;--pane-x:14px}
+  #channels .dv__frame{flex-direction:column;max-height:none}
+  #channels .dv__side{flex:0 1 auto;border-right:0;border-bottom:1px solid var(--line-2)}
+  #channels .dv__list{max-height:min(540px,64vh);max-height:min(540px,64svh)}
+  #channels .dv__server{letter-spacing:var(--trk-caps)}
+  #channels .dv__pane{flex:0 0 auto}
+  #channels .dv__head{padding:0 var(--pane-x)}
+  #channels .dv__plate{flex:0 0 auto;aspect-ratio:600/440;min-height:0}
+  #channels .dv__locked{gap:10px}
   #channels .dv figcaption{margin-top:14px}
 }
 
 /* ---- section:markets ---- */
 /* ===== markets: the board, then live =====
-   The instruments as a desk board with the numbers left off. The board
-   keeps the reel's axis (base.css dl.pairs): each group is one credit --
-   the label right of the gutter in the label voice, its instruments left
-   of it, three across on the label's baseline at the list size the
-   credits use for a column of names -- and every row closes on one
-   hairline that starts at the axis and runs to the column's edge. Nothing
-   is drawn down the axis; the label column stays a margin. Beside a name,
-   where the client gave one, the ticker in the mono: small, in the label
-   grey, the one thing on the board that is counted. No price, no change,
-   no dash where a number would sit -- the note under the board, on the
-   board's own column line, says so.
+   The instruments as a desk board with the numbers left off, set on the
+   strip's two edges and not on the reel's axis: eight names at quote
+   size hung on the left edge (the founder's line: numeral, hair, quote),
+   and on the right edge -- where the scale of a chart is -- the ticker in
+   the mono, on the name's baseline, so the three the client gave (NQ, ES,
+   XAUUSD) stand in one column like the tags on a price scale. Under every
+   row a hairline from edge to edge: each row is a level, its ticker the
+   tag, and where there is no ticker the level runs to the scale untagged;
+   nothing is put where a number would sit. The groups are the board's
+   headings, in the label voice, on the left edge with the names. Two
+   voices: the serif (the names, the headings) and the mono (the tickers).
 
    The spread's vocabulary as furniture, and no more of it than this: the
-   rows are levels (hairlines, not the dashed line, which the reel has
-   already used above and below), a name pointed at becomes the gap band
-   -- the gold at seven percent with a hairline along its top and bottom,
-   exactly the zone on the plate -- and the ticker beside it warms. Live
-   is one plain credit with its sub-line, and the reel's own interstitial. */
+   rows are levels, the tickers their tags, and a row pointed at becomes
+   the gap band -- the gold at seven percent with a hairline along its top
+   and its bottom, exactly the zone on the plate -- its name in the paper,
+   its ticker brought forward; the other rows step back, so the one you
+   read is the one in the light. On arrival the rows settle in sequence
+   and each level draws itself from the left in its row's own slot.
+
+   Live keeps the edge: one statement at the board's size, its one line
+   under it, the call under that, all three on the left edge -- so the
+   whole piece has one line and nothing hangs off another. On a phone the
+   board is the same board, smaller, and Live stays on its edge with it:
+   one axis from the first heading to the call. */
 #markets .board{
-  --row-pad:clamp(12px,1.7vw,18px);
+  --bleed:12px;                                /* the band past the text      */
+  --band:rgba(215,179,100,.07);                /* the fair value gap band     */
+  --band-edge:rgba(215,179,100,.36);
   position:relative;z-index:2;
-  row-gap:0;
+  margin:clamp(2px,.8vw,8px) 0 0;
 }
-#markets .board .reveal{--reveal-y:12px}        /* a row settles, it does not travel */
+#markets .board .reveal{--reveal-y:10px}       /* a row settles, it does not travel */
+
+/* ---- a heading: the group, in the label voice, on the left edge -------- */
+#markets .board > dt{
+  margin:0;
+  padding:clamp(28px,4vw,44px) 0 clamp(8px,1.2vw,12px);
+  font-family:var(--f-display);
+  font-size:var(--t-micro);
+  font-weight:400;
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--ink-4);
+}
+#markets .board > dt:first-of-type{padding-top:0}
+
+/* ---- a row: the name, the tag, one baseline --------------------------- */
 #markets .board > dd{
   position:relative;
-  padding:var(--row-pad) 0;
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:clamp(16px,3vw,32px);
+  margin:0;
+  padding:clamp(9px,1.3vw,14px) 0 clamp(10px,1.4vw,15px);
+  min-width:0;
 }
-#markets .board > dd:first-of-type{padding-top:0}
+/* the level: a hairline under the row, on the content's edges */
 #markets .board > dd::after{
   content:"";
-  position:absolute;
-  left:0;right:0;bottom:0;
+  position:absolute;left:0;right:0;bottom:0;
   height:1px;
   background:var(--line-2);
+  transform-origin:left center;
   pointer-events:none;
 }
-/* three across; the shared .cols sizes stay (the list size, the leading) */
-#markets .board .cols{
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  column-gap:clamp(12px,1.6vw,20px);
-  row-gap:clamp(4px,.8vw,8px);
-}
-/* a name: the band is drawn on the row itself and the row is the width
-   of its words (not of its cell, so the band is a zone around a name and
-   not a cell of a table), eight pixels past them either side so the text
-   never touches its edge; the ticker sits on the name's baseline after a
-   half em */
-#markets .board li{
-  position:relative;
-  justify-self:start;
-  display:flex;align-items:baseline;gap:.5em;
-  min-width:0;max-width:calc(100% + 16px);
-  margin:0 -8px;padding:3px 8px;
-  white-space:nowrap;
-  color:var(--ink-1);
+/* the band: a layer under the row, past the text by the bleed, so its
+   transition never touches the row's own (the reveal's) */
+#markets .board > dd::before{
+  content:"";
+  position:absolute;top:0;bottom:0;
+  left:calc(-1 * var(--bleed));right:calc(-1 * var(--bleed));
+  z-index:-1;
   background:rgba(215,179,100,0);
   box-shadow:inset 0 1px 0 rgba(215,179,100,0),inset 0 -1px 0 rgba(215,179,100,0);
+  transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out);
+  pointer-events:none;
 }
-#markets .board__name{min-width:0;letter-spacing:-.006em}
-#markets .board .num{
+#markets .board__name{
+  flex:1 1 auto;min-width:0;
+  font-family:var(--f-display);
+  font-size:var(--t-quote);
+  font-weight:400;
+  line-height:var(--lh-tight);
+  letter-spacing:-.012em;
+  color:var(--ink-1);
+  transition:color var(--d) var(--e-out);
+}
+/* the tag: mono, small, on the scale */
+#markets .board__tick{
   flex:0 0 auto;
+  font-family:var(--f-mono);
   font-size:var(--t-caption);
   font-weight:400;
+  letter-spacing:var(--trk-mono);
   color:var(--ink-3);
-}
-/* the hover transition is declared only once the reveal has run, so the
-   reveal's own transition (opacity, transform) is never overridden */
-#markets .board li:not(.reveal){transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out)}
-#markets .board li:not(.reveal) .num{transition:color var(--d) var(--e-out)}
-@media (hover:hover){
-  #markets .board li:hover{
-    background:rgba(215,179,100,.07);
-    box-shadow:inset 0 1px 0 rgba(215,179,100,.36),inset 0 -1px 0 rgba(215,179,100,.36);
-  }
-  #markets .board li:hover .num{color:var(--ink-1)}
+  transition:color var(--d) var(--e-out);
 }
 
-/* the note: read after the board, on the board's column line */
+/* ---- the lit row, and the others a step back ---------------------------- */
+@media (hover:hover){
+  #markets .board > dd:hover::before{
+    background:var(--band);
+    box-shadow:inset 0 1px 0 var(--band-edge),inset 0 -1px 0 var(--band-edge);
+  }
+  #markets .board > dd:hover .board__name{color:var(--paper)}
+  #markets .board > dd:hover .board__tick{color:var(--ink-1)}
+  #markets .board:hover > dd:not(:hover) .board__name{color:var(--ink-2)}
+}
+
+/* ---- the level draws itself in the row's own slot of the stagger --------
+   scale, never opacity, so a probe sees the rule at once */
+.js #markets .board > dd::after{transform:scaleX(0)}
+.js #markets .board > dd.is-in::after{
+  transform:none;
+  transition:transform var(--d-reveal) var(--e-reveal);
+  transition-delay:inherit;
+}
+
+/* ---- the note: read after the board, on the board's left edge ---------- */
 #markets .board__note{
   position:relative;z-index:2;
-  display:grid;
-  grid-template-columns:var(--axis-l) var(--axis-r);
-  column-gap:var(--axis-gap);
-  margin-top:clamp(14px,2vw,20px);
-}
-#markets .board__note p{
-  grid-column:2;
-  margin:0;
+  margin:clamp(14px,2vw,20px) 0 0;
   max-width:44ch;
   font-size:var(--t-small);
   line-height:1.6;
@@ -2439,25 +2485,48 @@ dl.pairs .cols{
   text-wrap:pretty;
 }
 
-/* narrower than the width at which three names sit on one line: two */
-@media (max-width:760px){
-  #markets .board .cols{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* ---- live: the statement, its line, the call, on the one edge ---------- */
+#markets .live{
+  position:relative;z-index:2;
+  margin:clamp(4px,1vw,10px) 0 clamp(40px,5.5vw,72px);
 }
-/* a phone: the board stays a left-read table (the credits under it centre
-   as they do everywhere). The label above its row on the row's left edge,
-   the hairline still closing each group. */
-@media (max-width:620px){
-  #markets .board{row-gap:0}
-  #markets .board > dt{text-align:left;padding-top:clamp(20px,5.4vw,26px)}
-  #markets .board > dt:first-of-type{padding-top:0}
-  #markets .board > dd,#markets .board > dd:first-of-type{text-align:left;padding:4px 0 14px}
-  #markets .board .cols{column-gap:16px;row-gap:2px}
-  #markets .board__note{display:block}
-  #markets .board__note p{max-width:none}
+#markets .live__line{
+  margin:0;
+  max-width:24ch;
+  font-family:var(--f-display);
+  font-size:var(--t-quote);
+  font-weight:400;
+  line-height:1.25;
+  letter-spacing:-.012em;
+  color:var(--ink-1);
+  text-wrap:balance;
 }
+#markets .live__line .mask{display:block}
+#markets .live__line .mask > span{display:block}
+#markets .live__sub{
+  margin:clamp(10px,1.4vw,14px) 0 0;
+  max-width:var(--measure-narrow);
+  font-size:var(--t-body);
+  line-height:1.5;
+  color:var(--ink-3);
+  text-wrap:pretty;
+}
+#markets .live .cta{margin:clamp(18px,2.6vw,28px) 0 0}
 
 @media (prefers-reduced-motion:reduce){
-  #markets .board li:not(.reveal),#markets .board li:not(.reveal) .num{transition:none}
+  .js #markets .board > dd::after{transform:none;transition:none}
+  #markets .board > dd::before,#markets .board__name,#markets .board__tick{transition:none}
+}
+
+/* ---- a phone: the same board, smaller, and Live on its edge with it ---- */
+@media (max-width:620px){
+  #markets .board{--bleed:10px}
+  #markets .board > dt{padding:clamp(24px,6vw,30px) 0 6px}
+  #markets .board > dd{padding:8px 0 9px;gap:14px}
+  #markets .board__note{max-width:none}
+  #markets .live{margin-bottom:clamp(36px,9vw,48px)}
+  #markets .live__line{max-width:none}
+  #markets .live__sub{max-width:none}
 }
 
 /* ---- section:material ---- */
@@ -2660,6 +2729,15 @@ dl.pairs .cols{
    shared hairline between them, each at the proportion the files have
    (four by three); a single takes a wider-than-tall frame that still
    holds its labels. */
+@media (max-width:719px){
+  /* a narrow strip: the label's second way, so a title that wraps never
+     leaves a stub of level beside it */
+  #material .plate figcaption{grid-template-columns:auto minmax(32px,1fr) auto;column-gap:14px}
+  #material .plate__level{grid-column:2;grid-row:1}
+  #material .plate__after{grid-column:3;grid-row:1}
+  #material .plate__title{grid-column:1/-1;grid-row:2;margin-top:8px}
+  #material .plate figcaption small{grid-column:1/-1;grid-row:3}
+}
 @media (max-width:619px){
   #material .plate{grid-template-columns:minmax(0,1fr)}
   #material .plate--pair .tile{grid-column:1/-1}
@@ -2667,11 +2745,6 @@ dl.pairs .cols{
   #material .frame{aspect-ratio:16/10}
   #material .plate--pair .frame{aspect-ratio:4/3}
   #material .plate__tag--trend{transform:translate(-50%,-50%) rotate(24deg)}
-  #material .plate figcaption{grid-template-columns:auto minmax(32px,1fr) auto;column-gap:14px}
-  #material .plate__level{grid-column:2;grid-row:1}
-  #material .plate__after{grid-column:3;grid-row:1}
-  #material .plate__title{grid-column:1/-1;grid-row:2;margin-top:8px}
-  #material .plate figcaption small{grid-column:1/-1;grid-row:3}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -2691,25 +2764,39 @@ dl.pairs .cols{
    value column on that same baseline, the amount or the date in the serif
    under it. Nothing is drawn down the gutter and nothing runs under a row;
    the levels live in the label column, the way a chart's tags live in its
-   margin. The two years already on the page bracket the column, first and
-   last, as an axis carries its first and last figure. The numbers count
-   rows and nothing else; the levels carry no value. On scroll each tick
-   draws itself from the axis, then the row rises.
+   margin. The two years bracket the rows as two solid levels: a hairline
+   from the strip's edge to the year, tagged at the gutter the way every
+   level on the reel is tagged -- so the range is anchored to the axis and
+   nothing floats. The numbers count rows and nothing else; the levels
+   carry no value. On scroll each level draws itself from the axis, then
+   the row rises.
 
-   The evidence: the same six, in the same order, printed as plates -- one
-   size, one mat, one hairline, one grey -- with the number of their row on
-   each; only the one under the pointer is allowed its colour. They print
-   on from the left like the spread's plate; a tap opens the untouched
-   original in the page's one lightbox.
+   The evidence: the same six, in the same order, printed two to a row as
+   the wall above prints its pairs -- at full value, in their own colour,
+   on one mat inside one hairline of the gold, the number of their row on
+   each. A certificate is a document, so it is shown as one: nothing is
+   veiled, nothing is greyed. The row of the two square files is a pair
+   of squares, the other rows 3:2, so every row lands level. Pointed at,
+   the mat under the plate warms to the gold of the spread's zones (the
+   band, not the line) and the frame comes up a step. They print on from
+   the left like the spread's plate; a tap opens the untouched original in
+   the page's one lightbox. The one note a certificate needs (02's ROI
+   figure) is a footnote under the wall, hung on the wall's left edge, and
+   travels with the plate into the lightbox.
 
    The caveat: not small print. Set as the founder's quote is set -- the
    label in the margin, a short rule, the words at lead size in the ink of
    a value -- because it is the most important paragraph on the page.
    .roll::before is the strip's edge, so every block sits above it (z:2). */
-#trackrecord{--mat:var(--panel-lo);--inset:clamp(6px,1vw,10px)}
+#trackrecord{
+  --mat:var(--panel-lo);
+  --inset:clamp(7px,1.1vw,11px);
+  --edge:clamp(18px,4vw,40px);            /* the roll's padding: the strip's edge is this far left */
+  --level:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+}
 
 /* ---------- the ledger ---------------------------------------------------- */
-#trackrecord .ledger{position:relative;z-index:2;margin:0}
+#trackrecord .ledger{position:relative;z-index:2;margin:clamp(4px,.8vw,10px) 0 0}
 #trackrecord .ledger__rows{
   list-style:none;margin:0;padding:0;
   display:grid;
@@ -2741,7 +2828,7 @@ dl.pairs .cols{
   font-size:var(--t-caption);
   font-variant-numeric:tabular-nums;
   letter-spacing:var(--trk-mono);
-  color:var(--ink-4);
+  color:var(--ink-3);
 }
 /* the level: the dash of the spread's liquidity lines (3 on, 5 off) in
    the hairline gold, lifted from the baseline to the middle of the caps.
@@ -2755,7 +2842,7 @@ dl.pairs .cols{
   position:relative;top:-.34em;
   height:1px;
   font-size:var(--t-micro);
-  background:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+  background:var(--level);
 }
 #trackrecord .ledger__firm{
   flex:0 1 auto;
@@ -2766,7 +2853,7 @@ dl.pairs .cols{
   letter-spacing:var(--trk-caps);
   text-transform:uppercase;
   line-height:1.5;
-  color:var(--ink-4);
+  color:var(--ink-2);
   white-space:nowrap;
 }
 #trackrecord .ledger__val{
@@ -2787,37 +2874,46 @@ dl.pairs .cols{
   font-variant-numeric:tabular-nums;
   letter-spacing:.01em;
   line-height:1.5;
-  color:var(--ink-3);
+  color:var(--ink-2);
 }
-/* the axis ends: the first and the last year, right of the label column
-   against the gutter, in the mono of everything counted, in the faintest
-   readable grey -- the range of the ledger, not a seventh row */
+/* the axis ends: the first and the last year as two solid levels in the
+   label column -- a hairline from the strip's edge to the year, the year
+   tagged at the gutter in the mono of everything counted. The range of
+   the ledger, drawn on the axis; not a seventh row. */
 #trackrecord .ledger__axis{
+  display:flex;align-items:center;
+  gap:clamp(12px,1.8vw,20px);
   width:calc((100% - var(--axis-gap)) * 2 / 5);
   margin:0;
-  text-align:right;
   font-family:var(--f-mono);
   font-size:var(--t-caption);
   font-variant-numeric:tabular-nums;
   letter-spacing:var(--trk-mono);
   line-height:1;
-  color:var(--ink-5);
+  color:var(--ink-3);
 }
-#trackrecord .ledger__axis time{font-size:inherit;letter-spacing:inherit}
-#trackrecord .ledger__axis--from{margin-bottom:clamp(16px,2.4vw,26px)}
-#trackrecord .ledger__axis--to{margin-top:clamp(16px,2.4vw,26px)}
+#trackrecord .ledger__rule{
+  flex:1 1 auto;min-width:0;
+  height:1px;
+  margin-left:calc(-1 * var(--edge));
+  background:var(--line-3);
+}
+#trackrecord .ledger__axis time{flex:0 0 auto;font-size:inherit;letter-spacing:inherit}
+#trackrecord .ledger__axis--from{margin-bottom:clamp(18px,2.6vw,28px)}
+#trackrecord .ledger__axis--to{margin-top:clamp(18px,2.6vw,28px)}
 
 /* a phone: every row centres with the reel, the tick on its own line --
    the number and the name between two levels that run to the edges of
    the screen, the way the founder's numeral sits on its level -- and the
-   value and its sub-line under them. Both levels are simply there. */
+   value and its sub-line under them. The years sit the same way, on a
+   solid level that runs from edge to edge. Every level is simply there. */
 @media (max-width:620px){
   #trackrecord .ledger__rows{row-gap:clamp(26px,7vw,34px)}
   #trackrecord .ledger__rows li{display:block;text-align:center}
   #trackrecord .ledger__tick{
     justify-content:center;
     gap:14px;
-    margin:0 calc(-1 * clamp(18px,4vw,40px));
+    margin:0 calc(-1 * var(--edge));
   }
   #trackrecord .ledger__tick::after{
     content:"";
@@ -2825,14 +2921,21 @@ dl.pairs .cols{
     align-self:baseline;
     position:relative;top:-.34em;
     height:1px;
-    background:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+    background:var(--level);
   }
   #trackrecord .ledger__lv{order:-1}
   #trackrecord .ledger__n{padding-left:6px}
   #trackrecord .ledger__firm{flex:0 0 auto;text-align:center;padding-right:6px}
-  .js #trackrecord .ledger__lv.draw{transform:none;transition:none}
+  .js #trackrecord .ledger__lv.draw,.js #trackrecord .ledger__rule.draw{transform:none;transition:none}
   #trackrecord .ledger__val{margin-top:clamp(8px,2.4vw,12px)}
-  #trackrecord .ledger__axis{width:auto;text-align:center}
+  #trackrecord .ledger__axis{
+    width:auto;
+    justify-content:center;
+    gap:14px;
+    margin-left:calc(-1 * var(--edge));margin-right:calc(-1 * var(--edge));
+  }
+  #trackrecord .ledger__rule{margin-left:0}
+  #trackrecord .ledger__axis::after{content:"";flex:1 1 auto;min-width:16px;height:1px;background:var(--line-3)}
 }
 
 /* ---------- the evidence -------------------------------------------------- */
@@ -2843,66 +2946,55 @@ dl.pairs .cols{
   position:relative;z-index:2;
   display:flex;flex-wrap:wrap;align-items:baseline;
   gap:2px clamp(14px,1.6vw,22px);
-  margin:clamp(48px,6.5vw,80px) 0 clamp(12px,1.6vw,18px);
+  margin:clamp(52px,7vw,88px) 0 clamp(14px,1.8vw,20px);
   font-family:var(--f-display);
   line-height:1.5;
 }
 #trackrecord .proofs-hint__t{
   flex:0 0 auto;
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
-  color:var(--ink-3);
+  color:var(--ink-1);
 }
 #trackrecord .proofs-hint__n{
   flex:1 1 20ch;min-width:0;
-  font-size:var(--t-small);color:var(--ink-4);
+  font-size:var(--t-small);color:var(--ink-3);
   text-wrap:pretty;
 }
+/* two to a row, as the wall above prints its pairs; the row of the two
+   square files is a pair of squares, the others 3:2, so a row is level */
 #trackrecord .proofs{
   position:relative;z-index:2;
   display:grid;
-  gap:clamp(18px,2.6vw,28px) clamp(10px,1.6vw,16px);
+  gap:clamp(26px,3.6vw,40px) clamp(12px,2vw,20px);
   grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:start;
 }
-@media (min-width:720px){ #trackrecord .proofs{grid-template-columns:repeat(3,minmax(0,1fr))} }
 #trackrecord .proofs figure{margin:0;min-width:0}
-/* six firms, six house styles, none of them ours: the plates are one
-   size, on one mat inside one hairline, in one grey, and only the one
-   under the pointer is allowed its colour. The whole figure is the hover
-   target, so pointing at a caption lights its plate. The hover transition
-   waits until the reveal has run: an id-scoped transition would outrank
-   the .wipe's own and the plate would snap on instead of printing on. */
+/* the plate: the file at full value in its own colour, on one mat inside
+   one hairline of the gold. The whole figure is the hover target, so
+   pointing at a caption lights its plate: the mat warms to the gold of
+   the spread's zones -- the band, not the line -- and the frame comes up
+   a step. The hover transition waits until the reveal has run: an
+   id-scoped transition would outrank the .wipe's own and the plate would
+   snap on instead of printing on. */
 #trackrecord .tile{
   display:block;width:100%;margin:0;padding:var(--inset);
   border:1px solid var(--line-2);
   background:var(--mat);
   cursor:zoom-in;
 }
-#trackrecord .tile:not(.reveal){transition:border-color var(--d) var(--e-out)}
-#trackrecord .pic{display:block;position:relative;width:100%;aspect-ratio:4/3;overflow:hidden}
+#trackrecord .tile:not(.reveal){transition:border-color var(--d) var(--e-out),background-color var(--d-slow) var(--e-out)}
+#trackrecord .pic{display:block;position:relative;width:100%;aspect-ratio:3/2;overflow:hidden}
+#trackrecord .proofs .sq .pic{aspect-ratio:1/1}
 #trackrecord .pic img{
   display:block;width:100%;height:100%;
   object-fit:contain;
-  filter:grayscale(1) brightness(.78) contrast(.9);
-  transition:filter var(--d-slow) var(--e-out);
-}
-/* six papers, one grey: a veil in the mat's own colour over every plate,
-   so a light certificate and a dark one print at the same depth; it
-   lifts with the colour when the plate is pointed at */
-#trackrecord .pic::after{
-  content:"";position:absolute;inset:0;
-  background:rgba(14,15,18,.18);
-  pointer-events:none;
-  transition:background-color var(--d-slow) var(--e-out);
 }
 @media (hover:hover){
-  #trackrecord .proofs figure:hover .tile{border-color:var(--line-4)}
-  #trackrecord .proofs figure:hover .pic img{filter:none}
-  #trackrecord .proofs figure:hover .pic::after{background:rgba(14,15,18,0)}
+  #trackrecord .proofs figure:hover .tile{border-color:var(--line-4);background:rgba(215,179,100,.09)}
   #trackrecord .proofs figure:hover figcaption > b{color:var(--gold)}
 }
-#trackrecord .tile:focus-visible{outline:1px solid var(--gold);outline-offset:3px;border-color:var(--line-4)}
-#trackrecord .tile:focus-visible .pic img{filter:none}
-#trackrecord .tile:focus-visible .pic::after{background:rgba(14,15,18,0)}
+#trackrecord .tile:focus-visible{outline:1px solid var(--gold);outline-offset:3px;border-color:var(--line-4);background:rgba(215,179,100,.09)}
 /* the caption as the plates are captioned: the number in mono, the firm
    in the label voice, the note in the serif under it on the firm's line */
 #trackrecord .proofs figcaption,
@@ -2914,37 +3006,44 @@ dl.pairs .cols{
   line-height:1.5;
 }
 #trackrecord .proofs figcaption > b,
-#trackrecord .zoom figcaption > b{
+#trackrecord .zoom figcaption > b,
+#trackrecord .proofs-fn > b{
   flex:0 0 auto;
   font-family:var(--f-mono);font-weight:400;font-size:var(--t-caption);
   letter-spacing:var(--trk-mono);text-transform:none;
-  color:var(--ink-4);
+  color:var(--ink-3);
   transition:color var(--d) var(--e-out);
 }
 #trackrecord .proofs figcaption > span,
 #trackrecord .zoom figcaption > span{min-width:0;color:var(--ink-1)}
 #trackrecord .proofs figcaption small,
 #trackrecord .zoom figcaption small{
-  display:block;margin-top:6px;
+  display:block;margin-top:5px;
   letter-spacing:0;text-transform:none;
-  font-size:var(--t-small);color:var(--ink-3);line-height:1.55;
+  font-size:var(--t-small);color:var(--ink-2);line-height:1.55;
   text-wrap:pretty;
 }
-@media (max-width:719px){
-  /* two narrow columns: the number leads the firm's name as text, so a
-     long name wraps under it instead of beside it */
-  #trackrecord .proofs figcaption{display:block}
-  #trackrecord .proofs figcaption > b{margin-right:10px}
-  #trackrecord .proofs figcaption > span{display:inline}
+/* the footnote: the one note a plate needs, under the wall on the wall's
+   left edge, in the caption's own voice -- the number of its plate in
+   mono, the note in the serif */
+#trackrecord .proofs-fn{
+  position:relative;z-index:2;
+  display:flex;gap:14px;align-items:baseline;
+  max-width:60ch;
+  margin:clamp(18px,2.6vw,28px) 0 0;
+  padding-top:clamp(14px,2vw,20px);
+  border-top:1px solid var(--line-1);
+  font-family:var(--f-display);
+  font-size:var(--t-small);
+  line-height:1.55;
+  color:var(--ink-2);
+  text-wrap:pretty;
 }
+#trackrecord .proofs-fn > span{min-width:0}
 @media (max-width:480px){
   /* a phone: one plate per row, the width of the column, so a certificate
      can be read where it stands and the caption has its own line */
-  #trackrecord .proofs{grid-template-columns:minmax(0,1fr);row-gap:clamp(28px,8vw,36px)}
-  #trackrecord .pic{aspect-ratio:3/2}
-  #trackrecord .proofs figcaption{display:flex}
-  #trackrecord .proofs figcaption > b{margin-right:0}
-  #trackrecord .proofs figcaption > span{display:block}
+  #trackrecord .proofs{grid-template-columns:minmax(0,1fr);row-gap:clamp(30px,8vw,40px)}
 }
 
 /* ---------- the caveat ---------------------------------------------------- */
@@ -2970,7 +3069,7 @@ dl.pairs .cols{
   letter-spacing:var(--trk-caps);
   text-transform:uppercase;
   line-height:1.5;
-  color:var(--ink-3);
+  color:var(--ink-2);
 }
 #trackrecord .caveat__body{grid-column:2;grid-row:2;min-width:0;max-width:42ch}
 #trackrecord .caveat__body p{
@@ -3025,7 +3124,7 @@ dl.pairs .cols{
 #trackrecord .zoom .close{margin:clamp(14px,2.4vh,24px) 0 0}
 
 @media (prefers-reduced-motion:reduce){
-  #trackrecord .tile,#trackrecord .pic img,#trackrecord .pic::after,#trackrecord .proofs figcaption > b{transition:none}
+  #trackrecord .tile,#trackrecord .proofs figcaption > b{transition:none}
   #trackrecord .zoom[open],#trackrecord .zoom[open]::backdrop{animation:none}
 }
 
@@ -3506,6 +3605,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 @media (max-width:619px){
   footer .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
   footer .fsig{grid-column:1 / -1}
+  footer .fnav{padding-top:0}             /* under the signature, not beside it */
   footer .fbase{display:block}
   footer .ftime{padding-top:0;margin-top:clamp(24px,6vw,32px)}
 }
@@ -3863,33 +3963,36 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <section id="channels">
   <div class="grp" id="kanalen"><h2><span lang="nl">Locaties · 15 kanalen</span><span lang="en">Locations · 15 channels</span></h2></div>
 
-  <!-- The server as a device. A sidebar the way Discord draws one -- the
-       server's name, two categories, the fifteen channels as they stand,
-       and at its foot the place a member's own panel sits -- beside a
-       message pane that holds no messages: skeleton lines only, and in
-       one of them a chart drawn as a schema (one line, one orderblock,
-       one gap, one level; no price, no day). The selected row is a fair
-       value gap band; the boundary of Premium is a dashed liquidity line;
-       the locks are hairlines of the gold; the row numbers sit at the
-       right like the levels of a price scale. Selecting a channel moves
-       the band and names the channel in the pane. The pane and the foot
-       are decoration (aria-hidden); the list is content. Nothing here is
-       a name, a count or a message. -->
+  <!-- The server as a device. Left, a sidebar the way Discord draws one:
+       the server's name, two categories, the fifteen channels as they
+       stand, the six of Premium behind a lock. Right, the pane a channel
+       opens on -- and since no message of the server is ours to show, the
+       pane holds the one thing on this page that is: the figure of the
+       spread, drawn again at the pane's full width. One line, one
+       orderblock, one gap, one level, three tags; no price, no day, no
+       outcome. The selected row is a fair value gap band; the boundary of
+       Premium is a dashed liquidity line; the locks are hairlines of the
+       gold; the row numbers sit at the right like the levels of a price
+       scale. Selecting a channel moves the band and names the channel over
+       the pane; a Premium channel dims the figure under its lock and the
+       one sentence that is true of it. The pane is decoration
+       (aria-hidden); the list is content. Nothing here is a name, a count
+       or a message. -->
   <figure class="dv" data-stagger="40">
     <div class="dv__frame">
       <div class="dv__side">
         <div class="dv__server reveal"><span>Atlas Capital</span><i class="dv__chev" aria-hidden="true"></i></div>
         <div class="dv__list">
           <p class="dv__cat reveal"><span lang="nl">Gratis &middot; voorlopig</span><span lang="en">Free &middot; for now</span></p>
-          <button type="button" class="dv__ch reveal" data-kind="chart" aria-pressed="true"><span class="dv__hash">#</span><span class="dv__chname">nq-chart-ideeën</span><span class="dv__n">01</span></button>
-          <button type="button" class="dv__ch reveal" data-kind="chart" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">es-chart-ideeën</span><span class="dv__n">02</span></button>
-          <button type="button" class="dv__ch reveal" data-kind="chart" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">bitcoin</span><span class="dv__n">03</span></button>
-          <button type="button" class="dv__ch reveal" data-kind="chart" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">altcoins</span><span class="dv__n">04</span></button>
-          <button type="button" class="dv__ch reveal" data-kind="chat" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">markt</span><span class="dv__n">05</span></button>
-          <button type="button" class="dv__ch reveal" data-kind="chat" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">vragen</span><span class="dv__n">06</span></button>
-          <button type="button" class="dv__ch reveal" data-kind="chat" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">algemeen</span><span class="dv__n">07</span></button>
-          <button type="button" class="dv__ch reveal" data-kind="chat" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">atlas-op-socials</span><span class="dv__n">08</span></button>
-          <button type="button" class="dv__ch reveal" data-kind="chat" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">ondersteuning</span><span class="dv__n">09</span></button>
+          <button type="button" class="dv__ch reveal" data-kind="free" aria-pressed="true"><span class="dv__hash">#</span><span class="dv__chname">nq-chart-ideeën</span><span class="dv__n">01</span></button>
+          <button type="button" class="dv__ch reveal" data-kind="free" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">es-chart-ideeën</span><span class="dv__n">02</span></button>
+          <button type="button" class="dv__ch reveal" data-kind="free" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">bitcoin</span><span class="dv__n">03</span></button>
+          <button type="button" class="dv__ch reveal" data-kind="free" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">altcoins</span><span class="dv__n">04</span></button>
+          <button type="button" class="dv__ch reveal" data-kind="free" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">markt</span><span class="dv__n">05</span></button>
+          <button type="button" class="dv__ch reveal" data-kind="free" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">vragen</span><span class="dv__n">06</span></button>
+          <button type="button" class="dv__ch reveal" data-kind="free" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">algemeen</span><span class="dv__n">07</span></button>
+          <button type="button" class="dv__ch reveal" data-kind="free" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">atlas-op-socials</span><span class="dv__n">08</span></button>
+          <button type="button" class="dv__ch reveal" data-kind="free" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">ondersteuning</span><span class="dv__n">09</span></button>
           <p class="dv__cat dv__cat--prem reveal"><span lang="nl">Premium &middot; opent later</span><span lang="en">Premium &middot; opens later</span></p>
           <button type="button" class="dv__ch reveal" data-kind="lock" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">trade-setups</span><i class="dv__lock" aria-hidden="true"></i><span class="dv__n">10</span></button>
           <button type="button" class="dv__ch reveal" data-kind="lock" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">marktupdates</span><i class="dv__lock" aria-hidden="true"></i><span class="dv__n">11</span></button>
@@ -3898,38 +4001,41 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
           <button type="button" class="dv__ch reveal" data-kind="lock" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">chart-ideeën</span><i class="dv__lock" aria-hidden="true"></i><span class="dv__n">14</span></button>
           <button type="button" class="dv__ch reveal" data-kind="lock" aria-pressed="false"><span class="dv__hash">#</span><span class="dv__chname">premium-chat</span><i class="dv__lock" aria-hidden="true"></i><span class="dv__n">15</span></button>
         </div>
-        <!-- the member's own panel, as Discord sets it under the list: an
-             avatar, a name, three controls -- drawn as skeleton, so it is a
-             place and not a person -->
-        <div class="dv__me reveal" aria-hidden="true"><i class="dv__av"></i><i class="dv__ln dv__ln--name"></i><i class="dv__ctl"></i><i class="dv__ctl"></i><i class="dv__ctl"></i></div>
       </div>
-      <div class="dv__pane" data-kind="chart" aria-hidden="true">
+      <div class="dv__pane" data-kind="free" aria-hidden="true">
         <div class="dv__head reveal" data-at="0"><span class="dv__hash">#</span><span class="dv__name">nq-chart-ideeën</span></div>
-        <div class="dv__body">
-          <div class="dv__msg reveal" data-at="0"><i class="dv__av"></i><i class="dv__ln dv__ln--name" style="width:58px"></i><i class="dv__ln" style="width:66%"></i><i class="dv__ln" style="width:74%"></i></div>
-          <div class="dv__msg reveal" data-at="40"><i class="dv__av"></i><i class="dv__ln dv__ln--name" style="width:80px"></i><i class="dv__ln" style="width:42%"></i></div>
-          <div class="dv__msg reveal" data-at="80"><i class="dv__av"></i><i class="dv__ln dv__ln--name" style="width:74px"></i><i class="dv__ln" style="width:82%"></i><i class="dv__ln" style="width:46%"></i></div>
-          <div class="dv__msg reveal" data-at="160"><i class="dv__av"></i><i class="dv__ln dv__ln--name" style="width:52px"></i><i class="dv__ln" style="width:63%"></i>
-            <div class="dv__plate">
-              <svg class="dv__fig" viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-                <rect class="dv__zone" x="42" y="86" width="22" height="12"/>
-                <rect class="dv__zone" x="214" y="50" width="86" height="10"/>
-                <line class="dv__zone dv__level" x1="150" y1="18" x2="300" y2="18"/>
-                <path class="dv__line" pathLength="1" d="M0 70 20 74 40 68 52 94 66 84 90 90 110 60 126 66 150 34 164 44 186 14 200 22 214 40 230 34 250 62 262 56 280 84 300 78"/>
-              </svg>
-            </div>
+        <!-- the figure, read left to right: the line opens low and ranges,
+             dips once out of an orderblock, rallies in three legs and
+             leaves a gap (the band), puts two equal highs under the
+             liquidity line, sweeps it once and falls back through the gap
+             towards the level below. It stops short of the right edge:
+             that is now. The zones are HTML, the page's own hairlines, so
+             they run on to the pane's edge -- a level is drawn forward, a
+             line up to the present. -->
+        <div class="dv__plate reveal trace" data-at="0">
+          <div class="dv__ink">
+            <i class="dv__ob"></i>
+            <i class="dv__band"></i>
+            <i class="dv__lvl dv__lvl--hi"></i>
+            <i class="dv__lvl dv__lvl--lo"></i>
+            <svg class="dv__fig" viewBox="0 0 600 520" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path class="dv__line" pathLength="1" d="M0 340 24 334 48 344 72 332 96 340 118 330 136 338 152 328 166 362 178 398 196 376 218 322 232 336 240 284 256 306 272 272 284 250 300 190 318 214 348 128 362 158 380 92 396 120 412 90 422 110 432 68 444 126 456 114 468 206 478 196 490 258 498 250 502 284"/>
+            </svg>
+            <i class="dv__tag dv__tag--liq"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></i>
+            <i class="dv__tag dv__tag--fvg">FVG</i>
+            <i class="dv__tag dv__tag--ob">Orderblock</i>
           </div>
-          <div class="dv__msg reveal" data-at="240"><i class="dv__av"></i><i class="dv__ln dv__ln--name" style="width:88px"></i><i class="dv__ln" style="width:38%"></i></div>
-          <div class="dv__msg reveal" data-at="320"><i class="dv__av"></i><i class="dv__ln dv__ln--name" style="width:60px"></i><i class="dv__ln" style="width:88%"></i><i class="dv__ln" style="width:71%"></i><i class="dv__ln" style="width:29%"></i></div>
-          <div class="dv__msg reveal" data-at="400"><i class="dv__av"></i><i class="dv__ln dv__ln--name" style="width:66px"></i><i class="dv__ln" style="width:54%"></i></div>
-          <div class="dv__locked"><i class="dv__lock"></i><span><span lang="nl">Opent later</span><span lang="en">Opens later</span></span></div>
+          <div class="dv__locked">
+            <i class="dv__lock"></i>
+            <span class="dv__locked-t"><span lang="nl">Opent later</span><span lang="en">Opens later</span></span>
+            <span class="dv__locked-n"><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">The price and the date will be announced in the server.</span></span>
+          </div>
         </div>
-        <div class="dv__composer reveal" data-at="480"></div>
       </div>
     </div>
     <figcaption class="reveal">
       <span class="dv__title"><span lang="nl">Figuur &mdash; De server, schematisch</span><span lang="en">Figure &mdash; The server, as a schema</span></span>
-      <span class="dv__note"><span lang="nl">De kanalen zoals ze in de server staan. Geen berichten; die lees je daar.</span><span lang="en">The channels as they stand in the server. No messages; you read those there.</span></span>
+      <span class="dv__note"><span lang="nl">Vijftien kanalen zoals ze in de server staan. Het paneel is een schema: geen koers, geen berichten.</span><span lang="en">Fifteen channels as they stand in the server. The pane is a schema: no price, no messages.</span></span>
     </figcaption>
   </figure>
   <p class="dv__call"><a class="cta reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom binnen op Discord</span><span lang="en">Step inside the Discord</span></a></p>
@@ -3945,7 +4051,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       for (var i = 0; i < rows.length; i++) rows[i].setAttribute("aria-pressed", rows[i] === b ? "true" : "false");
       var n = b.querySelector(".dv__chname");
       name.textContent = n ? n.textContent : "";
-      pane.setAttribute("data-kind", b.getAttribute("data-kind") || "chat");
+      pane.setAttribute("data-kind", b.getAttribute("data-kind") || "free");
     }
     list.addEventListener("click", function(e){ var b = rowOf(e.target); if (b) pick(b); });
     /* the cue at the list's foot: only while the list has more below */
@@ -3973,61 +4079,47 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <section id="markets">
   <div class="grp"><h2><span lang="nl">Markten</span><span lang="en">Markets</span></h2></div>
 
-  <!-- the board: the instruments set like a desk board, with everything a
-       desk board would show next to them left off. One row per group on
-       the reel's axis (the label right of the gutter, the instruments left
-       of it, three across, on the label's baseline), a hairline under each
-       row, and the ticker in the mono beside the name -- only where the
-       client gave one: NQ, ES, XAUUSD. No price, no change, no dash where a
-       number would sit. The dl carries its own stagger so the names arrive
-       one after another across the rows, like a board filling. -->
-  <dl class="pairs board" data-stagger="55">
+  <!-- The board. The eight instruments set the way a desk board sets them,
+       with everything a desk board would show next to them left off: one
+       instrument per row, its name large on the strip's left edge, its
+       ticker in the mono on the strip's right edge -- where the scale of a
+       chart is -- on the name's baseline, and a hairline under every row,
+       so each row is a level and the ticker is its tag. Only the tickers
+       the client gave (NQ, ES, XAUUSD); where he gave none the level runs
+       to the scale untagged, and nothing is put where a number would sit.
+       The groups are the board's headings, in the label voice, on the
+       same left edge. A dl: the term is the group, the descriptions are
+       its instruments. It carries its own stagger, so the board fills top
+       to bottom, each level drawing itself under its row. -->
+  <dl class="board" data-stagger="70">
     <dt class="reveal">Indices</dt>
-    <dd>
-      <ul class="cols">
-        <li class="reveal"><span class="board__name">Nasdaq</span><b class="num">NQ</b></li>
-        <li class="reveal"><span class="board__name">S&amp;P&nbsp;500</span><b class="num">ES</b></li>
-        <li class="reveal"><span class="board__name">Dow Jones</span></li>
-      </ul>
-    </dd>
+    <dd class="reveal"><span class="board__name">Nasdaq</span><b class="board__tick num">NQ</b></dd>
+    <dd class="reveal"><span class="board__name">S&amp;P&nbsp;500</span><b class="board__tick num">ES</b></dd>
+    <dd class="reveal"><span class="board__name">Dow Jones</span></dd>
+
     <dt class="reveal"><span lang="nl">Metalen</span><span lang="en">Metals</span></dt>
-    <dd>
-      <ul class="cols">
-        <li class="reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><b class="num">XAUUSD</b></li>
-        <li class="reveal"><span class="board__name"><span lang="nl">Zilver</span><span lang="en">Silver</span></span></li>
-      </ul>
-    </dd>
+    <dd class="reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><b class="board__tick num">XAUUSD</b></dd>
+    <dd class="reveal"><span class="board__name"><span lang="nl">Zilver</span><span lang="en">Silver</span></span></dd>
+
     <dt class="reveal"><span lang="nl">Energie</span><span lang="en">Energy</span></dt>
-    <dd>
-      <ul class="cols">
-        <li class="reveal"><span class="board__name"><span lang="nl">Olie</span><span lang="en">Oil</span></span></li>
-      </ul>
-    </dd>
+    <dd class="reveal"><span class="board__name"><span lang="nl">Olie</span><span lang="en">Oil</span></span></dd>
+
     <dt class="reveal">Crypto</dt>
-    <dd>
-      <ul class="cols">
-        <li class="reveal"><span class="board__name">Bitcoin</span></li>
-        <li class="reveal"><span class="board__name">Altcoins</span></li>
-      </ul>
-    </dd>
+    <dd class="reveal"><span class="board__name">Bitcoin</span></dd>
+    <dd class="reveal"><span class="board__name">Altcoins</span></dd>
   </dl>
-  <!-- read after the board, on the board's own column line -->
-  <div class="board__note">
-    <p class="reveal"><span lang="nl">De markten waar het in de server over gaat. Zonder koersen: dit is een lijst, geen feed.</span><span lang="en">The markets the server is about. No prices: this is a list, not a feed.</span></p>
-  </div>
+  <!-- read after the board, on the board's own left edge -->
+  <p class="board__note reveal"><span lang="nl">De markten waar het in de server over gaat. Zonder koersen: dit is een lijst, geen feed.</span><span lang="en">The markets the server is about. No prices: this is a list, not a feed.</span></p>
 
   <div class="grp" id="live"><h2>Live</h2></div>
-  <!-- one credit, the reel's own: what happens, and under it where and
-       when -- which is announced in the server and nowhere else, so
-       nothing here is a time -->
-  <dl class="pairs">
-    <dt><span lang="nl">Wat</span><span lang="en">What</span></dt>
-    <dd><span lang="nl">De oprichter handelt live</span><span lang="en">The founder trades live</span><small><span lang="nl">In de server, op tijden die daar worden aangekondigd.</span><span lang="en">In the server, at times announced there.</span></small></dd>
-  </dl>
-
-  <div class="interstitial">
-    <p><span lang="nl">Zit erbij als het live gaat</span><span lang="en">Be there when it goes live</span></p>
-    <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Naar de server</span><span lang="en">To the server</span></a>
+  <!-- Live is one statement on the board's left edge, its one line under
+       it, and the call under that on the same edge: what happens, where,
+       and the way in. When is announced in the server and nowhere else,
+       so nothing here is a time. No label: the title names it. -->
+  <div class="live" data-stagger="160">
+    <p class="live__line"><span class="mask"><span class="reveal"><span lang="nl">De oprichter handelt live.</span><span lang="en">The founder trades live.</span></span></span></p>
+    <p class="live__sub reveal"><span lang="nl">In de server, op tijden die daar worden aangekondigd.</span><span lang="en">In the server, at times announced there.</span></p>
+    <a class="cta reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Naar de server</span><span lang="en">To the server</span></a>
   </div>
 </section>
 <!-- /section:markets -->
@@ -4163,7 +4255,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
           </svg>
           <i class="plate__tag plate__tag--eqh plate__tag--end" style="left:99.9%;top:11.6%">equal highs</i>
           <i class="plate__tag plate__tag--liq plate__tag--end" style="left:99.9%;top:74.4%">Sellside liquidity</i>
-          <i class="plate__tag plate__tag--tag plate__tag--end" style="left:77.1%;top:77.1%">FVG</i>
+          <i class="plate__tag plate__tag--tag plate__tag--end" style="left:77.1%;top:79.4%">FVG</i>
           <i class="plate__tag plate__tag--trend plate__tag--middle" style="left:68.4%;top:32.3%">Trendline liquidity</i>
         </span>
       </a>
@@ -4200,8 +4292,8 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
           <line class="fig__level fig__level--grey" x1="773" y1="260.5" x2="1006" y2="260.5"/>
           <line class="fig__level fig__level--grey" x1="579" y1="256.5" x2="773" y2="256.5"/>
           <line class="fig__dash" x1="57" y1="109.5" x2="1010" y2="109.5"/>
-          <path class="fig__wick fig__wick--up" d="M46.5 628V639M47.5 627V639M48.5 628V639M53.5 612V628M54.5 608V639M55.5 611V639M56.5 545V613M57.5 405V639M58.5 530V613M59.5 404V612M60.5 401V550M61.5 402V549M66.5 355V504M67.5 336V516M68.5 316V504M69.5 313V492M70.5 310V491M71.5 313V492M72.5 262V313M73.5 262V315M74.5 262V491M75.5 262V492M76.5 262V264M77.5 262V264M78.5 490V491M79.5 490V492M81.5 133V145M82.5 126V491M83.5 126V492M84.5 133V182M85.5 130V134M86.5 113V491M87.5 113V492M88.5 64V134M89.5 41V152M90.5 41V491M91.5 44V492M92.5 38V84M93.5 38V84M94.5 44V492M95.5 41V492M96.5 22V74M97.5 21V74M108.5 103V105M110.5 490V492M111.5 490V491M112.5 21V639M124.5 312V314M125.5 309V318M126.5 310V314M138.5 473V505M139.5 473V504M141.5 473V478M142.5 472V508M143.5 474V478M154.5 483V541M155.5 463V541M156.5 474V492M157.5 474V481M158.5 474V482M159.5 474V476M164.5 490V512M165.5 485V512M166.5 465V504M167.5 464V492M168.5 464V492M169.5 457V491M170.5 398V466M171.5 398V465M172.5 386V416M173.5 385V399M174.5 386V398M180.5 414V433M181.5 403V433M182.5 392V413M183.5 392V413M184.5 392V412M185.5 394V396M186.5 378V392M187.5 377V392M188.5 377V392M189.5 373V391M190.5 370V391M191.5 372V379M192.5 340V373M193.5 331V373M194.5 340V373M195.5 303V337M196.5 286V346M197.5 303V337M202.5 281V310M203.5 281V312M204.5 301V311M222.5 357V386M223.5 357V386M224.5 367V377M232.5 345V369M233.5 346V369M238.5 322V357M239.5 322V360M248.5 332V370M249.5 330V371M250.5 304V334M251.5 303V334M252.5 304V333M253.5 304V311M254.5 284V304M255.5 284V304M256.5 284V304M257.5 262V281M258.5 262V285M259.5 262V282M306.5 272V279M307.5 262V280M326.5 262V263M849.5 146V160M850.5 146V173M851.5 146V160M877.5 135V153M879.5 146V153M880.5 146V154M881.5 145V153M882.5 130V147M883.5 130V148M889.5 139V150M890.5 137V152M891.5 146V150M895.5 137V147M896.5 139V147M897.5 140V146M911.5 126V155M912.5 123V156M913.5 126V156M918.5 143V157M919.5 143V150M921.5 130V147M922.5 125V149M923.5 130V147M924.5 123V131M925.5 119V135M926.5 123V131M934.5 146V153M935.5 145V153M936.5 146V149M941.5 137V182M945.5 141V169M951.5 124V398M992.5 346V379M993.5 300V384M994.5 303V380M995.5 376V377M998.5 327V344M999.5 303V356M1000.5 326V344M1008.5 365V396M1009.5 344V399M1010.5 365V396M1018.5 414V436M1019.5 399V436M1025.5 456V492M1026.5 455V493M1027.5 468V491M1040.5 481V490M1041.5 469V513M1042.5 480V511M1043.5 467V477M1044.5 448V493M1045.5 449V490M1047.5 437V465M1048.5 419V464M1049.5 420V464M1053.5 425V435M1054.5 424V468M1055.5 424V468M1057.5 422V424M1058.5 421V426M1059.5 412V426M1060.5 411V425M1061.5 412V419M1062.5 413V418M1064.5 408V410M1070.5 434V448M1071.5 434V448M1076.5 481V492M1077.5 480V492M1086.5 520V534M1087.5 510V544M1088.5 520V533M1089.5 510V524M1090.5 509V524M1091.5 510V524M1092.5 490V507M1093.5 486V509M1094.5 485V515M1095.5 497V506M1106.5 496V529M1107.5 497V525M1112.5 545V557M1113.5 544V557M1116.5 539V551M1117.5 530V554M1118.5 522V547M1119.5 518V547M1120.5 517V546M1121.5 516V545M1122.5 515V540M1123.5 504V529M1124.5 504V516M1125.5 490V516M1126.5 489V519M1127.5 476V518M1128.5 469V500M1129.5 469V493M1130.5 470V492M1131.5 470V491M1132.5 469V480M1133.5 453V474M1134.5 452V473M1135.5 463V469M1136.5 464V467M1148.5 489V505M1149.5 487V505M1150.5 465V503M1151.5 464V492M1152.5 464V492M1153.5 455V492M1154.5 454V486M1155.5 454V463M1156.5 442V461M1157.5 441V456M1158.5 440V456M1159.5 441V455M1166.5 492V494M1167.5 466V495M1168.5 466V495M1169.5 466V494M1176.5 474V492M1177.5 473V492M1178.5 474V492M1179.5 470V490M1180.5 465V473M1181.5 454V473M1182.5 466V471M1183.5 455V471M1184.5 451V475M1185.5 450V473M1190.5 466V468M1191.5 449V472M1192.5 465V467M1193.5 464V467M1194.5 463V469M1195.5 462V480M1196.5 461V479M1197.5 450V469M1198.5 453V468M1199.5 451V468M1200.5 438V505M1201.5 451V467M1209.5 512V514M1210.5 492V520M1216.5 513V526M1217.5 513V526M1218.5 490V521M1219.5 513V523M1220.5 513V523M1221.5 486V517M1222.5 483V520M1223.5 483V520M1224.5 486V514M1225.5 480V491M1226.5 480V492M1227.5 486V488M1228.5 490V491M1229.5 483V493M1230.5 483V494M1238.5 490V497M1239.5 483V503M1240.5 484V503M1241.5 490V497M1242.5 490V491M1245.5 490V492M1246.5 490V491M1249.5 490V492M1253.5 490V492M1257.5 490V492M1261.5 490V492M1265.5 490V492M1269.5 490V492M1273.5 490V492M1277.5 490V492M1280.5 490V491M1281.5 490V492M1284.5 490V491M1285.5 490V492M1288.5 490V491M1289.5 490V492M1292.5 490V491M1293.5 490V492M1296.5 490V492M1297.5 490V492M1300.5 490V492M1301.5 490V492M1304.5 490V492M1305.5 490V492M1308.5 490V492M1309.5 490V491M1312.5 490V492M1313.5 490V491"/>
-          <path class="fig__wick fig__wick--dn" d="M44.5 632V639M45.5 633V639M50.5 628V639M51.5 628V639M52.5 629V639M63.5 406V503M64.5 404V504M65.5 406V505M98.5 45V492M99.5 41V492M100.5 41V95M101.5 41V125M102.5 54V492M103.5 56V492M104.5 65V245M105.5 125V245M106.5 102V492M107.5 103V491M113.5 262V286M114.5 262V288M115.5 262V289M116.5 262V288M117.5 262V288M118.5 283V304M119.5 281V321M120.5 283V321M121.5 284V321M122.5 286V331M123.5 288V324M127.5 317V347M128.5 309V357M129.5 312V358M131.5 345V445M132.5 345V475M133.5 345V476M134.5 424V505M135.5 443V505M136.5 444V474M144.5 465V490M145.5 452V510M146.5 476V513M147.5 477V514M148.5 478V531M149.5 480V534M150.5 474V552M151.5 474V551M152.5 513V536M160.5 475V512M161.5 469V512M162.5 484V489M176.5 386V432M177.5 385V432M178.5 385V432M179.5 387V414M199.5 303V314M200.5 296V317M201.5 303V314M205.5 284V286M206.5 279V302M207.5 280V302M208.5 296V319M209.5 296V321M210.5 295V325M211.5 296V327M212.5 303V358M213.5 304V358M214.5 320V363M215.5 344V364M216.5 345V366M217.5 345V380M218.5 346V386M219.5 352V386M220.5 359V385M225.5 358V367M226.5 358V368M227.5 358V369M228.5 343V381M229.5 344V381M230.5 367V368M234.5 343V347M235.5 342V360M236.5 342V360M237.5 325V360M240.5 320V341M241.5 319V344M242.5 320V344M243.5 321V344M244.5 337V373M245.5 342V374M246.5 342V373M247.5 336V372M769.5 146V166M770.5 146V261M771.5 145V261M772.5 146V261M773.5 145V146M815.5 145V146M816.5 145V149M817.5 145V150M818.5 145V150M819.5 146V150M853.5 146V163M854.5 137V163M855.5 137V163M885.5 130V147M886.5 129V149M887.5 130V147M892.5 130V146M893.5 130V147M898.5 140V172M899.5 140V196M900.5 140V190M901.5 140V173M914.5 123V145M915.5 123V147M916.5 123V146M917.5 123V141M927.5 118V120M928.5 116V125M929.5 116V125M930.5 117V153M931.5 125V153M932.5 126V153M976.5 137V191M977.5 137V192M982.5 262V292M983.5 262V293M984.5 262V304M985.5 262V304M986.5 276V307M987.5 279V342M988.5 302V304M989.5 305V375M990.5 302V377M991.5 295V384M996.5 306V344M997.5 306V344M1002.5 325V360M1003.5 326V360M1004.5 327V390M1005.5 340V398M1006.5 341V399M1007.5 362V398M1011.5 397V398M1012.5 353V417M1013.5 352V418M1014.5 365V434M1015.5 385V436M1016.5 388V436M1017.5 404V434M1020.5 435V490M1021.5 409V490M1022.5 411V492M1023.5 414V492M1028.5 437V490M1029.5 437V490M1030.5 457V482M1031.5 433V485M1032.5 446V485M1033.5 467V482M1034.5 480V491M1035.5 479V511M1036.5 479V512M1037.5 480V511M1038.5 447V516M1039.5 447V516M1050.5 437V468M1051.5 436V469M1052.5 438V468M1066.5 407V448M1067.5 407V449M1068.5 408V448M1073.5 435V481M1074.5 434V482M1075.5 434V482M1080.5 480V505M1081.5 480V520M1082.5 483V532M1083.5 495V534M1084.5 494V541M1085.5 506V534M1096.5 480V523M1097.5 480V523M1098.5 486V514M1099.5 475V522M1100.5 475V523M1101.5 496V514M1102.5 516V527M1103.5 514V529M1104.5 515V536M1105.5 524V526M1108.5 521V554M1109.5 519V554M1110.5 520V554M1111.5 520V555M1138.5 449V467M1139.5 450V480M1140.5 461V500M1141.5 462V501M1142.5 465V502M1143.5 466V503M1144.5 474V505M1145.5 476V505M1146.5 500V504M1160.5 442V468M1161.5 442V468M1162.5 441V469M1163.5 442V489M1164.5 461V493M1165.5 463V498M1170.5 466V481M1171.5 466V482M1172.5 467V482M1173.5 468V482M1174.5 470V505M1175.5 480V511M1186.5 456V472M1187.5 456V473M1188.5 457V472M1189.5 460V471M1202.5 450V490M1203.5 450V491M1204.5 452V490M1205.5 486V491M1206.5 486V520M1207.5 486V512M1208.5 488V510M1212.5 501V525M1213.5 490V523M1214.5 490V520M1232.5 486V499M1233.5 486V500M1234.5 486V501M1235.5 489V501M1236.5 490V500M1237.5 492V500"/>
+          <path class="fig__wick fig__wick--up" d="M46.5 628V639M47.5 627V639M48.5 628V639M53.5 612V628M54.5 608V639M55.5 611V639M56.5 545V613M57.5 405V639M58.5 530V613M59.5 404V612M60.5 401V550M61.5 402V549M66.5 355V504M67.5 336V516M68.5 316V504M69.5 313V492M70.5 310V491M71.5 313V492M72.5 252V313M73.5 247V315M74.5 241V491M75.5 173V492M76.5 163V264M77.5 162V264M78.5 183V491M82.5 126V491M83.5 126V492M84.5 133V183M85.5 130V134M86.5 113V491M87.5 113V492M88.5 64V134M89.5 41V153M90.5 41V491M91.5 44V492M92.5 38V84M93.5 38V84M94.5 44V492M95.5 41V492M96.5 22V74M97.5 21V74M108.5 103V248M109.5 212V260M110.5 212V492M111.5 222V491M112.5 21V639M124.5 312V314M125.5 309V318M126.5 310V314M138.5 473V505M139.5 473V504M141.5 473V478M142.5 472V508M143.5 474V478M154.5 483V541M155.5 463V541M156.5 474V492M157.5 474V481M158.5 474V482M159.5 474V476M164.5 490V512M165.5 485V512M166.5 465V504M167.5 464V492M168.5 464V492M169.5 457V491M170.5 398V466M171.5 398V465M172.5 386V416M173.5 385V399M174.5 386V398M180.5 414V433M181.5 403V433M182.5 392V413M183.5 392V413M184.5 392V412M185.5 394V396M186.5 378V392M187.5 377V392M188.5 377V392M189.5 373V391M190.5 370V391M191.5 372V379M192.5 340V373M193.5 331V373M194.5 340V373M195.5 303V337M196.5 286V346M197.5 303V337M202.5 281V310M203.5 281V312M204.5 301V311M222.5 357V386M223.5 357V386M224.5 367V377M232.5 345V369M233.5 346V369M238.5 322V357M239.5 322V360M248.5 332V370M249.5 330V371M250.5 304V334M251.5 303V334M252.5 304V333M253.5 304V311M254.5 284V304M255.5 284V304M256.5 284V304M257.5 256V281M258.5 253V285M259.5 254V282M260.5 235V255M261.5 234V255M262.5 234V254M263.5 222V236M264.5 221V253M265.5 221V236M270.5 214V235M271.5 209V236M272.5 214V234M273.5 154V216M274.5 152V217M275.5 152V216M280.5 182V209M281.5 181V210M282.5 161V206M283.5 160V179M284.5 160V180M290.5 191V197M291.5 191V197M300.5 229V239M301.5 231V239M306.5 202V279M307.5 198V280M308.5 208V219M309.5 207V258M310.5 207V219M326.5 239V263M327.5 254V255M328.5 234V255M329.5 222V255M330.5 234V255M331.5 218V236M332.5 216V241M333.5 217V235M335.5 215V219M336.5 213V220M337.5 215V219M338.5 212V213M339.5 203V214M340.5 211V213M341.5 195V213M342.5 194V213M343.5 195V213M346.5 190V195M347.5 192V193M348.5 182V196M349.5 171V212M350.5 187V196M358.5 182V214M359.5 182V214M360.5 206V207M368.5 198V204M369.5 198V203M374.5 198V208M375.5 198V206M384.5 209V211M385.5 208V209M386.5 205V209M387.5 203V210M388.5 205V209M390.5 178V206M391.5 178V206M392.5 178V206M393.5 165V179M394.5 164V179M395.5 165V179M403.5 185V189M404.5 180V189M405.5 185V189M406.5 175V186M407.5 175V193M413.5 182V186M414.5 181V187M415.5 182V186M416.5 182V189M417.5 172V191M422.5 190V194M423.5 182V194M424.5 185V186M425.5 184V185M426.5 148V186M427.5 149V186M444.5 206V208M445.5 204V208M446.5 204V208M447.5 205V208M448.5 198V203M449.5 197V204M450.5 198V200M458.5 208V216M459.5 208V216M460.5 208V215M461.5 209V212M462.5 204V211M463.5 204V206M468.5 227V246M469.5 227V245M474.5 248V255M475.5 243V255M476.5 242V254M477.5 235V245M478.5 234V246M479.5 234V245M480.5 232V238M481.5 232V238M482.5 231V238M483.5 231V238M484.5 224V237M485.5 224V232M486.5 213V228M487.5 212V227M488.5 212V226M489.5 213V225M494.5 197V212M495.5 197V212M500.5 213V220M501.5 213V220M502.5 216V217M503.5 201V208M504.5 194V216M505.5 194V216M509.5 186V193M510.5 181V199M511.5 181V199M516.5 182V196M517.5 182V196M518.5 181V196M519.5 178V195M520.5 178V188M521.5 178V187M522.5 172V184M523.5 172V183M524.5 172V183M529.5 179V182M530.5 177V184M531.5 178V182M542.5 196V197M543.5 189V197M544.5 189V196M545.5 188V196M546.5 187V196M547.5 188V196M548.5 183V186M549.5 182V186M550.5 182V187M551.5 181V186M552.5 176V186M553.5 176V186M554.5 166V186M555.5 163V173M556.5 162V174M557.5 166V173M581.5 204V208M582.5 204V205M584.5 198V206M585.5 193V207M586.5 198V206M587.5 192V196M588.5 189V202M589.5 192V196M590.5 195V196M591.5 192V196M598.5 192V204M604.5 207V219M605.5 208V219M614.5 217V220M626.5 218V241M627.5 218V241M628.5 222V235M633.5 221V229M634.5 218V230M635.5 212V228M636.5 212V224M637.5 212V224M638.5 212V222M640.5 212V227M641.5 212V227M642.5 208V212M643.5 205V215M644.5 207V213M645.5 205V213M646.5 205V218M647.5 205V213M648.5 195V206M649.5 193V207M650.5 195V206M652.5 188V196M653.5 188V196M668.5 239V241M669.5 237V243M670.5 239V241M672.5 229V242M673.5 236V238M676.5 234V243M685.5 242V255M686.5 242V248M687.5 239V248M688.5 235V252M689.5 235V242M690.5 237V241M696.5 236V238M697.5 231V238M698.5 223V244M699.5 223V238M700.5 224V237M708.5 240V258M709.5 235V258M710.5 238V252M711.5 238V242M712.5 234V254M713.5 238V242M714.5 238V243M715.5 235V244M717.5 227V241M718.5 231V243M719.5 226V245M720.5 225V240M721.5 208V233M722.5 227V231M723.5 209V242M724.5 208V238M725.5 208V237M726.5 205V223M727.5 205V227M728.5 206V225M729.5 206V207M730.5 204V215M736.5 212V216M737.5 211V216M738.5 192V215M740.5 197V212M741.5 198V212M746.5 212V219M747.5 208V223M748.5 208V215M749.5 192V225M750.5 192V214M751.5 208V212M752.5 186V205M753.5 186V208M754.5 185V209M755.5 184V206M756.5 168V207M757.5 170V187M758.5 160V184M759.5 160V176M760.5 160V185M761.5 161V176M766.5 151V173M767.5 151V174M779.5 187V197M780.5 188V196M781.5 185V186M782.5 182V192M783.5 183V186M785.5 182V186M786.5 179V193M787.5 182V186M788.5 162V183M789.5 162V183M790.5 178V183M802.5 197V204M803.5 198V203M804.5 178V196M805.5 172V197M806.5 178V196M808.5 175V180M809.5 172V181M810.5 175V179M811.5 160V174M812.5 160V177M813.5 159V173M814.5 150V164M815.5 145V167M816.5 146V163M827.5 162V167M828.5 161V167M834.5 156V171M835.5 156V172M846.5 160V166M847.5 151V173M848.5 159V172M849.5 146V161M850.5 146V174M851.5 146V161M857.5 159V163M863.5 167V176M864.5 170V171M866.5 162V173M867.5 162V174M868.5 170V173M872.5 153V169M873.5 152V170M874.5 153V170M876.5 152V154M877.5 135V154M878.5 152V154M879.5 146V154M880.5 146V155M881.5 145V154M882.5 130V147M883.5 130V149M889.5 139V151M890.5 137V153M891.5 146V151M895.5 137V147M896.5 139V147M897.5 140V146M907.5 156V184M908.5 150V194M909.5 150V194M911.5 126V156M912.5 123V157M913.5 126V157M918.5 143V158M919.5 143V151M921.5 130V147M922.5 125V150M923.5 130V147M924.5 123V131M925.5 119V135M926.5 123V131M934.5 146V154M935.5 145V154M936.5 146V150M940.5 169V183M941.5 137V183M942.5 169V183M944.5 149V170M945.5 141V170M946.5 161V170M951.5 124V398M956.5 178V225M957.5 162V251M958.5 162V251M962.5 169V175M963.5 149V257M964.5 149V257M965.5 170V236M969.5 154V186M970.5 150V218M971.5 150V218M972.5 152V186M992.5 346V379M993.5 300V384M994.5 303V380M995.5 376V377M998.5 327V344M999.5 303V356M1000.5 326V344M1008.5 365V396M1009.5 344V399M1010.5 365V396M1018.5 414V436M1019.5 399V436M1025.5 456V492M1026.5 455V493M1027.5 468V491M1040.5 481V490M1041.5 469V513M1042.5 480V511M1043.5 467V477M1044.5 448V493M1045.5 449V490M1047.5 437V465M1048.5 419V464M1049.5 420V464M1053.5 425V435M1054.5 424V468M1055.5 424V468M1057.5 422V424M1058.5 421V426M1059.5 412V426M1060.5 411V425M1061.5 412V419M1062.5 413V418M1064.5 408V410M1070.5 434V448M1071.5 434V448M1076.5 481V492M1077.5 480V492M1086.5 520V534M1087.5 510V544M1088.5 520V533M1089.5 510V524M1090.5 509V524M1091.5 510V524M1092.5 490V507M1093.5 486V509M1094.5 485V515M1095.5 497V506M1106.5 496V529M1107.5 497V525M1112.5 545V557M1113.5 544V557M1116.5 539V551M1117.5 530V554M1118.5 522V547M1119.5 518V547M1120.5 517V546M1121.5 516V545M1122.5 515V540M1123.5 504V529M1124.5 504V516M1125.5 490V516M1126.5 489V519M1127.5 476V518M1128.5 469V500M1129.5 469V493M1130.5 470V492M1131.5 470V491M1132.5 469V480M1133.5 453V474M1134.5 452V473M1135.5 463V469M1136.5 464V467M1148.5 489V505M1149.5 487V505M1150.5 465V503M1151.5 464V492M1152.5 464V492M1153.5 455V492M1154.5 454V486M1155.5 454V463M1156.5 442V461M1157.5 441V456M1158.5 440V456M1159.5 441V455M1166.5 492V494M1167.5 466V495M1168.5 466V495M1169.5 466V494M1176.5 474V492M1177.5 473V492M1178.5 474V492M1179.5 470V490M1180.5 465V473M1181.5 454V473M1182.5 466V471M1183.5 455V471M1184.5 451V475M1185.5 450V473M1190.5 466V468M1191.5 449V472M1192.5 465V467M1193.5 464V467M1194.5 463V469M1195.5 462V480M1196.5 461V479M1197.5 450V469M1198.5 453V468M1199.5 451V468M1200.5 438V505M1201.5 451V467M1209.5 512V514M1210.5 492V520M1216.5 513V526M1217.5 513V526M1218.5 490V521M1219.5 513V523M1220.5 513V523M1221.5 486V517M1222.5 483V520M1223.5 483V520M1224.5 486V514M1225.5 480V491M1226.5 480V492M1227.5 486V488M1228.5 490V491M1229.5 483V493M1230.5 483V494M1238.5 490V497M1239.5 483V503M1240.5 484V503M1241.5 490V497M1242.5 490V491M1245.5 490V492M1246.5 490V491M1249.5 490V492M1253.5 490V492M1257.5 490V492M1261.5 490V492M1265.5 490V492M1269.5 490V492M1273.5 490V492M1277.5 490V492M1280.5 490V491M1281.5 490V492M1284.5 490V491M1285.5 490V492M1288.5 490V491M1289.5 490V492M1292.5 490V491M1293.5 490V492M1296.5 490V492M1297.5 490V492M1300.5 490V492M1301.5 490V492M1304.5 490V492M1305.5 490V492M1308.5 490V492M1309.5 490V491M1312.5 91V492M1313.5 490V491"/>
+          <path class="fig__wick fig__wick--dn" d="M44.5 632V639M45.5 633V639M50.5 628V639M51.5 628V639M52.5 629V639M63.5 406V503M64.5 404V504M65.5 406V504M79.5 170V492M80.5 169V184M81.5 133V182M98.5 45V492M99.5 41V492M100.5 41V95M101.5 41V125M102.5 54V492M103.5 56V492M104.5 65V245M105.5 125V246M106.5 102V492M107.5 103V491M113.5 206V286M114.5 224V288M115.5 224V289M116.5 234V288M117.5 235V288M118.5 283V304M119.5 281V321M120.5 283V321M121.5 284V321M122.5 287V331M123.5 288V324M127.5 317V347M128.5 309V357M129.5 312V358M131.5 345V445M132.5 346V475M133.5 345V476M134.5 424V505M135.5 443V505M136.5 444V474M144.5 465V490M145.5 452V510M146.5 476V513M147.5 477V514M148.5 478V531M149.5 480V534M150.5 475V551M151.5 474V551M152.5 513V536M160.5 475V512M161.5 469V512M162.5 484V489M176.5 386V432M177.5 385V432M178.5 385V432M179.5 387V414M199.5 303V314M200.5 296V317M201.5 303V314M205.5 284V286M206.5 279V302M207.5 280V302M208.5 296V319M209.5 296V321M210.5 295V325M211.5 296V327M212.5 303V357M213.5 304V358M214.5 320V363M215.5 344V364M216.5 345V366M217.5 345V380M218.5 346V386M219.5 352V386M220.5 359V385M225.5 358V367M226.5 358V368M227.5 358V369M228.5 343V381M229.5 344V381M230.5 367V368M234.5 343V347M235.5 342V360M236.5 342V360M237.5 325V360M240.5 320V341M241.5 319V344M242.5 320V344M243.5 321V344M244.5 337V373M245.5 342V374M246.5 342V373M247.5 336V372M266.5 219V222M267.5 218V236M268.5 215V237M269.5 215V236M276.5 156V207M277.5 153V208M278.5 152V212M279.5 152V209M285.5 186V190M286.5 151V202M287.5 151V202M288.5 165V195M292.5 196V205M293.5 192V206M294.5 192V211M295.5 192V237M296.5 192V238M297.5 193V238M298.5 203V237M302.5 237V258M303.5 234V258M304.5 234V258M312.5 208V226M313.5 207V229M314.5 208V228M315.5 208V229M316.5 218V240M317.5 219V241M318.5 224V246M319.5 225V257M320.5 231V246M321.5 233V245M322.5 244V252M323.5 244V253M324.5 244V252M351.5 182V186M352.5 181V198M353.5 182V200M354.5 185V209M355.5 186V209M356.5 188V209M361.5 182V210M362.5 182V206M363.5 182V206M364.5 198V206M365.5 198V206M366.5 202V206M370.5 203V206M371.5 201V207M372.5 201V207M376.5 205V209M377.5 201V211M378.5 201V211M379.5 202V209M380.5 204V209M381.5 203V210M382.5 204V209M383.5 205V208M396.5 162V170M397.5 162V181M398.5 162V172M399.5 167V189M400.5 165V191M401.5 169V189M409.5 176V185M410.5 174V187M411.5 175V186M418.5 180V187M419.5 178V189M420.5 177V189M421.5 178V189M428.5 157V176M429.5 156V174M430.5 156V174M431.5 157V184M432.5 171V190M433.5 172V191M436.5 180V200M437.5 187V203M438.5 193V202M439.5 194V203M440.5 196V203M441.5 197V205M442.5 197V207M443.5 198V207M451.5 204V211M452.5 197V213M453.5 198V214M454.5 206V218M455.5 212V218M456.5 213V217M464.5 208V248M465.5 208V248M466.5 209V247M471.5 229V253M472.5 228V255M473.5 228V255M490.5 207V215M491.5 207V213M496.5 212V221M497.5 198V222M498.5 198V222M499.5 199V221M507.5 195V199M508.5 196V198M512.5 183V195M513.5 182V196M514.5 183V195M515.5 185V195M526.5 175V178M527.5 175V179M532.5 175V188M533.5 175V189M534.5 177V190M535.5 184V191M536.5 185V193M537.5 186V194M538.5 193V194M539.5 193V195M540.5 192V196M541.5 192V196M558.5 161V166M559.5 161V166M562.5 163V174M563.5 163V174M564.5 172V187M565.5 172V189M566.5 172V189M567.5 173V190M568.5 183V194M569.5 184V194M572.5 191V198M573.5 191V198M578.5 197V206M579.5 196V206M594.5 198V203M595.5 197V204M596.5 198V203M600.5 202V219M601.5 200V219M602.5 202V208M607.5 208V212M608.5 207V213M609.5 207V213M610.5 208V220M611.5 209V220M612.5 212V216M616.5 219V221M617.5 217V223M618.5 216V223M619.5 217V225M620.5 213V231M621.5 212V232M622.5 218V234M623.5 225V236M624.5 226V238M625.5 229V231M629.5 218V227M630.5 217V231M631.5 218V230M632.5 218V221M655.5 185V198M656.5 183V201M657.5 183V202M658.5 187V233M659.5 150V238M660.5 180V247M661.5 197V241M662.5 199V243M663.5 217V243M664.5 220V242M665.5 227V243M666.5 227V245M667.5 233V244M675.5 229V241M677.5 242V243M678.5 231V242M679.5 230V247M680.5 233V249M681.5 232V251M682.5 233V252M683.5 236V251M684.5 238V239M693.5 243V244M695.5 229V230M701.5 221V249M702.5 221V255M703.5 226V255M704.5 223V261M705.5 223V261M706.5 224V261M707.5 227V238M716.5 228V229M731.5 197V216M732.5 207V217M733.5 198V217M734.5 198V217M735.5 198V216M739.5 193V234M742.5 194V217M743.5 192V220M744.5 191V222M745.5 192V222M762.5 153V173M763.5 152V175M764.5 148V174M765.5 173V174M768.5 152V153M769.5 146V178M770.5 146V179M771.5 146V180M772.5 146V261M773.5 145V196M774.5 170V179M775.5 178V196M776.5 178V202M777.5 178V202M792.5 162V180M793.5 162V180M794.5 182V199M795.5 182V201M796.5 182V199M798.5 197V203M799.5 197V205M817.5 145V151M818.5 145V151M819.5 146V151M820.5 150V153M821.5 149V154M822.5 148V156M823.5 149V157M824.5 152V165M825.5 152V165M826.5 153V159M830.5 160V173M831.5 157V176M832.5 158V175M833.5 170V173M837.5 158V166M838.5 158V167M839.5 160V167M840.5 160V188M841.5 160V188M842.5 164V166M843.5 166V176M844.5 165V176M845.5 166V176M853.5 146V163M854.5 137V164M855.5 137V164M859.5 156V170M860.5 151V171M861.5 151V171M870.5 161V171M871.5 162V171M885.5 130V147M886.5 129V150M887.5 130V147M892.5 130V146M893.5 130V147M898.5 141V173M899.5 140V243M900.5 140V242M901.5 140V186M902.5 170V195M903.5 170V195M904.5 175V193M905.5 176V194M906.5 185V194M914.5 123V145M915.5 123V147M916.5 123V146M917.5 123V150M927.5 118V120M928.5 116V125M929.5 116V125M930.5 117V154M931.5 125V154M932.5 126V154M937.5 151V180M938.5 149V181M939.5 149V179M947.5 149V159M948.5 148V183M949.5 150V187M950.5 156V243M952.5 161V228M953.5 192V228M954.5 203V229M955.5 205V228M960.5 151V243M961.5 151V241M966.5 166V179M967.5 165V180M968.5 165V179M973.5 152V157M974.5 152V163M975.5 152V191M976.5 137V192M977.5 137V193M978.5 175V193M979.5 188V254M980.5 186V255M981.5 183V257M982.5 236V292M983.5 253V293M984.5 254V304M985.5 256V304M986.5 276V307M987.5 279V342M988.5 302V304M989.5 305V375M990.5 302V377M991.5 295V384M996.5 306V344M997.5 306V344M1002.5 326V360M1003.5 326V360M1004.5 327V368M1005.5 342V398M1006.5 341V399M1007.5 362V398M1012.5 353V416M1013.5 352V418M1014.5 365V434M1015.5 385V435M1016.5 388V436M1017.5 404V434M1020.5 436V490M1021.5 409V490M1022.5 411V492M1023.5 414V492M1028.5 437V490M1029.5 437V490M1030.5 457V482M1031.5 433V485M1032.5 446V485M1033.5 467V482M1034.5 480V491M1035.5 479V511M1036.5 479V512M1037.5 480V511M1038.5 447V516M1039.5 447V516M1050.5 437V468M1051.5 436V469M1052.5 438V468M1066.5 407V448M1067.5 407V449M1068.5 408V448M1073.5 435V481M1074.5 434V482M1075.5 434V482M1080.5 480V505M1081.5 480V520M1082.5 483V532M1083.5 495V534M1084.5 494V541M1085.5 506V534M1096.5 481V523M1097.5 480V523M1098.5 486V514M1099.5 475V522M1100.5 475V523M1101.5 496V514M1102.5 516V527M1103.5 514V529M1104.5 515V536M1105.5 524V525M1108.5 521V554M1109.5 519V554M1110.5 520V554M1111.5 91V555M1138.5 449V467M1139.5 450V480M1140.5 461V500M1141.5 462V501M1142.5 465V502M1143.5 466V503M1144.5 474V505M1145.5 476V505M1146.5 500V504M1160.5 442V468M1161.5 442V468M1162.5 441V469M1163.5 442V489M1164.5 461V493M1165.5 463V498M1170.5 466V481M1171.5 466V482M1172.5 467V482M1173.5 468V482M1174.5 470V505M1175.5 480V511M1186.5 456V472M1187.5 456V473M1188.5 457V472M1189.5 460V471M1202.5 451V490M1203.5 450V491M1204.5 452V490M1205.5 486V491M1206.5 486V512M1207.5 486V512M1208.5 488V510M1212.5 501V525M1213.5 490V523M1214.5 490V520M1232.5 486V499M1233.5 486V500M1234.5 486V501M1235.5 489V501M1236.5 490V500M1237.5 492V500"/>
           </svg>
           <i class="plate__tag plate__tag--tag plate__tag--start" style="left:73.4%;top:17.1%">FVG</i>
         </span>
@@ -4312,12 +4404,12 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
        liquidity line of the opening schema) running from the number to the
        firm's name at the gutter -- and what was earned takes the value
        column on the same baseline. The two years already on the page
-       bracket the label column, first and last, the way an axis carries
-       its first and last figure. The numbers count rows and nothing else;
-       the levels carry no value. The same numbers are on the certificates
-       below. -->
+       bracket the rows as two solid levels: a hairline from the strip's
+       edge to the year, tagged at the gutter the way every level on the
+       reel is tagged. The numbers count rows and nothing else; the levels
+       carry no value. The same numbers are on the certificates below. -->
   <div class="ledger" data-stagger="70">
-    <p class="ledger__axis ledger__axis--from reveal" aria-hidden="true"><time>2023</time></p>
+    <p class="ledger__axis ledger__axis--from" aria-hidden="true"><i class="ledger__rule reveal draw"></i><time class="reveal">2023</time></p>
     <ol class="ledger__rows">
       <li>
         <span class="ledger__tick"><b class="ledger__n reveal" aria-hidden="true">01</b><i class="ledger__lv reveal draw" aria-hidden="true"></i><span class="ledger__firm reveal">Funded Trading Plus</span></span>
@@ -4344,12 +4436,18 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
         <div class="ledger__val reveal">Champion Trader &middot; Rising Trader<small><span lang="nl">augustus 2026</span><span lang="en">August 2026</span></small></div>
       </li>
     </ol>
-    <p class="ledger__axis ledger__axis--to reveal" aria-hidden="true"><time>2026</time></p>
+    <p class="ledger__axis ledger__axis--to" aria-hidden="true"><i class="ledger__rule reveal draw"></i><time class="reveal">2026</time></p>
   </div>
 
   <!-- the evidence: the same six, in the same order, numbered as the rows
-       are, printed as plates on one mat. Monochrome until pointed at; a
-       tap opens the untouched original. -->
+       are, printed two to a row as the wall above prints its pairs -- at
+       full value, in their own colour, on one mat inside one hairline,
+       so a certificate reads as a document and not as decoration. Rows
+       03 and 04 are square files, so that row is a pair of squares; the
+       others are 3:2. A tap opens the untouched original. The one note a
+       certificate needs (02's ROI figure) is a footnote under the wall,
+       and travels with the plate into the lightbox, so the captions are
+       one line each and the rows land level. -->
   <p class="proofs-hint">
     <span class="proofs-hint__t"><span lang="nl">Zes certificaten, op datum</span><span lang="en">Six certificates, in date order</span></span>
     <span class="proofs-hint__n"><span lang="nl">Tik op een certificaat voor het origineel.</span><span lang="en">Tap a certificate for the original.</span></span>
@@ -4367,11 +4465,11 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/fpips-reward.webp" alt="FundingPips &mdash; Performance rewards" loading="lazy" decoding="async" width="900" height="606"></span></button>
       <figcaption class="reveal"><b>02</b>
         <span><span class="firm">FundingPips</span>
-          <small><span lang="nl">Performance rewards &middot; mei en juni 2024. Het ROI-cijfer onderaan is het rendement op de inschrijfkosten, niet op de rekening.</span><span lang="en">Performance rewards &middot; May and June 2024. The ROI figure at the foot is the return on the entry fee, not on the account.</span></small>
+          <small><span lang="nl">Performance rewards &middot; mei en juni 2024</span><span lang="en">Performance rewards &middot; May and June 2024</span></small>
         </span>
       </figcaption>
     </figure>
-    <figure>
+    <figure class="sq">
       <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/ftmo-chal.webp" alt="FTMO &mdash; Challenge passed" loading="lazy" decoding="async" width="760" height="760"></span></button>
       <figcaption class="reveal"><b>03</b>
         <span><span class="firm">FTMO</span>
@@ -4379,7 +4477,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
         </span>
       </figcaption>
     </figure>
-    <figure>
+    <figure class="sq">
       <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/topstep-payout.webp" alt="Topstep &mdash; Proof of Payout" loading="lazy" decoding="async" width="760" height="760"></span></button>
       <figcaption class="reveal"><b>04</b>
         <span><span class="firm">Topstep</span>
@@ -4404,6 +4502,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       </figcaption>
     </figure>
   </div>
+  <p class="proofs-fn reveal" data-for="02"><b>02</b><span><span lang="nl">Het ROI-cijfer onderaan is het rendement op de inschrijfkosten, niet op de rekening.</span><span lang="en">The ROI figure at the foot is the return on the entry fee, not on the account.</span></span></p>
 
   <!-- the caveat, set as the founder's quote is set: a label in the margin,
        a short rule, the words at lead size in the ink of a value. It is the
@@ -4437,16 +4536,25 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
     var d = document.getElementById("zoom"); if (!d || !d.showModal) return;
     var im = d.querySelector("img"), num = d.querySelector("figcaption b"),
         firm = d.querySelector("figcaption .firm"), note = d.querySelector("figcaption small");
-    /* innerText, so only the language on screen is read out of a pair */
-    function text(el){ return el ? (el.innerText || el.textContent || "").replace(/\s+/g, " ").trim() : ""; }
+    /* only the language on screen is read out of a pair: a copy with the
+       other language's spans removed, then its text */
+    function text(el){
+      if (!el) return "";
+      var lang = document.documentElement.getAttribute("data-lang") || "nl";
+      var c = el.cloneNode(true), xs = c.querySelectorAll("[lang]"), k;
+      for (k = xs.length - 1; k >= 0; k--) if (xs[k].getAttribute("lang") !== lang) xs[k].parentNode.removeChild(xs[k]);
+      return (c.textContent || "").replace(/\s+/g, " ").trim();
+    }
     document.addEventListener("click", function(e){
       var t = e.target.closest("#trackrecord .tile");
       if (t) {
         var i = t.querySelector("img"), fc = t.parentNode.querySelector("figcaption");
+        var n = text(fc && fc.querySelector("b")), s = text(fc && fc.querySelector("small"));
+        var fn = document.querySelector('#trackrecord .proofs-fn[data-for="' + n + '"] > span');
         im.src = i.src; im.alt = i.alt;
-        num.textContent = text(fc && fc.querySelector("b"));
+        num.textContent = n;
         firm.textContent = text(fc && fc.querySelector(".firm"));
-        note.textContent = text(fc && fc.querySelector("small"));
+        note.textContent = fn ? s + ". " + text(fn) : s;
         d.showModal(); return;
       }
       if (e.target === d || e.target.closest("#zoom .close")) d.close();

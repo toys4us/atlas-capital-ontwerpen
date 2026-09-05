@@ -12,12 +12,12 @@
        liquidity line of the opening schema) running from the number to the
        firm's name at the gutter -- and what was earned takes the value
        column on the same baseline. The two years already on the page
-       bracket the label column, first and last, the way an axis carries
-       its first and last figure. The numbers count rows and nothing else;
-       the levels carry no value. The same numbers are on the certificates
-       below. -->
+       bracket the rows as two solid levels: a hairline from the strip's
+       edge to the year, tagged at the gutter the way every level on the
+       reel is tagged. The numbers count rows and nothing else; the levels
+       carry no value. The same numbers are on the certificates below. -->
   <div class="ledger" data-stagger="70">
-    <p class="ledger__axis ledger__axis--from reveal" aria-hidden="true"><time>2023</time></p>
+    <p class="ledger__axis ledger__axis--from" aria-hidden="true"><i class="ledger__rule reveal draw"></i><time class="reveal">2023</time></p>
     <ol class="ledger__rows">
       <li>
         <span class="ledger__tick"><b class="ledger__n reveal" aria-hidden="true">01</b><i class="ledger__lv reveal draw" aria-hidden="true"></i><span class="ledger__firm reveal">Funded Trading Plus</span></span>
@@ -44,12 +44,18 @@
         <div class="ledger__val reveal">Champion Trader &middot; Rising Trader<small><span lang="nl">augustus 2026</span><span lang="en">August 2026</span></small></div>
       </li>
     </ol>
-    <p class="ledger__axis ledger__axis--to reveal" aria-hidden="true"><time>2026</time></p>
+    <p class="ledger__axis ledger__axis--to" aria-hidden="true"><i class="ledger__rule reveal draw"></i><time class="reveal">2026</time></p>
   </div>
 
   <!-- the evidence: the same six, in the same order, numbered as the rows
-       are, printed as plates on one mat. Monochrome until pointed at; a
-       tap opens the untouched original. -->
+       are, printed two to a row as the wall above prints its pairs -- at
+       full value, in their own colour, on one mat inside one hairline,
+       so a certificate reads as a document and not as decoration. Rows
+       03 and 04 are square files, so that row is a pair of squares; the
+       others are 3:2. A tap opens the untouched original. The one note a
+       certificate needs (02's ROI figure) is a footnote under the wall,
+       and travels with the plate into the lightbox, so the captions are
+       one line each and the rows land level. -->
   <p class="proofs-hint">
     <span class="proofs-hint__t"><span lang="nl">Zes certificaten, op datum</span><span lang="en">Six certificates, in date order</span></span>
     <span class="proofs-hint__n"><span lang="nl">Tik op een certificaat voor het origineel.</span><span lang="en">Tap a certificate for the original.</span></span>
@@ -67,11 +73,11 @@
       <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/fpips-reward.webp" alt="FundingPips &mdash; Performance rewards" loading="lazy" decoding="async" width="900" height="606"></span></button>
       <figcaption class="reveal"><b>02</b>
         <span><span class="firm">FundingPips</span>
-          <small><span lang="nl">Performance rewards &middot; mei en juni 2024. Het ROI-cijfer onderaan is het rendement op de inschrijfkosten, niet op de rekening.</span><span lang="en">Performance rewards &middot; May and June 2024. The ROI figure at the foot is the return on the entry fee, not on the account.</span></small>
+          <small><span lang="nl">Performance rewards &middot; mei en juni 2024</span><span lang="en">Performance rewards &middot; May and June 2024</span></small>
         </span>
       </figcaption>
     </figure>
-    <figure>
+    <figure class="sq">
       <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/ftmo-chal.webp" alt="FTMO &mdash; Challenge passed" loading="lazy" decoding="async" width="760" height="760"></span></button>
       <figcaption class="reveal"><b>03</b>
         <span><span class="firm">FTMO</span>
@@ -79,7 +85,7 @@
         </span>
       </figcaption>
     </figure>
-    <figure>
+    <figure class="sq">
       <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/topstep-payout.webp" alt="Topstep &mdash; Proof of Payout" loading="lazy" decoding="async" width="760" height="760"></span></button>
       <figcaption class="reveal"><b>04</b>
         <span><span class="firm">Topstep</span>
@@ -104,6 +110,7 @@
       </figcaption>
     </figure>
   </div>
+  <p class="proofs-fn reveal" data-for="02"><b>02</b><span><span lang="nl">Het ROI-cijfer onderaan is het rendement op de inschrijfkosten, niet op de rekening.</span><span lang="en">The ROI figure at the foot is the return on the entry fee, not on the account.</span></span></p>
 
   <!-- the caveat, set as the founder's quote is set: a label in the margin,
        a short rule, the words at lead size in the ink of a value. It is the
@@ -137,16 +144,25 @@
     var d = document.getElementById("zoom"); if (!d || !d.showModal) return;
     var im = d.querySelector("img"), num = d.querySelector("figcaption b"),
         firm = d.querySelector("figcaption .firm"), note = d.querySelector("figcaption small");
-    /* innerText, so only the language on screen is read out of a pair */
-    function text(el){ return el ? (el.innerText || el.textContent || "").replace(/\s+/g, " ").trim() : ""; }
+    /* only the language on screen is read out of a pair: a copy with the
+       other language's spans removed, then its text */
+    function text(el){
+      if (!el) return "";
+      var lang = document.documentElement.getAttribute("data-lang") || "nl";
+      var c = el.cloneNode(true), xs = c.querySelectorAll("[lang]"), k;
+      for (k = xs.length - 1; k >= 0; k--) if (xs[k].getAttribute("lang") !== lang) xs[k].parentNode.removeChild(xs[k]);
+      return (c.textContent || "").replace(/\s+/g, " ").trim();
+    }
     document.addEventListener("click", function(e){
       var t = e.target.closest("#trackrecord .tile");
       if (t) {
         var i = t.querySelector("img"), fc = t.parentNode.querySelector("figcaption");
+        var n = text(fc && fc.querySelector("b")), s = text(fc && fc.querySelector("small"));
+        var fn = document.querySelector('#trackrecord .proofs-fn[data-for="' + n + '"] > span');
         im.src = i.src; im.alt = i.alt;
-        num.textContent = text(fc && fc.querySelector("b"));
+        num.textContent = n;
         firm.textContent = text(fc && fc.querySelector(".firm"));
-        note.textContent = text(fc && fc.querySelector("small"));
+        note.textContent = fn ? s + ". " + text(fn) : s;
         d.showModal(); return;
       }
       if (e.target === d || e.target.closest("#zoom .close")) d.close();

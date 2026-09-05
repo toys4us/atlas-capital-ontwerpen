@@ -1,60 +1,46 @@
 <section id="markets">
   <div class="grp"><h2><span lang="nl">Markten</span><span lang="en">Markets</span></h2></div>
 
-  <!-- the board: the instruments set like a desk board, with everything a
-       desk board would show next to them left off. One row per group on
-       the reel's axis (the label right of the gutter, the instruments left
-       of it, three across, on the label's baseline), a hairline under each
-       row, and the ticker in the mono beside the name -- only where the
-       client gave one: NQ, ES, XAUUSD. No price, no change, no dash where a
-       number would sit. The dl carries its own stagger so the names arrive
-       one after another across the rows, like a board filling. -->
-  <dl class="pairs board" data-stagger="55">
+  <!-- The board. The eight instruments set the way a desk board sets them,
+       with everything a desk board would show next to them left off: one
+       instrument per row, its name large on the strip's left edge, its
+       ticker in the mono on the strip's right edge -- where the scale of a
+       chart is -- on the name's baseline, and a hairline under every row,
+       so each row is a level and the ticker is its tag. Only the tickers
+       the client gave (NQ, ES, XAUUSD); where he gave none the level runs
+       to the scale untagged, and nothing is put where a number would sit.
+       The groups are the board's headings, in the label voice, on the
+       same left edge. A dl: the term is the group, the descriptions are
+       its instruments. It carries its own stagger, so the board fills top
+       to bottom, each level drawing itself under its row. -->
+  <dl class="board" data-stagger="70">
     <dt class="reveal">Indices</dt>
-    <dd>
-      <ul class="cols">
-        <li class="reveal"><span class="board__name">Nasdaq</span><b class="num">NQ</b></li>
-        <li class="reveal"><span class="board__name">S&amp;P&nbsp;500</span><b class="num">ES</b></li>
-        <li class="reveal"><span class="board__name">Dow Jones</span></li>
-      </ul>
-    </dd>
+    <dd class="reveal"><span class="board__name">Nasdaq</span><b class="board__tick num">NQ</b></dd>
+    <dd class="reveal"><span class="board__name">S&amp;P&nbsp;500</span><b class="board__tick num">ES</b></dd>
+    <dd class="reveal"><span class="board__name">Dow Jones</span></dd>
+
     <dt class="reveal"><span lang="nl">Metalen</span><span lang="en">Metals</span></dt>
-    <dd>
-      <ul class="cols">
-        <li class="reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><b class="num">XAUUSD</b></li>
-        <li class="reveal"><span class="board__name"><span lang="nl">Zilver</span><span lang="en">Silver</span></span></li>
-      </ul>
-    </dd>
+    <dd class="reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><b class="board__tick num">XAUUSD</b></dd>
+    <dd class="reveal"><span class="board__name"><span lang="nl">Zilver</span><span lang="en">Silver</span></span></dd>
+
     <dt class="reveal"><span lang="nl">Energie</span><span lang="en">Energy</span></dt>
-    <dd>
-      <ul class="cols">
-        <li class="reveal"><span class="board__name"><span lang="nl">Olie</span><span lang="en">Oil</span></span></li>
-      </ul>
-    </dd>
+    <dd class="reveal"><span class="board__name"><span lang="nl">Olie</span><span lang="en">Oil</span></span></dd>
+
     <dt class="reveal">Crypto</dt>
-    <dd>
-      <ul class="cols">
-        <li class="reveal"><span class="board__name">Bitcoin</span></li>
-        <li class="reveal"><span class="board__name">Altcoins</span></li>
-      </ul>
-    </dd>
+    <dd class="reveal"><span class="board__name">Bitcoin</span></dd>
+    <dd class="reveal"><span class="board__name">Altcoins</span></dd>
   </dl>
-  <!-- read after the board, on the board's own column line -->
-  <div class="board__note">
-    <p class="reveal"><span lang="nl">De markten waar het in de server over gaat. Zonder koersen: dit is een lijst, geen feed.</span><span lang="en">The markets the server is about. No prices: this is a list, not a feed.</span></p>
-  </div>
+  <!-- read after the board, on the board's own left edge -->
+  <p class="board__note reveal"><span lang="nl">De markten waar het in de server over gaat. Zonder koersen: dit is een lijst, geen feed.</span><span lang="en">The markets the server is about. No prices: this is a list, not a feed.</span></p>
 
   <div class="grp" id="live"><h2>Live</h2></div>
-  <!-- one credit, the reel's own: what happens, and under it where and
-       when -- which is announced in the server and nowhere else, so
-       nothing here is a time -->
-  <dl class="pairs">
-    <dt><span lang="nl">Wat</span><span lang="en">What</span></dt>
-    <dd><span lang="nl">De oprichter handelt live</span><span lang="en">The founder trades live</span><small><span lang="nl">In de server, op tijden die daar worden aangekondigd.</span><span lang="en">In the server, at times announced there.</span></small></dd>
-  </dl>
-
-  <div class="interstitial">
-    <p><span lang="nl">Zit erbij als het live gaat</span><span lang="en">Be there when it goes live</span></p>
-    <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Naar de server</span><span lang="en">To the server</span></a>
+  <!-- Live is one statement on the board's left edge, its one line under
+       it, and the call under that on the same edge: what happens, where,
+       and the way in. When is announced in the server and nowhere else,
+       so nothing here is a time. No label: the title names it. -->
+  <div class="live" data-stagger="160">
+    <p class="live__line"><span class="mask"><span class="reveal"><span lang="nl">De oprichter handelt live.</span><span lang="en">The founder trades live.</span></span></span></p>
+    <p class="live__sub reveal"><span lang="nl">In de server, op tijden die daar worden aangekondigd.</span><span lang="en">In the server, at times announced there.</span></p>
+    <a class="cta reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Naar de server</span><span lang="en">To the server</span></a>
   </div>
 </section>

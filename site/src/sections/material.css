@@ -197,6 +197,15 @@
    shared hairline between them, each at the proportion the files have
    (four by three); a single takes a wider-than-tall frame that still
    holds its labels. */
+@media (max-width:719px){
+  /* a narrow strip: the label's second way, so a title that wraps never
+     leaves a stub of level beside it */
+  #material .plate figcaption{grid-template-columns:auto minmax(32px,1fr) auto;column-gap:14px}
+  #material .plate__level{grid-column:2;grid-row:1}
+  #material .plate__after{grid-column:3;grid-row:1}
+  #material .plate__title{grid-column:1/-1;grid-row:2;margin-top:8px}
+  #material .plate figcaption small{grid-column:1/-1;grid-row:3}
+}
 @media (max-width:619px){
   #material .plate{grid-template-columns:minmax(0,1fr)}
   #material .plate--pair .tile{grid-column:1/-1}
@@ -204,11 +213,6 @@
   #material .frame{aspect-ratio:16/10}
   #material .plate--pair .frame{aspect-ratio:4/3}
   #material .plate__tag--trend{transform:translate(-50%,-50%) rotate(24deg)}
-  #material .plate figcaption{grid-template-columns:auto minmax(32px,1fr) auto;column-gap:14px}
-  #material .plate__level{grid-column:2;grid-row:1}
-  #material .plate__after{grid-column:3;grid-row:1}
-  #material .plate__title{grid-column:1/-1;grid-row:2;margin-top:8px}
-  #material .plate figcaption small{grid-column:1/-1;grid-row:3}
 }
 
 @media (prefers-reduced-motion:reduce){

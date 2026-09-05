@@ -3,43 +3,46 @@
    coloured the way this page colours everything: the sidebar a step darker
    than the pane, hairlines of the gold for every edge, square corners. The
    two headers (the server's name, the channel's name) share one height so
-   the rule under them runs unbroken across the device; the two feet (the
-   member's panel under the list, the composer under the messages) share
-   one height too, so the rule over the one and the top edge of the other
-   sit on a second line. The chart vocabulary of the spread is the
-   furniture here: the selected row is a fair value gap band (the gold at
-   .07 with its two edges at .38, exactly the zone on the plate), a hover
-   is the same band at half strength, the boundary of Premium is a dashed
-   liquidity line, the row numbers sit at the right like the levels of a
-   price scale, and one skeleton message carries a chart as a schema. The
-   pane holds no messages -- lines only. On a phone the two panes stay
-   side by side, smaller; the list scrolls inside the device only when the
-   screen is too short for it, and the device is never taller than the
-   screen, so the page is never trapped. */
+   the rule under them runs unbroken across the device. Under the channel's
+   name the pane is the figure of the spread, drawn again at the pane's
+   full width: the line in the gold, the zones the page's own hairlines
+   (the 3-on-5 dashed level, the band with two rules, the box), the tags in
+   the label voice on the pane's right margin, the axis of a chart. No
+   message, no line of one; the figure is the content of the pane.
+
+   The chart vocabulary is the furniture of the list too: the selected row
+   is a fair value gap band (the gold at .07 with its two edges at .38,
+   exactly the zone on the plate), a hover is the same band at half
+   strength, the boundary of Premium is a dashed liquidity line, the row
+   numbers sit at the right like the levels of a price scale. A Premium
+   channel dims the figure under its lock and the one sentence that is
+   true of it.
+
+   The frame is one flex line, so the pane takes the sidebar's height and
+   the figure fills what is under the channel's name; on a short screen the
+   frame is capped, the list scrolls inside the device and chains to the
+   page at its ends. On a phone the device stacks: the sidebar, then the
+   pane at the full width of the column, the figure at a set proportion. */
 #channels .dv{
   --side:244px;                 /* the sidebar's width                    */
   --hd:48px;                    /* both headers                           */
-  --foot:60px;                  /* both feet: the panel, and the composer
-                                   with its margin                        */
   --row:28px;                   /* one channel                            */
   --pad-x:16px;                 /* the sidebar's inner margin             */
-  --pane-x:22px;                /* the pane's inner margin                */
-  --sk:rgba(244,242,236,.07);   /* a skeleton line                        */
-  --sk-hi:rgba(244,242,236,.11);    /* an avatar, a name line             */
+  --pane-x:22px;                /* the pane's inner margin (the tags)     */
   --band:rgba(215,179,100,.07); /* the fair value gap band                */
   --band-lo:rgba(215,179,100,.035);
   --chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 3 4 5.5 6.5 3' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
   --lock:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 11'%3E%3Crect x='.5' y='5' width='8' height='5.5' fill='none' stroke='%23000'/%3E%3Cpath d='M2.5 5V3.2a2 2 0 0 1 4 0V5' fill='none' stroke='%23000'/%3E%3C/svg%3E");
-  --plus:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5 1v8M1 5h8' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
   position:relative;z-index:2;
   margin:0;
 }
 #channels .dv .reveal{--reveal-y:10px}      /* a row settles, it does not travel */
 
-/* ---- the frame ---- */
+/* ---- the frame: one flex line, capped on a short screen ---- */
 #channels .dv__frame{
   position:relative;
   display:flex;
+  align-items:stretch;
   max-height:min(720px,84vh);
   max-height:min(720px,84svh);
   border:1px solid var(--line-2);
@@ -54,11 +57,11 @@
   border-right:1px solid var(--line-2);
 }
 /* while the list has more below (a short screen), its foot fades into the
-   panel under it; the script toggles the class, and drops it at the end */
+   sidebar; the script toggles the class, and drops it at the end */
 #channels .dv__side::after{
   content:"";
   display:none;
-  position:absolute;left:0;right:0;bottom:var(--foot);height:44px;
+  position:absolute;left:0;right:0;bottom:0;height:48px;
   background:linear-gradient(180deg,rgba(14,15,18,0),var(--panel-lo));
   pointer-events:none;
 }
@@ -87,7 +90,7 @@
    at its ends the scroll chains to the page, so nothing is trapped */
 #channels .dv__list{
   flex:1 1 auto;min-height:0;
-  padding:6px 0 10px;
+  padding:6px 0 12px;
   overflow-y:auto;overflow-x:hidden;
   overscroll-behavior-y:auto;
   scrollbar-width:thin;
@@ -169,24 +172,12 @@
 #channels .dv__ch[aria-pressed="true"] .dv__hash{color:var(--gold)}
 #channels .dv__ch[aria-pressed="true"] .dv__n{color:var(--ink-2)}
 #channels .dv__ch:focus-visible{outline-offset:-3px}
-/* the member's panel: the avatar, the name, three controls, all skeleton */
-#channels .dv__me{
-  flex:0 0 auto;
-  height:var(--foot);
-  display:flex;align-items:center;gap:8px;
-  padding:0 var(--pad-x);
-  border-top:1px solid var(--line-2);
-  background:var(--panel-lo);
-}
-#channels .dv__me .dv__av{width:24px;height:24px;margin-right:2px}
-#channels .dv__me .dv__ln--name{width:58px;margin-right:auto}
-#channels .dv__ctl{display:block;width:8px;height:8px;background:var(--sk)}
 
-/* ---- the pane: lifted out of the flow, so the sidebar sets the height ---- */
+/* ---- the pane: the channel's name, then the figure ---- */
 #channels .dv__pane{
-  position:absolute;top:0;bottom:0;right:0;left:var(--side);
+  flex:1 1 auto;
   display:flex;flex-direction:column;
-  min-width:0;
+  min-width:0;min-height:0;
 }
 #channels .dv__head{
   flex:0 0 auto;
@@ -202,80 +193,89 @@
 }
 #channels .dv__head .dv__hash{color:var(--ink-4)}
 #channels .dv__name{overflow:hidden;text-overflow:ellipsis;padding-bottom:1px}
-/* messages stack from the bottom, as in a chat; what does not fit is
-   clipped at the top under a fade to the pane */
-#channels .dv__body{
-  position:relative;
-  flex:1 1 auto;min-height:0;
-  display:flex;flex-direction:column;justify-content:flex-end;gap:20px;
-  padding:20px var(--pane-x) 18px;
-  overflow:hidden;
-}
-#channels .dv__body::before{
-  content:"";
-  position:absolute;left:0;right:0;top:0;height:64px;
-  background:linear-gradient(180deg,var(--panel),rgba(21,22,26,0));
-  pointer-events:none;
-  z-index:1;
-}
-#channels .dv__msg{
-  flex:0 0 auto;
-  display:grid;grid-template-columns:28px minmax(0,1fr);
-  column-gap:12px;row-gap:8px;
-  align-items:start;
-}
-#channels .dv__msg > *{grid-column:2}
-#channels .dv__av{display:block;width:28px;height:28px;background:var(--sk-hi)}
-#channels .dv__msg .dv__av{grid-column:1;grid-row:1/span 6}
-#channels .dv__ln{display:block;height:7px;max-width:100%;background:var(--sk)}
-#channels .dv__ln--name{height:8px;background:var(--sk-hi)}
-/* the chart in the message: the spread's plate, small */
+/* the plate fills what is under the name; the tags size from its width */
 #channels .dv__plate{
   position:relative;
-  width:min(100%,300px);aspect-ratio:300/120;
-  margin-top:2px;
-  border:1px solid var(--line-2);
-  background:var(--panel-lo);
+  flex:1 1 auto;min-height:0;
+  container-type:inline-size;
+  overflow:hidden;
+}
+#channels .dv__ink{
+  position:absolute;inset:0;
+  transition:opacity var(--d) var(--e-out);
 }
 #channels .dv__fig{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 #channels .dv__fig *{vector-effect:non-scaling-stroke}
 #channels .dv__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:round}
-#channels .dv__zone{stroke:var(--gold);stroke-width:1;stroke-opacity:.36;fill:var(--gold);fill-opacity:.07}
-#channels .dv__level{stroke-opacity:.55;stroke-dasharray:3 5;stroke-linecap:butt}
-#channels .dv__pane:not([data-kind="chart"]) .dv__plate{display:none}
-/* the composer: a box, a plus, no words; its top edge on the line of the
-   member's panel across the device */
-#channels .dv__composer{
-  flex:0 0 auto;
-  height:40px;
-  margin:0 var(--pane-x) calc(var(--foot) - 40px);
-  display:flex;align-items:center;gap:14px;
-  padding:0 14px;
-  border:1px solid var(--line-2);
-  background:var(--panel-lo);
+/* the zones, placed in the figure's own percentages (the SVG is stretched
+   to the plate, so a percentage of the plate is a coordinate of the
+   drawing: y 82 of 520 is 15.8%). The band and the two levels run on to
+   the pane's right edge -- a level is drawn forward. */
+#channels .dv__ob,#channels .dv__band,#channels .dv__lvl{position:absolute;display:block;pointer-events:none}
+#channels .dv__ob{
+  left:26.7%;top:72.7%;width:6%;height:5.8%;
+  border:1px solid var(--line-3);
+  background:rgba(215,179,100,.07);
 }
-#channels .dv__composer::before{
-  content:"";width:10px;height:10px;
-  background:var(--ink-5);
-  -webkit-mask:var(--plus) center/10px 10px no-repeat;
-  mask:var(--plus) center/10px 10px no-repeat;
+#channels .dv__band{
+  left:48%;right:0;top:43.5%;height:4.2%;
+  border-top:1px solid var(--line-3);
+  border-bottom:1px solid var(--line-3);
+  background:rgba(215,179,100,.07);
 }
-#channels .dv__composer::after{content:"";width:34%;height:7px;background:var(--sk)}
-/* Premium: the lines dim, a lock and two words in the label voice */
+#channels .dv__lvl{
+  left:50%;right:0;top:15.8%;height:1px;
+  background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
+}
+#channels .dv__lvl--lo{left:56.7%;top:88%}
+/* the tags: the label voice, on the pane's right margin above the right
+   ends of the two levels, and under the orderblock's box; they scale a
+   little with the plate and never go under 9px */
+#channels .dv__tag{
+  position:absolute;
+  display:block;
+  font-family:var(--f-display);
+  font-style:normal;
+  font-size:clamp(9px,2cqw,var(--t-nano));
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--ink-4);
+  white-space:nowrap;
+  pointer-events:none;
+}
+#channels .dv__tag--liq{right:var(--pane-x);top:15.8%;transform:translateY(calc(-100% - 6px))}
+#channels .dv__tag--fvg{right:var(--pane-x);top:43.5%;transform:translateY(calc(-100% - 6px))}
+#channels .dv__tag--ob{left:26.7%;top:78.5%;transform:translateY(5px)}
+
+/* Premium: the figure recedes, a lock and the one true sentence on it */
 #channels .dv__locked{
   display:none;
   position:absolute;inset:0;z-index:2;
-  align-items:center;justify-content:center;flex-direction:column;gap:14px;
+  align-items:center;justify-content:center;flex-direction:column;gap:12px;
+  padding:0 var(--pane-x);
+  text-align:center;
+}
+#channels .dv__locked .dv__lock{width:13px;height:16px;margin-bottom:6px;background:var(--gold);-webkit-mask-size:13px 16px;mask-size:13px 16px}
+#channels .dv__locked-t{
   font-family:var(--f-display);
   font-size:var(--t-micro);
   letter-spacing:var(--trk-caps);
   text-indent:var(--trk-caps);
   text-transform:uppercase;
-  color:var(--ink-3);
+  line-height:1.5;
+  color:var(--ink-1);
 }
-#channels .dv__locked .dv__lock{width:13px;height:16px;background:var(--gold);-webkit-mask-size:13px 16px;mask-size:13px 16px}
+#channels .dv__locked-n{
+  max-width:28ch;
+  font-family:var(--f-display);
+  font-size:var(--t-small);
+  line-height:1.5;
+  color:var(--ink-3);
+  text-wrap:balance;
+}
 #channels .dv__pane[data-kind="lock"] .dv__locked{display:flex}
-#channels .dv__pane[data-kind="lock"] .dv__msg,#channels .dv__pane[data-kind="lock"] .dv__composer{opacity:.3}
+#channels .dv__pane[data-kind="lock"] .dv__ink{opacity:.28}
 
 /* ---- the caption and the call, hung on the device's left edge ---- */
 #channels .dv figcaption{
@@ -293,33 +293,45 @@
 #channels .dv__note{flex:1 1 20ch;min-width:0;font-size:var(--t-small);color:var(--ink-4);text-wrap:balance}
 #channels .dv__call{position:relative;z-index:2;margin:clamp(16px,2.4vw,26px) 0 0}
 
-/* ---- the line draws itself as its message arrives ---- */
-.js #channels .reveal .dv__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s var(--e-reveal) .25s}
-.js #channels .reveal.is-in .dv__line{stroke-dashoffset:0}
+/* ---- the trace: the plate's own reveal --------------------------------
+   Under .js, until motion.js marks it .is-in, the plate is bare: the
+   zones are drawn back to nothing at their left ends, the tags wait, and
+   the line is drawn back to nothing (pathLength 1, so the dash is the
+   whole path). In: the zones draw out of the left and the line draws
+   itself left to right over the slow settle while the rows of the list
+   settle beside it; the tags come last, once their levels are under
+   them. Never a transform, never opacity on the plate itself -- the
+   probe sees the plate at once; the motion is in the ink. */
+.js #channels .reveal.trace{opacity:1;transform:none}
+.js #channels .reveal.trace .dv__ob,.js #channels .reveal.trace .dv__band,.js #channels .reveal.trace .dv__lvl{
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform 1.6s var(--e-reveal) .35s;
+}
+.js #channels .reveal.trace .dv__tag{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) 1.1s}
+.js #channels .reveal.trace .dv__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.9s var(--e-reveal)}
+.js #channels .reveal.trace.is-in .dv__ob,.js #channels .reveal.trace.is-in .dv__band,.js #channels .reveal.trace.is-in .dv__lvl{transform:none}
+.js #channels .reveal.trace.is-in .dv__tag{opacity:1}
+.js #channels .reveal.trace.is-in .dv__line{stroke-dashoffset:0}
 @media (prefers-reduced-motion:reduce){
-  .js #channels .reveal .dv__line{stroke-dashoffset:0;transition:none}
-  #channels .dv__ch:not(.reveal),#channels .dv__hash,#channels .dv__n{transition:none}
+  .js #channels .reveal.trace .dv__ob,.js #channels .reveal.trace .dv__band,.js #channels .reveal.trace .dv__lvl{transform:none;transition:none}
+  .js #channels .reveal.trace .dv__tag{opacity:1;transition:none}
+  .js #channels .reveal.trace .dv__line{stroke-dashoffset:0;transition:none}
+  #channels .dv__ch:not(.reveal),#channels .dv__hash,#channels .dv__n,#channels .dv__ink{transition:none}
 }
 
-/* ---- a phone: the same device, smaller, and never taller than the screen ---- */
+/* ---- a phone: the device stacks, one column -----------------------------
+   The sidebar first at the column's full width (the list scrolls inside
+   only on a screen too short for it), then the pane under it with the
+   figure at a set proportion. */
 @media (max-width:620px){
-  #channels .dv{--side:58%;--hd:44px;--foot:48px;--row:28px;--pad-x:11px;--pane-x:14px}
-  #channels .dv__frame{max-height:min(640px,78vh);max-height:min(640px,78svh)}
-  #channels .dv__server{letter-spacing:var(--trk-caps);font-size:var(--t-nano)}
-  #channels .dv__cat{letter-spacing:var(--trk-caps-tight);padding-right:4px}
-  #channels .dv__ch{gap:7px}
-  #channels .dv__hash{width:10px}
-  #channels .dv__me{gap:7px}
-  #channels .dv__me .dv__av{width:20px;height:20px;margin-right:1px}
-  #channels .dv__me .dv__ln--name{width:44px}
-  #channels .dv__ctl{width:7px;height:7px}
-  #channels .dv__head{gap:6px;padding:0 12px;font-size:12.5px}
-  #channels .dv__head .dv__hash{width:9px}
-  #channels .dv__body{gap:18px;padding:16px var(--pane-x) 14px}
-  #channels .dv__msg{grid-template-columns:22px minmax(0,1fr);column-gap:9px;row-gap:7px}
-  #channels .dv__av{width:22px;height:22px}
-  #channels .dv__ln{height:6px}
-  #channels .dv__ln--name{height:7px}
-  #channels .dv__composer{height:34px;margin:0 var(--pane-x) calc(var(--foot) - 34px);padding:0 10px}
+  #channels .dv{--hd:44px;--pad-x:14px;--pane-x:14px}
+  #channels .dv__frame{flex-direction:column;max-height:none}
+  #channels .dv__side{flex:0 1 auto;border-right:0;border-bottom:1px solid var(--line-2)}
+  #channels .dv__list{max-height:min(540px,64vh);max-height:min(540px,64svh)}
+  #channels .dv__server{letter-spacing:var(--trk-caps)}
+  #channels .dv__pane{flex:0 0 auto}
+  #channels .dv__head{padding:0 var(--pane-x)}
+  #channels .dv__plate{flex:0 0 auto;aspect-ratio:600/440;min-height:0}
+  #channels .dv__locked{gap:10px}
   #channels .dv figcaption{margin-top:14px}
 }

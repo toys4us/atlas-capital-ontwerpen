@@ -9,25 +9,39 @@
    value column on that same baseline, the amount or the date in the serif
    under it. Nothing is drawn down the gutter and nothing runs under a row;
    the levels live in the label column, the way a chart's tags live in its
-   margin. The two years already on the page bracket the column, first and
-   last, as an axis carries its first and last figure. The numbers count
-   rows and nothing else; the levels carry no value. On scroll each tick
-   draws itself from the axis, then the row rises.
+   margin. The two years bracket the rows as two solid levels: a hairline
+   from the strip's edge to the year, tagged at the gutter the way every
+   level on the reel is tagged -- so the range is anchored to the axis and
+   nothing floats. The numbers count rows and nothing else; the levels
+   carry no value. On scroll each level draws itself from the axis, then
+   the row rises.
 
-   The evidence: the same six, in the same order, printed as plates -- one
-   size, one mat, one hairline, one grey -- with the number of their row on
-   each; only the one under the pointer is allowed its colour. They print
-   on from the left like the spread's plate; a tap opens the untouched
-   original in the page's one lightbox.
+   The evidence: the same six, in the same order, printed two to a row as
+   the wall above prints its pairs -- at full value, in their own colour,
+   on one mat inside one hairline of the gold, the number of their row on
+   each. A certificate is a document, so it is shown as one: nothing is
+   veiled, nothing is greyed. The row of the two square files is a pair
+   of squares, the other rows 3:2, so every row lands level. Pointed at,
+   the mat under the plate warms to the gold of the spread's zones (the
+   band, not the line) and the frame comes up a step. They print on from
+   the left like the spread's plate; a tap opens the untouched original in
+   the page's one lightbox. The one note a certificate needs (02's ROI
+   figure) is a footnote under the wall, hung on the wall's left edge, and
+   travels with the plate into the lightbox.
 
    The caveat: not small print. Set as the founder's quote is set -- the
    label in the margin, a short rule, the words at lead size in the ink of
    a value -- because it is the most important paragraph on the page.
    .roll::before is the strip's edge, so every block sits above it (z:2). */
-#trackrecord{--mat:var(--panel-lo);--inset:clamp(6px,1vw,10px)}
+#trackrecord{
+  --mat:var(--panel-lo);
+  --inset:clamp(7px,1.1vw,11px);
+  --edge:clamp(18px,4vw,40px);            /* the roll's padding: the strip's edge is this far left */
+  --level:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+}
 
 /* ---------- the ledger ---------------------------------------------------- */
-#trackrecord .ledger{position:relative;z-index:2;margin:0}
+#trackrecord .ledger{position:relative;z-index:2;margin:clamp(4px,.8vw,10px) 0 0}
 #trackrecord .ledger__rows{
   list-style:none;margin:0;padding:0;
   display:grid;
@@ -59,7 +73,7 @@
   font-size:var(--t-caption);
   font-variant-numeric:tabular-nums;
   letter-spacing:var(--trk-mono);
-  color:var(--ink-4);
+  color:var(--ink-3);
 }
 /* the level: the dash of the spread's liquidity lines (3 on, 5 off) in
    the hairline gold, lifted from the baseline to the middle of the caps.
@@ -73,7 +87,7 @@
   position:relative;top:-.34em;
   height:1px;
   font-size:var(--t-micro);
-  background:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+  background:var(--level);
 }
 #trackrecord .ledger__firm{
   flex:0 1 auto;
@@ -84,7 +98,7 @@
   letter-spacing:var(--trk-caps);
   text-transform:uppercase;
   line-height:1.5;
-  color:var(--ink-4);
+  color:var(--ink-2);
   white-space:nowrap;
 }
 #trackrecord .ledger__val{
@@ -105,37 +119,46 @@
   font-variant-numeric:tabular-nums;
   letter-spacing:.01em;
   line-height:1.5;
-  color:var(--ink-3);
+  color:var(--ink-2);
 }
-/* the axis ends: the first and the last year, right of the label column
-   against the gutter, in the mono of everything counted, in the faintest
-   readable grey -- the range of the ledger, not a seventh row */
+/* the axis ends: the first and the last year as two solid levels in the
+   label column -- a hairline from the strip's edge to the year, the year
+   tagged at the gutter in the mono of everything counted. The range of
+   the ledger, drawn on the axis; not a seventh row. */
 #trackrecord .ledger__axis{
+  display:flex;align-items:center;
+  gap:clamp(12px,1.8vw,20px);
   width:calc((100% - var(--axis-gap)) * 2 / 5);
   margin:0;
-  text-align:right;
   font-family:var(--f-mono);
   font-size:var(--t-caption);
   font-variant-numeric:tabular-nums;
   letter-spacing:var(--trk-mono);
   line-height:1;
-  color:var(--ink-5);
+  color:var(--ink-3);
 }
-#trackrecord .ledger__axis time{font-size:inherit;letter-spacing:inherit}
-#trackrecord .ledger__axis--from{margin-bottom:clamp(16px,2.4vw,26px)}
-#trackrecord .ledger__axis--to{margin-top:clamp(16px,2.4vw,26px)}
+#trackrecord .ledger__rule{
+  flex:1 1 auto;min-width:0;
+  height:1px;
+  margin-left:calc(-1 * var(--edge));
+  background:var(--line-3);
+}
+#trackrecord .ledger__axis time{flex:0 0 auto;font-size:inherit;letter-spacing:inherit}
+#trackrecord .ledger__axis--from{margin-bottom:clamp(18px,2.6vw,28px)}
+#trackrecord .ledger__axis--to{margin-top:clamp(18px,2.6vw,28px)}
 
 /* a phone: every row centres with the reel, the tick on its own line --
    the number and the name between two levels that run to the edges of
    the screen, the way the founder's numeral sits on its level -- and the
-   value and its sub-line under them. Both levels are simply there. */
+   value and its sub-line under them. The years sit the same way, on a
+   solid level that runs from edge to edge. Every level is simply there. */
 @media (max-width:620px){
   #trackrecord .ledger__rows{row-gap:clamp(26px,7vw,34px)}
   #trackrecord .ledger__rows li{display:block;text-align:center}
   #trackrecord .ledger__tick{
     justify-content:center;
     gap:14px;
-    margin:0 calc(-1 * clamp(18px,4vw,40px));
+    margin:0 calc(-1 * var(--edge));
   }
   #trackrecord .ledger__tick::after{
     content:"";
@@ -143,14 +166,21 @@
     align-self:baseline;
     position:relative;top:-.34em;
     height:1px;
-    background:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+    background:var(--level);
   }
   #trackrecord .ledger__lv{order:-1}
   #trackrecord .ledger__n{padding-left:6px}
   #trackrecord .ledger__firm{flex:0 0 auto;text-align:center;padding-right:6px}
-  .js #trackrecord .ledger__lv.draw{transform:none;transition:none}
+  .js #trackrecord .ledger__lv.draw,.js #trackrecord .ledger__rule.draw{transform:none;transition:none}
   #trackrecord .ledger__val{margin-top:clamp(8px,2.4vw,12px)}
-  #trackrecord .ledger__axis{width:auto;text-align:center}
+  #trackrecord .ledger__axis{
+    width:auto;
+    justify-content:center;
+    gap:14px;
+    margin-left:calc(-1 * var(--edge));margin-right:calc(-1 * var(--edge));
+  }
+  #trackrecord .ledger__rule{margin-left:0}
+  #trackrecord .ledger__axis::after{content:"";flex:1 1 auto;min-width:16px;height:1px;background:var(--line-3)}
 }
 
 /* ---------- the evidence -------------------------------------------------- */
@@ -161,66 +191,55 @@
   position:relative;z-index:2;
   display:flex;flex-wrap:wrap;align-items:baseline;
   gap:2px clamp(14px,1.6vw,22px);
-  margin:clamp(48px,6.5vw,80px) 0 clamp(12px,1.6vw,18px);
+  margin:clamp(52px,7vw,88px) 0 clamp(14px,1.8vw,20px);
   font-family:var(--f-display);
   line-height:1.5;
 }
 #trackrecord .proofs-hint__t{
   flex:0 0 auto;
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
-  color:var(--ink-3);
+  color:var(--ink-1);
 }
 #trackrecord .proofs-hint__n{
   flex:1 1 20ch;min-width:0;
-  font-size:var(--t-small);color:var(--ink-4);
+  font-size:var(--t-small);color:var(--ink-3);
   text-wrap:pretty;
 }
+/* two to a row, as the wall above prints its pairs; the row of the two
+   square files is a pair of squares, the others 3:2, so a row is level */
 #trackrecord .proofs{
   position:relative;z-index:2;
   display:grid;
-  gap:clamp(18px,2.6vw,28px) clamp(10px,1.6vw,16px);
+  gap:clamp(26px,3.6vw,40px) clamp(12px,2vw,20px);
   grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:start;
 }
-@media (min-width:720px){ #trackrecord .proofs{grid-template-columns:repeat(3,minmax(0,1fr))} }
 #trackrecord .proofs figure{margin:0;min-width:0}
-/* six firms, six house styles, none of them ours: the plates are one
-   size, on one mat inside one hairline, in one grey, and only the one
-   under the pointer is allowed its colour. The whole figure is the hover
-   target, so pointing at a caption lights its plate. The hover transition
-   waits until the reveal has run: an id-scoped transition would outrank
-   the .wipe's own and the plate would snap on instead of printing on. */
+/* the plate: the file at full value in its own colour, on one mat inside
+   one hairline of the gold. The whole figure is the hover target, so
+   pointing at a caption lights its plate: the mat warms to the gold of
+   the spread's zones -- the band, not the line -- and the frame comes up
+   a step. The hover transition waits until the reveal has run: an
+   id-scoped transition would outrank the .wipe's own and the plate would
+   snap on instead of printing on. */
 #trackrecord .tile{
   display:block;width:100%;margin:0;padding:var(--inset);
   border:1px solid var(--line-2);
   background:var(--mat);
   cursor:zoom-in;
 }
-#trackrecord .tile:not(.reveal){transition:border-color var(--d) var(--e-out)}
-#trackrecord .pic{display:block;position:relative;width:100%;aspect-ratio:4/3;overflow:hidden}
+#trackrecord .tile:not(.reveal){transition:border-color var(--d) var(--e-out),background-color var(--d-slow) var(--e-out)}
+#trackrecord .pic{display:block;position:relative;width:100%;aspect-ratio:3/2;overflow:hidden}
+#trackrecord .proofs .sq .pic{aspect-ratio:1/1}
 #trackrecord .pic img{
   display:block;width:100%;height:100%;
   object-fit:contain;
-  filter:grayscale(1) brightness(.78) contrast(.9);
-  transition:filter var(--d-slow) var(--e-out);
-}
-/* six papers, one grey: a veil in the mat's own colour over every plate,
-   so a light certificate and a dark one print at the same depth; it
-   lifts with the colour when the plate is pointed at */
-#trackrecord .pic::after{
-  content:"";position:absolute;inset:0;
-  background:rgba(14,15,18,.18);
-  pointer-events:none;
-  transition:background-color var(--d-slow) var(--e-out);
 }
 @media (hover:hover){
-  #trackrecord .proofs figure:hover .tile{border-color:var(--line-4)}
-  #trackrecord .proofs figure:hover .pic img{filter:none}
-  #trackrecord .proofs figure:hover .pic::after{background:rgba(14,15,18,0)}
+  #trackrecord .proofs figure:hover .tile{border-color:var(--line-4);background:rgba(215,179,100,.09)}
   #trackrecord .proofs figure:hover figcaption > b{color:var(--gold)}
 }
-#trackrecord .tile:focus-visible{outline:1px solid var(--gold);outline-offset:3px;border-color:var(--line-4)}
-#trackrecord .tile:focus-visible .pic img{filter:none}
-#trackrecord .tile:focus-visible .pic::after{background:rgba(14,15,18,0)}
+#trackrecord .tile:focus-visible{outline:1px solid var(--gold);outline-offset:3px;border-color:var(--line-4);background:rgba(215,179,100,.09)}
 /* the caption as the plates are captioned: the number in mono, the firm
    in the label voice, the note in the serif under it on the firm's line */
 #trackrecord .proofs figcaption,
@@ -232,37 +251,44 @@
   line-height:1.5;
 }
 #trackrecord .proofs figcaption > b,
-#trackrecord .zoom figcaption > b{
+#trackrecord .zoom figcaption > b,
+#trackrecord .proofs-fn > b{
   flex:0 0 auto;
   font-family:var(--f-mono);font-weight:400;font-size:var(--t-caption);
   letter-spacing:var(--trk-mono);text-transform:none;
-  color:var(--ink-4);
+  color:var(--ink-3);
   transition:color var(--d) var(--e-out);
 }
 #trackrecord .proofs figcaption > span,
 #trackrecord .zoom figcaption > span{min-width:0;color:var(--ink-1)}
 #trackrecord .proofs figcaption small,
 #trackrecord .zoom figcaption small{
-  display:block;margin-top:6px;
+  display:block;margin-top:5px;
   letter-spacing:0;text-transform:none;
-  font-size:var(--t-small);color:var(--ink-3);line-height:1.55;
+  font-size:var(--t-small);color:var(--ink-2);line-height:1.55;
   text-wrap:pretty;
 }
-@media (max-width:719px){
-  /* two narrow columns: the number leads the firm's name as text, so a
-     long name wraps under it instead of beside it */
-  #trackrecord .proofs figcaption{display:block}
-  #trackrecord .proofs figcaption > b{margin-right:10px}
-  #trackrecord .proofs figcaption > span{display:inline}
+/* the footnote: the one note a plate needs, under the wall on the wall's
+   left edge, in the caption's own voice -- the number of its plate in
+   mono, the note in the serif */
+#trackrecord .proofs-fn{
+  position:relative;z-index:2;
+  display:flex;gap:14px;align-items:baseline;
+  max-width:60ch;
+  margin:clamp(18px,2.6vw,28px) 0 0;
+  padding-top:clamp(14px,2vw,20px);
+  border-top:1px solid var(--line-1);
+  font-family:var(--f-display);
+  font-size:var(--t-small);
+  line-height:1.55;
+  color:var(--ink-2);
+  text-wrap:pretty;
 }
+#trackrecord .proofs-fn > span{min-width:0}
 @media (max-width:480px){
   /* a phone: one plate per row, the width of the column, so a certificate
      can be read where it stands and the caption has its own line */
-  #trackrecord .proofs{grid-template-columns:minmax(0,1fr);row-gap:clamp(28px,8vw,36px)}
-  #trackrecord .pic{aspect-ratio:3/2}
-  #trackrecord .proofs figcaption{display:flex}
-  #trackrecord .proofs figcaption > b{margin-right:0}
-  #trackrecord .proofs figcaption > span{display:block}
+  #trackrecord .proofs{grid-template-columns:minmax(0,1fr);row-gap:clamp(30px,8vw,40px)}
 }
 
 /* ---------- the caveat ---------------------------------------------------- */
@@ -288,7 +314,7 @@
   letter-spacing:var(--trk-caps);
   text-transform:uppercase;
   line-height:1.5;
-  color:var(--ink-3);
+  color:var(--ink-2);
 }
 #trackrecord .caveat__body{grid-column:2;grid-row:2;min-width:0;max-width:42ch}
 #trackrecord .caveat__body p{
@@ -343,6 +369,6 @@
 #trackrecord .zoom .close{margin:clamp(14px,2.4vh,24px) 0 0}
 
 @media (prefers-reduced-motion:reduce){
-  #trackrecord .tile,#trackrecord .pic img,#trackrecord .pic::after,#trackrecord .proofs figcaption > b{transition:none}
+  #trackrecord .tile,#trackrecord .proofs figcaption > b{transition:none}
   #trackrecord .zoom[open],#trackrecord .zoom[open]::backdrop{animation:none}
 }

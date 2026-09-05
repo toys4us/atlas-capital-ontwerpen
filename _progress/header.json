@@ -1,8 +1,24 @@
 {
  "id": "header",
  "title": "Header",
- "wave": 0,
- "round": 0,
- "status": "queued",
- "history": []
+ "wave": 1,
+ "round": 1,
+ "status": "win",
+ "history": [
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.5,
+   "score_ref": 5,
+   "wowed": false,
+   "gap": "The unscrolled nav reserves width for the later \"— OPEN DE DISCORD ↗\" swap, so at rest DISCORD sits in an ~85px hole on either side while every other item is spaced ~28px; it reads as a broken flex gap, not a feature. At the bar the item keeps a single measured slot and the scrolled label grows from the dash without disturbing its neighbours (or the whole nav re-centres in one eased move). Beyond that, gold-small-caps-on-black-grain is a well-worn \"private capital\" costume; the header needs one element that is unmistakably this brand, not the category.",
+   "motion": "No contact sheet supplied; between states the bar compacts, gains a gold hairline and swaps DISCORD for a dashed \"OPEN DE DISCORD\" — considered choreography, restrained, but the static reservation for it is visible.",
+   "verdict": "B has the more distinctive atmosphere and a genuinely good vertical logotype, but it ships a struck-through mobile nav, low-contrast labels and no scrolled behaviour, which no jury forgives. A is the more generic idiom yet is built with real care — language switcher underline, scrolled hairline and label swap, tidy mobile — and loses points only for the gapped Discord slot and a look that belongs to the category rather than the brand.",
+   "confidence": 0.68,
+   "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/01-header.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/header.css. Shots in E:/ClaudeCode_GUI/atlas-designs/site/_build/header (+ /states for drawer/hover/focus/current/no-JS).\n1. Bug fixed: opening the drawer mid-page un-stuck the bar (scroll lock on <html> re-roots the scroller; it is now on body).\n2. Scrolled bar: opaque ground and a hairline that draws itself from the left. The .86 glass was showing sharp page text: its backdrop blur never renders in Chromium because base.css .page{isolation:isolate} is the backdrop roo",
+   "timestamp": "2026-09-05T21:25:16+02:00"
+  }
+ ]
 }
