@@ -2,7 +2,7 @@
  "id": "production",
  "title": "Production",
  "wave": 1,
- "round": 2,
+ "round": 1,
  "status": "win",
  "history": [
   {
@@ -49,6 +49,21 @@
    "confidence": 0.7,
    "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/03-production.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/production.css\n- Mobile (<=620px) now keeps the label/leader object instead of the centred stack: label left in the same tracked caps, the dashed gold leader runs out of it (a dash starting at the label) to the column's edge and terminates on a 1px x 9px vertical hairline rule (the frame edge the phone does not draw); the value takes the next line on the label's left edge. The ledger is inset 6% so labels start where the title card's rule starts and the ticks end whe",
    "ts": "2026-09-05T21:26:12"
+  },
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.5,
+   "score_ref": 5.5,
+   "wowed": false,
+   "gap": "The \"Productie\" spec sheet is a well-drilled hairline-and-leader system, but the aesthetic is the familiar dark-navy-plus-gold-serif fintech template and the smallest detail breaks it: the mono \"discord.gg/78Ff2GuSfW\" is dropped beside \"Discord\" at a different size and baseline, reading as an afterthought rather than a designed value. At the bar the URL either becomes the value itself (set in the same serif, gold, as a link with its own leader row) or sits on a second aligned line in the caption style; and the row-reveal stagger should never leave the nav reading \"OPE  DISCORD\" mid-transition as frame 5 of the motion sheet does.",
+   "motion": "Restrained staggered fade-ups per row with a hairline nav morph; disciplined, but the hero chart panel occludes the headline in frame 1 and the nav label is caught half-rendered.",
+   "verdict": "A wins on craft: its hairline grid, leaders, label tracking and single gold accent hold together at every size, even if the look is a known dark-luxury idiom and the URL detail and mid-transition nav glitch keep it off the shortlist. B has the more ambitious, moodier concept but ships with too many visible defects — colliding vertical labels, strikethrough nav, illegible text over imagery, missing spaces and a dead mobile zone — for the atmosphere to compensate.",
+   "confidence": 0.7,
+   "note": "Rebuilt the credits as a ladder: each label is now the tag at the end of a price level — a dashed hairline (3 on / 5 off, line-3, anchored so a dash ends at the label) drawn from the strip's left edge to the label, the same construction the founder's \"10+\" uses once and larger on the next reel, so the four small levels arrive at the big one; they also read as contents-page leaders, i.e. typeset.\nValue column is now type only: removed the four dashed rules under the values (they were brighter than the group rule and read as table borders, five rules in 700px on a phone). Rows are set by the",
+   "ts": "2026-09-06T01:58:09"
   }
  ]
 }
