@@ -19,6 +19,21 @@
    "confidence": 0.72,
    "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/07-markets.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/markets.css\n- Replaced the plain dl.pairs list with a desk board (dl.board): one row per instrument, name in the serif at list size, ticker in the mono at the row's right edge only where the client gave one (NQ, ES, XAUUSD), a --line-1 hairline under each row; no prices, no changes, no dashes where a number would sit.\n- Each group (Indices/Metalen/Energie/Crypto) is a credit on the reel's axis (label right of the gutter, rows left, first baseline shared) and closes on",
    "timestamp": "2026-09-05T19:25:36+02:00"
+  },
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 7,
+   "score_ref": 4,
+   "wowed": false,
+   "gap": "The markets list is immaculate but inert: four rows of nouns set at one size, with the entire left third of the viewport (0–560px) empty apart from tiny right-aligned labels, and on mobile the section flips from left-aligned rows to a centred \"WAT / De oprichter\" block. At the bar, the list would carry one designed moment — a large numeral count, a wide-measure display line, or the ticker tags (NQ, ES, XAUUSD) promoted into a true second column on a shared baseline — and the mobile section would keep a single alignment axis, with Dow Jones not orphaned onto its own row in the two-column grid.",
+   "motion": "Restrained staggered row fade-ins with a scroll-spy vertical section label; nothing over-eased, nothing gratuitous, though the rows simply fade rather than settle.",
+   "verdict": "A is a disciplined editorial ledger — warm hairlines, aligned ticker tags, a cool serif/small-caps pairing — that is correct in every pixel but never rises above tasteful. B has the more cinematic ambition, yet on screen it is a hero with overlapping labels, unreadable copy over imagery, broken text animation and a strikethrough nav, so A wins comfortably on craft while neither reaches the shortlist.",
+   "confidence": 0.86,
+   "note": "Rebuilt markets as a compact desk board on the reel's own axis (base.css dl.pairs, not a fork): each group is one credit row — label right of the gutter, its instruments three across on the label's baseline at the shared .cols list size, one hairline (line-2) closing each row in the value column, nothing drawn down the axis.\nTickers (NQ, ES, XAUUSD — only where the client gave one) now sit beside their names in the mono at caption size, ink-3, instead of stranded 430px away at the row's right edge; no ticker, no dash, for the other five.\nDropped the four bright dashed levels (the dashed liq",
+   "timestamp": "2026-09-05T21:14:44+02:00"
   }
  ]
 }
