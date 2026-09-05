@@ -28,10 +28,10 @@ footer{
 }
 footer .flinks{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
 footer .flinks a{
-  font-family:var(--f-mono);font-size:var(--t-micro);letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
+  font-family:var(--f-display);font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;color:var(--ink-2);
   text-decoration:none;border-bottom:1px solid var(--line-3);padding-bottom:4px;
 }
-footer .flinks a:hover{color:var(--gold-hi)}
+footer .flinks a:hover{color:var(--gold)}
 footer .risk{
   max-width:74ch;margin:0 auto;
   font-size:var(--t-small);line-height:1.75;letter-spacing:.02em;color:var(--ink-4);

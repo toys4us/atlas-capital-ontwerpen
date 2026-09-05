@@ -28,12 +28,12 @@
 #material .lesson figcaption{
   display:flex;gap:14px;align-items:baseline;
   margin-top:12px;
-  font-size:var(--t-caption);letter-spacing:.2em;text-transform:uppercase;
+  font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
 }
-#material .lesson figcaption b{color:var(--gold);font-weight:400;flex:0 0 auto}
+#material .lesson figcaption b{color:var(--ink-4);font-weight:400;flex:0 0 auto}
 #material .lesson figcaption span{color:var(--paper);font-weight:400}
 #material .lesson figcaption small{
   display:block;margin-top:7px;
-  letter-spacing:.04em;text-transform:none;
+  letter-spacing:0;text-transform:none;
   font-size:var(--t-small);color:var(--ink-3);line-height:1.6;
 }

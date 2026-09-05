@@ -21,9 +21,9 @@
   #header > .langsw{justify-self:end}
 }
 #header .wm{display:flex;align-items:center;gap:10px;text-decoration:none}
-#header .wm__mark{display:block;width:22px;height:auto;flex:0 0 auto}
+#header .wm__mark{display:block;width:var(--logo-nav);height:auto;flex:0 0 auto}
 #header .wm b{
-  font-weight:500;font-size:var(--t-micro);letter-spacing:.36em;text-transform:uppercase;color:var(--paper);
+  font-weight:500;font-size:var(--t-micro);letter-spacing:var(--trk-caps-wide);text-transform:uppercase;color:var(--paper);
 }
-#header .cta{padding:9px 16px;font-size:var(--t-nano);letter-spacing:.2em}
-#header .cta:hover{letter-spacing:.2em}
+#header .cta{padding:9px 0;font-size:var(--t-nano);letter-spacing:var(--trk-mono-caps)}
+#header .cta:hover{letter-spacing:var(--trk-mono-caps)}

@@ -2,9 +2,9 @@
  "id": "identity",
  "title": "Identity",
  "wave": 0,
- "round": 1,
+ "round": 2,
  "status": "loss",
- "updated_at": "2026-09-05T07:14:10+02:00",
+ "updated_at": "2026-09-05T07:41:12+02:00",
  "history": [
   {
    "wave": 0,
@@ -33,6 +33,21 @@
    "confidence": 0.78,
    "note": "IDENTITY ROUND 1 — gate PASS (0 failures, 0 notes) at 1440 and 390, NL and EN. Nothing committed.\n\nFILES OWNED\n- E:/ClaudeCode_GUI/atlas-designs/site/src/base.css (rewritten)\n- E:/ClaudeCode_GUI/atlas-designs/site/src/motion.js (rewritten)\n- E:/ClaudeCode_GUI/atlas-designs/site/src/index.tpl.html (fonts, meta, head script; inline grain SVG removed)\nToken-only swaps in sections: header.css, hero.css, material.css, trackrecord.css, closer.css. Reveal hooks added to 02-hero.html and 04-founder.html.\nJudging shots: _build/self (hero + full page), _build/self-founder (mask/stagger motion sh",
    "at": "2026-09-05T07:14:10+02:00"
+  },
+  {
+   "wave": 0,
+   "round": 2,
+   "ref": "monolog",
+   "status": "loss",
+   "score_ours": 5.2,
+   "score_ref": 6.8,
+   "wowed": false,
+   "gap": "The identity is carried by a bevelled gradient-gold emblem and raw TradingView screenshots, and both read as stock: the chrome-gold of the logo does not even match the flat mustard of the CTA, and the chart thumbnails are low-res captures of differing crops, with platform watermarks, dropped into hairline frames. At the bar, the mark would be a flat single-tone gold on one stroke weight, the button and rails would share that exact hue, and the \"leerstof\" charts would be redrawn as consistent, vector, on-brand diagrams (one palette, one candle style, same aspect ratio) with the SMT/FVG annotations set in the site's mono. The mobile nav also breaks: the wordmark wraps to two lines, the NL indicator dot floats untethered, and NL/EN spacing is uneven.",
+   "motion": "Six frames, one scroll position: apart from a mask-reveal on the hero heading and ticking clocks, nothing moves — the page is effectively static, which is restraint by omission rather than design.",
+   "verdict": "A has a genuine identity — a custom wordmark with a real idea in its two O's, a grainy filmic hero, brand-scaled statements — undermined by header/pin collisions, a clipped mobile nav and template-like centred copy in dead black space. B has a tidier editorial type system (serif display, mono small caps, hairline rails, dual clocks) but hangs it on a gradient-gold crypto-style emblem and screenshot chart thumbnails with no scroll choreography at all, so it never rises above a well-set template.",
+   "confidence": 0.8,
+   "note": "IDENTITY ROUND 2 — gate PASS (0 failures, 0 notes) at 1440 and 390, NL and EN. Nothing committed. Judging shots refreshed: E:/ClaudeCode_GUI/atlas-designs/site/_build/self (hero: desk-fold, mob-fold, motion, full-desk, full-mob) and _build/self-founder (mask/draw/stagger + rail motion).\n\nWHAT THE JUDGE SAW vs NOW\n- \"gradient-gold badge logo as a poster\" -> the lockup is now a mark: token --logo-hero clamp(120px,14vw,168px) (hero.css swapped its hard-coded clamp(180px,32vw,340px) for the token; header mark uses --logo-nav).\n- \"gold-foil CTA twice in one viewport\" -> .cta is now a hairl",
+   "at": "2026-09-05T07:41:12+02:00"
   }
  ]
 }

@@ -25,7 +25,7 @@
 #trackrecord .proofs figcaption{
   margin-top:8px;
   font-size:var(--t-micro);
-  letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+  letter-spacing:var(--trk-caps);text-transform:uppercase;color:var(--ink-1);
 }
 #trackrecord .proofs figcaption small{
   display:block;margin-top:4px;
@@ -35,7 +35,7 @@
 #trackrecord .proofs-hint{
   position:relative;z-index:2;
   margin:clamp(26px,3.6vw,40px) 0 clamp(14px,2vw,20px);text-align:center;
-  font-size:var(--t-micro);letter-spacing:.28em;text-transform:uppercase;color:var(--ink-5);
+  font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;color:var(--ink-5);
 }
 #trackrecord .caveat{
   position:relative;z-index:2;
@@ -47,8 +47,8 @@
 }
 #trackrecord .caveat b{
   display:block;margin-bottom:12px;
-  color:var(--gold);font-weight:400;
-  font-size:var(--t-micro);letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ink-1);font-weight:400;
+  font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
 }
 #trackrecord .caveat p{margin:0 0 .8em}
 #trackrecord .caveat p:last-child{margin-bottom:0}
@@ -61,5 +61,5 @@
 #trackrecord .zoom .close{
   display:block;margin:14px auto 0;padding:8px 18px;
   border:1px solid var(--line-3);background:transparent;color:var(--gold);
-  font:inherit;font-size:var(--t-micro);letter-spacing:.3em;text-transform:uppercase;cursor:pointer;
+  font:inherit;font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;cursor:pointer;
 }

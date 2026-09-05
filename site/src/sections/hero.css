@@ -47,6 +47,6 @@
    letterspaced sub-line stays as the credit beneath it. */
 #hero .filmtitle__logo{
   display:block;margin:0 auto;
-  width:clamp(180px,32vw,340px);height:auto;
+  width:var(--logo-hero);height:auto;
 }
 #hero .cta{margin-top:clamp(26px,4vw,38px);position:relative;z-index:3}
