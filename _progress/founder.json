@@ -19,6 +19,21 @@
    "confidence": 0.72,
    "builder_note": "Rewrote src/sections/04-founder.html and src/sections/founder.css (only those two files).\n- Dropped the \"OPRICHTER\" dt label (it doubled the signature for one voice); the group title names the role, the signature names the voice.\n- The credit is now `p.ten` on the reel's axis: \"10⁺\" as a large quiet serif numeral (local --n clamp(58px,7.2vw,96px), superior plus on the cap line) right against the gutter like the tag at the end of a price level, a dashed gold hairline (3/5 dashes of --line-4, the hero's liquidity-line rhythm) running to it from the strip's edge; \"jaar actief in trading /",
    "ts": "2026-09-05T17:27:47+00:00"
+  },
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 7,
+   "score_ref": 5.5,
+   "wowed": false,
+   "gap": "The founder region is a statement with no founder: a \"10+\" figure, a dotted leader and a pull-quote signed \"— de oprichter\", with the dotted rule floating at mid-x-height of the numeral and \"jaar actief in trading\" anchored to neither the numeral edge nor the rule start (20px gap to the leader, 135px to the label), so the lockup reads assembled rather than designed. At the bar this is a composed lockup — leader sitting on the numeral's baseline, label flush to where the leader begins — paired with a single restrained portrait or a hand-set proof (a screenshot, a signature, a dated caption) so the section carries a person, not just a claim, and the dark-gold-serif trading trope earns its distinctiveness.",
+   "motion": "Restrained fade-up stagger — spec rows, then numeral, then statement — with consistent easing and a nice nav swap to \"OPEN DE DISCORD\", marred only by a clipped headline fragment in the first frame.",
+   "verdict": "A wins on discipline: a tight editorial system with real typographic hierarchy, clean hairline framing and restrained motion, even though it is a familiar dark-luxury idiom and its founder section lacks any human evidence. B has the stronger atmosphere and more distinctive world, but a jury cannot look past label collisions, illegible copy over imagery, a dead mobile viewport and broken split-text — those are disqualifying at SOTD level, not polish notes.",
+   "confidence": 0.74,
+   "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/04-founder.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/founder.css.\n- The credit is now a proper level: \"10+\" hangs on the strip's left edge (the quote's line), set large (clamp 72–132px, ink-2 so it stays a step under the quote) with the plus as a small superior; one dashed gold hairline (3 on/5 off at .55, the hero's level) runs from the tag to the strip's right edge at the height of the figures; the numeral's ground covers the line, so the tag sits on it.\n- \"jaar actief in trading\" / \"years active in trading\" hang",
+   "ts": "2026-09-05T19:13:53+00:00"
   }
  ]
 }

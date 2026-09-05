@@ -65,8 +65,8 @@
    path holds -- folded flat until the row is pointed at, then it develops
    downward from the level (a scale, never opacity, so the probe sees it) */
 #access .fig__zone{
-  fill:var(--gold);fill-opacity:.07;
-  stroke:var(--gold);stroke-opacity:.3;stroke-width:1;
+  fill:var(--gold);fill-opacity:.09;
+  stroke:var(--gold);stroke-opacity:.16;stroke-width:1;
   transform:scaleY(0);transform-origin:top;transform-box:fill-box;
   transition:transform var(--d-slow) var(--e-out);
 }
