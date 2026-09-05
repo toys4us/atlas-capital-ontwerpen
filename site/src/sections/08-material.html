@@ -69,17 +69,18 @@
     </figure>
   </div>
   <!-- a tap opens the untouched file in the page's one lightbox (#zoom, in
-       the track record). Its own script only listens to its own tiles, so
+       the track record, later in the page -- so it is looked up on the
+       click, not now). Its own script only listens to its own tiles, so
        this one opens it for the plates: the picture, then whatever caption
        slots the dialog has (number, name, note), then showModal. Closing is
        the dialog's own affair. Nothing here runs without the dialog. -->
   <script>
   (function(){
-    var d = document.getElementById("zoom"); if (!d || !d.showModal) return;
     function text(el){ return el ? (el.innerText || el.textContent || "").replace(/\s+/g, " ").trim() : ""; }
     function put(el, s){ if (el) el.textContent = s; }
     document.addEventListener("click", function(e){
-      var t = e.target.closest("#material .tile"); if (!t || d.open) return;
+      var t = e.target.closest("#material .tile"); if (!t) return;
+      var d = document.getElementById("zoom"); if (!d || !d.showModal || d.open) return;
       var i = t.querySelector("img"), fc = t.closest("figure"), im = d.querySelector("img");
       fc = fc && fc.querySelector("figcaption");
       if (!i || !im) return;

@@ -1,8 +1,24 @@
 {
  "id": "markets",
  "title": "Markets & Live",
- "wave": 0,
- "round": 0,
- "status": "queued",
- "history": []
+ "wave": 1,
+ "round": 1,
+ "status": "win",
+ "history": [
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.5,
+   "score_ref": 5,
+   "wowed": false,
+   "gap": "The markets region is a ledger of nouns, not a designed moment: nine serif rows, three orphan tickers (NQ, ES, XAUUSD) with the other six rows bare, so the right column reads as unfinished rather than deliberate, and the desktop crop leaves the left third of the container empty above a 130px dead band before \"06 Live\". At the bar every row would carry the same secondary datum (or none), the group headers would do real typographic work (a display-size \"Indices\" with the count, not a 10px tracked label), and the section would have one moment of scale contrast instead of uniform 22px rows.",
+   "motion": "Plain scroll with a sticky header and rotated margin label; no reveals, no easing visible, restrained to the point of static.",
+   "verdict": "A is a quiet, consistent editorial ledger with a coherent hairline system (solid rows, gold dashed groups) and clean small caps, but it never rises above competent and its inconsistent tickers and dead band keep it off a shortlist. B has the atmosphere and photographic ambition of a stronger site, yet illegible copy over imagery, a logo collision, missing-space text bugs and a struck-through mobile nav are craft failures a jury cannot forgive, so the restrained one wins.",
+   "confidence": 0.72,
+   "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/07-markets.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/markets.css\n- Replaced the plain dl.pairs list with a desk board (dl.board): one row per instrument, name in the serif at list size, ticker in the mono at the row's right edge only where the client gave one (NQ, ES, XAUUSD), a --line-1 hairline under each row; no prices, no changes, no dashes where a number would sit.\n- Each group (Indices/Metalen/Energie/Crypto) is a credit on the reel's axis (label right of the gutter, rows left, first baseline shared) and closes on",
+   "timestamp": "2026-09-05T19:25:36+02:00"
+  }
+ ]
 }

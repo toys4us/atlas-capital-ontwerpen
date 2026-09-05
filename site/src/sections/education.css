@@ -118,13 +118,15 @@
 }
 
 /* with a pointer, at the width where the two columns hold a gloss on one
-   line: the line is reserved and the gloss waits below it, clipped; it
-   rises when the row is pointed at or focused */
+   line: the line is reserved and the gloss is clipped to nothing in its
+   place (a clip, not a transform: a displaced layer under an overflow
+   clip leaks in a beyond-viewport capture); it prints on, top to bottom,
+   when the row is pointed at or focused -- the way the opening plate
+   prints on */
 @media (hover:hover) and (min-width:840px){
-  #education dd{overflow:hidden}
-  #education .gloss{transform:translateY(115%)}
-  #education .row:not(.reveal) .gloss{transition:transform var(--d) var(--e-out)}
-  #education .row:hover .gloss,#education .row:focus-visible .gloss{transform:none}
+  #education .gloss{clip-path:inset(0 0 100% 0)}
+  #education .row:not(.reveal) .gloss{transition:clip-path var(--d) var(--e-out)}
+  #education .row:hover .gloss,#education .row:focus-visible .gloss{clip-path:inset(0)}
   #education .level__tag{display:block}
 }
 
