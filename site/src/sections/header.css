@@ -1,29 +1,62 @@
-/* ===== header ===== */
+/* ===== header =====
+   One bar, three things: the mark and the name, the one link that matters,
+   the two languages. At the top of the page it is transparent -- the title
+   card owns the fold -- and it gains its ground and hairline once the
+   visitor has moved (motion.js toggles .is-top). The link is quiet text
+   while a gold button is on screen (the title card's, the end card's) and
+   becomes that button itself when none is: one gold button per viewport,
+   always (motion.js toggles .solid on it). */
 #header{
   position:sticky;top:0;z-index:50;
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:11px clamp(16px,4vw,40px);
-  background:var(--bg-glass);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  min-height:var(--hdr-h);
+  padding:0 clamp(14px,4vw,40px);
+  background:rgba(8,9,11,.94);
   border-bottom:1px solid var(--line-1);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:background-color var(--d-slow) var(--e-out),border-color var(--d-slow) var(--e-out);
 }
+.js #header.is-top{background:rgba(8,9,11,0);border-bottom-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
 /* space-between puts the middle item halfway between its neighbours, not
-   halfway across the bar -- and the wordmark is 80px wider than the language
-   switch, so the Discord button sat 40px right of centre on a page whose
-   every other element is centred. Two equal outer tracks fix it. Measured:
-   the symmetric layout needs ~580px, so it only engages once there is room;
-   below that the row stays space-between, which is right on a phone. */
+   halfway across the bar -- and the wordmark is wider than the language
+   switch. Two equal outer tracks centre the link on the page's own axis. */
 @media (min-width:620px){
   #header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
   #header > .wm{justify-self:start}
   #header > .cta{justify-self:center}
   #header > .langsw{justify-self:end}
 }
-#header .wm{display:flex;align-items:center;gap:10px;text-decoration:none}
+#header .wm{display:inline-flex;align-items:center;gap:10px;text-decoration:none;flex:0 0 auto;min-width:0}
 #header .wm__mark{display:block;width:var(--logo-nav);height:auto;flex:0 0 auto}
 #header .wm b{
+  display:block;
+  white-space:nowrap;
   font-weight:500;font-size:var(--t-micro);letter-spacing:var(--trk-caps-wide);text-transform:uppercase;color:var(--paper);
+  transition:color var(--d) var(--e-out);
 }
-#header .cta{padding:9px 0;font-size:var(--t-nano);letter-spacing:var(--trk-mono-caps)}
-#header .cta:hover{letter-spacing:var(--trk-mono-caps)}
+#header .wm:hover b{color:var(--gold-hi)}
+/* the link: same box in both states, so the swap is a fill, not a jump */
+#header .cta{
+  padding:10px 14px 9px;
+  font-size:var(--t-micro);
+  letter-spacing:var(--trk-caps);
+  color:var(--ink-2);
+  background:transparent;
+  transition:background-color var(--d-slow) var(--e-out),color var(--d-slow) var(--e-out),transform var(--d-fast) var(--e-out);
+}
+#header .cta::before{display:none}
+#header .cta:hover,#header .cta:focus-visible{color:var(--paper)}
+#header .cta.solid{background:var(--gold);color:var(--gold-ink)}
+#header .cta.solid:hover,#header .cta.solid:focus-visible{background:var(--gold-hi);color:var(--gold-ink)}
+#header .cta.solid:active{background:var(--gold-lo)}
+/* a phone: the same three things, tighter, and nothing wraps */
+@media (max-width:619px){
+  #header{gap:6px}
+  #header .wm{gap:8px}
+  #header .wm b{font-size:var(--t-nano);letter-spacing:.16em}
+  #header .cta{padding:10px 8px 9px;font-size:var(--t-nano);letter-spacing:.11em}
+  #header .langsw{gap:2px}
+  #header .langsw button{padding:8px 4px;font-size:var(--t-nano)}
+  #header .langsw button::after{left:4px;right:calc(4px + var(--trk-caps))}
+}

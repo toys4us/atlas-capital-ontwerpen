@@ -6,7 +6,8 @@
 
    Identity in one line: a credits roll set like the financial press —
    Newsreader for everything that is read, Fragment Mono for everything that
-   is counted, gold only ever as a hairline, one italic, or the one button.
+   is counted, one flat gold (#D7B364) for the mark, the hairlines and the
+   one button, and a page that arrives as you read it.
 
    Where the gold goes (and nowhere else):
      - hairlines: the strip edges, the group rules, the language dot
@@ -58,6 +59,7 @@
   /* fluid scale, 390 → 1440. Newsreader has a small x-height, so every
      step sits a size above where a grotesk would. */
   --t-display:clamp(76px,12.5vw,184px);  /* the end card                   */
+  --t-hero:clamp(58px,9.2vw,132px);      /* the title card, three lines    */
   --t-h1:clamp(44px,7vw,100px);          /* a section-sized line           */
   --t-h2:clamp(27px,3.2vw,46px);         /* a statement, a quote           */
   --t-h3:clamp(20px,1.95vw,27px);        /* a credit value                 */
@@ -71,6 +73,7 @@
 
   /* tracking per size */
   --trk-display:-.022em;
+  --trk-hero:-.024em;
   --trk-h1:-.014em;
   --trk-caps-wide:.24em;                 /* group titles, the wordmark     */
   --trk-caps:.16em;                      /* labels                         */
@@ -80,6 +83,7 @@
 
   /* leading */
   --lh-display:.92;
+  --lh-hero:.94;
   --lh-tight:1.08;
   --lh-snug:1.24;
   --lh-body:1.6;
@@ -96,9 +100,11 @@
   --gap-block:clamp(32px,5vw,64px);
   --gap-item:clamp(12px,1.6vw,20px);
 
-  /* the mark: a mark, not a poster */
-  --logo-hero:clamp(120px,14vw,168px);
-  --logo-nav:22px;
+  /* the mark: a mark, not a poster. The hero shows the studio ident (the
+     triangle alone) at the size of a line of text; the name is set in type. */
+  --logo-hero:clamp(40px,4.4vw,58px);
+  --logo-nav:20px;
+  --hdr-h:52px;
 
   /* radii: none. Corners are square everywhere. */
   --r:0;
@@ -107,12 +113,13 @@
   --d-fast:.18s;
   --d:.45s;
   --d-slow:.9s;
-  --d-reveal:1.4s;
+  --d-reveal:1.4s;                        /* the settle (transform)            */
+  --d-fade:.7s;                           /* the appearance (opacity)          */
   --e-out:cubic-bezier(.16,1,.3,1);       /* expo-out: fast start, long settle */
   --e-reveal:cubic-bezier(.33,1,.68,1);   /* cubic-out: a calm arrival          */
   --e-inout:cubic-bezier(.65,0,.35,1);
   --e-soft:cubic-bezier(.2,.6,.2,1);
-  --reveal-y:22px;
+  --reveal-y:26px;
 }
 
 /* ---------- metric-matched fallbacks --------------------------------------
@@ -142,7 +149,7 @@ html{
   -webkit-text-size-adjust:100%;
   background:var(--bg);
   scroll-behavior:smooth;
-  scroll-padding-top:64px;              /* the sticky header */
+  scroll-padding-top:var(--hdr-h);      /* the sticky header */
   scrollbar-width:thin;
   scrollbar-color:#3A321F var(--bg-deep);
 }
@@ -306,8 +313,10 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
    Two kinds and only two. .cta is a hairline dash and a label, the way a
    quiet link reads on a good site; on hover the dash lengthens and the
    label warms. .cta.solid is the one gold button on the page: flat gold,
-   dark ink, no gradient, no glow. Nothing about the text moves, so the
-   label never jitters. */
+   dark ink, no gradient, no glow, the same #D7B364 as every hairline and
+   the mark. The label is set in the page's label voice -- the serif, small,
+   tracked caps -- not in the mono, which is for what is counted. Nothing
+   about the text moves, so the label never jitters. */
 .cta{
   position:relative;
   display:inline-flex;align-items:center;gap:14px;
@@ -315,10 +324,10 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
   border:0;
   background:transparent;
   color:var(--ink-1);
-  font-family:var(--f-mono);
-  font-size:var(--t-caption);
-  font-weight:400;
-  letter-spacing:var(--trk-mono-caps);
+  font-family:var(--f-display);
+  font-size:12.5px;
+  font-weight:500;
+  letter-spacing:var(--trk-caps);
   line-height:1.2;
   text-transform:uppercase;
   text-decoration:none;
@@ -337,7 +346,7 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 .cta:hover::before,.cta:focus-visible::before{width:44px}
 .cta:active{transform:translateY(1px)}
 .cta.solid{
-  padding:15px 30px;
+  padding:15px 30px 14px;
   background:var(--gold);
   color:var(--gold-ink);
   transition:background-color var(--d) var(--e-out),color var(--d) var(--e-out),transform var(--d-fast) var(--e-out);
@@ -551,12 +560,14 @@ dl.pairs .cols{
 /* ---------- language ----------------------------------------------------- */
 :root:not([data-lang="en"]) [lang="en"]{display:none!important}
 :root[data-lang="en"] [lang="nl"]{display:none!important}
-/* Two words, no box. The chosen one carries a gold point above it, the way
-   a projector marks the reel in play; the other waits in the label grey. */
+/* Two words, no box, evenly spaced. The chosen one is in the paper and
+   carries a short gold rule directly under it -- tethered to the word, the
+   width of the word; the other waits in the label grey. Both are the same
+   box so nothing shifts when they swap. */
 .langsw{
   display:inline-flex;
-  align-items:stretch;
-  gap:18px;
+  align-items:center;
+  gap:6px;
 }
 .langsw button{
   appearance:none;
@@ -564,31 +575,32 @@ dl.pairs .cols{
   position:relative;
   background:transparent;
   border:0;
-  padding:10px 2px 8px;
+  margin:0;
+  padding:8px 5px;
   font-family:var(--f-display);
   font-size:var(--t-micro);
   font-weight:400;
   letter-spacing:var(--trk-caps);
-  text-indent:var(--trk-caps);
   text-transform:uppercase;
   line-height:1;
   color:var(--ink-4);
   cursor:pointer;
   transition:color var(--d) var(--e-out);
 }
-.langsw button::before{
+.langsw button::after{
   content:"";
   position:absolute;
-  left:50%;top:0;
-  width:3px;height:3px;
-  margin-left:-1px;
+  left:5px;right:calc(5px + var(--trk-caps));   /* the word, minus its trailing tracking */
+  bottom:3px;
+  height:1px;
   background:var(--gold);
-  transform:scale(0);
+  transform:scaleX(0);
+  transform-origin:left center;
   transition:transform var(--d) var(--e-out);
 }
 .langsw button:hover{color:var(--paper)}
-.langsw button[aria-pressed="true"]{color:var(--ink-1);cursor:default}
-.langsw button[aria-pressed="true"]::before{transform:scale(1)}
+.langsw button[aria-pressed="true"]{color:var(--paper);cursor:default}
+.langsw button[aria-pressed="true"]::after{transform:none}
 .langsw button:focus-visible{outline-offset:2px}
 
 /* ---------- reveal contract ---------------------------------------------
@@ -600,34 +612,51 @@ dl.pairs .cols{
        missing, behind .no-tr so the hide is a cut and not a fade
    so without JavaScript every element is on screen from the first paint.
    motion.js adds .is-in when the element scrolls into view; children of a
-   [data-stagger] container arrive one after another; once the transition
-   has run motion.js drops the .reveal class so the element goes back to its
-   own cascade (a button keeps its hover transition). If motion.js throws it
-   takes .js off again, so a broken script is a visible page.
+   [data-stagger] container arrive one after another (the attribute's value
+   is the step in ms); once the transition has run motion.js drops the
+   .reveal class so the element goes back to its own cascade (a button keeps
+   its hover transition). If motion.js throws it takes .js off again, so a
+   broken script is a visible page. The roll's own blocks (group titles,
+   credit pairs, plates, the end card) need no markup: motion.js tags them
+   itself before the first frame, under the same rules.
 
-   Variants (never opacity, so they are always "visible" to a probe):
+   Timing: the appearance is quick (opacity, --d-fade) and the settle is
+   slow (transform, --d-reveal) -- a thing is there almost at once, then
+   finds its place. Variants (never opacity, so always "visible" to a probe):
      .mask > .reveal   the wrapper clips; the child rises from below the
                        fold line -- for display lines and quotes
      .reveal.draw      a rule that draws itself from the left (or from the
-                       centre with .draw.from-centre) -- for .hair and rules */
+                       centre with .draw.from-centre) -- for .hair and rules
+     .reveal.card      a group title: the rule draws from the centre while
+                       the title itself fades in on it */
 .js .reveal{
   opacity:0;
   transform:translateY(var(--reveal-y));
-  transition:opacity var(--d-reveal) var(--e-reveal),transform var(--d-reveal) var(--e-reveal);
+  transition:opacity var(--d-fade) var(--e-reveal),transform var(--d-reveal) var(--e-reveal);
 }
 .js .reveal.is-in{opacity:1;transform:none}
-.no-tr .reveal{transition:none!important}
+.no-tr .reveal,.no-tr .reveal::before,.no-tr .reveal *,.reveal.no-tr,.reveal.no-tr::before,.reveal.no-tr *{transition:none!important}
 .mask{overflow:hidden;padding-bottom:.3em;margin-bottom:-.3em}
-.js .mask > .reveal{opacity:1;transform:translateY(110%);transition:transform calc(var(--d-reveal) * 1.1) var(--e-reveal)}
+.js .mask > .reveal{opacity:1;transform:translateY(112%);transition:transform calc(var(--d-reveal) * 1.1) var(--e-reveal)}
 .js .mask > .reveal.is-in{transform:none}
 .js .reveal.draw{opacity:1;transform:scaleX(0);transform-origin:left center;transition:transform var(--d-reveal) var(--e-reveal)}
 .js .reveal.draw.from-centre{transform-origin:center}
 .js .reveal.draw.is-in{transform:none}
+.js .reveal.card{opacity:1;transform:none;transition:none}
+.js .reveal.card::before{transform:scaleX(0);transition:transform var(--d-reveal) var(--e-reveal)}
+.js .reveal.card > h2{opacity:0;transform:translateY(10px);transition:opacity var(--d-fade) var(--e-reveal),transform var(--d-reveal) var(--e-reveal)}
+.js .reveal.card.is-in::before{transform:none}
+.js .reveal.card.is-in > h2{opacity:1;transform:none}
+/* [data-parallax="0.12"] drifts at that fraction of the scroll distance from
+   the viewport centre; with [data-parallax-top] it drifts from where it sits
+   at the top of the page instead (for the fold, so the load layout holds). */
 [data-parallax]{will-change:transform}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .js .reveal,.js .mask > .reveal,.js .reveal.draw{opacity:1;transform:none;transition:none}
+  .js .reveal,.js .mask > .reveal,.js .reveal.draw,.js .reveal.card > h2{opacity:1;transform:none;transition:none}
+  .js .reveal.card::before{transform:none;transition:none}
+  [data-parallax]{transform:none!important}
   .js .roll::before{background:linear-gradient(180deg,rgba(215,179,100,0) 0,var(--line-2) 220px,var(--line-2) calc(100% - 220px),rgba(215,179,100,0) 100%)}
   .rail__scroll::after{animation:none}
   .cta,.cta::before,.cta::after,a,.langsw button,.rail__label,.rail__scroll{transition:none}

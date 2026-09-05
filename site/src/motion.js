@@ -4,21 +4,34 @@
    class "js", and only elements with .reveal are affected. So a visitor
    without JavaScript, or with a script that failed, sees everything.
 
-   Reveal     .reveal gets .is-in once 15% of it is inside the viewport
-              (measured 8% in from the bottom edge). A [data-stagger]
-              container reveals its .reveal children one after the other,
-              STEP ms apart. Whatever is on screen at load comes in as one
-              short sequence starting on the first frame, after the web fonts
-              (never later than FONTS ms). When a reveal has run, the .reveal
-              class is dropped so the element returns to its own cascade.
+   Reveal     .reveal gets .is-in once it is inside the viewport (measured
+              8% in from the bottom edge). A [data-stagger] container
+              reveals its .reveal children one after the other, STEP ms
+              apart (or the attribute's own value); on scroll the whole
+              sequence is capped so nothing waits behind its siblings.
+              Whatever is on screen at load comes in as one sequence
+              starting on the first frame, after the web fonts (never later
+              than FONTS ms). When a reveal has run, the .reveal class is
+              dropped so the element returns to its own cascade.
+   Auto       the roll's own blocks are tagged here, before the first frame,
+              so the section partials carry no motion markup: group titles
+              (.card: the rule draws, the title fades), credit pairs (a
+              stagger of rows), plates and proofs (a stagger of figures),
+              ledes, quotes, the end card and the footer.
    Mask       a .mask wrapper clips its .reveal child, which rises from below
               the fold line instead of fading (base.css does the styling; the
               observer is the same).
    Draw       .reveal.draw is a rule that draws itself (scaleX), same observer.
    Parallax   [data-parallax="0.12"] drifts at that fraction of the scroll
               distance from the viewport centre: positive lags like a
-              background, negative leads. Do not put it on a .reveal element
-              (both write transform); put it on a child or a wrapper.
+              background, negative leads. With [data-parallax-top] it drifts
+              from where it sits at scroll 0 instead (for the fold). Do not
+              put it on a .reveal element (both write transform); put it on
+              a child or a wrapper.
+   Header     .is-top while the page is at the top (the bar is transparent
+              over the title card); .solid on the header's link whenever no
+              other gold button is on screen, so there is one gold button
+              per viewport and the link becomes it when the card's has gone.
    Lead       writes --spine-y on .roll so the bright lead on the strip's
               left edge sits level with the middle of the viewport.
    Rail       desktop only, markup in the template: two market clocks in
@@ -36,12 +49,58 @@
   var reduce = false;
   try { reduce = W.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e){}
 
-  var STEP = 220;         /* ms between staggered siblings                */
-  var GAP = 200;          /* ms between groups in the load sequence        */
-  var CAP = 700;          /* the load sequence never waits longer          */
-  var FONTS = 400;        /* ms we are willing to wait for the web fonts   */
-  var BEAT = 220;         /* ms of stillness before the fold comes in      */
+  var STEP = 160;         /* ms between staggered siblings (default)      */
+  var SCROLL_SPAN = 420;  /* on scroll a whole stagger fits in this        */
+  var GAP = 160;          /* ms between groups in the load sequence        */
+  var CAP = 900;          /* the load sequence never waits longer          */
+  var FONTS = 350;        /* ms we are willing to wait for the web fonts   */
+  var BEAT = 520;         /* ms of light before the card comes in          */
   var DUR = 1800;         /* >= the longest reveal transition in css       */
+
+  /* ---- auto: tag the roll's blocks -------------------------------------
+     Before anything is measured. Each entry: selector, what to add to the
+     match, and (for a stagger) what to add to which children. */
+  function tag(el, cls){ if (el && !el.classList.contains("reveal")) el.classList.add.apply(el.classList, cls.split(" ")); }
+  function auto(sel, cls, kids, kidCls, step){
+    var els = document.querySelectorAll(sel), i, k, c;
+    for (i = 0; i < els.length; i++) {
+      if (els[i].closest("[data-stagger]") || els[i].classList.contains("reveal")) continue;
+      if (kids) {
+        c = els[i].querySelectorAll(kids);
+        if (!c.length) continue;
+        els[i].setAttribute("data-stagger", step || "");
+        for (k = 0; k < c.length; k++) tag(c[k], kidCls || "reveal");
+      } else {
+        tag(els[i], cls);
+      }
+    }
+  }
+  function wrapMask(el){
+    if (!el || (el.parentNode && el.parentNode.classList.contains("mask"))) return;
+    var m = document.createElement("div");
+    m.className = "mask";
+    el.parentNode.insertBefore(m, el);
+    m.appendChild(el);
+    tag(el, "reveal");
+  }
+  if (!reduce) {
+    auto(".roll .grp", "reveal card");
+    auto(".roll .lesson-lede", "reveal");
+    auto(".roll dl.pairs", null, ":scope > dt, :scope > dd", "reveal", 70);
+    auto(".roll .lessons", null, ":scope > figure, :scope > *", "reveal", 110);
+    auto(".roll .proofs", null, ":scope > figure, :scope > *", "reveal", 90);
+    auto(".roll .still", null, ".hair, blockquote, .who", "reveal", 180);
+    auto(".roll .interstitial", null, ":scope > *", "reveal", 140);
+    auto(".roll .proofs-hint, .roll .caveat", "reveal");
+    wrapMask(document.querySelector("#closer .endword"));
+    auto("#closer", null, ":scope > svg, .mask > .endword, :scope > .subtitle, :scope > .cta", "reveal", 140);
+    auto("footer", "reveal");
+    var em = document.querySelector("#closer svg");
+    if (em && !em.hasAttribute("data-parallax")) { /* the reel emblem lags a little behind the card */
+      var w = document.createElement("span"); w.setAttribute("data-parallax", "0.08"); w.style.display = "block";
+      em.parentNode.insertBefore(w, em); w.appendChild(em);
+    }
+  }
 
   var all = document.querySelectorAll(".reveal");
   var boxes = document.querySelectorAll("[data-stagger]");
@@ -60,12 +119,18 @@
     var r = el.getBoundingClientRect(), h = W.innerHeight || root.clientHeight;
     return r.bottom > 0 && r.top < h * 0.92 + 1;
   }
+  function stepOf(box, n, onScroll){
+    var s = parseInt(box.getAttribute("data-stagger"), 10);
+    if (isNaN(s) || s <= 0) s = STEP;
+    if (onScroll && n > 1) s = Math.min(s, Math.floor(SCROLL_SPAN / (n - 1)));
+    return s;
+  }
   /* reveal a container's children in sequence; returns the delay after the last */
-  function stagger(box, base){
-    var kids = box.querySelectorAll(".reveal"), i, d = base || 0;
+  function stagger(box, base, onScroll){
+    var kids = box.querySelectorAll(".reveal"), i, d = base || 0, s = stepOf(box, kids.length, onScroll);
     for (i = 0; i < kids.length; i++) {
       if (kids[i].classList.contains("is-in")) continue;
-      show(kids[i], d); d += STEP;
+      show(kids[i], d); d += s;
     }
     return d;
   }
@@ -94,6 +159,38 @@
   })();
 
   function pad(n){ return n < 10 ? "0" + n : "" + n; }
+
+  /* ---- the header: transparent at the top, one gold button per viewport --
+     The link in the bar is quiet text while any other .cta.solid is on
+     screen and is the gold button itself when none is. Works with or
+     without reduced motion: it is state, not decoration. */
+  var hdr = document.querySelector("#header");
+  var hdrCta = hdr ? hdr.querySelector(".cta") : null;
+  var golds = [], g, gv = [];
+  (function header(){
+    if (!hdr) return;
+    var sol = document.querySelectorAll(".cta.solid");
+    for (g = 0; g < sol.length; g++) if (!hdr.contains(sol[g])) { golds.push(sol[g]); gv.push(false); }
+    function top(){ hdr.classList.toggle("is-top", (W.scrollY || W.pageYOffset || 0) < 8); }
+    function swap(){
+      var any = false, i;
+      for (i = 0; i < gv.length; i++) if (gv[i]) any = true;
+      if (hdrCta) hdrCta.classList.toggle("solid", !any && golds.length > 0);
+    }
+    top();
+    W.addEventListener("scroll", top, { passive: true });
+    if ("IntersectionObserver" in W && golds.length) {
+      var gio = new IntersectionObserver(function(entries){
+        for (var k = 0; k < entries.length; k++) {
+          var i = golds.indexOf(entries[k].target);
+          if (i >= 0) gv[i] = entries[k].isIntersecting;
+        }
+        swap();
+      }, { threshold: 0, rootMargin: "-" + (hdr.offsetHeight || 52) + "px 0px 0px 0px" });
+      for (g = 0; g < golds.length; g++) gio.observe(golds[g]);
+    }
+  })();
+
   /* reduced motion: the rail still names the group in view, without sliding */
   function railStatic(){
     var rl = document.querySelector(".rail"), lb = rl ? rl.querySelector(".rail__label") : null;
@@ -127,8 +224,9 @@
      a transition that the next frame would only reverse. Either way the
      next frame starts the intro. Groups above the fold follow each other;
      nothing waits past CAP. The intro itself waits one BEAT after the
-     fonts, so the first thing the visitor sees is stillness, then the
-     fold arriving; the whole sequence is over well inside two seconds. */
+     fonts, so the first thing the visitor sees is the light coming on, then
+     the card arriving; the whole sequence is over inside two seconds and a
+     half, and the first thing in it is on screen within one. */
   if (!root.classList.contains("js")) {
     root.classList.add("no-tr");
     root.classList.add("js");
@@ -136,22 +234,38 @@
     root.classList.remove("no-tr");
   }
   var j, started = false;
+  /* what is on screen right now belongs to the intro, not to the observer */
+  var fold = [];
+  for (j = 0; j < boxes.length; j++) if (inView(boxes[j])) fold.push(boxes[j]);
+  for (j = 0; j < all.length; j++) if (!all[j].closest("[data-stagger]") && inView(all[j])) fold.push(all[j]);
   function intro(){
     if (started) return;
     started = true;
     setTimeout(function(){ W.requestAnimationFrame(run); }, BEAT);
   }
+  function snap(el){ el.classList.add("no-tr"); el.classList.add("is-in"); setTimeout(function(){ el.classList.remove("no-tr"); done(el); }, 60); }
   function run(){
-      var d = 0;
+      var d = 0, moved = (W.scrollY || W.pageYOffset || 0) > 60, f;
+      if (moved) {
+        /* the visitor has already left the top: the fold is simply there,
+           and the sequence starts from where they are */
+        for (f = 0; f < fold.length; f++) {
+          if (fold[f].hasAttribute("data-stagger")) {
+            var ks = fold[f].querySelectorAll(".reveal"), q;
+            for (q = 0; q < ks.length; q++) snap(ks[q]);
+          } else snap(fold[f]);
+        }
+      }
       for (j = 0; j < boxes.length; j++) {
         if (!inView(boxes[j])) continue;
-        d = Math.min(stagger(boxes[j], d) + GAP, CAP);
+        d = Math.min(stagger(boxes[j], d, false) + GAP, CAP);
       }
       for (j = 0; j < all.length; j++) {
         var el = all[j];
         if (el.classList.contains("is-in") || el.closest("[data-stagger]") || !inView(el)) continue;
         show(el, d); d = Math.min(d + GAP, CAP);
       }
+      fold = [];
   }
   /* the fold is hidden anyway, so give the web fonts a moment (never more
      than FONTS ms) and let the serif arrive as itself, not as a swap */
@@ -164,20 +278,29 @@
   } catch(e){}
   setTimeout(intro, FONTS);
 
-  /* ---- scroll: the observer ------------------------------------------- */
-  var io = new IntersectionObserver(function(entries){
+  /* ---- scroll: the observers ------------------------------------------
+     Watching from the first frame, so a visitor who scrolls at once never
+     passes anything unseen -- except the fold, which the intro owns until
+     it has run (an observer fires for whatever is already in view, and
+     that would pre-empt the beat). Single elements come in once 15% of
+     them is inside; a stagger box starts as soon as its first pixel is, so
+     a long list never sits hidden while its top rows are in view. */
+  function onSeen(entries, obs){
     for (var k = 0; k < entries.length; k++) {
       var en = entries[k];
       if (!en.isIntersecting) continue;
       var el = en.target;
-      if (el.hasAttribute("data-stagger")) stagger(el, 0); else show(el, 0);
-      io.unobserve(el);
+      if (fold.indexOf(el) >= 0) continue;
+      if (el.hasAttribute("data-stagger")) stagger(el, 0, true);
+      else if (!el.classList.contains("is-in")) show(el, 0);
+      obs.unobserve(el);
     }
-  }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
-
-  for (j = 0; j < boxes.length; j++) io.observe(boxes[j]);
+  }
+  var io = new IntersectionObserver(onSeen, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+  var bio = new IntersectionObserver(onSeen, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
+  for (j = 0; j < boxes.length; j++) bio.observe(boxes[j]);
   for (j = 0; j < all.length; j++) {
-    if (!all[j].classList.contains("is-in") && !all[j].closest("[data-stagger]")) io.observe(all[j]);
+    if (!all[j].closest("[data-stagger]")) io.observe(all[j]);
   }
 
   /* ---- scroll-linked: parallax, the lead, the rail ---------------------- */
@@ -204,20 +327,27 @@
     }, 320);
   }
 
-  var offs = [], p;
-  for (p = 0; p < px.length; p++) offs.push(0);
+  var offs = [], fromTop = [], p;
+  for (p = 0; p < px.length; p++) { offs.push(0); fromTop.push(px[p].hasAttribute("data-parallax-top")); }
 
   var ticking = false;
   function frame(){
     ticking = false;
     var h = W.innerHeight || root.clientHeight, mid = h / 2, r, y, c, f, i;
+    var sy = W.scrollY || W.pageYOffset || 0;
     for (i = 0; i < px.length; i++) {
-      r = px[i].getBoundingClientRect();
-      c = r.top + r.height / 2 - offs[i];          /* centre before our own shift */
-      if (c < -h || c > h * 2) continue;            /* far off screen: leave it     */
       f = parseFloat(px[i].getAttribute("data-parallax"));
       if (isNaN(f)) f = 0.1;
-      y = (c - mid) * f;
+      if (fromTop[i]) {
+        y = sy * f;                                 /* lags behind the page  */
+        if (sy > h * 1.5) continue;                 /* long gone: leave it   */
+      } else {
+        r = px[i].getBoundingClientRect();
+        c = r.top + r.height / 2 - offs[i];         /* centre before our own shift */
+        if (c < -h || c > h * 2) continue;          /* far off screen: leave it    */
+        y = (c - mid) * f;
+      }
+      if (Math.abs(y - offs[i]) < 0.05) continue;
       offs[i] = y;
       px[i].style.transform = "translate3d(0," + y.toFixed(1) + "px,0)";
     }
@@ -235,7 +365,7 @@
         setLabel(at);
       }
     }
-    if (rail) rail.classList.toggle("is-scrolled", (W.scrollY || W.pageYOffset || 0) > 40);
+    if (rail) rail.classList.toggle("is-scrolled", sy > 40);
   }
   function ask(){ if (!ticking) { ticking = true; W.requestAnimationFrame(frame); } }
   W.addEventListener("scroll", ask, { passive: true });

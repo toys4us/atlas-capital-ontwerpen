@@ -1,10 +1,22 @@
-/* ===== hero: the projector gate ===== */
+/* ===== hero: the title card =====
+   One viewport, nothing else in it. The projector comes on, the studio
+   ident appears in the beam, then the three words of the title rise one
+   after another out of their own baselines, then the sub-line and the one
+   gold button. Everything is centred on the page's axis, like a card
+   between reels; the scale contrast is the design -- a mark the size of a
+   line of text under a title that fills the width of a phone. */
 #hero{
   position:relative;
-  padding:clamp(46px,9vw,110px) 20px clamp(28px,5vw,54px);
+  display:flex;flex-direction:column;justify-content:center;
+  min-height:calc(100vh - var(--hdr-h));
+  min-height:calc(100svh - var(--hdr-h));
+  padding:clamp(28px,5vw,56px) 20px clamp(64px,9vw,112px);
   text-align:center;
   overflow:hidden;
 }
+#hero .card{position:relative;z-index:3;width:100%}
+/* the beam: a cone of light from above the frame, switched on before
+   anything is in it, and never quite still */
 #hero .beam{
   position:absolute;
   left:50%;top:-6%;
@@ -14,39 +26,52 @@
   background:
     conic-gradient(from 172deg at 50% 0%,
       rgba(0,0,0,0) 0deg,
-      rgba(230,204,142,.10) 6deg,
-      rgba(230,204,142,.18) 8deg,
-      rgba(230,204,142,.06) 11deg,
+      rgba(230,204,142,.08) 6deg,
+      rgba(230,204,142,.15) 8deg,
+      rgba(230,204,142,.05) 11deg,
       rgba(0,0,0,0) 16deg);
   filter:blur(2px);
   opacity:.9;
-  animation:flicker 6.5s ease-in-out infinite alternate;
   pointer-events:none;
 }
+.js #hero .beam{animation:beam-on 1.8s var(--e-reveal) both,flicker 6.5s ease-in-out 1.8s infinite alternate}
+@keyframes beam-on{ 0%{opacity:0} 100%{opacity:.72} }
 @keyframes flicker{
   0%{opacity:.72}
   40%{opacity:.95}
   62%{opacity:.8}
   100%{opacity:1}
 }
-@media (prefers-reduced-motion: reduce){ #hero .beam{animation:none} }
+@media (prefers-reduced-motion: reduce){ .js #hero .beam{animation:none} }
 
-#hero .filmtitle{
-  position:relative;z-index:3;
+/* the studio ident: the mark alone, the size of a line of text */
+#hero .ident{display:block;width:var(--logo-hero);margin:0 auto clamp(26px,3.6vw,44px)}
+#hero .ident__mark{display:block;width:100%;height:auto}
+.js #hero .ident__mark.reveal{transform:translateY(8px);transition:opacity var(--d-slow) var(--e-reveal),transform var(--d-reveal) var(--e-reveal)}
+.js #hero .ident__mark.reveal.is-in{transform:none}
+
+/* the title: three words, three lines, three masks */
+#hero .title{
   margin:0;
+  font-family:var(--f-display);
   font-weight:400;
-  font-size:var(--t-h1);
-  line-height:1.02;
-  letter-spacing:clamp(.10em,1.1vw,.22em);
-  text-indent:clamp(.10em,1.1vw,.22em);
-  text-transform:uppercase;
+  font-size:var(--t-hero);
+  line-height:var(--lh-hero);
+  letter-spacing:var(--trk-hero);
   color:var(--paper);
+  text-wrap:balance;
 }
-#hero .filmtitle span{display:block;color:var(--gold)}
-/* The lockup carries the name, so the title card is the mark itself and the
-   letterspaced sub-line stays as the credit beneath it. */
-#hero .filmtitle__logo{
-  display:block;margin:0 auto;
-  width:var(--logo-hero);height:auto;
+#hero .title .mask{display:block;padding-bottom:.18em;margin-bottom:-.18em}
+#hero .title__line{display:block}
+#hero .title__line > span{display:inline-block}
+
+/* the sub-line: read, not declaimed */
+#hero .subtitle{
+  margin:clamp(24px,3.4vw,40px) auto 0;
+  max-width:40ch;
+  font-size:var(--t-lead);
+  line-height:1.4;
+  letter-spacing:0;
+  color:var(--ink-3);
 }
-#hero .cta{margin-top:clamp(26px,4vw,38px);position:relative;z-index:3}
+#hero .cta{margin-top:clamp(26px,3.6vw,40px)}

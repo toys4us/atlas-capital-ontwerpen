@@ -2,9 +2,9 @@
  "id": "identity",
  "title": "Identity",
  "wave": 0,
- "round": 2,
+ "round": 3,
  "status": "loss",
- "updated_at": "2026-09-05T07:41:12+02:00",
+ "updated_at": "2026-09-05T16:30:52+02:00",
  "history": [
   {
    "wave": 0,
@@ -48,6 +48,21 @@
    "confidence": 0.8,
    "note": "IDENTITY ROUND 2 — gate PASS (0 failures, 0 notes) at 1440 and 390, NL and EN. Nothing committed. Judging shots refreshed: E:/ClaudeCode_GUI/atlas-designs/site/_build/self (hero: desk-fold, mob-fold, motion, full-desk, full-mob) and _build/self-founder (mask/draw/stagger + rail motion).\n\nWHAT THE JUDGE SAW vs NOW\n- \"gradient-gold badge logo as a poster\" -> the lockup is now a mark: token --logo-hero clamp(120px,14vw,168px) (hero.css swapped its hard-coded clamp(180px,32vw,340px) for the token; header mark uses --logo-nav).\n- \"gold-foil CTA twice in one viewport\" -> .cta is now a hairl",
    "at": "2026-09-05T07:41:12+02:00"
+  },
+  {
+   "wave": 0,
+   "round": 3,
+   "ref": "exo-ape",
+   "status": "loss",
+   "score_ours": 6.3,
+   "score_ref": 7.7,
+   "wowed": false,
+   "gap": "It is the stock \"dark + gold + centered display serif + light beam\" luxury template: every element (symmetric hero, small-caps nav, gold rectangle CTA repeated in the header, world clocks) is competent but interchangeable with a hundred premium-Discord landing pages, and the copy (\"Proces. Discipline. Uitvoering.\" / \"Alles wat erin zit...\") tells the visitor nothing concrete. At the bar the hero would carry one distinctive move that is truly its own (an asymmetric grid, a single real artefact such as a trade journal or chart rendered with the same care as the type), the founder block would stop mixing three type voices (serif, small caps, mono) in 40px of height, and the mobile fold would not spend its top 400px on an empty beam.",
+   "motion": "Masked line-by-line headline reveal with a soft stagger, then subtitle and CTA fade in: tasteful and restrained, but all six frames stay on the hero so no scroll choreography is actually demonstrated.",
+   "verdict": "B wins on identity: photography-led, oversized grotesk cropping out of the fold, and a real scroll narrative, which is what a jury remembers; A is polished but generic and never leaves the safe centre. Neither is shortlist-ready as captured, B because of the stray scroll label and the ragged mid-page grid, A because it is a well-executed template rather than a point of view.",
+   "confidence": 0.8,
+   "note": "src/base.css: one flat gold everywhere (mark = hairlines = button); --t-hero/--trk-hero/--lh-hero display step; --d-fade (quick appearance) vs --d-reveal (slow settle); .reveal.card variant (group rule draws from centre, title fades); [data-parallax-top] anchor; .cta label now the page's serif-caps voice, not mono; language switch re-set (same box both states, gold rule tethered under the chosen word, even spacing); favicon-grade tokens --hdr-h/--logo-nav/--logo-hero.\nsrc/motion.js: auto-tags the roll's blocks at runtime (group titles, credit pairs, plates, proofs, ledes, end card, footer) s",
+   "at": "2026-09-05T16:30:52+02:00"
   }
  ]
 }

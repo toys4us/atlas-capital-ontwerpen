@@ -13,7 +13,7 @@
 <meta property="og:locale:alternate" content="en_GB">
 <meta name="theme-color" content="#08090B">
 <meta name="color-scheme" content="dark">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2308090B'/%3E%3Cpath d='M16 6 L26 26 H6 Z' fill='none' stroke='%23D7B364' stroke-width='1.5'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-30 -69 480 480'%3E%3Crect x='-30' y='-69' width='480' height='480' fill='%2308090B'/%3E%3Cpath fill='%23D7B364' fill-rule='evenodd' d='M210 0 420 342 366 342 210 44 54 342 0 342ZM210 160 183 204 267.8 342 321.8 342ZM163.1 236 190.1 280 152 342 98 342Z'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Fragment+Mono&display=swap" rel="stylesheet">
@@ -27,7 +27,8 @@
 
    Identity in one line: a credits roll set like the financial press —
    Newsreader for everything that is read, Fragment Mono for everything that
-   is counted, gold only ever as a hairline, one italic, or the one button.
+   is counted, one flat gold (#D7B364) for the mark, the hairlines and the
+   one button, and a page that arrives as you read it.
 
    Where the gold goes (and nowhere else):
      - hairlines: the strip edges, the group rules, the language dot
@@ -79,6 +80,7 @@
   /* fluid scale, 390 → 1440. Newsreader has a small x-height, so every
      step sits a size above where a grotesk would. */
   --t-display:clamp(76px,12.5vw,184px);  /* the end card                   */
+  --t-hero:clamp(58px,9.2vw,132px);      /* the title card, three lines    */
   --t-h1:clamp(44px,7vw,100px);          /* a section-sized line           */
   --t-h2:clamp(27px,3.2vw,46px);         /* a statement, a quote           */
   --t-h3:clamp(20px,1.95vw,27px);        /* a credit value                 */
@@ -92,6 +94,7 @@
 
   /* tracking per size */
   --trk-display:-.022em;
+  --trk-hero:-.024em;
   --trk-h1:-.014em;
   --trk-caps-wide:.24em;                 /* group titles, the wordmark     */
   --trk-caps:.16em;                      /* labels                         */
@@ -101,6 +104,7 @@
 
   /* leading */
   --lh-display:.92;
+  --lh-hero:.94;
   --lh-tight:1.08;
   --lh-snug:1.24;
   --lh-body:1.6;
@@ -117,9 +121,11 @@
   --gap-block:clamp(32px,5vw,64px);
   --gap-item:clamp(12px,1.6vw,20px);
 
-  /* the mark: a mark, not a poster */
-  --logo-hero:clamp(120px,14vw,168px);
-  --logo-nav:22px;
+  /* the mark: a mark, not a poster. The hero shows the studio ident (the
+     triangle alone) at the size of a line of text; the name is set in type. */
+  --logo-hero:clamp(40px,4.4vw,58px);
+  --logo-nav:20px;
+  --hdr-h:52px;
 
   /* radii: none. Corners are square everywhere. */
   --r:0;
@@ -128,12 +134,13 @@
   --d-fast:.18s;
   --d:.45s;
   --d-slow:.9s;
-  --d-reveal:1.4s;
+  --d-reveal:1.4s;                        /* the settle (transform)            */
+  --d-fade:.7s;                           /* the appearance (opacity)          */
   --e-out:cubic-bezier(.16,1,.3,1);       /* expo-out: fast start, long settle */
   --e-reveal:cubic-bezier(.33,1,.68,1);   /* cubic-out: a calm arrival          */
   --e-inout:cubic-bezier(.65,0,.35,1);
   --e-soft:cubic-bezier(.2,.6,.2,1);
-  --reveal-y:22px;
+  --reveal-y:26px;
 }
 
 /* ---------- metric-matched fallbacks --------------------------------------
@@ -163,7 +170,7 @@ html{
   -webkit-text-size-adjust:100%;
   background:var(--bg);
   scroll-behavior:smooth;
-  scroll-padding-top:64px;              /* the sticky header */
+  scroll-padding-top:var(--hdr-h);      /* the sticky header */
   scrollbar-width:thin;
   scrollbar-color:#3A321F var(--bg-deep);
 }
@@ -327,8 +334,10 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
    Two kinds and only two. .cta is a hairline dash and a label, the way a
    quiet link reads on a good site; on hover the dash lengthens and the
    label warms. .cta.solid is the one gold button on the page: flat gold,
-   dark ink, no gradient, no glow. Nothing about the text moves, so the
-   label never jitters. */
+   dark ink, no gradient, no glow, the same #D7B364 as every hairline and
+   the mark. The label is set in the page's label voice -- the serif, small,
+   tracked caps -- not in the mono, which is for what is counted. Nothing
+   about the text moves, so the label never jitters. */
 .cta{
   position:relative;
   display:inline-flex;align-items:center;gap:14px;
@@ -336,10 +345,10 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
   border:0;
   background:transparent;
   color:var(--ink-1);
-  font-family:var(--f-mono);
-  font-size:var(--t-caption);
-  font-weight:400;
-  letter-spacing:var(--trk-mono-caps);
+  font-family:var(--f-display);
+  font-size:12.5px;
+  font-weight:500;
+  letter-spacing:var(--trk-caps);
   line-height:1.2;
   text-transform:uppercase;
   text-decoration:none;
@@ -358,7 +367,7 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 .cta:hover::before,.cta:focus-visible::before{width:44px}
 .cta:active{transform:translateY(1px)}
 .cta.solid{
-  padding:15px 30px;
+  padding:15px 30px 14px;
   background:var(--gold);
   color:var(--gold-ink);
   transition:background-color var(--d) var(--e-out),color var(--d) var(--e-out),transform var(--d-fast) var(--e-out);
@@ -572,12 +581,14 @@ dl.pairs .cols{
 /* ---------- language ----------------------------------------------------- */
 :root:not([data-lang="en"]) [lang="en"]{display:none!important}
 :root[data-lang="en"] [lang="nl"]{display:none!important}
-/* Two words, no box. The chosen one carries a gold point above it, the way
-   a projector marks the reel in play; the other waits in the label grey. */
+/* Two words, no box, evenly spaced. The chosen one is in the paper and
+   carries a short gold rule directly under it -- tethered to the word, the
+   width of the word; the other waits in the label grey. Both are the same
+   box so nothing shifts when they swap. */
 .langsw{
   display:inline-flex;
-  align-items:stretch;
-  gap:18px;
+  align-items:center;
+  gap:6px;
 }
 .langsw button{
   appearance:none;
@@ -585,31 +596,32 @@ dl.pairs .cols{
   position:relative;
   background:transparent;
   border:0;
-  padding:10px 2px 8px;
+  margin:0;
+  padding:8px 5px;
   font-family:var(--f-display);
   font-size:var(--t-micro);
   font-weight:400;
   letter-spacing:var(--trk-caps);
-  text-indent:var(--trk-caps);
   text-transform:uppercase;
   line-height:1;
   color:var(--ink-4);
   cursor:pointer;
   transition:color var(--d) var(--e-out);
 }
-.langsw button::before{
+.langsw button::after{
   content:"";
   position:absolute;
-  left:50%;top:0;
-  width:3px;height:3px;
-  margin-left:-1px;
+  left:5px;right:calc(5px + var(--trk-caps));   /* the word, minus its trailing tracking */
+  bottom:3px;
+  height:1px;
   background:var(--gold);
-  transform:scale(0);
+  transform:scaleX(0);
+  transform-origin:left center;
   transition:transform var(--d) var(--e-out);
 }
 .langsw button:hover{color:var(--paper)}
-.langsw button[aria-pressed="true"]{color:var(--ink-1);cursor:default}
-.langsw button[aria-pressed="true"]::before{transform:scale(1)}
+.langsw button[aria-pressed="true"]{color:var(--paper);cursor:default}
+.langsw button[aria-pressed="true"]::after{transform:none}
 .langsw button:focus-visible{outline-offset:2px}
 
 /* ---------- reveal contract ---------------------------------------------
@@ -621,78 +633,140 @@ dl.pairs .cols{
        missing, behind .no-tr so the hide is a cut and not a fade
    so without JavaScript every element is on screen from the first paint.
    motion.js adds .is-in when the element scrolls into view; children of a
-   [data-stagger] container arrive one after another; once the transition
-   has run motion.js drops the .reveal class so the element goes back to its
-   own cascade (a button keeps its hover transition). If motion.js throws it
-   takes .js off again, so a broken script is a visible page.
+   [data-stagger] container arrive one after another (the attribute's value
+   is the step in ms); once the transition has run motion.js drops the
+   .reveal class so the element goes back to its own cascade (a button keeps
+   its hover transition). If motion.js throws it takes .js off again, so a
+   broken script is a visible page. The roll's own blocks (group titles,
+   credit pairs, plates, the end card) need no markup: motion.js tags them
+   itself before the first frame, under the same rules.
 
-   Variants (never opacity, so they are always "visible" to a probe):
+   Timing: the appearance is quick (opacity, --d-fade) and the settle is
+   slow (transform, --d-reveal) -- a thing is there almost at once, then
+   finds its place. Variants (never opacity, so always "visible" to a probe):
      .mask > .reveal   the wrapper clips; the child rises from below the
                        fold line -- for display lines and quotes
      .reveal.draw      a rule that draws itself from the left (or from the
-                       centre with .draw.from-centre) -- for .hair and rules */
+                       centre with .draw.from-centre) -- for .hair and rules
+     .reveal.card      a group title: the rule draws from the centre while
+                       the title itself fades in on it */
 .js .reveal{
   opacity:0;
   transform:translateY(var(--reveal-y));
-  transition:opacity var(--d-reveal) var(--e-reveal),transform var(--d-reveal) var(--e-reveal);
+  transition:opacity var(--d-fade) var(--e-reveal),transform var(--d-reveal) var(--e-reveal);
 }
 .js .reveal.is-in{opacity:1;transform:none}
-.no-tr .reveal{transition:none!important}
+.no-tr .reveal,.no-tr .reveal::before,.no-tr .reveal *,.reveal.no-tr,.reveal.no-tr::before,.reveal.no-tr *{transition:none!important}
 .mask{overflow:hidden;padding-bottom:.3em;margin-bottom:-.3em}
-.js .mask > .reveal{opacity:1;transform:translateY(110%);transition:transform calc(var(--d-reveal) * 1.1) var(--e-reveal)}
+.js .mask > .reveal{opacity:1;transform:translateY(112%);transition:transform calc(var(--d-reveal) * 1.1) var(--e-reveal)}
 .js .mask > .reveal.is-in{transform:none}
 .js .reveal.draw{opacity:1;transform:scaleX(0);transform-origin:left center;transition:transform var(--d-reveal) var(--e-reveal)}
 .js .reveal.draw.from-centre{transform-origin:center}
 .js .reveal.draw.is-in{transform:none}
+.js .reveal.card{opacity:1;transform:none;transition:none}
+.js .reveal.card::before{transform:scaleX(0);transition:transform var(--d-reveal) var(--e-reveal)}
+.js .reveal.card > h2{opacity:0;transform:translateY(10px);transition:opacity var(--d-fade) var(--e-reveal),transform var(--d-reveal) var(--e-reveal)}
+.js .reveal.card.is-in::before{transform:none}
+.js .reveal.card.is-in > h2{opacity:1;transform:none}
+/* [data-parallax="0.12"] drifts at that fraction of the scroll distance from
+   the viewport centre; with [data-parallax-top] it drifts from where it sits
+   at the top of the page instead (for the fold, so the load layout holds). */
 [data-parallax]{will-change:transform}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .js .reveal,.js .mask > .reveal,.js .reveal.draw{opacity:1;transform:none;transition:none}
+  .js .reveal,.js .mask > .reveal,.js .reveal.draw,.js .reveal.card > h2{opacity:1;transform:none;transition:none}
+  .js .reveal.card::before{transform:none;transition:none}
+  [data-parallax]{transform:none!important}
   .js .roll::before{background:linear-gradient(180deg,rgba(215,179,100,0) 0,var(--line-2) 220px,var(--line-2) calc(100% - 220px),rgba(215,179,100,0) 100%)}
   .rail__scroll::after{animation:none}
   .cta,.cta::before,.cta::after,a,.langsw button,.rail__label,.rail__scroll{transition:none}
 }
 
 /* ---- section:header ---- */
-/* ===== header ===== */
+/* ===== header =====
+   One bar, three things: the mark and the name, the one link that matters,
+   the two languages. At the top of the page it is transparent -- the title
+   card owns the fold -- and it gains its ground and hairline once the
+   visitor has moved (motion.js toggles .is-top). The link is quiet text
+   while a gold button is on screen (the title card's, the end card's) and
+   becomes that button itself when none is: one gold button per viewport,
+   always (motion.js toggles .solid on it). */
 #header{
   position:sticky;top:0;z-index:50;
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:11px clamp(16px,4vw,40px);
-  background:var(--bg-glass);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  min-height:var(--hdr-h);
+  padding:0 clamp(14px,4vw,40px);
+  background:rgba(8,9,11,.94);
   border-bottom:1px solid var(--line-1);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:background-color var(--d-slow) var(--e-out),border-color var(--d-slow) var(--e-out);
 }
+.js #header.is-top{background:rgba(8,9,11,0);border-bottom-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
 /* space-between puts the middle item halfway between its neighbours, not
-   halfway across the bar -- and the wordmark is 80px wider than the language
-   switch, so the Discord button sat 40px right of centre on a page whose
-   every other element is centred. Two equal outer tracks fix it. Measured:
-   the symmetric layout needs ~580px, so it only engages once there is room;
-   below that the row stays space-between, which is right on a phone. */
+   halfway across the bar -- and the wordmark is wider than the language
+   switch. Two equal outer tracks centre the link on the page's own axis. */
 @media (min-width:620px){
   #header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
   #header > .wm{justify-self:start}
   #header > .cta{justify-self:center}
   #header > .langsw{justify-self:end}
 }
-#header .wm{display:flex;align-items:center;gap:10px;text-decoration:none}
+#header .wm{display:inline-flex;align-items:center;gap:10px;text-decoration:none;flex:0 0 auto;min-width:0}
 #header .wm__mark{display:block;width:var(--logo-nav);height:auto;flex:0 0 auto}
 #header .wm b{
+  display:block;
+  white-space:nowrap;
   font-weight:500;font-size:var(--t-micro);letter-spacing:var(--trk-caps-wide);text-transform:uppercase;color:var(--paper);
+  transition:color var(--d) var(--e-out);
 }
-#header .cta{padding:9px 0;font-size:var(--t-nano);letter-spacing:var(--trk-mono-caps)}
-#header .cta:hover{letter-spacing:var(--trk-mono-caps)}
+#header .wm:hover b{color:var(--gold-hi)}
+/* the link: same box in both states, so the swap is a fill, not a jump */
+#header .cta{
+  padding:10px 14px 9px;
+  font-size:var(--t-micro);
+  letter-spacing:var(--trk-caps);
+  color:var(--ink-2);
+  background:transparent;
+  transition:background-color var(--d-slow) var(--e-out),color var(--d-slow) var(--e-out),transform var(--d-fast) var(--e-out);
+}
+#header .cta::before{display:none}
+#header .cta:hover,#header .cta:focus-visible{color:var(--paper)}
+#header .cta.solid{background:var(--gold);color:var(--gold-ink)}
+#header .cta.solid:hover,#header .cta.solid:focus-visible{background:var(--gold-hi);color:var(--gold-ink)}
+#header .cta.solid:active{background:var(--gold-lo)}
+/* a phone: the same three things, tighter, and nothing wraps */
+@media (max-width:619px){
+  #header{gap:6px}
+  #header .wm{gap:8px}
+  #header .wm b{font-size:var(--t-nano);letter-spacing:.16em}
+  #header .cta{padding:10px 8px 9px;font-size:var(--t-nano);letter-spacing:.11em}
+  #header .langsw{gap:2px}
+  #header .langsw button{padding:8px 4px;font-size:var(--t-nano)}
+  #header .langsw button::after{left:4px;right:calc(4px + var(--trk-caps))}
+}
 
 /* ---- section:hero ---- */
-/* ===== hero: the projector gate ===== */
+/* ===== hero: the title card =====
+   One viewport, nothing else in it. The projector comes on, the studio
+   ident appears in the beam, then the three words of the title rise one
+   after another out of their own baselines, then the sub-line and the one
+   gold button. Everything is centred on the page's axis, like a card
+   between reels; the scale contrast is the design -- a mark the size of a
+   line of text under a title that fills the width of a phone. */
 #hero{
   position:relative;
-  padding:clamp(46px,9vw,110px) 20px clamp(28px,5vw,54px);
+  display:flex;flex-direction:column;justify-content:center;
+  min-height:calc(100vh - var(--hdr-h));
+  min-height:calc(100svh - var(--hdr-h));
+  padding:clamp(28px,5vw,56px) 20px clamp(64px,9vw,112px);
   text-align:center;
   overflow:hidden;
 }
+#hero .card{position:relative;z-index:3;width:100%}
+/* the beam: a cone of light from above the frame, switched on before
+   anything is in it, and never quite still */
 #hero .beam{
   position:absolute;
   left:50%;top:-6%;
@@ -702,42 +776,55 @@ dl.pairs .cols{
   background:
     conic-gradient(from 172deg at 50% 0%,
       rgba(0,0,0,0) 0deg,
-      rgba(230,204,142,.10) 6deg,
-      rgba(230,204,142,.18) 8deg,
-      rgba(230,204,142,.06) 11deg,
+      rgba(230,204,142,.08) 6deg,
+      rgba(230,204,142,.15) 8deg,
+      rgba(230,204,142,.05) 11deg,
       rgba(0,0,0,0) 16deg);
   filter:blur(2px);
   opacity:.9;
-  animation:flicker 6.5s ease-in-out infinite alternate;
   pointer-events:none;
 }
+.js #hero .beam{animation:beam-on 1.8s var(--e-reveal) both,flicker 6.5s ease-in-out 1.8s infinite alternate}
+@keyframes beam-on{ 0%{opacity:0} 100%{opacity:.72} }
 @keyframes flicker{
   0%{opacity:.72}
   40%{opacity:.95}
   62%{opacity:.8}
   100%{opacity:1}
 }
-@media (prefers-reduced-motion: reduce){ #hero .beam{animation:none} }
+@media (prefers-reduced-motion: reduce){ .js #hero .beam{animation:none} }
 
-#hero .filmtitle{
-  position:relative;z-index:3;
+/* the studio ident: the mark alone, the size of a line of text */
+#hero .ident{display:block;width:var(--logo-hero);margin:0 auto clamp(26px,3.6vw,44px)}
+#hero .ident__mark{display:block;width:100%;height:auto}
+.js #hero .ident__mark.reveal{transform:translateY(8px);transition:opacity var(--d-slow) var(--e-reveal),transform var(--d-reveal) var(--e-reveal)}
+.js #hero .ident__mark.reveal.is-in{transform:none}
+
+/* the title: three words, three lines, three masks */
+#hero .title{
   margin:0;
+  font-family:var(--f-display);
   font-weight:400;
-  font-size:var(--t-h1);
-  line-height:1.02;
-  letter-spacing:clamp(.10em,1.1vw,.22em);
-  text-indent:clamp(.10em,1.1vw,.22em);
-  text-transform:uppercase;
+  font-size:var(--t-hero);
+  line-height:var(--lh-hero);
+  letter-spacing:var(--trk-hero);
   color:var(--paper);
+  text-wrap:balance;
 }
-#hero .filmtitle span{display:block;color:var(--gold)}
-/* The lockup carries the name, so the title card is the mark itself and the
-   letterspaced sub-line stays as the credit beneath it. */
-#hero .filmtitle__logo{
-  display:block;margin:0 auto;
-  width:var(--logo-hero);height:auto;
+#hero .title .mask{display:block;padding-bottom:.18em;margin-bottom:-.18em}
+#hero .title__line{display:block}
+#hero .title__line > span{display:inline-block}
+
+/* the sub-line: read, not declaimed */
+#hero .subtitle{
+  margin:clamp(24px,3.4vw,40px) auto 0;
+  max-width:40ch;
+  font-size:var(--t-lead);
+  line-height:1.4;
+  letter-spacing:0;
+  color:var(--ink-3);
 }
-#hero .cta{margin-top:clamp(26px,4vw,38px);position:relative;z-index:3}
+#hero .cta{margin-top:clamp(26px,3.6vw,40px)}
 
 /* ---- section:production ---- */
 /* ===== production =====
@@ -933,9 +1020,9 @@ footer .risk{
 </aside>
 <!-- section:header -->
 <header id="header">
-  <a class="wm" href="#hero">
-    <img class="wm__mark" src="assets/logo-mark.webp" alt="" width="420" height="342">
-    <b>Atlas Capital</b>
+  <a class="wm" href="#hero" aria-label="Atlas Capital">
+    <img class="wm__mark" src="assets/logo-mark.svg" alt="" width="420" height="342">
+    <b>Atlas&nbsp;Capital</b>
   </a>
   <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
   <div class="langsw" role="group" aria-label="Taal / Language">
@@ -946,16 +1033,21 @@ footer .risk{
 <!-- /section:header -->
 
 <!-- section:hero -->
-<section class="gate" id="hero" data-stagger>
+<section class="gate" id="hero" data-stagger="170">
   <span class="beam" aria-hidden="true"></span>
 
-
-  <h1 class="filmtitle reveal">
-    <img class="filmtitle__logo" data-parallax="0.12" src="assets/logo.webp" alt="Atlas Capital"
-         width="760" height="694">
-  </h1>
-  <div class="mask"><p class="subtitle reveal"><span lang="nl">Alles wat erin zit, in de vorm waarin het hoort: een lijst, rustig, zonder ruis.</span><span lang="en">Everything in it, in the form it belongs in: a list, calm, no noise.</span></p></div>
-  <a class="cta solid reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
+  <div class="card">
+    <span class="ident" data-parallax="0.16" data-parallax-top>
+      <img class="ident__mark reveal" src="assets/logo-mark.svg" alt="Atlas Capital" width="420" height="342">
+    </span>
+    <h1 class="title">
+      <span class="mask"><span class="title__line reveal"><span lang="nl">Proces.</span><span lang="en">Process.</span></span></span>
+      <span class="mask"><span class="title__line reveal"><span lang="nl">Discipline.</span><span lang="en">Discipline.</span></span></span>
+      <span class="mask"><span class="title__line reveal"><span lang="nl">Uitvoering.</span><span lang="en">Execution.</span></span></span>
+    </h1>
+    <p class="subtitle reveal"><span lang="nl">Alles wat erin zit, in de vorm waarin het hoort: een lijst, rustig, zonder ruis.</span><span lang="en">Everything in it, in the form it belongs in: a list, calm, no noise.</span></p>
+    <a class="cta solid reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
+  </div>
 </section>
 <!-- /section:hero -->
 
@@ -1271,21 +1363,34 @@ footer .risk{
    class "js", and only elements with .reveal are affected. So a visitor
    without JavaScript, or with a script that failed, sees everything.
 
-   Reveal     .reveal gets .is-in once 15% of it is inside the viewport
-              (measured 8% in from the bottom edge). A [data-stagger]
-              container reveals its .reveal children one after the other,
-              STEP ms apart. Whatever is on screen at load comes in as one
-              short sequence starting on the first frame, after the web fonts
-              (never later than FONTS ms). When a reveal has run, the .reveal
-              class is dropped so the element returns to its own cascade.
+   Reveal     .reveal gets .is-in once it is inside the viewport (measured
+              8% in from the bottom edge). A [data-stagger] container
+              reveals its .reveal children one after the other, STEP ms
+              apart (or the attribute's own value); on scroll the whole
+              sequence is capped so nothing waits behind its siblings.
+              Whatever is on screen at load comes in as one sequence
+              starting on the first frame, after the web fonts (never later
+              than FONTS ms). When a reveal has run, the .reveal class is
+              dropped so the element returns to its own cascade.
+   Auto       the roll's own blocks are tagged here, before the first frame,
+              so the section partials carry no motion markup: group titles
+              (.card: the rule draws, the title fades), credit pairs (a
+              stagger of rows), plates and proofs (a stagger of figures),
+              ledes, quotes, the end card and the footer.
    Mask       a .mask wrapper clips its .reveal child, which rises from below
               the fold line instead of fading (base.css does the styling; the
               observer is the same).
    Draw       .reveal.draw is a rule that draws itself (scaleX), same observer.
    Parallax   [data-parallax="0.12"] drifts at that fraction of the scroll
               distance from the viewport centre: positive lags like a
-              background, negative leads. Do not put it on a .reveal element
-              (both write transform); put it on a child or a wrapper.
+              background, negative leads. With [data-parallax-top] it drifts
+              from where it sits at scroll 0 instead (for the fold). Do not
+              put it on a .reveal element (both write transform); put it on
+              a child or a wrapper.
+   Header     .is-top while the page is at the top (the bar is transparent
+              over the title card); .solid on the header's link whenever no
+              other gold button is on screen, so there is one gold button
+              per viewport and the link becomes it when the card's has gone.
    Lead       writes --spine-y on .roll so the bright lead on the strip's
               left edge sits level with the middle of the viewport.
    Rail       desktop only, markup in the template: two market clocks in
@@ -1303,12 +1408,58 @@ footer .risk{
   var reduce = false;
   try { reduce = W.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e){}
 
-  var STEP = 220;         /* ms between staggered siblings                */
-  var GAP = 200;          /* ms between groups in the load sequence        */
-  var CAP = 700;          /* the load sequence never waits longer          */
-  var FONTS = 400;        /* ms we are willing to wait for the web fonts   */
-  var BEAT = 220;         /* ms of stillness before the fold comes in      */
+  var STEP = 160;         /* ms between staggered siblings (default)      */
+  var SCROLL_SPAN = 420;  /* on scroll a whole stagger fits in this        */
+  var GAP = 160;          /* ms between groups in the load sequence        */
+  var CAP = 900;          /* the load sequence never waits longer          */
+  var FONTS = 350;        /* ms we are willing to wait for the web fonts   */
+  var BEAT = 520;         /* ms of light before the card comes in          */
   var DUR = 1800;         /* >= the longest reveal transition in css       */
+
+  /* ---- auto: tag the roll's blocks -------------------------------------
+     Before anything is measured. Each entry: selector, what to add to the
+     match, and (for a stagger) what to add to which children. */
+  function tag(el, cls){ if (el && !el.classList.contains("reveal")) el.classList.add.apply(el.classList, cls.split(" ")); }
+  function auto(sel, cls, kids, kidCls, step){
+    var els = document.querySelectorAll(sel), i, k, c;
+    for (i = 0; i < els.length; i++) {
+      if (els[i].closest("[data-stagger]") || els[i].classList.contains("reveal")) continue;
+      if (kids) {
+        c = els[i].querySelectorAll(kids);
+        if (!c.length) continue;
+        els[i].setAttribute("data-stagger", step || "");
+        for (k = 0; k < c.length; k++) tag(c[k], kidCls || "reveal");
+      } else {
+        tag(els[i], cls);
+      }
+    }
+  }
+  function wrapMask(el){
+    if (!el || (el.parentNode && el.parentNode.classList.contains("mask"))) return;
+    var m = document.createElement("div");
+    m.className = "mask";
+    el.parentNode.insertBefore(m, el);
+    m.appendChild(el);
+    tag(el, "reveal");
+  }
+  if (!reduce) {
+    auto(".roll .grp", "reveal card");
+    auto(".roll .lesson-lede", "reveal");
+    auto(".roll dl.pairs", null, ":scope > dt, :scope > dd", "reveal", 70);
+    auto(".roll .lessons", null, ":scope > figure, :scope > *", "reveal", 110);
+    auto(".roll .proofs", null, ":scope > figure, :scope > *", "reveal", 90);
+    auto(".roll .still", null, ".hair, blockquote, .who", "reveal", 180);
+    auto(".roll .interstitial", null, ":scope > *", "reveal", 140);
+    auto(".roll .proofs-hint, .roll .caveat", "reveal");
+    wrapMask(document.querySelector("#closer .endword"));
+    auto("#closer", null, ":scope > svg, .mask > .endword, :scope > .subtitle, :scope > .cta", "reveal", 140);
+    auto("footer", "reveal");
+    var em = document.querySelector("#closer svg");
+    if (em && !em.hasAttribute("data-parallax")) { /* the reel emblem lags a little behind the card */
+      var w = document.createElement("span"); w.setAttribute("data-parallax", "0.08"); w.style.display = "block";
+      em.parentNode.insertBefore(w, em); w.appendChild(em);
+    }
+  }
 
   var all = document.querySelectorAll(".reveal");
   var boxes = document.querySelectorAll("[data-stagger]");
@@ -1327,12 +1478,18 @@ footer .risk{
     var r = el.getBoundingClientRect(), h = W.innerHeight || root.clientHeight;
     return r.bottom > 0 && r.top < h * 0.92 + 1;
   }
+  function stepOf(box, n, onScroll){
+    var s = parseInt(box.getAttribute("data-stagger"), 10);
+    if (isNaN(s) || s <= 0) s = STEP;
+    if (onScroll && n > 1) s = Math.min(s, Math.floor(SCROLL_SPAN / (n - 1)));
+    return s;
+  }
   /* reveal a container's children in sequence; returns the delay after the last */
-  function stagger(box, base){
-    var kids = box.querySelectorAll(".reveal"), i, d = base || 0;
+  function stagger(box, base, onScroll){
+    var kids = box.querySelectorAll(".reveal"), i, d = base || 0, s = stepOf(box, kids.length, onScroll);
     for (i = 0; i < kids.length; i++) {
       if (kids[i].classList.contains("is-in")) continue;
-      show(kids[i], d); d += STEP;
+      show(kids[i], d); d += s;
     }
     return d;
   }
@@ -1361,6 +1518,38 @@ footer .risk{
   })();
 
   function pad(n){ return n < 10 ? "0" + n : "" + n; }
+
+  /* ---- the header: transparent at the top, one gold button per viewport --
+     The link in the bar is quiet text while any other .cta.solid is on
+     screen and is the gold button itself when none is. Works with or
+     without reduced motion: it is state, not decoration. */
+  var hdr = document.querySelector("#header");
+  var hdrCta = hdr ? hdr.querySelector(".cta") : null;
+  var golds = [], g, gv = [];
+  (function header(){
+    if (!hdr) return;
+    var sol = document.querySelectorAll(".cta.solid");
+    for (g = 0; g < sol.length; g++) if (!hdr.contains(sol[g])) { golds.push(sol[g]); gv.push(false); }
+    function top(){ hdr.classList.toggle("is-top", (W.scrollY || W.pageYOffset || 0) < 8); }
+    function swap(){
+      var any = false, i;
+      for (i = 0; i < gv.length; i++) if (gv[i]) any = true;
+      if (hdrCta) hdrCta.classList.toggle("solid", !any && golds.length > 0);
+    }
+    top();
+    W.addEventListener("scroll", top, { passive: true });
+    if ("IntersectionObserver" in W && golds.length) {
+      var gio = new IntersectionObserver(function(entries){
+        for (var k = 0; k < entries.length; k++) {
+          var i = golds.indexOf(entries[k].target);
+          if (i >= 0) gv[i] = entries[k].isIntersecting;
+        }
+        swap();
+      }, { threshold: 0, rootMargin: "-" + (hdr.offsetHeight || 52) + "px 0px 0px 0px" });
+      for (g = 0; g < golds.length; g++) gio.observe(golds[g]);
+    }
+  })();
+
   /* reduced motion: the rail still names the group in view, without sliding */
   function railStatic(){
     var rl = document.querySelector(".rail"), lb = rl ? rl.querySelector(".rail__label") : null;
@@ -1394,8 +1583,9 @@ footer .risk{
      a transition that the next frame would only reverse. Either way the
      next frame starts the intro. Groups above the fold follow each other;
      nothing waits past CAP. The intro itself waits one BEAT after the
-     fonts, so the first thing the visitor sees is stillness, then the
-     fold arriving; the whole sequence is over well inside two seconds. */
+     fonts, so the first thing the visitor sees is the light coming on, then
+     the card arriving; the whole sequence is over inside two seconds and a
+     half, and the first thing in it is on screen within one. */
   if (!root.classList.contains("js")) {
     root.classList.add("no-tr");
     root.classList.add("js");
@@ -1403,22 +1593,38 @@ footer .risk{
     root.classList.remove("no-tr");
   }
   var j, started = false;
+  /* what is on screen right now belongs to the intro, not to the observer */
+  var fold = [];
+  for (j = 0; j < boxes.length; j++) if (inView(boxes[j])) fold.push(boxes[j]);
+  for (j = 0; j < all.length; j++) if (!all[j].closest("[data-stagger]") && inView(all[j])) fold.push(all[j]);
   function intro(){
     if (started) return;
     started = true;
     setTimeout(function(){ W.requestAnimationFrame(run); }, BEAT);
   }
+  function snap(el){ el.classList.add("no-tr"); el.classList.add("is-in"); setTimeout(function(){ el.classList.remove("no-tr"); done(el); }, 60); }
   function run(){
-      var d = 0;
+      var d = 0, moved = (W.scrollY || W.pageYOffset || 0) > 60, f;
+      if (moved) {
+        /* the visitor has already left the top: the fold is simply there,
+           and the sequence starts from where they are */
+        for (f = 0; f < fold.length; f++) {
+          if (fold[f].hasAttribute("data-stagger")) {
+            var ks = fold[f].querySelectorAll(".reveal"), q;
+            for (q = 0; q < ks.length; q++) snap(ks[q]);
+          } else snap(fold[f]);
+        }
+      }
       for (j = 0; j < boxes.length; j++) {
         if (!inView(boxes[j])) continue;
-        d = Math.min(stagger(boxes[j], d) + GAP, CAP);
+        d = Math.min(stagger(boxes[j], d, false) + GAP, CAP);
       }
       for (j = 0; j < all.length; j++) {
         var el = all[j];
         if (el.classList.contains("is-in") || el.closest("[data-stagger]") || !inView(el)) continue;
         show(el, d); d = Math.min(d + GAP, CAP);
       }
+      fold = [];
   }
   /* the fold is hidden anyway, so give the web fonts a moment (never more
      than FONTS ms) and let the serif arrive as itself, not as a swap */
@@ -1431,20 +1637,29 @@ footer .risk{
   } catch(e){}
   setTimeout(intro, FONTS);
 
-  /* ---- scroll: the observer ------------------------------------------- */
-  var io = new IntersectionObserver(function(entries){
+  /* ---- scroll: the observers ------------------------------------------
+     Watching from the first frame, so a visitor who scrolls at once never
+     passes anything unseen -- except the fold, which the intro owns until
+     it has run (an observer fires for whatever is already in view, and
+     that would pre-empt the beat). Single elements come in once 15% of
+     them is inside; a stagger box starts as soon as its first pixel is, so
+     a long list never sits hidden while its top rows are in view. */
+  function onSeen(entries, obs){
     for (var k = 0; k < entries.length; k++) {
       var en = entries[k];
       if (!en.isIntersecting) continue;
       var el = en.target;
-      if (el.hasAttribute("data-stagger")) stagger(el, 0); else show(el, 0);
-      io.unobserve(el);
+      if (fold.indexOf(el) >= 0) continue;
+      if (el.hasAttribute("data-stagger")) stagger(el, 0, true);
+      else if (!el.classList.contains("is-in")) show(el, 0);
+      obs.unobserve(el);
     }
-  }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
-
-  for (j = 0; j < boxes.length; j++) io.observe(boxes[j]);
+  }
+  var io = new IntersectionObserver(onSeen, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+  var bio = new IntersectionObserver(onSeen, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
+  for (j = 0; j < boxes.length; j++) bio.observe(boxes[j]);
   for (j = 0; j < all.length; j++) {
-    if (!all[j].classList.contains("is-in") && !all[j].closest("[data-stagger]")) io.observe(all[j]);
+    if (!all[j].closest("[data-stagger]")) io.observe(all[j]);
   }
 
   /* ---- scroll-linked: parallax, the lead, the rail ---------------------- */
@@ -1471,20 +1686,27 @@ footer .risk{
     }, 320);
   }
 
-  var offs = [], p;
-  for (p = 0; p < px.length; p++) offs.push(0);
+  var offs = [], fromTop = [], p;
+  for (p = 0; p < px.length; p++) { offs.push(0); fromTop.push(px[p].hasAttribute("data-parallax-top")); }
 
   var ticking = false;
   function frame(){
     ticking = false;
     var h = W.innerHeight || root.clientHeight, mid = h / 2, r, y, c, f, i;
+    var sy = W.scrollY || W.pageYOffset || 0;
     for (i = 0; i < px.length; i++) {
-      r = px[i].getBoundingClientRect();
-      c = r.top + r.height / 2 - offs[i];          /* centre before our own shift */
-      if (c < -h || c > h * 2) continue;            /* far off screen: leave it     */
       f = parseFloat(px[i].getAttribute("data-parallax"));
       if (isNaN(f)) f = 0.1;
-      y = (c - mid) * f;
+      if (fromTop[i]) {
+        y = sy * f;                                 /* lags behind the page  */
+        if (sy > h * 1.5) continue;                 /* long gone: leave it   */
+      } else {
+        r = px[i].getBoundingClientRect();
+        c = r.top + r.height / 2 - offs[i];         /* centre before our own shift */
+        if (c < -h || c > h * 2) continue;          /* far off screen: leave it    */
+        y = (c - mid) * f;
+      }
+      if (Math.abs(y - offs[i]) < 0.05) continue;
       offs[i] = y;
       px[i].style.transform = "translate3d(0," + y.toFixed(1) + "px,0)";
     }
@@ -1502,7 +1724,7 @@ footer .risk{
         setLabel(at);
       }
     }
-    if (rail) rail.classList.toggle("is-scrolled", (W.scrollY || W.pageYOffset || 0) > 40);
+    if (rail) rail.classList.toggle("is-scrolled", sy > 40);
   }
   function ask(){ if (!ticking) { ticking = true; W.requestAnimationFrame(frame); } }
   W.addEventListener("scroll", ask, { passive: true });
