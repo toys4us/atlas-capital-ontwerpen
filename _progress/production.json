@@ -2,7 +2,7 @@
  "id": "production",
  "title": "Production",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -34,6 +34,21 @@
    "confidence": 0.9,
    "note": "Rebuilt the credits as a ladder: each label is now the tag at the end of a price level — a dashed hairline (3 on / 5 off, line-3, anchored so a dash ends at the label) drawn from the strip's left edge to the label, the same construction the founder's \"10+\" uses once and larger on the next reel, so the four small levels arrive at the big one; they also read as contents-page leaders, i.e. typeset.\nValue column is now type only: removed the four dashed rules under the values (they were brighter than the group rule and read as table borders, five rules in 700px on a phone). Rows are set by the",
    "ts": "2026-09-05T21:11:16"
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 7.5,
+   "score_ref": 6,
+   "wowed": false,
+   "gap": "The choreography is the weak leg: frames 1-3 show the serif headline clipped behind the chart card and body copy arriving as a Gaussian blur-to-sharp, which reads as a stock reveal preset rather than an authored sequence. At the bar the headline and chart never overlap mid-scroll, copy arrives by opacity plus a few pixels of translate, and the \"discord.gg\" mono chip sits on the same baseline and optical size as \"Discord\" instead of hanging a little low and small.",
+   "motion": "Rows fade in with a dotted-leader draw and the CTA migrates into the nav, which is elegant, but blur-in text and a headline/chart collision in the early frames undercut it.",
+   "verdict": "B's film-credit table is genuinely designed: right-ranged small-cap labels on dotted leaders, one gold italic accent, a single hairline spine, and a mobile reflow that keeps the leaders with a terminal tick. A has the louder idea (type sliced through a photograph) but its supporting copy is a bland centered paragraph, the logo grid is a stock component, and the header-bleed bugs are disqualifying at this level.",
+   "confidence": 0.7,
+   "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/03-production.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/production.css\n- Mobile (<=620px) now keeps the label/leader object instead of the centred stack: label left in the same tracked caps, the dashed gold leader runs out of it (a dash starting at the label) to the column's edge and terminates on a 1px x 9px vertical hairline rule (the frame edge the phone does not draw); the value takes the next line on the label's left edge. The ledger is inset 6% so labels start where the title card's rule starts and the ticks end whe",
+   "ts": "2026-09-05T21:26:12"
   }
  ]
 }

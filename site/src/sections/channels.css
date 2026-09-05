@@ -248,13 +248,20 @@
 #channels .dv__tag--fvg{right:var(--pane-x);top:43.5%;transform:translateY(calc(-100% - 6px))}
 #channels .dv__tag--ob{left:26.7%;top:78.5%;transform:translateY(5px)}
 
-/* Premium: the figure recedes, a lock and the one true sentence on it */
+/* Premium: the figure recedes; a lock and the one true sentence sit on
+   it, clearing a mat of the pane's own colour the way a label sits on a
+   chart, so no line runs through the words */
 #channels .dv__locked{
   display:none;
   position:absolute;inset:0;z-index:2;
-  align-items:center;justify-content:center;flex-direction:column;gap:12px;
+  align-items:center;justify-content:center;
   padding:0 var(--pane-x);
   text-align:center;
+}
+#channels .dv__locked-in{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  padding:22px 28px 24px;
+  background:var(--panel);
 }
 #channels .dv__locked .dv__lock{width:13px;height:16px;margin-bottom:6px;background:var(--gold);-webkit-mask-size:13px 16px;mask-size:13px 16px}
 #channels .dv__locked-t{
@@ -332,6 +339,6 @@
   #channels .dv__pane{flex:0 0 auto}
   #channels .dv__head{padding:0 var(--pane-x)}
   #channels .dv__plate{flex:0 0 auto;aspect-ratio:600/440;min-height:0}
-  #channels .dv__locked{gap:10px}
+  #channels .dv__locked-in{gap:10px;padding:18px 20px 20px}
   #channels .dv figcaption{margin-top:14px}
 }
