@@ -1,8 +1,24 @@
 {
  "id": "trackrecord",
  "title": "Track record",
- "wave": 0,
- "round": 0,
- "status": "queued",
- "history": []
+ "wave": 1,
+ "round": 1,
+ "status": "win",
+ "history": [
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.5,
+   "score_ref": 5,
+   "wowed": false,
+   "gap": "Everything is set two stops too dark: the \"08 TRACKRECORD\" kicker, the floating \"2023 / 2026\" year markers and the entire certificate grid are grey-on-near-black, and the six thumbnails are desaturated into indistinguishable mud so the one thing the section exists to prove (real certificates) reads as decoration. At the bar the thumbnails sit at full value with one hairline frame, the year markers anchor to the rail rather than hover centred over nothing, and caption 02 is cut to two lines so the grid rows land level instead of one caption running five lines against its neighbours' two.",
+   "motion": "Quiet staggered fade-up per row and section, no easing flourish, restrained to the point of being invisible; fine, not choreographed.",
+   "verdict": "A is a disciplined editorial system (leader-dot timeline, numbered captions, honest disclaimer block) undermined by contrast so low the evidence itself vanishes. B has the cinematic ambition A lacks, but overlapping copy, a clipped rail, strikethrough nav and a dead mobile viewport are craft failures no jury forgives, so A takes it on execution.",
+   "confidence": 0.72,
+   "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/09-trackrecord.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/trackrecord.css (nothing else touched).\n- Ledger rebuilt as a timeline off the reel's spine: each row is a tick — mono number at the axis, a dashed level (the hero's 3-on/5-off liquidity dash in --line-4) drawing from the number to the firm's name at the gutter, value + serif sub-line on the same baseline. No full-width rules, nothing under rows; the ambiguous right-hand \"01\" is gone (numbers now lead, as on the tiles).\n- The two years already on the page (2023/2",
+   "ts": "2026-09-05T19:17:09+00:00"
+  }
+ ]
 }

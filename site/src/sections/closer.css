@@ -36,7 +36,7 @@
   --act:calc(3.2 * var(--D));            /* the action's width            */
   --bleed:calc(var(--gutter) + max(0px,(100vw - 2 * var(--gutter) - var(--wide)) / 2));
   position:relative;
-  padding:clamp(48px,7vw,104px) var(--gutter) clamp(72px,9vw,128px);
+  padding:clamp(48px,7vw,104px) var(--gutter) clamp(64px,8vw,112px);
 }
 #closer .card{
   position:relative;
@@ -71,34 +71,37 @@
 #closer .end__word{display:block;white-space:nowrap}
 #closer .end__word > span{display:inline-block}
 
-/* the figure: an absolute box under the line at the page's right edge.
-   The svg holds the whole line -- the flat run comes from far left of
-   its own box (overflow visible; .page clips it at the viewport) and the
-   action sits in the box, y=0 on the line, in em/100 -- so the rule and
-   the move are one stroke and there is no seam. */
+/* the figure: an absolute box under the line, the width of the viewport
+   (it is the box the wipe runs across). The svg is the action's box, at
+   the right edge; it holds the whole line -- the flat run comes from far
+   left of it (overflow visible) and the action sits in the box, y=0 on
+   the line, in em/100 -- so the rule and the move are one stroke and
+   there is no seam. The stroke is non-scaling, so the hairline is a
+   hairline at every width. */
 #closer .end__fig{
   position:absolute;
   top:var(--base);
+  left:calc(-1 * var(--bleed));
   right:calc(-1 * var(--bleed));
-  width:var(--act);
-  height:calc(.5 * var(--D));
+  height:calc(.5 * var(--D) + 24px);     /* the action, and the caption under it */
   pointer-events:none;
 }
 #closer .fig{
   display:block;
   position:absolute;
-  left:0;top:0;
-  width:100%;height:100%;
+  right:0;top:0;
+  width:var(--act);height:calc(.5 * var(--D));
   overflow:visible;
   margin-top:-.5px;                       /* the stroke centred on the line's top */
 }
 #closer .fig *{vector-effect:non-scaling-stroke}
 #closer .fig__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:butt}
-/* the level: 3 on 5, as every level on the page, run to the page's edge */
+/* the level: 3 on 5, as every level on the page, from 1em into the
+   action to the page's edge */
 #closer .end__lvl{
   position:absolute;
-  left:calc(1.0 * var(--D));
   right:0;
+  width:calc(var(--act) - 1.0 * var(--D));
   top:calc(.30 * var(--D));
   height:1px;
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.5) 0 3px,transparent 3px 8px);
@@ -133,20 +136,25 @@
 
 /* ---- the trace: the figure's own reveal --------------------------------
    The box itself never fades or moves (a probe sees it at once); the
-   motion is in the ink. In: the line draws itself in one stroke -- the
-   flat run crosses the page in the fast start of the curve, the move
-   under the line takes the long settle -- the level comes up under it
-   once the line has reached it, and the caption last, when the sweep is
-   drawn. The word's own mask rise starts on the third beat, when the
-   line is under it; the sentence and the call follow. */
-.js #closer .reveal.trace{opacity:1;transform:none;transition:none}
-.js #closer .reveal.trace .fig__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2s var(--e-out)}
+   motion is a wipe across it, left to right, the way the spread's plate
+   prints on (clip-path, no opacity). Over the cubic-out the flat run
+   crosses the page in the fast start of the curve and the move under the
+   line takes the long settle: the front is past the word in a third of
+   a second, at the action after two thirds, and creeps out at the right
+   edge. The level comes up under the line once the front has reached it,
+   the caption last, when the sweep is drawn. The word's own mask rise
+   starts on the third beat, when the line is under it; the sentence and
+   the call follow. (Not a dash on the path: with a non-scaling stroke,
+   Chromium runs a pathLength dash the wrong way.) The insets are open by
+   two pixels top and bottom so the stroke on the box's top edge is never
+   halved. */
+.js #closer .reveal.trace{opacity:1;transform:none;clip-path:inset(-2px 100% -2px 0);transition:clip-path 2.2s var(--e-reveal)}
 .js #closer .reveal.trace .end__lvl{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) .5s}
 .js #closer .reveal.trace .end__tag{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) 1s}
-.js #closer .reveal.trace.is-in .fig__line{stroke-dashoffset:0}
+.js #closer .reveal.trace.is-in{clip-path:inset(-2px 0 -2px 0)}
 .js #closer .reveal.trace.is-in .end__lvl,.js #closer .reveal.trace.is-in .end__tag{opacity:1}
 @media (prefers-reduced-motion:reduce){
-  .js #closer .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
+  .js #closer .reveal.trace{clip-path:none;transition:none}
   .js #closer .reveal.trace .end__lvl,.js #closer .reveal.trace .end__tag{opacity:1;transition:none}
 }
 
@@ -200,7 +208,7 @@ footer .fsig small{
    ten pixels past the word either side, the way a pointed-at row on the
    markets board does. A link that leaves the page carries the bar's
    arrow after it, grey until pointed at, as in the header. */
-footer .fnav{list-style:none;margin:0;padding:0;display:grid;row-gap:clamp(4px,.6vw,8px);justify-items:start}
+footer .fnav{list-style:none;margin:0;padding:calc(1px + clamp(16px,2vw,22px) - 6px) 0 0;display:grid;row-gap:clamp(4px,.6vw,8px);justify-items:start}  /* the first word's baseline on the name's, under the hair */
 footer .fnav a{
   position:relative;z-index:0;            /* its own context, so the band sits under the word and over the ground */
   display:inline-flex;align-items:center;gap:9px;
@@ -251,7 +259,7 @@ footer .fbase{
 }
 /* the two lines that go under everything: secondary prose, not a hint --
    they are read */
-footer .legal{max-width:74ch}
+footer .legal{max-width:88ch}                /* the risk line on one line at a desk */
 footer .legal p{
   margin:0;
   font-size:var(--t-small);
