@@ -97,11 +97,13 @@
    the leader: off the edge fast, the settle long (expo-out); the wipe's
    clip stays put so the dashes are revealed, not scaled */
 .js #production .lvl.reveal.wipe{transition:clip-path 1.15s var(--e-out)}
-/* the label: opacity only -- its leader does the moving -- on a curve
-   that starts slow, so it surfaces as the line arrives */
-.js #production .tag.reveal{transform:none;transition:opacity 1.05s var(--e-inout)}
-/* the value: the mask rise of base.css, a shade quicker than a title line */
-.js #production .mask > .val.reveal{transition-duration:1.2s}
+/* the label: opacity only -- its leader does the moving -- and quick, so
+   it is there as the line arrives and before its value is */
+.js #production .tag.reveal{transform:none;transition:opacity .75s var(--e-reveal)}
+/* the value: the mask rise of base.css, a shade quicker than a title line,
+   from a little deeper so no ascender shows before the rise has begun */
+.js #production .mask > .val.reveal{transform:translateY(145%);transition-duration:1.2s}
+.js #production .mask > .val.reveal.is-in{transform:none}
 /* the address: in place, and slowly, so it is not there before the word is */
 .js #production .addr.reveal{transform:none;transition:opacity 1.3s var(--e-inout)}
 

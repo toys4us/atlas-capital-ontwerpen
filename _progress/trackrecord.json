@@ -2,7 +2,7 @@
  "id": "trackrecord",
  "title": "Track record",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -19,6 +19,21 @@
    "confidence": 0.72,
    "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/09-trackrecord.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/trackrecord.css (nothing else touched).\n- Ledger rebuilt as a timeline off the reel's spine: each row is a tick — mono number at the axis, a dashed level (the hero's 3-on/5-off liquidity dash in --line-4) drawing from the number to the firm's name at the gutter, value + serif sub-line on the same baseline. No full-width rules, nothing under rows; the ambiguous right-hand \"01\" is gone (numbers now lead, as on the tiles).\n- The two years already on the page (2023/2",
    "ts": "2026-09-05T19:17:09+00:00"
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 7,
+   "score_ref": 5.5,
+   "wowed": false,
+   "gap": "The six certificate thumbnails are raw vendor screenshots — blue starbursts, green FTMO gradients, a Dutch flag pill, four QR codes, mixed aspect ratios with visible letterboxing — dropped into an otherwise disciplined black-and-gold serif system, and they shatter the colour restraint the section has built. At the bar they would be normalised to one frame and aspect, given a uniform tonal (duotone or desaturated) treatment that lifts to full colour on hover, with the originals behind the click; the desktop timeline should also use the right 340px of its container instead of leaving that column empty.",
+   "motion": "Staggered fade-up per timeline row with a rotated side label and fixed nav; restrained and legible, if slow to reach full opacity, with no gesture beyond the default reveal.",
+   "verdict": "B is a coherent editorial system — serif/mono pairing, gold hairline brackets, dotted leaders, numbered captions — let down by unedited certificate imagery and a half-empty timeline column. A has one striking hero gesture (type-through-image) but its trackrecord region itself is a generic logo grid with overflow, collision and dead-zone faults on mobile, so B takes it clearly.",
+   "confidence": 0.8,
+   "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/09-trackrecord.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/trackrecord.css\n- Plates now sit at full value in their own colour: the grayscale/brightness filter and the dark veil are gone; one hairline frame (line-2) on a mat. Hover is the FVG band in the page's vocabulary: the mat warms to gold at 9%, the frame steps to line-4, the plate number goes gold. Focus does the same.\n- Wall goes two to a row (as the material wall's pairs): rows 01/02 and 05/06 at 3:2, 03/04 (the two square files) as a pair of squares, so every row ",
+   "ts": "2026-09-05T19:35:19+00:00"
   }
  ]
 }

@@ -4,19 +4,18 @@
       <img class="wm__mark" src="assets/logo-mark.svg" alt="" width="420" height="342">
       <b>Atlas&nbsp;Capital</b>
     </a>
-    <!-- the one call, dead-centre of the bar. Two labels in one mask: the
-         short one while another gold call is on screen, the full one with
-         its rule and arrow when none is (motion.js toggles .solid); the
-         swap slides along the reading axis like the rail's label. Both
-         rows share one cell, so the box is as wide as the wider row and
-         nothing beside it ever moves. The short row is a visual state
-         (aria-hidden); the full one is the link's name everywhere, on a
-         phone too, where it is kept for the reader and clipped for the eye. -->
+    <!-- the one call, dead-centre of the bar, in one measured slot. The
+         word and its arrow are always there; the prefix -- the rule and the
+         verb -- is a grid track that is 0fr while another gold call is on
+         screen and 1fr when none is (motion.js toggles .solid), so the label
+         grows from the dash and the row either side of it re-centres in one
+         eased move. Nothing is reserved: at rest the slot is exactly the
+         width of the word. The prefix is never hidden from the reader, only
+         clipped for the eye, so the link's name is the full call whatever
+         its state. -->
     <a class="cta" href="https://discord.gg/78Ff2GuSfW">
-      <span class="cta__track">
-        <span class="r r--s" aria-hidden="true">Discord</span>
-        <span class="r r--l"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></span>
-      </span>
+      <span class="cta__pre"><i class="cta__rule" aria-hidden="true"></i><span class="cta__verb"><span lang="nl">Open de</span><span lang="en">Open the</span></span></span>
+      <span class="cta__word">Discord</span>
     </a>
     <!-- the contents line: two anchors either side of the call on a desk,
          a drawer of levels under the bar everywhere else. Each row is a
