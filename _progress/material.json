@@ -1,8 +1,24 @@
 {
  "id": "material",
  "title": "Material",
- "wave": 0,
- "round": 0,
- "status": "queued",
- "history": []
+ "wave": 1,
+ "round": 1,
+ "status": "win",
+ "history": [
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 7.2,
+   "score_ref": 5.3,
+   "wowed": false,
+   "gap": "The five chart plates are rhythmically identical (card, caption row, one-line body, repeat) so the section reads as a list rather than a designed spread; the caption row itself (number · bold small caps · dotted leader · grey link) is a stock editorial pattern executed at 11px with no scale contrast to the plates above it. At the bar, plates would vary in scale and grid position (a full-bleed pair, then a narrow inset with a wide margin note), captions would carry a real secondary type size, and the mono annotations on mobile (\"EQUAL HIGHS\", \"TRENDLINE LIQUIDITY\", \"FVG\") would be re-laid rather than left colliding with candles and fib labels.",
+   "motion": "Restrained fade-and-rise reveals with a clipped vertical wipe on the chart plates; competent, consistent, but generic and never surprising.",
+   "verdict": "A is a disciplined, tightly kerned dark-editorial system whose only crime is safeness: every hairline, leader and mono label sits where it should, and the SVG chart tracings with gold annotations are genuinely distinctive material. B has the more cinematic ambition and a beautiful first photograph, but it fails the basic craft gates of contrast, label collision, dead space and copy proofing, so A takes it clearly without reaching shortlist.",
+   "confidence": 0.86,
+   "timestamp": "2026-09-05T21:33:44",
+   "note": "material — 08-material.html + material.css rebuilt around FAITHFUL VECTOR TRACES of the founder's seven charts (option 2 of the brief): every plate is an inline SVG whose viewBox is the original file's pixel grid; the candles (high/low/open/close/direction) are read off the pixels with a small pipeline (masks → candle segmentation by wick column → OHLC), the zones/levels/lines/labels measured on the file and redrawn in the site's vocabulary (gold hairline boxes at 7%, dashed 3/5 levels, one gold hairline for a drawn line, up candles in ink-2 / down in ink-4, labels in the serif caps voice, fi"
+  }
+ ]
 }

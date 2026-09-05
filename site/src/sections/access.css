@@ -1,40 +1,101 @@
 /* ===== access: two levels, one path =====
-   The two ways in, set as two levels on the reel's one axis instead of as
-   two columns of a price table. The label column is the chart's margin
-   and the gutter is its price axis: each tag sits on the axis the way a
-   level is tagged, its level drawn out to the left from the strip's edge
-   in the hairline gold of the spread's plate. The open level is the one
-   the path has reached -- the single hairline path of the spread comes in
-   low from the margin, climbs in two legs and holds the level up to the
-   tag (this is where things are). The level that opens later is the
-   dashed liquidity line of the spread: drawn, not yet run through; point
-   at its link and it draws itself solid, left to right, the way every
-   rule on the page draws. Right of the axis, on the value column with
-   every other credit: what the level holds, at statement size because
-   these two words are the reel's last answer; one line under it; the
-   link. The open level carries the one call of the screen; the other a
-   quiet link, the page's ordinary one. Nothing is a price, a day or an
-   instrument; the caption says so.
-   .roll::before is the strip's edge, so the block sits above it (z:2). */
-#access{--edge:clamp(18px,4vw,40px)}   /* the roll's padding: the strip's edge is this far left */
+   The two ways in, drawn as one figure on the reel's axis instead of as
+   two columns of a price table. The label column is the chart and the
+   gutter is its price axis. Each level is a hairline that runs from the
+   content edge -- the line the group's rule starts on -- to its tag, and
+   the tag column is one width, so both levels end on one line against
+   the gutter. A level is a flex item on the tag's baseline (a box with
+   no text takes its bottom edge as its baseline) and the row is a grid
+   aligned on baselines, so the NU level is the line "Gratis" stands on
+   and the LATER level the line "Premium" stands on: the graph is the
+   two tiers.
+
+   The open level is the one the path has reached: the single hairline
+   path of the spread hangs off it in a plate as tall as the copy beside
+   it (--plate-h: the first row and the gap, so the plate reaches down to
+   the second level and stops short of it), comes in low from the edge,
+   ranges, climbs in three legs and holds the level to the tag. The
+   level that opens later is the dashed liquidity line of the spread,
+   drawn and not yet run through; point at that row and it draws itself
+   solid, left to right, the way every rule on the page draws. Point at
+   the open row and a band develops under the held level: the gap of
+   the spread, a scale and never an opacity.
+
+   Right of the axis, on the value column with every other credit: what
+   the level holds, at statement size because these two words are the
+   reel's last answer; one line under it; the link. The open level
+   carries the one call of the screen, the other the page's quiet link,
+   and both rules are one length. The caption sits on the figure's
+   column, right against the axis with the tags, on the last link's
+   baseline. Nothing is a price, a day or an instrument; the caption
+   says so. .roll::before is the strip's edge, so the block sits above
+   it (z:2). */
+#access{
+  --edge:clamp(18px,4vw,40px);            /* the roll's padding, the strip's edge is this far left */
+  --tag:calc(4.5em + 14px);               /* the tag column: one width, so both levels end on one line */
+  --rows:clamp(44px,6vw,80px);            /* between the two levels */
+  /* the plate: from the open level down to the gap before the next --
+     the first row (a value line, the note's two lines, the link) plus
+     the gap between the rows; the path's low run stays above its foot */
+  --plate-h:calc(var(--t-h2) * 1.08 + clamp(8px,1.2vw,12px) + var(--t-body) * 3 + clamp(14px,2vw,22px) + 35px + var(--rows));
+}
 
 #access .levels{position:relative;z-index:2}
 
-/* a level is one credit row on the reel's axis */
+/* a level is one credit row on the reel's axis, aligned on its baseline */
 #access .level{
   display:grid;
   grid-template-columns:var(--axis-l) var(--axis-r);
   column-gap:var(--axis-gap);
   align-items:baseline;
 }
-#access .level + .level{margin-top:clamp(44px,6vw,80px)}
+#access .level + .level{margin-top:var(--rows)}
 
-/* the scale: the figure is placed across the whole cell from the strip's
-   edge, and the tag sits on top of its end, on the page's ground, so the
-   line runs up to the word and stops */
+/* the scale: the level and its tag on one baseline, the level taking
+   whatever the tag leaves, from the content edge to the tag column */
 #access .level__scale{
-  grid-column:1;
+  grid-column:1;grid-row:1;
+  display:flex;align-items:baseline;
+  min-width:0;
+  font-family:var(--f-display);
+  font-size:var(--t-micro);
+  line-height:1.5;
+}
+#access .lvl{
   position:relative;
+  flex:1 1 auto;
+  min-width:0;
+  height:1px;
+  align-self:baseline;                    /* its bottom edge: on the tag's baseline */
+  font-size:var(--t-micro);
+}
+/* the open level: solid, in the hairline gold of the group rules; it is
+   a pseudo so the trace reveal can draw it without moving the plate */
+#access .lvl--now::before{
+  content:"";
+  position:absolute;inset:0;
+  background:var(--line-3);
+  transform-origin:left center;
+}
+/* the later level: the dash of the spread's liquidity lines (3 on, 5
+   off); the solid line over it is drawn back to nothing and draws
+   itself on the row's hover or the link's focus */
+#access .lvl--later{
+  background:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+}
+#access .lvl--later::after{
+  content:"";
+  position:absolute;inset:0;
+  background:var(--line-4);
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform var(--d-slow) var(--e-out);
+}
+#access .level--later:hover .lvl--later::after,
+#access .level--later:focus-within .lvl--later::after{transform:none}
+#access .level__tag{
+  flex:0 0 auto;
+  width:var(--tag);
+  padding-left:14px;
   text-align:right;
   font-family:var(--f-display);
   font-size:var(--t-micro);
@@ -44,26 +105,22 @@
   color:var(--ink-4);
   white-space:nowrap;
 }
-#access .level__fig{
+
+/* the plate: hung off the open level, as wide as the level, as tall as
+   the copy; y0 of the drawing is the level, so the path holds it */
+#access .fig{
   position:absolute;
-  left:calc(-1 * var(--edge));
-  width:calc(100% + var(--edge) - 3px);    /* a replaced box does not stretch
-                                              between left and right: sized, so
-                                              the line ends under the tag and
-                                              its round cap never shows past it */
+  left:0;right:0;top:0;
+  height:var(--plate-h);
   display:block;overflow:visible;
+  pointer-events:none;
 }
-/* the open level: 84px of figure hung on the tag -- the level at y12, on
-   the tag's middle, and the path climbing to it from 62px below */
-#access .level--now .level__fig{top:calc(50% - 12px);height:84px}
-#access .level--later .level__fig{top:calc(50% - 16px);height:32px}
-#access .level__fig *{vector-effect:non-scaling-stroke}
-#access .fig__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-opacity:.85;stroke-linejoin:round;stroke-linecap:round}
-#access .fig__level{stroke:var(--gold);stroke-width:1;stroke-opacity:.34;stroke-linecap:butt}
-#access .fig__level--open{stroke-opacity:.55;stroke-dasharray:3 5}
-/* the zone: a band of the spread's kind under the open level, where the
-   path holds -- folded flat until the row is pointed at, then it develops
-   downward from the level (a scale, never opacity, so the probe sees it) */
+#access .fig *{vector-effect:non-scaling-stroke}
+#access .fig__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-opacity:.85;stroke-linejoin:round;stroke-linecap:butt}
+#access .fig__line--flat{display:none}
+/* the band: a gap of the spread's kind under the held level, folded
+   flat until the row is pointed at, then it develops downward from the
+   level (a scale, never opacity, so the probe sees it) */
 #access .fig__zone{
   fill:var(--gold);fill-opacity:.09;
   stroke:var(--gold);stroke-opacity:.16;stroke-width:1;
@@ -72,24 +129,9 @@
 }
 #access .level--now:hover .fig__zone,
 #access .level--now:focus-within .fig__zone{transform:none}
-/* the same level, solid, drawn back to nothing; on the row's hover (or the
-   link's focus) it draws itself left to right over the dashes */
-#access .fig__level--set{
-  stroke-opacity:.62;
-  stroke-dasharray:1;stroke-dashoffset:1;
-  transition:stroke-dashoffset var(--d-slow) var(--e-out);
-}
-#access .level--later:hover .fig__level--set,
-#access .level--later:focus-within .fig__level--set{stroke-dashoffset:0}
-#access .level__tag{
-  position:relative;
-  display:inline-block;
-  padding-left:14px;
-  background:var(--bg);
-}
 
 /* the credit: the value column, at statement size */
-#access .level__body{grid-column:2;min-width:0}
+#access .level__body{grid-column:2;grid-row:1;min-width:0}
 #access .level__value{
   margin:0;
   font-family:var(--f-display);
@@ -109,67 +151,69 @@
   color:var(--ink-3);
   text-wrap:pretty;
 }
-#access .level__body .cta{margin-top:clamp(14px,2vw,22px)}
+/* the two links on one rule length: the quiet one takes the call's */
+#access .level__body .cta{--rule:clamp(22px,3vw,36px);margin-top:clamp(14px,2vw,22px)}
 
-/* the caption, on the figure's own column, against the axis */
+/* the caption: on the figure's column, against the axis with the tags,
+   its baseline on the last link's */
 #access .levels__cap{
-  width:calc((100% - var(--axis-gap)) * 2 / 5);
-  margin:clamp(20px,3vw,36px) 0 0;
-  text-align:right;
+  grid-column:1;grid-row:1;
+  align-self:end;justify-self:end;
+  margin:0 0 9px;
   font-family:var(--f-display);
   font-size:var(--t-micro);
   letter-spacing:var(--trk-caps);
   text-transform:uppercase;
   line-height:1.5;
+  text-align:right;
+  white-space:nowrap;
   color:var(--ink-5);
 }
 
 /* the trace: the open level's own reveal, as on the spread. Under .js,
-   until motion.js marks it .is-in, the path is drawn back to nothing and
-   the level waits; in, the path draws itself left to right over the slow
-   settle and the level comes up under it. Never opacity on the figure
-   itself, so the probe sees it at once; the motion is in the ink. */
+   until motion.js marks it .is-in, the level is drawn back to nothing
+   and the path with it; in, the level draws out of the edge over the
+   settle and the path draws itself left to right along it. Never
+   opacity, so the probe sees the figure at once; the motion is in the
+   ink. The draw ends inside the window motion.js gives a reveal. */
 .js #access .reveal.trace{opacity:1;transform:none;transition:none}
-.js #access .reveal.trace .fig__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.2s var(--e-reveal)}
-.js #access .reveal.trace .fig__level{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) .6s}
+.js #access .reveal.trace::before{transform:scaleX(0);transition:transform var(--d-reveal) var(--e-reveal)}
+.js #access .reveal.trace .fig__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.9s var(--e-reveal)}
+.js #access .reveal.trace.is-in::before{transform:none}
 .js #access .reveal.trace.is-in .fig__line{stroke-dashoffset:0}
-.js #access .reveal.trace.is-in .fig__level{opacity:1}
 @media (prefers-reduced-motion:reduce){
+  .js #access .reveal.trace::before{transform:none;transition:none}
   .js #access .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
-  .js #access .reveal.trace .fig__level{opacity:1;transition:none}
-  #access .fig__level--set,#access .fig__zone{transition:none}
+  #access .lvl--later::after,#access .fig__zone{transition:none}
 }
 
 /* a phone: the credits centre, so each level centres with them the way
-   the founder's does -- the level runs from one edge of the screen to
-   the other with the tag on it, the path climbing to the tag from the
-   left, the level going on past it to the right; what the level holds
-   sits centred under it. The figure is in the flow, so nothing needs
-   covering. */
+   the ledger's ticks do -- the level runs from one edge of the screen
+   to the other with the tag on it; the path comes up to it from the
+   left in a shallow plate, so the climb is a drawing and not a spike,
+   and holds the level to the tag; the level goes on past the tag to
+   the right. What the level holds sits centred under it. */
 @media (max-width:620px){
   #access .level{display:block;text-align:center}
-  #access .level + .level{margin-top:clamp(44px,11vw,56px)}
+  #access .level + .level{margin-top:clamp(40px,10vw,52px)}
   #access .level__scale{
-    display:flex;align-items:flex-start;justify-content:center;
-    gap:14px;
+    justify-content:center;
     margin:0 calc(-1 * var(--edge));
-    text-align:center;
   }
-  #access .level__fig{position:static;flex:1 1 0;min-width:0;width:auto}
-  /* the open figure squeezed to two thirds of its height (the viewBox
-     stretches), so the climb is 40px and not half the screen: y12 lands
-     at 8px, the tag's middle */
-  #access .level--now .level__fig{height:56px;margin-top:0}
-  #access .level--later .level__fig{margin-top:-8px}   /* y16 on the tag's middle */
-  #access .level__tag{flex:0 0 auto;padding:0;background:transparent}
-  /* the level continues past the tag */
-  #access .level__scale::after{content:"";flex:1 1 0;height:1px;margin-top:8px}
-  #access .level--now .level__scale::after{background:rgba(215,179,100,.34)}
-  #access .level--later .level__scale::after{background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px)}
-  /* the words sit close under their tag: the path's low run is at the
-     far left, the centred value clears it */
-  #access .level__body{margin-top:8px}
-  #access .level--now .level__body{margin-top:-14px}
+  #access .lvl{flex:1 1 0}
+  #access .level__scale::after{content:"";flex:1 1 0;height:1px;align-self:baseline}
+  #access .level--now .level__scale::after{background:var(--line-3)}
+  #access .level--later .level__scale::after{background:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px)}
+  #access .level__tag{width:auto;padding:0 14px;text-align:center}
+  #access .fig{height:52px}
+  #access .fig__line--tall{display:none}
+  #access .fig__line--flat{display:block}
+  #access .level__body{margin-top:10px}
   #access .level__note{margin-left:auto;margin-right:auto}
-  #access .levels__cap{width:auto;text-align:center}
+  #access .levels__cap{
+    display:block;
+    margin:clamp(22px,6vw,30px) 0 0;
+    text-align:center;
+    white-space:normal;
+  }
 }

@@ -65,8 +65,8 @@
 #hero{
   --kick:calc(16.5px + clamp(18px,2.4vw,32px));
   --plate-x:calc(var(--t-hero) * 1.5);
-  --plate-top:calc(var(--kick) - var(--t-hero) * .012);
-  --plate-h:calc(var(--t-hero) * 3.162);
+  --plate-top:calc(var(--kick) + 1px);   /* measured: the cap top of the P */
+  --plate-h:calc(var(--t-hero) * 3.15);
   --under:calc(var(--t-hero) * .33);     /* band bottom below the title's box */
   --bleed:calc(var(--gutter) + max(0px,(100vw - 2 * var(--gutter) - var(--wide)) / 2));
   --edge:var(--gutter);
@@ -230,7 +230,8 @@
    under 9px. The two levels are labelled above their right ends, on the
    page's right gutter -- the axis of the chart, in the bleed on a wide
    screen, on the content edge on a phone; the orderblock's label sits
-   over its box, where nothing is drawn. */
+   beside its box, on the box's middle, where nothing is drawn (the line
+   leaves the box upward and to the right, over the label). */
 #hero .plate__tag{
   position:absolute;
   display:block;
@@ -247,7 +248,7 @@
 }
 #hero .plate__tag--liq{right:calc(var(--gutter) - var(--edge));top:24.5%;transform:translateY(calc(-100% - 6px))}
 #hero .plate__tag--fvg{right:calc(var(--gutter) - var(--edge));top:56.5%;transform:translateY(calc(-100% - 6px))}
-#hero .plate__tag--ob{left:47.8%;top:90%;transform:translateY(calc(-100% - 6px))}
+#hero .plate__tag--ob{left:calc(52.8% + 9px);top:93.75%;transform:translateY(-50%)}
 /* the caption: the figure's number in the label voice, its note in the
    serif at note size; one row hung on the band's left edge where the band
    is in the flow (a phone), two short lines on the axis under the band's
@@ -354,11 +355,11 @@
     grid-template-columns:var(--plate-x) minmax(0,1fr) auto;
     grid-template-rows:auto auto auto auto;
     align-items:baseline;
-    column-gap:clamp(32px,4vw,64px);
+    column-gap:0;                        /* the reading column is the band's edge */
   }
   #hero .kicker{grid-column:1/-1;grid-row:1;align-self:start}
   #hero .title{grid-column:1/-1;grid-row:2;align-self:start;min-width:0}
-  #hero .plate{grid-column:3;grid-row:3;width:auto;margin:calc(var(--under) + clamp(22px,3vh,30px)) 0 0}
+  #hero .plate{grid-column:3;grid-row:3;width:auto;margin:calc(var(--under) + clamp(22px,3vh,30px)) 0 0 clamp(32px,4vw,64px)}
   #hero .plate__px{
     position:absolute;right:0;
     top:var(--plate-top);
