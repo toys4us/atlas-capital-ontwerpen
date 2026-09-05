@@ -29,7 +29,7 @@
   margin:0 0 clamp(30px,4.4vw,48px);
   text-align:center;
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
-  color:var(--ink-5);
+  color:var(--ink-4);
   text-wrap:balance;
 }
 #material .wall{
@@ -182,7 +182,7 @@
   grid-column:4;grid-row:1;
   font-size:var(--t-nano);letter-spacing:var(--trk-caps);
   text-transform:uppercase;line-height:1.5;
-  color:var(--ink-5);
+  color:var(--ink-4);
   white-space:nowrap;
 }
 #material .plate figcaption small{

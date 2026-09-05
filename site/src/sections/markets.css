@@ -36,7 +36,7 @@
 /* ---- a heading: the group, in the label voice, on the left edge -------- */
 #markets .board > dt{
   margin:0;
-  padding:clamp(28px,4vw,44px) 0 clamp(8px,1.2vw,12px);
+  padding:clamp(24px,3.4vw,38px) 0 clamp(6px,1vw,10px);
   font-family:var(--f-display);
   font-size:var(--t-micro);
   font-weight:400;
@@ -53,7 +53,7 @@
   display:flex;align-items:baseline;justify-content:space-between;
   gap:clamp(16px,3vw,32px);
   margin:0;
-  padding:clamp(9px,1.3vw,14px) 0 clamp(10px,1.4vw,15px);
+  padding:clamp(8px,1.2vw,12px) 0 clamp(9px,1.3vw,13px);
   min-width:0;
 }
 /* the level: a hairline under the row, on the content's edges */
@@ -137,7 +137,7 @@
 }
 #markets .live__line{
   margin:0;
-  max-width:24ch;
+  max-width:28ch;
   font-family:var(--f-display);
   font-size:var(--t-quote);
   font-weight:400;

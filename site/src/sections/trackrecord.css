@@ -135,7 +135,7 @@
   font-variant-numeric:tabular-nums;
   letter-spacing:var(--trk-mono);
   line-height:1;
-  color:var(--ink-3);
+  color:var(--ink-2);
 }
 #trackrecord .ledger__rule{
   flex:1 1 auto;min-width:0;
@@ -268,23 +268,22 @@
   font-size:var(--t-small);color:var(--ink-2);line-height:1.55;
   text-wrap:pretty;
 }
-/* the footnote: the one note a plate needs, under the wall on the wall's
-   left edge, in the caption's own voice -- the number of its plate in
-   mono, the note in the serif */
+/* the footnote: the one note a plate needs, under a rule that closes the
+   wall edge to edge, hung on the wall's left edge in the caption's own
+   voice -- the number of its plate in mono, the note in the serif */
 #trackrecord .proofs-fn{
   position:relative;z-index:2;
   display:flex;gap:14px;align-items:baseline;
-  max-width:60ch;
-  margin:clamp(18px,2.6vw,28px) 0 0;
+  margin:clamp(22px,3vw,34px) 0 0;
   padding-top:clamp(14px,2vw,20px);
-  border-top:1px solid var(--line-1);
+  border-top:1px solid var(--line-2);
   font-family:var(--f-display);
   font-size:var(--t-small);
   line-height:1.55;
   color:var(--ink-2);
   text-wrap:pretty;
 }
-#trackrecord .proofs-fn > span{min-width:0}
+#trackrecord .proofs-fn > span{min-width:0;max-width:56ch}
 @media (max-width:480px){
   /* a phone: one plate per row, the width of the column, so a certificate
      can be read where it stands and the caption has its own line */

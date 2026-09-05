@@ -1724,7 +1724,6 @@ dl.pairs .cols{
    and the quote is set left with a rag and no break at a hyphen. */
 #founder{
   --n:clamp(72px,9.4vw,132px);              /* the numeral: a size the scale lacks   */
-  --tag-gap:clamp(10px,1.1vw,14px);         /* from the tag to the first dash        */
   --edge:clamp(18px,4vw,40px);              /* the roll's padding: to the strip edge */
 }
 
@@ -1733,9 +1732,9 @@ dl.pairs .cols{
   position:relative;z-index:2;
   display:grid;
   grid-template-columns:auto minmax(0,1fr);
-  column-gap:var(--tag-gap);
+  column-gap:0;                              /* the plus's right edge is the column line */
   align-items:baseline;
-  margin:clamp(4px,1vw,12px) 0 0;
+  margin:clamp(10px,1.5vw,20px) 0 0;
   text-align:left;
 }
 /* the tag: a flex row so its baseline is the numeral's (the mask keeps
@@ -1746,7 +1745,7 @@ dl.pairs .cols{
   grid-column:1;grid-row:1;
   display:flex;align-items:baseline;
   min-width:0;
-  margin-left:-.06em;
+  margin-left:-.015em;
   font-family:var(--f-display);
   font-size:var(--n);
   font-weight:400;
@@ -1764,8 +1763,8 @@ dl.pairs .cols{
   font-size:.44em;
   line-height:1;
   vertical-align:baseline;
-  position:relative;top:-1.02em;
-  margin-left:.06em;
+  position:relative;top:-1.18em;
+  margin:0 -.08em 0 .06em;                  /* its right bearing goes, so the ink's edge is the line */
 }
 /* the level: an empty grid item has no baseline of its own, so it is
    given the row's -- its bottom edge -- and the line is the baseline
@@ -1804,7 +1803,7 @@ dl.pairs .cols{
   grid-column:2;grid-row:2;
   display:block;
   min-width:0;
-  margin-top:calc(7px - .265 * var(--n));
+  margin-top:calc(3px - .265 * var(--n));
   font-family:var(--f-display);
   font-size:var(--t-small);
   letter-spacing:.01em;
@@ -2412,7 +2411,7 @@ dl.pairs .cols{
 /* ---- a heading: the group, in the label voice, on the left edge -------- */
 #markets .board > dt{
   margin:0;
-  padding:clamp(28px,4vw,44px) 0 clamp(8px,1.2vw,12px);
+  padding:clamp(24px,3.4vw,38px) 0 clamp(6px,1vw,10px);
   font-family:var(--f-display);
   font-size:var(--t-micro);
   font-weight:400;
@@ -2429,7 +2428,7 @@ dl.pairs .cols{
   display:flex;align-items:baseline;justify-content:space-between;
   gap:clamp(16px,3vw,32px);
   margin:0;
-  padding:clamp(9px,1.3vw,14px) 0 clamp(10px,1.4vw,15px);
+  padding:clamp(8px,1.2vw,12px) 0 clamp(9px,1.3vw,13px);
   min-width:0;
 }
 /* the level: a hairline under the row, on the content's edges */
@@ -2513,7 +2512,7 @@ dl.pairs .cols{
 }
 #markets .live__line{
   margin:0;
-  max-width:24ch;
+  max-width:28ch;
   font-family:var(--f-display);
   font-size:var(--t-quote);
   font-weight:400;
@@ -2582,7 +2581,7 @@ dl.pairs .cols{
   margin:0 0 clamp(30px,4.4vw,48px);
   text-align:center;
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
-  color:var(--ink-5);
+  color:var(--ink-4);
   text-wrap:balance;
 }
 #material .wall{
@@ -2735,7 +2734,7 @@ dl.pairs .cols{
   grid-column:4;grid-row:1;
   font-size:var(--t-nano);letter-spacing:var(--trk-caps);
   text-transform:uppercase;line-height:1.5;
-  color:var(--ink-5);
+  color:var(--ink-4);
   white-space:nowrap;
 }
 #material .plate figcaption small{
@@ -2911,7 +2910,7 @@ dl.pairs .cols{
   font-variant-numeric:tabular-nums;
   letter-spacing:var(--trk-mono);
   line-height:1;
-  color:var(--ink-3);
+  color:var(--ink-2);
 }
 #trackrecord .ledger__rule{
   flex:1 1 auto;min-width:0;
@@ -3044,23 +3043,22 @@ dl.pairs .cols{
   font-size:var(--t-small);color:var(--ink-2);line-height:1.55;
   text-wrap:pretty;
 }
-/* the footnote: the one note a plate needs, under the wall on the wall's
-   left edge, in the caption's own voice -- the number of its plate in
-   mono, the note in the serif */
+/* the footnote: the one note a plate needs, under a rule that closes the
+   wall edge to edge, hung on the wall's left edge in the caption's own
+   voice -- the number of its plate in mono, the note in the serif */
 #trackrecord .proofs-fn{
   position:relative;z-index:2;
   display:flex;gap:14px;align-items:baseline;
-  max-width:60ch;
-  margin:clamp(18px,2.6vw,28px) 0 0;
+  margin:clamp(22px,3vw,34px) 0 0;
   padding-top:clamp(14px,2vw,20px);
-  border-top:1px solid var(--line-1);
+  border-top:1px solid var(--line-2);
   font-family:var(--f-display);
   font-size:var(--t-small);
   line-height:1.55;
   color:var(--ink-2);
   text-wrap:pretty;
 }
-#trackrecord .proofs-fn > span{min-width:0}
+#trackrecord .proofs-fn > span{min-width:0;max-width:56ch}
 @media (max-width:480px){
   /* a phone: one plate per row, the width of the column, so a certificate
      can be read where it stands and the caption has its own line */
@@ -3801,10 +3799,10 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
     <!-- the figure: a session drawn as a schema, in hairlines of the one
          gold. Four zones and one line, nothing else -- no price, no date, no
          entry, no outcome. Read left to right: the line opens low and quiet
-         (on a desk that is the part the last two words run across), ranges,
-         dips once below the range out of an orderblock, rallies in three
-         legs and leaves a gap (the FVG band), meets two equal highs under
-         the liquidity line, sweeps it once, and falls back through the gap
+         (on a desk that is the part the three words stand on), dips once
+         below the range out of an orderblock, rallies in three legs and
+         leaves a gap (the FVG band), meets three equal highs under the
+         liquidity line, sweeps it once, and falls back through the gap
          towards the level below. It stops short of the right edge: that is
          now. The zones are HTML, not SVG, so they are the same hairlines
          every other section draws its levels with (a 3-on-5 dashed line,
@@ -3812,13 +3810,14 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
          the band's bleed, to the edge of the page -- a level is drawn
          forward, a line is drawn up to the present. Every point is placed,
          so the line reads as a drawing and not as a feed. On load the line
-         draws itself while the zones draw out of the left. Labels sit on the
-         page's right gutter like the axis of a chart.
+         draws itself while the zones draw out of the left. The two levels
+         are labelled on the page's right gutter like the axis of a chart;
+         the caption sits on that axis too, under the band's right end.
          On a desk the frame is lifted out of the flow (it is the band the
-         title crosses); the caption stays in it, so it sits under the band
-         at the band's left edge, and the standfirst and the calls follow it
-         on that same line. On a phone the band sits under the title, edge to
-         edge, so the figure is in the first screen there too. -->
+         title stands on); the caption stays in it, so it lands in the row
+         under the band with the one line. On a phone the band sits under
+         the title, edge to edge, so the figure is in the first screen
+         there too, and the caption hangs on its left edge. -->
     <figure class="plate">
       <div class="plate__px" data-parallax="0.04" data-parallax-top>
         <div class="plate__frame reveal trace" data-at="300">
@@ -3826,20 +3825,20 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
           <i class="plate__band"></i>
           <i class="plate__lvl plate__lvl--hi"></i>
           <i class="plate__lvl plate__lvl--lo"></i>
-          <svg class="fig" viewBox="0 0 1000 450" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <path class="fig__line" pathLength="1" d="M0 392 70 388 140 394 210 389 280 393 320 386 350 392 376 384 388 380 410 404 446 342 462 356 516 236 536 254 630 128 652 162 680 128 700 168 724 96 746 150 762 138 804 240 820 228 856 306 872 296 912 362 928 352 950 368"/>
+          <svg class="fig" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path class="fig__line" pathLength="1" d="M0 378 50 374 100 380 150 375 200 379 250 373 300 378 340 372 380 377 420 373 450 378 474 371 492 388 520 340 536 352 566 268 580 286 612 206 628 226 662 116 680 150 704 108 722 146 742 110 760 144 776 120 792 84 808 140 826 124 846 196 860 186 884 250 898 240 922 300 936 290 952 318"/>
           </svg>
           <i class="plate__tag plate__tag--liq"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></i>
           <i class="plate__tag plate__tag--fvg">FVG</i>
           <i class="plate__tag plate__tag--ob">Orderblock</i>
         </div>
       </div>
-      <figcaption class="reveal" data-at="760">
+      <figcaption class="reveal" data-at="940">
         <span class="plate__title"><span lang="nl">Figuur &mdash; Een sessie, schematisch</span><span lang="en">Figure &mdash; A session, as a schema</span></span>
         <span class="plate__note"><span lang="nl">Vier zones, &eacute;&eacute;n lijn. Geen koers, geen dag, geen uitslag.</span><span lang="en">Four zones, one line. No price, no day, no outcome.</span></span>
       </figcaption>
     </figure>
-    <p class="subtitle reveal" data-at="880"><span lang="nl">E&eacute;n manier om de markt te lezen, uitgelegd en daarna live voorgedaan.</span><span lang="en">One way of reading the market, taught and then shown live.</span></p>
+    <p class="subtitle reveal" data-at="820"><span lang="nl">E&eacute;n manier om de markt te lezen, uitgelegd en daarna live voorgedaan.</span><span lang="en">One way of reading the market, taught and then shown live.</span></p>
     <p class="calls">
       <a class="cta solid reveal" data-at="1020" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
       <a class="aside reveal" data-at="1160" href="#educatie"><span lang="nl">of bekijk eerst de tien onderwerpen</span><span lang="en">or see the ten topics first</span></a>
@@ -3922,66 +3921,257 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <section id="education">
   <div class="grp" id="educatie"><h2><span lang="nl">Educatie · 10 onderwerpen</span><span lang="en">Education · 10 topics</span></h2></div>
 
-  <!-- the syllabus: ten terms set as ten levels on the reel's axis. The
-       count is a tag at the left in mono, a hairline level runs from it to
-       the term, the term ends on the gutter where every label of the reel
-       ends, and the gloss takes the value column -- what the word means,
-       in dictionary voice, never what the course does with it. Pointing
-       at a row makes it a zone (the fair value gap band of the figure)
-       and lights its level. On a phone the level is a short tick and the
-       gloss sits under the term. -->
+  <!-- The syllabus as a scale and a plate. Left of the axis, in the label
+       column, the ten terms as an index: the count in mono, the term in
+       the serif, one under the other like the levels of a price scale.
+       Right of the axis, on the value column, one plate: the term that is
+       lit, drawn as a schema in the vocabulary of the opening figure (one
+       hairline path, a zone, a dashed level; no price, no day, no
+       outcome), the term itself under it at statement size and, under
+       that, what the word means -- in dictionary voice, never what the
+       course does with it. Point at a row, or move to it with the
+       keyboard, and it becomes the lit one: the band of the figure fills
+       behind it and the plate redraws for it; leave, and the plate goes
+       back to the last row chosen. The pane is decoration (aria-hidden):
+       the index carries the content, the gloss in each row is read by a
+       screen reader and shown on a phone, where the plate sits above the
+       index and every row keeps its gloss under the term. -->
   <div class="syllabus" data-stagger="70">
+    <div class="pane reveal" data-at="0" aria-hidden="true">
+      <figure class="fig is-on">
+        <div class="plate">
+          <svg viewBox="0 0 300 130" preserveAspectRatio="none" focusable="false">
+            <line class="lq" x1="24" y1="44" x2="300" y2="44"/>
+            <line class="lq" x1="24" y1="92" x2="300" y2="92"/>
+            <rect class="zn" x="138" y="28" width="40" height="16"/>
+            <path class="ln" pathLength="1" d="M0 70 18 64 34 76 52 60 70 72 86 56 100 66 116 50 130 62 146 42 158 32 168 36 178 48 190 58 204 50 218 68 232 60 248 74 262 66 276 80"/>
+          </svg>
+          <i class="tag"><b>01</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <figcaption>
+          <span class="word"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span>
+          <span class="gloss"><span lang="nl">een uitbraak die in de range terugkeert</span><span lang="en">a breakout that returns into the range</span></span>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="plate">
+          <svg viewBox="0 0 300 130" preserveAspectRatio="none" focusable="false">
+            <line class="lq" x1="104" y1="48" x2="210" y2="48"/>
+            <line class="lq" x1="104" y1="88" x2="210" y2="88"/>
+            <path class="ln ln--b" pathLength="1" d="M0 116 16 110 30 120 48 102 64 108 78 94 92 100 104 88 118 98 132 108 146 100 160 94 176 92 190 102 204 112 220 106 236 118 252 112 268 122"/>
+            <path class="ln" pathLength="1" d="M0 82 16 76 30 86 48 68 64 74 78 58 92 64 104 48 118 60 132 70 146 62 160 54 176 38 190 50 204 62 220 56 236 70 252 64 268 76"/>
+          </svg>
+          <i class="tag"><b>02</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <figcaption>
+          <span class="word">SMT</span>
+          <span class="gloss"><span lang="nl">divergentie tussen twee verwante markten</span><span lang="en">divergence between two related markets</span></span>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="plate">
+          <svg viewBox="0 0 300 130" preserveAspectRatio="none" focusable="false">
+            <rect class="zn" x="112" y="58" width="188" height="18"/>
+            <path class="ln" pathLength="1" d="M0 100 16 94 30 104 46 96 62 102 78 92 94 98 106 88 118 66 130 44 142 28 156 36 168 24 182 36 196 30 210 44 224 58 236 68 250 52 264 40 278 46"/>
+          </svg>
+          <i class="tag"><b>03</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <figcaption>
+          <span class="word">FVG</span>
+          <span class="gloss"><span lang="nl">fair value gap: het gat dat een impuls achterlaat</span><span lang="en">fair value gap: the gap an impulse leaves behind</span></span>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="plate">
+          <svg viewBox="0 0 300 130" preserveAspectRatio="none" focusable="false">
+            <rect class="zn" x="112" y="58" width="188" height="18"/>
+            <path class="ln" pathLength="1" d="M0 100 16 94 30 104 46 96 62 102 78 92 94 98 106 88 118 66 130 44 142 28 156 36 168 24 182 36 196 30 210 44 222 60 234 80 246 96 258 84 268 76 278 90 288 104"/>
+          </svg>
+          <i class="tag"><b>04</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <figcaption>
+          <span class="word">IFVG</span>
+          <span class="gloss"><span lang="nl">inverse fair value gap: een doorbroken FVG</span><span lang="en">inverse fair value gap: a fair value gap that has been broken</span></span>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="plate">
+          <svg viewBox="0 0 300 130" preserveAspectRatio="none" focusable="false">
+            <rect class="zn zn--lo" x="124" y="84" width="176" height="16"/>
+            <rect class="zn" x="100" y="84" width="24" height="16"/>
+            <path class="ln" pathLength="1" d="M0 60 16 66 30 56 46 70 62 62 78 74 92 68 104 82 116 96 128 84 138 60 150 42 162 30 174 36 188 24 202 40 216 58 230 74 242 88 256 70 268 56 282 62"/>
+          </svg>
+          <i class="tag"><b>05</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <figcaption>
+          <span class="word">Orderblocks</span>
+          <span class="gloss"><span lang="nl">de laatste tegengestelde candle v&oacute;&oacute;r een impuls</span><span lang="en">the last opposing candle before an impulse</span></span>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="plate">
+          <svg viewBox="0 0 300 130" preserveAspectRatio="none" focusable="false">
+            <line class="hl hl--lo" x1="36" y1="112" x2="150" y2="22"/>
+            <line class="hl" x1="150" y1="56" x2="300" y2="56"/>
+            <line class="hl" x1="150" y1="67" x2="300" y2="67"/>
+            <line class="hl" x1="150" y1="78" x2="300" y2="78"/>
+            <line class="hl" x1="150" y1="93" x2="300" y2="93"/>
+            <path class="ln" pathLength="1" d="M0 104 12 110 24 100 36 112 48 98 60 104 72 86 84 92 98 72 110 78 122 56 134 62 150 22 162 34 174 50 186 62 198 74 210 70 222 80 236 66 250 52 264 58 278 44"/>
+          </svg>
+          <i class="tag"><b>06</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <figcaption>
+          <span class="word">Fibonacci</span>
+          <span class="gloss"><span lang="nl">vaste verhoudingen tussen een low en een high</span><span lang="en">fixed ratios between a low and a high</span></span>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="plate">
+          <svg viewBox="0 0 300 130" preserveAspectRatio="none" focusable="false">
+            <rect class="zn zn--lo" x="50" y="24" width="90" height="84"/>
+            <line class="lq" x1="74" y1="44" x2="300" y2="44"/>
+            <line class="lq" x1="110" y1="90" x2="300" y2="90"/>
+            <path class="ln" pathLength="1" d="M0 74 14 68 28 78 42 70 50 66 62 54 74 44 86 56 98 66 110 90 122 80 134 72 140 78 154 70 168 60 182 66 196 52 210 40 220 36 232 48 246 62 260 56 274 70"/>
+          </svg>
+          <i class="tag"><b>07</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <figcaption>
+          <span class="word"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span>
+          <span class="gloss"><span lang="nl">de highs en lows die een sessie achterlaat</span><span lang="en">the highs and lows a session leaves behind</span></span>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="plate">
+          <svg viewBox="0 0 300 130" preserveAspectRatio="none" focusable="false">
+            <line class="lq" x1="60" y1="40" x2="300" y2="40"/>
+            <line class="lq" x1="100" y1="98" x2="300" y2="98"/>
+            <path class="ln" pathLength="1" d="M0 70 14 64 26 76 40 60 56 50 70 42 84 54 98 74 110 96 124 80 138 58 150 42 162 56 176 78 190 96 204 82 218 64 232 50 244 34 254 40 266 56 278 68"/>
+          </svg>
+          <i class="tag"><b>08</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <figcaption>
+          <span class="word"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span>
+          <span class="gloss"><span lang="nl">orders die boven highs en onder lows liggen</span><span lang="en">orders resting above highs and below lows</span></span>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="plate">
+          <svg viewBox="0 0 300 130" preserveAspectRatio="none" focusable="false">
+            <rect class="zn zn--lo" x="130" y="30" width="120" height="40"/>
+            <rect class="zn" x="130" y="70" width="120" height="18"/>
+            <line class="hl" x1="130" y1="70" x2="250" y2="70"/>
+            <path class="ln" pathLength="1" d="M0 98 12 92 26 102 40 88 54 94 68 80 82 86 96 72 108 78 120 68 130 70"/>
+          </svg>
+          <i class="tag"><b>09</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <figcaption>
+          <span class="word"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span>
+          <span class="gloss"><span lang="nl">positiegrootte en wat &eacute;&eacute;n trade mag kosten</span><span lang="en">position size and what one trade may cost</span></span>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="plate">
+          <svg viewBox="0 0 300 130" preserveAspectRatio="none" focusable="false">
+            <line class="nw" x1="200" y1="18" x2="200" y2="112"/>
+            <path class="br" d="M200 66 222 58 244 52 266 44 290 36"/>
+            <path class="br" d="M200 66 222 74 244 84 266 90 290 98"/>
+            <path class="ln" pathLength="1" d="M0 80 12 74 26 86 40 70 54 76 68 60 82 66 96 52 108 58 122 46 134 54 148 40 160 48 174 62 186 56 200 66"/>
+          </svg>
+          <i class="tag"><b>10</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <figcaption>
+          <span class="word"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span>
+          <span class="gloss"><span lang="nl">gedrag en emotie op het moment van beslissen</span><span lang="en">behaviour and emotion at the moment of deciding</span></span>
+        </figcaption>
+      </figure>
+    </div>
+
     <dl class="index">
-      <div class="row reveal" tabindex="0">
-        <dt><b class="num">01</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span></dt>
+      <div class="row reveal is-on" tabindex="0">
+        <dt><b class="num">01</b><span class="term"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span></dt>
         <dd><span lang="nl">een uitbraak die in de range terugkeert</span><span lang="en">a breakout that returns into the range</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">02</b><i class="lvl" aria-hidden="true"></i><span class="term">SMT</span></dt>
+        <dt><b class="num">02</b><span class="term">SMT</span></dt>
         <dd><span lang="nl">divergentie tussen twee verwante markten</span><span lang="en">divergence between two related markets</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">03</b><i class="lvl" aria-hidden="true"></i><span class="term">FVG</span></dt>
+        <dt><b class="num">03</b><span class="term">FVG</span></dt>
         <dd><span lang="nl">fair value gap: het gat dat een impuls achterlaat</span><span lang="en">fair value gap: the gap an impulse leaves behind</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">04</b><i class="lvl" aria-hidden="true"></i><span class="term">IFVG</span></dt>
-        <dd><span lang="nl">inverse fair value gap: een doorbroken FVG</span><span lang="en">inverse fair value gap: a broken FVG</span></dd>
+        <dt><b class="num">04</b><span class="term">IFVG</span></dt>
+        <dd><span lang="nl">inverse fair value gap: een doorbroken FVG</span><span lang="en">inverse fair value gap: a fair value gap that has been broken</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">05</b><i class="lvl" aria-hidden="true"></i><span class="term">Orderblocks</span></dt>
+        <dt><b class="num">05</b><span class="term">Orderblocks</span></dt>
         <dd><span lang="nl">de laatste tegengestelde candle v&oacute;&oacute;r een impuls</span><span lang="en">the last opposing candle before an impulse</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">06</b><i class="lvl" aria-hidden="true"></i><span class="term">Fibonacci</span></dt>
+        <dt><b class="num">06</b><span class="term">Fibonacci</span></dt>
         <dd><span lang="nl">vaste verhoudingen tussen een low en een high</span><span lang="en">fixed ratios between a low and a high</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">07</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span></dt>
+        <dt><b class="num">07</b><span class="term"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span></dt>
         <dd><span lang="nl">de highs en lows die een sessie achterlaat</span><span lang="en">the highs and lows a session leaves behind</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">08</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span></dt>
+        <dt><b class="num">08</b><span class="term"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span></dt>
         <dd><span lang="nl">orders die boven highs en onder lows liggen</span><span lang="en">orders resting above highs and below lows</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">09</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span></dt>
+        <dt><b class="num">09</b><span class="term"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span></dt>
         <dd><span lang="nl">positiegrootte en wat &eacute;&eacute;n trade mag kosten</span><span lang="en">position size and what one trade may cost</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
-        <dt><b class="num">10</b><i class="lvl" aria-hidden="true"></i><span class="term"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span></dt>
-        <dd><span lang="nl">gedrag en emotie bij het beslissen</span><span lang="en">behaviour and emotion when deciding</span></dd>
+        <dt><b class="num">10</b><span class="term"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span></dt>
+        <dd><span lang="nl">gedrag en emotie op het moment van beslissen</span><span lang="en">behaviour and emotion at the moment of deciding</span></dd>
       </div>
     </dl>
-    <!-- the liquidity line of the figure, under the ten levels: the index
-         ends here, the call sits below it -->
-    <div class="level" aria-hidden="true"><i class="level__line reveal draw"></i></div>
   </div>
 
-  <div class="interstitial">
-    <p><span lang="nl">De educatie staat in de server</span><span lang="en">The teaching is in the server</span></p>
-    <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom erbij op Discord</span><span lang="en">Join us on Discord</span></a>
+  <!-- the close: one line and the call that answers it, on the strip's
+       left edge with the index -- the section's one action, in the paper
+       with the arrow, and nothing drawn above it -->
+  <div class="close" data-stagger="140">
+    <p class="close__line reveal"><span lang="nl">De educatie staat in de server.</span><span lang="en">The teaching lives in the server.</span></p>
+    <a class="cta solid reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom erbij op Discord</span><span lang="en">Join us on Discord</span></a>
   </div>
+
+  <script>
+  (function(){
+    var s = document.getElementById("education"); if (!s) return;
+    var box = s.querySelector(".syllabus"), list = s.querySelector(".index"), pane = s.querySelector(".pane");
+    if (!box || !list || !pane) return;
+    var rows = list.querySelectorAll(".row"), figs = pane.querySelectorAll(".fig");
+    var pinned = 0, cur = 0, live = false;
+    function rowOf(t){ while (t && t !== list) { if (t.classList && t.classList.contains("row")) return t; t = t.parentNode; } return null; }
+    function at(t){ var r = rowOf(t); return r ? Array.prototype.indexOf.call(rows, r) : -1; }
+    /* the first pointer or key wakes the pane: from then on a swap fades in
+       and redraws quickly, where the arrival on scroll drew slowly */
+    function wake(){ if (!live) { live = true; pane.classList.add("is-live"); } }
+    function set(i){
+      if (i < 0 || i >= rows.length || i === cur) return;
+      cur = i;
+      for (var k = 0; k < rows.length; k++) rows[k].classList.toggle("is-on", k === i);
+      for (k = 0; k < figs.length; k++) figs[k].classList.toggle("is-on", k === i);
+    }
+    list.addEventListener("mouseover", function(e){ var i = at(e.target); if (i >= 0) { wake(); set(i); } });
+    list.addEventListener("mouseleave", function(){ set(pinned); });
+    list.addEventListener("click", function(e){ var i = at(e.target); if (i >= 0) { wake(); pinned = i; set(i); } });
+    list.addEventListener("focusin", function(e){ var i = at(e.target); if (i >= 0) { wake(); pinned = i; set(i); } });
+    list.addEventListener("keydown", function(e){
+      var i = at(e.target); if (i < 0) return;
+      var j = -1, k = e.key;
+      if (k === "ArrowDown") j = Math.min(rows.length - 1, i + 1);
+      else if (k === "ArrowUp") j = Math.max(0, i - 1);
+      else if (k === "Home") j = 0;
+      else if (k === "End") j = rows.length - 1;
+      if (j < 0 || j === i) return;
+      e.preventDefault(); rows[j].focus();
+    });
+  })();
+  </script>
 </section>
 <!-- /section:education -->
 

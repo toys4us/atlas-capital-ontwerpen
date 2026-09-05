@@ -9,10 +9,10 @@
     <!-- the figure: a session drawn as a schema, in hairlines of the one
          gold. Four zones and one line, nothing else -- no price, no date, no
          entry, no outcome. Read left to right: the line opens low and quiet
-         (on a desk that is the part the last two words run across), ranges,
-         dips once below the range out of an orderblock, rallies in three
-         legs and leaves a gap (the FVG band), meets two equal highs under
-         the liquidity line, sweeps it once, and falls back through the gap
+         (on a desk that is the part the three words stand on), dips once
+         below the range out of an orderblock, rallies in three legs and
+         leaves a gap (the FVG band), meets three equal highs under the
+         liquidity line, sweeps it once, and falls back through the gap
          towards the level below. It stops short of the right edge: that is
          now. The zones are HTML, not SVG, so they are the same hairlines
          every other section draws its levels with (a 3-on-5 dashed line,
@@ -20,13 +20,14 @@
          the band's bleed, to the edge of the page -- a level is drawn
          forward, a line is drawn up to the present. Every point is placed,
          so the line reads as a drawing and not as a feed. On load the line
-         draws itself while the zones draw out of the left. Labels sit on the
-         page's right gutter like the axis of a chart.
+         draws itself while the zones draw out of the left. The two levels
+         are labelled on the page's right gutter like the axis of a chart;
+         the caption sits on that axis too, under the band's right end.
          On a desk the frame is lifted out of the flow (it is the band the
-         title crosses); the caption stays in it, so it sits under the band
-         at the band's left edge, and the standfirst and the calls follow it
-         on that same line. On a phone the band sits under the title, edge to
-         edge, so the figure is in the first screen there too. -->
+         title stands on); the caption stays in it, so it lands in the row
+         under the band with the one line. On a phone the band sits under
+         the title, edge to edge, so the figure is in the first screen
+         there too, and the caption hangs on its left edge. -->
     <figure class="plate">
       <div class="plate__px" data-parallax="0.04" data-parallax-top>
         <div class="plate__frame reveal trace" data-at="300">
@@ -34,20 +35,20 @@
           <i class="plate__band"></i>
           <i class="plate__lvl plate__lvl--hi"></i>
           <i class="plate__lvl plate__lvl--lo"></i>
-          <svg class="fig" viewBox="0 0 1000 450" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <path class="fig__line" pathLength="1" d="M0 392 70 388 140 394 210 389 280 393 320 386 350 392 376 384 388 380 410 404 446 342 462 356 516 236 536 254 630 128 652 162 680 128 700 168 724 96 746 150 762 138 804 240 820 228 856 306 872 296 912 362 928 352 950 368"/>
+          <svg class="fig" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path class="fig__line" pathLength="1" d="M0 378 50 374 100 380 150 375 200 379 250 373 300 378 340 372 380 377 420 373 450 378 474 371 492 388 520 340 536 352 566 268 580 286 612 206 628 226 662 116 680 150 704 108 722 146 742 110 760 144 776 120 792 84 808 140 826 124 846 196 860 186 884 250 898 240 922 300 936 290 952 318"/>
           </svg>
           <i class="plate__tag plate__tag--liq"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></i>
           <i class="plate__tag plate__tag--fvg">FVG</i>
           <i class="plate__tag plate__tag--ob">Orderblock</i>
         </div>
       </div>
-      <figcaption class="reveal" data-at="760">
+      <figcaption class="reveal" data-at="940">
         <span class="plate__title"><span lang="nl">Figuur &mdash; Een sessie, schematisch</span><span lang="en">Figure &mdash; A session, as a schema</span></span>
         <span class="plate__note"><span lang="nl">Vier zones, &eacute;&eacute;n lijn. Geen koers, geen dag, geen uitslag.</span><span lang="en">Four zones, one line. No price, no day, no outcome.</span></span>
       </figcaption>
     </figure>
-    <p class="subtitle reveal" data-at="880"><span lang="nl">E&eacute;n manier om de markt te lezen, uitgelegd en daarna live voorgedaan.</span><span lang="en">One way of reading the market, taught and then shown live.</span></p>
+    <p class="subtitle reveal" data-at="820"><span lang="nl">E&eacute;n manier om de markt te lezen, uitgelegd en daarna live voorgedaan.</span><span lang="en">One way of reading the market, taught and then shown live.</span></p>
     <p class="calls">
       <a class="cta solid reveal" data-at="1020" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
       <a class="aside reveal" data-at="1160" href="#educatie"><span lang="nl">of bekijk eerst de tien onderwerpen</span><span lang="en">or see the ten topics first</span></a>

@@ -2,7 +2,7 @@
  "id": "channels",
  "title": "Channels",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -34,6 +34,21 @@
    "confidence": 0.74,
    "ts": "2026-09-05T19:13:01+00:00",
    "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/06-channels.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/channels.css\n- Fixed the reveal: the row's own transition (background/box-shadow/color) had higher specificity than .js .reveal and overrode it, so the 15 rows cut in instead of settling; now declared on .dv__ch:not(.reveal) (the education pattern). Motion sheet confirms rows fade/settle in sequence.\n- Added a Discord-style member panel at the sidebar's foot (skeleton avatar, name line, three controls; aria-hidden, no name/status) with a --foot height shared with the "
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 7.5,
+   "score_ref": 5,
+   "wowed": false,
+   "gap": "The chart panel is under-composed: the whole upper-left quadrant is empty, the bottom-right dashed rule floats with no label or reason, the FVG band runs off the panel edge, and the chevron beside \"ATLAS CAPITAL\" is nearly invisible; on mobile the \"# nq-chart-ideeën\" header repeats directly beneath the selected list row. At the bar the schematic fills its frame deliberately (price axis ticks, a time scale, or a labelled range for that lower dashed line), the muted serif rows are lifted a step in contrast, and the section earns one moment of scale contrast rather than living entirely between 11 and 16px.",
+   "motion": "Scroll-linked line draw of the chart with annotations landing last, staggered fades on the list; restrained and purposeful, nothing overshoots.",
+   "verdict": "B turns a Discord channel list into an engraved gold-on-black schematic with numbered rows, tabular figures, hairline rules and a considered caption — the detail craft is consistent even if the chart panel has dead space and the luxury-trading palette is familiar. A is a generic dark-agency section whose big headline cannot cover for overflow bugs, a bleeding pinned caption and a mobile dead zone; B wins on craft and clarity.",
+   "confidence": 0.86,
+   "ts": "2026-09-05T19:30:56+00:00",
+   "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/06-channels.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/channels.css. Renders in E:/ClaudeCode_GUI/atlas-designs/site/_build/channels (desk, mob, motion, plus desk-en/mob-en, desk-prem/mob-prem, desk-short).\n- Removed every skeleton bar: the seven fake-message rows, the member panel and the composer are gone; nothing grey-placeholder remains.\n- The right pane is now the page's own schematic plate at the pane's full width (one gold hairline path, orderblock box, FVG band, dashed liquidity line + a lower level, three label-v"
   }
  ]
 }

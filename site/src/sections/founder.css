@@ -32,7 +32,6 @@
    and the quote is set left with a rag and no break at a hyphen. */
 #founder{
   --n:clamp(72px,9.4vw,132px);              /* the numeral: a size the scale lacks   */
-  --tag-gap:clamp(10px,1.1vw,14px);         /* from the tag to the first dash        */
   --edge:clamp(18px,4vw,40px);              /* the roll's padding: to the strip edge */
 }
 
@@ -41,9 +40,9 @@
   position:relative;z-index:2;
   display:grid;
   grid-template-columns:auto minmax(0,1fr);
-  column-gap:var(--tag-gap);
+  column-gap:0;                              /* the plus's right edge is the column line */
   align-items:baseline;
-  margin:clamp(4px,1vw,12px) 0 0;
+  margin:clamp(10px,1.5vw,20px) 0 0;
   text-align:left;
 }
 /* the tag: a flex row so its baseline is the numeral's (the mask keeps
@@ -54,7 +53,7 @@
   grid-column:1;grid-row:1;
   display:flex;align-items:baseline;
   min-width:0;
-  margin-left:-.06em;
+  margin-left:-.015em;
   font-family:var(--f-display);
   font-size:var(--n);
   font-weight:400;
@@ -72,8 +71,8 @@
   font-size:.44em;
   line-height:1;
   vertical-align:baseline;
-  position:relative;top:-1.02em;
-  margin-left:.06em;
+  position:relative;top:-1.18em;
+  margin:0 -.08em 0 .06em;                  /* its right bearing goes, so the ink's edge is the line */
 }
 /* the level: an empty grid item has no baseline of its own, so it is
    given the row's -- its bottom edge -- and the line is the baseline
@@ -112,7 +111,7 @@
   grid-column:2;grid-row:2;
   display:block;
   min-width:0;
-  margin-top:calc(7px - .265 * var(--n));
+  margin-top:calc(3px - .265 * var(--n));
   font-family:var(--f-display);
   font-size:var(--t-small);
   letter-spacing:.01em;
