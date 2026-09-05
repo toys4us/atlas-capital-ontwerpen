@@ -154,7 +154,6 @@
 }
 #channels .dv__ch[aria-pressed="true"] .dv__hash{color:var(--gold)}
 #channels .dv__ch:focus-visible{outline-offset:-3px}
-#channels .dv__ch:active{transform:none}
 
 /* ---- the pane: lifted out of the flow, so the sidebar sets the height ---- */
 #channels .dv__pane{

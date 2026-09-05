@@ -37,7 +37,8 @@
   padding:0 var(--gutter);
   background:var(--bg);
   border-bottom:1px solid var(--line-2);
-  -webkit-backdrop-filter:blur(0);backdrop-filter:blur(0);
+  /* no backdrop-filter at rest, not even blur(0): a backdrop root over the
+     grain's screen blend lifts the band a shade. none interpolates. */
   transition:transform .5s var(--e-out),background-color .35s var(--e-out),border-color .35s var(--e-out),
              -webkit-backdrop-filter .35s var(--e-out),backdrop-filter .35s var(--e-out);
 }
@@ -236,6 +237,10 @@
   #header .nav,#header .foot{display:contents}
   #header .menu,#header .tk{display:none}
   #header .lv{display:flex;align-items:center;gap:clamp(18px,2.2vw,30px)}
+  /* every item pinned to the one row: the flanks come after the call in
+     the markup but sit before it, and auto-placement would give them a
+     second row */
+  #header .wm,#header .lv,#header .cta,#header .langsw{grid-row:1}
   #header .lv--l{grid-column:2;justify-self:end}
   #header .cta{grid-column:3}
   #header .lv--r{grid-column:4;justify-self:start}

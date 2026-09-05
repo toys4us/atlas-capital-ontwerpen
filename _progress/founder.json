@@ -1,8 +1,24 @@
 {
  "id": "founder",
  "title": "Founder",
- "wave": 0,
- "round": 0,
- "status": "queued",
- "history": []
+ "wave": 1,
+ "round": 1,
+ "status": "win",
+ "history": [
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 7,
+   "score_ref": 5.5,
+   "wowed": false,
+   "gap": "The pull quote is merely large, not designed: a regular-weight serif at ~38px with a 40px stub rule above it and an italic \"— de oprichter\" is the stock editorial pattern, and on mobile it becomes nine centred lines with an ugly \"snelle-rijk- / verhalen\" break. At the bar the quote would be left-set on mobile with a hand-tuned rag (no hyphen breaks), the stat and quote would share one visible axis instead of the numeral hanging on its own column, and one element (an optical-size display cut, a hanging quote mark, or the gold leader actually meeting the numeral) would carry a signature so the section is recognisably this brand rather than \"dark-gold trading template\".",
+   "motion": "Staggered fade-up of label/value rows, stat, then quote with a consistent cadence — restrained and legible, nothing broken but nothing memorable.",
+   "verdict": "A is a disciplined, well-gridded stat-and-quote section whose only real sin is being predictable; B reaches for a far more distinctive atmosphere and photography but ships with clipped labels, struck-through nav, a mobile dead zone, and animation that eats spaces out of its own sentences. Ambition does not outrank execution here, so A takes it — neither is shortlist-ready as-is.",
+   "confidence": 0.72,
+   "builder_note": "Rewrote src/sections/04-founder.html and src/sections/founder.css (only those two files).\n- Dropped the \"OPRICHTER\" dt label (it doubled the signature for one voice); the group title names the role, the signature names the voice.\n- The credit is now `p.ten` on the reel's axis: \"10⁺\" as a large quiet serif numeral (local --n clamp(58px,7.2vw,96px), superior plus on the cap line) right against the gutter like the tag at the end of a price level, a dashed gold hairline (3/5 dashes of --line-4, the hero's liquidity-line rhythm) running to it from the strip's edge; \"jaar actief in trading /",
+   "ts": "2026-09-05T17:27:47+00:00"
+  }
+ ]
 }

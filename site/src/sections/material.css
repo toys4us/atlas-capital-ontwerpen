@@ -41,14 +41,17 @@
 #material .plate--pair .tile{grid-column:auto}
 #material .plate--pair .tile + .tile{border-left:0}
 
-/* the frame: a button, since a tap opens the original */
+/* the frame: a button, since a tap opens the original. Its hover
+   transition waits until the reveal has run: an id-scoped transition
+   would outrank the .wipe's own (base.css), and the plate would snap on
+   instead of printing on. motion.js drops .reveal when the print is done. */
 #material .tile{
   display:block;width:100%;margin:0;padding:var(--inset);
   border:1px solid var(--line-2);
   background:var(--mat);
   cursor:zoom-in;
-  transition:border-color var(--d) var(--e-out);
 }
+#material .tile:not(.reveal){transition:border-color var(--d) var(--e-out)}
 #material .pic{
   display:block;position:relative;width:100%;
   aspect-ratio:2/1;

@@ -1,24 +1,68 @@
+<!-- The end card: the opening spread, closed. One word set at display
+     size and hung on the page's left axis (the wordmark's, the title's),
+     standing on the line -- the price path of the opening plate, run
+     across the whole page as a rule. The line comes in from the left
+     margin, the word rises out of it, and at the right, under the line,
+     the path does its last move: two equal lows on a dashed level, one
+     sweep beneath it, and back up to the line as it leaves the page --
+     the session is over; except that it turns up and goes on, which is
+     what the sub-line says. No price, no day, no outcome; the one label
+     names the level and says so. Everything in the figure is placed in
+     em of the display size, so the drawing is the same drawing at every
+     width. The sub-line and the one call hang under the word on the
+     axis; on a phone they wait below the figure. -->
 <section class="leader" id="closer">
-  <svg viewBox="0 0 200 200" aria-hidden="true">
-    <circle cx="100" cy="100" r="96" fill="none" stroke="#D7B364" stroke-width="1" opacity=".35"/>
-    <circle cx="100" cy="100" r="74" fill="none" stroke="#D7B364" stroke-width="1" opacity=".55"/>
-    <circle cx="100" cy="100" r="52" fill="none" stroke="#D7B364" stroke-width="1" opacity=".75"/>
-    <path d="M100 0 V200 M0 100 H200" stroke="#D7B364" stroke-width=".8" opacity=".5"/>
-    <path d="M100 100 L100 4 A96 96 0 0 1 196 100 Z" fill="#D7B364" opacity=".10"/>
-    <path d="M100 82 L112 100 L100 118 L88 100 Z" fill="#E6CC8E"/>
-  </svg>
-  <p class="endword"><span lang="nl">Einde</span><span lang="en">The End</span></p>
-  <p class="subtitle"><span lang="nl">Behalve in de server. Daar begint het.</span><span lang="en">Except in the server. That is where it starts.</span></p>
-  <a class="cta solid" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
+  <div class="card">
+    <p class="end__row" data-stagger="120">
+      <span class="mask"><span class="end__word reveal" data-at="300"><span lang="nl">Einde</span><span lang="en">The End</span></span></span>
+      <span class="end__fig reveal trace" data-at="0" aria-hidden="true">
+        <!-- data-parallax="0": the figure is the word's ground and does
+             not drift (motion.js would otherwise give the first svg of
+             the end card a lag of its own) -->
+        <svg class="fig" viewBox="0 0 260 50" data-parallax="0" aria-hidden="true" focusable="false">
+          <path class="fig__line" pathLength="1" d="M-900 0 H0 L24 0 40 3 52 9 62 6 76 16 86 12 100 24 110 20 122 30 132 24 146 30 156 23 168 40 178 28 190 20 200 24 214 12 224 15 240 5 252 1 260 0"/>
+        </svg>
+        <i class="end__lvl"></i>
+        <i class="end__tag"><span lang="nl">Liquiditeit, schematisch</span><span lang="en">Liquidity, as a schema</span></i>
+      </span>
+    </p>
+    <div class="end__col" data-stagger="140">
+      <p class="subtitle reveal"><span lang="nl">Behalve in de server. Daar begint het.</span><span lang="en">Except in the server. That is where it starts.</span></p>
+      <a class="cta solid reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
+    </div>
+  </div>
 </section>
 
-<footer>
-  <div class="flinks">
-    <a href="https://discord.gg/78Ff2GuSfW">Discord</a>
-    <a href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
-    <a href="#educatie"><span lang="nl">Educatie</span><span lang="en">Education</span></a>
-    <a href="#kanalen"><span lang="nl">Kanalen</span><span lang="en">Channels</span></a>
-    <a href="#trackrecord"><span lang="nl">Trackrecord</span><span lang="en">Track record</span></a>
+<!-- The footer: the signature, the five links, the local time, and the
+     two lines that go under everything on this page -- the risk line and
+     the past-performance line, each on its own line, exactly as they read
+     in the record. The clock is written by motion.js into [data-clock];
+     without a script the line is not shown at all. -->
+<footer data-stagger="90">
+  <div class="inner">
+    <div class="fgrid">
+      <div class="fsig">
+        <i class="hair reveal draw"></i>
+        <b class="reveal">Atlas&nbsp;Capital</b>
+        <small class="reveal"><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></small>
+      </div>
+      <ul class="fnav reveal">
+        <li><a href="https://discord.gg/78Ff2GuSfW">Discord</a></li>
+        <li><a href="https://www.tiktok.com/@atlascapitalbv">TikTok</a></li>
+      </ul>
+      <ul class="fnav reveal">
+        <li><a href="#educatie"><span lang="nl">Educatie</span><span lang="en">Education</span></a></li>
+        <li><a href="#kanalen"><span lang="nl">Kanalen</span><span lang="en">Channels</span></a></li>
+        <li><a href="#trackrecord"><span lang="nl">Trackrecord</span><span lang="en">Track record</span></a></li>
+      </ul>
+    </div>
+    <i class="frule reveal draw"></i>
+    <div class="fbase">
+      <div class="legal">
+        <p class="risk reveal"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
+        <p class="past reveal"><span lang="nl">Resultaten uit het verleden bieden geen garantie voor de toekomst.</span><span lang="en">Past results are no guarantee of future results.</span></p>
+      </div>
+      <p class="ftime reveal"><span class="ftime__city">Amsterdam</span> <time data-clock="Europe/Amsterdam"></time></p>
+    </div>
   </div>
-  <p class="risk"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee. Resultaten uit het verleden bieden geen garantie voor de toekomst.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss. Past results are no guarantee of future results.</span></p>
 </footer>
