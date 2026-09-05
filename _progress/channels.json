@@ -1,8 +1,24 @@
 {
  "id": "channels",
  "title": "Channels",
- "wave": 0,
- "round": 0,
- "status": "queued",
- "history": []
+ "wave": 1,
+ "round": 1,
+ "status": "win",
+ "history": [
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.3,
+   "score_ref": 5.4,
+   "wowed": false,
+   "gap": "The chat pane is two-thirds of the figure and it is filled with generic grey skeleton-loader bars — a wireframe placeholder that reads as unfinished and stock, and on mobile it swallows 45% of the width for 1100px of nothing while the sparkline shrinks to a 175px smudge. At the bar the figure would either show a real, typographically set (redacted) thread with the chart as the hero, or collapse to the channel list alone on mobile and give the space back to the chart and caption. The section is otherwise tidy but merely correct — the small-caps label + rule + two-pane frame is a pattern, not a point of view.",
+   "motion": "Steady, evenly-eased slide-up reveals with list items fading in together — restrained and clean, but there is no timing hierarchy, so nothing is choreographed, only revealed.",
+   "verdict": "B has the more distinctive vision — luscious photography, a real serif headline, cinematic pacing — but it ships with collisions, ghosted copy, dropped spaces and a struck-through nav, which a jury cannot look past. A wins by being finished and disciplined, though its skeleton-bar chat pane is a dead zone that keeps a competent section from being a memorable one.",
+   "confidence": 0.62,
+   "ts": "2026-09-05T17:30:30+00:00",
+   "note": "Rebuilt \"Locaties · 15 kanalen\" as the Discord-like device (site/src/sections/06-channels.html + channels.css):\n- A <figure> the width of the strip: sidebar (server header \"Atlas Capital\" + chevron, category \"Thuis · nu gratis\" with 9 rows, \"Premium · opent later\" with 6 rows carrying a hairline gold lock) beside a message pane of skeleton lines only (7 abstract messages, avatar squares, a composer box with a plus) — no messages, no names, no counts. Pane is aria-hidden; the list is content.\n- Chart vocabulary as furniture: selected row = FVG band (go"
+  }
+ ]
 }

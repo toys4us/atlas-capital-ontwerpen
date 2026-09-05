@@ -16,8 +16,9 @@
    untouched original.
 
    The caveat: not small print. Set as the founder's quote is set -- the
-   label in the margin, a short rule, the words at lead size in the ink of
-   a value -- because it is the most important paragraph on the page.
+   label in the margin, a short rule, the words a step under lead size in
+   the ink of a value -- because it is the most important paragraph on the
+   page.
    .roll::before is the strip's edge, so every block sits above it (z:2). */
 
 /* ---------- the ledger ---------------------------------------------------- */
@@ -74,7 +75,7 @@
   background:repeating-linear-gradient(90deg,var(--line-3) 0 3px,transparent 3px 8px);
 }
 /* the number sits on the line, at the right, the way a level is tagged on
-   the price axis: mono, tabular, in the faintest readable grey */
+   the price axis: mono, tabular, in the label grey */
 #trackrecord .ledger__n{
   position:absolute;right:0;bottom:-.5em;
   font-family:var(--f-mono);

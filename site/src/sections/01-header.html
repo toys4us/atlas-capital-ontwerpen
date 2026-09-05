@@ -55,10 +55,12 @@
     var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
     var wide = W.matchMedia("(min-width: 1120px)");
     function pad(n){ return n < 10 ? "0" + n : "" + n; }
-    /* which section each anchor leads to, and its reel number */
-    var secs = [];
-    (function(){
+    /* which section each anchor leads to, and its reel number -- resolved
+       once the rest of the page is parsed (this script runs before it) */
+    var secs = [], cur = null;
+    function resolve(){
       var grps = Array.prototype.slice.call(document.querySelectorAll(".roll .grp")), i, t, g, n;
+      secs = [];
       for (i = 0; i < links.length; i++) {
         try { t = document.querySelector(links[i].getAttribute("href")); } catch(e) { t = null; }
         if (!t) { secs.push(null); continue; }
@@ -67,8 +69,9 @@
         n = links[i].querySelector(".n");
         if (g && n && grps.indexOf(g) >= 0) n.textContent = pad(grps.indexOf(g) + 1);
       }
-    })();
-    var cur = null;
+      ask();
+    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", resolve); else resolve();
     function frame(){
       ticking = false;
       var y = W.scrollY || W.pageYOffset || 0;
