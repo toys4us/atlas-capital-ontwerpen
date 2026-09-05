@@ -19,6 +19,21 @@
    "confidence": 0.85,
    "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/11-closer.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/closer.css\n- Fixed the mask clipping \"Einde\"/\"The End\" ascenders (i-dot, d were cut): mask opens .12em above the row via padding/negative margin; row is flow-root so the margin cannot collapse and drop the line below the baseline.\n- Redrew the end move as a schema (fall in two legs, two equal lows on the dashed level, one sweep, three-leg recovery) in a 320x50 em-locked viewBox; action widened 2.6em to 3.2em; flat run extended so the rule reaches the viewport edge o",
    "timestamp": "2026-09-05T19:27:08.459988+00:00"
+  },
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 7.2,
+   "score_ref": 3.8,
+   "wowed": false,
+   "gap": "The closer's right half is a dead zone: \"Einde\" and the gold liquidity line are the whole idea, yet the line just wanders off to a schematic squiggle parked in empty charcoal, and below the CTA there is ~130px of nothing before the footer. At the bar, the line and heading are one composed object — the trace should read as an underline that becomes the chart, terminating deliberately (a dot, a value, the caption locked to the endpoint) with the column grid extending into the footer's link columns so the section feels resolved. Fix the mobile wraps too: the \"LIQUIDITEIT, SCHEMATISCH\" caption fills the whole measure at 50% tracking and the disclaimer strands \"met zich mee.\" on its own line.",
+   "motion": "Pinned two-tier section hands off to the closer with the gold trace drawing on nicely, but frame 3 shows \"Behalve in de server.\" ghosting over the clock strip mid-transition — an overlap artefact the eye catches.",
+   "verdict": "A is a disciplined, single-idea closer — a big serif \"Einde\" bisected by a gold liquidity trace, a warm mono clock, a tidy link grid — that only misses the shortlist on a dead right half, a mobile orphan and a transition overlap. B has the more seductive imagery but its closer is a void with a broken mobile state (strikethroughs, doubled logo, spaced-out bullets), which is a fail at this level regardless of mood.",
+   "confidence": 0.92,
+   "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/11-closer.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/closer.css\n- Fixed the mask clipping \"Einde\"/\"The End\" ascenders (i-dot, d were cut): mask opens .12em above the row via padding/negative margin; row is flow-root so the margin cannot collapse and drop the line below the baseline.\n- Redrew the end move as a schema (fall in two legs, two equal lows on the dashed level, one sweep, three-leg recovery) in a 320x50 em-locked viewBox; action widened 2.6em to 3.2em; flat run extended so the rule reaches the viewport edge o",
+   "timestamp": "2026-09-05T23:56:27.027824+00:00"
   }
  ]
 }
