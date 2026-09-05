@@ -61,6 +61,17 @@
 #access .fig__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-opacity:.85;stroke-linejoin:round;stroke-linecap:round}
 #access .fig__level{stroke:var(--gold);stroke-width:1;stroke-opacity:.34;stroke-linecap:butt}
 #access .fig__level--open{stroke-opacity:.55;stroke-dasharray:3 5}
+/* the zone: a band of the spread's kind under the open level, where the
+   path holds -- folded flat until the row is pointed at, then it develops
+   downward from the level (a scale, never opacity, so the probe sees it) */
+#access .fig__zone{
+  fill:var(--gold);fill-opacity:.07;
+  stroke:var(--gold);stroke-opacity:.3;stroke-width:1;
+  transform:scaleY(0);transform-origin:top;transform-box:fill-box;
+  transition:transform var(--d-slow) var(--e-out);
+}
+#access .level--now:hover .fig__zone,
+#access .level--now:focus-within .fig__zone{transform:none}
 /* the same level, solid, drawn back to nothing; on the row's hover (or the
    link's focus) it draws itself left to right over the dashes */
 #access .fig__level--set{
@@ -126,7 +137,7 @@
 @media (prefers-reduced-motion:reduce){
   .js #access .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
   .js #access .reveal.trace .fig__level{opacity:1;transition:none}
-  #access .fig__level--set{transition:none}
+  #access .fig__level--set,#access .fig__zone{transition:none}
 }
 
 /* a phone: the credits centre, so each level centres with them the way

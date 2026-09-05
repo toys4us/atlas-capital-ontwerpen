@@ -2614,7 +2614,7 @@ dl.pairs .cols{
    so a probe sees the level as fully there. */
 #trackrecord .ledger__lv{
   flex:1 1 auto;
-  min-width:16px;
+  min-width:0;                      /* a narrow column: the name holds, the tick gives way */
   align-self:baseline;
   position:relative;top:-.34em;
   height:1px;
@@ -2631,7 +2631,7 @@ dl.pairs .cols{
   text-transform:uppercase;
   line-height:1.5;
   color:var(--ink-4);
-  text-wrap:balance;
+  white-space:nowrap;
 }
 #trackrecord .ledger__val{
   grid-column:2;grid-row:1;
@@ -2957,6 +2957,17 @@ dl.pairs .cols{
 #access .fig__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-opacity:.85;stroke-linejoin:round;stroke-linecap:round}
 #access .fig__level{stroke:var(--gold);stroke-width:1;stroke-opacity:.34;stroke-linecap:butt}
 #access .fig__level--open{stroke-opacity:.55;stroke-dasharray:3 5}
+/* the zone: a band of the spread's kind under the open level, where the
+   path holds -- folded flat until the row is pointed at, then it develops
+   downward from the level (a scale, never opacity, so the probe sees it) */
+#access .fig__zone{
+  fill:var(--gold);fill-opacity:.07;
+  stroke:var(--gold);stroke-opacity:.3;stroke-width:1;
+  transform:scaleY(0);transform-origin:top;transform-box:fill-box;
+  transition:transform var(--d-slow) var(--e-out);
+}
+#access .level--now:hover .fig__zone,
+#access .level--now:focus-within .fig__zone{transform:none}
 /* the same level, solid, drawn back to nothing; on the row's hover (or the
    link's focus) it draws itself left to right over the dashes */
 #access .fig__level--set{
@@ -3022,7 +3033,7 @@ dl.pairs .cols{
 @media (prefers-reduced-motion:reduce){
   .js #access .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
   .js #access .reveal.trace .fig__level{opacity:1;transition:none}
-  #access .fig__level--set{transition:none}
+  #access .fig__level--set,#access .fig__zone{transition:none}
 }
 
 /* a phone: the credits centre, so each level centres with them the way
@@ -4154,6 +4165,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       <div class="level__scale">
         <svg class="level__fig reveal trace" viewBox="0 0 300 84" preserveAspectRatio="none" aria-hidden="true" focusable="false">
           <line class="fig__level" x1="0" y1="12" x2="300" y2="12"/>
+          <rect class="fig__zone" x="166" y="12" width="134" height="13"/>
           <path class="fig__line" pathLength="1" d="M0 74 12 71 20 77 34 69 46 73 58 66 70 70 80 64 94 46 100 52 112 38 126 30 134 36 150 16 158 20 168 12 180 9.5 190 13 210 11 232 13.5 256 11 280 13 300 12"/>
         </svg>
         <span class="level__tag reveal"><span lang="nl">Nu</span><span lang="en">Now</span></span>

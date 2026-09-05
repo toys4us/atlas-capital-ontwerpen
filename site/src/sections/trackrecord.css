@@ -68,7 +68,7 @@
    so a probe sees the level as fully there. */
 #trackrecord .ledger__lv{
   flex:1 1 auto;
-  min-width:16px;
+  min-width:0;                      /* a narrow column: the name holds, the tick gives way */
   align-self:baseline;
   position:relative;top:-.34em;
   height:1px;
@@ -85,7 +85,7 @@
   text-transform:uppercase;
   line-height:1.5;
   color:var(--ink-4);
-  text-wrap:balance;
+  white-space:nowrap;
 }
 #trackrecord .ledger__val{
   grid-column:2;grid-row:1;

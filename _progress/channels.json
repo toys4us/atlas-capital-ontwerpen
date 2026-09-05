@@ -19,6 +19,21 @@
    "confidence": 0.62,
    "ts": "2026-09-05T17:30:30+00:00",
    "note": "Rebuilt \"Locaties · 15 kanalen\" as the Discord-like device (site/src/sections/06-channels.html + channels.css):\n- A <figure> the width of the strip: sidebar (server header \"Atlas Capital\" + chevron, category \"Thuis · nu gratis\" with 9 rows, \"Premium · opent later\" with 6 rows carrying a hairline gold lock) beside a message pane of skeleton lines only (7 abstract messages, avatar squares, a composer box with a plus) — no messages, no names, no counts. Pane is aria-hidden; the list is content.\n- Chart vocabulary as furniture: selected row = FVG band (go"
+  },
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.5,
+   "score_ref": 4.5,
+   "wowed": false,
+   "gap": "The right-hand \"chat\" pane is a skeleton-loader: thirty grey placeholder bars and a lonely 300px sparkline, which reads as an unfinished wireframe rather than a designed figure, and on mobile it collapses into a useless 300px-tall strip of grey noise beside a cramped channel list. At the bar the figure would either commit to real, typeset content (one or two genuine chart-idea posts in the house serif, the chart at full column width) or become a pure diagram of the channel list alone, with the mobile view stacking to a single column instead of squeezing two.",
+   "motion": "Staggered opacity reveals on the numbered list, restrained and easy, but the channel figure itself simply appears with no internal choreography.",
+   "verdict": "A is the disciplined one: a single serif family, restrained gold on near-black, numbered hairline rhythm and a caption system that all hold together, undone only by a placeholder-grade figure and a lazy mobile squeeze. B has the mood and imagery of a shortlist candidate, but a jury judges what is on screen, and what is on screen is colliding labels, doubled text, broken word spacing and a dead zone, which no atmosphere excuses.",
+   "confidence": 0.74,
+   "ts": "2026-09-05T19:13:01+00:00",
+   "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/06-channels.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/channels.css\n- Fixed the reveal: the row's own transition (background/box-shadow/color) had higher specificity than .js .reveal and overrode it, so the 15 rows cut in instead of settling; now declared on .dv__ch:not(.reveal) (the education pattern). Motion sheet confirms rows fade/settle in sequence.\n- Added a Discord-style member panel at the sidebar's foot (skeleton avatar, name line, three controls; aria-hidden, no name/status) with a --foot height shared with the "
   }
  ]
 }
