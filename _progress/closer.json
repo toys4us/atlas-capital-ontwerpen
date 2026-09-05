@@ -1,8 +1,24 @@
 {
  "id": "closer",
  "title": "Closer",
- "wave": 0,
- "round": 0,
- "status": "queued",
- "history": []
+ "wave": 1,
+ "round": 1,
+ "status": "win",
+ "history": [
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.5,
+   "score_ref": 4,
+   "wowed": false,
+   "gap": "The gold rule that runs through \"Einde\" is the one idea in the closer and it is not executed cleanly: on desktop it sits a few pixels above the baseline and shaves the feet of the E, n and d; on mobile it cuts through the letters at roughly x-height, reading as a rendering error rather than a device. At the bar the rule sits exactly on the baseline at every breakpoint (or clears the feet by a hairline), the sparkline starts after the word, and the empty right 60% of the closer is given a job — the \"LIQUIDITEIT, SCHEMATISCH\" caption is currently a whisper of low-contrast 9px text in a void. Secondary: the footer's link columns land at arbitrary x-positions (Discord at ~720, Educatie at ~1070) and the right column does not close to the same edge as the clock, and on mobile the disclaimer orphans \"met zich mee.\" on its own line.",
+   "motion": "Sections crossfade upward on a slow ease with the rule and sparkline drawing in — restrained and on-brand, but the incoming closer text ghosts over the footer clock mid-transition (frame 3) and the sheet shows no easing character beyond a fade.",
+   "verdict": "A wins on discipline: one editorial device (rule-as-baseline becoming a sparkline), a coherent serif hierarchy, a gold restrained to hairlines and one CTA, and a footer that is merely under-gridded rather than broken. B has the more seductive atmosphere in motion, but its closer arrives with struck-through links, a colliding logo lockup and an empty headline void — a jury cannot shortlist a page whose footer looks like it failed to load.",
+   "confidence": 0.85,
+   "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/11-closer.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/closer.css\n- Fixed the mask clipping \"Einde\"/\"The End\" ascenders (i-dot, d were cut): mask opens .12em above the row via padding/negative margin; row is flow-root so the margin cannot collapse and drop the line below the baseline.\n- Redrew the end move as a schema (fall in two legs, two equal lows on the dashed level, one sweep, three-leg recovery) in a 320x50 em-locked viewBox; action widened 2.6em to 3.2em; flat run extended so the rule reaches the viewport edge o",
+   "timestamp": "2026-09-05T19:27:08.459988+00:00"
+  }
+ ]
 }

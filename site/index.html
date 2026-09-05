@@ -1690,80 +1690,75 @@ dl.pairs .cols{
 }
 
 /* ---- section:founder ---- */
-/* ===== founder: the credit as a level, the words as a pull-quote =====
-   Two blocks on the reel, each hung on a line the reel already has.
+/* ===== founder: the credit as one level, the words as speech =====
+   Two blocks on the reel, both hung on the strip's left edge.
 
-   The credit (.ten) is a level. The numeral "10+" hangs on the strip's
-   left edge, set large in the serif and a step quieter than the words --
-   a typographic object, not a headline -- and from its right side one
-   dashed hairline of the gold (the liquidity line of the opening plate,
-   used as furniture) runs at the height of the figures to the strip's
-   right edge, the way a level runs from its tag. "jaar actief in trading"
-   takes the value column on the numeral's baseline with every other value
-   on the reel, under the level like a caption under a rule, the five
-   words cut from his first sentence under it. The level draws itself out
-   of the numeral while the numeral rises out of its baseline; then the
-   words, then the sub-line. One number, no instrument, no date.
+   The credit (.ten) is one composed level, not three things near each
+   other. The numeral "10+" is the tag at the left end, set large in the
+   serif with proportional figures (so the 1 and the 0 close up) and a
+   step quieter than the words: a typographic object, not a headline.
+   From its right side the dashed hairline of the gold -- the liquidity
+   line of the opening plate, used as furniture -- runs to the strip's
+   right edge, and it runs ON THE NUMERAL'S BASELINE: the row aligns
+   baselines, and an empty box's baseline is its bottom edge, so the line
+   is the baseline drawn. The label "jaar actief in trading" sits above
+   the line, flush with its first dash, lifted by its own descent plus a
+   hair of air -- a level's label sits above its start, the way the
+   plate's tags do. Under the line, on that same flush edge, the founder's
+   own account of those years at note size (cut from his first sentence,
+   never rewritten). So the numeral's foot, the line, the label's start
+   and the note's start are one construction, and the words are his.
 
-   The words (.word) leave the axis on purpose: a quote at credit size in
-   the value column is a quote marooned in a narrow column, and at
-   pull-quote size it needs the strip's width. So it hangs on the strip's
-   left edge -- the numeral's line -- with the hair above it and the
-   signature under it, and the signature is the only naming of the voice
-   (the group title names the role). So the section has the reel's two
-   lines and no third: the edge (numeral, hair, quote, signature) and the
-   axis (the words, the sub-line). On a phone, where the credits centre,
-   both blocks centre and the level runs from one edge of the screen to
-   the other with the tag in the middle of it. */
-#founder{--n:clamp(72px,9.4vw,132px)}      /* the numeral: a size the scale lacks */
+   The words (.word) are his too, at pull-quote size, and now in
+   quotation marks so they read as something a person said. The opening
+   mark hangs in the margin (a negative indent the width of the glyph;
+   hanging-punctuation where the browser has it) so the first letter sits
+   on the strip's edge under the numeral; the signature closes them on
+   that same edge. No rule above the quote: the level above and the hung
+   mark are the section's two details, and the gold appears once.
+
+   Reveal: the numeral rises out of its baseline, the level draws out of
+   it, then the label, then the note; below, the words settle and the
+   signature arrives last and slowly. On a phone everything stays on the
+   left edge, the level runs from the numeral to the edge of the screen,
+   and the quote is set left with a rag and no break at a hyphen. */
+#founder{
+  --n:clamp(72px,9.4vw,132px);              /* the numeral: a size the scale lacks   */
+  --tag-gap:clamp(10px,1.1vw,14px);         /* from the tag to the first dash        */
+  --edge:clamp(18px,4vw,40px);              /* the roll's padding: to the strip edge */
+}
 
 /* ---- the credit ------------------------------------------------------- */
 #founder .ten{
   position:relative;z-index:2;
   display:grid;
-  grid-template-columns:var(--axis-l) var(--axis-r);
-  column-gap:var(--axis-gap);
+  grid-template-columns:auto minmax(0,1fr);
+  column-gap:var(--tag-gap);
   align-items:baseline;
-  margin:clamp(6px,1.4vw,16px) 0 0;
+  margin:clamp(4px,1vw,12px) 0 0;
   text-align:left;
 }
-/* the level: the strip's width, at the middle of the figures (the row's
-   top is the numeral's box, so the height is in the numeral's em); 3 on,
-   5 off, like the plate's. It runs under the numeral too; the numeral's
-   ground covers it there, so it is seen from the tag's right side on. */
-#founder .ten__lvl{
-  position:absolute;left:0;right:0;
-  top:calc(var(--n) * .40);
-  height:1px;
-  background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,rgba(215,179,100,0) 3px 8px);
-  pointer-events:none;
-}
-/* the tag: a flex row so its baseline is the numeral's and the grid hangs
-   the words on it; above the level, so the numeral's ground covers it.
-   The 1 carries a wide left bearing, so the figures are pulled out a
-   little to sit optically on the edge with the hair and the quote. */
+/* the tag: a flex row so its baseline is the numeral's (the mask keeps
+   it), and the grid hangs the level and the label on that baseline. The
+   1 carries a left bearing, so the figures are pulled out a little to sit
+   optically on the edge with the quote's first letter. */
 #founder .ten__n{
-  grid-column:1;
-  position:relative;z-index:1;
-  display:flex;align-items:baseline;justify-content:flex-start;
+  grid-column:1;grid-row:1;
+  display:flex;align-items:baseline;
   min-width:0;
-  margin-left:-.13em;
+  margin-left:-.06em;
   font-family:var(--f-display);
   font-size:var(--n);
   font-weight:400;
   line-height:1;
   letter-spacing:var(--trk-h1);
-  font-variant-numeric:lining-nums;
+  font-variant-numeric:lining-nums proportional-nums;
   color:var(--ink-2);
 }
 #founder .ten__n .mask{flex:0 0 auto;padding-bottom:.12em;margin-bottom:-.12em}
-#founder .ten__num{
-  display:inline-block;
-  padding:0 .12em 0 .05em;                  /* the gap between the tag and its level */
-  background:var(--bg);
-}
-/* the plus as a superior: under half size, its top on the cap line, so the
-   numeral is two figures and a small sign, not a cross */
+#founder .ten__num{display:inline-block}
+/* the plus as a superior: under half size, its top on the cap line, so
+   the numeral is two figures and a small sign, not a cross */
 #founder .ten__plus{
   display:inline-block;
   font-size:.44em;
@@ -1772,8 +1767,28 @@ dl.pairs .cols{
   position:relative;top:-1.02em;
   margin-left:.06em;
 }
-#founder .ten__v{
-  grid-column:2;
+/* the level: an empty grid item has no baseline of its own, so it is
+   given the row's -- its bottom edge -- and the line is the baseline
+   drawn, from the first dash after the tag to the strip's edge (through
+   the roll's padding); 3 on, 5 off, like the plate's */
+#founder .ten__lvl{
+  grid-column:2;grid-row:1;
+  align-self:baseline;
+  display:block;
+  height:1px;
+  margin-right:calc(-1 * var(--edge));
+  background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,rgba(215,179,100,0) 3px 8px);
+  transform-origin:left center;
+  pointer-events:none;
+}
+/* the label: on the row's baseline by the grid, then lifted clear of the
+   line by its own descent (.265em in this face) and a little air, so its
+   descenders never touch the dashes and its first letter is flush with
+   the first dash */
+#founder .ten__words{
+  grid-column:2;grid-row:1;
+  align-self:baseline;
+  position:relative;top:calc(-.265em - 5px);
   display:block;
   min-width:0;
   font-family:var(--f-display);
@@ -1782,10 +1797,14 @@ dl.pairs .cols{
   letter-spacing:-.006em;
   color:var(--ink-1);
 }
-#founder .ten__words{display:block}
+/* the note: the next row, pulled up under the line. The row above ends
+   at the numeral's box bottom, .265 of its size under the baseline; the
+   note's top is set a few px under the line instead. */
 #founder .ten__sub{
+  grid-column:2;grid-row:2;
   display:block;
-  margin-top:6px;
+  min-width:0;
+  margin-top:calc(7px - .265 * var(--n));
   font-family:var(--f-display);
   font-size:var(--t-small);
   letter-spacing:.01em;
@@ -1797,10 +1816,9 @@ dl.pairs .cols{
 /* ---- the words --------------------------------------------------------- */
 #founder .word{
   position:relative;z-index:2;
-  margin:clamp(44px,6vw,72px) 0 0;
+  margin:clamp(40px,5.6vw,72px) 0 0;
   text-align:left;
 }
-#founder .word .hair{display:block;width:40px;margin:0 0 clamp(18px,2.6vw,28px)}
 #founder .word blockquote{
   margin:0;
   max-width:31ch;
@@ -1810,10 +1828,15 @@ dl.pairs .cols{
   line-height:1.3;
   letter-spacing:-.012em;
   color:var(--ink-1);
-  hanging-punctuation:first last;
 }
-#founder .word blockquote p{margin:0;text-wrap:pretty}
-#founder .word .nb{white-space:nowrap}       /* a hyphenated compound stays whole on a desk */
+/* the opening mark hangs: its advance is .40em in this face, so the
+   first letter lands on the edge; where the browser hangs punctuation
+   itself, let it */
+#founder .word blockquote p{margin:0;text-indent:-.40em;text-wrap:pretty}
+@supports (hanging-punctuation:first){
+  #founder .word blockquote p{text-indent:0;hanging-punctuation:first last}
+}
+#founder .word .nb{white-space:nowrap}       /* a hyphenated compound stays whole */
 /* the signature: italic at note size with a dash, the way a quotation is
    signed -- it arrives last and slowly, so it is never there before the
    words are */
@@ -1829,20 +1852,11 @@ dl.pairs .cols{
 #founder .word .who::before{content:"\2014\00A0\00A0";color:var(--ink-4)}
 .js #founder .word > .who.reveal{transition-duration:calc(var(--d-reveal) * 1.2)}
 
-/* ---- a phone: everything centres with the reel ------------------------- */
+/* ---- a phone: the same construction, on the left edge ------------------ */
 @media (max-width:620px){
-  #founder .ten{display:block;text-align:center;margin-top:10px}
-  /* the level runs from one edge of the screen to the other, the tag on
-     it in the middle, and draws from the middle outward */
-  #founder .ten__lvl{left:calc(-1 * clamp(18px,4vw,40px));right:calc(-1 * clamp(18px,4vw,40px))}
-  .js #founder .ten__lvl.draw{transform-origin:center}
-  #founder .ten__n{justify-content:center;margin-left:0}
-  #founder .ten__num{padding:0 .14em 0 .08em}
-  #founder .ten__v{margin-top:clamp(10px,3vw,16px)}
-  #founder .word{max-width:34ch;margin-left:auto;margin-right:auto;text-align:center}
-  #founder .word .hair{margin-left:auto;margin-right:auto}
-  #founder .word blockquote{max-width:none}
-  #founder .word .nb{white-space:normal}     /* on a phone it may break at its own hyphen */
+  #founder .ten{margin-top:8px}
+  #founder .word{margin-top:clamp(36px,9vw,48px)}
+  #founder .word blockquote{max-width:none;line-height:1.28}
 }
 
 /* ---- section:education ---- */
