@@ -2,21 +2,22 @@
    The credits, set as a ledger and drawn as a ladder. Four rows on the
    shared axis of base.css (dl.pairs: the label right of the axis in
    tracked caps, the value left of it at credit size, one baseline). Each
-   label is the tag at the end of a price level: a dashed hairline of the
-   one gold runs to it from the strip's left edge -- the frame line -- the
-   way the liquidity line of the opening plate runs to its tag and the way
-   the founder's numeral sits at the end of its level on the next reel. So
-   the four credits read as the leaders of a contents page and, at once,
-   as the ladder that the "10+" below completes. The value column carries
-   type and nothing else: no rule runs under a value, nothing is drawn
-   down the axis. Schema only: no number, no instrument, no date.
+   row is one composed level: a leader -- the dashed hairline of the one
+   gold, the liquidity line of the opening plate used as furniture -- runs
+   from the strip's left edge, the frame line, to the label, which is the
+   tag at its end; the founder's numeral sits at the end of its level the
+   same way on the next reel. So the four credits read as the leaders of
+   a contents page and, at once, as the ladder the "10+" below completes.
+   The value column carries type and nothing else: no rule runs under a
+   value, nothing is drawn down the axis. Schema only: no number, no
+   instrument, no date.
 
    Every row is the same row. The one small fact that is a code -- the
-   server's address -- sits in the mono on the value's own baseline, after
-   the word, the way a role follows a name in a credit; so the fourth row
-   is as tall as the first three and the four sit on one grid. Pointed at,
-   a band fills behind the address, a hairline along its top and its
-   bottom (the FVG, as a hover state). Two voices, serif and mono, no third.
+   server's address -- hangs after the word in the mono, a size down (the
+   label size) and a hair under the baseline, the way a role follows a
+   name in a credit: it is read second. Pointed at, a band fills behind
+   it, a hairline along its top and its bottom (the plate's gap, as a
+   hover state). Two voices, serif and mono, no third.
 
    The title card: the rule runs from frame line to frame line (the
    strip's edges, not the column's), and the title is set in three cells,
@@ -24,23 +25,32 @@
    last, so the word is centred on the page and the two rules are symmetric
    about it -- the numeral hangs in the left gap like a folio.
 
-   Reveal: motion.js tags the rows itself (a stagger of dt, dd). A label
-   fades in place while its level draws out of the frame to meet it --
-   scale, never opacity, so a probe sees the rule at once, on the label's
-   own beat (the delay is inherited from the row) -- and the value rises
-   in on the next. On a phone the same object, read the other way: the
-   label leads, left, in the same caps; the level runs out of it to the
-   column's edge and ends on a short vertical rule (the strip's edge, which
-   the phone does not draw); the value takes the next line on the label's
-   left edge. */
+   Reveal: authored in the partial (data-stagger with data-at slots), so
+   a row is a sequence and not a fade. The leader draws out of the frame
+   towards the label -- a wipe, so the dashes stay where they are and the
+   line is drawn, not stretched -- fast off the edge and slow to arrive;
+   the label surfaces at its end, opacity only, on a slow-start curve so
+   it is there once the line is; the value rises through its own baseline
+   out of a mask, the way the title's lines rise on the spread. Rows
+   follow 110ms apart. The address comes last and slowly, after the word.
+   On a phone the same object, read the other way: the label leads, left,
+   in the same caps; the leader runs out of it to the column's edge and
+   ends on a short vertical rule (the strip's edge, which the phone does
+   not draw, standing there before the line reaches it); the value takes
+   the next line on the label's left edge. */
+#production{
+  --edge:clamp(18px,4vw,40px);              /* the roll's padding: to the strip's edge */
+  --lead-gap:clamp(10px,1.4vw,14px);        /* from the leader's last dash to the label */
+  --lead-y:.64em;                           /* the middle of the caps: where the level runs */
+}
 #production dl.pairs{
   row-gap:clamp(16px,2.4vw,28px);
 }
 
 /* ---- the title card: rule to the frame, title symmetric ----------------- */
 #production .grp::before{
-  left:calc(-1 * clamp(18px,4vw,40px));           /* the roll's padding: out to the frame line */
-  right:calc(-1 * clamp(18px,4vw,40px));
+  left:calc(-1 * var(--edge));
+  right:calc(-1 * var(--edge));
 }
 #production .grp h2{
   display:inline-grid;
@@ -51,47 +61,64 @@
 #production .grp h2 > span{grid-column:2}
 
 /* ---- the rows ------------------------------------------------------------
-   the tag: a flex row so the level takes whatever width the label leaves;
-   the level opts out of baseline alignment, so the row's baseline is the
-   label's and the grid hangs the value on it */
+   the tag: a flex row so the leader takes whatever width the label
+   leaves; the leader opts out of baseline alignment, so the row's
+   baseline is the label's and the grid hangs the value on it */
 #production dl.pairs > dt{
   display:flex;align-items:baseline;justify-content:flex-end;
   min-width:0;
-  margin-left:calc(-1 * clamp(18px,4vw,40px));   /* the level starts on the frame line */
+  margin-left:calc(-1 * var(--edge));      /* the leader starts on the frame line */
   white-space:nowrap;
 }
-#production dl.pairs > dt::before{
-  content:"";
+#production .lvl{
+  display:block;
   flex:1 1 auto;
   align-self:flex-start;
-  margin:.64em clamp(10px,1.4vw,14px) 0 0;     /* the middle of the caps; the gap to the label */
+  margin:var(--lead-y) var(--lead-gap) 0 0;
   height:1px;
   min-width:24px;
-  /* the figure's liquidity line, 3 on 5 off, anchored right so a dash
+  /* the plate's liquidity line, 3 on 5 off, anchored right so a dash
      ends at the label */
   background:linear-gradient(90deg,transparent 0 5px,var(--line-3) 5px 8px) right center/8px 1px repeat-x;
+  pointer-events:none;
 }
-/* the draw: the label only fades (its level does the moving); the level
-   is hidden by scale, never by opacity, and takes the row's own delay,
-   so the level of the fourth credit waits with the fourth credit */
-.js #production dl.pairs > dt.reveal{transform:none}
-.js #production dl.pairs > dt.reveal::before{
-  transform:scaleX(0);
-  transform-origin:left center;
-  transition:transform calc(var(--d-reveal) * 1.2) var(--e-reveal);
-  transition-delay:inherit;
-}
-.js #production dl.pairs > dt.reveal.is-in::before{transform:none}
+#production .tag{display:block;min-width:0}
 
-/* the address: the mono, at caption size, in the secondary grey (it is a
-   link, so a step above a label), on the value's baseline after the word */
+/* the value: a flex row on the baseline, so the word's mask (a block)
+   keeps the baseline for the grid and the address can sit after it */
+#production dl.pairs > dd{
+  display:flex;align-items:baseline;
+  min-width:0;
+}
+#production dl.pairs > dd .mask{display:block;flex:0 1 auto;min-width:0}
+#production .val{display:inline-block}
+
+/* ---- the sequence ---------------------------------------------------------
+   the leader: off the edge fast, the settle long (expo-out); the wipe's
+   clip stays put so the dashes are revealed, not scaled */
+.js #production .lvl.reveal.wipe{transition:clip-path 1.15s var(--e-out)}
+/* the label: opacity only -- its leader does the moving -- on a curve
+   that starts slow, so it surfaces as the line arrives */
+.js #production .tag.reveal{transform:none;transition:opacity 1.05s var(--e-inout)}
+/* the value: the mask rise of base.css, a shade quicker than a title line */
+.js #production .mask > .val.reveal{transition-duration:1.2s}
+/* the address: in place, and slowly, so it is not there before the word is */
+.js #production .addr.reveal{transform:none;transition:opacity 1.3s var(--e-inout)}
+
+/* ---- the address ------------------------------------------------------------
+   the mono, at the label size (a size under the caption's: next to a word
+   at credit size the mono's tall x-height reads a step larger than it
+   is), in the secondary grey (a link, so a step above a label), after
+   the word and a hair below its baseline -- hung, the way a role hangs
+   under a name */
 #production .addr{
   position:relative;
-  display:inline-block;
-  vertical-align:baseline;
-  margin:0 0 0 clamp(12px,1.6vw,18px);
+  top:.3em;
+  flex:0 0 auto;
+  display:block;
+  margin:0 0 0 clamp(11px,1.4vw,16px);
   font-family:var(--f-mono);
-  font-size:var(--t-caption);
+  font-size:var(--t-micro);
   font-variant-numeric:tabular-nums;
   letter-spacing:var(--trk-mono);
   line-height:1.6;
@@ -102,6 +129,7 @@
   position:relative;z-index:1;
   color:inherit;
   text-decoration-color:var(--line-2);
+  text-underline-offset:.28em;
 }
 #production .addr a:hover,#production .addr a:focus-visible{color:var(--gold-hi);text-decoration-color:var(--gold)}
 /* the band: a gap filled, a little wider than the address, between two hairlines */
@@ -123,8 +151,8 @@
 /* ---- a phone: the same object, the tag leading -------------------------
    The title card's rule ends 6% in from the column on a phone (base.css);
    the ledger sits between those two verticals, so the labels start where
-   the rule starts and the levels end where it ends. Label left in the
-   caps, the level out of it to the right, a dash starting at the label,
+   the rule starts and the leaders end where it ends. Label left in the
+   caps, the leader out of it to the right, a dash starting at the label,
    ending on a short vertical hairline; the value on the next line, on the
    label's left edge; the rows set by air. */
 @media (max-width:620px){
@@ -137,26 +165,28 @@
     text-align:left;
   }
   #production dl.pairs > dt:first-of-type{padding-top:22px}
-  #production dl.pairs > dt::before{
+  #production .tag{order:1;flex:0 0 auto}
+  #production .lvl{
     order:2;
-    margin:.64em 0 0 clamp(10px,3vw,14px);
+    margin:var(--lead-y) 0 0 clamp(10px,3vw,14px);
     background:linear-gradient(90deg,var(--line-3) 0 3px,transparent 3px 8px) left center/8px 1px repeat-x;
   }
+  /* the strip's edge, standing before the line reaches it */
   #production dl.pairs > dt::after{
     content:"";
     order:3;
     flex:0 0 auto;
     align-self:flex-start;
     width:1px;height:9px;
-    margin-top:calc(.64em - 4px);
+    margin-top:calc(var(--lead-y) - 4px);
     background:var(--line-3);
   }
-  #production dl.pairs > dd{text-align:left;margin-top:5px}
-  #production .addr{margin-left:12px}
+  #production dl.pairs > dd{justify-content:flex-start;text-align:left;margin-top:5px}
+  #production .addr{margin-left:10px}
   #production .addr::before{left:-4px;right:-4px}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .js #production dl.pairs > dt.reveal::before{transform:none;transition:none}
+  .js #production .lvl.reveal.wipe,.js #production .tag.reveal,.js #production .addr.reveal{transition:none}
   #production .addr::before{transition:none}
 }

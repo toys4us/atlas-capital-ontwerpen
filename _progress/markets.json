@@ -2,7 +2,7 @@
  "id": "markets",
  "title": "Markets & Live",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -34,6 +34,21 @@
    "confidence": 0.86,
    "note": "Rebuilt markets as a compact desk board on the reel's own axis (base.css dl.pairs, not a fork): each group is one credit row — label right of the gutter, its instruments three across on the label's baseline at the shared .cols list size, one hairline (line-2) closing each row in the value column, nothing drawn down the axis.\nTickers (NQ, ES, XAUUSD — only where the client gave one) now sit beside their names in the mono at caption size, ink-3, instead of stranded 430px away at the row's right edge; no ticker, no dash, for the other five.\nDropped the four bright dashed levels (the dashed liq",
    "timestamp": "2026-09-05T21:14:44+02:00"
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 6.5,
+   "score_ref": 4.5,
+   "wowed": false,
+   "gap": "The list is well-set but it is only a list, and its detail system is inconsistent: NQ, ES and XAUUSD get right-aligned ticker codes while Dow Jones, Zilver, Olie, Bitcoin and Altcoins get nothing, so the right column reads as half-finished rather than deliberate. At the bar every row carries its code (or none do), group separators are clearly distinguished from row hairlines rather than an almost-invisible grey/gold difference, and the empty right third of the desktop column earns its keep — a note, a session time, a sparkline-free reference — instead of reading as a narrow page floating in a wide canvas.",
+   "motion": "Rows enter in a quiet stagger with hairlines drawing in left-to-right at different lengths; restrained, legible, nothing overshoots.",
+   "verdict": "B wins on craft: a coherent serif/spaced-caps system, disciplined hairlines and a calm staggered reveal, undermined only by inconsistent ticker codes and a page that sits too narrow in its canvas. A has one loud desktop frame but a mobile view with overlapping header text, colliding captions and a dead half-screen, which no jury forgives.",
+   "confidence": 0.8,
+   "note": "markets (E:/ClaudeCode_GUI/atlas-designs/site/src/sections/07-markets.html + markets.css), round 2:\n- Rebuilt the list as a desk board on the strip's two edges, off the reel's axis: eight instruments one per row, names at quote size (24–38px) hung on the strip's left edge (the founder's line), tickers NQ/ES/XAUUSD in Fragment Mono at the strip's right edge — a true second column, right-aligned, on the name's baseline, like tags on a price scale. Hairline level under every row; untagged rows stay untagged (no dash where a number would sit). Groups (Indices/Metalen/Energie/Crypto) are caps hea",
+   "timestamp": "2026-09-05T21:32:50+02:00"
   }
  ]
 }

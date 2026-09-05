@@ -31,7 +31,7 @@
    left edge, the level runs from the numeral to the edge of the screen,
    and the quote is set left with a rag and no break at a hyphen. */
 #founder{
-  --n:clamp(72px,9.4vw,132px);              /* the numeral: a size the scale lacks   */
+  --n:clamp(84px,9.4vw,132px);              /* the numeral: a size the scale lacks   */
   --edge:clamp(18px,4vw,40px);              /* the roll's padding: to the strip edge */
 }
 
@@ -42,7 +42,7 @@
   grid-template-columns:auto minmax(0,1fr);
   column-gap:0;                              /* the plus's right edge is the column line */
   align-items:baseline;
-  margin:clamp(10px,1.5vw,20px) 0 0;
+  margin:0;                                  /* the group title's own margin is the air */
   text-align:left;
 }
 /* the tag: a flex row so its baseline is the numeral's (the mask keeps
@@ -161,7 +161,6 @@
 
 /* ---- a phone: the same construction, on the left edge ------------------ */
 @media (max-width:620px){
-  #founder .ten{margin-top:8px}
   #founder .word{margin-top:clamp(36px,9vw,48px)}
   #founder .word blockquote{max-width:none;line-height:1.28}
 }

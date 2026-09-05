@@ -1,42 +1,53 @@
 /* ===== hero: the opening spread =====
-   A spread, not a title card. Two columns and nothing else. The left one
-   is the title's: the kicker, then the three words of the tagline set
-   large and hung on the gutter. The right one is the band's: a plate --
-   a session drawn as a schema in hairlines of the one gold, four zones,
-   one line (the SVG in the partial) -- that enters from the right margin,
-   bleeds to the viewport's edge and has no left edge drawn at all; the
-   last two words of the title run across it, in front. Under the band,
-   on the line of its left edge, everything that is read after the title
-   in the order it is read: the figure's caption, the one line, the call
-   and its quiet aside. Two hairlines only, top and bottom of the band, run
-   from its left to the page's edge like the rules of a chart; the frame is
-   open on the side the words come in from, on purpose, so no letter ever
-   chops a line. The band the words cover is empty (the line opens low and
-   quiet there; the session happens in the right three quarters).
+   A spread, not a title card. Two things from two margins, one in front.
+   From the left, hung on the gutter: the kicker, then the three words of
+   the tagline set large. From the right: a band -- a session drawn as a
+   schema in hairlines of the one gold, four zones, one line (the SVG in
+   the partial) -- that bleeds to the viewport's edge and has no left edge
+   drawn at all. The band is the title's own row: its top hairline runs on
+   the cap line of the first word, its bottom a descender and a little
+   under the third, and it starts only 1.5em in from the gutter, so half
+   or more of every word stands on it (P, D and U stand in the margin, the
+   rest of each word on the band). Not a corner touched by a descender: a
+   title in front of a plate, on purpose, the way a headline crosses the
+   picture on a spread.
+
+   Everything that is read after the title hangs on the band's left edge,
+   in one column, in the order it is read: the one line, then the call
+   and its quiet aside. The figure's caption goes to the page's right
+   gutter -- the axis of the chart, where the figure's labels already sit
+   -- on the one line's baseline, so the row under the band is one row
+   with two ends and nothing floats. Three verticals and no more: the
+   gutter (the kicker, the title, the clocks), the band's edge (the line,
+   the call), the axis (the labels, the caption, the bar's switch).
 
    The zones are the page's own hairlines, not strokes in the SVG: the two
    levels are the 3-on-5 dashed line every later section draws its rules
    with, the gap is a band with a rule above and below, the orderblock a
    box. They run past the line's end into the bleed, to the edge of the
    page -- a level is drawn forward; the line stops where the present is.
-   Their labels sit on the page's right gutter, the axis of the chart, on
-   the same vertical the bar's language switch and the rail's hint keep.
+   The line opens low and quiet under the words (its range runs under the
+   descenders, never through a letter); the session happens on the right.
 
    The mark leads from the bar, which is transparent over this screen (see
    header.css): a mark, not a poster. Here the tagline is the statement.
 
    Everything is locked to the type in em of --t-hero, so the relationships
    hold at every width and on a short laptop screen:
-     top      .84em  (first baseline .703em + .137em of the line gap)
-     height  2.35em  -> bottom at 3.19em; the third baseline is at 2.58em
-                        and its descender ends at 2.80em; the title's box
-                        is 2.82em, so the column starts .37em below it
-     left    3.30em  from the card's left edge (--plate-x): "Discipline."
-                     (4.31em) crosses by 1.0em, "Uitvoering." (4.66em) by
-                     1.36em, "Execution." (4.44em) by 1.14em, "Process."
-                     (3.32em) clears the corner. Constant in em, so
-                     constant at every width. The figure stretches to the
-                     frame (preserveAspectRatio none); its strokes do not.
+     baselines   .703em, 1.643em, 2.583em (line pitch .94em)
+     cap line    baseline 1 - .715em = -.012em (Newsreader's cap height)
+     descender   baseline 3 + .236em = 2.82em, the title's box bottom
+     band top    -.012em      the cap line
+     band bottom 3.15em       .33em under the descender: the line's range
+                              (93-95% of the band) runs under the g
+     band left   1.50em       "Proces." (2.99em wide, hung -.06em) crosses
+                              by 1.43em, "Discipline." (4.37em) by 2.81em,
+                              "Uitvoering." (4.72em) by 3.16em; "Process."
+                              (3.38em) by 1.82em, "Execution." (4.50em) by
+                              2.94em. Constant in em, so constant at every
+                              width. The figure stretches to the frame
+                              (preserveAspectRatio none); its strokes and
+                              its labels do not.
    --kick    height of the kicker line plus its gap, so the band's top can be
              set from the card's top edge without measuring
    --bleed   from the card's right edge to the viewport's: the gutter plus
@@ -46,16 +57,17 @@
    --edge    what the mat and the levels overhang the frame by on the
              right: the bleed on a desk, the gutter everywhere else
    On load the mat comes up, the zones draw out of the left and the line
-   draws itself while the words rise out of their baselines; then the
-   column under the band arrives top to bottom, the one line resolving out
-   of a blur. On scroll the title leads (-.05) and the band lags a little
-   (.04), so the two layers part; the column stays with the page. */
+   draws itself while the words rise out of their baselines; then the row
+   under the band arrives, the one line resolving out of a blur, the
+   caption after it, the call last. On scroll the title leads (-.05) and
+   the band lags a little (.04), so the two layers part and the front one
+   is seen to be in front; the column stays with the page. */
 #hero{
-  --kick:calc(17px + clamp(18px,2.4vw,32px));
-  --card-w:min(100cqw,var(--wide));
-  --plate-x:calc(var(--t-hero) * 3.30);
-  --plate-w:min(calc(var(--card-w) - var(--plate-x)),var(--card-w));
-  --plate-h:calc(var(--t-hero) * 2.35);
+  --kick:calc(16.5px + clamp(18px,2.4vw,32px));
+  --plate-x:calc(var(--t-hero) * 1.5);
+  --plate-top:calc(var(--kick) - var(--t-hero) * .012);
+  --plate-h:calc(var(--t-hero) * 3.162);
+  --under:calc(var(--t-hero) * .33);     /* band bottom below the title's box */
   --bleed:calc(var(--gutter) + max(0px,(100vw - 2 * var(--gutter) - var(--wide)) / 2));
   --edge:var(--gutter);
   --mat:#121318;                        /* between the letterbox and a card */
@@ -147,6 +159,11 @@
   text-underline-offset:.26em;
   transition:color var(--d) var(--e-out),text-decoration-color var(--d) var(--e-out);
 }
+/* while it is still a reveal it keeps the reveal's transition as well as
+   its own, so it arrives like everything else and does not cut in */
+.js #hero .aside.reveal{
+  transition:opacity var(--d-fade) var(--e-reveal),transform var(--d-reveal) var(--e-reveal),color var(--d) var(--e-out),text-decoration-color var(--d) var(--e-out);
+}
 /* pointed at, the aside is the figure's gap: a band fills behind the line
    from the left, two rules and the faint gold, and the underline goes */
 #hero .aside::before{
@@ -170,7 +187,7 @@
 #hero .plate__frame{
   position:relative;
   container-type:inline-size;          /* the labels size from the frame */
-  aspect-ratio:1000/450;
+  aspect-ratio:1000/460;
 }
 #hero .plate__frame::before{
   content:"";
@@ -185,35 +202,35 @@
 #hero .fig__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:round}
 /* the zones, placed in the figure's own percentages (the SVG is stretched
    to the frame, so a percentage of the frame is a coordinate of the
-   drawing: y 128 of 450 is 28.4%). The two levels and the band run on
+   drawing: y 98 of 400 is 24.5%). The two levels and the band run on
    past the frame's right edge by --edge, to the edge of the mat. */
 #hero .plate__ob,#hero .plate__band,#hero .plate__lvl{
   position:absolute;display:block;
   pointer-events:none;
 }
 #hero .plate__ob{
-  left:38.4%;top:83.1%;width:4.8%;height:7.6%;
+  left:47.8%;top:90%;width:5%;height:7.5%;
   border:1px solid var(--line-3);
   background:rgba(215,179,100,.07);
 }
 #hero .plate__band{
-  left:49.6%;right:calc(-1 * var(--edge));top:58.2%;height:4.9%;
+  left:55.5%;right:calc(-1 * var(--edge));top:56.5%;height:5%;
   border-top:1px solid var(--line-3);
   border-bottom:1px solid var(--line-3);
   background:rgba(215,179,100,.07);
 }
 #hero .plate__lvl{
-  left:59%;right:calc(-1 * var(--edge));top:28.4%;height:1px;
+  left:61%;right:calc(-1 * var(--edge));top:24.5%;height:1px;
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
 }
-#hero .plate__lvl--lo{left:69%;top:95.6%}
+#hero .plate__lvl--lo{left:70%;top:96.5%}
 /* labels: the page's label voice, positioned in the figure's own
    percentages so they stay with their zones at every width; they scale a
    little with the plate so a phone's figure is not all label, and never
    under 9px. The two levels are labelled above their right ends, on the
    page's right gutter -- the axis of the chart, in the bleed on a wide
    screen, on the content edge on a phone; the orderblock's label sits
-   under its box, where nothing is drawn. */
+   over its box, where nothing is drawn. */
 #hero .plate__tag{
   position:absolute;
   display:block;
@@ -228,11 +245,13 @@
   pointer-events:none;
   transition:opacity var(--d-fade) var(--e-reveal);
 }
-#hero .plate__tag--liq{right:calc(var(--gutter) - var(--edge));top:28.4%;transform:translateY(calc(-100% - 6px))}
-#hero .plate__tag--fvg{right:calc(var(--gutter) - var(--edge));top:58.2%;transform:translateY(calc(-100% - 6px))}
-#hero .plate__tag--ob{left:38.4%;top:90.7%;transform:translateY(4px)}
+#hero .plate__tag--liq{right:calc(var(--gutter) - var(--edge));top:24.5%;transform:translateY(calc(-100% - 6px))}
+#hero .plate__tag--fvg{right:calc(var(--gutter) - var(--edge));top:56.5%;transform:translateY(calc(-100% - 6px))}
+#hero .plate__tag--ob{left:47.8%;top:90%;transform:translateY(calc(-100% - 6px))}
 /* the caption: the figure's number in the label voice, its note in the
-   serif at note size, one row, hung on the band's left edge */
+   serif at note size; one row hung on the band's left edge where the band
+   is in the flow (a phone), two short lines on the axis under the band's
+   right end on a desk */
 #hero .plate figcaption{
   display:flex;flex-wrap:wrap;align-items:baseline;
   gap:2px clamp(14px,1.6vw,22px);
@@ -317,31 +336,46 @@
   .js #hero .reveal.trace .plate__tag{opacity:1;transition:none}
   .js #hero .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
   .js #hero .subtitle.reveal{filter:none;transition:none}
-  #hero .aside,#hero .aside::before{transition:none}
+  #hero .aside,#hero .aside::before,.js #hero .aside.reveal{transition:none}
   #hero .cue,#hero .cue::after{animation:none;clip-path:none}
 }
 
-/* the desk: the band lifted out of the flow and tipped in at the right,
-   the last two words running across it; the figure stays in the flow, so
-   its caption lands under the band's bottom rule at the band's left edge,
-   and the one line and the calls follow on that line */
+/* the desk: the card is a grid of three columns -- the margin the first
+   letters stand in (the band's left edge is its right edge), the reading
+   column, and the axis -- and four rows: the kicker, the title, the row
+   under the band (the one line left, the caption right, one baseline),
+   the call. The band is lifted out of the flow and placed from the
+   card's top edge in em of the title, so it is the title's row whatever
+   the width; the figure stays in the flow only for its caption. */
 @media (min-width:900px){
   #hero{--edge:var(--bleed)}
-  #hero .plate{margin:calc(var(--t-hero) * .37 + 16px) 0 0 var(--plate-x);width:var(--plate-w)}
+  #hero .card{
+    display:grid;
+    grid-template-columns:var(--plate-x) minmax(0,1fr) auto;
+    grid-template-rows:auto auto auto auto;
+    align-items:baseline;
+    column-gap:clamp(32px,4vw,64px);
+  }
+  #hero .kicker{grid-column:1/-1;grid-row:1;align-self:start}
+  #hero .title{grid-column:1/-1;grid-row:2;align-self:start;min-width:0}
+  #hero .plate{grid-column:3;grid-row:3;width:auto;margin:calc(var(--under) + clamp(22px,3vh,30px)) 0 0}
   #hero .plate__px{
     position:absolute;right:0;
-    top:calc(var(--kick) + var(--t-hero) * .84);
-    width:var(--plate-w);height:var(--plate-h);
+    top:var(--plate-top);
+    width:calc(100% - var(--plate-x));height:var(--plate-h);
   }
   #hero .plate__frame{aspect-ratio:auto;height:100%}
-  #hero .plate figcaption{margin-top:0}
+  #hero .plate figcaption{display:block;margin:0;text-align:right}
+  #hero .plate__title,#hero .plate__note{display:block}
+  #hero .plate__note{margin-top:1px}
   #hero .subtitle{
-    margin:clamp(20px,3vh,30px) 0 0 var(--plate-x);
-    max-width:min(52ch,var(--plate-w));
+    grid-column:2;grid-row:3;
+    margin:calc(var(--under) + clamp(22px,3vh,30px)) 0 0;
+    max-width:min(52ch,100%);
     font-size:clamp(17px,1.4vw,21px);
     line-height:1.5;
   }
-  #hero .calls{margin:clamp(20px,3vh,30px) 0 0 var(--plate-x)}
+  #hero .calls{grid-column:2;grid-row:4;align-self:start;margin:clamp(20px,3vh,30px) 0 0}
 }
 /* narrower: one column in reading order -- the words, then the band with
    its caption, the one line, the calls; the band runs from edge to edge of

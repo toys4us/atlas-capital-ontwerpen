@@ -1165,44 +1165,55 @@ dl.pairs .cols{
 
 /* ---- section:hero ---- */
 /* ===== hero: the opening spread =====
-   A spread, not a title card. Two columns and nothing else. The left one
-   is the title's: the kicker, then the three words of the tagline set
-   large and hung on the gutter. The right one is the band's: a plate --
-   a session drawn as a schema in hairlines of the one gold, four zones,
-   one line (the SVG in the partial) -- that enters from the right margin,
-   bleeds to the viewport's edge and has no left edge drawn at all; the
-   last two words of the title run across it, in front. Under the band,
-   on the line of its left edge, everything that is read after the title
-   in the order it is read: the figure's caption, the one line, the call
-   and its quiet aside. Two hairlines only, top and bottom of the band, run
-   from its left to the page's edge like the rules of a chart; the frame is
-   open on the side the words come in from, on purpose, so no letter ever
-   chops a line. The band the words cover is empty (the line opens low and
-   quiet there; the session happens in the right three quarters).
+   A spread, not a title card. Two things from two margins, one in front.
+   From the left, hung on the gutter: the kicker, then the three words of
+   the tagline set large. From the right: a band -- a session drawn as a
+   schema in hairlines of the one gold, four zones, one line (the SVG in
+   the partial) -- that bleeds to the viewport's edge and has no left edge
+   drawn at all. The band is the title's own row: its top hairline runs on
+   the cap line of the first word, its bottom a descender and a little
+   under the third, and it starts only 1.5em in from the gutter, so half
+   or more of every word stands on it (P, D and U stand in the margin, the
+   rest of each word on the band). Not a corner touched by a descender: a
+   title in front of a plate, on purpose, the way a headline crosses the
+   picture on a spread.
+
+   Everything that is read after the title hangs on the band's left edge,
+   in one column, in the order it is read: the one line, then the call
+   and its quiet aside. The figure's caption goes to the page's right
+   gutter -- the axis of the chart, where the figure's labels already sit
+   -- on the one line's baseline, so the row under the band is one row
+   with two ends and nothing floats. Three verticals and no more: the
+   gutter (the kicker, the title, the clocks), the band's edge (the line,
+   the call), the axis (the labels, the caption, the bar's switch).
 
    The zones are the page's own hairlines, not strokes in the SVG: the two
    levels are the 3-on-5 dashed line every later section draws its rules
    with, the gap is a band with a rule above and below, the orderblock a
    box. They run past the line's end into the bleed, to the edge of the
    page -- a level is drawn forward; the line stops where the present is.
-   Their labels sit on the page's right gutter, the axis of the chart, on
-   the same vertical the bar's language switch and the rail's hint keep.
+   The line opens low and quiet under the words (its range runs under the
+   descenders, never through a letter); the session happens on the right.
 
    The mark leads from the bar, which is transparent over this screen (see
    header.css): a mark, not a poster. Here the tagline is the statement.
 
    Everything is locked to the type in em of --t-hero, so the relationships
    hold at every width and on a short laptop screen:
-     top      .84em  (first baseline .703em + .137em of the line gap)
-     height  2.35em  -> bottom at 3.19em; the third baseline is at 2.58em
-                        and its descender ends at 2.80em; the title's box
-                        is 2.82em, so the column starts .37em below it
-     left    3.30em  from the card's left edge (--plate-x): "Discipline."
-                     (4.31em) crosses by 1.0em, "Uitvoering." (4.66em) by
-                     1.36em, "Execution." (4.44em) by 1.14em, "Process."
-                     (3.32em) clears the corner. Constant in em, so
-                     constant at every width. The figure stretches to the
-                     frame (preserveAspectRatio none); its strokes do not.
+     baselines   .703em, 1.643em, 2.583em (line pitch .94em)
+     cap line    baseline 1 - .715em = -.012em (Newsreader's cap height)
+     descender   baseline 3 + .236em = 2.82em, the title's box bottom
+     band top    -.012em      the cap line
+     band bottom 3.15em       .33em under the descender: the line's range
+                              (93-95% of the band) runs under the g
+     band left   1.50em       "Proces." (2.99em wide, hung -.06em) crosses
+                              by 1.43em, "Discipline." (4.37em) by 2.81em,
+                              "Uitvoering." (4.72em) by 3.16em; "Process."
+                              (3.38em) by 1.82em, "Execution." (4.50em) by
+                              2.94em. Constant in em, so constant at every
+                              width. The figure stretches to the frame
+                              (preserveAspectRatio none); its strokes and
+                              its labels do not.
    --kick    height of the kicker line plus its gap, so the band's top can be
              set from the card's top edge without measuring
    --bleed   from the card's right edge to the viewport's: the gutter plus
@@ -1212,16 +1223,17 @@ dl.pairs .cols{
    --edge    what the mat and the levels overhang the frame by on the
              right: the bleed on a desk, the gutter everywhere else
    On load the mat comes up, the zones draw out of the left and the line
-   draws itself while the words rise out of their baselines; then the
-   column under the band arrives top to bottom, the one line resolving out
-   of a blur. On scroll the title leads (-.05) and the band lags a little
-   (.04), so the two layers part; the column stays with the page. */
+   draws itself while the words rise out of their baselines; then the row
+   under the band arrives, the one line resolving out of a blur, the
+   caption after it, the call last. On scroll the title leads (-.05) and
+   the band lags a little (.04), so the two layers part and the front one
+   is seen to be in front; the column stays with the page. */
 #hero{
-  --kick:calc(17px + clamp(18px,2.4vw,32px));
-  --card-w:min(100cqw,var(--wide));
-  --plate-x:calc(var(--t-hero) * 3.30);
-  --plate-w:min(calc(var(--card-w) - var(--plate-x)),var(--card-w));
-  --plate-h:calc(var(--t-hero) * 2.35);
+  --kick:calc(16.5px + clamp(18px,2.4vw,32px));
+  --plate-x:calc(var(--t-hero) * 1.5);
+  --plate-top:calc(var(--kick) - var(--t-hero) * .012);
+  --plate-h:calc(var(--t-hero) * 3.162);
+  --under:calc(var(--t-hero) * .33);     /* band bottom below the title's box */
   --bleed:calc(var(--gutter) + max(0px,(100vw - 2 * var(--gutter) - var(--wide)) / 2));
   --edge:var(--gutter);
   --mat:#121318;                        /* between the letterbox and a card */
@@ -1313,6 +1325,11 @@ dl.pairs .cols{
   text-underline-offset:.26em;
   transition:color var(--d) var(--e-out),text-decoration-color var(--d) var(--e-out);
 }
+/* while it is still a reveal it keeps the reveal's transition as well as
+   its own, so it arrives like everything else and does not cut in */
+.js #hero .aside.reveal{
+  transition:opacity var(--d-fade) var(--e-reveal),transform var(--d-reveal) var(--e-reveal),color var(--d) var(--e-out),text-decoration-color var(--d) var(--e-out);
+}
 /* pointed at, the aside is the figure's gap: a band fills behind the line
    from the left, two rules and the faint gold, and the underline goes */
 #hero .aside::before{
@@ -1336,7 +1353,7 @@ dl.pairs .cols{
 #hero .plate__frame{
   position:relative;
   container-type:inline-size;          /* the labels size from the frame */
-  aspect-ratio:1000/450;
+  aspect-ratio:1000/460;
 }
 #hero .plate__frame::before{
   content:"";
@@ -1351,35 +1368,35 @@ dl.pairs .cols{
 #hero .fig__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:round}
 /* the zones, placed in the figure's own percentages (the SVG is stretched
    to the frame, so a percentage of the frame is a coordinate of the
-   drawing: y 128 of 450 is 28.4%). The two levels and the band run on
+   drawing: y 98 of 400 is 24.5%). The two levels and the band run on
    past the frame's right edge by --edge, to the edge of the mat. */
 #hero .plate__ob,#hero .plate__band,#hero .plate__lvl{
   position:absolute;display:block;
   pointer-events:none;
 }
 #hero .plate__ob{
-  left:38.4%;top:83.1%;width:4.8%;height:7.6%;
+  left:47.8%;top:90%;width:5%;height:7.5%;
   border:1px solid var(--line-3);
   background:rgba(215,179,100,.07);
 }
 #hero .plate__band{
-  left:49.6%;right:calc(-1 * var(--edge));top:58.2%;height:4.9%;
+  left:55.5%;right:calc(-1 * var(--edge));top:56.5%;height:5%;
   border-top:1px solid var(--line-3);
   border-bottom:1px solid var(--line-3);
   background:rgba(215,179,100,.07);
 }
 #hero .plate__lvl{
-  left:59%;right:calc(-1 * var(--edge));top:28.4%;height:1px;
+  left:61%;right:calc(-1 * var(--edge));top:24.5%;height:1px;
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
 }
-#hero .plate__lvl--lo{left:69%;top:95.6%}
+#hero .plate__lvl--lo{left:70%;top:96.5%}
 /* labels: the page's label voice, positioned in the figure's own
    percentages so they stay with their zones at every width; they scale a
    little with the plate so a phone's figure is not all label, and never
    under 9px. The two levels are labelled above their right ends, on the
    page's right gutter -- the axis of the chart, in the bleed on a wide
    screen, on the content edge on a phone; the orderblock's label sits
-   under its box, where nothing is drawn. */
+   over its box, where nothing is drawn. */
 #hero .plate__tag{
   position:absolute;
   display:block;
@@ -1394,11 +1411,13 @@ dl.pairs .cols{
   pointer-events:none;
   transition:opacity var(--d-fade) var(--e-reveal);
 }
-#hero .plate__tag--liq{right:calc(var(--gutter) - var(--edge));top:28.4%;transform:translateY(calc(-100% - 6px))}
-#hero .plate__tag--fvg{right:calc(var(--gutter) - var(--edge));top:58.2%;transform:translateY(calc(-100% - 6px))}
-#hero .plate__tag--ob{left:38.4%;top:90.7%;transform:translateY(4px)}
+#hero .plate__tag--liq{right:calc(var(--gutter) - var(--edge));top:24.5%;transform:translateY(calc(-100% - 6px))}
+#hero .plate__tag--fvg{right:calc(var(--gutter) - var(--edge));top:56.5%;transform:translateY(calc(-100% - 6px))}
+#hero .plate__tag--ob{left:47.8%;top:90%;transform:translateY(calc(-100% - 6px))}
 /* the caption: the figure's number in the label voice, its note in the
-   serif at note size, one row, hung on the band's left edge */
+   serif at note size; one row hung on the band's left edge where the band
+   is in the flow (a phone), two short lines on the axis under the band's
+   right end on a desk */
 #hero .plate figcaption{
   display:flex;flex-wrap:wrap;align-items:baseline;
   gap:2px clamp(14px,1.6vw,22px);
@@ -1483,31 +1502,46 @@ dl.pairs .cols{
   .js #hero .reveal.trace .plate__tag{opacity:1;transition:none}
   .js #hero .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
   .js #hero .subtitle.reveal{filter:none;transition:none}
-  #hero .aside,#hero .aside::before{transition:none}
+  #hero .aside,#hero .aside::before,.js #hero .aside.reveal{transition:none}
   #hero .cue,#hero .cue::after{animation:none;clip-path:none}
 }
 
-/* the desk: the band lifted out of the flow and tipped in at the right,
-   the last two words running across it; the figure stays in the flow, so
-   its caption lands under the band's bottom rule at the band's left edge,
-   and the one line and the calls follow on that line */
+/* the desk: the card is a grid of three columns -- the margin the first
+   letters stand in (the band's left edge is its right edge), the reading
+   column, and the axis -- and four rows: the kicker, the title, the row
+   under the band (the one line left, the caption right, one baseline),
+   the call. The band is lifted out of the flow and placed from the
+   card's top edge in em of the title, so it is the title's row whatever
+   the width; the figure stays in the flow only for its caption. */
 @media (min-width:900px){
   #hero{--edge:var(--bleed)}
-  #hero .plate{margin:calc(var(--t-hero) * .37 + 16px) 0 0 var(--plate-x);width:var(--plate-w)}
+  #hero .card{
+    display:grid;
+    grid-template-columns:var(--plate-x) minmax(0,1fr) auto;
+    grid-template-rows:auto auto auto auto;
+    align-items:baseline;
+    column-gap:clamp(32px,4vw,64px);
+  }
+  #hero .kicker{grid-column:1/-1;grid-row:1;align-self:start}
+  #hero .title{grid-column:1/-1;grid-row:2;align-self:start;min-width:0}
+  #hero .plate{grid-column:3;grid-row:3;width:auto;margin:calc(var(--under) + clamp(22px,3vh,30px)) 0 0}
   #hero .plate__px{
     position:absolute;right:0;
-    top:calc(var(--kick) + var(--t-hero) * .84);
-    width:var(--plate-w);height:var(--plate-h);
+    top:var(--plate-top);
+    width:calc(100% - var(--plate-x));height:var(--plate-h);
   }
   #hero .plate__frame{aspect-ratio:auto;height:100%}
-  #hero .plate figcaption{margin-top:0}
+  #hero .plate figcaption{display:block;margin:0;text-align:right}
+  #hero .plate__title,#hero .plate__note{display:block}
+  #hero .plate__note{margin-top:1px}
   #hero .subtitle{
-    margin:clamp(20px,3vh,30px) 0 0 var(--plate-x);
-    max-width:min(52ch,var(--plate-w));
+    grid-column:2;grid-row:3;
+    margin:calc(var(--under) + clamp(22px,3vh,30px)) 0 0;
+    max-width:min(52ch,100%);
     font-size:clamp(17px,1.4vw,21px);
     line-height:1.5;
   }
-  #hero .calls{margin:clamp(20px,3vh,30px) 0 0 var(--plate-x)}
+  #hero .calls{grid-column:2;grid-row:4;align-self:start;margin:clamp(20px,3vh,30px) 0 0}
 }
 /* narrower: one column in reading order -- the words, then the band with
    its caption, the one line, the calls; the band runs from edge to edge of
@@ -1530,21 +1564,22 @@ dl.pairs .cols{
    The credits, set as a ledger and drawn as a ladder. Four rows on the
    shared axis of base.css (dl.pairs: the label right of the axis in
    tracked caps, the value left of it at credit size, one baseline). Each
-   label is the tag at the end of a price level: a dashed hairline of the
-   one gold runs to it from the strip's left edge -- the frame line -- the
-   way the liquidity line of the opening plate runs to its tag and the way
-   the founder's numeral sits at the end of its level on the next reel. So
-   the four credits read as the leaders of a contents page and, at once,
-   as the ladder that the "10+" below completes. The value column carries
-   type and nothing else: no rule runs under a value, nothing is drawn
-   down the axis. Schema only: no number, no instrument, no date.
+   row is one composed level: a leader -- the dashed hairline of the one
+   gold, the liquidity line of the opening plate used as furniture -- runs
+   from the strip's left edge, the frame line, to the label, which is the
+   tag at its end; the founder's numeral sits at the end of its level the
+   same way on the next reel. So the four credits read as the leaders of
+   a contents page and, at once, as the ladder the "10+" below completes.
+   The value column carries type and nothing else: no rule runs under a
+   value, nothing is drawn down the axis. Schema only: no number, no
+   instrument, no date.
 
    Every row is the same row. The one small fact that is a code -- the
-   server's address -- sits in the mono on the value's own baseline, after
-   the word, the way a role follows a name in a credit; so the fourth row
-   is as tall as the first three and the four sit on one grid. Pointed at,
-   a band fills behind the address, a hairline along its top and its
-   bottom (the FVG, as a hover state). Two voices, serif and mono, no third.
+   server's address -- hangs after the word in the mono, a size down (the
+   label size) and a hair under the baseline, the way a role follows a
+   name in a credit: it is read second. Pointed at, a band fills behind
+   it, a hairline along its top and its bottom (the plate's gap, as a
+   hover state). Two voices, serif and mono, no third.
 
    The title card: the rule runs from frame line to frame line (the
    strip's edges, not the column's), and the title is set in three cells,
@@ -1552,23 +1587,32 @@ dl.pairs .cols{
    last, so the word is centred on the page and the two rules are symmetric
    about it -- the numeral hangs in the left gap like a folio.
 
-   Reveal: motion.js tags the rows itself (a stagger of dt, dd). A label
-   fades in place while its level draws out of the frame to meet it --
-   scale, never opacity, so a probe sees the rule at once, on the label's
-   own beat (the delay is inherited from the row) -- and the value rises
-   in on the next. On a phone the same object, read the other way: the
-   label leads, left, in the same caps; the level runs out of it to the
-   column's edge and ends on a short vertical rule (the strip's edge, which
-   the phone does not draw); the value takes the next line on the label's
-   left edge. */
+   Reveal: authored in the partial (data-stagger with data-at slots), so
+   a row is a sequence and not a fade. The leader draws out of the frame
+   towards the label -- a wipe, so the dashes stay where they are and the
+   line is drawn, not stretched -- fast off the edge and slow to arrive;
+   the label surfaces at its end, opacity only, on a slow-start curve so
+   it is there once the line is; the value rises through its own baseline
+   out of a mask, the way the title's lines rise on the spread. Rows
+   follow 110ms apart. The address comes last and slowly, after the word.
+   On a phone the same object, read the other way: the label leads, left,
+   in the same caps; the leader runs out of it to the column's edge and
+   ends on a short vertical rule (the strip's edge, which the phone does
+   not draw, standing there before the line reaches it); the value takes
+   the next line on the label's left edge. */
+#production{
+  --edge:clamp(18px,4vw,40px);              /* the roll's padding: to the strip's edge */
+  --lead-gap:clamp(10px,1.4vw,14px);        /* from the leader's last dash to the label */
+  --lead-y:.64em;                           /* the middle of the caps: where the level runs */
+}
 #production dl.pairs{
   row-gap:clamp(16px,2.4vw,28px);
 }
 
 /* ---- the title card: rule to the frame, title symmetric ----------------- */
 #production .grp::before{
-  left:calc(-1 * clamp(18px,4vw,40px));           /* the roll's padding: out to the frame line */
-  right:calc(-1 * clamp(18px,4vw,40px));
+  left:calc(-1 * var(--edge));
+  right:calc(-1 * var(--edge));
 }
 #production .grp h2{
   display:inline-grid;
@@ -1579,47 +1623,64 @@ dl.pairs .cols{
 #production .grp h2 > span{grid-column:2}
 
 /* ---- the rows ------------------------------------------------------------
-   the tag: a flex row so the level takes whatever width the label leaves;
-   the level opts out of baseline alignment, so the row's baseline is the
-   label's and the grid hangs the value on it */
+   the tag: a flex row so the leader takes whatever width the label
+   leaves; the leader opts out of baseline alignment, so the row's
+   baseline is the label's and the grid hangs the value on it */
 #production dl.pairs > dt{
   display:flex;align-items:baseline;justify-content:flex-end;
   min-width:0;
-  margin-left:calc(-1 * clamp(18px,4vw,40px));   /* the level starts on the frame line */
+  margin-left:calc(-1 * var(--edge));      /* the leader starts on the frame line */
   white-space:nowrap;
 }
-#production dl.pairs > dt::before{
-  content:"";
+#production .lvl{
+  display:block;
   flex:1 1 auto;
   align-self:flex-start;
-  margin:.64em clamp(10px,1.4vw,14px) 0 0;     /* the middle of the caps; the gap to the label */
+  margin:var(--lead-y) var(--lead-gap) 0 0;
   height:1px;
   min-width:24px;
-  /* the figure's liquidity line, 3 on 5 off, anchored right so a dash
+  /* the plate's liquidity line, 3 on 5 off, anchored right so a dash
      ends at the label */
   background:linear-gradient(90deg,transparent 0 5px,var(--line-3) 5px 8px) right center/8px 1px repeat-x;
+  pointer-events:none;
 }
-/* the draw: the label only fades (its level does the moving); the level
-   is hidden by scale, never by opacity, and takes the row's own delay,
-   so the level of the fourth credit waits with the fourth credit */
-.js #production dl.pairs > dt.reveal{transform:none}
-.js #production dl.pairs > dt.reveal::before{
-  transform:scaleX(0);
-  transform-origin:left center;
-  transition:transform calc(var(--d-reveal) * 1.2) var(--e-reveal);
-  transition-delay:inherit;
-}
-.js #production dl.pairs > dt.reveal.is-in::before{transform:none}
+#production .tag{display:block;min-width:0}
 
-/* the address: the mono, at caption size, in the secondary grey (it is a
-   link, so a step above a label), on the value's baseline after the word */
+/* the value: a flex row on the baseline, so the word's mask (a block)
+   keeps the baseline for the grid and the address can sit after it */
+#production dl.pairs > dd{
+  display:flex;align-items:baseline;
+  min-width:0;
+}
+#production dl.pairs > dd .mask{display:block;flex:0 1 auto;min-width:0}
+#production .val{display:inline-block}
+
+/* ---- the sequence ---------------------------------------------------------
+   the leader: off the edge fast, the settle long (expo-out); the wipe's
+   clip stays put so the dashes are revealed, not scaled */
+.js #production .lvl.reveal.wipe{transition:clip-path 1.15s var(--e-out)}
+/* the label: opacity only -- its leader does the moving -- on a curve
+   that starts slow, so it surfaces as the line arrives */
+.js #production .tag.reveal{transform:none;transition:opacity 1.05s var(--e-inout)}
+/* the value: the mask rise of base.css, a shade quicker than a title line */
+.js #production .mask > .val.reveal{transition-duration:1.2s}
+/* the address: in place, and slowly, so it is not there before the word is */
+.js #production .addr.reveal{transform:none;transition:opacity 1.3s var(--e-inout)}
+
+/* ---- the address ------------------------------------------------------------
+   the mono, at the label size (a size under the caption's: next to a word
+   at credit size the mono's tall x-height reads a step larger than it
+   is), in the secondary grey (a link, so a step above a label), after
+   the word and a hair below its baseline -- hung, the way a role hangs
+   under a name */
 #production .addr{
   position:relative;
-  display:inline-block;
-  vertical-align:baseline;
-  margin:0 0 0 clamp(12px,1.6vw,18px);
+  top:.3em;
+  flex:0 0 auto;
+  display:block;
+  margin:0 0 0 clamp(11px,1.4vw,16px);
   font-family:var(--f-mono);
-  font-size:var(--t-caption);
+  font-size:var(--t-micro);
   font-variant-numeric:tabular-nums;
   letter-spacing:var(--trk-mono);
   line-height:1.6;
@@ -1630,6 +1691,7 @@ dl.pairs .cols{
   position:relative;z-index:1;
   color:inherit;
   text-decoration-color:var(--line-2);
+  text-underline-offset:.28em;
 }
 #production .addr a:hover,#production .addr a:focus-visible{color:var(--gold-hi);text-decoration-color:var(--gold)}
 /* the band: a gap filled, a little wider than the address, between two hairlines */
@@ -1651,8 +1713,8 @@ dl.pairs .cols{
 /* ---- a phone: the same object, the tag leading -------------------------
    The title card's rule ends 6% in from the column on a phone (base.css);
    the ledger sits between those two verticals, so the labels start where
-   the rule starts and the levels end where it ends. Label left in the
-   caps, the level out of it to the right, a dash starting at the label,
+   the rule starts and the leaders end where it ends. Label left in the
+   caps, the leader out of it to the right, a dash starting at the label,
    ending on a short vertical hairline; the value on the next line, on the
    label's left edge; the rows set by air. */
 @media (max-width:620px){
@@ -1665,27 +1727,29 @@ dl.pairs .cols{
     text-align:left;
   }
   #production dl.pairs > dt:first-of-type{padding-top:22px}
-  #production dl.pairs > dt::before{
+  #production .tag{order:1;flex:0 0 auto}
+  #production .lvl{
     order:2;
-    margin:.64em 0 0 clamp(10px,3vw,14px);
+    margin:var(--lead-y) 0 0 clamp(10px,3vw,14px);
     background:linear-gradient(90deg,var(--line-3) 0 3px,transparent 3px 8px) left center/8px 1px repeat-x;
   }
+  /* the strip's edge, standing before the line reaches it */
   #production dl.pairs > dt::after{
     content:"";
     order:3;
     flex:0 0 auto;
     align-self:flex-start;
     width:1px;height:9px;
-    margin-top:calc(.64em - 4px);
+    margin-top:calc(var(--lead-y) - 4px);
     background:var(--line-3);
   }
-  #production dl.pairs > dd{text-align:left;margin-top:5px}
-  #production .addr{margin-left:12px}
+  #production dl.pairs > dd{justify-content:flex-start;text-align:left;margin-top:5px}
+  #production .addr{margin-left:10px}
   #production .addr::before{left:-4px;right:-4px}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .js #production dl.pairs > dt.reveal::before{transform:none;transition:none}
+  .js #production .lvl.reveal.wipe,.js #production .tag.reveal,.js #production .addr.reveal{transition:none}
   #production .addr::before{transition:none}
 }
 
@@ -1723,7 +1787,7 @@ dl.pairs .cols{
    left edge, the level runs from the numeral to the edge of the screen,
    and the quote is set left with a rag and no break at a hyphen. */
 #founder{
-  --n:clamp(72px,9.4vw,132px);              /* the numeral: a size the scale lacks   */
+  --n:clamp(84px,9.4vw,132px);              /* the numeral: a size the scale lacks   */
   --edge:clamp(18px,4vw,40px);              /* the roll's padding: to the strip edge */
 }
 
@@ -1734,7 +1798,7 @@ dl.pairs .cols{
   grid-template-columns:auto minmax(0,1fr);
   column-gap:0;                              /* the plus's right edge is the column line */
   align-items:baseline;
-  margin:clamp(10px,1.5vw,20px) 0 0;
+  margin:0;                                  /* the group title's own margin is the air */
   text-align:left;
 }
 /* the tag: a flex row so its baseline is the numeral's (the mask keeps
@@ -1853,56 +1917,68 @@ dl.pairs .cols{
 
 /* ---- a phone: the same construction, on the left edge ------------------ */
 @media (max-width:620px){
-  #founder .ten{margin-top:8px}
   #founder .word{margin-top:clamp(36px,9vw,48px)}
   #founder .word blockquote{max-width:none;line-height:1.28}
 }
 
 /* ---- section:education ---- */
-/* ===== education: the syllabus as ten levels =====
-   The ten topics set as an index, in the vocabulary of the opening figure
-   and on the axis of the reel. Each row is a price level: the count in
-   mono at the left, the way a scale is labelled; a hairline of the gold
-   running from it to the term (so the ten levels have ten lengths, and
-   the block reads as a schema of levels and tags, not as a list with
-   dashes); the term ending on the gutter where every label of the reel
-   ends; and on the value side, at note size, the gloss -- what the word
-   means, in dictionary voice, never what the course does with it. The
-   term is the credit (value size), the gloss its sub-line; the number is
-   the only thing counted, so the only mono.
+/* ===== education: the syllabus as a scale and a plate =====
+   Two things on the reel's two lines. On the strip's left edge, in the
+   label column, the index: ten terms one under the other, the count in
+   mono at the left the way a price scale is labelled, the term in the
+   serif a size under the credits -- a scale, not ten credits. On the axis,
+   in the value column, the plate: the one term that is lit, drawn as a
+   schema in the spread's own vocabulary (one hairline path of the gold, a
+   zone at seven percent with its two edges, a dashed level 3 on 5 off;
+   no price, no day, no outcome, and the corner says so), the term under
+   it at statement size -- the one large thing in the section -- and the
+   gloss under that in the serif at body size: what the word means, in
+   dictionary voice, never what the course does with it.
 
-   Point at a row and it becomes a zone: the fair value gap band of the
-   figure, the gold at seven percent with a hairline along its top and its
-   bottom, its level lit in the full gold, the term in the paper, the
-   gloss brought forward to the ink; the other rows recede a step, so the
-   one you read is the one in the light. Nothing moves and nothing is
-   reserved, so nothing on the page shifts when you point. Focus does the
-   same for a keyboard, and the band is the ring.
+   The lit row is the fair value gap band of the figure: the gold at seven
+   percent with a hairline along its top and its bottom, the count in the
+   gold, the term in the paper; the other rows stand a step back while one
+   is pointed at. Point at a row (or tab to it, or tap it) and the band
+   moves to it and the plate redraws for it: the zones draw out of the
+   left, the line draws itself, the words come up under it. Leave the
+   index and the plate returns to the last row chosen. Nothing moves in
+   the index itself, so nothing on the page shifts.
 
-   On arrival the rows settle in sequence and each level draws itself
-   from its number to its term (transition-delay:inherit takes the row's
-   own slot in the stagger). Under the index the figure's liquidity line
-   draws itself; the call sits below it. On a phone the level is a short
-   tick and the gloss hangs under the term on the term's left edge.
-   Schema only: the count is the only number, and it counts topics. */
+   Arrival: the plate develops from the first beat of the stagger (its
+   line draws over the slow settle, as the spread's does) while the rows
+   settle in one after another. The close hangs on the strip's left edge
+   with the index: one line at credit size and the page's one call under
+   it, on the same line, with nothing drawn above them.
+
+   Content and decoration: the index is the content (the gloss is in every
+   row; with a script on a desk it is read by a screen reader and shown on
+   the plate, on a phone it stays under its term). The pane is decoration,
+   aria-hidden; its figures that are not lit are not rendered. Without a
+   script the first plate stands and every gloss stays in its row. */
 #education .syllabus{
-  --bleed:12px;                               /* the band past the text     */
-  --band:rgba(215,179,100,.07);               /* the fair value gap band    */
+  --bleed:12px;                               /* the band and the plate past the text */
+  --band:rgba(215,179,100,.07);               /* the fair value gap band              */
   --band-edge:rgba(215,179,100,.36);
+  --n:24px;                                   /* the count's column                   */
+  --g:clamp(10px,1.4vw,14px);                 /* count to term                        */
   position:relative;z-index:2;
-}
-#education .index{display:block;margin:clamp(6px,1.2vw,14px) 0 0}
-
-/* ---- a row: two columns on the reel's axis, baselines shared ---------- */
-#education .row{
-  --reveal-y:10px;                            /* a row settles, it does not travel */
-  position:relative;
   display:grid;
   grid-template-columns:var(--axis-l) var(--axis-r);
   column-gap:var(--axis-gap);
-  align-items:baseline;
+  align-items:start;
+  margin:clamp(6px,1.2vw,14px) 0 0;
+}
+#education .index{grid-column:1;grid-row:1;margin:0;min-width:0}
+#education .pane{grid-column:2;grid-row:1;margin:0;min-width:0;--reveal-y:14px}
+
+/* ---- the index: ten levels on a scale ----------------------------------- */
+#education .row{
+  --reveal-y:10px;                            /* a row settles, it does not travel */
+  position:relative;isolation:isolate;
+  display:block;
   margin:0 calc(-1 * var(--bleed));
-  padding:9px var(--bleed) 10px;
+  padding:7px var(--bleed) 8px;
+  cursor:default;
 }
 /* the band is a layer under the row, so its transition never touches the
    row's own (the reveal's) */
@@ -1913,24 +1989,17 @@ dl.pairs .cols{
   box-shadow:inset 0 1px 0 rgba(215,179,100,0),inset 0 -1px 0 rgba(215,179,100,0);
   transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out);
 }
-#education .row:focus-visible{outline:0}    /* the band is the ring */
-#education .row:hover::before,#education .row:focus-visible::before{
+#education .row.is-on::before{
   background:var(--band);
   box-shadow:inset 0 1px 0 var(--band-edge),inset 0 -1px 0 var(--band-edge);
 }
-
-/* the level: count, hairline, term */
+#education .row:focus-visible{outline-offset:3px}
 #education dt{
-  grid-column:1;
-  display:flex;align-items:baseline;
-  min-width:0;
-  margin:0;
-  font-family:var(--f-display);
-  font-size:var(--t-h3);
-  line-height:var(--lh-tight);
+  display:flex;align-items:baseline;gap:var(--g);
+  min-width:0;margin:0;
 }
 #education .num{
-  flex:0 0 auto;
+  flex:0 0 var(--n);
   font-family:var(--f-mono);
   font-size:var(--t-caption);
   font-weight:400;
@@ -1940,90 +2009,170 @@ dl.pairs .cols{
   color:var(--ink-4);
   transition:color var(--d) var(--e-out);
 }
-/* the hairline sits on the baseline (an empty box's baseline is its
-   bottom edge) and is lifted to the middle of the x-height */
-#education .lvl{
-  flex:1 1 auto;
-  min-width:14px;
-  height:1px;
-  margin:0 12px;
-  position:relative;top:-.24em;
-  background:var(--line-2);
-  transform-origin:left center;
-  transition:background-color var(--d) var(--e-out);
-}
 #education .term{
-  flex:0 1 auto;
-  min-width:0;
-  text-align:right;
+  flex:1 1 auto;min-width:0;
+  font-family:var(--f-display);
+  font-size:clamp(18px,1.55vw,22px);
   font-weight:400;
+  line-height:1.2;
   letter-spacing:-.006em;
-  color:var(--ink-1);
-  text-wrap:balance;
+  color:var(--ink-2);
+  text-wrap:pretty;
   transition:color var(--d) var(--e-out);
 }
-/* the gloss: the sub-line voice, on the value side */
+/* the gloss in the row: the sub-line voice, under the term on the term's
+   left edge (a phone, or no script) */
 #education dd{
-  grid-column:2;
-  margin:0;
-  min-width:0;
+  margin:3px 0 0 calc(var(--n) + var(--g));
   font-family:var(--f-display);
   font-size:var(--t-small);
   line-height:1.45;
   letter-spacing:.01em;
   color:var(--ink-3);
   text-wrap:pretty;
-  transition:color var(--d) var(--e-out);
 }
-
-/* ---- the lit row, and the others a step back ---------------------------- */
-#education .row:hover .num,#education .row:focus-visible .num{color:var(--ink-2)}
-#education .row:hover .lvl,#education .row:focus-visible .lvl{background:var(--gold)}
-#education .row:hover .term,#education .row:focus-visible .term{color:var(--paper)}
-#education .row:hover dd,#education .row:focus-visible dd{color:var(--ink-1)}
+#education .row.is-on .num{color:var(--gold)}
+#education .row.is-on .term{color:var(--paper)}
 @media (hover:hover){
-  #education .index:hover .row:not(:hover):not(:focus-visible) .term{color:var(--ink-3)}
-  #education .index:hover .row:not(:hover):not(:focus-visible) dd{color:var(--ink-4)}
+  #education .index:hover .row:not(.is-on) .term{color:var(--ink-3)}
 }
 
-/* ---- the level draws itself in the row's own slot of the stagger -------- */
-.js #education .row .lvl{transform:scaleX(0)}
-.js #education .row.is-in .lvl{
-  transform:none;
-  transition:transform var(--d-reveal) var(--e-reveal),background-color var(--d) var(--e-out);
-  transition-delay:inherit;
-}
-
-/* ---- the liquidity line under the index ---------------------------------
-   on the content's own edges, with the group rule above it; only the band
-   (a zone, and only while pointed at) runs past them */
-#education .level{
+/* ---- the plate: one figure at a time ------------------------------------ */
+#education .fig{display:none;margin:0}
+#education .fig.is-on{display:block}
+/* a mat with a hairline along its top and its bottom, none down its sides,
+   as the spread's; it runs a little past the column, the way a level is
+   drawn forward */
+#education .plate{
   position:relative;
-  height:1px;
-  margin:clamp(18px,2.6vw,28px) 0 0;
+  aspect-ratio:300/130;
+  margin:0 calc(-1 * var(--bleed)) 0 0;
+  background:var(--panel-lo);
+  border-top:1px solid var(--line-3);
+  border-bottom:1px solid var(--line-3);
 }
-#education .level__line{
+#education .plate svg{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#education .plate svg *{vector-effect:non-scaling-stroke}
+#education .ln{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:round}
+#education .ln--b{stroke-opacity:.42}
+#education .zn{fill:var(--gold);fill-opacity:.07;stroke:var(--gold);stroke-opacity:.36;stroke-width:1}
+#education .zn--lo{fill-opacity:.03;stroke-opacity:.16}
+#education .lq{fill:none;stroke:var(--gold);stroke-opacity:.55;stroke-width:1;stroke-dasharray:3 5;stroke-linecap:butt}
+#education .hl{fill:none;stroke:var(--gold);stroke-opacity:.3;stroke-width:1}
+#education .hl--lo{stroke-opacity:.16}
+#education .nw{fill:none;stroke:var(--gold);stroke-opacity:.22;stroke-width:1}
+#education .br{fill:none;stroke:var(--gold);stroke-opacity:.34;stroke-width:1;stroke-dasharray:2 4;stroke-linecap:butt}
+/* the corner: the figure's number in mono and the one word that keeps the
+   drawing honest, in the label voice, where the spread hangs its tags */
+#education .tag{
+  position:absolute;top:9px;right:12px;
+  display:flex;align-items:baseline;gap:.9em;
+  font-family:var(--f-display);
+  font-style:normal;
+  font-size:var(--t-nano);
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--ink-4);
+  white-space:nowrap;
+}
+#education .tag b{font-family:var(--f-mono);font-weight:400;letter-spacing:var(--trk-mono);font-variant-numeric:tabular-nums}
+/* the caption: the term at statement size, the gloss at body size, both
+   on the plate's left edge */
+#education .fig figcaption{margin:clamp(14px,2vw,20px) 0 0}
+#education .word{
   display:block;
-  position:absolute;inset:0;
-  background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,rgba(215,179,100,0) 3px 8px);
+  font-family:var(--f-display);
+  font-size:var(--t-h2);
+  font-weight:400;
+  line-height:1.08;
+  letter-spacing:-.012em;
+  color:var(--ink-1);
+  text-wrap:balance;
+}
+#education .gloss{
+  display:block;
+  margin-top:clamp(8px,1.2vw,12px);
+  max-width:36ch;
+  font-family:var(--f-display);
+  font-size:var(--t-body);
+  line-height:1.5;
+  color:var(--ink-2);
+  text-wrap:pretty;
+}
+
+/* ---- the plate draws itself: on arrival slowly, on a swap quickly ------ */
+@keyframes edu-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes edu-grow{from{transform:scaleX(0)}to{transform:none}}
+@keyframes edu-rise{from{transform:scaleY(0)}to{transform:none}}
+@keyframes edu-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.js #education .pane.is-in .fig.is-on .ln{
+  stroke-dasharray:1;
+  animation:edu-draw 1.7s var(--e-reveal) .15s both;
+}
+.js #education .pane.is-in .fig.is-on .zn,
+.js #education .pane.is-in .fig.is-on .lq,
+.js #education .pane.is-in .fig.is-on .hl,
+.js #education .pane.is-in .fig.is-on .br{
+  transform-box:fill-box;transform-origin:left center;
+  animation:edu-grow 1.3s var(--e-reveal) both;
+}
+.js #education .pane.is-in .fig.is-on .nw{
+  transform-box:fill-box;transform-origin:center top;
+  animation:edu-rise 1.1s var(--e-reveal) both;
+}
+.js #education .pane.is-live .fig.is-on{animation:edu-in .5s var(--e-reveal) both}
+.js #education .pane.is-live .fig.is-on .ln{animation-duration:1s;animation-delay:.05s}
+.js #education .pane.is-live .fig.is-on .zn,
+.js #education .pane.is-live .fig.is-on .lq,
+.js #education .pane.is-live .fig.is-on .hl,
+.js #education .pane.is-live .fig.is-on .br,
+.js #education .pane.is-live .fig.is-on .nw{animation-duration:.8s}
+
+/* ---- the close: one line and the call, on the strip's left edge --------- */
+#education .close{
+  position:relative;z-index:2;
+  margin:clamp(44px,6vw,72px) 0 0;
+  text-align:left;
+}
+#education .close__line{
+  margin:0;
+  max-width:30ch;
+  font-family:var(--f-display);
+  font-size:var(--t-h3);
+  font-weight:400;
+  line-height:1.3;
+  letter-spacing:-.006em;
+  color:var(--ink-1);
+  text-wrap:balance;
+}
+#education .close .cta{margin:clamp(18px,2.4vw,26px) 0 0}
+
+/* ---- a desk with a script: the gloss lives on the plate; in the row it
+   stays for a screen reader only -------------------------------------- */
+@media (min-width:621px){
+  .js #education .row dd{
+    position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+    overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
+  }
 }
 
 @media (prefers-reduced-motion:reduce){
-  .js #education .row .lvl{transform:none;transition:none}
-  #education .row::before,#education .num,#education .lvl,#education .term,#education dd{transition:none}
+  .js #education .pane .fig .ln{stroke-dasharray:none;animation:none}
+  .js #education .pane .fig .zn,.js #education .pane .fig .lq,.js #education .pane .fig .hl,
+  .js #education .pane .fig .br,.js #education .pane .fig .nw,.js #education .pane .fig{animation:none}
+  #education .row::before,#education .num,#education .term{transition:none}
 }
 
-/* ---- a phone: one column, the level a tick, the gloss under the term ---- */
+/* ---- a phone: the plate above the index, every gloss under its term,
+   everything on one left edge ------------------------------------------ */
 @media (max-width:620px){
-  #education .syllabus{--bleed:10px}
-  #education .index{--lead:calc(2ch + 10px + 14px + 10px)}
-  #education .row{display:block;padding:9px var(--bleed) 11px}
-  #education dt{align-items:baseline}
-  #education .num{flex:0 0 2ch}
-  #education .lvl{flex:0 0 14px;min-width:0;margin:0 10px}
-  #education .term{flex:1 1 auto;text-align:left;text-wrap:pretty}
-  #education dd{margin:3px 0 0 var(--lead)}
-  #education .level{margin-top:clamp(16px,4vw,24px)}
+  #education .syllabus{display:block;--bleed:10px}
+  #education .pane{margin:0 0 clamp(18px,5vw,26px)}
+  #education .plate{margin:0}
+  #education .fig figcaption{display:none}
+  #education .row{padding:8px var(--bleed) 9px}
+  #education .close{margin-top:clamp(36px,9vw,52px)}
 }
 
 /* ---- section:channels ---- */
@@ -3860,20 +4009,31 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <!-- section:production -->
 <section id="production">
   <div class="grp"><h2><span lang="nl">Productie</span><span lang="en">Production</span></h2></div>
-  <!-- four credits on the shared axis (base.css dl.pairs). production.css
-       draws each label as the tag at the end of a price level -- a dashed
-       hairline of the gold that runs to it from the strip's left edge, the
-       liquidity line of the opening plate used as a leader -- and sets the
-       one small fact that is a code, the server's address, in the mono on
-       the value's own baseline, so the four rows are four equal rows. On a
-       phone the tag leads: label left, the level runs out of it to the
-       column's edge and ends on a short rule, the value on the next line.
-       The value column is type only. motion.js tags the rows itself. -->
-  <dl class="pairs">
-    <dt>Community</dt><dd>Atlas Capital</dd>
-    <dt>Tagline</dt><dd><em><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></em></dd>
-    <dt><span lang="nl">Taal</span><span lang="en">Language</span></dt><dd><span lang="nl">Nederlands en Engels</span><span lang="en">Dutch and English</span></dd>
-    <dt><span lang="nl">Locatie</span><span lang="en">Location</span></dt><dd>Discord<small class="addr"><a href="https://discord.gg/78Ff2GuSfW">discord.gg/78Ff2GuSfW</a></small></dd>
+  <!-- four credits on the shared axis (base.css dl.pairs). Each row is
+       one composed level: a leader -- the dashed hairline of the opening
+       plate's liquidity line -- runs from the strip's left edge to the
+       label, which is the tag at its end; the value sits left of the axis
+       on the same baseline. The one small fact that is a code, the
+       server's address, hangs after the word in the mono, a size down and
+       a hair below the baseline, the way a role follows a name.
+
+       The reveal is authored here, not left to the auto-stagger: per row
+       the leader draws out of the frame (a wipe, so the dashes stay put),
+       the label surfaces at its end, and the value rises through its own
+       baseline out of a mask. Rows follow 110ms apart; the whole timeline
+       sits inside the scroll cap of motion.js. -->
+  <dl class="pairs" data-stagger="110">
+    <dt><i class="lvl reveal wipe" data-at="0" aria-hidden="true"></i><span class="tag reveal" data-at="70">Community</span></dt>
+    <dd><span class="mask"><span class="val reveal" data-at="150">Atlas Capital</span></span></dd>
+
+    <dt><i class="lvl reveal wipe" data-at="110" aria-hidden="true"></i><span class="tag reveal" data-at="180">Tagline</span></dt>
+    <dd><span class="mask"><span class="val reveal" data-at="260"><em><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></em></span></span></dd>
+
+    <dt><i class="lvl reveal wipe" data-at="220" aria-hidden="true"></i><span class="tag reveal" data-at="290"><span lang="nl">Taal</span><span lang="en">Language</span></span></dt>
+    <dd><span class="mask"><span class="val reveal" data-at="370"><span lang="nl">Nederlands en Engels</span><span lang="en">Dutch and English</span></span></span></dd>
+
+    <dt><i class="lvl reveal wipe" data-at="330" aria-hidden="true"></i><span class="tag reveal" data-at="400"><span lang="nl">Locatie</span><span lang="en">Location</span></span></dt>
+    <dd><span class="mask"><span class="val reveal" data-at="420">Discord</span></span><small class="addr reveal" data-at="420"><a href="https://discord.gg/78Ff2GuSfW">discord.gg/78Ff2GuSfW</a></small></dd>
   </dl>
 </section>
 <!-- /section:production -->

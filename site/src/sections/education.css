@@ -1,47 +1,60 @@
-/* ===== education: the syllabus as ten levels =====
-   The ten topics set as an index, in the vocabulary of the opening figure
-   and on the axis of the reel. Each row is a price level: the count in
-   mono at the left, the way a scale is labelled; a hairline of the gold
-   running from it to the term (so the ten levels have ten lengths, and
-   the block reads as a schema of levels and tags, not as a list with
-   dashes); the term ending on the gutter where every label of the reel
-   ends; and on the value side, at note size, the gloss -- what the word
-   means, in dictionary voice, never what the course does with it. The
-   term is the credit (value size), the gloss its sub-line; the number is
-   the only thing counted, so the only mono.
+/* ===== education: the syllabus as a scale and a plate =====
+   Two things on the reel's two lines. On the strip's left edge, in the
+   label column, the index: ten terms one under the other, the count in
+   mono at the left the way a price scale is labelled, the term in the
+   serif a size under the credits -- a scale, not ten credits. On the axis,
+   in the value column, the plate: the one term that is lit, drawn as a
+   schema in the spread's own vocabulary (one hairline path of the gold, a
+   zone at seven percent with its two edges, a dashed level 3 on 5 off;
+   no price, no day, no outcome, and the corner says so), the term under
+   it at statement size -- the one large thing in the section -- and the
+   gloss under that in the serif at body size: what the word means, in
+   dictionary voice, never what the course does with it.
 
-   Point at a row and it becomes a zone: the fair value gap band of the
-   figure, the gold at seven percent with a hairline along its top and its
-   bottom, its level lit in the full gold, the term in the paper, the
-   gloss brought forward to the ink; the other rows recede a step, so the
-   one you read is the one in the light. Nothing moves and nothing is
-   reserved, so nothing on the page shifts when you point. Focus does the
-   same for a keyboard, and the band is the ring.
+   The lit row is the fair value gap band of the figure: the gold at seven
+   percent with a hairline along its top and its bottom, the count in the
+   gold, the term in the paper; the other rows stand a step back while one
+   is pointed at. Point at a row (or tab to it, or tap it) and the band
+   moves to it and the plate redraws for it: the zones draw out of the
+   left, the line draws itself, the words come up under it. Leave the
+   index and the plate returns to the last row chosen. Nothing moves in
+   the index itself, so nothing on the page shifts.
 
-   On arrival the rows settle in sequence and each level draws itself
-   from its number to its term (transition-delay:inherit takes the row's
-   own slot in the stagger). Under the index the figure's liquidity line
-   draws itself; the call sits below it. On a phone the level is a short
-   tick and the gloss hangs under the term on the term's left edge.
-   Schema only: the count is the only number, and it counts topics. */
+   Arrival: the plate develops from the first beat of the stagger (its
+   line draws over the slow settle, as the spread's does) while the rows
+   settle in one after another. The close hangs on the strip's left edge
+   with the index: one line at credit size and the page's one call under
+   it, on the same line, with nothing drawn above them.
+
+   Content and decoration: the index is the content (the gloss is in every
+   row; with a script on a desk it is read by a screen reader and shown on
+   the plate, on a phone it stays under its term). The pane is decoration,
+   aria-hidden; its figures that are not lit are not rendered. Without a
+   script the first plate stands and every gloss stays in its row. */
 #education .syllabus{
-  --bleed:12px;                               /* the band past the text     */
-  --band:rgba(215,179,100,.07);               /* the fair value gap band    */
+  --bleed:12px;                               /* the band and the plate past the text */
+  --band:rgba(215,179,100,.07);               /* the fair value gap band              */
   --band-edge:rgba(215,179,100,.36);
+  --n:24px;                                   /* the count's column                   */
+  --g:clamp(10px,1.4vw,14px);                 /* count to term                        */
   position:relative;z-index:2;
-}
-#education .index{display:block;margin:clamp(6px,1.2vw,14px) 0 0}
-
-/* ---- a row: two columns on the reel's axis, baselines shared ---------- */
-#education .row{
-  --reveal-y:10px;                            /* a row settles, it does not travel */
-  position:relative;
   display:grid;
   grid-template-columns:var(--axis-l) var(--axis-r);
   column-gap:var(--axis-gap);
-  align-items:baseline;
+  align-items:start;
+  margin:clamp(6px,1.2vw,14px) 0 0;
+}
+#education .index{grid-column:1;grid-row:1;margin:0;min-width:0}
+#education .pane{grid-column:2;grid-row:1;margin:0;min-width:0;--reveal-y:14px}
+
+/* ---- the index: ten levels on a scale ----------------------------------- */
+#education .row{
+  --reveal-y:10px;                            /* a row settles, it does not travel */
+  position:relative;isolation:isolate;
+  display:block;
   margin:0 calc(-1 * var(--bleed));
-  padding:9px var(--bleed) 10px;
+  padding:7px var(--bleed) 8px;
+  cursor:default;
 }
 /* the band is a layer under the row, so its transition never touches the
    row's own (the reveal's) */
@@ -52,24 +65,17 @@
   box-shadow:inset 0 1px 0 rgba(215,179,100,0),inset 0 -1px 0 rgba(215,179,100,0);
   transition:background-color var(--d) var(--e-out),box-shadow var(--d) var(--e-out);
 }
-#education .row:focus-visible{outline:0}    /* the band is the ring */
-#education .row:hover::before,#education .row:focus-visible::before{
+#education .row.is-on::before{
   background:var(--band);
   box-shadow:inset 0 1px 0 var(--band-edge),inset 0 -1px 0 var(--band-edge);
 }
-
-/* the level: count, hairline, term */
+#education .row:focus-visible{outline-offset:3px}
 #education dt{
-  grid-column:1;
-  display:flex;align-items:baseline;
-  min-width:0;
-  margin:0;
-  font-family:var(--f-display);
-  font-size:var(--t-h3);
-  line-height:var(--lh-tight);
+  display:flex;align-items:baseline;gap:var(--g);
+  min-width:0;margin:0;
 }
 #education .num{
-  flex:0 0 auto;
+  flex:0 0 var(--n);
   font-family:var(--f-mono);
   font-size:var(--t-caption);
   font-weight:400;
@@ -79,88 +85,168 @@
   color:var(--ink-4);
   transition:color var(--d) var(--e-out);
 }
-/* the hairline sits on the baseline (an empty box's baseline is its
-   bottom edge) and is lifted to the middle of the x-height */
-#education .lvl{
-  flex:1 1 auto;
-  min-width:14px;
-  height:1px;
-  margin:0 12px;
-  position:relative;top:-.24em;
-  background:var(--line-2);
-  transform-origin:left center;
-  transition:background-color var(--d) var(--e-out);
-}
 #education .term{
-  flex:0 1 auto;
-  min-width:0;
-  text-align:right;
+  flex:1 1 auto;min-width:0;
+  font-family:var(--f-display);
+  font-size:clamp(18px,1.55vw,22px);
   font-weight:400;
+  line-height:1.2;
   letter-spacing:-.006em;
-  color:var(--ink-1);
-  text-wrap:balance;
+  color:var(--ink-2);
+  text-wrap:pretty;
   transition:color var(--d) var(--e-out);
 }
-/* the gloss: the sub-line voice, on the value side */
+/* the gloss in the row: the sub-line voice, under the term on the term's
+   left edge (a phone, or no script) */
 #education dd{
-  grid-column:2;
-  margin:0;
-  min-width:0;
+  margin:3px 0 0 calc(var(--n) + var(--g));
   font-family:var(--f-display);
   font-size:var(--t-small);
   line-height:1.45;
   letter-spacing:.01em;
   color:var(--ink-3);
   text-wrap:pretty;
-  transition:color var(--d) var(--e-out);
 }
-
-/* ---- the lit row, and the others a step back ---------------------------- */
-#education .row:hover .num,#education .row:focus-visible .num{color:var(--ink-2)}
-#education .row:hover .lvl,#education .row:focus-visible .lvl{background:var(--gold)}
-#education .row:hover .term,#education .row:focus-visible .term{color:var(--paper)}
-#education .row:hover dd,#education .row:focus-visible dd{color:var(--ink-1)}
+#education .row.is-on .num{color:var(--gold)}
+#education .row.is-on .term{color:var(--paper)}
 @media (hover:hover){
-  #education .index:hover .row:not(:hover):not(:focus-visible) .term{color:var(--ink-3)}
-  #education .index:hover .row:not(:hover):not(:focus-visible) dd{color:var(--ink-4)}
+  #education .index:hover .row:not(.is-on) .term{color:var(--ink-3)}
 }
 
-/* ---- the level draws itself in the row's own slot of the stagger -------- */
-.js #education .row .lvl{transform:scaleX(0)}
-.js #education .row.is-in .lvl{
-  transform:none;
-  transition:transform var(--d-reveal) var(--e-reveal),background-color var(--d) var(--e-out);
-  transition-delay:inherit;
-}
-
-/* ---- the liquidity line under the index ---------------------------------
-   on the content's own edges, with the group rule above it; only the band
-   (a zone, and only while pointed at) runs past them */
-#education .level{
+/* ---- the plate: one figure at a time ------------------------------------ */
+#education .fig{display:none;margin:0}
+#education .fig.is-on{display:block}
+/* a mat with a hairline along its top and its bottom, none down its sides,
+   as the spread's; it runs a little past the column, the way a level is
+   drawn forward */
+#education .plate{
   position:relative;
-  height:1px;
-  margin:clamp(18px,2.6vw,28px) 0 0;
+  aspect-ratio:300/130;
+  margin:0 calc(-1 * var(--bleed)) 0 0;
+  background:var(--panel-lo);
+  border-top:1px solid var(--line-3);
+  border-bottom:1px solid var(--line-3);
 }
-#education .level__line{
+#education .plate svg{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#education .plate svg *{vector-effect:non-scaling-stroke}
+#education .ln{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:round}
+#education .ln--b{stroke-opacity:.42}
+#education .zn{fill:var(--gold);fill-opacity:.07;stroke:var(--gold);stroke-opacity:.36;stroke-width:1}
+#education .zn--lo{fill-opacity:.03;stroke-opacity:.16}
+#education .lq{fill:none;stroke:var(--gold);stroke-opacity:.55;stroke-width:1;stroke-dasharray:3 5;stroke-linecap:butt}
+#education .hl{fill:none;stroke:var(--gold);stroke-opacity:.3;stroke-width:1}
+#education .hl--lo{stroke-opacity:.16}
+#education .nw{fill:none;stroke:var(--gold);stroke-opacity:.22;stroke-width:1}
+#education .br{fill:none;stroke:var(--gold);stroke-opacity:.34;stroke-width:1;stroke-dasharray:2 4;stroke-linecap:butt}
+/* the corner: the figure's number in mono and the one word that keeps the
+   drawing honest, in the label voice, where the spread hangs its tags */
+#education .tag{
+  position:absolute;top:9px;right:12px;
+  display:flex;align-items:baseline;gap:.9em;
+  font-family:var(--f-display);
+  font-style:normal;
+  font-size:var(--t-nano);
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--ink-4);
+  white-space:nowrap;
+}
+#education .tag b{font-family:var(--f-mono);font-weight:400;letter-spacing:var(--trk-mono);font-variant-numeric:tabular-nums}
+/* the caption: the term at statement size, the gloss at body size, both
+   on the plate's left edge */
+#education .fig figcaption{margin:clamp(14px,2vw,20px) 0 0}
+#education .word{
   display:block;
-  position:absolute;inset:0;
-  background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,rgba(215,179,100,0) 3px 8px);
+  font-family:var(--f-display);
+  font-size:var(--t-h2);
+  font-weight:400;
+  line-height:1.08;
+  letter-spacing:-.012em;
+  color:var(--ink-1);
+  text-wrap:balance;
+}
+#education .gloss{
+  display:block;
+  margin-top:clamp(8px,1.2vw,12px);
+  max-width:36ch;
+  font-family:var(--f-display);
+  font-size:var(--t-body);
+  line-height:1.5;
+  color:var(--ink-2);
+  text-wrap:pretty;
+}
+
+/* ---- the plate draws itself: on arrival slowly, on a swap quickly ------ */
+@keyframes edu-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes edu-grow{from{transform:scaleX(0)}to{transform:none}}
+@keyframes edu-rise{from{transform:scaleY(0)}to{transform:none}}
+@keyframes edu-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.js #education .pane.is-in .fig.is-on .ln{
+  stroke-dasharray:1;
+  animation:edu-draw 1.7s var(--e-reveal) .15s both;
+}
+.js #education .pane.is-in .fig.is-on .zn,
+.js #education .pane.is-in .fig.is-on .lq,
+.js #education .pane.is-in .fig.is-on .hl,
+.js #education .pane.is-in .fig.is-on .br{
+  transform-box:fill-box;transform-origin:left center;
+  animation:edu-grow 1.3s var(--e-reveal) both;
+}
+.js #education .pane.is-in .fig.is-on .nw{
+  transform-box:fill-box;transform-origin:center top;
+  animation:edu-rise 1.1s var(--e-reveal) both;
+}
+.js #education .pane.is-live .fig.is-on{animation:edu-in .5s var(--e-reveal) both}
+.js #education .pane.is-live .fig.is-on .ln{animation-duration:1s;animation-delay:.05s}
+.js #education .pane.is-live .fig.is-on .zn,
+.js #education .pane.is-live .fig.is-on .lq,
+.js #education .pane.is-live .fig.is-on .hl,
+.js #education .pane.is-live .fig.is-on .br,
+.js #education .pane.is-live .fig.is-on .nw{animation-duration:.8s}
+
+/* ---- the close: one line and the call, on the strip's left edge --------- */
+#education .close{
+  position:relative;z-index:2;
+  margin:clamp(44px,6vw,72px) 0 0;
+  text-align:left;
+}
+#education .close__line{
+  margin:0;
+  max-width:30ch;
+  font-family:var(--f-display);
+  font-size:var(--t-h3);
+  font-weight:400;
+  line-height:1.3;
+  letter-spacing:-.006em;
+  color:var(--ink-1);
+  text-wrap:balance;
+}
+#education .close .cta{margin:clamp(18px,2.4vw,26px) 0 0}
+
+/* ---- a desk with a script: the gloss lives on the plate; in the row it
+   stays for a screen reader only -------------------------------------- */
+@media (min-width:621px){
+  .js #education .row dd{
+    position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+    overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
+  }
 }
 
 @media (prefers-reduced-motion:reduce){
-  .js #education .row .lvl{transform:none;transition:none}
-  #education .row::before,#education .num,#education .lvl,#education .term,#education dd{transition:none}
+  .js #education .pane .fig .ln{stroke-dasharray:none;animation:none}
+  .js #education .pane .fig .zn,.js #education .pane .fig .lq,.js #education .pane .fig .hl,
+  .js #education .pane .fig .br,.js #education .pane .fig .nw,.js #education .pane .fig{animation:none}
+  #education .row::before,#education .num,#education .term{transition:none}
 }
 
-/* ---- a phone: one column, the level a tick, the gloss under the term ---- */
+/* ---- a phone: the plate above the index, every gloss under its term,
+   everything on one left edge ------------------------------------------ */
 @media (max-width:620px){
-  #education .syllabus{--bleed:10px}
-  #education .index{--lead:calc(2ch + 10px + 14px + 10px)}
-  #education .row{display:block;padding:9px var(--bleed) 11px}
-  #education dt{align-items:baseline}
-  #education .num{flex:0 0 2ch}
-  #education .lvl{flex:0 0 14px;min-width:0;margin:0 10px}
-  #education .term{flex:1 1 auto;text-align:left;text-wrap:pretty}
-  #education dd{margin:3px 0 0 var(--lead)}
-  #education .level{margin-top:clamp(16px,4vw,24px)}
+  #education .syllabus{display:block;--bleed:10px}
+  #education .pane{margin:0 0 clamp(18px,5vw,26px)}
+  #education .plate{margin:0}
+  #education .fig figcaption{display:none}
+  #education .row{padding:8px var(--bleed) 9px}
+  #education .close{margin-top:clamp(36px,9vw,52px)}
 }
