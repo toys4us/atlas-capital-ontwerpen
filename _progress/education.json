@@ -1,8 +1,24 @@
 {
  "id": "education",
  "title": "Education",
- "wave": 0,
- "round": 0,
- "status": "queued",
- "history": []
+ "wave": 1,
+ "round": 1,
+ "status": "win",
+ "history": [
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.5,
+   "score_ref": 5.5,
+   "wowed": false,
+   "gap": "The section is a well-set table of contents, not a designed moment: ten identical rows of right-aligned serif + hairline + muted caption, with the entire right third of the container (from ~975px to the 1100px rule) left dead and the CTA shrunk to a 12px smallcap at the bottom. At the bar, the ten terms would earn one typographic event — a single term set at display scale, a hover state that swaps in a definition or a chart glyph, or the captions pulled out to the right margin so the row spans the full measure — and the \"Kom erbij\" CTA would carry the weight of the section's only action instead of hiding under a dashed ticket-rule cliché. On mobile the centred CTA also breaks the strict left axis every row has established.",
+   "motion": "Restrained section-level fades and a soft rise as the block enters; no per-row stagger, so the ten-item list arrives as one slab rather than a cadence.",
+   "verdict": "A wins on craft: its hairlines, numerals, scale contrast and colour restraint are disciplined, though it is a handsome index rather than a section anyone will remember. B has the more distinctive world and the better photography, but a Site of the Day cannot ship with unreadable body copy, a strike-through nav and word-spacing bugs from its own animation.",
+   "confidence": 0.72,
+   "note": "Rebuilt the syllabus as ten price levels on the reel's shared axis (--axis-l/--axis-r): mono count at the left like a scale label, a hairline level of the gold running to the term, the term ending on the gutter where every reel label ends, the gloss in the value column. One row per topic (dropped the hollow 5+5 grid with reserved empty gloss lines).\nGlosses are visible at rest (ink-3) — the hero links here with \"bekijk eerst de tien onderwerpen\", and ten bare words left the section hollow; hover/focus brings one forward: the row becomes the FVG band (gold .07, edges .36), its level lights",
+   "timestamp": "2026-09-05T21:16:10+02:00"
+  }
+ ]
 }

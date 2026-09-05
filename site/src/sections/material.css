@@ -1,34 +1,38 @@
 /* ===== material: the plates =====
-   Five exhibits on one wall, each the width of the strip, one under the
-   other, so a chart is read the way a plate in a book is: alone, at the
-   size it needs. Every picture is the founder's own annotated screenshot
-   and the lightbox opens the file untouched; on the wall it is printed as
-   a plate, and the plate is what makes seven screenshots one set:
+   Five exhibits on one wall, one under the other, each the width of the
+   strip, so a chart is read the way a plate in a book is: alone, at the
+   size it needs. Every plate is a faithful trace of one of the founder's
+   own annotated charts -- the candles read off the file pixel by pixel,
+   the zones, levels, lines and labels measured on it -- and the file
+   itself opens untouched in the lightbox. The trace is what makes seven
+   screenshots one set:
      - one frame: a hairline of the gold with a narrow mat inside it
-     - one height per row: a single is 2:1, a pair is two squares, and the
-       chart is letterboxed on the mat with nothing cropped
-     - one surface: the mat is the charts' own floor -- #0f0f0f in every
-       file, measured -- so the box and the picture never show a seam
-     - one tone: the colour is held back until the plate is pointed at,
-       the way the certificates are grey until pointed at
-     - the platform's mark under the two SMT charts is covered with that
-       same floor; nothing in a chart is redrawn or added
+     - one height per row: a single is 2:1, a pair is two squares, and
+       every row of the wall is the same height
+     - one ink for what the founder drew: the zones, the levels, the
+       lines and their labels in the gold of the opening spread (a zone
+       is a hairline box at seven percent, a level is dashed 3 on 5 off)
+     - two greys for the price: up candles in the light ink, down candles
+       in the label grey, so the price is the ground and the teaching is
+       the accent
    The label under a plate is a museum label: the figure number in mono,
    the title in the label voice, and from the title a dashed level runs to
    the plate's right edge -- the liquidity line of the opening schema, same
-   dash, so the numbers of the wall sit on levels. The note is the serif,
-   under the title, on the title's column line.
+   dash -- with the plate's provenance tagged at its end the way a chart
+   tags a level. The note is the serif, under the title, on the title's
+   column line.
    .roll::before is the strip's edge, so the wall sits above it (z-index). */
-#material{--mat:#0f0f0f;--inset:clamp(6px,1vw,10px)}
+#material{--mat:var(--panel-lo);--inset:clamp(8px,1.2vw,12px)}
 #material .lesson-lede{margin-bottom:clamp(10px,1.4vw,14px)}
-#material .plates-hint{
+#material .wall__hint{
   position:relative;z-index:2;
   margin:0 0 clamp(30px,4.4vw,48px);
   text-align:center;
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
   color:var(--ink-5);
+  text-wrap:balance;
 }
-#material .plates{
+#material .wall{
   position:relative;z-index:2;
   display:grid;gap:clamp(40px,5.6vw,68px);
 }
@@ -41,56 +45,106 @@
 #material .plate--pair .tile{grid-column:auto}
 #material .plate--pair .tile + .tile{border-left:0}
 
-/* the frame: a button, since a tap opens the original. Its hover
-   transition waits until the reveal has run: an id-scoped transition
-   would outrank the .wipe's own (base.css), and the plate would snap on
-   instead of printing on. motion.js drops .reveal when the print is done. */
+/* the frame: a link to the file, so the original is one tap away with or
+   without a script (with one, the tap opens the lightbox instead). Its
+   hover transition waits until the reveal has run: an id-scoped
+   transition would outrank the .wipe's own (base.css), and the plate
+   would snap on instead of printing on. motion.js drops .reveal when the
+   print is done. */
 #material .tile{
   display:block;width:100%;margin:0;padding:var(--inset);
   border:1px solid var(--line-2);
   background:var(--mat);
+  color:inherit;
+  text-decoration:none;
   cursor:zoom-in;
 }
 #material .tile:not(.reveal){transition:border-color var(--d) var(--e-out)}
-#material .pic{
+#material .frame{
   display:block;position:relative;width:100%;
   aspect-ratio:2/1;
-  overflow:hidden;
+  container-type:inline-size;               /* the tags size from the frame */
 }
-#material .plate--pair .pic{aspect-ratio:1/1}
-#material .pic img{
-  display:block;width:100%;height:100%;
-  object-fit:contain;
-  filter:saturate(.42) brightness(.96);
-  transition:filter var(--d-slow) var(--e-out);
-}
-/* the platform's mark: a patch of the floor over it. The two SMT charts
-   sit in squares by contain, so the patch is placed in the square:
-     01.png 780x624 paints 80.0% tall from 10.0% down; the mark is at
-            x 417-455, y 555-589 of the file (measured), a pixel added
-     02.png 741x675 paints 91.1% tall from  4.5% down; the mark is at
-            x 383-421, y 571-605
-   The sellside line just above each (y 551 / 554) is untouched. */
-#material .pic::after{content:"";position:absolute;display:none;background:var(--mat)}
-#material .pic--wm-a::after{display:block;left:53.2%;top:80.9%;width:5.6%;height:5.1%}
-#material .pic--wm-b::after{display:block;left:51.4%;top:81.2%;width:5.8%;height:5.3%}
+#material .plate--pair .frame{aspect-ratio:1/1}
 
-/* pointed at: the frame warms, the chart takes its colour back */
+/* the figure: the file's pixel grid is the viewBox, stretched to the
+   frame (preserveAspectRatio none) with every stroke held at one pixel;
+   the candle bodies are geometry, so they widen with the plate as the
+   file's would */
+#material .fig{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#material .fig *{vector-effect:non-scaling-stroke}
+#material .fig__wick{fill:none;stroke-width:1;stroke-linecap:butt}
+#material .fig__wick--up{stroke:var(--ink-2);stroke-opacity:.62}
+#material .fig__wick--dn{stroke:var(--ink-4);stroke-opacity:.8}
+#material .fig__body{stroke:none}
+#material .fig__body--up{fill:var(--ink-2);fill-opacity:.92}
+#material .fig__body--dn{fill:var(--ink-4)}
+/* what the founder drew, in the one gold */
+#material .fig__zone{fill:var(--gold);fill-opacity:.07;stroke:var(--gold);stroke-opacity:.36;stroke-width:1;stroke-linejoin:miter}
+#material .fig__zone--obx{fill-opacity:.035;stroke-opacity:.18}
+#material .fig__zone--red{fill-opacity:.05}
+#material .fig__level{stroke:var(--gold);stroke-width:1;stroke-linecap:butt}
+#material .fig__level--liq,#material .fig__level--eqh,#material .fig__level--msb{stroke-dasharray:3 5;stroke-opacity:.6}
+#material .fig__level--grey{stroke-opacity:.22}
+#material .fig__level--red,#material .fig__level--cyan{stroke-opacity:.34}
+#material .fig__dash{stroke:var(--gold);stroke-width:1;stroke-dasharray:2 4;stroke-opacity:.4}
+#material .fig__line{stroke:var(--gold);stroke-width:1;stroke-linecap:round;stroke-opacity:.85}
+#material .fig__line--dash{stroke-dasharray:3 5;stroke-opacity:.5;stroke-linecap:butt}
+
+/* the founder's labels, in the page's label voice, placed in the file's
+   own percentages so they stay with their zones at every width; what is
+   counted (the fibonacci ratios) is mono. They scale a little with the
+   plate so a phone's plate is not all label. */
+#material .plate__tag{
+  position:absolute;
+  display:block;
+  transform:translateY(-50%);
+  font-family:var(--f-display);
+  font-style:normal;
+  font-size:clamp(8px,1.6cqw,var(--t-nano));
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--ink-3);
+  white-space:nowrap;
+  pointer-events:none;
+  text-shadow:0 0 3px var(--mat),0 0 2px var(--mat);
+}
+#material .plate--pair .plate__tag{font-size:clamp(8px,2.4cqw,var(--t-nano))}
+#material .plate__tag--middle{transform:translate(-50%,-50%)}
+#material .plate__tag--end{transform:translate(-100%,-50%)}
+#material .plate__tag--num{
+  font-family:var(--f-mono);
+  font-size:clamp(8px,1.3cqw,var(--t-nano));
+  letter-spacing:var(--trk-mono);
+  text-transform:none;
+  color:var(--ink-4);
+}
+#material .plate__tag--trend{transform:translate(-50%,-50%) rotate(18deg)}
+/* the founder's own labels in the gold of the line they name */
+#material .plate__tag--liq,#material .plate__tag--eqh,#material .plate__tag--smt,#material .plate__tag--trend{color:var(--gold);opacity:.85}
+
+/* pointed at: the frame warms, the ink of the annotations comes up */
+#material .tile .fig__zone,#material .tile .fig__level,#material .tile .fig__line,#material .tile .plate__tag{transition:opacity var(--d) var(--e-out),fill-opacity var(--d) var(--e-out),stroke-opacity var(--d) var(--e-out)}
 @media (hover:hover){
   #material .plate:hover .tile{border-color:var(--line-4)}
-  #material .plate:hover .pic img{filter:none}
+  #material .plate:hover .fig__zone{fill-opacity:.11;stroke-opacity:.55}
+  #material .plate:hover .fig__level--liq,#material .plate:hover .fig__level--eqh,#material .plate:hover .fig__level--msb{stroke-opacity:.9}
+  #material .plate:hover .plate__tag--liq,#material .plate:hover .plate__tag--eqh,#material .plate:hover .plate__tag--smt,#material .plate:hover .plate__tag--trend{opacity:1}
+  #material .plate:hover .plate__tag{color:var(--ink-2)}
+  #material .plate:hover .plate__tag--liq,#material .plate:hover .plate__tag--eqh,#material .plate:hover .plate__tag--smt,#material .plate:hover .plate__tag--trend{color:var(--gold-hi)}
+  #material .plate:hover figcaption > b{color:var(--gold)}
 }
 #material .tile:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
-#material .tile:focus-visible .pic img{filter:none}
 
-/* the label: a grid, so the same four pieces -- number, title, level,
-   note -- can sit two ways. On a desk: the number, the title and the
-   level on one row, the note under the title on the title's column line.
-   On a phone (below): the number and the level on one row, the title and
-   the note under them, flush with the plate, so a two-line title never
-   leaves a stub of level beside it. */
+/* the label: a grid, so the same five pieces -- number, title, level,
+   provenance, note -- can sit two ways. On a desk: the number, the title,
+   the level and the provenance tag on one row, the note under the title
+   on the title's column line. On a phone (below): the number, the level
+   and the tag on one row, the title and the note under them, flush with
+   the plate, so a two-line title never leaves a stub of level beside it. */
 #material .plate figcaption{
-  display:grid;grid-template-columns:auto auto minmax(32px,1fr);
+  display:grid;grid-template-columns:auto auto minmax(32px,1fr) auto;
   column-gap:clamp(12px,1.8vw,20px);
   align-items:baseline;
   margin-top:clamp(12px,1.6vw,16px);
@@ -101,6 +155,7 @@
   font-family:var(--f-mono);font-weight:400;font-size:var(--t-caption);
   letter-spacing:var(--trk-mono);
   color:var(--ink-4);
+  transition:color var(--d) var(--e-out);
 }
 #material .plate__title{
   grid-column:2;grid-row:1;min-width:0;
@@ -109,8 +164,8 @@
   color:var(--ink-1);
   text-wrap:balance;
 }
-/* the level: from the title to the plate's edge, the dash of the hero's
-   liquidity lines (3 on, 5 off), lifted to the middle of the caps */
+/* the level: from the title to the tag, the dash of the hero's liquidity
+   lines (3 on, 5 off), lifted to the middle of the caps */
 #material .plate__level{
   grid-column:3;grid-row:1;
   display:block;height:1px;
@@ -122,6 +177,14 @@
   transition:opacity var(--d) var(--e-out);
 }
 @media (hover:hover){ #material .plate:hover .plate__level{opacity:.9} }
+/* the provenance: tagged at the level's end, where a chart tags a level */
+#material .plate__after{
+  grid-column:4;grid-row:1;
+  font-size:var(--t-nano);letter-spacing:var(--trk-caps);
+  text-transform:uppercase;line-height:1.5;
+  color:var(--ink-5);
+  white-space:nowrap;
+}
 #material .plate figcaption small{
   grid-column:2/-1;grid-row:2;
   display:block;margin-top:6px;max-width:58ch;
@@ -131,21 +194,23 @@
 }
 
 /* a phone: a pair stacks, the second picture under the first with the
-   shared hairline between them. Every plate takes its chart's own
-   proportion here -- one to a row, there is no height to match, and the
-   column is narrow enough that a letterbox would only cost picture. The
-   patches move with the picture: at its own proportion the file paints
-   the whole box, so they sit where they sit in the file. */
+   shared hairline between them; a single takes a wider-than-tall frame
+   that still holds its labels. */
 @media (max-width:619px){
   #material .plate{grid-template-columns:minmax(0,1fr)}
   #material .plate--pair .tile{grid-column:1/-1}
   #material .plate--pair .tile + .tile{border-left:1px solid var(--line-2);border-top:0}
-  #material .pic,#material .plate--pair .pic{aspect-ratio:auto}
-  #material .pic img{height:auto}
-  #material .pic--wm-a::after{left:53.2%;top:88.6%;width:5.6%;height:6.4%}
-  #material .pic--wm-b::after{left:51.4%;top:84.3%;width:5.8%;height:5.8%}
-  #material .plate figcaption{grid-template-columns:auto minmax(32px,1fr);column-gap:14px}
+  #material .frame{aspect-ratio:16/10}
+  #material .plate--pair .frame{aspect-ratio:1/1}
+  #material .plate__tag--trend{transform:translate(-50%,-50%) rotate(24deg)}
+  #material .plate figcaption{grid-template-columns:auto minmax(32px,1fr) auto;column-gap:14px}
   #material .plate__level{grid-column:2;grid-row:1}
+  #material .plate__after{grid-column:3;grid-row:1}
   #material .plate__title{grid-column:1/-1;grid-row:2;margin-top:8px}
   #material .plate figcaption small{grid-column:1/-1;grid-row:3}
+}
+
+@media (prefers-reduced-motion:reduce){
+  #material .tile:not(.reveal),#material .plate__level,#material .plate figcaption > b,
+  #material .tile .fig__zone,#material .tile .fig__level,#material .tile .fig__line,#material .tile .plate__tag{transition:none}
 }
