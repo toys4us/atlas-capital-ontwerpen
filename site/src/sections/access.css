@@ -145,7 +145,7 @@
 #access .level__value em{font-style:italic;color:var(--gold)}
 #access .level__note{
   margin:clamp(8px,1.2vw,12px) 0 0;
-  max-width:var(--measure-narrow);
+  max-width:36ch;                        /* two lines in both languages, so the plate's foot holds */
   font-size:var(--t-body);
   line-height:1.5;
   color:var(--ink-3);

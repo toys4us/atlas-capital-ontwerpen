@@ -2,7 +2,7 @@
  "id": "channels",
  "title": "Channels",
  "wave": 1,
- "round": 2,
+ "round": 1,
  "status": "win",
  "history": [
   {
@@ -49,6 +49,21 @@
    "confidence": 0.86,
    "ts": "2026-09-05T19:30:56+00:00",
    "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/06-channels.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/channels.css. Renders in E:/ClaudeCode_GUI/atlas-designs/site/_build/channels (desk, mob, motion, plus desk-en/mob-en, desk-prem/mob-prem, desk-short).\n- Removed every skeleton bar: the seven fake-message rows, the member panel and the composer are gone; nothing grey-placeholder remains.\n- The right pane is now the page's own schematic plate at the pane's full width (one gold hairline path, orderblock box, FVG band, dashed liquidity line + a lower level, three label-v"
+  },
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.5,
+   "score_ref": 5,
+   "wowed": false,
+   "gap": "The schematic chart panel's header is broken: a ghosted \"SESSIE LIQUIDITEIT\" label sits directly under \"#NQ-CHART-IDEEËN\" as an overlapping smear on both desktop and mobile, and on mobile the \"SCHEMATISCH · GEEN KOERS, GEEN DAG\" line collides with the dotted liquidity line and its label, while the FVG band and price line run into the right border. At the bar that panel header is a single clean two-line lockup with a fixed gutter above the plot, the annotation labels have collision-free reserve space at every breakpoint, and the plot sits inset from the frame so no stroke ever touches the hairline.",
+   "motion": "Staggered row reveals and a chart line that draws in on scroll, with the section marker sliding into the nav; disciplined, easing reads calm, nothing gratuitous.",
+   "verdict": "A is a coherent, restrained typographic system (tracked small caps, gold hairlines, numbered index, a proper figure caption) let down by one genuinely broken header lockup and edge clipping in the chart panel. B has the more seductive atmosphere but the actual craft on screen fails harder: illegible body copy, struck-through nav, a dead mobile zone and unproofed copy, which puts it below A rather than above it.",
+   "confidence": 0.74,
+   "ts": "2026-09-05T23:54:39+00:00",
+   "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/06-channels.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/channels.css\n- Fixed the reveal: the row's own transition (background/box-shadow/color) had higher specificity than .js .reveal and overrode it, so the 15 rows cut in instead of settling; now declared on .dv__ch:not(.reveal) (the education pattern). Motion sheet confirms rows fade/settle in sequence.\n- Added a Discord-style member panel at the sidebar's foot (skeleton avatar, name line, three controls; aria-hidden, no name/status) with a --foot height shared with the "
   }
  ]
 }

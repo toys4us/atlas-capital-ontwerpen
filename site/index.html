@@ -914,15 +914,17 @@ dl.pairs .cols{
   transition:grid-template-columns .65s var(--e-out),color .3s var(--e-out);
 }
 #header .cta::before,#header .cta::after{content:none;display:none}
-/* the prefix: clipped to its track. The padding on the left, taken back
-   by the margin, is room outside the slot for the rule to grow into on
-   hover -- into the gap, where nothing sits -- without the slot changing */
+/* the prefix: clipped to its track by a clip-path, not overflow, so the
+   clip can reach --grow past the track's left edge -- into the gap, where
+   nothing sits -- for the rule to grow into on hover without the slot
+   changing. The item carries no padding or margin of its own: anything
+   it carried would be a minimum the track could never go under. */
 #header .cta__pre{
-  min-width:0;overflow:hidden;
+  min-width:0;
   display:flex;align-items:center;gap:12px;
-  margin-left:calc(-1 * var(--grow));
-  padding:8px 12px 8px var(--grow);
+  padding:8px 0;
   white-space:nowrap;
+  clip-path:inset(0 0 0 calc(-1 * var(--grow)));
 }
 #header .cta__rule{
   flex:0 0 auto;
@@ -931,7 +933,8 @@ dl.pairs .cols{
   transform-origin:right center;
   transition:transform var(--d) var(--e-out),background-color .3s var(--e-out);
 }
-#header .cta__verb{display:block}
+/* one word space before the word, so OPEN DE DISCORD reads as three words */
+#header .cta__verb{display:block;margin-right:.4em}
 #header .cta__word{
   display:inline-flex;align-items:center;gap:10px;
   padding:8px 0;
@@ -1180,7 +1183,8 @@ dl.pairs .cols{
   /* the verb is kept for the reader and clipped for the eye; the rule is
      what opens before the word, and it takes no room until it does */
   #header .cta__verb{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-  #header .cta__pre{position:relative;gap:0;padding:8px 7px 8px 0;margin-left:0}
+  #header .cta__pre{position:relative;gap:0;clip-path:inset(0)}
+  #header .cta__rule{margin-right:7px}
   #header .cta__word{gap:7px}
   #header .cta.solid,#header.is-open .cta{font-size:var(--t-nano);letter-spacing:.12em}
   #header .menu{font-size:var(--t-nano);letter-spacing:.14em}
@@ -3478,7 +3482,7 @@ dl.pairs .cols{
 #access .level__value em{font-style:italic;color:var(--gold)}
 #access .level__note{
   margin:clamp(8px,1.2vw,12px) 0 0;
-  max-width:var(--measure-narrow);
+  max-width:36ch;                        /* two lines in both languages, so the plate's foot holds */
   font-size:var(--t-body);
   line-height:1.5;
   color:var(--ink-3);
@@ -4194,8 +4198,8 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
         <div class="plate">
           <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
             <line class="lq" x1="208" y1="96" x2="420" y2="96"/>
-            <line class="lq" x1="208" y1="176" x2="420" y2="176"/>
-            <path class="ln ln--b" pathLength="1" d="M0 232 32 220 60 240 96 204 128 216 156 188 184 200 208 176 236 196 264 216 292 200 320 188 352 184 380 204 408 224 440 212 472 236 504 224 536 244"/>
+            <line class="lq" x1="208" y1="168" x2="420" y2="168"/>
+            <path class="ln ln--b" pathLength="1" d="M0 224 32 212 60 232 96 196 128 208 156 180 184 192 208 168 236 188 264 208 292 192 320 180 352 176 380 196 408 216 440 204 472 228 504 216 536 236"/>
             <path class="ln" pathLength="1" d="M0 164 32 152 60 172 96 136 128 148 156 116 184 128 208 96 236 120 264 140 292 124 320 108 352 76 380 100 408 124 440 112 472 140 504 128 536 152"/>
           </svg>
           <i class="tag"><b>02</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
@@ -4228,7 +4232,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
         </div>
         <figcaption>
           <span class="word">IFVG</span>
-          <span class="gloss"><span lang="nl">inverse fair value gap: een doorbroken FVG</span><span lang="en">inverse fair value gap: a fair value gap that has been broken</span></span>
+          <span class="gloss"><span lang="nl">inverse fair value gap: een doorbroken FVG</span><span lang="en">inverse fair value gap: a broken FVG</span></span>
         </figcaption>
       </figure>
       <figure class="fig">
@@ -4318,7 +4322,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
         </div>
         <figcaption>
           <span class="word"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span>
-          <span class="gloss"><span lang="nl">gedrag en emotie op het moment van beslissen</span><span lang="en">behaviour and emotion at the moment of deciding</span></span>
+          <span class="gloss"><span lang="nl">gedrag en emotie bij het beslissen</span><span lang="en">behaviour and emotion when deciding</span></span>
         </figcaption>
       </figure>
     </div>
@@ -4338,7 +4342,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       </div>
       <div class="row reveal" tabindex="0">
         <dt><b class="num">04</b><span class="term">IFVG</span></dt>
-        <dd><span lang="nl">inverse fair value gap: een doorbroken FVG</span><span lang="en">inverse fair value gap: a fair value gap that has been broken</span></dd>
+        <dd><span lang="nl">inverse fair value gap: een doorbroken FVG</span><span lang="en">inverse fair value gap: a broken FVG</span></dd>
       </div>
       <div class="row reveal" tabindex="0">
         <dt><b class="num">05</b><span class="term">Orderblocks</span></dt>
@@ -4362,7 +4366,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       </div>
       <div class="row reveal" tabindex="0">
         <dt><b class="num">10</b><span class="term"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span></dt>
-        <dd><span lang="nl">gedrag en emotie op het moment van beslissen</span><span lang="en">behaviour and emotion at the moment of deciding</span></dd>
+        <dd><span lang="nl">gedrag en emotie bij het beslissen</span><span lang="en">behaviour and emotion when deciding</span></dd>
       </div>
     </dl>
   </div>
@@ -4420,15 +4424,17 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
        the server's name, two categories, the fifteen channels as they
        stand, the six of Premium behind a lock. Right, the pane a channel
        opens on -- and since no message of the server is ours to show, the
-       pane holds the one thing on this page that is: the figure of the
-       spread, drawn again at the pane's full width. One line, one
-       orderblock, one gap, one level, three tags; no price, no day, no
-       outcome. The selected row is a fair value gap band; the boundary of
-       Premium is a dashed liquidity line; the locks are hairlines of the
-       gold; the row numbers sit at the right like the levels of a price
-       scale. Selecting a channel moves the band and names the channel over
-       the pane; a Premium channel dims the figure under its lock and the
-       one sentence that is true of it. The pane is decoration
+       pane is drawn as a chart page: the channel's name as its title, at
+       statement size (the one thing on this reel set large), a hairline
+       price path under it, a price scale on the right, a time scale along
+       the foot, and the four zones of the vocabulary with their tags. No
+       price, no day, no outcome: the scales carry ticks and no numbers,
+       and the title says so. The selected row is a fair value gap band;
+       the boundary of Premium is a dashed liquidity line; the locks are
+       hairlines of the gold; the row numbers sit at the right like the
+       levels of a price scale. Selecting a channel moves the band and
+       retitles the pane; a Premium channel dims the figure under its lock
+       and the one sentence that is true of it. The pane is decoration
        (aria-hidden); the list is content. Nothing here is a name, a count
        or a message. -->
   <figure class="dv" data-stagger="40">
@@ -4456,27 +4462,35 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
         </div>
       </div>
       <div class="dv__pane" data-kind="free" aria-hidden="true">
-        <div class="dv__head reveal" data-at="0"><span class="dv__hash">#</span><span class="dv__name">nq-chart-ideeën</span></div>
-        <!-- the figure, read left to right: the line opens low and ranges,
-             dips once out of an orderblock, rallies in three legs and
-             leaves a gap (the band), puts two equal highs under the
-             liquidity line, sweeps it once and falls back through the gap
-             towards the level below. It stops short of the right edge:
-             that is now. The zones are HTML, the page's own hairlines, so
-             they run on to the pane's edge -- a level is drawn forward, a
-             line up to the present. -->
+        <!-- the figure, read left to right: the line ranges through a
+             session and leaves two equal lows (the lower level runs on
+             from them), deviates once below them out of an orderblock,
+             rallies in three legs and leaves a gap (the band), puts
+             three equal highs under the upper level, sweeps it once and
+             falls back through the gap towards the lows it left. It stops
+             short of the scale: that is now. The zones are HTML, the
+             page's own hairlines, and every one of them runs forward to
+             the price scale and stops there, the way a level is drawn. -->
         <div class="dv__plate reveal trace" data-at="0">
           <div class="dv__ink">
+            <i class="dv__ax dv__ax--y"></i>
+            <i class="dv__ax dv__ax--x"></i>
             <i class="dv__ob"></i>
             <i class="dv__band"></i>
             <i class="dv__lvl dv__lvl--hi"></i>
             <i class="dv__lvl dv__lvl--lo"></i>
             <svg class="dv__fig" viewBox="0 0 600 520" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-              <path class="dv__line" pathLength="1" d="M0 340 24 334 48 344 72 332 96 340 118 330 136 338 152 328 166 362 178 398 196 376 218 322 232 336 240 284 256 306 272 272 284 250 300 190 318 214 348 128 362 158 380 92 396 120 412 90 422 110 432 68 444 126 456 114 468 206 478 196 490 258 498 250 502 284"/>
+              <path class="dv__line" pathLength="1" d="M26 282 40 268 56 292 70 262 86 288 102 270 118 310 134 276 150 310 166 284 182 300 196 336 208 372 220 410 232 380 244 396 258 340 270 302 282 322 296 264 308 284 322 214 334 236 346 196 356 220 368 158 378 176 392 96 404 118 418 92 430 116 442 94 452 68 462 106 474 150 486 134 498 200 508 232 518 218 530 270"/>
             </svg>
             <i class="dv__tag dv__tag--liq"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></i>
             <i class="dv__tag dv__tag--fvg">FVG</i>
+            <i class="dv__tag dv__tag--ses"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></i>
             <i class="dv__tag dv__tag--ob">Orderblock</i>
+          </div>
+          <!-- the title of the page: the channel, then what the page is -->
+          <div class="dv__title reveal" data-at="0">
+            <p class="dv__name"><span class="dv__hash">#</span><span class="dv__name-t">nq-chart-ideeën</span></p>
+            <p class="dv__sub"><span lang="nl">Schematisch &middot; geen koers, geen dag</span><span lang="en">Schematic &middot; no price, no day</span></p>
           </div>
           <div class="dv__locked"><span class="dv__locked-in">
             <i class="dv__lock"></i>
@@ -4487,8 +4501,8 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       </div>
     </div>
     <figcaption class="reveal">
-      <span class="dv__title"><span lang="nl">Figuur &mdash; De server, schematisch</span><span lang="en">Figure &mdash; The server, as a schema</span></span>
-      <span class="dv__note"><span lang="nl">Vijftien kanalen zoals ze in de server staan. Het paneel is een schema: geen koers, geen berichten.</span><span lang="en">Fifteen channels as they stand in the server. The pane is a schema: no price, no messages.</span></span>
+      <span class="dv__cap"><span lang="nl">Figuur &mdash; De server</span><span lang="en">Figure &mdash; The server</span></span>
+      <span class="dv__note"><span lang="nl">Vijftien kanalen zoals ze in de server staan: negen open, zes achter een slot tot Premium opent. Het paneel is een schema, geen bericht.</span><span lang="en">Fifteen channels as they stand in the server: nine open, six behind a lock until Premium opens. The pane is a schema, not a message.</span></span>
     </figcaption>
   </figure>
   <p class="dv__call"><a class="cta reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom binnen op Discord</span><span lang="en">Step inside the Discord</span></a></p>
@@ -4496,7 +4510,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   <script>
   (function(){
     var s = document.getElementById("channels"); if (!s) return;
-    var list = s.querySelector(".dv__list"), pane = s.querySelector(".dv__pane"), name = s.querySelector(".dv__name");
+    var list = s.querySelector(".dv__list"), pane = s.querySelector(".dv__pane"), name = s.querySelector(".dv__name-t");
     if (!list || !pane || !name) return;
     var rows = list.querySelectorAll(".dv__ch");
     function rowOf(t){ while (t && t !== list) { if (t.classList && t.classList.contains("dv__ch")) return t; t = t.parentNode; } return null; }
