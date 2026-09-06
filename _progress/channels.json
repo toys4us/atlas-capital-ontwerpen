@@ -2,7 +2,7 @@
  "id": "channels",
  "title": "Channels",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -64,6 +64,21 @@
    "confidence": 0.74,
    "ts": "2026-09-05T23:54:39+00:00",
    "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/06-channels.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/channels.css\n- Fixed the reveal: the row's own transition (background/box-shadow/color) had higher specificity than .js .reveal and overrode it, so the 15 rows cut in instead of settling; now declared on .dv__ch:not(.reveal) (the education pattern). Motion sheet confirms rows fade/settle in sequence.\n- Added a Discord-style member panel at the sidebar's foot (skeleton avatar, name line, three controls; aria-hidden, no name/status) with a --foot height shared with the "
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 7.5,
+   "score_ref": 4.5,
+   "wowed": false,
+   "gap": "The schematic chart is the weakest square inch: the right-side labels (\"LIQUIDITEIT\", \"FVG\") crowd the y-axis with no breathing room, the upper-left quadrant is empty, and the tick marks along the bottom are unlabelled decoration. At the bar, labels sit on a clear gutter off the axis, the curve fills the plot area, and the fixed \"AMSTERDAM / NEW YORK\" clock never collides with panel rows as it does mid-scroll. Beyond that, gold-on-near-black serif small-caps is the \"prestige trading\" genre uniform; a single more surprising choice would separate it from the crowd.",
+   "motion": "Channel rows stagger in and the chart draws sequentially (curve, then liquidity line, FVG band, orderblock label) with quiet easing; restrained and legible, marred only by the fixed clock overlapping panel content in one frame.",
+   "verdict": "B is a genuinely crafted editorial component: consistent hairlines, numbered rows, lock glyphs, small-caps tracking, a caption that reads like a figure in a book, and a mobile stack that survives intact. A has one decent desktop idea and a mobile view with header bleed, clipped text and half a screen of nothing, which disqualifies it at this level.",
+   "confidence": 0.9,
+   "ts": "2026-09-06T00:19:51+00:00",
+   "note": "Root cause of the judge's finding: last round's partial was restructured (title inside the plate, axes, a 4th tag) but channels.css was never updated, so the title fell into the caption's style and the session-liquidity tag had no position. Fixed by rewriting both files:\n- Pane header is now a proper two-line lockup block above the plate (channel name in serif 17–20px + \"Schematisch · geen koers, geen dag\" in nano caps), same 60px height as the sidebar header so the rule runs unbroken; the sidebar header got the matching two-line lockup (\"Atlas Capital\" / \"Discord-server\", chevron on t"
   }
  ]
 }

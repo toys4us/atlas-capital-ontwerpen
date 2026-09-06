@@ -135,13 +135,16 @@
 #material .fig__line--dash{stroke-dasharray:3 5;stroke-opacity:.5;stroke-linecap:butt}
 
 /* the founder's labels, in the page's label voice, placed in the file's
-   own percentages so they stay with their zones at every width; what is
+   own percentages (--x/--y on the tag) so they stay with their zones at
+   every width -- a phone's plate is a third the size and the labels are
+   not, so a tag may carry a second position for it (--xm/--ym); what is
    counted (the fibonacci ratios) is mono. Each sits on a sliver of the
    mat, the way the platform boxes its labels, so a label over a candle
    is read and not overprinted. They scale a little with the plate so a
    phone's plate is not all label. */
 #material .plate__tag{
   position:absolute;
+  left:var(--x);top:var(--y);                 /* the file's own percentages, on the tag */
   display:block;
   transform:translateY(-50%);
   padding:1px 3px;margin:-1px -3px;        /* the sliver grows around the text; the text stays put */
@@ -289,8 +292,10 @@
   #material .wall{row-gap:clamp(40px,10vw,56px)}
   #material .plate--pair{grid-template-columns:minmax(0,1fr)}
   #material .plate--pair .tile + .tile{border-left:1px solid var(--frame);border-top:0}
-  #material .frame,#material .plate--left .frame,#material .plate--right .frame,#material .plate--full .frame{aspect-ratio:16/10}
-  #material .plate--pair .frame{aspect-ratio:4/3}
+  #material .frame,#material .plate--full .frame{aspect-ratio:3/2}
+  #material .plate--pair .frame,#material .plate--left .frame,#material .plate--right .frame{aspect-ratio:4/3}   /* the label-dense plates get height */
+  #material .plate__tag{left:var(--xm,var(--x));top:var(--ym,var(--y))}
+  #material .plate__tag--join br{display:none}
   #material .plate__tag--trend{transform:translate(-50%,-50%) rotate(24deg)}
 }
 
