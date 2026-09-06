@@ -1,47 +1,68 @@
 <section id="access">
   <div class="grp"><h2><span lang="nl">Toegang</span><span lang="en">Access</span></h2></div>
 
-  <!-- The two ways in, set as two credits on the reel's one axis -- not
-       two columns of a price table, and not a chart. Each tier is a
-       level, drawn with the page's own furniture: in the label column,
-       from the content edge to the axis, the line the tier's word stands
-       on, tagged at the gutter the way every level on this reel is
-       tagged (the ledger above tags its years the same way). The open
-       tier is a solid hairline -- a level that has been reached. The
-       tier that opens later is the dashed liquidity line of the opening
-       schema -- a level drawn ahead, not yet run through; point at that
-       row and it draws itself solid. Point at the open row and a band
-       develops under its level, the gap of the spread. Right of the
-       axis, with every other value: the tier's one word, at statement
-       size and in one voice for both (nothing here ranks the two; the
-       level and the call do), the one line that is true of it, and the
-       link -- the open tier carries the one call of the screen, the
-       other the page's quiet link. No price, no day, no count that is
-       not in the sentence; the two levels are lines, not data, so they
-       carry no caption. -->
-  <dl class="levels" data-stagger="110">
-    <div class="level level--now">
-      <dt class="level__scale">
-        <i class="lvl lvl--now reveal draw" aria-hidden="true"></i>
-        <span class="level__tag reveal"><span lang="nl">Nu</span><span lang="en">Now</span></span>
-      </dt>
-      <dd class="level__body reveal">
-        <p class="level__value"><span lang="nl">Gratis</span><span lang="en">Free</span></p>
-        <p class="level__note"><span lang="nl">Negen open kanalen en de educatie in tien onderwerpen.</span><span lang="en">Nine open channels and the teaching in ten topics.</span></p>
+  <!-- The two ways in, set on one line: time, drawn left to right across
+       the strip the way the spread draws a session. Left of now the
+       line is solid -- what has been reached -- and stops on a dot: that
+       is now, and the one call of the screen stands under it. Right of
+       the dot the line runs on dashed, the liquidity line of the opening
+       schema: a level drawn ahead, not yet run through. From the dot a
+       hairline falls down the page and fades: the column line the later
+       path hangs on. Each path is set the same way under its stretch of
+       the line -- its tag in the label voice, its one word at title
+       size, then what it holds as a short scale (the thing named in the
+       serif, what is counted in mono at the right end of the row, the
+       way a level is tagged on a price scale; the names under it in
+       note size), and its link. No price, no day, no count that is not
+       in the sentence; the line is a line, not data, and carries no
+       caption. Both links go to the same server, so both carry the
+       arrow of the bar; the open path's is the one call, the other is
+       the page's quiet link. Point at a path and its stretch of the line
+       answers: under the solid run a band develops (the gap of the
+       spread); the dashed run draws itself solid. On a phone the two
+       paths stack, each under its own stretch of the line. -->
+  <div class="paths" data-stagger="120">
+    <div class="path path--now">
+      <p class="path__tag reveal" data-at="80"><span lang="nl">Nu</span><span lang="en">Now</span></p>
+      <i class="path__run reveal draw" data-at="0" aria-hidden="true"><i class="path__dot"></i></i>
+      <h3 class="path__word"><span class="mask"><span class="reveal" data-at="220"><span lang="nl">Gratis</span><span lang="en">Free</span></span></span></h3>
+      <div class="path__body reveal" data-at="400">
+        <ul class="rows">
+          <li class="row">
+            <span class="row__t"><span lang="nl">Negen open kanalen</span><span lang="en">Nine open channels</span></span>
+            <b class="row__n">9</b>
+            <small class="row__s">#nq-chart-idee&euml;n &middot; #es-chart-idee&euml;n &middot; #bitcoin &middot; #altcoins &middot; #markt &middot; #vragen &middot; #algemeen &middot; #atlas-op-socials &middot; #ondersteuning</small>
+          </li>
+          <li class="row">
+            <span class="row__t"><span lang="nl">De educatie</span><span lang="en">The teaching</span></span>
+            <b class="row__n">10</b>
+            <small class="row__s"><span lang="nl">Tien onderwerpen, van deviatie tot tradingpsychologie.</span><span lang="en">Ten topics, from deviation to trading psychology.</span></small>
+          </li>
+        </ul>
         <a class="cta solid" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom binnen</span><span lang="en">Come in</span></a>
-      </dd>
+      </div>
     </div>
 
-    <div class="level level--later">
-      <dt class="level__scale">
-        <i class="lvl lvl--later reveal draw" aria-hidden="true"></i>
-        <span class="level__tag reveal"><span lang="nl">Later</span><span lang="en">Later</span></span>
-      </dt>
-      <dd class="level__body reveal">
-        <p class="level__value"><span lang="nl">Premium</span><span lang="en">Premium</span></p>
-        <p class="level__note"><span lang="nl">Zes kanalen erbij zodra het opent. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Six more channels once it opens. The price and the date will be announced in the server.</span></p>
+    <div class="path path--later">
+      <p class="path__tag reveal" data-at="640"><span lang="nl">Later</span><span lang="en">Later</span></p>
+      <i class="path__run reveal draw" data-at="520" aria-hidden="true"></i>
+      <i class="path__mark reveal" data-at="560" aria-hidden="true"></i>
+      <h3 class="path__word"><span class="mask"><span class="reveal" data-at="760"><span lang="nl">Premium</span><span lang="en">Premium</span></span></span></h3>
+      <div class="path__body reveal" data-at="900">
+        <ul class="rows">
+          <li class="row">
+            <span class="row__t"><span lang="nl">Zes kanalen erbij</span><span lang="en">Six more channels</span></span>
+            <b class="row__n">6</b>
+            <small class="row__s">#trade-setups &middot; #marktupdates &middot; #indicatoren &middot; #sessie-opnames &middot; #chart-idee&euml;n &middot; #premium-chat</small>
+          </li>
+          <li class="row">
+            <span class="row__t"><span lang="nl">Prijs en datum</span><span lang="en">Price and date</span></span>
+            <span class="row__v"><span lang="nl">In de server</span><span lang="en">In the server</span></span>
+            <small class="row__s"><span lang="nl">Allebei worden daar aangekondigd.</span><span lang="en">Both are announced there.</span></small>
+          </li>
+        </ul>
         <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Volg het in de server</span><span lang="en">Follow it in the server</span></a>
-      </dd>
+      </div>
     </div>
-  </dl>
+  </div>
 </section>

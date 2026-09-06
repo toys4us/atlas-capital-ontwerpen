@@ -14,8 +14,9 @@
        the accent
 
    The hang, on a desk (>= 1100px): the wall is the page's wide column
-   (--wide, the width the spread and the bar share), and the plates come
-   forward off the strip and go back to it:
+   (--wide, the width the spread and the bar share, in by the bar's mark
+   so its edge is the axis of the name), and the plates come forward off
+   the strip and go back to it:
      01  a pair, inside the strip, on the reel's column
      02  offset left: from the page's left edge to past the middle, its
          label beside it in the strip's column, hung on its top edge
@@ -42,7 +43,12 @@
   --inset:clamp(8px,1.2vw,12px);
   --frame:var(--line-3);                    /* the hairline of a plate: legible, once */
   --frame-hi:var(--line-4);
-  --wallw:min(var(--wide),calc(100vw - 2 * var(--gutter)));
+  /* the wall: the page's wide column, in by the width of the bar's mark
+     and its gap on each side -- so a plate's edge sits on the axis of the
+     name in the bar, and the rail's group label (at the gutter, on a
+     desk) never runs over a frame */
+  --wall-in:calc(var(--logo-nav) + 10px);
+  --wallw:calc(min(var(--wide),100vw - 2 * var(--gutter)) - 2 * var(--wall-in));
   --capgap:clamp(32px,3.4vw,48px);          /* a plate to the label beside it */
   --level:repeating-linear-gradient(90deg,var(--gold) 0 3px,transparent 3px 8px);
 }

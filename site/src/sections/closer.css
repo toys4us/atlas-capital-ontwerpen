@@ -317,18 +317,39 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   footer .fnav a,footer .fnav a::before,footer .fnav a::after{transition:none}
 }
 
-/* where the risk line no longer fits one measure beside the clock, each
-   sentence takes its own line, and a sentence that must wrap wraps
-   evenly -- no line is one word */
+/* where the risk line no longer fits one line beside the clock it wraps
+   as prose, at the full measure of its column (pretty: no line is one
+   word), and the two paragraphs stand a little further apart so each
+   still reads as its own line */
 @media (max-width:1023px){
-  footer .legal .s{display:block;text-wrap:balance}
-  footer .legal .past{text-wrap:balance}
   footer .legal p + p{margin-top:8px}
 }
+/* a phone: the two lines run the whole column, a size under the note,
+   so they are prose across the page and not a ladder of short lines
+   down its left half */
 @media (max-width:619px){
   footer .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
   footer .fsig{grid-column:1 / -1}
   footer .fnav{padding-top:0}             /* under the signature, not beside it */
   footer .fbase{display:block}
+  footer .legal{max-width:none}
+  footer .legal p{font-size:13px;line-height:1.65;letter-spacing:.012em}
   footer .ftime{padding-top:0;margin-top:clamp(24px,6vw,32px)}
+}
+
+/* ---- the rail retires with the reel ------------------------------------
+   The rail's two clocks (base.css, in the template; desktop only) sit on
+   the bottom-left of every screen of the reel. Past the last group the
+   rail's label is already blank; here the clocks go too, the way the
+   scroll hint went -- down and out, the one move, on the one curve --
+   from the moment the end card's sentence and call come up from the
+   bottom edge (the closer's script sets .is-end on the rail; it takes it
+   off again on the way back up). The footer's own clock is the time from
+   there: one clock at the end of the page, on the page, and nothing
+   printing over the last lines. Reduced motion: a cut, no slide -- and
+   the footer's clock still ticks. */
+.rail .rail__now{transition:transform var(--d-slow) var(--e-out)}
+.rail.is-end .rail__now{transform:translateY(90px)}
+@media (prefers-reduced-motion:reduce){
+  .rail .rail__now{transition:none}
 }

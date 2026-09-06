@@ -2,7 +2,7 @@
  "id": "trackrecord",
  "title": "Track record",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -49,6 +49,21 @@
    "confidence": 0.86,
    "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/09-trackrecord.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/trackrecord.css (nothing else touched).\n- Ledger rebuilt as a timeline off the reel's spine: each row is a tick — mono number at the axis, a dashed level (the hero's 3-on/5-off liquidity dash in --line-4) drawing from the number to the firm's name at the gutter, value + serif sub-line on the same baseline. No full-width rules, nothing under rows; the ambiguous right-hand \"01\" is gone (numbers now lead, as on the tiles).\n- The two years already on the page (2023/2",
    "ts": "2026-09-06T00:02:34+00:00"
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 7.5,
+   "score_ref": 5.5,
+   "wowed": false,
+   "gap": "The certificate viewer band breaks the editorial spell: a raw scan sat in a flat rectangle with six ~90px thumbnails (about 50px on mobile, unreadable and untappable) and mono numerals under each reads like a stock lightbox against the beautifully leadered timeline above it. At the bar the certificate would be shown as a cropped detail (name, amount, verification code) with the code set as live typography, and the thumbnail strip would become a typographic index of firm + date with the gold progress line, not micro-images nobody can read.",
+   "motion": "Restrained sequential fade-up of list rows while the left rule draws down to 2026 and the nav item turns gold — quiet, legible, correctly paced.",
+   "verdict": "B is a coherent editorial system — serif display against mono labels, gold hairlines, dotted leaders, a bracketed timeline and an honest disclaimer column — let down only by a stock-feeling certificate lightbox and illegible thumbnails. A has one strong hero gesture but its actual track-record region is a generic logo grid with a half-empty mobile viewport and a header that lets content bleed through, which is not Site of the Day craft.",
+   "confidence": 0.82,
+   "builder_note": "Rebuilt the certificate region as one artefact (files: src/sections/09-trackrecord.html, src/sections/trackrecord.css):\n- Replaced the 2x3 certificate grid with one hero print at the strip's width (mat + gold hairline, cursor zoom-in, an <a> to the file so it works without JS), a museum label under it (mono number, firm in caps, dashed liquidity-line level to the document's date tagged in mono, document name under the firm, the page's .cta \"Het origineel / The original\" on the print's right column line), and a contact strip: six small numbered chips spaced across the print's width on one h",
+   "ts": "2026-09-06T00:25:06+00:00"
   }
  ]
 }

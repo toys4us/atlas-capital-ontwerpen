@@ -41,7 +41,7 @@
   --band-edge:rgba(215,179,100,.36);
   --n:24px;                                   /* the count's column                   */
   --g:clamp(10px,1.4vw,14px);                 /* count to term                        */
-  --lbl:clamp(110px,11vw,118px);               /* the rule-set's label column          */
+  --lbl:clamp(118px,11vw,124px);              /* the rule-set's label column          */
   position:relative;z-index:2;
   display:grid;
   grid-template-columns:var(--axis-l) var(--axis-r);
@@ -192,7 +192,7 @@
   letter-spacing:var(--trk-caps);
   text-transform:uppercase;
   line-height:1;
-  color:var(--ink-5);
+  color:var(--ink-4);
   white-space:nowrap;
 }
 

@@ -69,9 +69,11 @@
    the words and the row under the band take to arrive (the one line
    resolving out of a blur, the caption after it, the call last), so the
    plate is still being drawn as the reader reaches the call. On scroll
-   the spread is not a slide: the title leads (-.09) and the band lags
-   (.05), so the first word lifts off its shelf and the two layers are
-   seen to be two; and the line goes on -- a tail past "now", drawn by
+   the spread is not a slide: the title leads (-.10) and the band lags
+   a little (.02), so the first word lifts off its shelf and the two
+   layers are seen to be two (the difference is kept under .13: the rule
+   then never reaches the caps of the second word before that word has
+   passed under the bar); and the line goes on -- a tail past "now", drawn by
    the scroll itself over the first third of a screen (a scroll-driven
    animation, so it is exactly reversible; where the browser has none,
    the line simply stops at now). The column stays with the page. */

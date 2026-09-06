@@ -64,10 +64,13 @@
   position:sticky;top:0;z-index:50;
   padding:0 var(--gutter);
   background:var(--bg);
-  transition:transform .5s var(--e-out),padding .5s var(--e-out),background-color .35s var(--e-out);
+  transition:transform .5s var(--e-out),padding .5s var(--e-out),background-color .25s var(--e-out);
 }
 /* the hairline: drawn from the left once the page has moved, gone again
-   at the top; simply there without JavaScript */
+   at the top; simply there without JavaScript. With the script the top
+   state is the default and .is-scrolled is added -- the parser can paint
+   the bar before its own script has run, and a default that is already
+   the top state has nothing to transition from. */
 #header::after{
   content:"";
   position:absolute;left:0;right:0;bottom:0;height:1px;
@@ -75,14 +78,15 @@
   transform-origin:left center;
   transition:transform .7s var(--e-out);
 }
-.js #header.is-top{background:rgba(8,9,11,0)}
-.js #header.is-top::after{transform:scaleX(0)}
-.js #header:not(.is-top){
+.js #header{background:rgba(8,9,11,0)}
+.js #header::after{transform:scaleX(0)}
+.js #header.is-scrolled{
   --bar:calc(var(--hdr-h) - var(--lift));
   padding-top:var(--lift);
   transform:translateY(calc(-1 * var(--lift)));
   background:var(--bg);
 }
+.js #header.is-scrolled::after{transform:none}
 .js #header.is-open{background:var(--bg)}
 .js #header.is-open::after{transform:none}
 
@@ -184,10 +188,16 @@
 #header .now{display:none}
 
 /* ---- the drawer: everything narrower than the full row ---------------- */
-@media (max-width:1159px){
+@media (max-width:1199px){
   .js #header .menu{display:inline-block;margin-left:auto}
-  /* without JavaScript the contents line is simply a second row of the bar */
+  /* without JavaScript the contents line is simply a second row of the bar:
+     the name and the call keep the first row (and its height), the line
+     wraps under them */
+  #header .wm{min-height:var(--bar)}
+  #header .cta{order:1}
+  #header .menu{order:2}
   #header .nav{
+    order:3;
     flex:0 0 100%;
     display:flex;flex-wrap:wrap;align-items:center;column-gap:22px;row-gap:6px;
     padding:2px 0 12px;
@@ -312,7 +322,7 @@
 }
 
 /* ---- the full row ------------------------------------------------------- */
-@media (min-width:1160px){
+@media (min-width:1200px){
   #header .inner{flex-wrap:nowrap;column-gap:0}
   #header .nav,#header .foot{display:contents}
   #header .menu,#header .tk,#header .n{display:none}

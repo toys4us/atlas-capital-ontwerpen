@@ -46,13 +46,16 @@
 
 <!-- The footer: the signature, the five links, the local time, and the
      two lines that go under everything on this page -- the risk line and
-     the past-performance line, each on its own line, exactly as they read
-     in the record (on a phone each sentence takes its own line, so no
-     line is one word). The grid is the end card's: the signature in the
-     left half, the two lists on the two column lines the chart is drawn
-     on, the clock on the right edge under the dot. The clock is written
-     by motion.js into [data-clock]; without a script (or without a time)
-     the line is not shown at all. -->
+     the past-performance line, each its own paragraph, exactly as they
+     read in the record, run at the full measure wherever they are read.
+     The grid is the end card's: the signature in the left half, the two
+     lists on the two column lines the chart is drawn on, the clock on
+     the right edge under the dot. The clock is written by motion.js into
+     [data-clock]; without a script (or without a time) the line is not
+     shown at all. It is the only clock at the end of the page: the
+     script under the footer retires the rail's two clocks as the end
+     card's last words come up, so the time is handed from the rail to
+     the page and nothing prints over the last lines. -->
 <footer data-stagger="90">
   <div class="inner">
     <div class="fgrid">
@@ -74,10 +77,38 @@
     <i class="frule reveal draw"></i>
     <div class="fbase">
       <div class="legal">
-        <p class="risk reveal"><span lang="nl"><span class="s">Alleen voor educatieve doeleinden.</span> <span class="s">Geen financieel advies.</span> <span class="s">Traden brengt een aanzienlijk risico op verlies met zich mee.</span></span><span lang="en"><span class="s">For educational purposes only.</span> <span class="s">Not financial advice.</span> <span class="s">Trading carries a substantial risk of loss.</span></span></p>
+        <p class="risk reveal"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
         <p class="past reveal"><span lang="nl">Resultaten uit het verleden bieden geen garantie voor de toekomst.</span><span lang="en">Past results are no guarantee of future results.</span></p>
       </div>
       <p class="ftime reveal"><span class="ftime__city">Amsterdam</span> <time data-clock="Europe/Amsterdam"></time></p>
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  /* The rail retires with the reel. Its label already goes blank past the
+     last group; here its two clocks leave too -- the way the scroll hint
+     left, down and out (closer.css: .rail.is-end) -- from the moment the
+     end card's sentence and call come up from the bottom edge, 48px
+     before they reach the clocks' row, and they return if the visitor
+     scrolls back up. The footer's own clock carries the time from there,
+     so the page ends with one clock, on the page, and never two. The
+     rail is desktop decoration (aria-hidden), so this is a class and a
+     transform, nothing a reader or a probe can lose. */
+  var rail = document.querySelector(".rail");
+  var col = document.querySelector("#closer .end__col"), foot = document.querySelector("footer");
+  if (!rail || !("IntersectionObserver" in window)) return;
+  var seen = [], els = [], k;
+  if (col) els.push(col);
+  if (foot) els.push(foot);            /* and while any of the footer is on screen, whatever the screen's height */
+  if (!els.length) return;
+  var io = new IntersectionObserver(function(entries){
+    var i, any = false;
+    for (i = 0; i < entries.length; i++) seen[els.indexOf(entries[i].target)] = entries[i].isIntersecting;
+    for (i = 0; i < seen.length; i++) if (seen[i]) any = true;
+    rail.classList.toggle("is-end", any);
+  }, { threshold: 0, rootMargin: "0px 0px 48px 0px" });
+  for (k = 0; k < els.length; k++) { seen.push(false); io.observe(els[k]); }
+})();
+</script>

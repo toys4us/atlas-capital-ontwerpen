@@ -49,9 +49,9 @@
     </button>
   </div>
   <script>
-  /* the bar's own state: .is-top (transparent over the spread; motion.js
-     sets the same class by the same rule, this runs first so the first
-     paint is right), the drawer under the bar on anything narrower than
+  /* the bar's own state: .is-scrolled (lifted, on the page's black, its
+     hairline drawn; motion.js sets .is-top by the same rule, which the
+     bar's CSS does not need), the drawer under the bar on anything narrower than
      the full row, and aria-current on the anchor whose section holds the
      upper part of the viewport. One passive listener, one rAF. */
   (function(){
@@ -59,7 +59,7 @@
     var W = window, root = document.documentElement;
     var nav = hdr.querySelector(".nav"), btn = hdr.querySelector(".menu");
     var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
-    var wide = W.matchMedia("(min-width: 1160px)");
+    var wide = W.matchMedia("(min-width: 1200px)");
     function pad(n){ return n < 10 ? "0" + n : "" + n; }
     /* which section each anchor leads to, and its reel number -- resolved
        once the rest of the page is parsed (this script runs before it) */
@@ -82,6 +82,7 @@
       ticking = false;
       var y = W.scrollY || W.pageYOffset || 0;
       hdr.classList.toggle("is-top", y < 8);
+      hdr.classList.toggle("is-scrolled", y >= 8);
       var line = (W.innerHeight || root.clientHeight) * 0.4, at = null, i, r;
       for (i = 0; i < secs.length; i++) {
         if (!secs[i]) continue;

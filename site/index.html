@@ -857,10 +857,13 @@ dl.pairs .cols{
   position:sticky;top:0;z-index:50;
   padding:0 var(--gutter);
   background:var(--bg);
-  transition:transform .5s var(--e-out),padding .5s var(--e-out),background-color .35s var(--e-out);
+  transition:transform .5s var(--e-out),padding .5s var(--e-out),background-color .25s var(--e-out);
 }
 /* the hairline: drawn from the left once the page has moved, gone again
-   at the top; simply there without JavaScript */
+   at the top; simply there without JavaScript. With the script the top
+   state is the default and .is-scrolled is added -- the parser can paint
+   the bar before its own script has run, and a default that is already
+   the top state has nothing to transition from. */
 #header::after{
   content:"";
   position:absolute;left:0;right:0;bottom:0;height:1px;
@@ -868,14 +871,15 @@ dl.pairs .cols{
   transform-origin:left center;
   transition:transform .7s var(--e-out);
 }
-.js #header.is-top{background:rgba(8,9,11,0)}
-.js #header.is-top::after{transform:scaleX(0)}
-.js #header:not(.is-top){
+.js #header{background:rgba(8,9,11,0)}
+.js #header::after{transform:scaleX(0)}
+.js #header.is-scrolled{
   --bar:calc(var(--hdr-h) - var(--lift));
   padding-top:var(--lift);
   transform:translateY(calc(-1 * var(--lift)));
   background:var(--bg);
 }
+.js #header.is-scrolled::after{transform:none}
 .js #header.is-open{background:var(--bg)}
 .js #header.is-open::after{transform:none}
 
@@ -977,10 +981,16 @@ dl.pairs .cols{
 #header .now{display:none}
 
 /* ---- the drawer: everything narrower than the full row ---------------- */
-@media (max-width:1159px){
+@media (max-width:1199px){
   .js #header .menu{display:inline-block;margin-left:auto}
-  /* without JavaScript the contents line is simply a second row of the bar */
+  /* without JavaScript the contents line is simply a second row of the bar:
+     the name and the call keep the first row (and its height), the line
+     wraps under them */
+  #header .wm{min-height:var(--bar)}
+  #header .cta{order:1}
+  #header .menu{order:2}
   #header .nav{
+    order:3;
     flex:0 0 100%;
     display:flex;flex-wrap:wrap;align-items:center;column-gap:22px;row-gap:6px;
     padding:2px 0 12px;
@@ -1105,7 +1115,7 @@ dl.pairs .cols{
 }
 
 /* ---- the full row ------------------------------------------------------- */
-@media (min-width:1160px){
+@media (min-width:1200px){
   #header .inner{flex-wrap:nowrap;column-gap:0}
   #header .nav,#header .foot{display:contents}
   #header .menu,#header .tk,#header .n{display:none}
@@ -1259,9 +1269,11 @@ dl.pairs .cols{
    the words and the row under the band take to arrive (the one line
    resolving out of a blur, the caption after it, the call last), so the
    plate is still being drawn as the reader reaches the call. On scroll
-   the spread is not a slide: the title leads (-.09) and the band lags
-   (.05), so the first word lifts off its shelf and the two layers are
-   seen to be two; and the line goes on -- a tail past "now", drawn by
+   the spread is not a slide: the title leads (-.10) and the band lags
+   a little (.02), so the first word lifts off its shelf and the two
+   layers are seen to be two (the difference is kept under .13: the rule
+   then never reaches the caps of the second word before that word has
+   passed under the bar); and the line goes on -- a tail past "now", drawn by
    the scroll itself over the first third of a screen (a scroll-driven
    animation, so it is exactly reversible; where the browser has none,
    the line simply stops at now). The column stays with the page. */
@@ -1687,13 +1699,14 @@ dl.pairs .cols{
    a row is a sequence and not a fade. The label surfaces first, opacity
    only, quick; the leader draws out of it towards the value -- a wipe,
    so the dashes stay where they are and the line is drawn, not
-   stretched -- fast off the label and slow to arrive; the value rises
-   through its own baseline out of its own line box as the leader
-   arrives, the way the title's lines rise on the spread. Each value is
-   masked in its own line box, so every frame of the rise is a line
-   printing on, never a slice through a neighbour. Rows follow 80ms
-   apart. The address is the last beat: in place, slowly, after its
-   word, so nothing is ever there before the line it belongs to.
+   stretched -- fast off the label and slow to arrive; the value arrives
+   as the leader does, the way every line on the page arrives (base.css
+   .reveal: a quick appearance, a slow settle), from half a row below.
+   Not a mask rise: at credit size the first frames of a rise are the
+   tips of the tallest strokes, a row of specks beside the leaders; a
+   fade is whole in every frame. Rows follow 80ms apart. The address is
+   the last beat: in place, slowly, after its word, so nothing is ever
+   there before the line it belongs to.
    On a phone the same object, stacked: the label leads, left, in the
    same caps; the leader runs out of it to the column's edge and ends on
    a short vertical rule (the strip's edge, which the phone does not
@@ -1720,29 +1733,37 @@ dl.pairs .cols{
 }
 #production .tag{display:block;flex:0 0 auto;min-width:0}
 /* the leader: takes what the label leaves, runs across the gutter, and
-   stops a step short of the column line. The dashes are anchored on the
-   value's end, so the line always ends on a dash, whatever the label's
-   width; the run in from the label may begin on a gap, which is how a
-   leader is set */
+   stops a step short of the column line. The dashes are drawn on a box
+   whose width is rounded down to whole tiles and set against the value's
+   end, so the line begins on a gap after the label and ends on a dash
+   before the value whatever the label's width -- no cut dash at either
+   end; the odd pixels go to the gap after the label. */
 #production .lvl{
   display:block;
   flex:1 1 auto;
   min-width:24px;
   height:1px;
   margin:0 calc(var(--lead-gap) - var(--axis-gap)) 0 var(--lead-gap);
-  background:var(--level) right center/8px 1px repeat-x;
   pointer-events:none;
 }
+#production .lvl::before{
+  content:"";
+  display:block;
+  margin-left:auto;
+  width:100%;
+  width:round(down,100%,8px);
+  height:1px;
+  background:var(--level) 0 0/8px 1px repeat-x;
+}
 
-/* the value: a block whose first line is the word in its mask, so the
-   grid hangs the row on the word's baseline; the address is the line
-   under it, on the same left edge */
+/* the value: a block whose first line is the word, so the grid hangs
+   the row on the word's baseline; the address is the line under it, on
+   the same left edge. The word is an inline-block so it can settle. */
 #production dl.pairs > dd{
   display:block;
   min-width:0;
 }
-#production dl.pairs > dd .mask{display:block;min-width:0}
-#production .val{display:inline-block}
+#production .val{display:inline-block;max-width:100%}
 
 /* ---- the sequence ---------------------------------------------------------
    the label: opacity only -- its leader does the moving -- and quick, so
@@ -1751,10 +1772,10 @@ dl.pairs .cols{
 /* the leader: off the label fast, the settle long (expo-out); the wipe's
    clip stays put so the dashes are revealed, not scaled */
 .js #production .lvl.reveal.wipe{transition:clip-path 1.15s var(--e-out)}
-/* the value: the mask rise of base.css, a shade quicker than a title line,
-   from a little deeper so no ascender shows before the rise has begun */
-.js #production .mask > .val.reveal{transform:translateY(145%);transition-duration:1.2s}
-.js #production .mask > .val.reveal.is-in{transform:none}
+/* the value: base.css's own arrival, from half a row below instead of a
+   whole one, so a settling value never crosses the row under it */
+.js #production .val.reveal{transform:translateY(14px)}
+.js #production .val.reveal.is-in{transform:none}
 /* the address: in place, and slowly, so it is not there before the word is */
 .js #production .addr.reveal{transform:none;transition:opacity 1.1s var(--e-inout)}
 
@@ -1827,18 +1848,17 @@ dl.pairs .cols{
     padding-top:clamp(26px,7.5vw,32px);
   }
   #production dl.pairs > dt:first-of-type{padding-top:22px}
-  #production .lvl{
-    margin:0 0 0 clamp(10px,3vw,14px);
-    background:linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px) left center/8px 1px repeat-x;
-  }
+  #production .lvl{margin:0 0 0 clamp(10px,3vw,14px)}
   /* the strip's edge, standing before the line reaches it: straddles the
-     baseline the leader runs on */
+     baseline the leader runs on, one gap of the pattern after the last
+     dash, so it stands in the line's rhythm */
   #production dl.pairs > dt::after{
     content:"";
     flex:0 0 auto;
     align-self:baseline;
     position:relative;top:4px;
     width:1px;height:9px;
+    margin-left:5px;
     background:var(--line-3);
   }
   #production dl.pairs > dd{text-align:left;margin-top:5px}
@@ -1848,7 +1868,7 @@ dl.pairs .cols{
 
 @media (prefers-reduced-motion:reduce){
   .js #production .lvl.reveal.wipe,.js #production .tag.reveal,.js #production .addr.reveal{transition:none}
-  .js #production .mask > .val.reveal{transform:none;transition:none}
+  .js #production .val.reveal{transform:none;transition:none}
   #production .addr a,#production .addr a::before,#production .addr a::after{transition:none}
 }
 
@@ -2106,7 +2126,7 @@ dl.pairs .cols{
   --band-edge:rgba(215,179,100,.36);
   --n:24px;                                   /* the count's column                   */
   --g:clamp(10px,1.4vw,14px);                 /* count to term                        */
-  --lbl:clamp(110px,11vw,118px);               /* the rule-set's label column          */
+  --lbl:clamp(118px,11vw,124px);              /* the rule-set's label column          */
   position:relative;z-index:2;
   display:grid;
   grid-template-columns:var(--axis-l) var(--axis-r);
@@ -2257,7 +2277,7 @@ dl.pairs .cols{
   letter-spacing:var(--trk-caps);
   text-transform:uppercase;
   line-height:1;
-  color:var(--ink-5);
+  color:var(--ink-4);
   white-space:nowrap;
 }
 
@@ -3150,8 +3170,9 @@ dl.pairs .cols{
        the accent
 
    The hang, on a desk (>= 1100px): the wall is the page's wide column
-   (--wide, the width the spread and the bar share), and the plates come
-   forward off the strip and go back to it:
+   (--wide, the width the spread and the bar share, in by the bar's mark
+   so its edge is the axis of the name), and the plates come forward off
+   the strip and go back to it:
      01  a pair, inside the strip, on the reel's column
      02  offset left: from the page's left edge to past the middle, its
          label beside it in the strip's column, hung on its top edge
@@ -3178,7 +3199,12 @@ dl.pairs .cols{
   --inset:clamp(8px,1.2vw,12px);
   --frame:var(--line-3);                    /* the hairline of a plate: legible, once */
   --frame-hi:var(--line-4);
-  --wallw:min(var(--wide),calc(100vw - 2 * var(--gutter)));
+  /* the wall: the page's wide column, in by the width of the bar's mark
+     and its gap on each side -- so a plate's edge sits on the axis of the
+     name in the bar, and the rail's group label (at the gutter, on a
+     desk) never runs over a frame */
+  --wall-in:calc(var(--logo-nav) + 10px);
+  --wallw:calc(min(var(--wide),100vw - 2 * var(--gutter)) - 2 * var(--wall-in));
   --capgap:clamp(32px,3.4vw,48px);          /* a plate to the label beside it */
   --level:repeating-linear-gradient(90deg,var(--gold) 0 3px,transparent 3px 8px);
 }
@@ -3442,7 +3468,7 @@ dl.pairs .cols{
 
 /* ---- section:trackrecord ---- */
 /* ===== track record =====
-   A ledger, then the evidence, then what the evidence does not say.
+   A ledger, then the exhibit, then what the exhibit does not say.
 
    The ledger: six credits on the reel's one axis, in date order, 2023 to
    2026. The strip's left edge is the time axis and every row is a tick
@@ -3459,18 +3485,21 @@ dl.pairs .cols{
    carry no value. On scroll each level draws itself from the axis, then
    the row rises.
 
-   The evidence: the same six, in the same order, printed two to a row as
-   the wall above prints its pairs -- at full value, in their own colour,
-   on one mat inside one hairline of the gold, the number of their row on
-   each. A certificate is a document, so it is shown as one: nothing is
-   veiled, nothing is greyed. The row of the two square files is a pair
-   of squares, the other rows 3:2, so every row lands level. Pointed at,
-   the mat under the plate warms to the gold of the spread's zones (the
-   band, not the line) and the frame comes up a step. They print on from
-   the left like the spread's plate; a tap opens the untouched original in
-   the page's one lightbox. The one note a certificate needs (02's ROI
-   figure) is a footnote under the wall, hung on the wall's left edge, and
-   travels with the plate into the lightbox.
+   The exhibit: one artefact, not a gallery. One print -- the certificate
+   of the row in hand, at the width of the strip, in its own colour on one
+   mat inside one hairline of the gold, as the plates above are hung --
+   with its museum label under it: the row's number in mono, the firm in
+   the label voice, from the firm a dashed level to the document's date
+   tagged at its end in mono, the document named under the firm, and on
+   the print's right edge the page's link to the untouched file. Under
+   the label the contact strip: the six files as chips on one hairline,
+   spaced across the print's width, grey until pointed at, the one in the
+   print in colour with its number and a short rule of the gold on the
+   hairline under it. A chip swaps the print (it prints on again from the
+   left) and its label; the print or its link opens the original in the
+   page's one lightbox. The one note a certificate needs (02's ROI figure)
+   lives in 02's own label. Nothing here is a chart: a level is a rule
+   with a tag, and the tags are a date and a count.
 
    The caveat: not small print. Set as the founder's quote is set -- the
    label in the margin, a short rule, the words at lead size in the ink of
@@ -4418,20 +4447,41 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   footer .fnav a,footer .fnav a::before,footer .fnav a::after{transition:none}
 }
 
-/* where the risk line no longer fits one measure beside the clock, each
-   sentence takes its own line, and a sentence that must wrap wraps
-   evenly -- no line is one word */
+/* where the risk line no longer fits one line beside the clock it wraps
+   as prose, at the full measure of its column (pretty: no line is one
+   word), and the two paragraphs stand a little further apart so each
+   still reads as its own line */
 @media (max-width:1023px){
-  footer .legal .s{display:block;text-wrap:balance}
-  footer .legal .past{text-wrap:balance}
   footer .legal p + p{margin-top:8px}
 }
+/* a phone: the two lines run the whole column, a size under the note,
+   so they are prose across the page and not a ladder of short lines
+   down its left half */
 @media (max-width:619px){
   footer .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
   footer .fsig{grid-column:1 / -1}
   footer .fnav{padding-top:0}             /* under the signature, not beside it */
   footer .fbase{display:block}
+  footer .legal{max-width:none}
+  footer .legal p{font-size:13px;line-height:1.65;letter-spacing:.012em}
   footer .ftime{padding-top:0;margin-top:clamp(24px,6vw,32px)}
+}
+
+/* ---- the rail retires with the reel ------------------------------------
+   The rail's two clocks (base.css, in the template; desktop only) sit on
+   the bottom-left of every screen of the reel. Past the last group the
+   rail's label is already blank; here the clocks go too, the way the
+   scroll hint went -- down and out, the one move, on the one curve --
+   from the moment the end card's sentence and call come up from the
+   bottom edge (the closer's script sets .is-end on the rail; it takes it
+   off again on the way back up). The footer's own clock is the time from
+   there: one clock at the end of the page, on the page, and nothing
+   printing over the last lines. Reduced motion: a cut, no slide -- and
+   the footer's clock still ticks. */
+.rail .rail__now{transition:transform var(--d-slow) var(--e-out)}
+.rail.is-end .rail__now{transform:translateY(90px)}
+@media (prefers-reduced-motion:reduce){
+  .rail .rail__now{transition:none}
 }
 </style>
 </head>
@@ -4494,9 +4544,9 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
     </button>
   </div>
   <script>
-  /* the bar's own state: .is-top (transparent over the spread; motion.js
-     sets the same class by the same rule, this runs first so the first
-     paint is right), the drawer under the bar on anything narrower than
+  /* the bar's own state: .is-scrolled (lifted, on the page's black, its
+     hairline drawn; motion.js sets .is-top by the same rule, which the
+     bar's CSS does not need), the drawer under the bar on anything narrower than
      the full row, and aria-current on the anchor whose section holds the
      upper part of the viewport. One passive listener, one rAF. */
   (function(){
@@ -4504,7 +4554,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
     var W = window, root = document.documentElement;
     var nav = hdr.querySelector(".nav"), btn = hdr.querySelector(".menu");
     var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
-    var wide = W.matchMedia("(min-width: 1160px)");
+    var wide = W.matchMedia("(min-width: 1200px)");
     function pad(n){ return n < 10 ? "0" + n : "" + n; }
     /* which section each anchor leads to, and its reel number -- resolved
        once the rest of the page is parsed (this script runs before it) */
@@ -4527,6 +4577,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       ticking = false;
       var y = W.scrollY || W.pageYOffset || 0;
       hdr.classList.toggle("is-top", y < 8);
+      hdr.classList.toggle("is-scrolled", y >= 8);
       var line = (W.innerHeight || root.clientHeight) * 0.4, at = null, i, r;
       for (i = 0; i < secs.length; i++) {
         if (!secs[i]) continue;
@@ -4593,7 +4644,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <section class="spread" id="hero" data-stagger="150">
   <div class="card">
     <p class="kicker reveal" data-at="0"><span lang="nl">Discord-community voor traders</span><span lang="en">A Discord community for traders</span><span class="kicker__more"><span lang="nl">&nbsp;&middot; Nederlands en Engels</span><span lang="en">&nbsp;&middot; Dutch and English</span></span></p>
-    <h1 class="title" data-parallax="-0.09" data-parallax-top>
+    <h1 class="title" data-parallax="-0.10" data-parallax-top>
       <span class="mask"><span class="title__line reveal" data-at="120"><span lang="nl">Proces.</span><span lang="en">Process.</span></span></span>
       <span class="mask"><span class="title__line reveal" data-at="260"><span lang="nl">Discipline.</span><span lang="en">Discipline.</span></span></span>
       <span class="mask"><span class="title__line reveal" data-at="400"><span lang="nl">Uitvoering.</span><span lang="en">Execution.</span></span></span>
@@ -4626,7 +4677,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
          the title, edge to edge, so the figure is in the first screen
          there too, and the caption hangs on its left edge. -->
     <figure class="plate">
-      <div class="plate__px" data-parallax="0.05" data-parallax-top>
+      <div class="plate__px" data-parallax="0.02" data-parallax-top>
         <div class="plate__frame reveal trace" data-at="300">
           <i class="plate__rule plate__rule--top"></i>
           <i class="plate__rule plate__rule--base"></i>
@@ -4684,23 +4735,24 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 
        The reveal is authored here, not left to the auto-stagger: per row
        the label surfaces, the leader draws out of it towards the value (a
-       wipe, so the dashes stay put), and the value rises through its own
-       baseline out of its own line box. Rows follow 80ms apart; the
-       address is the last beat, in place, after its word. Every slot is
-       inside the scroll cap of motion.js (420ms). -->
+       wipe, so the dashes stay put), and the value arrives the way the
+       page's lines arrive -- a fade and a short settle, whole in every
+       frame, never a slice. Rows follow 80ms apart; the address is the
+       last beat, in place, after its word. Every slot is inside the
+       scroll cap of motion.js (420ms). -->
   <dl class="pairs" data-stagger="80">
     <dt><span class="tag reveal" data-at="0">Community</span><i class="lvl reveal wipe" data-at="40" aria-hidden="true"></i></dt>
-    <dd><span class="mask"><span class="val reveal" data-at="110">Atlas Capital</span></span></dd>
+    <dd><span class="val reveal" data-at="110">Atlas Capital</span></dd>
 
     <dt><span class="tag reveal" data-at="80">Tagline</span><i class="lvl reveal wipe" data-at="120" aria-hidden="true"></i></dt>
-    <dd><span class="mask"><span class="val reveal" data-at="190"><em><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></em></span></span></dd>
+    <dd><span class="val reveal" data-at="190"><em><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></em></span></dd>
 
     <dt><span class="tag reveal" data-at="160"><span lang="nl">Taal</span><span lang="en">Language</span></span><i class="lvl reveal wipe" data-at="200" aria-hidden="true"></i></dt>
-    <dd><span class="mask"><span class="val reveal" data-at="270"><span lang="nl">Nederlands en Engels</span><span lang="en">Dutch and English</span></span></span></dd>
+    <dd><span class="val reveal" data-at="270"><span lang="nl">Nederlands en Engels</span><span lang="en">Dutch and English</span></span></dd>
 
     <dt><span class="tag reveal" data-at="240"><span lang="nl">Locatie</span><span lang="en">Location</span></span><i class="lvl reveal wipe" data-at="280" aria-hidden="true"></i></dt>
     <dd>
-      <span class="mask"><span class="val reveal" data-at="350">Discord</span></span>
+      <span class="val reveal" data-at="350">Discord</span>
       <small class="addr reveal" data-at="420"><a href="https://discord.gg/78Ff2GuSfW">discord.gg/78Ff2GuSfW</a></small>
     </dd>
   </dl>
@@ -4799,7 +4851,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
             <rect class="zn zn--lo" x="354" y="44" width="40" height="36"/>
             <path class="ln" pathLength="1" d="M0 150 13 138 30 119 40 110 53 134 64 148 80 172 93 161 102 131 114 131 130 96 145 105 161 166 170 168 186 149 197 113 215 104 227 113 236 139 250 178 260 161 276 146 290 110 302 127 313 140 325 150 337 117 350 96 364 77 372 44 389 100 400 124 412 111 425 98 440 96 455 121 469 147 480 170 497 159 503 133 520 120 535 136 547 148 556 160"/>
           </svg>
-          <i class="lbl lbl--up" style="right:10px;top:30.8%">Range</i>
+          <i class="lbl lbl--dn" style="right:10px;top:73.1%">Range</i>
           <i class="lbl lbl--dn" style="left:66.7%;top:16.9%"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></i>
           <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
         </div>
@@ -5065,6 +5117,25 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e){}
       try { pane.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); } catch(e){ pane.scrollIntoView(); }
     }
+    /* on a desk the pane is as tall as its tallest lemma, so a swap never
+       moves the close under it; on a phone it is as tall as the one shown */
+    function level(){
+      if (mq && mq.matches) { pane.style.minHeight = ""; return; }
+      var h = 0, k, on;
+      for (k = 0; k < figs.length; k++) {
+        on = figs[k].classList.contains("is-on");
+        if (!on) figs[k].style.display = "block";
+        h = Math.max(h, figs[k].offsetHeight);
+        if (!on) figs[k].style.display = "";
+      }
+      pane.style.minHeight = h ? h + "px" : "";
+    }
+    var lt = null;
+    function relevel(){ clearTimeout(lt); lt = setTimeout(level, 120); }
+    level();
+    try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(level, function(){}); } catch(e){}
+    window.addEventListener("resize", relevel);
+    try { new MutationObserver(relevel).observe(document.documentElement, { attributes: true, attributeFilter: ["data-lang"] }); } catch(e){}
     list.addEventListener("mouseover", function(e){ var i = at(e.target); if (i >= 0) { wake(); set(i); } });
     list.addEventListener("mouseleave", function(){ set(pinned); });
     list.addEventListener("click", function(e){ var i = at(e.target); if (i >= 0) { wake(); pin(i); bring(); } });
@@ -5388,7 +5459,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
           <i class="plate__tag plate__tag--num plate__tag--end" style="--x:87.6%;--y:82.1%">-0.272</i>
           <i class="plate__tag plate__tag--num plate__tag--end" style="--x:87.6%;--y:86.9%">-0.3414</i>
           <i class="plate__tag plate__tag--eqh plate__tag--end" style="--x:99.8%;--y:28.4%">equal highs</i>
-          <i class="plate__tag plate__tag--liq plate__tag--end plate__tag--two plate__tag--join" style="--x:99.8%;--y:78.6%;--ym:75.6%">Sellside<br>liquidity</i>
+          <i class="plate__tag plate__tag--liq plate__tag--end plate__tag--two plate__tag--join" style="--x:99.8%;--y:78.6%;--ym:75.6%">Sellside<br> liquidity</i>
         </span>
       </a>
       <figcaption class="reveal">
@@ -5417,8 +5488,8 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
           <path class="fig__body fig__body--dn" d="M7 238h5v21h-5zM19 212h5v11h-5zM26 222h5v172h-5zM38 280h5v25h-5zM51 276h5v23h-5zM70 216h5v11h-5zM77 223h5v38h-5zM115 91.8h5v1.5h-5zM121 93h5v26h-5zM134 100h5v79h-5zM147 154h5v65h-5zM153 218h5v14h-5zM166 157h5v10h-5zM172 165h5v7h-5zM179 171h5v83h-5zM191 244h5v38h-5zM198 281h5v59h-5zM211 271h5v142h-5zM249 193h5v13h-5zM268 167h5v4h-5zM281 152h5v8h-5zM287 158h5v6h-5zM306 160h5v76h-5zM312 232h5v20h-5zM319 213h5v5h-5zM325 215h5v60h-5zM363 135h5v3h-5zM370 135h5v19h-5zM376 154h5v10h-5zM383 162h5v39h-5zM389 193h5v14h-5zM414 139h5v20h-5zM427 123h5v2h-5zM434 122h5v9h-5zM440 130h5v44h-5zM453 157h5v7h-5zM459 194h5v51h-5zM504 74h5v45h-5zM510 115h5v55h-5zM523 133h5v70h-5zM529 207h5v42h-5zM536 257h5v100h-5zM555 211h5v17h-5zM567 222h5v73h-5zM574 291h5v11h-5zM580 299h5v4h-5zM593 275h5v18h-5zM606 261h5v39h-5zM625 227h5v36h-5zM631 262h5v12h-5zM644 266h5v46h-5zM657 242h5v24h-5zM663 263h5v57h-5zM682 265h5v11h-5zM688 276h5v58h-5zM695 333h5v38h-5zM714 263h5v65h-5zM720 324.8h5v1.5h-5zM727 323h5v67h-5zM739 357h5v3h-5zM746 357h5v9h-5zM752 364h5v89h-5zM759 452h5v94h-5zM765 556h5v15h-5zM790 388h5v16h-5zM867 2h5v9h-5z"/>
           </svg>
           <i class="plate__tag plate__tag--eqh plate__tag--end" style="--x:99.9%;--y:12.6%">equal highs</i>
-          <i class="plate__tag plate__tag--liq plate__tag--end plate__tag--two" style="--x:99.9%;--y:76.8%;--ym:78.6%">Sellside<br>liquidity</i>
-          <i class="plate__tag plate__tag--tag plate__tag--end" style="--x:87.8%;--y:79.3%;--xm:85.5%;--ym:74%">FVG</i>
+          <i class="plate__tag plate__tag--liq plate__tag--end plate__tag--two" style="--x:99.9%;--y:76.8%;--ym:77.7%">Sellside<br>liquidity</i>
+          <i class="plate__tag plate__tag--tag plate__tag--end" style="--x:87.8%;--y:79.3%;--ym:85.5%">FVG</i>
           <i class="plate__tag plate__tag--trend plate__tag--middle" style="--x:68.4%;--y:32.3%">Trendline liquidity</i>
         </span>
       </a>
@@ -5785,49 +5856,70 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <section id="access">
   <div class="grp"><h2><span lang="nl">Toegang</span><span lang="en">Access</span></h2></div>
 
-  <!-- The two ways in, set as two credits on the reel's one axis -- not
-       two columns of a price table, and not a chart. Each tier is a
-       level, drawn with the page's own furniture: in the label column,
-       from the content edge to the axis, the line the tier's word stands
-       on, tagged at the gutter the way every level on this reel is
-       tagged (the ledger above tags its years the same way). The open
-       tier is a solid hairline -- a level that has been reached. The
-       tier that opens later is the dashed liquidity line of the opening
-       schema -- a level drawn ahead, not yet run through; point at that
-       row and it draws itself solid. Point at the open row and a band
-       develops under its level, the gap of the spread. Right of the
-       axis, with every other value: the tier's one word, at statement
-       size and in one voice for both (nothing here ranks the two; the
-       level and the call do), the one line that is true of it, and the
-       link -- the open tier carries the one call of the screen, the
-       other the page's quiet link. No price, no day, no count that is
-       not in the sentence; the two levels are lines, not data, so they
-       carry no caption. -->
-  <dl class="levels" data-stagger="110">
-    <div class="level level--now">
-      <dt class="level__scale">
-        <i class="lvl lvl--now reveal draw" aria-hidden="true"></i>
-        <span class="level__tag reveal"><span lang="nl">Nu</span><span lang="en">Now</span></span>
-      </dt>
-      <dd class="level__body reveal">
-        <p class="level__value"><span lang="nl">Gratis</span><span lang="en">Free</span></p>
-        <p class="level__note"><span lang="nl">Negen open kanalen en de educatie in tien onderwerpen.</span><span lang="en">Nine open channels and the teaching in ten topics.</span></p>
+  <!-- The two ways in, set on one line: time, drawn left to right across
+       the strip the way the spread draws a session. Left of now the
+       line is solid -- what has been reached -- and stops on a dot: that
+       is now, and the one call of the screen stands under it. Right of
+       the dot the line runs on dashed, the liquidity line of the opening
+       schema: a level drawn ahead, not yet run through. From the dot a
+       hairline falls down the page and fades: the column line the later
+       path hangs on. Each path is set the same way under its stretch of
+       the line -- its tag in the label voice, its one word at title
+       size, then what it holds as a short scale (the thing named in the
+       serif, what is counted in mono at the right end of the row, the
+       way a level is tagged on a price scale; the names under it in
+       note size), and its link. No price, no day, no count that is not
+       in the sentence; the line is a line, not data, and carries no
+       caption. Both links go to the same server, so both carry the
+       arrow of the bar; the open path's is the one call, the other is
+       the page's quiet link. Point at a path and its stretch of the line
+       answers: under the solid run a band develops (the gap of the
+       spread); the dashed run draws itself solid. On a phone the two
+       paths stack, each under its own stretch of the line. -->
+  <div class="paths" data-stagger="120">
+    <div class="path path--now">
+      <p class="path__tag reveal" data-at="80"><span lang="nl">Nu</span><span lang="en">Now</span></p>
+      <i class="path__run reveal draw" data-at="0" aria-hidden="true"><i class="path__dot"></i></i>
+      <h3 class="path__word"><span class="mask"><span class="reveal" data-at="220"><span lang="nl">Gratis</span><span lang="en">Free</span></span></span></h3>
+      <div class="path__body reveal" data-at="400">
+        <ul class="rows">
+          <li class="row">
+            <span class="row__t"><span lang="nl">Negen open kanalen</span><span lang="en">Nine open channels</span></span>
+            <b class="row__n">9</b>
+            <small class="row__s">#nq-chart-idee&euml;n &middot; #es-chart-idee&euml;n &middot; #bitcoin &middot; #altcoins &middot; #markt &middot; #vragen &middot; #algemeen &middot; #atlas-op-socials &middot; #ondersteuning</small>
+          </li>
+          <li class="row">
+            <span class="row__t"><span lang="nl">De educatie</span><span lang="en">The teaching</span></span>
+            <b class="row__n">10</b>
+            <small class="row__s"><span lang="nl">Tien onderwerpen, van deviatie tot tradingpsychologie.</span><span lang="en">Ten topics, from deviation to trading psychology.</span></small>
+          </li>
+        </ul>
         <a class="cta solid" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom binnen</span><span lang="en">Come in</span></a>
-      </dd>
+      </div>
     </div>
 
-    <div class="level level--later">
-      <dt class="level__scale">
-        <i class="lvl lvl--later reveal draw" aria-hidden="true"></i>
-        <span class="level__tag reveal"><span lang="nl">Later</span><span lang="en">Later</span></span>
-      </dt>
-      <dd class="level__body reveal">
-        <p class="level__value"><span lang="nl">Premium</span><span lang="en">Premium</span></p>
-        <p class="level__note"><span lang="nl">Zes kanalen erbij zodra het opent. Prijs en datum worden in de server aangekondigd.</span><span lang="en">Six more channels once it opens. The price and the date will be announced in the server.</span></p>
+    <div class="path path--later">
+      <p class="path__tag reveal" data-at="640"><span lang="nl">Later</span><span lang="en">Later</span></p>
+      <i class="path__run reveal draw" data-at="520" aria-hidden="true"></i>
+      <i class="path__mark reveal" data-at="560" aria-hidden="true"></i>
+      <h3 class="path__word"><span class="mask"><span class="reveal" data-at="760"><span lang="nl">Premium</span><span lang="en">Premium</span></span></span></h3>
+      <div class="path__body reveal" data-at="900">
+        <ul class="rows">
+          <li class="row">
+            <span class="row__t"><span lang="nl">Zes kanalen erbij</span><span lang="en">Six more channels</span></span>
+            <b class="row__n">6</b>
+            <small class="row__s">#trade-setups &middot; #marktupdates &middot; #indicatoren &middot; #sessie-opnames &middot; #chart-idee&euml;n &middot; #premium-chat</small>
+          </li>
+          <li class="row">
+            <span class="row__t"><span lang="nl">Prijs en datum</span><span lang="en">Price and date</span></span>
+            <span class="row__v"><span lang="nl">In de server</span><span lang="en">In the server</span></span>
+            <small class="row__s"><span lang="nl">Allebei worden daar aangekondigd.</span><span lang="en">Both are announced there.</span></small>
+          </li>
+        </ul>
         <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Volg het in de server</span><span lang="en">Follow it in the server</span></a>
-      </dd>
+      </div>
     </div>
-  </dl>
+  </div>
 </section>
 <!-- /section:access -->
 
@@ -5881,13 +5973,16 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 
 <!-- The footer: the signature, the five links, the local time, and the
      two lines that go under everything on this page -- the risk line and
-     the past-performance line, each on its own line, exactly as they read
-     in the record (on a phone each sentence takes its own line, so no
-     line is one word). The grid is the end card's: the signature in the
-     left half, the two lists on the two column lines the chart is drawn
-     on, the clock on the right edge under the dot. The clock is written
-     by motion.js into [data-clock]; without a script (or without a time)
-     the line is not shown at all. -->
+     the past-performance line, each its own paragraph, exactly as they
+     read in the record, run at the full measure wherever they are read.
+     The grid is the end card's: the signature in the left half, the two
+     lists on the two column lines the chart is drawn on, the clock on
+     the right edge under the dot. The clock is written by motion.js into
+     [data-clock]; without a script (or without a time) the line is not
+     shown at all. It is the only clock at the end of the page: the
+     script under the footer retires the rail's two clocks as the end
+     card's last words come up, so the time is handed from the rail to
+     the page and nothing prints over the last lines. -->
 <footer data-stagger="90">
   <div class="inner">
     <div class="fgrid">
@@ -5909,13 +6004,41 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
     <i class="frule reveal draw"></i>
     <div class="fbase">
       <div class="legal">
-        <p class="risk reveal"><span lang="nl"><span class="s">Alleen voor educatieve doeleinden.</span> <span class="s">Geen financieel advies.</span> <span class="s">Traden brengt een aanzienlijk risico op verlies met zich mee.</span></span><span lang="en"><span class="s">For educational purposes only.</span> <span class="s">Not financial advice.</span> <span class="s">Trading carries a substantial risk of loss.</span></span></p>
+        <p class="risk reveal"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
         <p class="past reveal"><span lang="nl">Resultaten uit het verleden bieden geen garantie voor de toekomst.</span><span lang="en">Past results are no guarantee of future results.</span></p>
       </div>
       <p class="ftime reveal"><span class="ftime__city">Amsterdam</span> <time data-clock="Europe/Amsterdam"></time></p>
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  /* The rail retires with the reel. Its label already goes blank past the
+     last group; here its two clocks leave too -- the way the scroll hint
+     left, down and out (closer.css: .rail.is-end) -- from the moment the
+     end card's sentence and call come up from the bottom edge, 48px
+     before they reach the clocks' row, and they return if the visitor
+     scrolls back up. The footer's own clock carries the time from there,
+     so the page ends with one clock, on the page, and never two. The
+     rail is desktop decoration (aria-hidden), so this is a class and a
+     transform, nothing a reader or a probe can lose. */
+  var rail = document.querySelector(".rail");
+  var col = document.querySelector("#closer .end__col"), foot = document.querySelector("footer");
+  if (!rail || !("IntersectionObserver" in window)) return;
+  var seen = [], els = [], k;
+  if (col) els.push(col);
+  if (foot) els.push(foot);            /* and while any of the footer is on screen, whatever the screen's height */
+  if (!els.length) return;
+  var io = new IntersectionObserver(function(entries){
+    var i, any = false;
+    for (i = 0; i < entries.length; i++) seen[els.indexOf(entries[i].target)] = entries[i].isIntersecting;
+    for (i = 0; i < seen.length; i++) if (seen[i]) any = true;
+    rail.classList.toggle("is-end", any);
+  }, { threshold: 0, rootMargin: "0px 0px 48px 0px" });
+  for (k = 0; k < els.length; k++) { seen.push(false); io.observe(els[k]); }
+})();
+</script>
 <!-- /section:closer -->
 
 </div>
