@@ -7,77 +7,83 @@
        -- one per group -- on a band of the plate's own ground, closed top
        and bottom by a hairline that runs to both edges of the screen.
 
-       A group is one line, and a group is not a row: its markets are set
-       at a size that follows how many of them there are, so the wall has
-       a cadence -- three names at the full display size, two at three
-       quarters of it, one at a little over half -- and the four lines
-       stand at four heights, with the air under each cut to the same
-       measure. Where the names stop, a hairline carries the line on to
-       the tag: on Indices a stub, on Energy most of the window. The
-       emptiness beside one market is drawn, not left, and it is drawn by
-       the same rule on all four lines -- the length of the leader is the
-       group's weight read backwards.
+       One vertical, and it is the page's own. The strip's right edge comes
+       down out of the chapter title, and where the band begins it is not
+       covered but carried: the scale inside the band stands on that same
+       axis and runs the whole height of the band, from the top hairline to
+       the bottom one. So the line the reader has been following since the
+       first reel never breaks -- it passes through the chapter and comes
+       out below it. The break-out is to the left only: the type crosses
+       the strip's left edge and runs on to the window, which is what makes
+       this chapter the one that leaves the strip. Everything in the band
+       is measured to that axis -- the group tags hang off it, each leader
+       lands on it, the caption and the call end on it -- and every level
+       rule crosses it and runs on to both edges of the screen.
+
+       The four groups are not four rows. They descend, in the order the
+       trader names them: indices at the full display size on the heaviest
+       rule, then metals, then energy, then crypto -- each line smaller,
+       its rule lighter, its air tighter, its ink a step quieter. Read down
+       the band and the wall fades; read across a line and the type gives
+       out, a fixed leader takes over and hands the line to its tag. The
+       leader is one declared length on all four lines and lands on the
+       axis every time, so the emptiness beside a group of one is a measure
+       and not an accident.
 
        No code is set against a name. The client named a ticker for three
        of the eight and for five of them named none, so either all eight
-       carry one or the wall carries none; it carries none. At the far end
-       of every line stands the board's scale, and the group's tag is set
-       against it in the label caps -- eleven pixels of caps, and between
-       forty-eight and eighty-eight of serif, on one baseline. Under every
-       group a level runs edge to edge of the screen. No price, no change,
-       no numeral: eight names, four groups, and the caption says exactly
-       that. The chapter closes on the width it opened with -- the founder
-       trades them live, on the markets' own axis, the call at the far
-       edge of the band on the statement's line. -->
-  <div class="wall" data-stagger="90">
+       carry one or the wall carries none; it carries none. No price, no
+       change, no numeral: eight names, four groups, and the caption says
+       exactly that. The chapter closes on the axis it was built on -- the
+       founder trades them live, the call at the far end of the statement's
+       own line. -->
+  <div class="wall" data-stagger="78">
     <i class="wall__edge wall__edge--t reveal draw" aria-hidden="true"></i>
+    <i class="wall__axis reveal" data-at="0" aria-hidden="true"></i>
 
     <figure class="wall__fig">
-     <div class="wall__board">
-      <i class="wall__axis reveal" data-at="0" aria-hidden="true"></i>
       <dl class="wall__list">
 
-        <div class="wall__grp" data-n="3">
+        <div class="wall__grp">
           <dt class="wall__tag reveal">Indices</dt>
           <dd class="wall__names reveal wipe">
             <span class="mk">Nasdaq</span>
             <span class="mk">S&amp;P&nbsp;500</span>
             <span class="mk">Dow&nbsp;Jones</span>
-            <i class="mk__lead" aria-hidden="true"></i>
           </dd>
+          <i class="mk__lead reveal draw" aria-hidden="true"></i>
           <i class="wall__rule reveal draw" aria-hidden="true"></i>
         </div>
 
-        <div class="wall__grp" data-n="2">
+        <div class="wall__grp">
           <dt class="wall__tag reveal"><span lang="nl">Metalen</span><span lang="en">Metals</span></dt>
           <dd class="wall__names reveal wipe">
             <span class="mk"><span lang="nl">Goud</span><span lang="en">Gold</span></span>
             <span class="mk"><span lang="nl">Zilver</span><span lang="en">Silver</span></span>
-            <i class="mk__lead" aria-hidden="true"></i>
           </dd>
+          <i class="mk__lead reveal draw" aria-hidden="true"></i>
           <i class="wall__rule reveal draw" aria-hidden="true"></i>
         </div>
 
-        <div class="wall__grp" data-n="1">
+        <div class="wall__grp">
           <dt class="wall__tag reveal"><span lang="nl">Energie</span><span lang="en">Energy</span></dt>
           <dd class="wall__names reveal wipe">
             <span class="mk"><span lang="nl">Olie</span><span lang="en">Oil</span></span>
-            <i class="mk__lead" aria-hidden="true"></i>
           </dd>
+          <i class="mk__lead reveal draw" aria-hidden="true"></i>
           <i class="wall__rule reveal draw" aria-hidden="true"></i>
         </div>
 
-        <div class="wall__grp" data-n="2">
+        <div class="wall__grp">
           <dt class="wall__tag reveal">Crypto</dt>
           <dd class="wall__names reveal wipe">
             <span class="mk">Bitcoin</span>
             <span class="mk">Altcoins</span>
-            <i class="mk__lead" aria-hidden="true"></i>
           </dd>
+          <i class="mk__lead reveal draw" aria-hidden="true"></i>
           <i class="wall__rule reveal draw" aria-hidden="true"></i>
         </div>
       </dl>
-     </div>
 
       <!-- the caption, on the markets' own axis, in the voice of every
            figure on the page: the figure's name in caps, its note in the serif -->
@@ -89,7 +95,7 @@
 
     <!-- Live: the statement on the markets' axis, the one accent of the
          screen the word itself in the italic gold, its line under it and the
-         call at the band's far edge on the statement's own line. When is
+         call landing on the same axis every leader lands on. When is
          announced in the server and nowhere else, so nothing here is a time. -->
     <div class="live" id="live">
       <p class="live__line"><span class="mask"><span class="reveal"><span lang="nl">De oprichter handelt <em>live</em>.</span><span lang="en">The founder trades <em>live</em>.</span></span></span></p>

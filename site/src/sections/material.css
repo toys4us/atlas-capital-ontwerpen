@@ -120,7 +120,9 @@
    frame (preserveAspectRatio none) with every stroke held at one pixel;
    the candle bodies are geometry, so they widen with the plate as the
    file's would */
-#material .fig{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+/* the figure is the founder's own file, shown whole: contain, never crop,
+   because a cropped chart is a chart you cannot check against his original */
+#material .fig{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--mat)}
 #material .fig *{vector-effect:non-scaling-stroke}
 #material .fig__wick{fill:none;stroke-width:1;stroke-linecap:butt}
 #material .fig__wick--up{stroke:var(--ink-2);stroke-opacity:.62}

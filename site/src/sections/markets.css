@@ -4,62 +4,84 @@
    window: a band of the plate's own ground (--panel-lo, the mat every
    chart is printed on) that runs from edge to edge of the screen, closed
    top and bottom by a hairline of the gold that runs the whole width, and
-   the eight markets set at the size of a headline inside it. The band
-   lies on the strip the way a plate does -- its ground covers the spine
-   for its height and the spine continues below -- so the chapter is one
-   deliberate break and not a leak.
+   the eight markets set at the size of a headline inside it.
 
-   The construction is the old board's, promoted to the width of the
-   window, but a group is a line and not a row. Each group is set at a
-   size that follows how many markets it holds (--w, off [data-n]): three
-   names at the full display size, two at three quarters of it, one at a
-   little over half, and the air under a line cut to the same measure --
-   so the wall descends, lifts, and no two lines stand at one height.
-   The markets run from the band's own left inset -- the axis material's
-   wall hangs on, in by the width of the bar's mark so the rail's vertical
-   label never runs over the type.
+   ---- one vertical, and it is the page's own -----------------------------
+   The strip's right edge is the only vertical this chapter owns. On a desk
+   the band's scale is put exactly on it -- 420px right of the page's
+   centre, which is where .roll's right hairline stands -- and it is drawn
+   the full height of the band, so it starts on the top hairline and ends
+   on the bottom one. The line the reader has followed since the first reel
+   therefore passes through the chapter instead of dying at its edge. The
+   break-out is to the left only: the type crosses the strip's left edge
+   and runs on toward the window, and that asymmetry is the chapter.
 
-   Where the names stop, a hairline carries the line on to the tag: on
-   Indices a stub, on Energy most of the window. One rule on all four
-   lines, and the length it draws is the group's weight read backwards --
-   the emptiness beside a single market is drawn, not left. No code is
-   set against a name: the client named a ticker for three of the eight
-   and none for five, so either all eight carry one or the wall carries
-   none. It carries none, and the mono is not one of this chapter's
-   voices.
+   Everything in the band is measured to that axis. Both the tail column
+   (grid, measured off the band's content box) and the scale (absolute,
+   measured off the band's padding box) are `calc(50% - 420px)` from the
+   right, and the two resolve to the same x -- the padding box is wider by
+   exactly the two insets the content box is short. Below 1260px there is
+   no room for a label column beyond the strip's edge, so the axis falls
+   back to a declared label column of its own width; the arrangement does
+   not change, only where the one vertical stands.
 
-   At the far end of the line stands the board's one vertical, the scale,
-   the height of the board; the group's tag is set against it,
-   right-aligned, in the label caps, the one constant the varying serif is
-   read against. Under every group a level runs from the screen's left
-   edge to its right, straight through the scale: the rule of a board at
-   the width of a window. No price, no change, no row numeral -- eight
-   names, four groups, and the caption says exactly that. The chapter
-   closes on the width it opened with: the founder trades them live, on
-   the markets' own axis, with the one call at the far edge on the same
-   line.
+   ---- four groups that descend -------------------------------------------
+   Not four rows. In the order the trader names them -- indices, metals,
+   energy, crypto -- each line is set smaller than the one above it (--w),
+   its level rule is lighter (--lv, and the first is drawn at two pixels
+   where the rest are one), its air is cut shorter, and its ink drops a
+   step. Read down the band and the wall fades out; nothing about the four
+   lines is repeated at the same value twice.
+
+   ---- the leader ---------------------------------------------------------
+   Where the type gives out the line is handed on: one leader of a single
+   declared length (--lead) on all four lines, starting on the grid stop
+   that column two begins at and landing on the axis every time. It comes
+   up out of nothing over its first half so it never reads as a dash, and
+   it carries its group's own weight. The emptiness beside a group of one
+   is then a measure -- the same measure as beside a group of three -- and
+   not a leftover. No code is set against a name: the client named a ticker
+   for three of the eight and none for five, so the wall carries none, and
+   the mono is not one of this chapter's voices.
+
+   Under every group a level runs from the screen's left edge to its right,
+   straight through the scale: the rule of a board at the width of a
+   window. No price, no change, no row numeral -- eight names, four groups,
+   and the caption says exactly that. The chapter closes on the axis it was
+   built on: the founder trades them live, the one call landing where every
+   leader lands.
 
    Arrival: the two edges draw themselves in from the corners, the scale
-   falls, each tag lifts, its markets and their leader print on from the
-   left (.wipe, the plate's own arrival) and its level draws out to the
-   screen's edge. On a phone the band is one column: the tag over its
-   markets, which take the full width at the same four sizes, and the same
-   levels to both edges. */
+   falls from the top hairline, each tag lifts, its markets print on from
+   the left (.wipe, the plate's own arrival), its leader grows out of the
+   axis and its level draws out to the screen's edge. On a phone the band
+   is one column: the tag over its markets, which take the full width at
+   four sizes drawn closer together, and the same four levels at the same
+   four weights to both edges. */
 #markets .wall{
   /* the band's inset: the wide column, in by the bar's mark on a desk so
      the rail's label clears the type (material's wall hangs on this axis) */
   --in:0px;
   --edge:calc(max(var(--gutter),(100vw - var(--wide)) / 2) + var(--in));
-  --tagg:clamp(14px,1.8vw,26px);               /* the markets to the tag     */
-  --pad-r:clamp(9px,.9vw,13px);                /* the tag's clearance to it  */
-  --size:clamp(40px,5.7vw,82px);               /* the heaviest group's size  */
-  --pad:clamp(34px,4.6vw,66px);                /* the band's own air        */
+  --tagg:clamp(14px,1.8vw,26px);               /* the markets to the leader  */
+  --lead:clamp(44px,7.4vw,120px);              /* the leader's one length    */
+  --pad-l:clamp(11px,1vw,16px);                /* the axis to its tag        */
+  --tagw:clamp(98px,7vw,112px);                /* the label column           */
+  --size:clamp(28px,4.95vw,70px);              /* the first group's size     */
+  --pad:clamp(34px,4.6vw,66px);                /* the band's own air         */
+  /* where the one vertical stands: the label column's own width, and on a
+     desk the strip's right hairline itself. --tail is read against the
+     content box (a grid track), --axis-r against the padding box (an
+     absolute inset); at 50% - 420px the two land on the same pixel. */
+  --tail:var(--tagw);
+  --axis-r:calc(var(--edge) + var(--tagw));
   position:relative;z-index:2;                 /* the band lies on the spine */
   margin:clamp(14px,2vw,26px) calc(50% - 50vw) 0;
   padding:var(--pad) var(--edge);
   background:var(--panel-lo);
 }
 @media (min-width:1100px){ #markets .wall{--in:calc(var(--logo-nav) + 10px)} }
+@media (min-width:1260px){ #markets .wall{--tail:calc(50% - 420px);--axis-r:calc(50% - 420px)} }
 #markets .wall .reveal{--reveal-y:12px}        /* a line settles, it does not travel */
 
 /* ---- the two edges of the band: full width, drawn in from the corners -- */
@@ -72,41 +94,50 @@
 #markets .wall__edge--t{top:0}
 #markets .wall__edge--b{bottom:0;transform-origin:right center}
 
-/* ---- the scale: the board's one vertical, at the far edge of the type,
-   the height of the board -- every level runs to it and crosses it ------- */
-#markets .wall__board{position:relative}
+/* ---- the scale: the strip's own right hairline, carried through the band
+   at its full height -- it starts on the top edge and ends on the bottom -- */
 #markets .wall__axis{
-  position:absolute;top:0;bottom:0;right:0;
+  position:absolute;top:0;bottom:0;right:var(--axis-r);
   width:1px;
-  background:var(--line-2);
+  background:var(--line-2);                    /* the roll's own hairline    */
   pointer-events:none;
 }
 
-/* ---- a group: the markets from the left inset, the tag against the scale,
-   the level running out to both edges of the screen --------------------- */
+/* ---- a group: the markets from the left inset, one leader to the axis,
+   the tag hung off it, the level running out to both edges of the screen -- */
 #markets .wall__list{margin:0;padding:0;min-width:0}
 #markets .wall__grp{
-  --w:1;                                       /* the group's weight: how many  */
+  --w:1;                                       /* this line's share of --size */
+  --lv:var(--line-3);                          /* its level's colour          */
+  --lvh:2px;                                   /* its level's weight          */
+  --ld:var(--line-4);                          /* its leader                  */
+  --nk:var(--paper);                           /* its ink                     */
   position:relative;
   display:grid;
-  grid-template-columns:minmax(0,1fr) auto;    /* the tag takes its own width */
-  column-gap:var(--tagg);
-  align-items:baseline;                        /* the tag on the line's baseline */
+  /* names | the leader's own column, gap included | the label column, which
+     begins exactly on the axis. Column one is one width on all four lines,
+     cut so the longest of them just clears it, which is what puts every
+     leader on the same two stops. */
+  grid-template-columns:minmax(0,1fr) calc(var(--tagg) + var(--lead)) var(--tail);
+  align-items:baseline;                        /* everything on one baseline  */
   /* the air follows the line: a fixed floor for the descenders, then a
-     share cut to the group's own size, so no two levels are equally far */
+     share cut to this group's own size, so no two levels are equally far */
   padding-bottom:calc(11px + clamp(11px,2vw,30px) * var(--w));
   margin-bottom:calc(13px + clamp(13px,2.5vw,36px) * var(--w));
   min-width:0;
 }
-#markets .wall__grp[data-n="2"]{--w:.74}
-#markets .wall__grp[data-n="1"]{--w:.55}
+/* the descent, in the order the trader names them: each line smaller than
+   the one above it, on a lighter rule, in a quieter ink */
+#markets .wall__grp:nth-child(2){--w:.78;--lv:var(--line-3);--lvh:1px;--ld:var(--line-3);--nk:var(--ink-1)}
+#markets .wall__grp:nth-child(3){--w:.60;--lv:var(--line-2);--lvh:1px;--ld:var(--line-2);--nk:var(--ink-1)}
+#markets .wall__grp:nth-child(4){--w:.46;--lv:var(--line-1);--lvh:1px;--ld:var(--line-1);--nk:var(--ink-2)}
 #markets .wall__grp:last-child{margin-bottom:0}
 #markets .wall__tag{
-  grid-column:2;grid-row:1;
-  justify-self:end;
+  grid-column:3;grid-row:1;
+  justify-self:start;
   margin:0;
-  padding-right:var(--pad-r);
-  text-align:right;
+  padding-left:var(--pad-l);
+  text-align:left;
   font-family:var(--f-display);
   font-size:var(--t-micro);
   font-weight:400;
@@ -119,7 +150,7 @@
 #markets .wall__names{
   grid-column:1;grid-row:1;
   display:flex;flex-wrap:wrap;align-items:baseline;
-  column-gap:clamp(20px,2.7vw,42px);
+  column-gap:clamp(18px,2vw,28px);
   row-gap:clamp(2px,.6vw,10px);
   margin:0;min-width:0;
   font-family:var(--f-display);
@@ -127,32 +158,33 @@
   font-weight:400;
   line-height:.98;
   letter-spacing:-.016em;
-  color:var(--ink-1);
+  color:var(--nk);
 }
 #markets .mk{
   white-space:nowrap;                          /* a market name never breaks */
   transition:color var(--d) var(--e-out);
 }
-/* the leader: where the names stop, the line goes on to the tag. It sits
-   just off the baseline of the type it follows and takes whatever the line
-   has left. It comes up out of nothing over its first inch, so a line that
-   is nearly full ends in no line at all rather than in a dash, and it
-   thins as it runs on, so the scale and the levels stay the drawn
-   structure and the leader stays a measure. */
+/* the leader: one length on all four lines, starting on the stop its
+   column begins at and landing on the axis. It comes up out of nothing
+   over its first half, so it reads as a measure and never as a dash, and
+   it sits just off the baseline of the type it follows. */
 #markets .mk__lead{
-  flex:1 1 0;min-width:0;
+  grid-column:2;grid-row:1;
   align-self:baseline;
+  margin-left:var(--tagg);
   height:1px;
-  margin-bottom:.12em;
-  background:linear-gradient(90deg,
-    rgba(215,179,100,0) 0,var(--line-3) 64px,var(--line-1) 100%);
+  font-size:calc(var(--size) * var(--w));      /* so the drop below the
+                                                  baseline is this line's */
+  margin-bottom:.1em;
+  background:linear-gradient(90deg,rgba(215,179,100,0) 0,var(--ld) 55%,var(--ld) 100%);
 }
-/* the level: from the screen's left edge to its right, under the group */
+/* the level: from the screen's left edge to its right, under the group,
+   at this group's own weight */
 #markets .wall__rule{
   position:absolute;
   left:calc(-1 * var(--edge));right:calc(-1 * var(--edge));bottom:0;
-  height:1px;
-  background:var(--line-2);
+  height:var(--lvh);
+  background:var(--lv);
   pointer-events:none;
 }
 
@@ -168,6 +200,7 @@
   display:flex;flex-wrap:wrap;align-items:baseline;
   gap:2px clamp(14px,1.6vw,22px);
   margin-top:clamp(14px,1.8vw,24px);
+  margin-right:var(--tail);                    /* ends on the axis          */
   font-family:var(--f-display);
   line-height:1.5;
 }
@@ -183,12 +216,13 @@
 }
 
 /* ---- live: the statement on the markets' axis, its line under it, and the
-   one call at the far edge of the band on the statement's own line ------- */
+   one call landing where every leader lands ------------------------------ */
 #markets .live{
   display:grid;
   grid-template-columns:minmax(0,1fr) auto;
   column-gap:clamp(24px,4vw,72px);
   margin-top:clamp(40px,5vw,74px);
+  margin-right:var(--tail);                    /* the call ends on the axis */
 }
 #markets .live__line{
   grid-column:1;grid-row:1;
@@ -220,52 +254,56 @@
   margin:0;white-space:nowrap;
 }
 
-/* ---- arrival: the ink draws, never opacity, so a probe sees every rule -- */
+/* ---- arrival: the ink draws, never opacity, so a probe sees every rule --
+   the scale falls from the top hairline; each leader grows out of the axis */
 .js #markets .wall__axis.reveal{
   opacity:1;
   transform:scaleY(0);transform-origin:top center;
   transition:transform 1.6s var(--e-reveal);
 }
 .js #markets .wall__axis.reveal.is-in{transform:none}
+.js #markets .mk__lead.reveal.draw{transform-origin:right center}
 
 @media (prefers-reduced-motion:reduce){
   .js #markets .wall__axis.reveal{transform:none;transition:none}
   #markets .mk{transition:none}
 }
 
-/* ---- a phone: one column, the same rules to both edges ------------------ */
+/* ---- a phone: one column, the same four weights to both edges ---------- */
 @media (max-width:620px){
   #markets .wall{
     --size:clamp(34px,9.6vw,44px);
     --pad:clamp(30px,6.4vw,40px);
+    --tail:0px;
   }
   #markets .wall__axis{display:none}
   /* the tag climbs above its markets and the names take the whole width,
      so a group of one is a short entry under its label and not a name
-     stranded beside a tag. The four sizes stay, drawn closer together --
-     a phone has no room for the desk's range. */
+     stranded beside a tag. The descent stays, drawn closer together --
+     a phone has no room for the desk's range -- and the four levels keep
+     their four weights, which is what carries it here. */
   #markets .wall__grp{
     grid-template-columns:minmax(0,1fr);
     padding-bottom:calc(9px + clamp(9px,3.4vw,16px) * var(--w));
     margin-bottom:calc(11px + clamp(11px,4.4vw,22px) * var(--w));
   }
-  #markets .wall__grp[data-n="2"]{--w:.82}
-  #markets .wall__grp[data-n="1"]{--w:.66}
+  #markets .wall__grp:nth-child(2){--w:.86}
+  #markets .wall__grp:nth-child(3){--w:.74}
+  #markets .wall__grp:nth-child(4){--w:.64}
   #markets .wall__tag{
     grid-column:1;grid-row:1;
-    justify-self:start;
-    text-align:left;
-    padding-right:0;
+    padding-left:0;
     margin-bottom:clamp(9px,2.6vw,13px);
   }
   #markets .wall__names{grid-column:1;grid-row:2;column-gap:clamp(16px,4.4vw,22px)}
   #markets .mk__lead{display:none}
-  #markets .wall__cap{display:block;margin-top:16px}
+  #markets .wall__cap{display:block;margin-top:16px;margin-right:0}
   #markets .wall__title{display:block}
   #markets .wall__note{display:block;margin-top:4px;max-width:none}
   #markets .live{
     grid-template-columns:minmax(0,1fr);
     margin-top:clamp(34px,8vw,44px);
+    margin-right:0;
   }
   #markets .live__line{max-width:none}
   #markets .live__sub{max-width:none}
