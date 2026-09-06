@@ -19,6 +19,21 @@
    "confidence": 0.72,
    "note": "Rebuilt the syllabus as ten price levels on the reel's shared axis (--axis-l/--axis-r): mono count at the left like a scale label, a hairline level of the gold running to the term, the term ending on the gutter where every reel label ends, the gloss in the value column. One row per topic (dropped the hollow 5+5 grid with reserved empty gloss lines).\nGlosses are visible at rest (ink-3) — the hero links here with \"bekijk eerst de tien onderwerpen\", and ten bare words left the section hollow; hover/focus brings one forward: the row becomes the FVG band (gold .07, edges .36), its level lights",
    "timestamp": "2026-09-05T21:16:10+02:00"
+  },
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.5,
+   "score_ref": 5,
+   "wowed": false,
+   "gap": "The right column dies after one line: a big \"Deviatie\" heading, a single lowercase caption, then ~170px of nothing above the closing line while the ten-item list keeps running on the left. At the bar the detail panel earns its width — a two-column definition, a rule-set of terms, a real (not zigzag placeholder) schematic that changes per item — and the heading is designed (tighter tracking, optical size, a numeral or eyebrow tied to the list) rather than simply set large.",
+   "motion": "Fade-up reveals of list and chart with a scroll-progress line and active-section nav state — restrained and clean, but stock choreography with no distinctive easing.",
+   "verdict": "A is a coherent, well-aligned dark editorial system — mono numerals, gold hairlines, consistent insets, a mobile list that actually reads — let down by a dead right column and a placeholder chart, so it is \"fine\", not shortlist. B has the more distinctive, atmospheric world, but a jury cannot forgive illegible copy, a label colliding with the logo, and mobile nav rendering bugs; A wins on craft while neither reaches Site of the Day.",
+   "confidence": 0.7,
+   "note": "Rebuilt the syllabus as ten price levels on the reel's shared axis (--axis-l/--axis-r): mono count at the left like a scale label, a hairline level of the gold running to the term, the term ending on the gutter where every reel label ends, the gloss in the value column. One row per topic (dropped the hollow 5+5 grid with reserved empty gloss lines).\nGlosses are visible at rest (ink-3) — the hero links here with \"bekijk eerst de tien onderwerpen\", and ten bare words left the section hollow; hover/focus brings one forward: the row becomes the FVG band (gold .07, edges .36), its level lights",
+   "timestamp": "2026-09-06T01:59:52+02:00"
   }
  ]
 }
