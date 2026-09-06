@@ -265,7 +265,7 @@
   try {
     var fs = document.fonts;
     if (fs && fs.load) {
-      Promise.all([fs.load('1em Newsreader'), fs.load('italic 1em Newsreader'),
+      Promise.all([fs.load('1em "Space Grotesk"'), fs.load('500 1em "Space Grotesk"'),
                    fs.load('1em "Fragment Mono"')]).then(intro, intro);
     }
   } catch(e){}

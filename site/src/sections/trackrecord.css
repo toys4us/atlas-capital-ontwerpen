@@ -484,3 +484,12 @@
   #trackrecord .print__plate.is-print,#trackrecord .print__cap.is-print{animation:none}
   #trackrecord .zoom[open],#trackrecord .zoom[open]::backdrop{animation:none}
 }
+
+/* The certificate was printed 814px tall -- the biggest single block on a
+   page the client called too long, for one image the reader can already
+   open full size. Half that is still legible and the filmstrip still
+   carries all six. */
+@media (min-width:900px){
+  #trackrecord .print{height:clamp(300px,32vw,430px)}
+  #trackrecord .print img{width:100%;height:100%;object-fit:contain}
+}

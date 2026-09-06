@@ -135,66 +135,9 @@
 /* ---- the lemma: one entry at a time ------------------------------------- */
 #education .fig{display:none}
 #education .fig.is-on{display:block}
-/* the plate: a mat with a hairline along its top and its bottom, none down
-   its sides, as the spread's; it runs a little past the column, the way a
-   level is drawn forward */
-#education .plate{
-  position:relative;
-  container-type:inline-size;
-  aspect-ratio:300/130;
-  margin:0 calc(-1 * var(--bleed)) 0 0;
-  background:var(--panel-lo);
-  border-top:1px solid var(--line-3);
-  border-bottom:1px solid var(--line-3);
-}
-#education .plate svg{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-#education .plate svg *{vector-effect:non-scaling-stroke}
-#education .ln{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:round}
-#education .ln--b{stroke-opacity:.42}
-#education .zn{fill:var(--gold);fill-opacity:.07;stroke:var(--gold);stroke-opacity:.36;stroke-width:1}
-#education .zn--lo{fill-opacity:.03;stroke-opacity:.16}
-#education .zn--fill{stroke:none}
-#education .lq{fill:none;stroke:var(--gold);stroke-opacity:.55;stroke-width:1;stroke-dasharray:3 5;stroke-linecap:butt}
-#education .hl{fill:none;stroke:var(--gold);stroke-opacity:.34;stroke-width:1}
-#education .hl--lo{stroke-opacity:.14}
-#education .hl--mid{stroke-opacity:.26}
-#education .hl--hi{stroke-opacity:.55}
-#education .nw{fill:none;stroke:var(--gold);stroke-opacity:.26;stroke-width:1}
-#education .br{fill:none;stroke:var(--gold);stroke-opacity:.34;stroke-width:1;stroke-dasharray:2 4;stroke-linecap:butt}
-/* candles: hairline bodies, a filled body where the candle falls */
-#education .cd line{stroke:var(--gold);stroke-opacity:.5;stroke-width:1}
-#education .cd rect{fill:none;stroke:var(--gold);stroke-opacity:.55;stroke-width:1}
-#education .cd--dn rect{fill:var(--gold);fill-opacity:.2}
-/* the tags of the figure: the page's label voice, above the right end of
-   a level (or under it), sized from the plate and never under 9px */
-#education .lbl{
-  position:absolute;
-  display:block;
-  font-family:var(--f-display);
-  font-style:normal;
-  font-size:clamp(9px,2.4cqw,var(--t-nano));
-  letter-spacing:var(--trk-caps);
-  text-transform:uppercase;
-  line-height:1;
-  color:var(--ink-4);
-  white-space:nowrap;
-  pointer-events:none;
-}
-#education .lbl--up{transform:translateY(calc(-100% - 5px))}
-#education .lbl--dn{transform:translateY(5px)}
+
 /* the corner: the one word that keeps the drawing honest, where a plate
    carries its title */
-#education .tag{
-  position:absolute;top:9px;left:12px;
-  font-family:var(--f-display);
-  font-style:normal;
-  font-size:var(--t-nano);
-  letter-spacing:var(--trk-caps);
-  text-transform:uppercase;
-  line-height:1;
-  color:var(--ink-4);
-  white-space:nowrap;
-}
 
 /* the entry under the plate, on the plate's left edge */
 #education .lemma{margin:clamp(14px,2vw,20px) 0 0}
@@ -363,7 +306,6 @@
 @media (max-width:620px){
   #education .syllabus{display:flex;flex-direction:column;--bleed:10px}
   #education .pane{order:-1;margin:0 0 clamp(22px,6vw,30px)}
-  #education .plate{margin:0}
   #education .row{padding:10px var(--bleed) 11px}
   #education .close{display:block;margin-top:clamp(36px,9vw,52px)}
   #education .close .cta{margin-top:clamp(18px,2.4vw,26px)}

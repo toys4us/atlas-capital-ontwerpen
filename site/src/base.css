@@ -5,7 +5,7 @@
    namespaced under that section's root id.
 
    Identity in one line: a trader's journal set like the financial press --
-   Newsreader for everything that is read, one flat gold (#D7B364) for the
+   Space Grotesk for everything that is read, one flat gold (#D7B364) for the
    mark, the hairlines, the one call and the ink the plates are printed
    in, and a page that arrives as you read it. The opening spread is the
    idea: the tagline set large and flush left, a session drawn as a schema
@@ -70,45 +70,47 @@
   --line-4:rgba(215,179,100,.62);
   --glow:rgba(233,212,160,.12);
 
-  /* type: one serif with an optical-size axis, one mono */
-  --f-display:"Newsreader","Newsreader Fallback","Times New Roman",Times,serif;
+  /* type: the mark is a geometric chevron -- flat terminals, clean
+     diagonals, no stress. A literary serif fights it and reads as a private
+     bank; Space Grotesk answers it, and it is the face of the design the
+     client chose out of a hundred. One family, one mono. */
+  --f-display:"Space Grotesk","Space Grotesk Fallback",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --f-text:var(--f-display);
   --f-mono:"Fragment Mono","Fragment Mono Fallback Win","Fragment Mono Fallback Mac",ui-monospace,Consolas,Menlo,monospace;
   --f:var(--f-text);
 
-  /* fluid scale, 390 → 1440. Newsreader has a small x-height, so every
-     step sits a size above where a grotesk would. */
-  --t-display:clamp(76px,12.5vw,184px);  /* the end card                   */
-  --t-hero:clamp(62px,min(11vw,16vh),158px); /* the spread: three lines, and
-                                            the call under the band still
-                                            above the fold on a 768 laptop */
-  --t-h1:clamp(44px,7vw,100px);          /* a section-sized line           */
-  --t-h2:clamp(27px,3.2vw,46px);         /* a statement, a quote           */
-  --t-h3:clamp(20px,1.95vw,27px);        /* a credit value                 */
-  --t-quote:clamp(24px,2.7vw,38px);      /* a long quote                   */
-  --t-lead:clamp(18px,1.6vw,23px);       /* the line under a title         */
-  --t-body:clamp(16.5px,1.15vw,18px);
-  --t-small:clamp(13.5px,1vw,14.5px);
+  /* fluid scale, 390 → 1440. A grotesk carries a bigger x-height than the
+     serif this replaced, so every step comes down a notch and the page gets
+     shorter for free. */
+  --t-display:clamp(64px,10vw,146px);    /* the end card                   */
+  --t-hero:clamp(50px,min(9vw,13vh),124px);
+  --t-h1:clamp(36px,5.4vw,74px);         /* a section-sized line           */
+  --t-h2:clamp(24px,2.7vw,38px);         /* a statement, a quote           */
+  --t-h3:clamp(19px,1.7vw,24px);         /* a credit value                 */
+  --t-quote:clamp(21px,2.2vw,31px);      /* a long quote                   */
+  --t-lead:clamp(17px,1.4vw,20px);       /* the line under a title         */
+  --t-body:clamp(16px,1.05vw,17px);
+  --t-small:clamp(13.5px,.95vw,14.5px);
   --t-caption:12px;                      /* mono: dates, amounts, tickers  */
   --t-micro:11px;                        /* serif caps labels              */
   --t-nano:10.5px;                       /* the header on a phone          */
 
   /* tracking per size */
-  --trk-display:-.022em;
-  --trk-hero:-.028em;
-  --trk-h1:-.014em;
-  --trk-caps-wide:.24em;                 /* group titles, the wordmark     */
+  --trk-display:-.035em;
+  --trk-hero:-.038em;
+  --trk-h1:-.028em;
+  --trk-caps-wide:.18em;                 /* group titles, the wordmark     */
   --trk-caps:.16em;                      /* labels                         */
   --trk-caps-tight:.10em;                /* caps at lead size and up       */
   --trk-mono:.02em;
   --trk-mono-caps:.14em;                 /* button labels                  */
 
   /* leading */
-  --lh-display:.92;
-  --lh-hero:.94;
-  --lh-tight:1.08;
-  --lh-snug:1.24;
-  --lh-body:1.6;
+  --lh-display:.94;
+  --lh-hero:.96;
+  --lh-tight:1.1;
+  --lh-snug:1.26;
+  --lh-body:1.55;
 
   /* measure */
   --measure:58ch;
@@ -118,8 +120,8 @@
 
   /* spacing: a fixed ladder plus three fluid gaps */
   --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;--s9:96px;--s10:128px;
-  --gap-section:clamp(72px,10vw,144px);
-  --gap-block:clamp(32px,5vw,64px);
+  --gap-section:clamp(48px,5.6vw,84px);
+  --gap-block:clamp(24px,3.2vw,42px);
   --gap-item:clamp(12px,1.6vw,20px);
 
   /* the mark: a mark, not a poster. It appears once, in the bar, at the
@@ -154,13 +156,13 @@
 
 /* ---------- metric-matched fallbacks --------------------------------------
    Measured from the served woff2 against the system faces they stand in for,
-   so a late swap moves nothing: Newsreader (opsz 16) runs at 104.8% of Times'
-   width with a 73.5/26.5 ascent/descent, Fragment Mono at 112.4% of Consolas
-   and 102.7% of Menlo. */
+   so a late swap moves nothing: Space Grotesk runs a little narrower than
+   Arial/Helvetica with a 98.4/24.1 ascent/descent, Fragment Mono at 112.4%
+   of Consolas and 102.7% of Menlo. */
 @font-face{
-  font-family:"Newsreader Fallback";
-  src:local("Times New Roman"),local("TimesNewRomanPSMT"),local("Times");
-  size-adjust:104.8%;ascent-override:70.1%;descent-override:25.3%;line-gap-override:0%;
+  font-family:"Space Grotesk Fallback";
+  src:local("Arial"),local("Helvetica Neue"),local("Helvetica");
+  size-adjust:97.2%;ascent-override:98.4%;descent-override:24.1%;line-gap-override:0%;
 }
 @font-face{
   font-family:"Fragment Mono Fallback Win";
@@ -431,11 +433,16 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
    "lead" rides the left edge level with the middle of the viewport
    (motion.js writes --spine-y), so the light you read by travels down the
    reel with you. Without JS the edges are simply there. */
+/* The strip was 840px wide on any screen, so on a desk the whole page ran
+   down a 760px column with 340px of nothing either side. That is what made
+   it feel like a brochure and it is most of why the page was thirteen
+   screens: a narrow measure stacks everything. It is a proper column now
+   and the page gets shorter without a word being cut. */
 .roll{
   position:relative;
-  max-width:840px;
+  max-width:1180px;
   margin:0 auto;
-  padding:clamp(34px,6vw,76px) clamp(18px,4vw,40px) clamp(56px,8vw,116px);
+  padding:clamp(28px,4vw,56px) clamp(18px,4vw,48px) clamp(44px,6vw,88px);
   counter-reset:reel;
 }
 .roll::before,.roll::after{
@@ -460,7 +467,7 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 .grp{
   position:relative;
   text-align:center;
-  margin:clamp(48px,7vw,96px) 0 clamp(20px,3vw,34px);
+  margin:clamp(38px,4.4vw,62px) 0 clamp(16px,2.2vw,26px);
   counter-increment:reel;
 }
 .roll > :first-child > .grp:first-child{margin-top:0}

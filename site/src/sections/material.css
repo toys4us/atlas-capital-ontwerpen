@@ -311,3 +311,51 @@
   #material .tile:not(.reveal),#material .plate--full,#material .plate__level,#material .plate figcaption > b,
   #material .tile .fig__zone,#material .tile .fig__level,#material .tile .fig__line,#material .tile .plate__tag{transition:none}
 }
+
+/* ---- the wall, tightened -------------------------------------------------
+   The scattered hang cost 2900px on a page the client already called too
+   long. Same plates, same captions, half the height: pairs stay full width
+   because each is one moment seen twice, the three singles share a row, and
+   nothing bleeds out of the column any more. */
+@media (min-width:900px){
+  #material .wall{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    column-gap:clamp(14px,1.6vw,22px);
+    row-gap:clamp(26px,3.2vw,44px);
+    --out:0px;
+  }
+  #material .plate--pair,#material .plate--full{grid-column:1/-1}
+  #material .plate--left,#material .plate--right{
+    grid-column:auto;grid-template-columns:minmax(0,1fr);row-gap:0;
+  }
+  #material .plate--left .tile,#material .plate--right .tile{
+    grid-column:1;grid-row:1;width:100%;margin:0;
+  }
+  #material .plate--left figcaption,#material .plate--right figcaption{
+    grid-column:1;grid-row:2;margin-top:clamp(10px,1.2vw,14px);
+  }
+  /* A plate's height is set, not derived from its width: with aspect ratios
+     a wider column made a taller page, which is backwards. contain keeps
+     every chart whole inside the box. */
+  #material .plate--left .frame,#material .plate--right .frame{aspect-ratio:auto;height:clamp(180px,17vw,240px)}
+  #material .plate--pair .frame{aspect-ratio:auto;height:clamp(200px,19vw,272px)}
+  #material .plate--full .frame{aspect-ratio:auto;height:clamp(220px,21vw,300px)}
+  #material .plate--full{margin:0}
+  #material .plate--full figcaption{margin-top:clamp(10px,1.2vw,14px)}
+}
+
+/* A phone is where the page was longest: five plates at their natural
+   ratios ran 2700px on their own. One height for every plate, set from the
+   viewport rather than from the column, and contain keeps each chart whole. */
+@media (max-width:899px){
+  #material .plate .frame,
+  #material .plate--pair .frame,
+  #material .plate--left .frame,
+  #material .plate--right .frame,
+  #material .plate--full .frame{aspect-ratio:auto;height:clamp(150px,42vw,210px)}
+  #material .wall{row-gap:clamp(18px,4vw,26px)}
+}
+@media (max-width:619px){
+  #material .plate--pair{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #material .plate--pair .frame{height:clamp(118px,30vw,150px)}
+}

@@ -16,7 +16,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-30 -69 480 480'%3E%3Crect x='-30' y='-69' width='480' height='480' fill='%2308090B'/%3E%3Cpath fill='%23D7B364' fill-rule='evenodd' d='M210 0 420 342 366 342 210 44 54 342 0 342ZM210 160 183 204 267.8 342 321.8 342ZM163.1 236 190.1 280 152 342 98 342Z'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Fragment+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fragment+Mono&display=swap" rel="stylesheet">
 <style>
 /* ---- base.css ---- */
 /* ==========================================================================
@@ -26,7 +26,7 @@
    namespaced under that section's root id.
 
    Identity in one line: a trader's journal set like the financial press --
-   Newsreader for everything that is read, one flat gold (#D7B364) for the
+   Space Grotesk for everything that is read, one flat gold (#D7B364) for the
    mark, the hairlines, the one call and the ink the plates are printed
    in, and a page that arrives as you read it. The opening spread is the
    idea: the tagline set large and flush left, a session drawn as a schema
@@ -91,45 +91,47 @@
   --line-4:rgba(215,179,100,.62);
   --glow:rgba(233,212,160,.12);
 
-  /* type: one serif with an optical-size axis, one mono */
-  --f-display:"Newsreader","Newsreader Fallback","Times New Roman",Times,serif;
+  /* type: the mark is a geometric chevron -- flat terminals, clean
+     diagonals, no stress. A literary serif fights it and reads as a private
+     bank; Space Grotesk answers it, and it is the face of the design the
+     client chose out of a hundred. One family, one mono. */
+  --f-display:"Space Grotesk","Space Grotesk Fallback",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --f-text:var(--f-display);
   --f-mono:"Fragment Mono","Fragment Mono Fallback Win","Fragment Mono Fallback Mac",ui-monospace,Consolas,Menlo,monospace;
   --f:var(--f-text);
 
-  /* fluid scale, 390 → 1440. Newsreader has a small x-height, so every
-     step sits a size above where a grotesk would. */
-  --t-display:clamp(76px,12.5vw,184px);  /* the end card                   */
-  --t-hero:clamp(62px,min(11vw,16vh),158px); /* the spread: three lines, and
-                                            the call under the band still
-                                            above the fold on a 768 laptop */
-  --t-h1:clamp(44px,7vw,100px);          /* a section-sized line           */
-  --t-h2:clamp(27px,3.2vw,46px);         /* a statement, a quote           */
-  --t-h3:clamp(20px,1.95vw,27px);        /* a credit value                 */
-  --t-quote:clamp(24px,2.7vw,38px);      /* a long quote                   */
-  --t-lead:clamp(18px,1.6vw,23px);       /* the line under a title         */
-  --t-body:clamp(16.5px,1.15vw,18px);
-  --t-small:clamp(13.5px,1vw,14.5px);
+  /* fluid scale, 390 → 1440. A grotesk carries a bigger x-height than the
+     serif this replaced, so every step comes down a notch and the page gets
+     shorter for free. */
+  --t-display:clamp(64px,10vw,146px);    /* the end card                   */
+  --t-hero:clamp(50px,min(9vw,13vh),124px);
+  --t-h1:clamp(36px,5.4vw,74px);         /* a section-sized line           */
+  --t-h2:clamp(24px,2.7vw,38px);         /* a statement, a quote           */
+  --t-h3:clamp(19px,1.7vw,24px);         /* a credit value                 */
+  --t-quote:clamp(21px,2.2vw,31px);      /* a long quote                   */
+  --t-lead:clamp(17px,1.4vw,20px);       /* the line under a title         */
+  --t-body:clamp(16px,1.05vw,17px);
+  --t-small:clamp(13.5px,.95vw,14.5px);
   --t-caption:12px;                      /* mono: dates, amounts, tickers  */
   --t-micro:11px;                        /* serif caps labels              */
   --t-nano:10.5px;                       /* the header on a phone          */
 
   /* tracking per size */
-  --trk-display:-.022em;
-  --trk-hero:-.028em;
-  --trk-h1:-.014em;
-  --trk-caps-wide:.24em;                 /* group titles, the wordmark     */
+  --trk-display:-.035em;
+  --trk-hero:-.038em;
+  --trk-h1:-.028em;
+  --trk-caps-wide:.18em;                 /* group titles, the wordmark     */
   --trk-caps:.16em;                      /* labels                         */
   --trk-caps-tight:.10em;                /* caps at lead size and up       */
   --trk-mono:.02em;
   --trk-mono-caps:.14em;                 /* button labels                  */
 
   /* leading */
-  --lh-display:.92;
-  --lh-hero:.94;
-  --lh-tight:1.08;
-  --lh-snug:1.24;
-  --lh-body:1.6;
+  --lh-display:.94;
+  --lh-hero:.96;
+  --lh-tight:1.1;
+  --lh-snug:1.26;
+  --lh-body:1.55;
 
   /* measure */
   --measure:58ch;
@@ -139,8 +141,8 @@
 
   /* spacing: a fixed ladder plus three fluid gaps */
   --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;--s9:96px;--s10:128px;
-  --gap-section:clamp(72px,10vw,144px);
-  --gap-block:clamp(32px,5vw,64px);
+  --gap-section:clamp(48px,5.6vw,84px);
+  --gap-block:clamp(24px,3.2vw,42px);
   --gap-item:clamp(12px,1.6vw,20px);
 
   /* the mark: a mark, not a poster. It appears once, in the bar, at the
@@ -175,13 +177,13 @@
 
 /* ---------- metric-matched fallbacks --------------------------------------
    Measured from the served woff2 against the system faces they stand in for,
-   so a late swap moves nothing: Newsreader (opsz 16) runs at 104.8% of Times'
-   width with a 73.5/26.5 ascent/descent, Fragment Mono at 112.4% of Consolas
-   and 102.7% of Menlo. */
+   so a late swap moves nothing: Space Grotesk runs a little narrower than
+   Arial/Helvetica with a 98.4/24.1 ascent/descent, Fragment Mono at 112.4%
+   of Consolas and 102.7% of Menlo. */
 @font-face{
-  font-family:"Newsreader Fallback";
-  src:local("Times New Roman"),local("TimesNewRomanPSMT"),local("Times");
-  size-adjust:104.8%;ascent-override:70.1%;descent-override:25.3%;line-gap-override:0%;
+  font-family:"Space Grotesk Fallback";
+  src:local("Arial"),local("Helvetica Neue"),local("Helvetica");
+  size-adjust:97.2%;ascent-override:98.4%;descent-override:24.1%;line-gap-override:0%;
 }
 @font-face{
   font-family:"Fragment Mono Fallback Win";
@@ -452,11 +454,16 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
    "lead" rides the left edge level with the middle of the viewport
    (motion.js writes --spine-y), so the light you read by travels down the
    reel with you. Without JS the edges are simply there. */
+/* The strip was 840px wide on any screen, so on a desk the whole page ran
+   down a 760px column with 340px of nothing either side. That is what made
+   it feel like a brochure and it is most of why the page was thirteen
+   screens: a narrow measure stacks everything. It is a proper column now
+   and the page gets shorter without a word being cut. */
 .roll{
   position:relative;
-  max-width:840px;
+  max-width:1180px;
   margin:0 auto;
-  padding:clamp(34px,6vw,76px) clamp(18px,4vw,40px) clamp(56px,8vw,116px);
+  padding:clamp(28px,4vw,56px) clamp(18px,4vw,48px) clamp(44px,6vw,88px);
   counter-reset:reel;
 }
 .roll::before,.roll::after{
@@ -481,7 +488,7 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 .grp{
   position:relative;
   text-align:center;
-  margin:clamp(48px,7vw,96px) 0 clamp(20px,3vw,34px);
+  margin:clamp(38px,4.4vw,62px) 0 clamp(16px,2.2vw,26px);
   counter-increment:reel;
 }
 .roll > :first-child > .grp:first-child{margin-top:0}
@@ -1589,212 +1596,6 @@ dl.pairs .cols{
   #hero .aside{margin-left:calc(clamp(22px,3vw,36px) + 14px)}
 }
 
-/* ---- section:production ---- */
-/* ===== production =====
-   The credits, set as a spec sheet. Four rows on the shared axis of
-   base.css (dl.pairs: label column left of the gutter, value column right
-   of it, one baseline). Each row is one composed level, read left to
-   right: the label at the left edge of the label column, in the tracked
-   caps; out of it a leader -- the dashed hairline of the one gold, the
-   liquidity line of the opening plate used as furniture -- runs along
-   the baseline the two columns share, across the gutter, and stops a
-   step short of the value; the value stands on the column line with
-   every other value on the reel. So the label-to-value gap is the led
-   one, the way a contents page or a spec sheet leads it, and the row is
-   the same object as the numeral and its level on the next reel (the
-   "10+" is the tag at the left, its level runs to the words). All four
-   leaders end on one invisible line a step left of the column line;
-   nothing is drawn down the axis itself. Schema only: no number, no
-   instrument, no date.
-
-   Every row is the same row, and the last one has a second line. The
-   place is the value, at credit size like every other; its address is
-   the line under it, on the same column line -- the way a credit carries
-   an address under a name -- in the mono at caption size (the one fact
-   here that is a code) and in the secondary grey (a link: a step above a
-   label). It is the link, and it ends in the arrow of the bar, the
-   page's mark for a link that leaves the page; no underline, the arrow
-   says it. Pointed at, a band fills behind it between two hairlines (the
-   plate's gap, as a hover state) and the address and its arrow warm to
-   the gold. Two voices, serif and mono, no third.
-
-   The title card is base.css's, unchanged, so the rule and the numeral
-   sit exactly as they do on every other reel.
-
-   Reveal: authored in the partial (data-stagger with data-at slots), so
-   a row is a sequence and not a fade. The label surfaces first, opacity
-   only, quick; the leader draws out of it towards the value -- a wipe,
-   so the dashes stay where they are and the line is drawn, not
-   stretched -- fast off the label and slow to arrive; the value arrives
-   as the leader does, the way every line on the page arrives (base.css
-   .reveal: a quick appearance, a slow settle), from half a row below.
-   Not a mask rise: at credit size the first frames of a rise are the
-   tips of the tallest strokes, a row of specks beside the leaders; a
-   fade is whole in every frame. Rows follow 80ms apart. The address is
-   the last beat: in place, slowly, after its word, so nothing is ever
-   there before the line it belongs to.
-   On a phone the same object, stacked: the label leads, left, in the
-   same caps; the leader runs out of it to the column's edge and ends on
-   a short vertical rule (the strip's edge, which the phone does not
-   draw, standing there before the line reaches it); the value takes the
-   next line on the label's left edge, and the address the line under
-   that, on the same edge. */
-#production{
-  --lead-gap:clamp(10px,1.4vw,14px);        /* from the label to the first dash, and from the last dash to the value */
-  --level:var(--dash-lead);               /* 3 on 5 off, the page's one dashed level */
-}
-#production dl.pairs{
-  row-gap:clamp(16px,2.4vw,28px);
-}
-
-/* ---- the rows ------------------------------------------------------------
-   the tag: a flex row on the baseline, so the empty box that is the
-   leader sits with its bottom edge on the label's baseline, and the grid
-   hangs the value on that same line */
-#production dl.pairs > dt{
-  display:flex;align-items:baseline;
-  min-width:0;
-  text-align:left;
-  white-space:nowrap;
-}
-#production .tag{display:block;flex:0 0 auto;min-width:0}
-/* the leader: takes what the label leaves, runs across the gutter, and
-   stops a step short of the column line. The dashes are drawn on a box
-   whose width is rounded down to whole tiles and set against the value's
-   end, so the line begins on a gap after the label and ends on a dash
-   before the value whatever the label's width -- no cut dash at either
-   end; the odd pixels go to the gap after the label. */
-#production .lvl{
-  display:block;
-  flex:1 1 auto;
-  min-width:24px;
-  height:1px;
-  margin:0 calc(var(--lead-gap) - var(--axis-gap)) 0 var(--lead-gap);
-  pointer-events:none;
-}
-#production .lvl::before{
-  content:"";
-  display:block;
-  margin-left:auto;
-  width:100%;
-  width:round(down,100%,8px);
-  height:1px;
-  background:var(--level) 0 0/8px 1px repeat-x;
-}
-
-/* the value: a block whose first line is the word, so the grid hangs
-   the row on the word's baseline; the address is the line under it, on
-   the same left edge. The word is an inline-block so it can settle. */
-#production dl.pairs > dd{
-  display:block;
-  min-width:0;
-}
-#production .val{display:inline-block;max-width:100%}
-
-/* ---- the sequence ---------------------------------------------------------
-   the label: opacity only -- its leader does the moving -- and quick, so
-   it is there before the line leaves it */
-.js #production .tag.reveal{transform:none;transition:opacity var(--d-fade) var(--e-reveal)}
-/* the leader: off the label fast, the settle long (expo-out); the wipe's
-   clip stays put so the dashes are revealed, not scaled */
-/* the value: base.css's own arrival, from half a row below instead of a
-   whole one, so a settling value never crosses the row under it */
-#production .val{--reveal-y:14px}
-/* the address: in place, and slowly, so it is not there before the word is */
-.js #production .addr.reveal{transform:none;transition:opacity var(--d-fade) var(--e-reveal)}
-
-/* ---- the address ------------------------------------------------------------
-   the second line of the last credit: the mono at caption size, in the
-   secondary grey, on the value's left edge, one short step under the
-   word's descenders. The line is the link; it carries the arrow of the
-   bar (the hairline glyph of base.css, masked, so it takes the link's
-   colour) and no underline. */
-#production .addr{
-  display:block;
-  margin:clamp(5px,.6vw,7px) 0 0;
-  font-family:var(--f-mono);
-  font-size:var(--t-caption);
-  font-variant-numeric:tabular-nums;
-  letter-spacing:var(--trk-mono);
-  line-height:1.5;
-  white-space:nowrap;
-  color:var(--ink-3);
-}
-#production .addr a{
-  position:relative;
-  display:inline-flex;align-items:center;gap:8px;
-  padding:1px 0;
-  color:inherit;
-  text-decoration:none;
-  transition:color var(--d) var(--e-out);
-}
-/* the arrow: the bar's, in the label grey at rest, the gold when pointed at */
-#production .addr a::after{
-  content:"";
-  flex:0 0 auto;
-  width:9px;height:9px;
-  background:var(--ink-4);
-  -webkit-mask:var(--arrow) center/9px 9px no-repeat;
-  mask:var(--arrow) center/9px 9px no-repeat;
-  transition:transform var(--d) var(--e-out),background-color var(--d) var(--e-out);
-}
-/* the band: a gap filled, a little wider than the address, between two
-   hairlines -- drawn out of the left, the way the plate's zones are */
-#production .addr a::before{
-  content:"";
-  position:absolute;
-  left:-6px;right:-6px;top:-2px;bottom:-2px;
-  z-index:-1;
-  background:var(--line-1);
-  border-top:1px solid var(--line-2);
-  border-bottom:1px solid var(--line-2);
-  transform:scaleX(0);
-  transform-origin:left center;
-  transition:transform var(--d) var(--e-out);
-  pointer-events:none;
-}
-#production .addr a:hover,#production .addr a:focus-visible{color:var(--gold-hi)}
-#production .addr a:hover::before,#production .addr a:focus-visible::before{transform:none}
-#production .addr a:hover::after,#production .addr a:focus-visible::after{background:var(--gold);transform:translate(2px,-2px)}
-
-/* ---- a phone: the same object, stacked -----------------------------------
-   The title card's rule ends 6% in from the column on a phone (base.css);
-   the ledger sits between those two verticals, so the labels start where
-   the rule starts and the leaders end where it ends. Label left in the
-   caps, the leader out of it to the right -- a dash starting at the
-   label -- ending on a short vertical hairline; the value on the next
-   line, on the label's left edge, and the address under the value on
-   that edge; the rows set by air. */
-@media (max-width:620px){
-  #production dl.pairs{row-gap:0;margin:0 6%}
-  #production dl.pairs > dt{
-    justify-content:flex-start;
-    padding-top:clamp(26px,7.5vw,32px);
-  }
-  #production dl.pairs > dt:first-of-type{padding-top:22px}
-  #production .lvl{margin:0 0 0 clamp(10px,3vw,14px)}
-  /* the strip's edge, standing before the line reaches it: straddles the
-     baseline the leader runs on, one gap of the pattern after the last
-     dash, so it stands in the line's rhythm */
-  #production dl.pairs > dt::after{
-    content:"";
-    flex:0 0 auto;
-    align-self:baseline;
-    position:relative;top:4px;
-    width:1px;height:9px;
-    margin-left:5px;
-    background:var(--line-3);
-  }
-  #production dl.pairs > dd{text-align:left;margin-top:5px}
-  #production .addr{margin-top:6px}
-  #production .addr a::before{left:-4px;right:-4px}
-}
-
-@media (prefers-reduced-motion:reduce){
-  .js #production .lvl.reveal.wipe,.js #production .tag.reveal,.js #production .addr.reveal{transition:none}
-  #production .addr a,#production .addr a::before,#production .addr a::after{transition:none}
-}
-
 /* ---- section:founder ---- */
 /* ===== founder: the numeral as the object, the words as the centre =====
    Two beats on the column line. There is no portrait and no name, so the
@@ -2152,66 +1953,9 @@ dl.pairs .cols{
 /* ---- the lemma: one entry at a time ------------------------------------- */
 #education .fig{display:none}
 #education .fig.is-on{display:block}
-/* the plate: a mat with a hairline along its top and its bottom, none down
-   its sides, as the spread's; it runs a little past the column, the way a
-   level is drawn forward */
-#education .plate{
-  position:relative;
-  container-type:inline-size;
-  aspect-ratio:300/130;
-  margin:0 calc(-1 * var(--bleed)) 0 0;
-  background:var(--panel-lo);
-  border-top:1px solid var(--line-3);
-  border-bottom:1px solid var(--line-3);
-}
-#education .plate svg{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-#education .plate svg *{vector-effect:non-scaling-stroke}
-#education .ln{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:round}
-#education .ln--b{stroke-opacity:.42}
-#education .zn{fill:var(--gold);fill-opacity:.07;stroke:var(--gold);stroke-opacity:.36;stroke-width:1}
-#education .zn--lo{fill-opacity:.03;stroke-opacity:.16}
-#education .zn--fill{stroke:none}
-#education .lq{fill:none;stroke:var(--gold);stroke-opacity:.55;stroke-width:1;stroke-dasharray:3 5;stroke-linecap:butt}
-#education .hl{fill:none;stroke:var(--gold);stroke-opacity:.34;stroke-width:1}
-#education .hl--lo{stroke-opacity:.14}
-#education .hl--mid{stroke-opacity:.26}
-#education .hl--hi{stroke-opacity:.55}
-#education .nw{fill:none;stroke:var(--gold);stroke-opacity:.26;stroke-width:1}
-#education .br{fill:none;stroke:var(--gold);stroke-opacity:.34;stroke-width:1;stroke-dasharray:2 4;stroke-linecap:butt}
-/* candles: hairline bodies, a filled body where the candle falls */
-#education .cd line{stroke:var(--gold);stroke-opacity:.5;stroke-width:1}
-#education .cd rect{fill:none;stroke:var(--gold);stroke-opacity:.55;stroke-width:1}
-#education .cd--dn rect{fill:var(--gold);fill-opacity:.2}
-/* the tags of the figure: the page's label voice, above the right end of
-   a level (or under it), sized from the plate and never under 9px */
-#education .lbl{
-  position:absolute;
-  display:block;
-  font-family:var(--f-display);
-  font-style:normal;
-  font-size:clamp(9px,2.4cqw,var(--t-nano));
-  letter-spacing:var(--trk-caps);
-  text-transform:uppercase;
-  line-height:1;
-  color:var(--ink-4);
-  white-space:nowrap;
-  pointer-events:none;
-}
-#education .lbl--up{transform:translateY(calc(-100% - 5px))}
-#education .lbl--dn{transform:translateY(5px)}
+
 /* the corner: the one word that keeps the drawing honest, where a plate
    carries its title */
-#education .tag{
-  position:absolute;top:9px;left:12px;
-  font-family:var(--f-display);
-  font-style:normal;
-  font-size:var(--t-nano);
-  letter-spacing:var(--trk-caps);
-  text-transform:uppercase;
-  line-height:1;
-  color:var(--ink-4);
-  white-space:nowrap;
-}
 
 /* the entry under the plate, on the plate's left edge */
 #education .lemma{margin:clamp(14px,2vw,20px) 0 0}
@@ -2380,7 +2124,6 @@ dl.pairs .cols{
 @media (max-width:620px){
   #education .syllabus{display:flex;flex-direction:column;--bleed:10px}
   #education .pane{order:-1;margin:0 0 clamp(22px,6vw,30px)}
-  #education .plate{margin:0}
   #education .row{padding:10px var(--bleed) 11px}
   #education .close{display:block;margin-top:clamp(36px,9vw,52px)}
   #education .close .cta{margin-top:clamp(18px,2.4vw,26px)}
@@ -2688,7 +2431,7 @@ dl.pairs .cols{
     #channels .dv__ink{top:52px;bottom:40px}
   }
 }
-#channels .dv__fig{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#channels .dv__fig{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.5}
 #channels .dv__fig *{vector-effect:non-scaling-stroke}
 #channels .dv__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:round}
 /* the scale: a hairline down the plot's right edge, and the plot's own
@@ -3518,6 +3261,54 @@ dl.pairs .cols{
   #material .tile .fig__zone,#material .tile .fig__level,#material .tile .fig__line,#material .tile .plate__tag{transition:none}
 }
 
+/* ---- the wall, tightened -------------------------------------------------
+   The scattered hang cost 2900px on a page the client already called too
+   long. Same plates, same captions, half the height: pairs stay full width
+   because each is one moment seen twice, the three singles share a row, and
+   nothing bleeds out of the column any more. */
+@media (min-width:900px){
+  #material .wall{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    column-gap:clamp(14px,1.6vw,22px);
+    row-gap:clamp(26px,3.2vw,44px);
+    --out:0px;
+  }
+  #material .plate--pair,#material .plate--full{grid-column:1/-1}
+  #material .plate--left,#material .plate--right{
+    grid-column:auto;grid-template-columns:minmax(0,1fr);row-gap:0;
+  }
+  #material .plate--left .tile,#material .plate--right .tile{
+    grid-column:1;grid-row:1;width:100%;margin:0;
+  }
+  #material .plate--left figcaption,#material .plate--right figcaption{
+    grid-column:1;grid-row:2;margin-top:clamp(10px,1.2vw,14px);
+  }
+  /* A plate's height is set, not derived from its width: with aspect ratios
+     a wider column made a taller page, which is backwards. contain keeps
+     every chart whole inside the box. */
+  #material .plate--left .frame,#material .plate--right .frame{aspect-ratio:auto;height:clamp(180px,17vw,240px)}
+  #material .plate--pair .frame{aspect-ratio:auto;height:clamp(200px,19vw,272px)}
+  #material .plate--full .frame{aspect-ratio:auto;height:clamp(220px,21vw,300px)}
+  #material .plate--full{margin:0}
+  #material .plate--full figcaption{margin-top:clamp(10px,1.2vw,14px)}
+}
+
+/* A phone is where the page was longest: five plates at their natural
+   ratios ran 2700px on their own. One height for every plate, set from the
+   viewport rather than from the column, and contain keeps each chart whole. */
+@media (max-width:899px){
+  #material .plate .frame,
+  #material .plate--pair .frame,
+  #material .plate--left .frame,
+  #material .plate--right .frame,
+  #material .plate--full .frame{aspect-ratio:auto;height:clamp(150px,42vw,210px)}
+  #material .wall{row-gap:clamp(18px,4vw,26px)}
+}
+@media (max-width:619px){
+  #material .plate--pair{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #material .plate--pair .frame{height:clamp(118px,30vw,150px)}
+}
+
 /* ---- section:trackrecord ---- */
 /* ===== track record =====
    A ledger, then the exhibit, then what the exhibit does not say.
@@ -4004,6 +3795,15 @@ dl.pairs .cols{
   #trackrecord .print__plate,#trackrecord .cap__n,#trackrecord .cap__lv,#trackrecord .strip__pic,#trackrecord .strip__pic img,#trackrecord .strip__n,#trackrecord .strip__chip::after{transition:none}
   #trackrecord .print__plate.is-print,#trackrecord .print__cap.is-print{animation:none}
   #trackrecord .zoom[open],#trackrecord .zoom[open]::backdrop{animation:none}
+}
+
+/* The certificate was printed 814px tall -- the biggest single block on a
+   page the client called too long, for one image the reader can already
+   open full size. Half that is still legible and the filmstrip still
+   carries all six. */
+@media (min-width:900px){
+  #trackrecord .print{height:clamp(300px,32vw,430px)}
+  #trackrecord .print img{width:100%;height:100%;object-fit:contain}
 }
 
 /* ---- section:access ---- */
@@ -4791,56 +4591,6 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       <span class="mask"><span class="title__line reveal" data-at="260"><span lang="nl">Discipline.</span><span lang="en">Discipline.</span></span></span>
       <span class="mask"><span class="title__line reveal" data-at="400"><span lang="nl">Uitvoering.</span><span lang="en">Execution.</span></span></span>
     </h1>
-    <!-- the figure: a session drawn as a schema, in hairlines of the one
-         gold. Four zones and one line, nothing else -- no price, no date, no
-         entry, no outcome. Read left to right: the line opens low and quiet
-         (on a desk that is the part the three words stand on), dips once
-         below the range out of an orderblock, rallies in three legs and
-         leaves a gap (the FVG band), meets three equal highs under the
-         liquidity line, sweeps it once, and falls back through the gap
-         towards the level below. It stops short of the right edge: that is
-         now. The zones are HTML, not SVG, so they are the same hairlines
-         every other section draws its levels with (a 3-on-5 dashed line,
-         a band with two rules) and so they can run on past the line, into
-         the band's bleed, to the edge of the page -- a level is drawn
-         forward, a line is drawn up to the present. Every point is placed,
-         so the line reads as a drawing and not as a feed. On load the line
-         draws itself while the two rules and the zones draw out of the
-         left; on scroll a short tail past "now" is drawn by the scroll
-         itself (see hero.css), into the bleed, so reading on moves the
-         session on. The two levels are labelled on the page's right
-         gutter like the axis of a chart; the caption sits on that axis
-         too, under the band's right end. On a desk the band's top edge is
-         the first word's baseline and its top rule starts after the word:
-         the word stands on the band, nothing runs into a letter.
-         On a desk the frame is lifted out of the flow (it is the band the
-         title stands on); the caption stays in it, so it lands in the row
-         under the band with the one line. On a phone the band sits under
-         the title, edge to edge, so the figure is in the first screen
-         there too, and the caption hangs on its left edge. -->
-    <figure class="plate">
-      <div class="plate__px" data-parallax="0.02" data-parallax-top>
-        <div class="plate__frame reveal trace" data-at="300">
-          <i class="plate__rule plate__rule--top"></i>
-          <i class="plate__rule plate__rule--base"></i>
-          <i class="plate__ob"></i>
-          <i class="plate__band"></i>
-          <i class="plate__lvl plate__lvl--hi"></i>
-          <i class="plate__lvl plate__lvl--lo"></i>
-          <svg class="fig" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <path class="fig__line" pathLength="1" d="M0 378 50 374 100 380 150 375 200 379 250 373 300 378 340 372 380 377 420 373 450 378 474 371 492 388 520 340 536 352 566 268 580 286 612 206 628 226 662 116 680 150 704 108 722 146 742 110 760 144 776 120 792 84 808 140 826 124 846 196 860 186 884 250 898 240 922 300 936 290 952 318"/>
-            <path class="fig__tail" pathLength="1" d="M952 318 966 308 982 334 998 324 1014 350 1028 342 1040 360"/>
-          </svg>
-          <i class="plate__tag plate__tag--liq"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></i>
-          <i class="plate__tag plate__tag--fvg">FVG</i>
-          <i class="plate__tag plate__tag--ob">Orderblock</i>
-        </div>
-      </div>
-      <figcaption class="reveal" data-at="940">
-        <span class="plate__title"><span lang="nl">Figuur &mdash; Een sessie, schematisch</span><span lang="en">Figure &mdash; A session, as a schema</span></span>
-        <span class="plate__note"><span lang="nl">Vier zones, &eacute;&eacute;n lijn. Geen koers, geen dag, geen uitslag.</span><span lang="en">Four zones, one line. No price, no day, no outcome.</span></span>
-      </figcaption>
-    </figure>
     <p class="subtitle reveal" data-at="820"><span lang="nl">E&eacute;n manier om de markt te lezen, uitgelegd en daarna live voorgedaan.</span><span lang="en">One way of reading the market, taught and then shown live.</span></p>
     <p class="calls">
       <a class="cta solid reveal" data-at="1020" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
@@ -4860,44 +4610,6 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <!-- /section:hero -->
 
 <div class="roll">
-<!-- section:production -->
-<section id="production">
-  <div class="grp"><h2><span lang="nl">Productie</span><span lang="en">Production</span></h2></div>
-  <!-- four credits on the shared axis (base.css dl.pairs), set as a spec
-       sheet: the label at the left edge of the label column, a leader --
-       the dashed hairline of the opening plate's liquidity line, on the
-       baseline the two columns share -- runs out of it across the gutter
-       and stops a step short of the value, which stands on the column
-       line with every other value on the reel. Same construction as the
-       numeral and its level on the next reel. The last credit has two
-       lines: the place, at credit size, and under it, on the same column
-       line, its address -- the one small fact that is a code, so it is
-       set in the mono at caption size, and it is the link, closed with
-       the arrow of the bar.
-
-       The reveal is authored here, not left to the auto-stagger: per row
-       the label surfaces, the leader draws out of it towards the value (a
-       wipe, so the dashes stay put), and the value arrives the way the
-       page's lines arrive -- a fade and a short settle, whole in every
-       frame, never a slice. Rows follow 80ms apart; the address is the
-       last beat, in place, after its word. Every slot is inside the
-       scroll cap of motion.js (420ms). -->
-  <dl class="pairs" data-stagger="80">
-    <dt><span class="tag reveal" data-at="0">Community</span><i class="lvl reveal wipe" data-at="40" aria-hidden="true"></i></dt>
-    <dd><span class="val reveal" data-at="110">Atlas Capital</span></dd>
-
-    <dt><span class="tag reveal" data-at="160"><span lang="nl">Taal</span><span lang="en">Language</span></span><i class="lvl reveal wipe" data-at="200" aria-hidden="true"></i></dt>
-    <dd><span class="val reveal" data-at="270"><span lang="nl">Nederlands en Engels</span><span lang="en">Dutch and English</span></span></dd>
-
-    <dt><span class="tag reveal" data-at="240"><span lang="nl">Locatie</span><span lang="en">Location</span></span><i class="lvl reveal wipe" data-at="280" aria-hidden="true"></i></dt>
-    <dd>
-      <span class="val reveal" data-at="350">Discord</span>
-      <small class="addr reveal" data-at="420"><a href="https://discord.gg/78Ff2GuSfW">discord.gg/78Ff2GuSfW</a></small>
-    </dd>
-  </dl>
-</section>
-<!-- /section:production -->
-
 <!-- section:founder -->
 <section id="founder">
   <div class="grp"><h2><span lang="nl">Hoofdrol</span><span lang="en">Starring</span></h2></div>
@@ -4949,29 +4661,15 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <section id="education">
   <div class="grp" id="educatie"><h2><span lang="nl">Educatie</span><span lang="en">Education</span></h2></div>
 
-  <!-- The syllabus as an index and a lemma, on the reel's two columns.
-       Left of the axis, in the label column, the index: the ten terms one
-       under the other, the count in mono at the left the way a price
-       scale is labelled, a hairline between rows -- a scale, not ten
-       credits. Right of the axis, in the value column, the lemma of the
-       term that is lit: a plate drawn for that term in the vocabulary of
-       the opening figure (one hairline path, zones, dashed levels, a few
-       candles where the term is defined by candles; no price, no day, no
-       outcome, and the corner says so), then the entry under it the way a
-       glossary sets one: the count tied to the index, the term at
-       statement size, its definition in dictionary voice, and a rule-set
-       of three lines -- what else the term is called, what the figure
-       shows, which other entries it belongs with (each a link to that
-       entry). What a word means, never what the course does with it.
-
-       The index is a tablist and the lemmas are its panels: point at a
-       row (or tab to it, or tap it) and the band moves to it and the
-       panel redraws for it; leave, and it returns to the last row chosen.
-       The plate is decoration (aria-hidden; the "in the figure" line says
-       in words what it draws). On a phone the lemma of the chosen term
-       sits above the index and every row keeps its one-line gloss under
-       the term; a tap brings the lemma back into view. Without a script
-       the first lemma stands and every gloss stays in its row. -->
+  <!-- The syllabus as an index and a lemma. Left of the axis the ten terms,
+       the count in mono the way a price scale is labelled; right of it the
+       entry for the term that is lit: the count, the term at statement size,
+       its definition in dictionary voice, what else it is called, and which
+       other entries it belongs with. What a word means, never what the course
+       does with it, and never a drawn chart standing in for one of the
+       founder's own. The index is a tablist and the entries are its panels.
+       On a phone the entry sits above the index and every row keeps its
+       one-line gloss; without a script the first entry stands. -->
   <div class="syllabus" data-stagger="70">
     <div class="index" role="tablist" aria-orientation="vertical" aria-labelledby="educatie">
       <button type="button" class="row reveal is-on" role="tab" id="edu-t01" aria-selected="true" aria-controls="edu-p01"><b class="num">01</b><span class="term"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span><span class="sub"><span lang="nl">een uitbraak die in de range terugkeert</span><span lang="en">a breakout that returns into the range</span></span></button>
@@ -4988,228 +4686,111 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 
     <div class="pane reveal" data-at="0">
       <div class="fig is-on" role="tabpanel" id="edu-p01" aria-labelledby="edu-t01">
-        <div class="plate" aria-hidden="true">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <line class="lq" x1="30" y1="80" x2="600" y2="80"/>
-            <line class="lq" x1="30" y1="190" x2="600" y2="190"/>
-            <rect class="zn zn--lo" x="354" y="44" width="40" height="36"/>
-            <path class="ln" pathLength="1" d="M0 150 13 138 30 119 40 110 53 134 64 148 80 172 93 161 102 131 114 131 130 96 145 105 161 166 170 168 186 149 197 113 215 104 227 113 236 139 250 178 260 161 276 146 290 110 302 127 313 140 325 150 337 117 350 96 364 77 372 44 389 100 400 124 412 111 425 98 440 96 455 121 469 147 480 170 497 159 503 133 520 120 535 136 547 148 556 160"/>
-          </svg>
-          <i class="lbl lbl--dn" style="right:10px;top:73.1%">Range</i>
-          <i class="lbl lbl--dn" style="left:66.7%;top:16.9%"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></i>
-          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
         <div class="lemma">
           <p class="eyebrow"><b class="num">01</b><span class="of">/ 10</span></p>
           <h3 class="word"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></h3>
           <p class="gloss"><span lang="nl">een uitbraak die in de range terugkeert</span><span lang="en">a breakout that returns into the range</span></p>
           <dl class="rules">
             <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd>false breakout, sweep</dd></div>
-            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">twee niveaus van een range; de lijn breekt erboven uit en keert terug</span><span lang="en">the two levels of a range; the line breaks above them and comes back</span></dd></div>
             <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="08"><b>08</b><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></button><span class="sep">&middot;</span><button type="button" class="xref" data-go="07"><b>07</b><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></button></dd></div>
           </dl>
         </div>
       </div>
       <div class="fig" role="tabpanel" id="edu-p02" aria-labelledby="edu-t02">
-        <div class="plate" aria-hidden="true">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <line class="hl" x1="222" y1="71" x2="414" y2="44"/>
-            <line class="hl" x1="222" y1="163" x2="414" y2="180"/>
-            <path class="ln ln--b" pathLength="1" d="M0 208 17 192 23 200 40 182 52 186 71 205 85 218 104 197 119 185 130 178 146 194 162 203 175 206 190 187 206 184 215 171 230 164 245 177 258 191 271 198 280 204 294 201 303 202 316 196 330 190 348 188 355 188 373 180 382 181 400 178 409 190 425 196 437 207 450 214 466 207 474 207 486 203 500 198 512 203 525 211 533 222 547 221 560 228"/>
-            <path class="ln" pathLength="1" d="M0 120 11 114 28 99 40 90 52 106 73 121 85 132 100 111 111 102 130 84 146 90 163 106 175 120 187 102 207 96 219 81 230 70 239 76 255 86 271 107 280 118 290 116 302 113 317 102 330 96 343 87 355 69 375 59 388 50 400 46 416 73 427 83 438 95 450 104 460 100 477 90 491 91 500 84 511 90 524 98 540 108 545 108 560 124"/>
-          </svg>
-          <i class="lbl lbl--up" style="left:68.7%;top:17.7%"><span lang="nl">Hogere high</span><span lang="en">Higher high</span></i>
-          <i class="lbl lbl--up" style="left:68.7%;top:68.5%"><span lang="nl">Lagere high</span><span lang="en">Lower high</span></i>
-          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
         <div class="lemma">
           <p class="eyebrow"><b class="num">02</b><span class="of">/ 10</span></p>
           <h3 class="word">SMT</h3>
           <p class="gloss"><span lang="nl">divergentie tussen twee verwante markten</span><span lang="en">divergence between two related markets</span></p>
           <dl class="rules">
             <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd><span lang="nl">smart money technique, SMT-divergentie</span><span lang="en">smart money technique, SMT divergence</span></dd></div>
-            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">twee verwante markten; de bovenste zet een hogere high, de onderste niet</span><span lang="en">two related markets; the upper sets a higher high, the lower does not</span></dd></div>
             <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="08"><b>08</b><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></button></dd></div>
           </dl>
         </div>
       </div>
       <div class="fig" role="tabpanel" id="edu-p03" aria-labelledby="edu-t03">
-        <div class="plate" aria-hidden="true">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <rect class="zn" x="232" y="96" width="368" height="44"/>
-            <g class="cds"><g class="cd cd--dn" transform="translate(48 0)"><line x1="0" y1="160" x2="0" y2="204"/><rect x="-7" y="168" width="14" height="28"/></g><g class="cd" transform="translate(80 0)"><line x1="0" y1="164" x2="0" y2="200"/><rect x="-7" y="174" width="14" height="20"/></g><g class="cd cd--dn" transform="translate(112 0)"><line x1="0" y1="156" x2="0" y2="198"/><rect x="-7" y="170" width="14" height="20"/></g><g class="cd" transform="translate(144 0)"><line x1="0" y1="162" x2="0" y2="206"/><rect x="-7" y="176" width="14" height="22"/></g><g class="cd cd--dn" transform="translate(176 0)"><line x1="0" y1="160" x2="0" y2="200"/><rect x="-7" y="172" width="14" height="20"/></g><g class="cd" transform="translate(208 0)"><line x1="0" y1="170" x2="0" y2="210"/><rect x="-7" y="184" width="14" height="20"/></g><g class="cd" transform="translate(246 0)"><line x1="0" y1="140" x2="0" y2="200"/><rect x="-7" y="148" width="14" height="44"/></g><g class="cd" transform="translate(282 0)"><line x1="0" y1="58" x2="0" y2="160"/><rect x="-7" y="64" width="14" height="90"/></g><g class="cd" transform="translate(318 0)"><line x1="0" y1="36" x2="0" y2="96"/><rect x="-7" y="42" width="14" height="50"/></g><g class="cd cd--dn" transform="translate(354 0)"><line x1="0" y1="38" x2="0" y2="76"/><rect x="-7" y="46" width="14" height="24"/></g><g class="cd cd--dn" transform="translate(390 0)"><line x1="0" y1="66" x2="0" y2="114"/><rect x="-7" y="70" width="14" height="38"/></g><g class="cd cd--dn" transform="translate(426 0)"><line x1="0" y1="104" x2="0" y2="146"/><rect x="-7" y="108" width="14" height="32"/></g><g class="cd" transform="translate(462 0)"><line x1="0" y1="96" x2="0" y2="142"/><rect x="-7" y="102" width="14" height="34"/></g><g class="cd" transform="translate(498 0)"><line x1="0" y1="54" x2="0" y2="108"/><rect x="-7" y="60" width="14" height="44"/></g><g class="cd" transform="translate(534 0)"><line x1="0" y1="26" x2="0" y2="64"/><rect x="-7" y="32" width="14" height="28"/></g></g>
-          </svg>
-          <i class="lbl lbl--up" style="right:10px;top:36.9%">FVG</i>
-          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
         <div class="lemma">
           <p class="eyebrow"><b class="num">03</b><span class="of">/ 10</span></p>
           <h3 class="word">FVG</h3>
           <p class="gloss"><span lang="nl">fair value gap: het gat dat een impuls achterlaat</span><span lang="en">fair value gap: the gap an impulse leaves behind</span></p>
           <dl class="rules">
             <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd>imbalance</dd></div>
-            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">drie candles; het gat tussen de high van de eerste en de low van de derde</span><span lang="en">three candles; the gap between the first one's high and the third one's low</span></dd></div>
             <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="04"><b>04</b>IFVG</button><span class="sep">&middot;</span><button type="button" class="xref" data-go="05"><b>05</b>Orderblocks</button></dd></div>
           </dl>
         </div>
       </div>
       <div class="fig" role="tabpanel" id="edu-p04" aria-labelledby="edu-t04">
-        <div class="plate" aria-hidden="true">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <rect class="zn" x="232" y="96" width="368" height="44"/>
-            <g class="cds"><g class="cd cd--dn" transform="translate(48 0)"><line x1="0" y1="160" x2="0" y2="204"/><rect x="-7" y="168" width="14" height="28"/></g><g class="cd" transform="translate(80 0)"><line x1="0" y1="164" x2="0" y2="200"/><rect x="-7" y="174" width="14" height="20"/></g><g class="cd cd--dn" transform="translate(112 0)"><line x1="0" y1="156" x2="0" y2="198"/><rect x="-7" y="170" width="14" height="20"/></g><g class="cd" transform="translate(144 0)"><line x1="0" y1="162" x2="0" y2="206"/><rect x="-7" y="176" width="14" height="22"/></g><g class="cd cd--dn" transform="translate(176 0)"><line x1="0" y1="160" x2="0" y2="200"/><rect x="-7" y="172" width="14" height="20"/></g><g class="cd" transform="translate(208 0)"><line x1="0" y1="170" x2="0" y2="210"/><rect x="-7" y="184" width="14" height="20"/></g><g class="cd" transform="translate(246 0)"><line x1="0" y1="140" x2="0" y2="200"/><rect x="-7" y="148" width="14" height="44"/></g><g class="cd" transform="translate(282 0)"><line x1="0" y1="58" x2="0" y2="160"/><rect x="-7" y="64" width="14" height="90"/></g><g class="cd" transform="translate(318 0)"><line x1="0" y1="36" x2="0" y2="96"/><rect x="-7" y="42" width="14" height="50"/></g><g class="cd cd--dn" transform="translate(354 0)"><line x1="0" y1="38" x2="0" y2="84"/><rect x="-7" y="46" width="14" height="34"/></g><g class="cd cd--dn" transform="translate(390 0)"><line x1="0" y1="74" x2="0" y2="134"/><rect x="-7" y="78" width="14" height="52"/></g><g class="cd cd--dn" transform="translate(426 0)"><line x1="0" y1="122" x2="0" y2="190"/><rect x="-7" y="128" width="14" height="56"/></g><g class="cd cd--dn" transform="translate(462 0)"><line x1="0" y1="178" x2="0" y2="222"/><rect x="-7" y="182" width="14" height="32"/></g><g class="cd" transform="translate(498 0)"><line x1="0" y1="138" x2="0" y2="218"/><rect x="-7" y="146" width="14" height="66"/></g><g class="cd cd--dn" transform="translate(534 0)"><line x1="0" y1="144" x2="0" y2="232"/><rect x="-7" y="148" width="14" height="78"/></g></g>
-          </svg>
-          <i class="lbl lbl--up" style="right:10px;top:36.9%">IFVG</i>
-          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
         <div class="lemma">
           <p class="eyebrow"><b class="num">04</b><span class="of">/ 10</span></p>
           <h3 class="word">IFVG</h3>
           <p class="gloss"><span lang="nl">inverse fair value gap: een doorbroken FVG die van rol wisselt</span><span lang="en">inverse fair value gap: a broken FVG that switches roles</span></p>
           <dl class="rules">
             <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd>inversion fair value gap</dd></div>
-            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">een FVG uit een stijging, daarna doorbroken en van onderen getest</span><span lang="en">an FVG from a rise, then broken through and tested from below</span></dd></div>
             <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="03"><b>03</b>FVG</button></dd></div>
           </dl>
         </div>
       </div>
       <div class="fig" role="tabpanel" id="edu-p05" aria-labelledby="edu-t05">
-        <div class="plate" aria-hidden="true">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <rect class="zn" x="196" y="160" width="404" height="38"/>
-            <g class="cds"><g class="cd cd--dn" transform="translate(48 0)"><line x1="0" y1="96" x2="0" y2="140"/><rect x="-7" y="104" width="14" height="30"/></g><g class="cd" transform="translate(80 0)"><line x1="0" y1="108" x2="0" y2="146"/><rect x="-7" y="114" width="14" height="26"/></g><g class="cd cd--dn" transform="translate(112 0)"><line x1="0" y1="104" x2="0" y2="152"/><rect x="-7" y="112" width="14" height="34"/></g><g class="cd" transform="translate(144 0)"><line x1="0" y1="128" x2="0" y2="170"/><rect x="-7" y="134" width="14" height="30"/></g><g class="cd cd--dn" transform="translate(176 0)"><line x1="0" y1="136" x2="0" y2="178"/><rect x="-7" y="142" width="14" height="28"/></g><g class="cd cd--dn" transform="translate(210 0)"><line x1="0" y1="154" x2="0" y2="208"/><rect x="-7" y="160" width="14" height="38"/></g><g class="cd" transform="translate(246 0)"><line x1="0" y1="102" x2="0" y2="202"/><rect x="-7" y="110" width="14" height="86"/></g><g class="cd" transform="translate(282 0)"><line x1="0" y1="44" x2="0" y2="116"/><rect x="-7" y="50" width="14" height="62"/></g><g class="cd" transform="translate(318 0)"><line x1="0" y1="28" x2="0" y2="60"/><rect x="-7" y="34" width="14" height="22"/></g><g class="cd cd--dn" transform="translate(354 0)"><line x1="0" y1="32" x2="0" y2="90"/><rect x="-7" y="38" width="14" height="46"/></g><g class="cd cd--dn" transform="translate(390 0)"><line x1="0" y1="80" x2="0" y2="136"/><rect x="-7" y="84" width="14" height="46"/></g><g class="cd cd--dn" transform="translate(426 0)"><line x1="0" y1="126" x2="0" y2="170"/><rect x="-7" y="130" width="14" height="36"/></g><g class="cd" transform="translate(462 0)"><line x1="0" y1="150" x2="0" y2="192"/><rect x="-7" y="156" width="14" height="32"/></g><g class="cd" transform="translate(498 0)"><line x1="0" y1="100" x2="0" y2="160"/><rect x="-7" y="106" width="14" height="50"/></g><g class="cd" transform="translate(534 0)"><line x1="0" y1="60" x2="0" y2="110"/><rect x="-7" y="66" width="14" height="40"/></g></g>
-          </svg>
-          <i class="lbl lbl--dn" style="right:10px;top:76.2%">Orderblock</i>
-          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
         <div class="lemma">
           <p class="eyebrow"><b class="num">05</b><span class="of">/ 10</span></p>
           <h3 class="word">Orderblocks</h3>
           <p class="gloss"><span lang="nl">de laatste tegengestelde candle v&oacute;&oacute;r een impuls</span><span lang="en">the last opposing candle before an impulse</span></p>
           <dl class="rules">
             <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd><span lang="nl">OB, bullish of bearish</span><span lang="en">OB, bullish or bearish</span></dd></div>
-            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">de laatste dalende candle v&oacute;&oacute;r de stijging, als zone vooruit getekend</span><span lang="en">the last falling candle before the rise, drawn forward as a zone</span></dd></div>
             <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="03"><b>03</b>FVG</button><span class="sep">&middot;</span><button type="button" class="xref" data-go="08"><b>08</b><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></button></dd></div>
           </dl>
         </div>
       </div>
       <div class="fig" role="tabpanel" id="edu-p06" aria-labelledby="edu-t06">
-        <div class="plate" aria-hidden="true">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <line class="hl hl--lo" x1="70" y1="232" x2="330" y2="36"/>
-            <line class="hl" x1="330" y1="36" x2="600" y2="36"/>
-            <line class="hl hl--lo" x1="330" y1="82" x2="600" y2="82"/>
-            <line class="hl hl--lo" x1="330" y1="111" x2="600" y2="111"/>
-            <line class="hl hl--lo" x1="330" y1="134" x2="600" y2="134"/>
-            <line class="hl hl--mid" x1="330" y1="157" x2="600" y2="157"/>
-            <line class="hl hl--lo" x1="330" y1="190" x2="600" y2="190"/>
-            <line class="hl" x1="330" y1="232" x2="600" y2="232"/>
-            <path class="ln" pathLength="1" d="M0 214 11 206 30 196 41 205 55 227 70 232 84 219 100 185 110 170 125 174 140 192 158 147 169 134 185 120 202 136 215 150 230 128 248 114 260 80 274 98 290 104 305 86 320 43 330 36 340 50 352 61 365 86 377 84 395 70 414 114 428 118 440 140 453 146 470 158 481 136 500 120 515 127 530 136 545 119 553 116 570 84"/>
-          </svg>
-          <i class="lbl lbl--up" style="right:10px;top:13.8%">High</i>
-          <i class="lbl lbl--dn" style="right:10px;top:89.2%">Low</i>
-          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
         <div class="lemma">
           <p class="eyebrow"><b class="num">06</b><span class="of">/ 10</span></p>
           <h3 class="word">Fibonacci</h3>
           <p class="gloss"><span lang="nl">vaste verhoudingen tussen een low en een high</span><span lang="en">fixed ratios between a low and a high</span></p>
           <dl class="rules">
             <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd>fib, retracement</dd></div>
-            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">van low naar high; de niveaus liggen op de verhoudingen van de reeks</span><span lang="en">from low to high; the levels sit at the ratios of the sequence</span></dd></div>
             <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="05"><b>05</b>Orderblocks</button></dd></div>
           </dl>
         </div>
       </div>
       <div class="fig" role="tabpanel" id="edu-p07" aria-labelledby="edu-t07">
-        <div class="plate" aria-hidden="true">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <rect class="zn zn--lo" x="80" y="28" width="190" height="204"/>
-            <line class="lq" x1="150" y1="72" x2="600" y2="72"/>
-            <line class="lq" x1="232" y1="204" x2="600" y2="204"/>
-            <path class="ln" pathLength="1" d="M0 150 16 137 25 140 40 124 50 132 67 148 80 156 92 141 110 110 123 105 133 99 150 72 159 96 173 121 185 130 195 140 206 173 220 176 232 204 242 178 255 173 270 150 283 145 293 141 310 124 325 117 335 110 345 96 354 86 365 81 380 58 392 63 403 92 415 100 427 89 441 86 450 84 466 128 479 146 490 150 504 134 516 135 530 120 545 135 560 144 570 166"/>
-          </svg>
-          <i class="lbl lbl--dn" style="left:14.7%;top:15.4%"><span lang="nl">Sessie</span><span lang="en">Session</span></i>
-          <i class="lbl lbl--up" style="right:10px;top:27.7%">High</i>
-          <i class="lbl lbl--dn" style="right:10px;top:78.5%">Low</i>
-          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
         <div class="lemma">
           <p class="eyebrow"><b class="num">07</b><span class="of">/ 10</span></p>
           <h3 class="word"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></h3>
           <p class="gloss"><span lang="nl">de highs en lows die een sessie achterlaat</span><span lang="en">the highs and lows a session leaves behind</span></p>
           <dl class="rules">
             <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd><span lang="nl">sessie-high en sessie-low</span><span lang="en">session high and session low</span></dd></div>
-            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">&eacute;&eacute;n sessie als venster; haar high en low lopen door als niveaus</span><span lang="en">one session as a window; its high and low run on as levels</span></dd></div>
             <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="08"><b>08</b><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></button><span class="sep">&middot;</span><button type="button" class="xref" data-go="01"><b>01</b><span lang="nl">Deviatie</span><span lang="en">Deviation</span></button></dd></div>
           </dl>
         </div>
       </div>
       <div class="fig" role="tabpanel" id="edu-p08" aria-labelledby="edu-t08">
-        <div class="plate" aria-hidden="true">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <line class="lq" x1="120" y1="64" x2="600" y2="64"/>
-            <line class="lq" x1="72" y1="200" x2="600" y2="200"/>
-            <path class="ln" pathLength="1" d="M0 150 13 136 30 129 40 120 53 146 69 170 76 190 92 200 101 165 114 136 129 85 140 64 150 90 167 125 179 168 188 200 203 150 215 139 227 92 236 64 251 115 257 122 271 160 284 200 296 166 307 123 319 94 332 64 345 74 352 99 365 120 375 93 393 74 404 36 415 43 428 72 440 96 452 112 466 121 480 140 495 130 507 119 520 112 532 131 547 157 559 171 568 176"/>
-          </svg>
-          <i class="lbl lbl--up" style="right:10px;top:24.6%">Buy-side</i>
-          <i class="lbl lbl--dn" style="right:10px;top:76.9%">Sell-side</i>
-          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
         <div class="lemma">
           <p class="eyebrow"><b class="num">08</b><span class="of">/ 10</span></p>
           <h3 class="word"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></h3>
           <p class="gloss"><span lang="nl">orders die boven highs en onder lows liggen</span><span lang="en">orders resting above highs and below lows</span></p>
           <dl class="rules">
             <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd><span lang="nl">buy-side en sell-side liquiditeit</span><span lang="en">buy-side and sell-side liquidity</span></dd></div>
-            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">gelijke highs en gelijke lows, elk met een niveau erlangs; &eacute;&eacute;n sweep</span><span lang="en">equal highs and equal lows, each with a level alongside; one sweep</span></dd></div>
             <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="07"><b>07</b><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></button><span class="sep">&middot;</span><button type="button" class="xref" data-go="01"><b>01</b><span lang="nl">Deviatie</span><span lang="en">Deviation</span></button></dd></div>
           </dl>
         </div>
       </div>
       <div class="fig" role="tabpanel" id="edu-p09" aria-labelledby="edu-t09">
-        <div class="plate" aria-hidden="true">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <rect class="zn zn--fill" x="264" y="136" width="336" height="60"/>
-            <line class="hl" x1="264" y1="52" x2="600" y2="52"/>
-            <line class="hl hl--hi" x1="264" y1="136" x2="600" y2="136"/>
-            <line class="lq" x1="264" y1="196" x2="600" y2="196"/>
-            <path class="ln" pathLength="1" d="M0 176 11 163 22 156 36 150 49 159 58 180 70 190 84 185 97 155 110 140 124 146 140 162 150 172 162 161 174 146 190 120 204 129 216 143 225 150 240 144 250 138 264 136"/>
-          </svg>
-          <i class="lbl lbl--up" style="right:10px;top:20.0%"><span lang="nl">Doel</span><span lang="en">Target</span></i>
-          <i class="lbl lbl--up" style="right:10px;top:52.3%">Entry</i>
-          <i class="lbl lbl--dn" style="right:10px;top:75.4%">Stop</i>
-          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
         <div class="lemma">
           <p class="eyebrow"><b class="num">09</b><span class="of">/ 10</span></p>
           <h3 class="word"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></h3>
           <p class="gloss"><span lang="nl">positiegrootte en wat &eacute;&eacute;n trade mag kosten</span><span lang="en">position size and what one trade may cost</span></p>
           <dl class="rules">
             <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd><span lang="nl">positiegrootte, stop-loss</span><span lang="en">position sizing, stop-loss</span></dd></div>
-            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">entry, stop en doel als drie niveaus; het risico is de afstand tot de stop</span><span lang="en">entry, stop and target as three levels; the risk is the distance to the stop</span></dd></div>
             <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="10"><b>10</b><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></button></dd></div>
           </dl>
         </div>
       </div>
       <div class="fig" role="tabpanel" id="edu-p10" aria-labelledby="edu-t10">
-        <div class="plate" aria-hidden="true">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <line class="nw" x1="400" y1="24" x2="400" y2="236"/>
-            <path class="br" d="M400 128 600 48"/>
-            <path class="br" d="M400 128 600 208"/>
-            <path class="ln" pathLength="1" d="M0 170 10 162 29 153 40 142 55 156 69 173 80 184 91 169 106 166 125 130 140 139 147 153 160 158 171 134 184 121 200 104 214 123 224 130 240 132 254 126 269 89 280 84 295 88 303 101 320 118 336 111 344 111 360 96 377 104 386 120 400 128"/>
-          </svg>
-          <i class="lbl lbl--dn" style="left:68.0%;top:11.5%"><span lang="nl">Nu</span><span lang="en">Now</span></i>
-          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
         <div class="lemma">
           <p class="eyebrow"><b class="num">10</b><span class="of">/ 10</span></p>
           <h3 class="word"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></h3>
           <p class="gloss"><span lang="nl">gedrag en emotie bij het beslissen</span><span lang="en">behaviour and emotion when deciding</span></p>
           <dl class="rules">
             <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd>mindset, discipline</dd></div>
-            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">de lijn tot nu en twee mogelijke vervolgen; de beslissing valt op de streep</span><span lang="en">the line so far and two ways it could go; the decision is made at the line</span></dd></div>
             <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="09"><b>09</b><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></button></dd></div>
           </dl>
         </div>
@@ -5377,21 +4958,8 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
              numbers. The zones are HTML, the page's own hairlines, and
              every level runs forward to the scale and stops there. -->
         <div class="dv__plate reveal trace" data-at="0">
-          <i class="dv__tag dv__tag--sch"><span lang="nl">Schematisch</span><span lang="en">Schematic</span></i>
           <div class="dv__ink">
-            <i class="dv__ax dv__ax--y"></i>
-            <i class="dv__ax dv__ax--x"></i>
-            <i class="dv__lvl dv__lvl--hi"></i>
-            <i class="dv__lvl dv__lvl--lo"></i>
-            <i class="dv__band"></i>
-            <i class="dv__ob"></i>
-            <svg class="dv__fig" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-              <path class="dv__line" pathLength="1" d="M0 96 12 76 24 106 36 84 48 118 60 90 72 74 84 110 96 94 108 120 120 100 128 118 168 78 178 102 186 86 200 138 212 124 226 176 238 162 250 196 258 178 272 236 282 222 294 268 304 254 316 306 326 292 336 340 344 330 352 362 362 326 370 344 384 288 394 304 408 236 418 254 434 172 444 190 456 120 466 140 478 88 490 108 500 86 510 106 520 90 528 44 536 80 544 66 554 128 560 116 570 178 576 168 582 206"/>
-            </svg>
-            <i class="dv__tag dv__tag--ob">Orderblock</i>
-            <i class="dv__tag dv__tag--liq"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></i>
-            <i class="dv__tag dv__tag--fvg">FVG</i>
-            <i class="dv__tag dv__tag--ses"><span lang="nl">Sessie-<br>liquiditeit</span><span lang="en">Session<br>liquidity</span></i>
+            <img class="dv__fig" src="assets/charts/04.png" alt="" width="983" height="606" loading="lazy" decoding="async">
           </div>
           <div class="dv__locked"><span class="dv__locked-in">
             <i class="dv__lock"></i>
@@ -6044,45 +5612,14 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 
 </div>
 <!-- section:closer -->
-<!-- The end card: the opening spread, closed. One word set at display
-     size and hung on the page's left axis (the wordmark's, the title's),
-     standing on the line -- the price path of the opening plate, run
-     under the word as a rule at its baseline. The card is set on the
-     footer's own grid (a half, a quarter, a quarter): the word and, under
-     it, the sentence and the one call take the left half; at the card's
-     centre -- the line the footer's first link column starts on -- the
-     rule becomes the chart. It falls in two legs, puts in two equal lows
-     on a dashed level, sweeps under it once (on the third column line,
-     where the footer's second list starts), climbs back in three legs
-     and stops on the level at the card's right edge, on a dot: that is
-     now. The level runs on past the dot to the edge of the page (a level
-     is drawn forward; a line is drawn up to the present) and the one
-     caption sits above the endpoint on the axis, as the spread's labels
-     sit above their level's right end. No price, no day, no outcome; the
-     caption says the figure is a schema. The whole card is one sequence:
-     the line first, the word out of it, then the sentence and the call;
-     the caption arrives when the line has reached the dot. -->
+<!-- The end card: one word at display size, hung on the page's left axis,
+     with the sentence and the one call under it. No drawn chart: the only
+     charts on this page are the founder's own. -->
 <section class="leader" id="closer">
   <div class="card" data-stagger="120">
     <p class="end__row">
       <span class="mask"><span class="end__word reveal" data-at="240"><span lang="nl">Einde</span><span lang="en">The End</span></span></span>
     </p>
-    <span class="end__fig reveal trace" data-at="0" aria-hidden="true">
-      <span class="end__chart">
-        <!-- data-parallax="0": the figure is the word's ground and does
-             not drift (motion.js would otherwise give the first svg of
-             the end card a lag of its own). The drawing is stretched to
-             the chart's box (its strokes are not); the flat run starts
-             far left of the box so it reaches the viewport's edge on any
-             screen -- .page clips it there. y=0 is the line. -->
-        <svg class="fig" viewBox="0 0 1000 240" preserveAspectRatio="none" data-parallax="0" aria-hidden="true" focusable="false">
-          <path class="fig__line" d="M-40000 0 H0 L64 56 96 44 172 120 200 106 270 170 316 140 362 170 412 148 534 212 590 146 614 162 700 88 726 104 836 34 864 46 1000 0"/>
-        </svg>
-        <i class="end__lvl"></i>
-        <i class="end__dot"></i>
-        <i class="end__tag"><span lang="nl">Liquiditeit, <span class="br">schematisch</span></span><span lang="en">Liquidity, <span class="br">as a schema</span></span></i>
-      </span>
-    </span>
     <div class="end__col">
       <p class="subtitle reveal" data-at="420"><span lang="nl">Behalve in de server. Daar begint het.</span><span lang="en">Except in the server. That is where it starts.</span></p>
       <a class="cta solid reveal" data-at="560" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
@@ -6451,7 +5988,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   try {
     var fs = document.fonts;
     if (fs && fs.load) {
-      Promise.all([fs.load('1em Newsreader'), fs.load('italic 1em Newsreader'),
+      Promise.all([fs.load('1em "Space Grotesk"'), fs.load('500 1em "Space Grotesk"'),
                    fs.load('1em "Fragment Mono"')]).then(intro, intro);
     }
   } catch(e){}

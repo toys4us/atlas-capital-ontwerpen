@@ -33,7 +33,7 @@ PROG = os.path.join(ROOT, "_progress")
 OUT = os.path.join(ROOT, "progress.html")
 LIVE = "https://toys4us.github.io/atlas-capital-ontwerpen/site/"
 
-ORDER = ["header", "hero", "production", "founder", "education", "channels",
+ORDER = ["header", "hero", "founder", "education", "channels",
          "markets", "material", "trackrecord", "access", "closer"]
 
 

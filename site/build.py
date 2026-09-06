@@ -27,10 +27,12 @@ SEC = os.path.join(SRC, "sections")
 OUT = os.path.join(HERE, "index.html")
 
 # (order, id, inside the roll?)
+# production was dropped: it listed the brand name, the language and the
+# Discord link, each of which the header, the language switch and five other
+# blocks already say. A section that repeats the page is the "too much".
 SECTIONS = [
     ("01", "header",      False),
     ("02", "hero",        False),
-    ("03", "production",  True),
     ("04", "founder",     True),
     ("05", "education",   True),
     ("06", "channels",    True),

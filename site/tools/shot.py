@@ -28,7 +28,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(HERE)
 INDEX = os.path.join(SITE, "index.html")
 
-SECTION_IDS = ["header", "hero", "production", "founder", "education", "channels",
+SECTION_IDS = ["header", "hero", "founder", "education", "channels",
                "markets", "material", "trackrecord", "access", "closer"]
 
 DESK = (1440, 900, 1)
