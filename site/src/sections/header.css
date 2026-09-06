@@ -55,7 +55,7 @@
   --lift:8px;                          /* what it loses once scrolled      */
   --nav-gap:clamp(18px,2.3vw,32px);    /* between two anchors              */
   --sep:22px;                          /* either side of the one separator */
-  --level:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,rgba(215,179,100,0) 3px 8px);
+  --level:var(--dash);
   --band:rgba(215,179,100,.07);        /* the fair value gap band          */
   --band-edge:rgba(215,179,100,.36);
   --rule-gap:14px;                     /* the call's rule to its first letter */
@@ -394,7 +394,6 @@
   }
   .js #header .menu{margin-left:0}
   #header .cta.solid,#header.is-open .cta{font-size:var(--t-nano);letter-spacing:.12em}
-  #header .cta__verb{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
   #header .menu{font-size:var(--t-nano);letter-spacing:.14em}
 }
 

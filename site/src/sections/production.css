@@ -49,7 +49,7 @@
    that, on the same edge. */
 #production{
   --lead-gap:clamp(10px,1.4vw,14px);        /* from the label to the first dash, and from the last dash to the value */
-  --level:linear-gradient(90deg,transparent 0 5px,rgba(215,179,100,.55) 5px 8px);  /* 3 on 5 off, the plate's line */
+  --level:var(--dash-lead);               /* 3 on 5 off, the page's one dashed level */
 }
 #production dl.pairs{
   row-gap:clamp(16px,2.4vw,28px);
@@ -102,15 +102,14 @@
 /* ---- the sequence ---------------------------------------------------------
    the label: opacity only -- its leader does the moving -- and quick, so
    it is there before the line leaves it */
-.js #production .tag.reveal{transform:none;transition:opacity .6s var(--e-reveal)}
+.js #production .tag.reveal{transform:none;transition:opacity var(--d-fade) var(--e-reveal)}
 /* the leader: off the label fast, the settle long (expo-out); the wipe's
    clip stays put so the dashes are revealed, not scaled */
-.js #production .lvl.reveal.wipe{transition:clip-path 1.15s var(--e-out)}
 /* the value: base.css's own arrival, from half a row below instead of a
    whole one, so a settling value never crosses the row under it */
 #production .val{--reveal-y:14px}
 /* the address: in place, and slowly, so it is not there before the word is */
-.js #production .addr.reveal{transform:none;transition:opacity 1.1s var(--e-inout)}
+.js #production .addr.reveal{transform:none;transition:opacity var(--d-fade) var(--e-reveal)}
 
 /* ---- the address ------------------------------------------------------------
    the second line of the last credit: the mono at caption size, in the

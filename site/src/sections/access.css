@@ -37,7 +37,6 @@
   --dot:6px;
   --mark:clamp(120px,14vw,200px);         /* how far the line of now falls before it fades  */
   --word:clamp(42px,5vw,72px);            /* the tier's one word                             */
-  --dash:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
   --band:rgba(215,179,100,.07);
 }
 
@@ -183,10 +182,10 @@
   grid-column:2;grid-row:1;
   font-family:var(--f-mono);
   font-weight:400;
-  font-size:var(--t-small);
+  font-size:var(--t-caption);
   font-variant-numeric:tabular-nums;
   letter-spacing:var(--trk-mono);
-  color:var(--ink-3);
+  color:var(--ink-4);
   text-align:right;
 }
 #access .row__v{
@@ -216,18 +215,16 @@
    names stays with the name before it (a no-break space in the markup) */
 #access .ch{white-space:nowrap}
 
-/* ---- the links: one construction, two weights, both with the arrow ----
-   Both go to the server, so both carry the arrow of the bar; the quiet one
-   takes the call's rule length, and sits a step dimmer, in the ink of the
-   level drawn ahead, until it is pointed at. */
+/* ---- the links: one construction, two weights ------------------------
+   The page's rule: the arrow belongs to the call and to nothing else, so
+   the open path carries it and the later path is the quiet link the rest
+   of the reel uses -- the same rule length, a step dimmer, in the ink of
+   the level drawn ahead, until it is pointed at. */
 #access .path__body .cta{--rule:clamp(22px,3vw,36px);margin-top:clamp(20px,2.6vw,30px)}
-#access .path--later .cta::after{display:block}
 #access .path--later .cta{color:var(--ink-2)}
-#access .path--later .cta::before,#access .path--later .cta::after{background:var(--line-4)}
+#access .path--later .cta::before{background:var(--line-4)}
 #access .path--later .cta:hover,#access .path--later .cta:focus-visible{color:var(--gold-hi)}
-#access .path--later .cta:hover::before,#access .path--later .cta:focus-visible::before,
-#access .path--later .cta:hover::after,#access .path--later .cta:focus-visible::after{background:var(--gold)}
-#access .path--later .cta:hover::after{transform:translate(2px,-2px)}
+#access .path--later .cta:hover::before,#access .path--later .cta:focus-visible::before{background:var(--gold)}
 
 /* ---- motion ----
    The runs draw themselves (the page's .draw), the dot riding the open

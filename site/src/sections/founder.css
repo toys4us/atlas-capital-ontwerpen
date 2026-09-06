@@ -94,7 +94,7 @@
   display:block;
   height:1px;
   margin:0 var(--lead-gap) 0 clamp(10px,1.2vw,14px);
-  background:linear-gradient(90deg,transparent 0 5px,var(--line-3) 5px 8px) right center/8px 1px repeat-x;
+  background:var(--dash-lead) right center/8px 1px repeat-x;
   pointer-events:none;
 }
 /* the unit and the note: one block whose first line stands on the
@@ -183,9 +183,7 @@
    the figures and slow to arrive; the unit settles as it does. The rule
    of the words draws from the left; the signature comes last and slowly,
    so it is never there before the words are. */
-.js #founder .mask > .ten__num.reveal{transform:translateY(120%);transition-duration:1.2s}
 .js #founder .mask > .ten__num.reveal.is-in{transform:none}
-.js #founder .ten__lvl.reveal.wipe{transition:clip-path 1.15s var(--e-out)}
 .js #founder .word > .who.reveal{transition-duration:calc(var(--d-reveal) * 1.2)}
 
 /* ---- a phone: the same two objects at the phone's size -------------------

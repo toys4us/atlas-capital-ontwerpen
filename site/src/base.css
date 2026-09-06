@@ -55,6 +55,14 @@
   --ink-4:#6E6F74;        /* labels, captions                        */
   --ink-5:#4F5055;        /* hints, the faintest readable            */
 
+  /* the dashed level -- the liquidity line of the opening schema, and the
+     one dashed hairline every section draws its levels with: 3 on, 5 off,
+     at the hairline's own weight. Declared once so it is the same line in
+     the bar, the spread, the server pane, the ledger, the paths and the
+     end card. */
+  --dash:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+  --dash-lead:linear-gradient(90deg,transparent 0 5px,var(--line-4) 5px 8px); /* same dash, anchored right */
+
   /* gold hairlines: alpha steps of the one gold */
   --line-1:rgba(215,179,100,.10);
   --line-2:rgba(215,179,100,.20);
@@ -494,9 +502,9 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
    is drawn down it. The axis sits left of centre (the label column is a
    margin for sidenotes, two fifths; the values get three), so a run of
    short credits is a column of text with a margin beside it, not a page
-   split down the middle with one half empty. .still and .interstitial share
-   the columns (--axis-l / --axis-r) so every row on the reel keeps the
-   one axis. */
+   split down the middle with one half empty. The founder's quote card and
+   the access rows share the columns (--axis-l / --axis-r), so every row on
+   the reel keeps the one axis. */
 :root{
   --axis-l:minmax(0,2fr);
   --axis-r:minmax(0,3fr);
@@ -566,95 +574,11 @@ dl.pairs .cols{
   text-wrap:pretty;
 }
 
-/* ---------- quote card --------------------------------------------------
-   The founder's own words, set as a credit and not as a pull-quote: the
-   label sits in the left column with every other label, the words in the
-   value column at value size, a short rule above them -- so the quote
-   stands on the same axis as the rows above and below it instead of
-   floating centred in the dark. On a phone, where the credits centre, the
-   quote centres with them. */
-.still{
-  position:relative;z-index:2;
-  display:grid;
-  grid-template-columns:var(--axis-l) var(--axis-r);
-  column-gap:var(--axis-gap);
-  row-gap:0;
-  align-items:start;
-  margin:clamp(36px,5vw,60px) 0 clamp(8px,1.5vw,16px);
-  text-align:left;
-}
-.still .hair{grid-column:2;grid-row:1;margin:0 0 clamp(16px,2.2vw,24px);width:40px}
-.still .mask{grid-column:2;grid-row:2;min-width:0}
-.still blockquote{
-  margin:0;
-  max-width:30ch;
-  font-family:var(--f-display);
-  font-size:var(--t-h3);
-  font-weight:400;
-  line-height:1.32;
-  letter-spacing:-.006em;
-  color:var(--ink-1);
-  text-wrap:pretty;
-  hanging-punctuation:first last;
-}
-/* the attribution is a signature under the words, not a second label: the
-   row above already names the voice in the label column, so this is set
-   italic, at note size, with a dash -- the way a quotation is signed */
-.still .who{
-  grid-column:2;grid-row:3;
-  margin:clamp(14px,2vw,20px) 0 0;
-  padding:0;
-  text-align:left;
-  font-family:var(--f-display);
-  font-style:italic;
-  font-size:var(--t-small);
-  letter-spacing:.01em;
-  text-transform:none;
-  color:var(--ink-3);
-  line-height:1.5;
-}
-/* the signature arrives slowly, so it is not there before the words are */
-.js .still > .who.reveal{transition-duration:calc(var(--d-reveal) * 1.2)}
-.still .who::before{content:"—  ";color:var(--ink-4)}
+/* ---------- the short rule ---------------------------------------------
+   Above a quote, over the footer's signature: the one hairline a block is
+   signed with. */
 .hair{
   width:40px;height:1px;background:var(--line-4);margin:0 auto clamp(24px,3.6vw,36px);
-}
-@media (max-width:620px){
-  .still{display:block;max-width:34ch;margin-left:auto;margin-right:auto;text-align:center}
-  .still .hair{margin:0 auto clamp(16px,2.2vw,24px)}
-  .still blockquote{max-width:none}
-  .still .who{margin-top:var(--s5);text-align:center}
-}
-
-/* ---------- interstitial cta --------------------------------------------
-   A prompt and the link that answers it, set as one more credit row: the
-   prompt in italic, right of the gutter with the labels; the link left of
-   it with the values. On a phone it centres with the rest. */
-.interstitial{
-  position:relative;z-index:2;
-  display:grid;
-  grid-template-columns:var(--axis-l) var(--axis-r);
-  column-gap:var(--axis-gap);
-  align-items:start;
-  margin:clamp(40px,5.5vw,72px) 0;
-  text-align:left;
-}
-.interstitial p{
-  grid-column:1;
-  margin:0;
-  padding-top:4px;                        /* its baseline on the link's */
-  text-align:right;
-  font-family:var(--f-display);
-  font-style:italic;
-  font-size:var(--t-lead);
-  line-height:var(--lh-snug);
-  color:var(--ink-3);
-  text-wrap:balance;
-}
-.interstitial .cta{grid-column:2;justify-self:start;margin:0}
-@media (max-width:620px){
-  .interstitial{display:block;text-align:center}
-  .interstitial p{padding:0;margin:0 0 14px;text-align:center}
 }
 
 /* ---------- language ----------------------------------------------------- */

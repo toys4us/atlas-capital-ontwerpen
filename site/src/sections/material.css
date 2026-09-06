@@ -50,7 +50,7 @@
   --wall-in:calc(var(--logo-nav) + 10px);
   --wallw:calc(min(var(--wide),100vw - 2 * var(--gutter)) - 2 * var(--wall-in));
   --capgap:clamp(32px,3.4vw,48px);          /* a plate to the label beside it */
-  --level:repeating-linear-gradient(90deg,var(--gold) 0 3px,transparent 3px 8px);
+  --level:var(--dash);                      /* the page's one dashed level */
 }
 #material .lesson-lede{margin-bottom:clamp(10px,1.4vw,14px)}
 #material .wall__hint{
@@ -230,10 +230,10 @@
   transform:translateY(-.34em);
   font-size:var(--t-micro);
   background:var(--level);
-  opacity:.55;
+  opacity:.85;
   transition:opacity var(--d) var(--e-out);
 }
-@media (hover:hover){ #material .plate:hover .plate__level{opacity:.9} }
+@media (hover:hover){ #material .plate:hover .plate__level{opacity:1} }
 /* the provenance: tagged at the level's end, where a chart tags a level */
 #material .plate__after{
   grid-column:4;grid-row:1;

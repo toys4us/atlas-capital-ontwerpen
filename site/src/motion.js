@@ -78,31 +78,11 @@
       }
     }
   }
-  function wrapMask(el){
-    if (!el || (el.parentNode && el.parentNode.classList.contains("mask"))) return;
-    var m = document.createElement("div");
-    m.className = "mask";
-    el.parentNode.insertBefore(m, el);
-    m.appendChild(el);
-    tag(el, "reveal");
-  }
   if (!reduce) {
     auto(".roll .grp", "reveal card");
     auto(".roll .lesson-lede", "reveal");
     auto(".roll dl.pairs", null, ":scope > dt, :scope > dd", "reveal", 70);
-    auto(".roll .lessons", null, ":scope > figure, :scope > *", "reveal", 110);
-    auto(".roll .proofs", null, ":scope > figure, :scope > *", "reveal", 90);
-    auto(".roll .still", null, ".hair, blockquote, .who", "reveal", 300); /* the signature waits for the words */
-    auto(".roll .interstitial", null, ":scope > *", "reveal", 140);
-    auto(".roll .proofs-hint, .roll .caveat", "reveal");
-    wrapMask(document.querySelector("#closer .endword"));
-    auto("#closer", null, ":scope > svg, .mask > .endword, :scope > .subtitle, :scope > .cta", "reveal", 140);
-    auto("footer", "reveal");
-    var em = document.querySelector("#closer svg");
-    if (em && !em.hasAttribute("data-parallax")) { /* the reel emblem lags a little behind the card */
-      var w = document.createElement("span"); w.setAttribute("data-parallax", "0.08"); w.style.display = "block";
-      em.parentNode.insertBefore(w, em); w.appendChild(em);
-    }
+    auto(".roll .caveat", "reveal");
   }
 
   var all = document.querySelectorAll(".reveal");

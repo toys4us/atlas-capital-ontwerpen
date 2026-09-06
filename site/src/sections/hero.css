@@ -145,7 +145,10 @@
   line-height:1.45;
   letter-spacing:0;
   color:var(--ink-2);
-  text-wrap:pretty;
+  /* balance, not pretty: on a desk the line fits whole, and where it has
+     to break (390, and the English, which runs longer) the two lines come
+     out even instead of leaving one word alone under the sentence */
+  text-wrap:balance;
 }
 .js #hero .subtitle.reveal{
   filter:blur(6px);
@@ -261,7 +264,7 @@
 }
 #hero .plate__lvl{
   left:61%;right:calc(-1 * var(--edge));top:24.5%;height:1px;
-  background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
+  background:var(--dash);
 }
 #hero .plate__lvl--lo{left:78%;top:96.5%}
 /* labels: the page's label voice, positioned in the figure's own

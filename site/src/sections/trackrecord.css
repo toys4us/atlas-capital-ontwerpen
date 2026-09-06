@@ -40,7 +40,7 @@
   --mat:var(--panel-lo);
   --inset:clamp(7px,1.1vw,11px);
   --edge:clamp(18px,4vw,40px);            /* the roll's padding: the strip's edge is this far left */
-  --level:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+  --level:var(--dash);
 }
 
 /* ---------- the ledger ---------------------------------------------------- */

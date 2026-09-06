@@ -148,7 +148,7 @@
   content:"";
   position:absolute;left:var(--pad-x);right:calc(var(--pad-x) - 2px);top:0;
   height:1px;
-  background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
+  background:var(--dash);
 }
 /* a row: the hash in the icon column, the name, the lock, the number.
    Its own transition is declared only once the reveal has run, so the
@@ -325,7 +325,7 @@
 }
 #channels .dv__lvl{
   left:78%;right:0;top:16%;height:1px;
-  background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
+  background:var(--dash);
 }
 #channels .dv__lvl--lo{left:0;top:87.5%}
 /* the tags: the label voice. Three sit on the scale, right of the axis,
@@ -440,7 +440,6 @@
   color:var(--ink-3);
 }
 #channels .dv__note{flex:1 1 20ch;min-width:0;max-width:52ch;font-size:var(--t-small);color:var(--ink-4);text-wrap:pretty}
-#channels .dv__call{position:relative;z-index:2;margin:clamp(16px,2.4vw,26px) 0 0}
 
 /* ---- the trace: the plate's own reveal --------------------------------
    Under .js, until motion.js marks it .is-in, the plate is bare: the
