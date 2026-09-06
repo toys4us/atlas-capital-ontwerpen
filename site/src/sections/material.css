@@ -34,7 +34,7 @@
    The label is a museum label: the figure number in mono, the title in
    the label voice, a dashed level -- the liquidity line of the opening
    schema, same dash -- and the plate's provenance tagged where a chart
-   tags a level. The note is the serif, under the title, on the title's
+   tags a level. The note is the display face, under the title, on the title's
    column line. Under a plate the five pieces sit in a row; beside a
    plate they stack.
    .roll::before is the strip's edge, so the wall sits above it (z-index). */

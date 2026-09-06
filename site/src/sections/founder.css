@@ -2,7 +2,7 @@
    Two beats on the column line. There is no portrait and no name, so the
    numeral is the portrait: "10+" set at the size of a plate (a size the
    scale lacks: a third of the column at 1440, two fifths of a phone),
-   flush left on the column line, in the serif with lining proportional
+   flush left on the column line, in the display face with lining proportional
    figures. The plus is a designed superior: a third of the figures' size,
    its top on the cap line, kerned into the bowl of the 0, in the one gold
    -- the accent of this screen, the sign that says "more than".
@@ -214,4 +214,13 @@
 @media (prefers-reduced-motion:reduce){
   .js #founder .mask > .ten__num.reveal{transform:none;transition:none}
   .js #founder .ten__lvl.reveal.wipe,.js #founder .word > .who.reveal{transition:none}
+}
+
+/* The mask is open on all four sides so it never cuts a glyph. The numeral
+   is also hung optically to the left, and on a phone the two together push
+   4px past the gutter -- so the mask keeps its own left edge here and the
+   hang is taken from the padding instead of from the page. */
+@media (max-width:619px){
+  #founder .ten__num{margin-left:0}
+  #founder .ten .mask{margin-left:0;padding-left:0}
 }

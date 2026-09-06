@@ -195,7 +195,7 @@
 }
 
 /* ---- the caption: on the markets' own axis, in the voice of every figure
-   on the page -- the figure's name in caps, its note in the serif -------- */
+   on the page -- the figure's name in caps, its note in the display face -------- */
 #markets .wall__cap{
   display:flex;flex-wrap:wrap;align-items:baseline;
   gap:2px clamp(14px,1.6vw,22px);

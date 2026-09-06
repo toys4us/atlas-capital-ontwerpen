@@ -6,7 +6,7 @@
    off it: the row's number in mono at the axis, a dashed level -- the
    liquidity line of the opening schema, same dash -- running from the
    number to the firm's name at the gutter, and what was earned in the
-   value column on that same baseline, the amount or the date in the serif
+   value column on that same baseline, the amount or the date in the display face
    under it. Nothing is drawn down the gutter and nothing runs under a row;
    the levels live in the label column, the way a chart's tags live in its
    margin. The two years bracket the rows as two solid levels: a hairline
@@ -456,7 +456,7 @@
   background:var(--mat);
 }
 /* captioned as the print is captioned: the number in mono, the firm in
-   the label voice, the note in the serif under it on the firm's line */
+   the label voice, the note in the display face under it on the firm's line */
 #trackrecord .zoom figcaption{
   display:flex;gap:14px;align-items:baseline;
   margin-top:14px;

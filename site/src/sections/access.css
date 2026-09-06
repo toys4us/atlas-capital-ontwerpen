@@ -152,7 +152,7 @@
 #access .path__word .mask > span{display:block}
 
 /* ---- the scale: two rows on hairlines ----
-   The thing named in the serif at credit size; what is counted in mono at
+   The thing named in the display face at credit size; what is counted in mono at
    the right end of the row (a count, not an ordinal, so no leading zero);
    the names under it at note size. A value that is not a count is set in
    the label voice, where the mono would be. */

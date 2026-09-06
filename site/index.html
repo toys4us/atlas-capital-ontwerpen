@@ -44,7 +44,7 @@
      - the one call (.cta.solid): a longer rule and the arrow, never a
        filled box, and never twice in a viewport
      - the plate: the figure's line and zones in the gold
-   Two voices per block, never three: the serif (roman, italic, or small
+   Two voices per block, never three: the display face (roman, italic, or small
    tracked caps for a label) and, only for what is counted next to a
    clock or a figure number, Fragment Mono. A sub-line under a credit is
    serif, whatever it says.
@@ -261,7 +261,7 @@ figcaption{font-variant-numeric:tabular-nums}
 figcaption b{font-family:var(--f-mono);font-weight:400;letter-spacing:var(--trk-mono)}
 figcaption small{letter-spacing:0}
 time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spacing:var(--trk-mono)}
-/* caps: the serif, small, tracked -- the label voice of the whole page */
+/* caps: the display face, small, tracked -- the label voice of the whole page */
 .caps{
   font-family:var(--f-display);
   font-size:var(--t-micro);
@@ -368,7 +368,7 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 /* ---------- link / call ------------------------------------------------
    One construction, two weights, and never a filled box. .cta is the
    page's link: a hairline of the gold, then the label in the label voice
-   (the serif, small, tracked caps); on hover the rule lengthens and the
+   (the display face, small, tracked caps); on hover the rule lengthens and the
    label warms. .cta.solid is the one call on a screen -- the same link,
    its label in the paper, a longer rule, and the arrow of the bar after
    it in the same gold. So the gold is a line everywhere it appears: the
@@ -483,7 +483,7 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 @media (max-width:620px){ .roll::before,.roll::after{display:none} }
 
 /* ---------- group heading ---------------------------------------------
-   A title card between reels: the reel number in mono, the title in serif
+   A title card between reels: the reel number in mono, the title in the display face
    caps, on a rule that runs edge to edge of the strip. */
 .grp{
   position:relative;
@@ -525,7 +525,7 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 @media (max-width:620px){ .grp::before{left:6%;right:6%} }
 
 /* ---------- credit pairs ------------------------------------------------
-   Label right of the gutter in serif caps, value left of it in the serif at
+   Label right of the gutter in the display face caps, value left of it in the display face at
    credit size; the two share a baseline. The gutter is the axis -- nothing
    is drawn down it. The axis sits left of centre (the label column is a
    margin for sidenotes, two fifths; the values get three), so a run of
@@ -692,7 +692,13 @@ dl.pairs .cols{
 }
 .js .reveal.is-in{opacity:1;transform:none}
 .no-tr .reveal,.no-tr .reveal::before,.no-tr .reveal *,.reveal.no-tr,.reveal.no-tr::before,.reveal.no-tr *{transition:none!important}
-.mask{overflow:hidden;padding-bottom:.3em;margin-bottom:-.3em}
+/* A mask hides a line until it rises; it must never clip the glyphs
+   themselves. It was open at the bottom only, so an optically hung numeral
+   lost its left edge and a cap at display size lost its top -- both of them
+   letters that sit outside the line box the old serif was measured on. Open
+   on all four sides, taken straight back with negative margins so the mask
+   still occupies exactly its line. */
+.mask{overflow:hidden;padding:.16em .14em .3em;margin:-.16em -.14em -.3em}
 .js .mask > .reveal{opacity:1;transform:translateY(132%);transition:transform calc(var(--d-reveal) * 1.1) var(--e-reveal)}
 .js .mask > .reveal.is-in{transform:none}
 .js .reveal.draw{opacity:1;transform:scaleX(0);transform-origin:left center;transition:transform var(--d-reveal) var(--e-reveal)}
@@ -765,7 +771,7 @@ dl.pairs .cols{
 
    Narrower than the full row the anchors live in a drawer under the bar,
    on the page's own black: the four sections set as levels -- the name in
-   the serif at credit size, a hairline under it, and on the right gutter,
+   the display face at credit size, a hairline under it, and on the right gutter,
    where the spread's labels sit like the axis of a chart, the reel number
    in mono. The current one's hairline is the liquidity line and its
    number is in the gold; the one under the pointer (or the keyboard) is
@@ -1623,7 +1629,7 @@ dl.pairs .cols{
    Two beats on the column line. There is no portrait and no name, so the
    numeral is the portrait: "10+" set at the size of a plate (a size the
    scale lacks: a third of the column at 1440, two fifths of a phone),
-   flush left on the column line, in the serif with lining proportional
+   flush left on the column line, in the display face with lining proportional
    figures. The plus is a designed superior: a third of the figures' size,
    its top on the cap line, kerned into the bowl of the 0, in the one gold
    -- the accent of this screen, the sign that says "more than".
@@ -1837,6 +1843,15 @@ dl.pairs .cols{
   .js #founder .ten__lvl.reveal.wipe,.js #founder .word > .who.reveal{transition:none}
 }
 
+/* The mask is open on all four sides so it never cuts a glyph. The numeral
+   is also hung optically to the left, and on a phone the two together push
+   4px past the gutter -- so the mask keeps its own left edge here and the
+   hang is taken from the padding instead of from the page. */
+@media (max-width:619px){
+  #founder .ten__num{margin-left:0}
+  #founder .ten .mask{margin-left:0;padding-left:0}
+}
+
 /* ---- section:education ---- */
 /* ===== education: the syllabus as an index and a lemma =====
    Three rows on the reel's two columns (base.css: --axis-l / --axis-r),
@@ -1846,7 +1861,7 @@ dl.pairs .cols{
 
    The index: ten terms one under the other, the count in mono at the left
    the way a price scale is labelled, a hairline between rows, the term in
-   the serif a size under the credits -- a scale, not ten credits. The lit
+   the display face a size under the credits -- a scale, not ten credits. The lit
    row is the fair value gap band of the opening figure: the gold at seven
    percent with a hairline along its top and its bottom, the count in the
    gold, the term in the paper; the other rows stand a step back while one
@@ -1866,7 +1881,7 @@ dl.pairs .cols{
    in, the definition at body size, and a rule-set of three hairlined
    lines in the credit voice -- what else the term is called, what the
    figure draws, which other entries it belongs with, each of those a link
-   to that entry. Two voices per block: the serif and the mono count.
+   to that entry. Two voices per block: the display face and the mono count.
 
    Arrival: the plate develops from the first beat of the stagger (the
    zones draw out of the left, the line draws itself over the slow
@@ -2012,7 +2027,7 @@ dl.pairs .cols{
   color:var(--ink-2);
   text-wrap:pretty;
 }
-/* the rule-set: label left in the credit voice, value right in the serif
+/* the rule-set: label left in the credit voice, value right in the display face
    at note size, a hairline over the first line and under each */
 #education .rules{margin:clamp(16px,2.2vw,22px) 0 0;border-top:1px solid var(--line-2)}
 #education .rules > div{
@@ -2384,7 +2399,7 @@ dl.pairs .cols{
   min-width:0;min-height:0;
 }
 /* the head: two lines, one block, the server head's height -- the channel
-   in the serif a size over the list, and under it, in the label voice,
+   in the display face a size over the list, and under it, in the label voice,
    its place in the fifteen, the count in the mono. Both lines on the
    plot's left edge. */
 #channels .dv__title{
@@ -2849,7 +2864,7 @@ dl.pairs .cols{
 }
 
 /* ---- the caption: on the markets' own axis, in the voice of every figure
-   on the page -- the figure's name in caps, its note in the serif -------- */
+   on the page -- the figure's name in caps, its note in the display face -------- */
 #markets .wall__cap{
   display:flex;flex-wrap:wrap;align-items:baseline;
   gap:2px clamp(14px,1.6vw,22px);
@@ -3005,7 +3020,7 @@ dl.pairs .cols{
    The label is a museum label: the figure number in mono, the title in
    the label voice, a dashed level -- the liquidity line of the opening
    schema, same dash -- and the plate's provenance tagged where a chart
-   tags a level. The note is the serif, under the title, on the title's
+   tags a level. The note is the display face, under the title, on the title's
    column line. Under a plate the five pieces sit in a row; beside a
    plate they stack.
    .roll::before is the strip's edge, so the wall sits above it (z-index). */
@@ -3340,7 +3355,7 @@ dl.pairs .cols{
    off it: the row's number in mono at the axis, a dashed level -- the
    liquidity line of the opening schema, same dash -- running from the
    number to the firm's name at the gutter, and what was earned in the
-   value column on that same baseline, the amount or the date in the serif
+   value column on that same baseline, the amount or the date in the display face
    under it. Nothing is drawn down the gutter and nothing runs under a row;
    the levels live in the label column, the way a chart's tags live in its
    margin. The two years bracket the rows as two solid levels: a hairline
@@ -3790,7 +3805,7 @@ dl.pairs .cols{
   background:var(--mat);
 }
 /* captioned as the print is captioned: the number in mono, the firm in
-   the label voice, the note in the serif under it on the firm's line */
+   the label voice, the note in the display face under it on the firm's line */
 #trackrecord .zoom figcaption{
   display:flex;gap:14px;align-items:baseline;
   margin-top:14px;
@@ -3987,7 +4002,7 @@ dl.pairs .cols{
 #access .path__word .mask > span{display:block}
 
 /* ---- the scale: two rows on hairlines ----
-   The thing named in the serif at credit size; what is counted in mono at
+   The thing named in the display face at credit size; what is counted in mono at
    the right end of the row (a count, not an ordinal, so no leading zero);
    the names under it at note size. A value that is not a count is set in
    the label voice, where the mono would be. */
@@ -4120,19 +4135,11 @@ dl.pairs .cols{
    (the drawing stretches, its stroke does not) and is as deep as the
    sentence beside it, so the right half of the card is the figure and
    not air. In em of the display size (--D):
-     --base   .6902em + 1.5px   the word's baseline from the top of its
-                                box (Newsreader, line-height .92), plus a
-                                pixel and a half of air: the line
-     --depth  .9em              the chart's box; the drawing is 240 units
-                                deep, the sweep at 212, the level at 178
    The footer: the signature (a hair and the name) in the left half, the
    five links on the two column lines, a rule, the two lines that go
    under everything, and the local time on the right edge. */
 #closer{
   --D:var(--t-display);
-  --base:calc(.6902 * var(--D) + 1.5px);
-  --depth:calc(.9 * var(--D));
-  --fig-f:.5;                            /* the chart's left edge, as a fraction of the card: the centre line */
   --bleed:calc(var(--gutter) + max(0px,(100vw - 2 * var(--gutter) - var(--wide)) / 2));
   position:relative;
   padding:clamp(48px,7vw,104px) var(--gutter) clamp(40px,5vw,64px);
@@ -4147,7 +4154,6 @@ dl.pairs .cols{
   position:relative;z-index:2;
   display:flow-root;                      /* the mask's negative margin stays inside: the row is the line's box */
   margin:0;
-  height:var(--base);
   font-family:var(--f-display);
   font-weight:400;
   font-size:var(--D);
@@ -4155,16 +4161,16 @@ dl.pairs .cols{
   letter-spacing:var(--trk-display);
   color:var(--paper);
 }
-/* the mask clips at the line, not .3em under the box: the word comes up
-   through the line, and the space under the baseline is the figure's.
-   Above the box it is open by .12em (padding, taken back with a negative
-   margin so the row's height is still the line's), because the serif's
-   ascenders and the dot of the i stand a little above the line box. */
+/* The mask exists to hide the word until it rises, so it clips the word's
+   own box and nothing else: open above by .12em for the ascenders, open
+   below by .3em so no descender or bottom arm is cut. It used to be pinned
+   to a baseline measured for the display face this page no longer uses, against a
+   drawn chart line that is no longer there, and it was slicing 34px off the
+   bottom of every letter. */
 #closer .end__row .mask{
   display:block;
-  height:calc(var(--base) + .12 * var(--D));
-  padding:calc(.12 * var(--D)) 0 0;
-  margin:calc(-.12 * var(--D)) 0 0 var(--optical);
+  padding:calc(.12 * var(--D)) 0 calc(.3 * var(--D));
+  margin:calc(-.12 * var(--D)) 0 calc(-.3 * var(--D)) var(--optical);
   overflow:hidden;
 }
 #closer .end__word{display:block;white-space:nowrap}
@@ -4179,20 +4185,6 @@ dl.pairs .cols{
    y=0 on the line -- so the rule and the move are one stroke and there
    is no seam. The stroke is non-scaling, so the hairline is a hairline
    at every width. */
-#closer .end__fig{
-  position:absolute;z-index:1;
-  top:var(--base);
-  left:calc(-1 * var(--bleed));
-  right:calc(-1 * var(--bleed));
-  height:var(--depth);
-  pointer-events:none;
-}
-#closer .end__chart{
-  position:absolute;
-  top:0;bottom:0;
-  left:calc(var(--bleed) + (100% - 2 * var(--bleed)) * var(--fig-f));
-  right:var(--bleed);
-}
 #closer .fig{
   display:block;
   position:absolute;
@@ -4204,38 +4196,9 @@ dl.pairs .cols{
 #closer .fig__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:butt}
 /* the level: 3 on 5, as every level on the page, from under the first
    low (x 230 of 1000) to the page's edge -- drawn forward past the dot */
-#closer .end__lvl{
-  position:absolute;
-  left:23%;
-  right:calc(-1 * var(--bleed));
-  top:calc(178 / 240 * 100%);
-  height:1px;
-  background:var(--dash);
-}
 /* the dot: where the line stops, on the level, on the card's right edge */
-#closer .end__dot{
-  position:absolute;
-  right:-3px;top:-3px;
-  width:6px;height:6px;
-  border-radius:50%;                      /* a marker on a chart, not a corner */
-  background:var(--gold);
-}
 /* the caption: the page's label voice, above the endpoint on the axis
    (the spread labels a level above its right end the same way) */
-#closer .end__tag{
-  position:absolute;
-  right:0;
-  bottom:calc(100% + 8px);
-  font-family:var(--f-display);
-  font-style:normal;
-  font-size:var(--t-nano);
-  letter-spacing:var(--trk-caps);
-  text-transform:uppercase;
-  line-height:1.3;
-  text-align:right;
-  color:var(--ink-4);
-  white-space:nowrap;
-}
 
 /* ---- what is read after the word ------------------------------------- */
 #closer .end__col{
@@ -4305,7 +4268,7 @@ footer .fgrid{
   align-items:start;
 }
 /* the signature: a hair, the name in the wordmark's voice, the tagline
-   under it in the serif at note size (a sub-line under a credit) */
+   under it in the display face at note size (a sub-line under a credit) */
 footer .fsig .hair{display:block;width:40px;margin:0 0 clamp(16px,2vw,22px)}
 footer .fsig b{
   display:block;

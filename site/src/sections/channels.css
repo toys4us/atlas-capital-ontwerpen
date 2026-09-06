@@ -230,7 +230,7 @@
   min-width:0;min-height:0;
 }
 /* the head: two lines, one block, the server head's height -- the channel
-   in the serif a size over the list, and under it, in the label voice,
+   in the display face a size over the list, and under it, in the label voice,
    its place in the fifteen, the count in the mono. Both lines on the
    plot's left edge. */
 #channels .dv__title{

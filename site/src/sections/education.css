@@ -6,7 +6,7 @@
 
    The index: ten terms one under the other, the count in mono at the left
    the way a price scale is labelled, a hairline between rows, the term in
-   the serif a size under the credits -- a scale, not ten credits. The lit
+   the display face a size under the credits -- a scale, not ten credits. The lit
    row is the fair value gap band of the opening figure: the gold at seven
    percent with a hairline along its top and its bottom, the count in the
    gold, the term in the paper; the other rows stand a step back while one
@@ -26,7 +26,7 @@
    in, the definition at body size, and a rule-set of three hairlined
    lines in the credit voice -- what else the term is called, what the
    figure draws, which other entries it belongs with, each of those a link
-   to that entry. Two voices per block: the serif and the mono count.
+   to that entry. Two voices per block: the display face and the mono count.
 
    Arrival: the plate develops from the first beat of the stagger (the
    zones draw out of the left, the line draws itself over the slow
@@ -172,7 +172,7 @@
   color:var(--ink-2);
   text-wrap:pretty;
 }
-/* the rule-set: label left in the credit voice, value right in the serif
+/* the rule-set: label left in the credit voice, value right in the display face
    at note size, a hairline over the first line and under each */
 #education .rules{margin:clamp(16px,2.2vw,22px) 0 0;border-top:1px solid var(--line-2)}
 #education .rules > div{

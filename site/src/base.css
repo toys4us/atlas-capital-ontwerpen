@@ -23,7 +23,7 @@
      - the one call (.cta.solid): a longer rule and the arrow, never a
        filled box, and never twice in a viewport
      - the plate: the figure's line and zones in the gold
-   Two voices per block, never three: the serif (roman, italic, or small
+   Two voices per block, never three: the display face (roman, italic, or small
    tracked caps for a label) and, only for what is counted next to a
    clock or a figure number, Fragment Mono. A sub-line under a credit is
    serif, whatever it says.
@@ -240,7 +240,7 @@ figcaption{font-variant-numeric:tabular-nums}
 figcaption b{font-family:var(--f-mono);font-weight:400;letter-spacing:var(--trk-mono)}
 figcaption small{letter-spacing:0}
 time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spacing:var(--trk-mono)}
-/* caps: the serif, small, tracked -- the label voice of the whole page */
+/* caps: the display face, small, tracked -- the label voice of the whole page */
 .caps{
   font-family:var(--f-display);
   font-size:var(--t-micro);
@@ -347,7 +347,7 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 /* ---------- link / call ------------------------------------------------
    One construction, two weights, and never a filled box. .cta is the
    page's link: a hairline of the gold, then the label in the label voice
-   (the serif, small, tracked caps); on hover the rule lengthens and the
+   (the display face, small, tracked caps); on hover the rule lengthens and the
    label warms. .cta.solid is the one call on a screen -- the same link,
    its label in the paper, a longer rule, and the arrow of the bar after
    it in the same gold. So the gold is a line everywhere it appears: the
@@ -462,7 +462,7 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 @media (max-width:620px){ .roll::before,.roll::after{display:none} }
 
 /* ---------- group heading ---------------------------------------------
-   A title card between reels: the reel number in mono, the title in serif
+   A title card between reels: the reel number in mono, the title in the display face
    caps, on a rule that runs edge to edge of the strip. */
 .grp{
   position:relative;
@@ -504,7 +504,7 @@ time,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spa
 @media (max-width:620px){ .grp::before{left:6%;right:6%} }
 
 /* ---------- credit pairs ------------------------------------------------
-   Label right of the gutter in serif caps, value left of it in the serif at
+   Label right of the gutter in the display face caps, value left of it in the display face at
    credit size; the two share a baseline. The gutter is the axis -- nothing
    is drawn down it. The axis sits left of centre (the label column is a
    margin for sidenotes, two fifths; the values get three), so a run of
@@ -671,7 +671,13 @@ dl.pairs .cols{
 }
 .js .reveal.is-in{opacity:1;transform:none}
 .no-tr .reveal,.no-tr .reveal::before,.no-tr .reveal *,.reveal.no-tr,.reveal.no-tr::before,.reveal.no-tr *{transition:none!important}
-.mask{overflow:hidden;padding-bottom:.3em;margin-bottom:-.3em}
+/* A mask hides a line until it rises; it must never clip the glyphs
+   themselves. It was open at the bottom only, so an optically hung numeral
+   lost its left edge and a cap at display size lost its top -- both of them
+   letters that sit outside the line box the old serif was measured on. Open
+   on all four sides, taken straight back with negative margins so the mask
+   still occupies exactly its line. */
+.mask{overflow:hidden;padding:.16em .14em .3em;margin:-.16em -.14em -.3em}
 .js .mask > .reveal{opacity:1;transform:translateY(132%);transition:transform calc(var(--d-reveal) * 1.1) var(--e-reveal)}
 .js .mask > .reveal.is-in{transform:none}
 .js .reveal.draw{opacity:1;transform:scaleX(0);transform-origin:left center;transition:transform var(--d-reveal) var(--e-reveal)}
