@@ -4094,15 +4094,17 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
        one composed level: a leader -- the dashed hairline of the opening
        plate's liquidity line -- runs from the strip's left edge to the
        label, which is the tag at its end; the value sits left of the axis
-       on the same baseline. The one small fact that is a code, the
-       server's address, hangs after the word in the mono, a size down and
-       a hair below the baseline, the way a role follows a name.
+       on the same baseline. The last credit has two lines: the place, at
+       credit size, and under it, on the same column line, its address --
+       the one small fact that is a code, so it is set in the mono at
+       caption size, and it is the link, closed with the arrow of the bar.
 
        The reveal is authored here, not left to the auto-stagger: per row
        the leader draws out of the frame (a wipe, so the dashes stay put),
        the label surfaces at its end, and the value rises through its own
-       baseline out of a mask. Rows follow 110ms apart; the whole timeline
-       sits inside the scroll cap of motion.js. -->
+       baseline out of a mask. Rows follow 110ms apart; the address is the
+       last beat, in place, after its word. The whole timeline sits inside
+       the scroll cap of motion.js. -->
   <dl class="pairs" data-stagger="110">
     <dt><i class="lvl reveal wipe" data-at="0" aria-hidden="true"></i><span class="tag reveal" data-at="70">Community</span></dt>
     <dd><span class="mask"><span class="val reveal" data-at="150">Atlas Capital</span></span></dd>
@@ -4114,7 +4116,10 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
     <dd><span class="mask"><span class="val reveal" data-at="370"><span lang="nl">Nederlands en Engels</span><span lang="en">Dutch and English</span></span></span></dd>
 
     <dt><i class="lvl reveal wipe" data-at="330" aria-hidden="true"></i><span class="tag reveal" data-at="400"><span lang="nl">Locatie</span><span lang="en">Location</span></span></dt>
-    <dd><span class="mask"><span class="val reveal" data-at="420">Discord</span></span><small class="addr reveal" data-at="420"><a href="https://discord.gg/78Ff2GuSfW">discord.gg/78Ff2GuSfW</a></small></dd>
+    <dd>
+      <span class="mask"><span class="val reveal" data-at="420">Discord</span></span>
+      <small class="addr reveal" data-at="560"><a href="https://discord.gg/78Ff2GuSfW">discord.gg/78Ff2GuSfW</a></small>
+    </dd>
   </dl>
 </section>
 <!-- /section:production -->
@@ -4123,38 +4128,41 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <section id="founder">
   <div class="grp"><h2><span lang="nl">Hoofdrol</span><span lang="en">Starring</span></h2></div>
 
-  <!-- the credit, composed as one level: the numeral is the tag at the
-       left end, the dashed hairline of the gold (the liquidity line of the
-       opening plate, as furniture) runs from the numeral's right side to
-       the strip's edge ON THE NUMERAL'S BASELINE, and the label sits above
-       the line flush with its first dash, the way a level's label sits
-       above its start on a chart. Under the line, on the same flush edge,
-       the founder's own account of those years, cut from his first
-       sentence and not rewritten (KIT.md / BILINGUAL.md). One number, no
-       instrument, no date: a schema, not a chart. The plus is decoration
-       for the eye; the words carry the fact. -->
-  <p class="ten" data-stagger="120">
-    <span class="ten__n"><span class="mask"><span class="ten__num reveal" data-at="0">10<span class="ten__plus" aria-hidden="true">+</span></span></span></span>
-    <i class="ten__lvl reveal draw" data-at="140" aria-hidden="true"></i>
-    <span class="ten__words reveal" data-at="300"><span lang="nl">jaar actief in trading</span><span lang="en">years active in trading</span></span>
-    <small class="ten__sub reveal" data-at="440"><span lang="nl">winst, verlies, fouten, groei en vooral heel veel lessen</span><span lang="en">wins, losses, mistakes, growth, and a lot of lessons</span></small>
-  </p>
+  <!-- One row on the reel's shared axis (base.css: --axis-l / --axis-r),
+       read as one credit. Left of the axis, in the label column, the
+       numeral "10+" is the tag of a level: from its right side the dashed
+       hairline of the opening plate's liquidity line runs along its
+       baseline across the gutter and ends where the words begin. Right of
+       the axis, in the value column, the founder's own words at pull-quote
+       size, their first line standing on that same baseline, and under
+       them the signature on a short rule of the gold. Under the numeral,
+       on its own left edge, what the numeral counts -- "jaar actief in
+       trading" -- and his own account of those years, cut from his first
+       sentence and not rewritten. One number, no instrument, no date: a
+       schema, not a chart. The plus is decoration for the eye; the words
+       carry the fact. NL as on the page; EN is the official text,
+       verbatim. The whole row is one reveal sequence. -->
+  <div class="role" data-stagger="120">
+    <div class="ten">
+      <p class="ten__row">
+        <span class="mask"><span class="ten__num reveal" data-at="0">10<span class="ten__plus" aria-hidden="true">+</span></span></span>
+        <i class="ten__lvl reveal wipe" data-at="160" aria-hidden="true"></i>
+      </p>
+      <p class="ten__words reveal" data-at="360"><span lang="nl">jaar actief in trading</span><span lang="en">years active in trading</span></p>
+      <p class="ten__sub reveal" data-at="480"><span lang="nl">winst, verlies, fouten, groei en vooral heel veel lessen</span><span lang="en">wins, losses, mistakes, growth, and a lot of lessons</span></p>
+    </div>
 
-  <!-- the founder's own words at pull-quote size, in quotation marks so
-       they read as speech and not as copy; the opening mark hangs in the
-       margin so the first letter sits on the strip's edge with the numeral
-       above it and the signature under it. NL as on the page; EN is the
-       official text, verbatim, shortened only by cutting. -->
-  <figure class="word" data-stagger="300">
-    <blockquote class="reveal"><p>
-      <span lang="nl">&#8220;Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten
-      zien hoe ik de markten dagelijks benader. Geen <span class="nb">snelle-rijk-verhalen</span>, maar echte setups,
-      educatie en een community die samen beter wil worden.&#8221;</span><span lang="en">&#8220;I built Atlas Capital to share that experience, bring traders together, and show how I
-      approach the markets on a daily basis. No <span class="nb">get-rich-quick</span> promises, just real setups,
-      education, and a community focused on improving together.&#8221;</span>
-    </p></blockquote>
-    <figcaption class="who reveal"><span lang="nl">de oprichter</span><span lang="en">the founder</span></figcaption>
-  </figure>
+    <figure class="word">
+      <blockquote class="reveal" data-at="300"><p>
+        <span lang="nl">&#8220;Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten
+        zien hoe ik de markten dagelijks benader. Geen <span class="nb">snelle-rijk-verhalen</span>, maar echte setups,
+        educatie en een community die samen beter wil worden.&#8221;</span><span lang="en">&#8220;I built Atlas Capital to share that experience, bring traders together, and show how I
+        approach the markets on a daily basis. No <span class="nb">get-rich-quick</span> promises, just real setups,
+        education, and a community focused on improving together.&#8221;</span>
+      </p></blockquote>
+      <figcaption class="who reveal" data-at="900"><span lang="nl">de oprichter</span><span lang="en">the founder</span></figcaption>
+    </figure>
+  </div>
 </section>
 <!-- /section:founder -->
 

@@ -2,7 +2,7 @@
  "id": "trackrecord",
  "title": "Track record",
  "wave": 1,
- "round": 2,
+ "round": 1,
  "status": "win",
  "history": [
   {
@@ -34,6 +34,21 @@
    "confidence": 0.8,
    "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/09-trackrecord.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/trackrecord.css\n- Plates now sit at full value in their own colour: the grayscale/brightness filter and the dark veil are gone; one hairline frame (line-2) on a mat. Hover is the FVG band in the page's vocabulary: the mat warms to gold at 9%, the frame steps to line-4, the plate number goes gold. Focus does the same.\n- Wall goes two to a row (as the material wall's pairs): rows 01/02 and 05/06 at 3:2, 03/04 (the two square files) as a pair of squares, so every row ",
    "ts": "2026-09-05T19:35:19+00:00"
+  },
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 7.2,
+   "score_ref": 5.2,
+   "wowed": false,
+   "gap": "The six-certificate grid is a plain two-column gallery of third-party JPEGs in tinted frames — it reads as an attachments folder, not a designed exhibit, and it eats half the section. At the bar the certificates would be treated as a single artefact: one large hero certificate with the other five as small numbered thumbnails or a horizontal filmstrip, the verification codes typeset in the mono as a real ledger column, so the typographic system (the excellent dotted-leader index above it) carries the whole region instead of handing over to raster images. Secondary: the \"Tik op een certificaat\" hint is phone copy shown on desktop, and the \"02\" footnote floats without its \"01\" sibling.",
+   "motion": "Restrained staggered fade-and-rise of ledger rows on entry with a persistent hairline nav and live dual clocks — quiet, consistent, no overreach.",
+   "verdict": "A is a disciplined editorial ledger — mono index, dotted leaders, gold hairline year rules, well-measured captions — let down only by a stock-looking certificate gallery and a few copy details, so it is close to but not at shortlist. B has the more seductive atmosphere and bolder motion, yet illegible hero copy, a struck-through mobile nav, a huge mobile dead zone and ghosted transition frames are craft failures a jury cannot forgive; A wins comfortably.",
+   "confidence": 0.86,
+   "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/09-trackrecord.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/trackrecord.css (nothing else touched).\n- Ledger rebuilt as a timeline off the reel's spine: each row is a tick — mono number at the axis, a dashed level (the hero's 3-on/5-off liquidity dash in --line-4) drawing from the number to the firm's name at the gutter, value + serif sub-line on the same baseline. No full-width rules, nothing under rows; the ambiguous right-hand \"01\" is gone (numbers now lead, as on the tiles).\n- The two years already on the page (2023/2",
+   "ts": "2026-09-06T00:02:34+00:00"
   }
  ]
 }
