@@ -490,6 +490,10 @@
    open full size. Half that is still legible and the filmstrip still
    carries all six. */
 @media (min-width:900px){
-  #trackrecord .print{height:clamp(300px,32vw,430px)}
-  #trackrecord .print img{width:100%;height:100%;object-fit:contain}
+  /* the cap belongs on the picture, not on the figure: on the figure the
+     image overflowed it and printed over the filmstrip and the caveat */
+  #trackrecord .print__plate .pic{display:block;height:clamp(260px,27vw,360px)}
+  #trackrecord .print__plate .pic img{
+    display:block;width:100%;height:100%;object-fit:contain;
+  }
 }
