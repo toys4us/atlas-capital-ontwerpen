@@ -19,6 +19,21 @@
    "confidence": 0.74,
    "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/02-hero.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/hero.css\n- Decision kept: the tagline leads, the mark stays in the bar (base.css identity: \"a mark, not a poster\"); composition (spread, band, column under the band) unchanged.\n- The four zones left the SVG and are now HTML hairlines: two 3-on-5 dashed levels, the FVG band (two rules + 7% fill), the orderblock box -- the exact idiom every other section copies from the hero. They now run past the line's end into the mat's bleed to the page edge (before, they stopped dead",
    "timestamp": "2026-09-05T21:18:03+02:00"
+  },
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 7.5,
+   "score_ref": 5.5,
+   "wowed": false,
+   "gap": "The chart panel's gold top hairline runs straight into the cap-height of \"Proces.\" (it starts mid-word and sits a few pixels above the letter tops), so the headline-over-panel overlap reads as a collision rather than a decision; at the bar the panel either starts clearly below the first line's baseline or the hairline is dropped where type crosses it, so the hang is unmistakably intentional. Secondary: after the entrance reveal the hero is inert on scroll (frames 3–6 identical) — a single scroll-tied gesture (chart line extending, headline parallax) would make it feel alive rather than a loaded slide.",
+   "motion": "Clean line-mask headline stagger plus chart draw-on with a soft caption fade — well eased and restrained, but purely an intro; zero scroll response afterwards.",
+   "verdict": "A wins on what a hero jury actually scores at the fold: a designed display serif hung over a bespoke schematic, disciplined gold hairlines, a proper dual CTA and caption craft, marred only by the hairline-to-cap-height collision and a static post-load state. B has the better scroll choreography, but its fold is a photograph with a whisper of type, and the mobile strikethrough nav, missing-space copy and duplicated heading are the small things that lose Site of the Day.",
+   "confidence": 0.8,
+   "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/02-hero.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/hero.css\n- Decision kept: the tagline leads, the mark stays in the bar (base.css identity: \"a mark, not a poster\"); composition (spread, band, column under the band) unchanged.\n- The four zones left the SVG and are now HTML hairlines: two 3-on-5 dashed levels, the FVG band (two rules + 7% fill), the orderblock box -- the exact idiom every other section copies from the hero. They now run past the line's end into the mat's bleed to the page edge (before, they stopped dead",
+   "timestamp": "2026-09-06T02:03:23+02:00"
   }
  ]
 }

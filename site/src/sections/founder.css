@@ -99,14 +99,9 @@
   flex:1 1 auto;
   min-width:24px;
   height:1px;
-  margin:0 calc(-1 * var(--axis-gap) + var(--hang) * (var(--q) / 1em) + var(--lead-gap)) 0 clamp(10px,1.4vw,14px);
+  margin:0 calc(-1 * var(--axis-gap) + .4 * var(--q) + var(--lead-gap)) 0 clamp(10px,1.4vw,14px);
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
   pointer-events:none;
-}
-/* the margin above needs a unitless em: --hang is .4em of the words' size,
-   so the level's right margin is written out with --q instead */
-#founder .ten__lvl{
-  margin-right:calc(-1 * var(--axis-gap) + .4 * var(--q) + var(--lead-gap));
 }
 
 /* the label under the numeral: what it counts, at the size of the line
