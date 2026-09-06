@@ -1,60 +1,85 @@
 <section id="markets">
   <div class="grp"><h2><span lang="nl">Markten</span><span lang="en">Markets</span></h2></div>
 
-  <!-- The board: two panels side by side, each a price scale. Eight
-       instruments in four groups, read as a board is read -- the two
-       upper groups, then the two lower: Indices and Metalen on the top
-       line, Energie and Crypto under them -- so the two panels hold four
-       rows each and end on one line. A row is the name in the serif on
-       the panel's left edge and, right-aligned against the panel's scale
-       in the one mono, its code where the client gave one (NQ, ES,
-       XAUUSD) and the row's numeral: so every row ends the same way, in
-       the same column, and the rules enclose a line of content. A group
-       is a level of its own: its name the tag at the left end and a
-       heavier rule of the gold running to the scale. No price, no
-       change: the numerals count the rows and nothing else, and the
-       caption says so. A figure whose content is a dl (the term is the
-       group, the descriptions its instruments); the two scales are
-       decoration. The markup is the reading order; markets.css places
-       each term and description on its panel. -->
-  <figure class="board" data-stagger="70">
-    <div class="board__sheet">
-      <i class="board__axis board__axis--a reveal" data-at="0" aria-hidden="true"></i>
-      <i class="board__axis board__axis--b reveal" data-at="0" aria-hidden="true"></i>
-      <dl class="board__list">
-        <dt class="board__grp reveal"><span class="board__tag">Indices</span><i class="board__lvl" aria-hidden="true"></i></dt>
-        <dd class="board__row reveal"><span class="board__name">Nasdaq</span><span class="board__code">NQ</span><span class="board__n" aria-hidden="true">01</span></dd>
-        <dd class="board__row reveal"><span class="board__name">S&amp;P&nbsp;500</span><span class="board__code">ES</span><span class="board__n" aria-hidden="true">02</span></dd>
-        <dd class="board__row reveal"><span class="board__name">Dow Jones</span><span class="board__n" aria-hidden="true">03</span></dd>
+  <!-- The one chapter that leaves the strip. Everywhere else the page is
+       read in the reel's column; here it opens to the width of the window
+       and the eight markets are set at the size of a headline, four lines
+       -- one per group -- on a band of the plate's own ground, closed top
+       and bottom by a hairline that runs to both edges of the screen. A
+       group is one line: the markets from the band's own axis, each with
+       its code in the one mono where the client gave one (NQ, ES, XAUUSD),
+       so a name and its ticker are one word; at the far end of the line
+       stands the board's scale, and the group's tag is set against it in
+       the label caps -- eleven pixels of caps and eighty of serif on one
+       baseline. Under every group a level runs edge to edge of the screen.
+       No price, no change, no numeral: eight names, four groups, and the
+       caption says exactly that. The chapter closes on the width it opened
+       with -- the founder trades them live, on the markets' own axis, the
+       call at the far edge of the band on the statement's line. -->
+  <div class="wall" data-stagger="90">
+    <i class="wall__edge wall__edge--t reveal draw" aria-hidden="true"></i>
 
-        <dt class="board__grp reveal"><span class="board__tag"><span lang="nl">Metalen</span><span lang="en">Metals</span></span><i class="board__lvl" aria-hidden="true"></i></dt>
-        <dd class="board__row reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><span class="board__code">XAUUSD</span><span class="board__n" aria-hidden="true">04</span></dd>
-        <dd class="board__row reveal"><span class="board__name"><span lang="nl">Zilver</span><span lang="en">Silver</span></span><span class="board__n" aria-hidden="true">05</span></dd>
+    <figure class="wall__fig">
+     <div class="wall__board">
+      <i class="wall__axis reveal" data-at="0" aria-hidden="true"></i>
+      <dl class="wall__list">
 
-        <dt class="board__grp reveal"><span class="board__tag"><span lang="nl">Energie</span><span lang="en">Energy</span></span><i class="board__lvl" aria-hidden="true"></i></dt>
-        <dd class="board__row reveal"><span class="board__name"><span lang="nl">Olie</span><span lang="en">Oil</span></span><span class="board__n" aria-hidden="true">06</span></dd>
+        <div class="wall__grp">
+          <dt class="wall__tag reveal">Indices</dt>
+          <dd class="wall__names reveal wipe">
+            <span class="mk">Nasdaq<i class="mk__c">NQ</i></span>
+            <span class="mk">S&amp;P&nbsp;500<i class="mk__c">ES</i></span>
+            <span class="mk">Dow&nbsp;Jones</span>
+          </dd>
+          <i class="wall__rule reveal draw" aria-hidden="true"></i>
+        </div>
 
-        <dt class="board__grp reveal"><span class="board__tag">Crypto</span><i class="board__lvl" aria-hidden="true"></i></dt>
-        <dd class="board__row reveal"><span class="board__name">Bitcoin</span><span class="board__n" aria-hidden="true">07</span></dd>
-        <dd class="board__row reveal"><span class="board__name">Altcoins</span><span class="board__n" aria-hidden="true">08</span></dd>
+        <div class="wall__grp">
+          <dt class="wall__tag reveal"><span lang="nl">Metalen</span><span lang="en">Metals</span></dt>
+          <dd class="wall__names reveal wipe">
+            <span class="mk"><span lang="nl">Goud</span><span lang="en">Gold</span><i class="mk__c">XAUUSD</i></span>
+            <span class="mk"><span lang="nl">Zilver</span><span lang="en">Silver</span></span>
+          </dd>
+          <i class="wall__rule reveal draw" aria-hidden="true"></i>
+        </div>
+
+        <div class="wall__grp">
+          <dt class="wall__tag reveal"><span lang="nl">Energie</span><span lang="en">Energy</span></dt>
+          <dd class="wall__names reveal wipe">
+            <span class="mk"><span lang="nl">Olie</span><span lang="en">Oil</span></span>
+          </dd>
+          <i class="wall__rule reveal draw" aria-hidden="true"></i>
+        </div>
+
+        <div class="wall__grp">
+          <dt class="wall__tag reveal">Crypto</dt>
+          <dd class="wall__names reveal wipe">
+            <span class="mk">Bitcoin</span>
+            <span class="mk">Altcoins</span>
+          </dd>
+          <i class="wall__rule reveal draw" aria-hidden="true"></i>
+        </div>
       </dl>
-    </div>
-    <!-- the caption, hung on the board's left edge like every figure's -->
-    <figcaption class="board__cap reveal">
-      <span class="board__title"><span lang="nl">Figuur &mdash; De markten</span><span lang="en">Figure &mdash; The markets</span></span>
-      <span class="board__note"><span lang="nl">Acht markten in vier groepen: waar het in de server over gaat. Geen koers, geen verandering &mdash; een lijst, geen feed.</span><span lang="en">Eight markets in four groups: what the server is about. No price, no change &mdash; a list, not a feed.</span></span>
-    </figcaption>
-  </figure>
+     </div>
 
-  <div class="grp" id="live"><h2>Live</h2></div>
-  <!-- Live is one statement on the board's left edge, its one line under
-       it, and the call under that on the same edge: what happens, where,
-       and the way in. When is announced in the server and nowhere else,
-       so nothing here is a time. The one accent of the screen is the word
-       itself, in the italic gold. No label: the title names it. -->
-  <div class="live" data-stagger="160">
-    <p class="live__line"><span class="mask"><span class="reveal"><span lang="nl">De oprichter handelt <em>live</em>.</span><span lang="en">The founder trades <em>live</em>.</span></span></span></p>
-    <p class="live__sub reveal"><span lang="nl">In de server, op tijden die daar worden aangekondigd.</span><span lang="en">In the server, at times announced there.</span></p>
-    <a class="cta reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Naar de server</span><span lang="en">To the server</span></a>
+      <!-- the caption, on the markets' own axis, in the voice of every
+           figure on the page: the figure's name in caps, its note in the serif -->
+      <figcaption class="wall__cap reveal">
+        <span class="wall__title"><span lang="nl">Figuur &mdash; De markten</span><span lang="en">Figure &mdash; The markets</span></span>
+        <span class="wall__note"><span lang="nl">Acht markten in vier groepen: waar het in de server over gaat. Geen koers, geen verandering &mdash; een lijst, geen feed.</span><span lang="en">Eight markets in four groups: what the server is about. No price, no change &mdash; a list, not a feed.</span></span>
+      </figcaption>
+    </figure>
+
+    <!-- Live: the statement on the markets' axis, the one accent of the
+         screen the word itself in the italic gold, its line under it and the
+         call at the band's far edge on the statement's own line. When is
+         announced in the server and nowhere else, so nothing here is a time. -->
+    <div class="live" id="live">
+      <p class="live__line"><span class="mask"><span class="reveal"><span lang="nl">De oprichter handelt <em>live</em>.</span><span lang="en">The founder trades <em>live</em>.</span></span></span></p>
+      <p class="live__sub reveal"><span lang="nl">In de server, op tijden die daar worden aangekondigd.</span><span lang="en">In the server, at times announced there.</span></p>
+      <a class="cta reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Naar de server</span><span lang="en">To the server</span></a>
+    </div>
+
+    <i class="wall__edge wall__edge--b reveal draw" aria-hidden="true"></i>
   </div>
 </section>

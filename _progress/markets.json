@@ -1,8 +1,8 @@
 {
  "id": "markets",
  "title": "Markets & Live",
- "wave": 1,
- "round": 2,
+ "wave": 2,
+ "round": 1,
  "status": "win",
  "history": [
   {
@@ -79,6 +79,19 @@
    "confidence": 0.82,
    "note": "Rebuilt the board as a price scale so the three faults in the verdict are gone from the render:\n- Every row now ends the same way: a vertical hairline axis runs down the right of the board, every row's rule runs to it and ticks across it, and the row's numeral (01–08, mono, aria-hidden) sits on the scale after the tick — the eight names sit like the levels of a scale; no row trails an empty rule.\n- The three real codes (NQ, ES, XAUUSD) moved off the right slot to after the name, in the mono at caption size (the same construction as \"Discord discord.gg/…\" on the production reel); nothing w",
    "timestamp": "2026-09-06T02:16:13+02:00"
+  },
+  {
+   "wave": 2,
+   "round": 1,
+   "ref": "exo-ape",
+   "status": "win",
+   "score_ours": 7.5,
+   "score_ref": 7.2,
+   "wowed": false,
+   "gap": "Every row is the same height and every market name is the same size and weight, so a genuinely good idea flattens into a table — \"Olie\" alone in a full-width band is void, not tension. The superscript tickers are applied inconsistently (NQ, ES, XAUUSD present; nothing on Zilver, Olie, Bitcoin, Altcoins), which reads as an oversight rather than a rule. Vary row rhythm and name scale by group weight, and either tag all eight markets or none.",
+   "verdict": "B takes it narrowly, and on idea rather than execution. It is the only one of the two doing something I have not seen a hundred times: a markets index set as an editorial masthead in high-contrast serif, prices deliberately withheld and that refusal stated in the caption, held together by gold hairlines, letterspaced category rails and a numbered section convention. Colour restraint is exemplary — ink, bone, one gold, one italic accent — and the mobile stack survives the reduction better than the desktop does. A is the higher-craft object: its motion sheet is the best work on the table and its mobile Work page is confidently set. But the desktop frame is a hole with pictures clipped around the edges and a floating hover pill, and the aesthetic is the default award-site dialect executed very well rather than a position of its own. B loses motion outright and its uniform row rhythm undercuts the concept badly; fix the rhythm and choreograph the section entry and it moves into shortlist range. Neither is there as-is.",
+   "note": "markets is now the page's one full-bleed chapter — it abandons the 840px reel measure on purpose.\n- 07-markets.html: the two-panel board is gone; one `div.wall` band holds a `dl` of four group lines (Indices / Metalen / Energie / Crypto), each `dd` a flex row of names with its ticker in mono (NQ, ES, XAUUSD). Row numerals 01-08 dropped.\n- The separate \"LIVE\" chapter card is gone: the live statement, its line and the one Discord call now close the same band (reel numbering shifts down by one, material is now 06).\n- markets.css rewritten: the band breaks out with `margin-inline:calc(50% - ",
+   "timestamp": "2026-09-06T15:04:53+02:00"
   }
  ]
 }
