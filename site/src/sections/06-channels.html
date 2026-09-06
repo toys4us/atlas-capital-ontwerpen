@@ -3,21 +3,23 @@
 
   <!-- The server as a device. Left, a sidebar the way Discord draws one:
        the server's name, two categories, the fifteen channels as they
-       stand, the six of Premium behind a lock. Right, the pane a channel
-       opens on -- and since no message of the server is ours to show, the
-       pane is drawn as a chart page: a two-line title (the channel, and
-       what the page is) on the same rule as the server's name, and under
-       it, inset from the frame, the figure of the spread with a scale on
-       its right and its foot -- ticks, no numbers. The zones of the
-       vocabulary carry their tags where a level is tagged, on the scale.
-       No price, no day, no outcome, and the title says so. The selected
-       row is a fair value gap band; the boundary of Premium is a dashed
-       liquidity line; the locks are hairlines of the gold; the row
-       numbers sit at the right like the levels of a price scale.
-       Selecting a channel moves the band and retitles the pane; a Premium
-       channel dims the figure under its lock and the one sentence that is
-       true of it. The pane is decoration (aria-hidden); the list is
-       content. Nothing here is a name, a count or a message. -->
+       stand, the six of Premium behind a lock. Right, the page a channel
+       opens on, in Discord's three parts -- the channel's name on the
+       same rule as the server's, the content, and at the foot the
+       composer with only the prompt Discord itself prints there. Since
+       no message of the server is ours to show, the content is the
+       figure of the spread drawn again as a chart page: the plot, and
+       right of it a price scale that carries words where a chart carries
+       numbers -- each level's tag on the scale, off the axis, on its own
+       tick. The one word in the plot's corner keeps it honest. No price,
+       no day, no outcome. The selected row is a fair value gap band that
+       glides between rows; the boundary of Premium is a dashed liquidity
+       line; the locks are hairlines of the gold; the row numbers sit at
+       the right like the levels of a price scale. Selecting a channel
+       moves the band, retitles the page and draws the line again; a
+       Premium channel dims the figure under its lock and the one sentence
+       that is true of it. The pane is decoration (aria-hidden); the list
+       is content. Nothing here is a name, a count or a message. -->
   <figure class="dv" data-stagger="40">
     <div class="dv__frame">
       <div class="dv__side">
@@ -46,24 +48,26 @@
         </div>
       </div>
       <div class="dv__pane" data-kind="free" aria-hidden="true">
-        <!-- the title of the page: the channel, then what the page is;
-             one block, the height of the server's name, so the rule
-             under the two runs unbroken across the device -->
+        <!-- the head of the page: the channel, and under it its place in
+             the fifteen -- one block, the height of the server's name, so
+             the rule under the two runs unbroken across the device -->
         <div class="dv__title reveal" data-at="0">
           <p class="dv__name"><span class="dv__hash">#</span><span class="dv__name-t">nq-chart-ideeën</span></p>
-          <p class="dv__sub"><span lang="nl">Schematisch &middot; geen koers, geen dag</span><span lang="en">Schematic &middot; no price, no day</span></p>
+          <p class="dv__sub"><span lang="nl">Kanaal</span><span lang="en">Channel</span> <b class="dv__idx">01</b> <span class="dv__of">/ 15</span></p>
         </div>
-        <!-- the figure, read left to right: the line ranges through a
-             session, deviates once below the range out of an orderblock,
-             rallies in three legs and leaves a gap (the band), puts three
-             equal highs under the upper level, sweeps it once and falls
-             back through the gap. It stops short of the scale: that is
-             now. The plot is inset from the frame on every side; the
-             zones are HTML, the page's own hairlines, and every level
-             runs forward to the scale and stops there. The tags sit
-             above the right end of their level, on the scale, where the
-             line never comes; the orderblock's tag sits beside its box. -->
+        <!-- the figure, read left to right: the line ranges high through
+             the first third of the plot, turns down out of an orderblock,
+             deviates below the range to sweep the lows the last session
+             left, rallies in three legs and leaves a gap (the band), puts
+             three equal highs under the upper level, sweeps it once and
+             falls back into the gap. It stops short of the scale: that is
+             now. The plot is inset from the plate; right of it the scale,
+             a hairline with a tick wherever a level is tagged, and the
+             tags themselves on the scale in the label voice -- words, not
+             numbers. The zones are HTML, the page's own hairlines, and
+             every level runs forward to the scale and stops there. -->
         <div class="dv__plate reveal trace" data-at="0">
+          <i class="dv__tag dv__tag--sch"><span lang="nl">Schematisch</span><span lang="en">Schematic</span></i>
           <div class="dv__ink">
             <i class="dv__ax dv__ax--y"></i>
             <i class="dv__ax dv__ax--x"></i>
@@ -72,18 +76,27 @@
             <i class="dv__band"></i>
             <i class="dv__ob"></i>
             <svg class="dv__fig" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-              <path class="dv__line" pathLength="1" d="M0 238 18 228 36 246 54 234 72 252 90 240 108 256 124 244 136 268 146 292 156 310 166 296 174 274 180 262 190 278 204 226 214 242 228 196 238 212 258 130 270 146 286 92 296 108 306 68 320 98 336 68 350 102 366 68 380 100 394 44 406 84 418 122 430 106 444 150 454 190 464 180 474 206"/>
+              <path class="dv__line" pathLength="1" d="M0 96 12 76 24 106 36 84 48 118 60 90 72 74 84 110 96 94 108 120 120 100 128 118 168 78 178 102 186 86 200 138 210 126 226 184 236 172 252 232 262 220 278 280 288 268 302 324 312 312 322 360 334 326 344 344 360 288 370 304 388 236 398 254 414 176 424 194 440 118 452 138 466 86 478 108 492 84 504 106 518 88 530 108 544 40 556 76 564 62 576 140 584 126 590 214"/>
             </svg>
+            <i class="dv__tag dv__tag--ob">Orderblock</i>
             <i class="dv__tag dv__tag--liq"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></i>
             <i class="dv__tag dv__tag--fvg">FVG</i>
-            <i class="dv__tag dv__tag--ses"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></i>
-            <i class="dv__tag dv__tag--ob">Orderblock</i>
+            <i class="dv__tag dv__tag--ses"><span lang="nl">Sessie-<br>liquiditeit</span><span lang="en">Session<br>liquidity</span></i>
           </div>
           <div class="dv__locked"><span class="dv__locked-in">
             <i class="dv__lock"></i>
             <span class="dv__locked-t"><span lang="nl">Opent later</span><span lang="en">Opens later</span></span>
             <span class="dv__locked-n"><span lang="nl">Prijs en datum worden in de server aangekondigd.</span><span lang="en">The price and the date will be announced in the server.</span></span>
           </span></div>
+        </div>
+        <!-- the composer at the foot, as Discord draws it: a box, and in
+             it only the prompt Discord itself prints there -- for a
+             Premium channel, what is true of it instead -->
+        <div class="dv__composer reveal" data-at="120">
+          <span class="dv__composer-in">
+            <span class="dv__composer-t dv__composer-t--free"><span lang="nl">Bericht in</span><span lang="en">Message</span> <span class="dv__composer-ch">#nq-chart-ideeën</span></span>
+            <span class="dv__composer-t dv__composer-t--lock"><span lang="nl">Premium &middot; opent later</span><span lang="en">Premium &middot; opens later</span></span>
+          </span>
         </div>
       </div>
     </div>
@@ -100,20 +113,52 @@
     var list = s.querySelector(".dv__list"), pane = s.querySelector(".dv__pane"), name = s.querySelector(".dv__name-t");
     if (!list || !pane || !name) return;
     var rows = list.querySelectorAll(".dv__ch");
-    function rowOf(t){ while (t && t !== list) { if (t.classList && t.classList.contains("dv__ch")) return t; t = t.parentNode; } return null; }
-    function pick(b){
-      for (var i = 0; i < rows.length; i++) rows[i].setAttribute("aria-pressed", rows[i] === b ? "true" : "false");
-      var n = b.querySelector(".dv__chname");
-      name.textContent = n ? n.textContent : "";
-      pane.setAttribute("data-kind", b.getAttribute("data-kind") || "free");
+    var idx = s.querySelector(".dv__idx"), comp = s.querySelector(".dv__composer-ch"), plate = s.querySelector(".dv__plate");
+    var reduce = false;
+    try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e){}
+    /* the band: one element that glides to the selected row (the rows'
+       own band is turned off under .js). It joins the list's reveal in
+       the first slot, so it is there when the first row is. */
+    var sel = document.createElement("i");
+    sel.className = "dv__sel reveal"; sel.setAttribute("data-at", "0"); sel.setAttribute("aria-hidden", "true");
+    list.insertBefore(sel, list.firstChild);
+    var cur = null;
+    function place(b, cut){
+      if (cut) sel.classList.add("is-cut");
+      sel.style.transform = "translateY(" + b.offsetTop + "px)";
+      sel.style.height = b.offsetHeight + "px";
+      if (cut) { void sel.offsetHeight; sel.classList.remove("is-cut"); }
     }
+    function retrace(){
+      if (!plate || reduce || plate.classList.contains("reveal")) return;
+      plate.classList.add("is-cut"); plate.classList.add("is-back");
+      void plate.offsetHeight;
+      plate.classList.remove("is-cut"); plate.classList.remove("is-back");
+    }
+    function rowOf(t){ while (t && t !== list) { if (t.classList && t.classList.contains("dv__ch")) return t; t = t.parentNode; } return null; }
+    function pick(b, first){
+      if (b === cur) return;
+      var was = cur; cur = b;
+      for (var i = 0; i < rows.length; i++) rows[i].setAttribute("aria-pressed", rows[i] === b ? "true" : "false");
+      var n = b.querySelector(".dv__chname"), t = n ? n.textContent : "";
+      var k = b.getAttribute("data-kind") || "free";
+      name.textContent = t;
+      if (comp) comp.textContent = "#" + t;
+      if (idx) { var num = b.querySelector(".dv__n"); idx.textContent = num ? num.textContent : ""; }
+      pane.setAttribute("data-kind", k);
+      place(b, !!first);
+      if (!first && k === "free" && was) retrace();
+    }
+    for (var r = 0; r < rows.length; r++) if (rows[r].getAttribute("aria-pressed") === "true") { pick(rows[r], true); break; }
+    if (!cur && rows.length) pick(rows[0], true);
     list.addEventListener("click", function(e){ var b = rowOf(e.target); if (b) pick(b); });
     /* the cue at the list's foot: only while the list has more below */
     var side = s.querySelector(".dv__side");
     function cue(){ if (side) side.classList.toggle("is-more", list.scrollHeight - list.clientHeight - list.scrollTop > 4); }
+    function onResize(){ cue(); if (cur) place(cur, true); }
     list.addEventListener("scroll", cue, { passive: true });
-    window.addEventListener("resize", cue);
-    cue(); setTimeout(cue, 800);
+    window.addEventListener("resize", onResize);
+    cue(); setTimeout(onResize, 800);
     list.addEventListener("keydown", function(e){
       var b = rowOf(e.target); if (!b) return;
       var i = Array.prototype.indexOf.call(rows, b), j = -1, k = e.key;

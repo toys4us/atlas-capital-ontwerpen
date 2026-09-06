@@ -124,7 +124,7 @@
   letter-spacing:.01em;
   line-height:1.5;
   color:var(--ink-2);
-  text-wrap:pretty;
+  text-wrap:balance;
 }
 
 /* ---- the words: rule, quote, signature ----------------------------------- */
@@ -141,7 +141,7 @@
 }
 #founder .word blockquote{
   margin:0;
-  max-width:29ch;
+  max-width:31ch;                          /* six lines in either language at 1440 */
   font-family:var(--f-display);
   font-size:var(--q);
   font-weight:400;
@@ -204,8 +204,8 @@
      line (the row's box ends .265em under the baseline) */
   #founder .ten__sub{
     grid-column:1 / -1;grid-row:2;
-    margin-top:calc(50px - .265 * var(--n));
-    max-width:30ch;
+    margin-top:calc(44px - .265 * var(--n));
+    max-width:none;
   }
   #founder .word{margin-top:clamp(36px,10vw,44px)}
   #founder .word .hair{margin-bottom:18px}

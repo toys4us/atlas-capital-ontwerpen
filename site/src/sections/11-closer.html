@@ -90,9 +90,10 @@
   /* The rail retires with the reel. Its label already goes blank past the
      last group; here its two clocks leave too -- the way the scroll hint
      left, down and out (closer.css: .rail.is-end) -- from the moment the
-     end card's sentence and call come up from the bottom edge, 48px
-     before they reach the clocks' row, and they return if the visitor
-     scrolls back up. The footer's own clock carries the time from there,
+     end card's sentence and call come up from the bottom edge, 80px
+     before the edge (so they are gone before the words reach their row
+     at any reading speed), and they return if the visitor scrolls back
+     up. The footer's own clock carries the time from there,
      so the page ends with one clock, on the page, and never two. The
      rail is desktop decoration (aria-hidden), so this is a class and a
      transform, nothing a reader or a probe can lose. */
@@ -108,7 +109,7 @@
     for (i = 0; i < entries.length; i++) seen[els.indexOf(entries[i].target)] = entries[i].isIntersecting;
     for (i = 0; i < seen.length; i++) if (seen[i]) any = true;
     rail.classList.toggle("is-end", any);
-  }, { threshold: 0, rootMargin: "0px 0px 48px 0px" });
+  }, { threshold: 0, rootMargin: "0px 0px 80px 0px" });
   for (k = 0; k < els.length; k++) { seen.push(false); io.observe(els[k]); }
 })();
 </script>

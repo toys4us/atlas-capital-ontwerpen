@@ -2,7 +2,7 @@
  "id": "production",
  "title": "Production",
  "wave": 1,
- "round": 2,
+ "round": 3,
  "status": "win",
  "history": [
   {
@@ -79,6 +79,21 @@
    "confidence": 0.8,
    "note": "production (E:/ClaudeCode_GUI/atlas-designs/site/src/sections/03-production.html + production.css), round 2:\n- The Discord address is no longer dropped beside the word. It is the second line of the Locatie credit: under \"Discord\", flush on the value column line (desk and phone), mono at --t-caption, ink-3, tabular, with the bar's arrow glyph (--arrow mask, ink-4) closing it and no underline -- the page's own mark for a link that leaves the page.\n- dd is a plain block again (word in its mask on the first line, address the line under), so the grid still hangs each row on the word's baseline",
    "ts": "2026-09-06T02:10:33"
+  },
+  {
+   "wave": 1,
+   "round": 3,
+   "ref": "exo-ape",
+   "status": "win",
+   "score_ours": 7.3,
+   "score_ref": 6.5,
+   "wowed": false,
+   "gap": "In the motion sheet the figure/chart panel slides over the hero headline and clips \"Proces\" and \"Uitvoering\" mid-glyph while the panel itself is almost empty — it reads as a z-index accident, not a layered reveal; at the bar the panel would either sit fully below the type or mask it with a deliberate hard edge and content already visible. Secondary: the tracked small-caps \"01 PRODUCTIE\" header carries trailing letter-spacing, so the gap to the right rule (~30px) is double the left (~15px) on both desk and mobile — a hairline off by design, not by pixel.",
+   "motion": "Staggered row-by-row fade of the spec list and a rising \"10+\" numeral are restrained and well-timed, but the sticky figure panel colliding with the hero headline and a blur-in caption undercut it.",
+   "verdict": "A's colophon-style spec sheet — small-cap labels, dotted leaders with gold end ticks, serif/italic/mono hierarchy — is the more designed piece of typography and holds tight on mobile, despite the genre-cliché gold-on-black and a headline/panel collision in motion. B is a competently executed but stock agency portfolio grid whose crop exposes dead space and a heading that is big rather than designed.",
+   "confidence": 0.66,
+   "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/03-production.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/production.css\n- Leaders reversed to spec-sheet order: label at the label column's left edge, the dashed liquidity line runs out of it along the shared baseline, across the gutter, and stops one step before the value — the same construction as the founder's \"10+ · level · words\" directly below; all four leader ends land on one line 14px left of the column line.\n- Leader ends are clean at both ends: the dashes are drawn on a ::before whose width is round(down,100%,",
+   "ts": "2026-09-06T02:30:52"
   }
  ]
 }
