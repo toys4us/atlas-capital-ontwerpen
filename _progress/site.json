@@ -8,10 +8,27 @@
       "status": "coherence",
       "timestamp": "2026-09-06T13:38:07.730204+02:00",
       "note": "Section markers: dropped the \"· 10 onderwerpen\" / \"· 15 kanalen\" tails so all nine markers are one title set the same way — the counts were already said by the list, the \"01 / 10\" counter and the caption directly under them.\nAdjacent duplicate: deleted production's TAGLINE credit — the hero's H1 one section above IS \"Proces. Discipline. Uitvoering.\" Trackrecord's exhibit label lost \"Zes\" (the lede and the 01/06 counter already say six).\nOne CTA voice: the call is now \"Open de Discord / Open the Discord\" everywhere it is the call (hero, education, access-now, closer) and \"Naar d"
+    },
+    {
+      "wave": 2,
+      "round": 1,
+      "ref": "izanami",
+      "status": "win",
+      "score_ours": 7.5,
+      "score_ref": 5.2,
+      "margin": 2.3,
+      "wowed": false,
+      "clean": false,
+      "gap": "From MARKTEN through TOEGANG the page plateaus: five consecutive sections run the same ledger template — hairline rule, mono eyebrow, two-column list — locked into a ~590px measure inside 1440 with dead margins either side, so after the hero the scroll stops building and just accumulates. The markets block is the worst of it: eight serif nouns and eight numbers, no scale contrast, no image, no reason to be its own chapter. The one ambitious move, the bleeding chart plates in section 07, changes width and offset from plate to plate without a readable rule, so it reads loose rather than composed. At the bar, the middle third earns a genuine change of gear — one full-bleed moment, one violent scale jump, one section that abandons the ledger measure on purpose.",
+      "piece": "markets",
+      "motion": "Staged editorial entrances — headline lines, quote lines and list rows fading up in sequence while the chart panel draws itself; restrained and genuinely on-brand, though the first frame paints almost nothing, and on mobile the same choreography leaves more than half the page blank.",
+      "verdict": "A is one world from header to footer — bone Didone, single gold accent, mono ledger labels, numbered chapters — and it actually argues something, moving from schematic to annotated real charts to verifiable certificates to an unusually honest \"what this does not say\" disclaimer, then landing on \"Einde\" with the gold rule running out of the E's baseline into the chart from the hero. B is the better photograph and the worse website: gorgeous grading and real restraint, but the fold says nothing for two viewports, the three project blocks are the same block three times, the story slides from Japanese harmony to Dubai to a Mayan ceremony, and the thesis paragraph ships with unreadable lines and missing word-spaces while the ending ships with its own logo overlapping itself. A loses points for a flat middle third and mobile reveals so aggressive that half the page fails to paint in capture; it is still the only one of the two that opens, builds, pays off and lands. Neither is shortlist-ready as-is, but only one is close.",
+      "confidence": 0.88,
+      "timestamp": "2026-09-06T14:32:38.151657+02:00"
     }
   ],
   "wave": 2,
   "round": 1,
-  "status": "coherence",
-  "note": "Section markers: dropped the \"· 10 onderwerpen\" / \"· 15 kanalen\" tails so all nine markers are one title set the same way — the counts were already said by the list, the \"01 / 10\" counter and the caption directly under them.\nAdjacent duplicate: deleted production's TAGLINE credit — the hero's H1 one section above IS \"Proces. Discipline. Uitvoering.\" Trackrecord's exhibit label lost \"Zes\" (the lede and the 01/06 counter already say six).\nOne CTA voice: the call is now \"Open de Discord / Open the Discord\" everywhere it is the call (hero, education, access-now, closer) and \"Naar d"
+  "status": "win",
+  "note": "I've finished the sweep. Here are the findings.\n\n---\n\n# DEFECTS FOUND\n\n## 1. Lightbox backdrop is translucent — the page's own text ghosts through, on the same lines as the dialog's caption\n**Where:** `#trackrecord .zoom::backdrop` (`index.html:3957` — `background:rgba(3,3,4,.97)`). Affects every tile in `#material` and every certificate in `#trackrecord`.\n**What is wrong:** At 3% transparency over `--paper` text the page behind composites to ~rgb(10,10,10) against a rgb(3,3,4) ground — readable"
 }
