@@ -1,15 +1,18 @@
 /* ===== production =====
-   The credits, set as a ledger and drawn as a ladder. Four rows on the
-   shared axis of base.css (dl.pairs: the label right of the axis in
-   tracked caps, the value left of it at credit size, one baseline). Each
-   row is one composed level: a leader -- the dashed hairline of the one
-   gold, the liquidity line of the opening plate used as furniture -- runs
-   from the strip's left edge, the frame line, to the label, which is the
-   tag at its end; the founder's numeral sits at the end of its level the
-   same way on the next reel. So the four credits read as the leaders of
-   a contents page and, at once, as the ladder the "10+" below completes.
-   The value column carries type and nothing else: no rule runs under a
-   value, nothing is drawn down the axis. Schema only: no number, no
+   The credits, set as a spec sheet. Four rows on the shared axis of
+   base.css (dl.pairs: label column left of the gutter, value column right
+   of it, one baseline). Each row is one composed level, read left to
+   right: the label at the left edge of the label column, in the tracked
+   caps; out of it a leader -- the dashed hairline of the one gold, the
+   liquidity line of the opening plate used as furniture -- runs along
+   the baseline the two columns share, across the gutter, and stops a
+   step short of the value; the value stands on the column line with
+   every other value on the reel. So the label-to-value gap is the led
+   one, the way a contents page or a spec sheet leads it, and the row is
+   the same object as the numeral and its level on the next reel (the
+   "10+" is the tag at the left, its level runs to the words). All four
+   leaders end on one invisible line a step left of the column line;
+   nothing is drawn down the axis itself. Schema only: no number, no
    instrument, no date.
 
    Every row is the same row, and the last one has a second line. The
@@ -23,72 +26,59 @@
    plate's gap, as a hover state) and the address and its arrow warm to
    the gold. Two voices, serif and mono, no third.
 
-   The title card: the rule runs from frame line to frame line (the
-   strip's edges, not the column's), and the title is set in three cells,
-   the numeral in the first and an empty cell of the numeral's width in the
-   last, so the word is centred on the page and the two rules are symmetric
-   about it -- the numeral hangs in the left gap like a folio.
+   The title card is base.css's, unchanged, so the rule and the numeral
+   sit exactly as they do on every other reel.
 
    Reveal: authored in the partial (data-stagger with data-at slots), so
-   a row is a sequence and not a fade. The leader draws out of the frame
-   towards the label -- a wipe, so the dashes stay where they are and the
-   line is drawn, not stretched -- fast off the edge and slow to arrive;
-   the label surfaces at its end, opacity only, on a slow-start curve so
-   it is there once the line is; the value rises through its own baseline
-   out of a mask, the way the title's lines rise on the spread. Rows
-   follow 110ms apart. The address is the last beat: in place, slowly,
-   after its word, so nothing is ever there before the line it belongs to.
-   On a phone the same object, read the other way: the label leads, left,
-   in the same caps; the leader runs out of it to the column's edge and
-   ends on a short vertical rule (the strip's edge, which the phone does
-   not draw, standing there before the line reaches it); the value takes
-   the next line on the label's left edge, and the address the line under
+   a row is a sequence and not a fade. The label surfaces first, opacity
+   only, quick; the leader draws out of it towards the value -- a wipe,
+   so the dashes stay where they are and the line is drawn, not
+   stretched -- fast off the label and slow to arrive; the value rises
+   through its own baseline out of its own line box as the leader
+   arrives, the way the title's lines rise on the spread. Each value is
+   masked in its own line box, so every frame of the rise is a line
+   printing on, never a slice through a neighbour. Rows follow 80ms
+   apart. The address is the last beat: in place, slowly, after its
+   word, so nothing is ever there before the line it belongs to.
+   On a phone the same object, stacked: the label leads, left, in the
+   same caps; the leader runs out of it to the column's edge and ends on
+   a short vertical rule (the strip's edge, which the phone does not
+   draw, standing there before the line reaches it); the value takes the
+   next line on the label's left edge, and the address the line under
    that, on the same edge. */
 #production{
-  --edge:clamp(18px,4vw,40px);              /* the roll's padding: to the strip's edge */
-  --lead-gap:clamp(10px,1.4vw,14px);        /* from the leader's last dash to the label */
-  --lead-y:.64em;                           /* the middle of the caps: where the level runs */
+  --lead-gap:clamp(10px,1.4vw,14px);        /* from the label to the first dash, and from the last dash to the value */
+  --level:linear-gradient(90deg,transparent 0 5px,rgba(215,179,100,.55) 5px 8px);  /* 3 on 5 off, the plate's line */
 }
 #production dl.pairs{
   row-gap:clamp(16px,2.4vw,28px);
 }
 
-/* ---- the title card: rule to the frame, title symmetric ----------------- */
-#production .grp::before{
-  left:calc(-1 * var(--edge));
-  right:calc(-1 * var(--edge));
-}
-#production .grp h2{
-  display:inline-grid;
-  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
-  align-items:baseline;
-}
-#production .grp h2::before{grid-column:1;text-align:left}
-#production .grp h2 > span{grid-column:2}
-
 /* ---- the rows ------------------------------------------------------------
-   the tag: a flex row so the leader takes whatever width the label
-   leaves; the leader opts out of baseline alignment, so the row's
-   baseline is the label's and the grid hangs the value on it */
+   the tag: a flex row on the baseline, so the empty box that is the
+   leader sits with its bottom edge on the label's baseline, and the grid
+   hangs the value on that same line */
 #production dl.pairs > dt{
-  display:flex;align-items:baseline;justify-content:flex-end;
+  display:flex;align-items:baseline;
   min-width:0;
-  margin-left:calc(-1 * var(--edge));      /* the leader starts on the frame line */
+  text-align:left;
   white-space:nowrap;
 }
+#production .tag{display:block;flex:0 0 auto;min-width:0}
+/* the leader: takes what the label leaves, runs across the gutter, and
+   stops a step short of the column line. The dashes are anchored on the
+   value's end, so the line always ends on a dash, whatever the label's
+   width; the run in from the label may begin on a gap, which is how a
+   leader is set */
 #production .lvl{
   display:block;
   flex:1 1 auto;
-  align-self:flex-start;
-  margin:var(--lead-y) var(--lead-gap) 0 0;
-  height:1px;
   min-width:24px;
-  /* the plate's liquidity line, 3 on 5 off, anchored right so a dash
-     ends at the label */
-  background:linear-gradient(90deg,transparent 0 5px,var(--line-3) 5px 8px) right center/8px 1px repeat-x;
+  height:1px;
+  margin:0 calc(var(--lead-gap) - var(--axis-gap)) 0 var(--lead-gap);
+  background:var(--level) right center/8px 1px repeat-x;
   pointer-events:none;
 }
-#production .tag{display:block;min-width:0}
 
 /* the value: a block whose first line is the word in its mask, so the
    grid hangs the row on the word's baseline; the address is the line
@@ -101,12 +91,12 @@
 #production .val{display:inline-block}
 
 /* ---- the sequence ---------------------------------------------------------
-   the leader: off the edge fast, the settle long (expo-out); the wipe's
+   the label: opacity only -- its leader does the moving -- and quick, so
+   it is there before the line leaves it */
+.js #production .tag.reveal{transform:none;transition:opacity .6s var(--e-reveal)}
+/* the leader: off the label fast, the settle long (expo-out); the wipe's
    clip stays put so the dashes are revealed, not scaled */
 .js #production .lvl.reveal.wipe{transition:clip-path 1.15s var(--e-out)}
-/* the label: opacity only -- its leader does the moving -- and quick, so
-   it is there as the line arrives and before its value is */
-.js #production .tag.reveal{transform:none;transition:opacity .75s var(--e-reveal)}
 /* the value: the mask rise of base.css, a shade quicker than a title line,
    from a little deeper so no ascender shows before the rise has begun */
 .js #production .mask > .val.reveal{transform:translateY(145%);transition-duration:1.2s}
@@ -168,38 +158,33 @@
 #production .addr a:hover::before,#production .addr a:focus-visible::before{transform:none}
 #production .addr a:hover::after,#production .addr a:focus-visible::after{background:var(--gold);transform:translate(2px,-2px)}
 
-/* ---- a phone: the same object, the tag leading -------------------------
+/* ---- a phone: the same object, stacked -----------------------------------
    The title card's rule ends 6% in from the column on a phone (base.css);
    the ledger sits between those two verticals, so the labels start where
    the rule starts and the leaders end where it ends. Label left in the
-   caps, the leader out of it to the right, a dash starting at the label,
-   ending on a short vertical hairline; the value on the next line, on the
-   label's left edge, and the address under the value on that edge; the
-   rows set by air. */
+   caps, the leader out of it to the right -- a dash starting at the
+   label -- ending on a short vertical hairline; the value on the next
+   line, on the label's left edge, and the address under the value on
+   that edge; the rows set by air. */
 @media (max-width:620px){
-  #production .grp::before{left:6%;right:6%}     /* no frame on a phone: the card's rule as base.css sets it */
   #production dl.pairs{row-gap:0;margin:0 6%}
   #production dl.pairs > dt{
     justify-content:flex-start;
-    margin:0;
     padding-top:clamp(26px,7.5vw,32px);
-    text-align:left;
   }
   #production dl.pairs > dt:first-of-type{padding-top:22px}
-  #production .tag{order:1;flex:0 0 auto}
   #production .lvl{
-    order:2;
-    margin:var(--lead-y) 0 0 clamp(10px,3vw,14px);
-    background:linear-gradient(90deg,var(--line-3) 0 3px,transparent 3px 8px) left center/8px 1px repeat-x;
+    margin:0 0 0 clamp(10px,3vw,14px);
+    background:linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px) left center/8px 1px repeat-x;
   }
-  /* the strip's edge, standing before the line reaches it */
+  /* the strip's edge, standing before the line reaches it: straddles the
+     baseline the leader runs on */
   #production dl.pairs > dt::after{
     content:"";
-    order:3;
     flex:0 0 auto;
-    align-self:flex-start;
+    align-self:baseline;
+    position:relative;top:4px;
     width:1px;height:9px;
-    margin-top:calc(var(--lead-y) - 4px);
     background:var(--line-3);
   }
   #production dl.pairs > dd{text-align:left;margin-top:5px}

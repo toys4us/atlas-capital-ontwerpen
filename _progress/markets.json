@@ -2,7 +2,7 @@
  "id": "markets",
  "title": "Markets & Live",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -64,6 +64,21 @@
    "confidence": 0.72,
    "note": "Rebuilt markets as a compact desk board on the reel's own axis (base.css dl.pairs, not a fork): each group is one credit row — label right of the gutter, its instruments three across on the label's baseline at the shared .cols list size, one hairline (line-2) closing each row in the value column, nothing drawn down the axis.\nTickers (NQ, ES, XAUUSD — only where the client gave one) now sit beside their names in the mono at caption size, ink-3, instead of stranded 430px away at the row's right edge; no ticker, no dash, for the other five.\nDropped the four bright dashed levels (the dashed liq",
    "timestamp": "2026-09-06T01:58:59+02:00"
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 7,
+   "score_ref": 5.5,
+   "wowed": false,
+   "gap": "Each row is a serif name at the left and a mono index at the far right with roughly 60% of the row as empty air between hairlines, so the section reads as eight words framed by rules rather than a designed index; the ticker tags (NQ, ES, XAUUSD) are also set in a third face, a condensed grotesque that sits small and baseline-drifted next to the serif. At the bar the ticker moves into the same mono as the numbering, right-aligned into the vacant zone (or paired with a one-line descriptor), so the hairlines enclose content and the type system stays at two faces.",
+   "motion": "Rows fade-rise in on entry with a light stagger, a fixed side rail tracks the section number, nothing else moves: restrained and appropriate, if unremarkable.",
+   "verdict": "B is a disciplined editorial index: two-tone hairlines, tracked small caps, mono numbering, a proper figure caption, and it holds up cleanly on mobile, though the rows are hollow and the ticker face is a mis-pairing. A has the bolder image but the craft fails on the basics, with a backdrop-less sticky nav that crashes into copy and logos, an orphaned logo row, and a centred text-over-photo hero that is loud without being designed.",
+   "confidence": 0.82,
+   "note": "Rebuilt the board as a price scale so the three faults in the verdict are gone from the render:\n- Every row now ends the same way: a vertical hairline axis runs down the right of the board, every row's rule runs to it and ticks across it, and the row's numeral (01–08, mono, aria-hidden) sits on the scale after the tick — the eight names sit like the levels of a scale; no row trails an empty rule.\n- The three real codes (NQ, ES, XAUUSD) moved off the right slot to after the name, in the mono at caption size (the same construction as \"Discord discord.gg/…\" on the production reel); nothing w",
+   "timestamp": "2026-09-06T02:16:13+02:00"
   }
  ]
 }

@@ -1,7 +1,7 @@
 <section class="spread" id="hero" data-stagger="150">
   <div class="card">
     <p class="kicker reveal" data-at="0"><span lang="nl">Discord-community voor traders</span><span lang="en">A Discord community for traders</span><span class="kicker__more"><span lang="nl">&nbsp;&middot; Nederlands en Engels</span><span lang="en">&nbsp;&middot; Dutch and English</span></span></p>
-    <h1 class="title" data-parallax="-0.05" data-parallax-top>
+    <h1 class="title" data-parallax="-0.09" data-parallax-top>
       <span class="mask"><span class="title__line reveal" data-at="120"><span lang="nl">Proces.</span><span lang="en">Process.</span></span></span>
       <span class="mask"><span class="title__line reveal" data-at="260"><span lang="nl">Discipline.</span><span lang="en">Discipline.</span></span></span>
       <span class="mask"><span class="title__line reveal" data-at="400"><span lang="nl">Uitvoering.</span><span lang="en">Execution.</span></span></span>
@@ -20,23 +20,31 @@
          the band's bleed, to the edge of the page -- a level is drawn
          forward, a line is drawn up to the present. Every point is placed,
          so the line reads as a drawing and not as a feed. On load the line
-         draws itself while the zones draw out of the left. The two levels
-         are labelled on the page's right gutter like the axis of a chart;
-         the caption sits on that axis too, under the band's right end.
+         draws itself while the two rules and the zones draw out of the
+         left; on scroll a short tail past "now" is drawn by the scroll
+         itself (see hero.css), into the bleed, so reading on moves the
+         session on. The two levels are labelled on the page's right
+         gutter like the axis of a chart; the caption sits on that axis
+         too, under the band's right end. On a desk the band's top edge is
+         the first word's baseline and its top rule starts after the word:
+         the word stands on the band, nothing runs into a letter.
          On a desk the frame is lifted out of the flow (it is the band the
          title stands on); the caption stays in it, so it lands in the row
          under the band with the one line. On a phone the band sits under
          the title, edge to edge, so the figure is in the first screen
          there too, and the caption hangs on its left edge. -->
     <figure class="plate">
-      <div class="plate__px" data-parallax="0.04" data-parallax-top>
+      <div class="plate__px" data-parallax="0.05" data-parallax-top>
         <div class="plate__frame reveal trace" data-at="300">
+          <i class="plate__rule plate__rule--top"></i>
+          <i class="plate__rule plate__rule--base"></i>
           <i class="plate__ob"></i>
           <i class="plate__band"></i>
           <i class="plate__lvl plate__lvl--hi"></i>
           <i class="plate__lvl plate__lvl--lo"></i>
           <svg class="fig" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true" focusable="false">
             <path class="fig__line" pathLength="1" d="M0 378 50 374 100 380 150 375 200 379 250 373 300 378 340 372 380 377 420 373 450 378 474 371 492 388 520 340 536 352 566 268 580 286 612 206 628 226 662 116 680 150 704 108 722 146 742 110 760 144 776 120 792 84 808 140 826 124 846 196 860 186 884 250 898 240 922 300 936 290 952 318"/>
+            <path class="fig__tail" pathLength="1" d="M952 318 966 308 982 334 998 324 1014 350 1028 342 1040 360"/>
           </svg>
           <i class="plate__tag plate__tag--liq"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></i>
           <i class="plate__tag plate__tag--fvg">FVG</i>

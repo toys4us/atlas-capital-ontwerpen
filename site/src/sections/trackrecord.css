@@ -452,8 +452,28 @@
   border:1px solid var(--line-3);
   background:var(--mat);
 }
-#trackrecord .zoom figcaption{margin-top:14px}
-#trackrecord .zoom figcaption small{max-width:60ch}
+/* captioned as the print is captioned: the number in mono, the firm in
+   the label voice, the note in the serif under it on the firm's line */
+#trackrecord .zoom figcaption{
+  display:flex;gap:14px;align-items:baseline;
+  margin-top:14px;
+  font-family:var(--f-display);
+  font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
+  line-height:1.5;
+}
+#trackrecord .zoom figcaption > b{
+  flex:0 0 auto;
+  font-family:var(--f-mono);font-weight:400;font-size:var(--t-caption);
+  letter-spacing:var(--trk-mono);text-transform:none;
+  color:var(--ink-3);
+}
+#trackrecord .zoom figcaption > span{min-width:0;color:var(--ink-1)}
+#trackrecord .zoom figcaption small{
+  display:block;margin-top:5px;max-width:60ch;
+  letter-spacing:0;text-transform:none;
+  font-size:var(--t-small);color:var(--ink-2);line-height:1.55;
+  text-wrap:pretty;
+}
 #trackrecord .zoom .close{margin:clamp(14px,2.4vh,24px) 0 0}
 
 @media (prefers-reduced-motion:reduce){

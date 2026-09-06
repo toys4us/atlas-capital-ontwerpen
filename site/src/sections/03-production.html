@@ -1,34 +1,37 @@
 <section id="production">
   <div class="grp"><h2><span lang="nl">Productie</span><span lang="en">Production</span></h2></div>
-  <!-- four credits on the shared axis (base.css dl.pairs). Each row is
-       one composed level: a leader -- the dashed hairline of the opening
-       plate's liquidity line -- runs from the strip's left edge to the
-       label, which is the tag at its end; the value sits left of the axis
-       on the same baseline. The last credit has two lines: the place, at
-       credit size, and under it, on the same column line, its address --
-       the one small fact that is a code, so it is set in the mono at
-       caption size, and it is the link, closed with the arrow of the bar.
+  <!-- four credits on the shared axis (base.css dl.pairs), set as a spec
+       sheet: the label at the left edge of the label column, a leader --
+       the dashed hairline of the opening plate's liquidity line, on the
+       baseline the two columns share -- runs out of it across the gutter
+       and stops a step short of the value, which stands on the column
+       line with every other value on the reel. Same construction as the
+       numeral and its level on the next reel. The last credit has two
+       lines: the place, at credit size, and under it, on the same column
+       line, its address -- the one small fact that is a code, so it is
+       set in the mono at caption size, and it is the link, closed with
+       the arrow of the bar.
 
        The reveal is authored here, not left to the auto-stagger: per row
-       the leader draws out of the frame (a wipe, so the dashes stay put),
-       the label surfaces at its end, and the value rises through its own
-       baseline out of a mask. Rows follow 110ms apart; the address is the
-       last beat, in place, after its word. The whole timeline sits inside
-       the scroll cap of motion.js. -->
-  <dl class="pairs" data-stagger="110">
-    <dt><i class="lvl reveal wipe" data-at="0" aria-hidden="true"></i><span class="tag reveal" data-at="70">Community</span></dt>
-    <dd><span class="mask"><span class="val reveal" data-at="150">Atlas Capital</span></span></dd>
+       the label surfaces, the leader draws out of it towards the value (a
+       wipe, so the dashes stay put), and the value rises through its own
+       baseline out of its own line box. Rows follow 80ms apart; the
+       address is the last beat, in place, after its word. Every slot is
+       inside the scroll cap of motion.js (420ms). -->
+  <dl class="pairs" data-stagger="80">
+    <dt><span class="tag reveal" data-at="0">Community</span><i class="lvl reveal wipe" data-at="40" aria-hidden="true"></i></dt>
+    <dd><span class="mask"><span class="val reveal" data-at="110">Atlas Capital</span></span></dd>
 
-    <dt><i class="lvl reveal wipe" data-at="110" aria-hidden="true"></i><span class="tag reveal" data-at="180">Tagline</span></dt>
-    <dd><span class="mask"><span class="val reveal" data-at="260"><em><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></em></span></span></dd>
+    <dt><span class="tag reveal" data-at="80">Tagline</span><i class="lvl reveal wipe" data-at="120" aria-hidden="true"></i></dt>
+    <dd><span class="mask"><span class="val reveal" data-at="190"><em><span lang="nl">Proces. Discipline. Uitvoering.</span><span lang="en">Process. Discipline. Execution.</span></em></span></span></dd>
 
-    <dt><i class="lvl reveal wipe" data-at="220" aria-hidden="true"></i><span class="tag reveal" data-at="290"><span lang="nl">Taal</span><span lang="en">Language</span></span></dt>
-    <dd><span class="mask"><span class="val reveal" data-at="370"><span lang="nl">Nederlands en Engels</span><span lang="en">Dutch and English</span></span></span></dd>
+    <dt><span class="tag reveal" data-at="160"><span lang="nl">Taal</span><span lang="en">Language</span></span><i class="lvl reveal wipe" data-at="200" aria-hidden="true"></i></dt>
+    <dd><span class="mask"><span class="val reveal" data-at="270"><span lang="nl">Nederlands en Engels</span><span lang="en">Dutch and English</span></span></span></dd>
 
-    <dt><i class="lvl reveal wipe" data-at="330" aria-hidden="true"></i><span class="tag reveal" data-at="400"><span lang="nl">Locatie</span><span lang="en">Location</span></span></dt>
+    <dt><span class="tag reveal" data-at="240"><span lang="nl">Locatie</span><span lang="en">Location</span></span><i class="lvl reveal wipe" data-at="280" aria-hidden="true"></i></dt>
     <dd>
-      <span class="mask"><span class="val reveal" data-at="420">Discord</span></span>
-      <small class="addr reveal" data-at="560"><a href="https://discord.gg/78Ff2GuSfW">discord.gg/78Ff2GuSfW</a></small>
+      <span class="mask"><span class="val reveal" data-at="350">Discord</span></span>
+      <small class="addr reveal" data-at="420"><a href="https://discord.gg/78Ff2GuSfW">discord.gg/78Ff2GuSfW</a></small>
     </dd>
   </dl>
 </section>

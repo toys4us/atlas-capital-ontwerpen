@@ -383,10 +383,11 @@
 @media (min-width:1100px){ #hero .cue{display:none} }
 
 @media (prefers-reduced-motion:reduce){
-  .js #hero .reveal.trace::before{border-color:var(--line-3);background-color:var(--mat)}
-  .js #hero .reveal.trace .plate__ob,.js #hero .reveal.trace .plate__band,.js #hero .reveal.trace .plate__lvl{transform:none;transition:none}
+  .js #hero .reveal.trace::before{background-color:var(--mat)}
+  .js #hero .reveal.trace .plate__rule,.js #hero .reveal.trace .plate__ob,.js #hero .reveal.trace .plate__band,.js #hero .reveal.trace .plate__lvl{transform:none;transition:none}
   .js #hero .reveal.trace .plate__tag{opacity:1;transition:none}
   .js #hero .reveal.trace .fig__line{stroke-dashoffset:0;transition:none}
+  #hero .fig__tail{animation:none}      /* the line stops at now, still */
   .js #hero .subtitle.reveal{filter:none;transition:none}
   #hero .aside,#hero .aside::before,.js #hero .aside.reveal{transition:none}
   #hero .cue,#hero .cue::after{animation:none;clip-path:none}
@@ -417,6 +418,10 @@
     width:calc(100% - var(--plate-x));height:var(--plate-h);
   }
   #hero .plate__frame{aspect-ratio:auto;height:100%}
+  /* the top rule is not drawn under the first word: it starts after the
+     full stop (--rule-x from the gutter, so --plate-x less from the
+     frame's own left edge) and runs to the edge of the page */
+  #hero .plate__rule--top{left:calc(var(--rule-x) - var(--plate-x))}
   #hero .plate figcaption{display:block;margin:0;text-align:right}
   #hero .plate__title,#hero .plate__note{display:block}
   #hero .plate__note{margin-top:1px}
@@ -435,7 +440,7 @@
    the first screen of a phone */
 @media (max-width:899px){
   #hero .plate{margin-top:clamp(30px,6vw,48px)}
-  #hero .plate__frame::before{left:calc(-1 * var(--gutter))}
+  #hero .plate__frame::before,#hero .plate__rule{left:calc(-1 * var(--gutter))}
   #hero .subtitle{margin-top:clamp(22px,4vh,36px)}
 }
 /* where the row would break -- a phone, and a desk narrower than the row
