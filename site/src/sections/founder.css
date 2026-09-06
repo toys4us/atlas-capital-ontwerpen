@@ -193,12 +193,12 @@
    the level between them; the note under the numeral across the column,
    pulled up into the numeral's descender space. */
 @media (max-width:620px){
-  #founder{--n:clamp(140px,40vw,160px);--lead-gap:12px}
-  #founder .ten{grid-template-columns:auto minmax(28px,1fr) auto;margin-top:0}
+  #founder{--n:clamp(116px,40vw,160px);--lead-gap:12px}
+  #founder .ten{grid-template-columns:auto minmax(22px,1fr) auto;margin-top:0}
   #founder .ten > .mask{margin-bottom:-.12em}
   #founder .ten__lvl{margin-left:10px}
   #founder .ten__what{display:contents}
-  #founder .ten__words{grid-column:3;grid-row:1;max-width:11ch;font-size:clamp(18px,4.8vw,20px)}
+  #founder .ten__words{grid-column:3;grid-row:1;max-width:11ch;font-size:clamp(17px,4.8vw,20px)}
   /* the note under the numeral: pulled up into the descender space, to
      a fixed distance under the baseline that clears the unit's second
      line (the row's box ends .265em under the baseline) */

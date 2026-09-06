@@ -2066,12 +2066,12 @@ dl.pairs .cols{
    the level between them; the note under the numeral across the column,
    pulled up into the numeral's descender space. */
 @media (max-width:620px){
-  #founder{--n:clamp(140px,40vw,160px);--lead-gap:12px}
-  #founder .ten{grid-template-columns:auto minmax(28px,1fr) auto;margin-top:0}
+  #founder{--n:clamp(116px,40vw,160px);--lead-gap:12px}
+  #founder .ten{grid-template-columns:auto minmax(22px,1fr) auto;margin-top:0}
   #founder .ten > .mask{margin-bottom:-.12em}
   #founder .ten__lvl{margin-left:10px}
   #founder .ten__what{display:contents}
-  #founder .ten__words{grid-column:3;grid-row:1;max-width:11ch;font-size:clamp(18px,4.8vw,20px)}
+  #founder .ten__words{grid-column:3;grid-row:1;max-width:11ch;font-size:clamp(17px,4.8vw,20px)}
   /* the note under the numeral: pulled up into the descender space, to
      a fixed distance under the baseline that clears the unit's second
      line (the row's box ends .265em under the baseline) */
@@ -2497,15 +2497,15 @@ dl.pairs .cols{
    sidebar, then the pane at the full width of the column, the plate at a
    set proportion. */
 #channels .dv{
-  --side:238px;                 /* the sidebar's width                    */
+  --side:220px;                 /* the sidebar's width                    */
   --hd:60px;                    /* both heads                             */
   --row:28px;                   /* one channel                            */
   --pad-x:16px;                 /* the sidebar's inner margin             */
-  --pane-x:22px;                /* the pane's inner margin                */
+  --pane-x:20px;                /* the pane's inner margin                */
   --scale:100px;                /* the price scale: the tags' gutter      */
-  --plot-t:32px;                /* the plot's inset from the plate: top,  */
+  --plot-t:54px;                /* the plot's inset from the plate: top,  */
   --plot-r:calc(var(--pane-x) + var(--scale)); /* right (past the scale), */
-  --plot-b:26px;                /* foot,                                  */
+  --plot-b:44px;                /* foot,                                  */
   --plot-l:var(--pane-x);       /* left -- on the head's own line         */
   --tick:6px;                   /* a tick of the scale                    */
   --band:rgba(215,179,100,.07); /* the fair value gap band                */
@@ -2784,13 +2784,13 @@ dl.pairs .cols{
   background:rgba(215,179,100,.07);
 }
 #channels .dv__band{
-  left:67%;right:0;top:50%;height:5.5%;
+  left:70%;right:0;top:50%;height:5.5%;
   border-top:1px solid var(--line-3);
   border-bottom:1px solid var(--line-3);
   background:rgba(215,179,100,.07);
 }
 #channels .dv__lvl{
-  left:75%;right:0;top:16%;height:1px;
+  left:78%;right:0;top:16%;height:1px;
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
 }
 #channels .dv__lvl--lo{left:0;top:87.5%}
@@ -2947,7 +2947,7 @@ dl.pairs .cols{
    the plate at a set proportion with the same inset and a narrower
    scale, and the composer. */
 @media (max-width:620px){
-  #channels .dv{--hd:56px;--pad-x:14px;--pane-x:14px;--scale:88px;--plot-t:30px;--plot-b:22px}
+  #channels .dv{--hd:56px;--pad-x:14px;--pane-x:14px;--scale:100px;--plot-t:30px;--plot-b:22px}
   #channels .dv__frame{flex-direction:column;max-height:none}
   #channels .dv__side{flex:0 1 auto;border-right:0;border-bottom:1px solid var(--line-2)}
   #channels .dv__list{max-height:min(540px,64vh);max-height:min(540px,64svh)}
@@ -5460,7 +5460,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
             <i class="dv__band"></i>
             <i class="dv__ob"></i>
             <svg class="dv__fig" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-              <path class="dv__line" pathLength="1" d="M0 96 12 76 24 106 36 84 48 118 60 90 72 74 84 110 96 94 108 120 120 100 128 118 168 78 178 102 186 86 200 138 210 126 226 184 236 172 252 232 262 220 278 280 288 268 302 324 312 312 322 360 334 326 344 344 360 288 370 304 388 236 398 254 414 176 424 194 440 118 452 138 466 86 478 108 492 84 504 106 518 88 530 108 544 40 556 76 564 62 576 140 584 126 590 214"/>
+              <path class="dv__line" pathLength="1" d="M0 96 12 76 24 106 36 84 48 118 60 90 72 74 84 110 96 94 108 120 120 100 128 118 168 78 178 102 186 86 200 138 212 124 226 176 238 162 250 196 258 178 272 236 282 222 294 268 304 254 316 306 326 292 336 340 344 330 352 362 362 326 370 344 384 288 394 304 408 236 418 254 434 172 444 190 456 120 466 140 478 88 490 108 500 86 510 106 520 90 528 44 536 80 544 66 554 128 560 116 570 178 576 168 582 206"/>
             </svg>
             <i class="dv__tag dv__tag--ob">Orderblock</i>
             <i class="dv__tag dv__tag--liq"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></i>

@@ -31,15 +31,15 @@
    sidebar, then the pane at the full width of the column, the plate at a
    set proportion. */
 #channels .dv{
-  --side:238px;                 /* the sidebar's width                    */
+  --side:220px;                 /* the sidebar's width                    */
   --hd:60px;                    /* both heads                             */
   --row:28px;                   /* one channel                            */
   --pad-x:16px;                 /* the sidebar's inner margin             */
-  --pane-x:22px;                /* the pane's inner margin                */
+  --pane-x:20px;                /* the pane's inner margin                */
   --scale:100px;                /* the price scale: the tags' gutter      */
-  --plot-t:32px;                /* the plot's inset from the plate: top,  */
+  --plot-t:54px;                /* the plot's inset from the plate: top,  */
   --plot-r:calc(var(--pane-x) + var(--scale)); /* right (past the scale), */
-  --plot-b:26px;                /* foot,                                  */
+  --plot-b:44px;                /* foot,                                  */
   --plot-l:var(--pane-x);       /* left -- on the head's own line         */
   --tick:6px;                   /* a tick of the scale                    */
   --band:rgba(215,179,100,.07); /* the fair value gap band                */
@@ -318,13 +318,13 @@
   background:rgba(215,179,100,.07);
 }
 #channels .dv__band{
-  left:67%;right:0;top:50%;height:5.5%;
+  left:70%;right:0;top:50%;height:5.5%;
   border-top:1px solid var(--line-3);
   border-bottom:1px solid var(--line-3);
   background:rgba(215,179,100,.07);
 }
 #channels .dv__lvl{
-  left:75%;right:0;top:16%;height:1px;
+  left:78%;right:0;top:16%;height:1px;
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
 }
 #channels .dv__lvl--lo{left:0;top:87.5%}
@@ -481,7 +481,7 @@
    the plate at a set proportion with the same inset and a narrower
    scale, and the composer. */
 @media (max-width:620px){
-  #channels .dv{--hd:56px;--pad-x:14px;--pane-x:14px;--scale:88px;--plot-t:30px;--plot-b:22px}
+  #channels .dv{--hd:56px;--pad-x:14px;--pane-x:14px;--scale:100px;--plot-t:30px;--plot-b:22px}
   #channels .dv__frame{flex-direction:column;max-height:none}
   #channels .dv__side{flex:0 1 auto;border-right:0;border-bottom:1px solid var(--line-2)}
   #channels .dv__list{max-height:min(540px,64vh);max-height:min(540px,64svh)}
