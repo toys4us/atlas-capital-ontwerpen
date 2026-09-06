@@ -305,15 +305,16 @@
 #trackrecord .cap__orig{grid-column:4;grid-row:2;justify-self:end;margin:0}
 
 /* the contact strip: the six files as chips on one hairline, in the
-   order of the rows, each the size of a stamp, its number under it in
-   mono. A chip is grey until it is pointed at; the one in the print is
+   order of the rows, spaced across the print's width so the first and
+   the last stand on its column lines, each the size of a stamp, its
+   number under it in mono. A chip is grey until it is pointed at; the one in the print is
    in colour, its number in the gold, and a short rule of the gold sits
    on the hairline under it -- the marker on a level -- and slides to
    whichever chip is chosen. Pointed at, a chip's mat warms to the band
    of the spread. */
 #trackrecord .strip{
   list-style:none;margin:clamp(22px,3vw,34px) 0 0;padding:0;
-  display:flex;gap:clamp(8px,1.5vw,14px);
+  display:flex;justify-content:space-between;gap:8px;
   border-bottom:1px solid var(--line-2);
 }
 #trackrecord .strip li{flex:0 0 auto;min-width:0}
@@ -376,7 +377,6 @@
   #trackrecord .cap__firm{grid-column:1/-1;grid-row:2;margin-top:8px;white-space:normal}
   #trackrecord .cap__note{grid-column:1/-1;grid-row:3;min-height:0;max-width:none}
   #trackrecord .cap__orig{grid-column:1/-1;grid-row:4;justify-self:start;margin-top:4px}
-  #trackrecord .strip{gap:8px}
 }
 
 /* ---------- the caveat ---------------------------------------------------- */

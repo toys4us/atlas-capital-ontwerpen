@@ -2,7 +2,7 @@
  "id": "closer",
  "title": "Closer",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -34,6 +34,21 @@
    "confidence": 0.92,
    "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/11-closer.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/closer.css\n- Fixed the mask clipping \"Einde\"/\"The End\" ascenders (i-dot, d were cut): mask opens .12em above the row via padding/negative margin; row is flow-root so the margin cannot collapse and drop the line below the baseline.\n- Redrew the end move as a schema (fall in two legs, two equal lows on the dashed level, one sweep, three-leg recovery) in a 320x50 em-locked viewBox; action widened 2.6em to 3.2em; flat run extended so the rule reaches the viewport edge o",
    "timestamp": "2026-09-05T23:56:27.027824+00:00"
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 7.5,
+   "score_ref": 5.5,
+   "wowed": false,
+   "gap": "The fixed Amsterdam/New York clock strip does not retire when the footer arrives: in the last motion frame it prints directly over the disclaimer's second line while a second, docked clock sits at the right of the same row, so the page ends with a duplicated element and a text collision. At the bar the HUD clock unpins or fades on footer intersection and the docked instance takes over; secondly the mobile disclaimer is forced into a ~430px measure with hard breaks leaving the right half of the column empty, where it should run the full measure at a slightly smaller size.",
+   "motion": "Restrained: \"Einde\" rises, the baseline rule extends and draws itself into the liquidity sparkline with the caption typing in, all on one easing, but the fixed clock strip collides with content through the whole sequence.",
+   "verdict": "B is the designed piece: a serif display whose baseline literally becomes a gold sparkline is a single idea carried into typography, rule weight and colour restraint, and the footer grid beneath it is quietly correct. A has personality in its halftone band and bracketed sign-off but sabotages its own last line with an illegible blend, leaves a dead zone above the meta row and drops in a stock AI-chip row; B wins clearly, though its clock-strip collision and cramped mobile disclaimer keep it off an as-is shortlist.",
+   "confidence": 0.86,
+   "note": "Closer rebuilt on the footer's own grid (2fr|1fr|1fr, --axis-gap) so the two blocks are one composition: the line runs from the viewport's left edge under EINDE and at the card's centre line (where the footer's Discord column starts) becomes the chart; the sweep lands on the third column line (the Educatie column); the path returns to the level and stops on a 6px gold dot at the card's right edge, with the caption locked above the endpoint on the axis and the clock ending on the same edge below. Verified numerically: chart left 720 = list 1, sweep 1070 = list 2, dot/caption/clock all end at 1",
+   "timestamp": "2026-09-06T00:18:58.392729+00:00"
   }
  ]
 }

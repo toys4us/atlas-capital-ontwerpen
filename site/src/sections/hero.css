@@ -229,7 +229,7 @@
    offset is how much is still undrawn), so reading on is what moves the
    market on. Where the browser cannot drive an animation from the scroll
    the line simply stops at now. */
-#hero .fig__tail{stroke-dasharray:1;stroke-dashoffset:1}
+#hero .fig__tail{stroke-dasharray:1;stroke-dashoffset:1;stroke-linecap:butt}   /* butt: a round cap would show as a dot at "now" before the line gets there */
 @keyframes hero-tail{ from{stroke-dashoffset:1} to{stroke-dashoffset:0} }
 @supports (animation-timeline:scroll()){
   #hero .fig__tail{
@@ -439,8 +439,18 @@
    the screen, the figure stays inside the gutters, and the whole of it is
    the first screen of a phone */
 @media (max-width:899px){
-  #hero .plate{margin-top:clamp(30px,6vw,48px)}
-  #hero .plate__frame::before,#hero .plate__rule{left:calc(-1 * var(--gutter))}
+  /* the same shelf, one word lower: the band's top edge is the third
+     baseline, "Uitvoering." stands on it with only the g reaching in,
+     and the top rule starts after its full stop (4.58em from the gutter;
+     "Execution." ends at 4.35em) and runs to the edge of the screen */
+  #hero{--rule-x:calc(var(--t-hero) * 4.85)}
+  :root[data-lang="en"] #hero{--rule-x:calc(var(--t-hero) * 4.62)}
+  #hero .plate{margin-top:calc(var(--t-hero) * -.231)}   /* baseline 3 (2.589em) up from the title's box bottom (2.82em) */
+  #hero .plate__frame::before,#hero .plate__rule--base{left:calc(-1 * var(--gutter))}
+  #hero .plate__rule--top{left:var(--rule-x)}
+  /* the phone's first screen is shot early: the one line resolves in the
+     time it takes to appear, not over the long settle */
+  .js #hero .subtitle.reveal{transition-duration:var(--d-fade),var(--d-reveal),var(--d-fade)}
   #hero .subtitle{margin-top:clamp(22px,4vh,36px)}
 }
 /* where the row would break -- a phone, and a desk narrower than the row
