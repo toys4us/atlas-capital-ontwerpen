@@ -2,7 +2,7 @@
  "id": "education",
  "title": "Education",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -34,6 +34,21 @@
    "confidence": 0.7,
    "note": "Rebuilt the syllabus as ten price levels on the reel's shared axis (--axis-l/--axis-r): mono count at the left like a scale label, a hairline level of the gold running to the term, the term ending on the gutter where every reel label ends, the gloss in the value column. One row per topic (dropped the hollow 5+5 grid with reserved empty gloss lines).\nGlosses are visible at rest (ink-3) — the hero links here with \"bekijk eerst de tien onderwerpen\", and ten bare words left the section hollow; hover/focus brings one forward: the row becomes the FVG band (gold .07, edges .36), its level lights",
    "timestamp": "2026-09-06T01:59:52+02:00"
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 7.5,
+   "score_ref": 5,
+   "wowed": false,
+   "gap": "The right-hand panel is slightly under-resolved: the schematic figure sits at 670-1112px while the definition table below it stops at 1100px, so the two blocks don't share a right edge, and the figure itself is a small, somewhat generic line-chart floating with a large empty strip beneath the \"01/10\" counter. On mobile the \"ZIE OOK\" row wraps with a dangling \"·\" separator at the end of the first line. At the bar the figure, counter, title and table would lock to one column grid with matched edges, the figure would carry more graphic authority (larger, custom-drawn, with the deviation annotation designed rather than boxed), and separators would never orphan on a wrap.",
+   "motion": "Restrained staggered fades with the chart line drawing in on entry; nothing showy, timings read as calm and consistent across frames.",
+   "verdict": "B is a coherent editorial system (serif plus mono numerals plus one gold accent, consistent hairlines, a real mobile layout) with only small alignment and wrap lapses keeping it off the shortlist. A leans on a stock oversized-headline trope and its mobile view collapses, with header overlap and a dead half-screen, so it loses clearly.",
+   "confidence": 0.86,
+   "note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/05-education.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/education.css (only these two).\n- Right column rebuilt as a glossary lemma that runs to the index's foot: plate, then eyebrow \"01 / 10\" (same mono, same gold as the index count), the term at statement size (clamp 27-42px, -.022em, Newsreader opsz 72), the definition, and a hairlined two-column rule-set: OOK / IN DE FIGUUR / ZIE OOK (Also / In the figure / See also) with cross-references that are links to the other entries (numbers in mono).\n- Ten real schematics, o",
+   "timestamp": "2026-09-06T02:31:45+02:00"
   }
  ]
 }
