@@ -19,6 +19,21 @@
    "confidence": 0.86,
    "timestamp": "2026-09-05T21:33:44",
    "note": "material — 08-material.html + material.css rebuilt around FAITHFUL VECTOR TRACES of the founder's seven charts (option 2 of the brief): every plate is an inline SVG whose viewBox is the original file's pixel grid; the candles (high/low/open/close/direction) are read off the pixels with a small pipeline (masks → candle segmentation by wick column → OHLC), the zones/levels/lines/labels measured on the file and redrawn in the site's vocabulary (gold hairline boxes at 7%, dashed 3/5 levels, one gold hairline for a drawn line, up candles in ink-2 / down in ink-4, labels in the serif caps voice, fi"
+  },
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.5,
+   "score_ref": 5,
+   "wowed": false,
+   "gap": "The five lesson plates are stacked in one identical ~590px column with the same box, same rhythm, same caption block, so on a 1440 viewport two-thirds of the screen is dead black and the section reads as a list, not a designed sequence. At the bar, the plates would vary in scale and placement (a full-bleed plate, a pair, an offset one with the caption beside it), the near-invisible chart frame hairline would either commit to a legible 1px tone or disappear, and in-chart annotations would stop colliding (plate 02's fib scale \"1\"/\"0\" stacks directly on \"EQUAL HIGHS\"/\"SELLSIDE LIQUIDITY\"; plate 03's \"FVG\"/\"SELLSIDE LIQUIDITY\" overprint the candles).",
+   "motion": "Restrained fade-and-rise reveals with a clipped wipe on the chart plates; consistent, quiet, a little uniform.",
+   "verdict": "A is a disciplined dark-editorial system (small-caps tracking, dotted leaders, gold annotation) let down by monotony and a few label collisions; B has the more seductive atmosphere but ships with ghosted body copy, a clipped vertical label, struck-through mobile nav and a dead zone, which are disqualifying at this level. A takes it on craft; neither is a Site of the Day shortlist as-is.",
+   "confidence": 0.72,
+   "timestamp": "2026-09-06T02:01:38",
+   "note": "material — 08-material.html + material.css rebuilt around FAITHFUL VECTOR TRACES of the founder's seven charts (option 2 of the brief): every plate is an inline SVG whose viewBox is the original file's pixel grid; the candles (high/low/open/close/direction) are read off the pixels with a small pipeline (masks → candle segmentation by wick column → OHLC), the zones/levels/lines/labels measured on the file and redrawn in the site's vocabulary (gold hairline boxes at 7%, dashed 3/5 levels, one gold hairline for a drawn line, up candles in ink-2 / down in ink-4, labels in the serif caps voice, fi"
   }
  ]
 }
