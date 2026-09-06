@@ -2,7 +2,7 @@
  "id": "markets",
  "title": "Markets & Live",
  "wave": 2,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -92,6 +92,19 @@
    "verdict": "B takes it narrowly, and on idea rather than execution. It is the only one of the two doing something I have not seen a hundred times: a markets index set as an editorial masthead in high-contrast serif, prices deliberately withheld and that refusal stated in the caption, held together by gold hairlines, letterspaced category rails and a numbered section convention. Colour restraint is exemplary — ink, bone, one gold, one italic accent — and the mobile stack survives the reduction better than the desktop does. A is the higher-craft object: its motion sheet is the best work on the table and its mobile Work page is confidently set. But the desktop frame is a hole with pictures clipped around the edges and a floating hover pill, and the aesthetic is the default award-site dialect executed very well rather than a position of its own. B loses motion outright and its uniform row rhythm undercuts the concept badly; fix the rhythm and choreograph the section entry and it moves into shortlist range. Neither is there as-is.",
    "note": "markets is now the page's one full-bleed chapter — it abandons the 840px reel measure on purpose.\n- 07-markets.html: the two-panel board is gone; one `div.wall` band holds a `dl` of four group lines (Indices / Metalen / Energie / Crypto), each `dd` a flex row of names with its ticker in mono (NQ, ES, XAUUSD). Row numerals 01-08 dropped.\n- The separate \"LIVE\" chapter card is gone: the live statement, its line and the one Discord call now close the same band (reel numbering shifts down by one, material is now 06).\n- markets.css rewritten: the band breaks out with `margin-inline:calc(50% - ",
    "timestamp": "2026-09-06T15:04:53+02:00"
+  },
+  {
+   "wave": 2,
+   "round": 2,
+   "ref": "aebele",
+   "status": "win",
+   "score_ours": 6.9,
+   "score_ref": 6.2,
+   "wowed": false,
+   "gap": "The four market bands are metrically identical — same left margin, same rule weight, same type size, same vertical rhythm — so the region reads as a table rather than a composition, and \"Olie\" alone in a full-width band exposes how empty that system is. The connector rules are inconsistent: INDICES gets a short stub, METALEN a full run, and stray vertical grid lines at x≈1140 and x≈1348 terminate in nothing. Differentiate the four groups by scale or rule weight (indices heaviest, crypto lightest), and land every connector and vertical on one declared grid.",
+   "verdict": "A takes it on idea and discipline, not on execution. A's markets region has an actual conceit — eight markets in four groups, no tickers, no feed, just names in a high-contrast serif with micro-caps labels — and it holds a severe near-black/bone/single-gold palette without flinching; the mobile stacking is the stronger of its two layouts. B is the more finished-looking page but is the wrong kind of finished: it is the standard 2024 luxury-interiors template (cream, gold, condensed didone, script overlay), its compared view is compositionally broken with half the canvas dead, and its signature script word is literally truncated on mobile. B's motion sheet is the better piece of work in this pair and it is the only thing keeping the gap narrow. Neither is shortlist material as-is: A is restrained to the point of inert and needs hierarchy inside its four bands plus real motion design; B needs a composition that closes and an identity that isn't borrowed.",
+   "note": "src/sections/07-markets.html + src/sections/markets.css — the wall of markets stops being a table.\n\n1. Tickers: removed the mono superscripts (NQ, ES, XAUUSD). The client named a code for three of eight and none for five, so inventing YM/XAGUSD/CL/BTC was out; per the judge's \"all eight or none\", the wall now carries none. No mono left in the chapter.\n2. Row rhythm by weight: each group carries data-n (how many markets) driving --w. Names are calc(--size * --w) — 82 / 61 / 45px at 1440 (3 / 2 / 1 markets). Row air is calc(floor + share * --w), so block heights run 169 / 131 / 104 / 92 px",
+   "timestamp": "2026-09-06T15:22:46+02:00"
   }
  ]
 }
