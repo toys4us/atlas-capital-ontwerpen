@@ -19,6 +19,21 @@
    "confidence": 0.68,
    "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/01-header.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/header.css. Shots in E:/ClaudeCode_GUI/atlas-designs/site/_build/header (+ /states for drawer/hover/focus/current/no-JS).\n1. Bug fixed: opening the drawer mid-page un-stuck the bar (scroll lock on <html> re-roots the scroller; it is now on body).\n2. Scrolled bar: opaque ground and a hairline that draws itself from the left. The .86 glass was showing sharp page text: its backdrop blur never renders in Chromium because base.css .page{isolation:isolate} is the backdrop roo",
    "timestamp": "2026-09-05T21:25:16+02:00"
+  },
+  {
+   "wave": 1,
+   "round": 1,
+   "ref": "izanami",
+   "status": "win",
+   "score_ours": 6.5,
+   "score_ref": 5,
+   "wowed": false,
+   "gap": "The header is competent but reads as the stock \"dark + gold hairline + tracked serif caps\" fintech idiom, and the details that should sell it are loose: the centred nav group sits ~16px right of the page axis, a stray mid-dot separator floats between KANALEN and DISCORD with no partner elsewhere, and on scroll the label morphs into \"OPEN DE  DISCORD\" with a visibly doubled word-space and the gold dash colliding into the label. At the bar, the nav is either truly centred or honestly left-set on the same 64px margin as the logo and eyebrow, separators are a system (all or none), and the scroll-state CTA is a single tracked string with the gold rule set at a fixed optical gap.",
+   "motion": "Header compacts on scroll into a slim bar with a bottom hairline and the Discord item reveals a gold dash + CTA label; a considered choreography, though the label spacing snaps rather than settles.",
+   "verdict": "A is a disciplined but familiar dark-luxury header whose small alignment and spacing slips keep it off the shortlist; B has the more distinctive mark and atmosphere but ships an illegible, arbitrarily placed desktop nav and a visibly broken mobile nav. Craft beats mood here: A wins on clarity, detail and a real scrolled state, with neither site at Site-of-the-Day standard as-is.",
+   "confidence": 0.72,
+   "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/01-header.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/header.css. Shots in E:/ClaudeCode_GUI/atlas-designs/site/_build/header (+ /states for drawer/hover/focus/current/no-JS).\n1. Bug fixed: opening the drawer mid-page un-stuck the bar (scroll lock on <html> re-roots the scroller; it is now on body).\n2. Scrolled bar: opaque ground and a hairline that draws itself from the left. The .86 glass was showing sharp page text: its backdrop blur never renders in Chromium because base.css .page{isolation:isolate} is the backdrop roo",
+   "timestamp": "2026-09-06T02:00:46+02:00"
   }
  ]
 }
