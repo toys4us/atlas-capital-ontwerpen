@@ -2,7 +2,7 @@
  "id": "hero",
  "title": "Hero",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -34,6 +34,21 @@
    "confidence": 0.8,
    "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/02-hero.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/hero.css\n- Decision kept: the tagline leads, the mark stays in the bar (base.css identity: \"a mark, not a poster\"); composition (spread, band, column under the band) unchanged.\n- The four zones left the SVG and are now HTML hairlines: two 3-on-5 dashed levels, the FVG band (two rules + 7% fill), the orderblock box -- the exact idiom every other section copies from the hero. They now run past the line's end into the mat's bleed to the page edge (before, they stopped dead",
    "timestamp": "2026-09-06T02:03:23+02:00"
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 7.5,
+   "score_ref": 5.5,
+   "wowed": false,
+   "gap": "The figure panel is only half-committed as a layer: its lighter rectangle starts mid-word behind \"Discipline.\", its top hairline runs off the right viewport edge while the caption stops at the margin, and on mobile the \"g\" of \"Uitvoering.\" drops into the panel with the gold rule butting the full stop. At the bar, the panel either sits cleanly beneath the headline with the hairline ending at the same right margin as the caption, or the overlap is intentional and consistent, with the headline's descenders cleared by the panel's top edge on every breakpoint.",
+   "motion": "Staged, restrained load sequence: masked line-rise on the three headline words, the gold session line drawing left to right, captions blurring in, labels last; one transient frame shows the panel clipping the rising headline, otherwise well-timed.",
+   "verdict": "B has an authored typographic voice, a bespoke figure with careful caption craft and a coherent gold-on-ink restraint, and loses points only for the panel layering seams and edge bleeds. A is a familiar dark agency template with grain and a big wordmark, but its centred copy is undesigned, the fold has a dead zone, and the mobile nav shows a rendering defect.",
+   "confidence": 0.8,
+   "builder_note": "- Band top is now the first baseline (.701em, measured): \"Proces.\" stands on the band as its shelf; the top rule is a separate element that starts .27em after the full stop (--rule-x 3.2em NL / 3.6em EN) and runs to the page edge — nothing touches a letter (verified to ±0.2px at 900–1920 wide, both languages). Band bottom unchanged (3.15em); plate height 2.449em; chart y-coords are percentages so the schema simply re-stretches.\n- Same device on the phone: the band's top edge is the third baseline, \"Uitvoering.\"/\"Execution.\" stands on it (only the g reaches in), rule stub after the word",
+   "timestamp": "2026-09-06T02:29:05+02:00"
   }
  ]
 }

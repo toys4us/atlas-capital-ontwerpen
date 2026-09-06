@@ -2963,19 +2963,24 @@ dl.pairs .cols{
    its panel; dense placement gives it the first free line there. */
 #markets .board__list{
   display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  grid-template-rows:auto repeat(5,var(--row));
-  grid-auto-rows:var(--row);
-  grid-auto-flow:row dense;
-  column-gap:var(--gap);
+  grid-template-columns:minmax(0,1fr);
   margin:0;padding:0;
   min-width:0;
 }
-#markets .board__list > :nth-child(-n+4),
-#markets .board__list > :nth-child(8),
-#markets .board__list > :nth-child(9){grid-column:1}
-#markets .board__list > :nth-child(n+5):nth-child(-n+7),
-#markets .board__list > :nth-child(n+10){grid-column:2}
+@media (min-width:621px){
+  #markets .board__list{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-rows:auto repeat(5,var(--row));
+    grid-auto-rows:var(--row);
+    grid-auto-flow:row dense;
+    column-gap:var(--gap);
+  }
+  #markets .board__list > :nth-child(-n+4),
+  #markets .board__list > :nth-child(8),
+  #markets .board__list > :nth-child(9){grid-column:1}
+  #markets .board__list > :nth-child(n+5):nth-child(-n+7),
+  #markets .board__list > :nth-child(n+10){grid-column:2}
+}
 
 /* ---- the scales: one hairline at each panel's right edge, the board's
    height, hanging from the first tags' baseline (9px into their line
@@ -3185,14 +3190,6 @@ dl.pairs .cols{
    other in reading order, the same scale on the right --------------------- */
 @media (max-width:620px){
   #markets .board{--row:56px;--bleed:10px;--pad-r:10px}
-  #markets .board__list{
-    grid-template-columns:minmax(0,1fr);
-    grid-template-rows:auto;
-    grid-auto-rows:auto;
-    grid-auto-flow:row;
-    column-gap:0;
-  }
-  #markets .board__list > *{grid-column:1}
   #markets .board__axis--a{display:none}
   #markets .board__grp{padding-top:clamp(24px,6.5vw,30px)}
   #markets .board__list > .board__grp:first-child{padding-top:0}
