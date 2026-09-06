@@ -1,35 +1,42 @@
 <!-- The end card: the opening spread, closed. One word set at display
      size and hung on the page's left axis (the wordmark's, the title's),
      standing on the line -- the price path of the opening plate, run
-     across the whole page as a rule. The line comes in from the left
-     margin, the word rises out of it, and at the right, under the line,
-     the path does its last move: a fall in two legs, two equal lows on a
-     dashed level, one sweep beneath it, and back up to the line in three
-     legs as it leaves the page -- the session is over; except that it
-     turns up and goes on, which is what the sub-line says. No price, no
-     day, no outcome; the one caption says the figure is a schema.
-     Everything in the figure is placed in em of the display size, so the
-     drawing is the same drawing at every width. The sub-line and the one
-     call hang under the word on the axis; on a phone they wait below the
-     figure. The whole card is one sequence: the line first, the word out
-     of it, then the sentence and the call. -->
+     under the word as a rule at its baseline. The card is set on the
+     footer's own grid (a half, a quarter, a quarter): the word and, under
+     it, the sentence and the one call take the left half; at the card's
+     centre -- the line the footer's first link column starts on -- the
+     rule becomes the chart. It falls in two legs, puts in two equal lows
+     on a dashed level, sweeps under it once (on the third column line,
+     where the footer's second list starts), climbs back in three legs
+     and stops on the level at the card's right edge, on a dot: that is
+     now. The level runs on past the dot to the edge of the page (a level
+     is drawn forward; a line is drawn up to the present) and the one
+     caption sits above the endpoint on the axis, as the spread's labels
+     sit above their level's right end. No price, no day, no outcome; the
+     caption says the figure is a schema. The whole card is one sequence:
+     the line first, the word out of it, then the sentence and the call;
+     the caption arrives when the line has reached the dot. -->
 <section class="leader" id="closer">
   <div class="card" data-stagger="120">
     <p class="end__row">
-      <span class="mask"><span class="end__word reveal" data-at="300"><span lang="nl">Einde</span><span lang="en">The End</span></span></span>
-      <span class="end__fig reveal trace" data-at="0" aria-hidden="true">
+      <span class="mask"><span class="end__word reveal" data-at="240"><span lang="nl">Einde</span><span lang="en">The End</span></span></span>
+    </p>
+    <span class="end__fig reveal trace" data-at="0" aria-hidden="true">
+      <span class="end__chart">
         <!-- data-parallax="0": the figure is the word's ground and does
              not drift (motion.js would otherwise give the first svg of
-             the end card a lag of its own). The flat run starts far left
-             of the box so it reaches the viewport's edge on any screen;
-             .page clips it there. -->
-        <svg class="fig" viewBox="0 0 320 50" data-parallax="0" aria-hidden="true" focusable="false">
-          <path class="fig__line" pathLength="1" d="M-2400 0 H0 L28 0 58 14 70 9 96 24 106 20 118 30 134 20 148 30 160 41 178 22 190 27 214 10 226 14 254 4 280 1 320 0"/>
+             the end card a lag of its own). The drawing is stretched to
+             the chart's box (its strokes are not); the flat run starts
+             far left of the box so it reaches the viewport's edge on any
+             screen -- .page clips it there. y=0 is the line. -->
+        <svg class="fig" viewBox="0 0 1000 240" preserveAspectRatio="none" data-parallax="0" aria-hidden="true" focusable="false">
+          <path class="fig__line" d="M-40000 0 H0 L64 56 96 44 172 120 200 106 270 170 316 140 362 170 412 148 534 212 590 146 614 162 700 88 726 104 836 34 864 46 1000 0"/>
         </svg>
         <i class="end__lvl"></i>
-        <i class="end__tag"><span lang="nl">Liquiditeit, schematisch</span><span lang="en">Liquidity, as a schema</span></i>
+        <i class="end__dot"></i>
+        <i class="end__tag"><span lang="nl">Liquiditeit, <span class="br">schematisch</span></span><span lang="en">Liquidity, <span class="br">as a schema</span></span></i>
       </span>
-    </p>
+    </span>
     <div class="end__col">
       <p class="subtitle reveal" data-at="420"><span lang="nl">Behalve in de server. Daar begint het.</span><span lang="en">Except in the server. That is where it starts.</span></p>
       <a class="cta solid reveal" data-at="560" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Open de Discord</span><span lang="en">Open the Discord</span></a>
@@ -40,8 +47,12 @@
 <!-- The footer: the signature, the five links, the local time, and the
      two lines that go under everything on this page -- the risk line and
      the past-performance line, each on its own line, exactly as they read
-     in the record. The clock is written by motion.js into [data-clock];
-     without a script (or without a time) the line is not shown at all. -->
+     in the record (on a phone each sentence takes its own line, so no
+     line is one word). The grid is the end card's: the signature in the
+     left half, the two lists on the two column lines the chart is drawn
+     on, the clock on the right edge under the dot. The clock is written
+     by motion.js into [data-clock]; without a script (or without a time)
+     the line is not shown at all. -->
 <footer data-stagger="90">
   <div class="inner">
     <div class="fgrid">
@@ -63,7 +74,7 @@
     <i class="frule reveal draw"></i>
     <div class="fbase">
       <div class="legal">
-        <p class="risk reveal"><span lang="nl">Alleen voor educatieve doeleinden. Geen financieel advies. Traden brengt een aanzienlijk risico op verlies met zich mee.</span><span lang="en">For educational purposes only. Not financial advice. Trading carries a substantial risk of loss.</span></p>
+        <p class="risk reveal"><span lang="nl"><span class="s">Alleen voor educatieve doeleinden.</span> <span class="s">Geen financieel advies.</span> <span class="s">Traden brengt een aanzienlijk risico op verlies met zich mee.</span></span><span lang="en"><span class="s">For educational purposes only.</span> <span class="s">Not financial advice.</span> <span class="s">Trading carries a substantial risk of loss.</span></span></p>
         <p class="past reveal"><span lang="nl">Resultaten uit het verleden bieden geen garantie voor de toekomst.</span><span lang="en">Past results are no guarantee of future results.</span></p>
       </div>
       <p class="ftime reveal"><span class="ftime__city">Amsterdam</span> <time data-clock="Europe/Amsterdam"></time></p>

@@ -2,7 +2,7 @@
  "id": "production",
  "title": "Production",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -64,6 +64,21 @@
    "confidence": 0.7,
    "note": "Rebuilt the credits as a ladder: each label is now the tag at the end of a price level — a dashed hairline (3 on / 5 off, line-3, anchored so a dash ends at the label) drawn from the strip's left edge to the label, the same construction the founder's \"10+\" uses once and larger on the next reel, so the four small levels arrive at the big one; they also read as contents-page leaders, i.e. typeset.\nValue column is now type only: removed the four dashed rules under the values (they were brighter than the group rule and read as table borders, five rules in 700px on a phone). Rows are set by the",
    "ts": "2026-09-06T01:58:09"
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 7.5,
+   "score_ref": 5.5,
+   "wowed": false,
+   "gap": "The motion leaves ugly intermediate states on screen: \"Discipline.\" is captured sliced by the chart panel in frame 1, and the CTA-to-nav morph reads \"OPE  DISCORD\" with a stray rule in frame 5. At the bar every mid-frame of a reveal still reads as a designed wipe (mask each display line in its own line box, crossfade the nav morph rather than translating letters through each other). Secondary: on desktop the dotted leaders run from the column rule to the label, leaving the label-to-value gap unled, which is backwards for a spec sheet.",
+   "motion": "Ambitious editorial choreography (masked line reveals, blur-to-sharp copy, live city clocks, nav CTA morph) with restrained pacing, undermined by messy mid-transition frames.",
+   "verdict": "B is a genuinely designed editorial system: serif display against tracked small-caps labels, a gold italic accent used once, dotted leaders with terminal ticks, hairline spines and a mono URL, and its mobile adaptation is the cleanest single screen in the set. A is a familiar dark-grain agency template (condensed all-caps over a portrait image, logo grid) executed loosely enough that the header collisions and mobile dead zone would sink it on any jury.",
+   "confidence": 0.8,
+   "note": "production (E:/ClaudeCode_GUI/atlas-designs/site/src/sections/03-production.html + production.css), round 2:\n- The Discord address is no longer dropped beside the word. It is the second line of the Locatie credit: under \"Discord\", flush on the value column line (desk and phone), mono at --t-caption, ink-3, tabular, with the bar's arrow glyph (--arrow mask, ink-4) closing it and no underline -- the page's own mark for a link that leaves the page.\n- dd is a plain block again (word in its mask on the first line, address the line under), so the grid still hangs each row on the word's baseline",
+   "ts": "2026-09-06T02:10:33"
   }
  ]
 }

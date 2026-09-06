@@ -1,45 +1,55 @@
 <section id="markets">
   <div class="grp"><h2><span lang="nl">Markten</span><span lang="en">Markets</span></h2></div>
 
-  <!-- The board. The eight instruments set the way a desk board sets them,
-       with everything a desk board would show next to them left off: one
-       instrument per row, its name large on the strip's left edge, its
-       ticker in the mono on the strip's right edge -- where the scale of a
-       chart is -- on the name's baseline, and a hairline under every row,
-       so each row is a level and the ticker is its tag. Only the tickers
-       the client gave (NQ, ES, XAUUSD); where he gave none the level runs
-       to the scale untagged, and nothing is put where a number would sit.
-       The groups are the board's headings, in the label voice, on the
-       same left edge. A dl: the term is the group, the descriptions are
-       its instruments. It carries its own stagger, so the board fills top
-       to bottom, each level drawing itself under its row. -->
-  <dl class="board" data-stagger="70">
-    <dt class="reveal">Indices</dt>
-    <dd class="reveal"><span class="board__name">Nasdaq</span><b class="board__tick num">NQ</b></dd>
-    <dd class="reveal"><span class="board__name">S&amp;P&nbsp;500</span><b class="board__tick num">ES</b></dd>
-    <dd class="reveal"><span class="board__name">Dow Jones</span></dd>
+  <!-- The board, drawn as a price scale. Eight instruments, one per row,
+       the name in the serif on the strip's left edge and, where the client
+       gave one, its code after the name in the mono, the way a role follows
+       a name. On the right a scale: a vertical hairline the height of the
+       board, and every row's rule runs to it and ticks across it, with the
+       row's numeral on the scale -- so every row ends the same way and the
+       eight sit like the levels of a price scale. The four groups are
+       levels of their own: the group's name is the tag at the left end and
+       a heavier rule of the gold runs from it to the scale, against the
+       faint rules between rows. No price, no change: the numerals count
+       the rows and nothing else, and the caption says so. A figure whose
+       content is a dl (the term is the group, the descriptions are its
+       instruments); the scale is decoration. -->
+  <figure class="board" data-stagger="70">
+    <div class="board__sheet">
+      <i class="board__axis reveal" data-at="0" aria-hidden="true"></i>
+      <dl class="board__list">
+        <dt class="board__grp reveal"><span class="board__tag">Indices</span><i class="board__lvl" aria-hidden="true"></i></dt>
+        <dd class="board__row reveal"><span class="board__name">Nasdaq</span><b class="board__tick">NQ</b><span class="board__n" aria-hidden="true">01</span></dd>
+        <dd class="board__row reveal"><span class="board__name">S&amp;P&nbsp;500</span><b class="board__tick">ES</b><span class="board__n" aria-hidden="true">02</span></dd>
+        <dd class="board__row reveal"><span class="board__name">Dow Jones</span><span class="board__n" aria-hidden="true">03</span></dd>
 
-    <dt class="reveal"><span lang="nl">Metalen</span><span lang="en">Metals</span></dt>
-    <dd class="reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><b class="board__tick num">XAUUSD</b></dd>
-    <dd class="reveal"><span class="board__name"><span lang="nl">Zilver</span><span lang="en">Silver</span></span></dd>
+        <dt class="board__grp reveal"><span class="board__tag"><span lang="nl">Metalen</span><span lang="en">Metals</span></span><i class="board__lvl" aria-hidden="true"></i></dt>
+        <dd class="board__row reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><b class="board__tick">XAUUSD</b><span class="board__n" aria-hidden="true">04</span></dd>
+        <dd class="board__row reveal"><span class="board__name"><span lang="nl">Zilver</span><span lang="en">Silver</span></span><span class="board__n" aria-hidden="true">05</span></dd>
 
-    <dt class="reveal"><span lang="nl">Energie</span><span lang="en">Energy</span></dt>
-    <dd class="reveal"><span class="board__name"><span lang="nl">Olie</span><span lang="en">Oil</span></span></dd>
+        <dt class="board__grp reveal"><span class="board__tag"><span lang="nl">Energie</span><span lang="en">Energy</span></span><i class="board__lvl" aria-hidden="true"></i></dt>
+        <dd class="board__row reveal"><span class="board__name"><span lang="nl">Olie</span><span lang="en">Oil</span></span><span class="board__n" aria-hidden="true">06</span></dd>
 
-    <dt class="reveal">Crypto</dt>
-    <dd class="reveal"><span class="board__name">Bitcoin</span></dd>
-    <dd class="reveal"><span class="board__name">Altcoins</span></dd>
-  </dl>
-  <!-- read after the board, on the board's own left edge -->
-  <p class="board__note reveal"><span lang="nl">De markten waar het in de server over gaat. Zonder koersen: dit is een lijst, geen feed.</span><span lang="en">The markets the server is about. No prices: this is a list, not a feed.</span></p>
+        <dt class="board__grp reveal"><span class="board__tag">Crypto</span><i class="board__lvl" aria-hidden="true"></i></dt>
+        <dd class="board__row reveal"><span class="board__name">Bitcoin</span><span class="board__n" aria-hidden="true">07</span></dd>
+        <dd class="board__row reveal"><span class="board__name">Altcoins</span><span class="board__n" aria-hidden="true">08</span></dd>
+      </dl>
+    </div>
+    <!-- the caption, hung on the board's left edge like every figure's -->
+    <figcaption class="board__cap reveal">
+      <span class="board__title"><span lang="nl">Figuur &mdash; De markten</span><span lang="en">Figure &mdash; The markets</span></span>
+      <span class="board__note"><span lang="nl">Acht markten in vier groepen: waar het in de server over gaat. Geen koers, geen verandering &mdash; een lijst, geen feed.</span><span lang="en">Eight markets in four groups: what the server is about. No price, no change &mdash; a list, not a feed.</span></span>
+    </figcaption>
+  </figure>
 
   <div class="grp" id="live"><h2>Live</h2></div>
   <!-- Live is one statement on the board's left edge, its one line under
        it, and the call under that on the same edge: what happens, where,
        and the way in. When is announced in the server and nowhere else,
-       so nothing here is a time. No label: the title names it. -->
+       so nothing here is a time. The one accent of the screen is the word
+       itself, in the italic gold. No label: the title names it. -->
   <div class="live" data-stagger="160">
-    <p class="live__line"><span class="mask"><span class="reveal"><span lang="nl">De oprichter handelt live.</span><span lang="en">The founder trades live.</span></span></span></p>
+    <p class="live__line"><span class="mask"><span class="reveal"><span lang="nl">De oprichter handelt <em>live</em>.</span><span lang="en">The founder trades <em>live</em>.</span></span></span></p>
     <p class="live__sub reveal"><span lang="nl">In de server, op tijden die daar worden aangekondigd.</span><span lang="en">In the server, at times announced there.</span></p>
     <a class="cta reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Naar de server</span><span lang="en">To the server</span></a>
   </div>

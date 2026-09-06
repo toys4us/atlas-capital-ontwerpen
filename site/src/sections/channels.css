@@ -2,13 +2,17 @@
    A panel the width of the strip, drawn the way Discord draws a server and
    coloured the way this page colours everything: the sidebar a step darker
    than the pane, hairlines of the gold for every edge, square corners. The
-   two headers (the server's name, the channel's name) share one height so
-   the rule under them runs unbroken across the device. Under the channel's
-   name the pane is the figure of the spread, drawn again at the pane's
-   full width: the line in the gold, the zones the page's own hairlines
-   (the 3-on-5 dashed level, the band with two rules, the box), the tags in
-   the label voice on the pane's right margin, the axis of a chart. No
-   message, no line of one; the figure is the content of the pane.
+   two headers (the server's name; the channel's name with, under it, what
+   the pane is) share one height, so the rule under them runs unbroken
+   across the device. Under that rule the pane is a chart page: the figure
+   of the spread drawn again, inset from the frame on every side so no
+   stroke ever meets the hairline, with a scale on its right and along its
+   foot -- ticks, no numbers. The line in the gold; the zones the page's
+   own hairlines (the 3-on-5 dashed level, the band with two rules, the
+   box); the tags in the label voice, each above the right end of its
+   level on the scale, where the line by construction never comes, and
+   the orderblock's beside its box. No message, no line of one; the
+   figure is the content of the pane.
 
    The chart vocabulary is the furniture of the list too: the selected row
    is a fair value gap band (the gold at .07 with its two edges at .38,
@@ -19,16 +23,21 @@
    true of it.
 
    The frame is one flex line, so the pane takes the sidebar's height and
-   the figure fills what is under the channel's name; on a short screen the
-   frame is capped, the list scrolls inside the device and chains to the
-   page at its ends. On a phone the device stacks: the sidebar, then the
-   pane at the full width of the column, the figure at a set proportion. */
+   the plate fills what is under the title; on a short screen the frame is
+   capped, the list scrolls inside the device and chains to the page at
+   its ends. On a phone the device stacks: the sidebar, then the pane at
+   the full width of the column, the plate at a set proportion. */
 #channels .dv{
   --side:244px;                 /* the sidebar's width                    */
-  --hd:48px;                    /* both headers                           */
+  --hd:60px;                    /* both headers                           */
   --row:28px;                   /* one channel                            */
   --pad-x:16px;                 /* the sidebar's inner margin             */
-  --pane-x:22px;                /* the pane's inner margin (the tags)     */
+  --pane-x:22px;                /* the pane's inner margin                */
+  --plot-t:34px;                /* the plot's inset from the plate: top,  */
+  --plot-r:var(--pane-x);       /* right (the scale's margin),            */
+  --plot-b:30px;                /* foot,                                  */
+  --plot-l:var(--pane-x);       /* left -- on the title's own line        */
+  --tick:4px;                   /* a tick of the scale                    */
   --band:rgba(215,179,100,.07); /* the fair value gap band                */
   --band-lo:rgba(215,179,100,.035);
   --chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 3 4 5.5 6.5 3' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
@@ -69,16 +78,37 @@
 #channels .dv__server{
   flex:0 0 auto;
   height:var(--hd);
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  display:flex;flex-direction:column;justify-content:center;gap:5px;
   padding:0 calc(var(--pad-x) - 2px) 0 var(--pad-x);
   border-bottom:1px solid var(--line-2);
+  min-width:0;
+}
+/* the server's name, and under it what the device is: the same two-line
+   lockup as the pane's title, the name in the wordmark's caps with the
+   chevron on its line, the sub-line in the label voice; the two blocks
+   share their line boxes, so the sub-lines sit on one baseline across
+   the device */
+#channels .dv__server-t{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding-top:3px;                          /* its baseline on the channel's */
   font-family:var(--f-display);
   font-size:var(--t-micro);
   letter-spacing:var(--trk-caps-wide);
   text-transform:uppercase;
-  line-height:1;
+  line-height:19px;
   color:var(--ink-1);
   white-space:nowrap;
+}
+#channels .dv__server-t > span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+#channels .dv__server-s{
+  display:block;
+  font-family:var(--f-display);
+  font-size:var(--t-nano);
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1.3;
+  color:var(--ink-4);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 #channels .dv__chev{
   flex:0 0 auto;width:8px;height:8px;
@@ -173,70 +203,112 @@
 #channels .dv__ch[aria-pressed="true"] .dv__n{color:var(--ink-2)}
 #channels .dv__ch:focus-visible{outline-offset:-3px}
 
-/* ---- the pane: the channel's name, then the figure ---- */
+/* ---- the pane: the title, then the plate ---- */
 #channels .dv__pane{
   flex:1 1 auto;
   display:flex;flex-direction:column;
   min-width:0;min-height:0;
 }
-#channels .dv__head{
+/* the title: two lines, one block, the header's height -- the channel in
+   the serif a size over the list, and under it, in the label voice, what
+   the pane is. Both lines on the plot's left edge. */
+#channels .dv__title{
   flex:0 0 auto;
   height:var(--hd);
-  display:flex;align-items:center;gap:8px;
+  display:flex;flex-direction:column;justify-content:center;
+  gap:5px;
   padding:0 var(--pane-x);
   border-bottom:1px solid var(--line-2);
-  font-family:var(--f-display);
-  font-size:var(--t-small);
-  line-height:1;
-  color:var(--ink-1);
-  white-space:nowrap;overflow:hidden;
+  min-width:0;
 }
-#channels .dv__head .dv__hash{color:var(--ink-4)}
-#channels .dv__name{overflow:hidden;text-overflow:ellipsis;padding-bottom:1px}
-/* the plate fills what is under the name; the tags size from its width */
+#channels .dv__name{
+  display:flex;align-items:baseline;gap:7px;
+  margin:0;min-width:0;
+  font-family:var(--f-display);
+  font-size:clamp(17px,1.4vw,20px);
+  font-weight:400;
+  line-height:22px;
+  letter-spacing:-.004em;
+  color:var(--ink-1);
+  white-space:nowrap;
+}
+#channels .dv__name .dv__hash{width:auto;font-size:.92em;color:var(--ink-4)}
+#channels .dv__name-t{min-width:0;overflow:hidden;text-overflow:ellipsis}
+#channels .dv__sub{
+  margin:0;min-width:0;
+  font-family:var(--f-display);
+  font-size:var(--t-nano);
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1.3;
+  color:var(--ink-4);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
+/* ---- the plate, and the plot inset in it ---- */
 #channels .dv__plate{
   position:relative;
   flex:1 1 auto;min-height:0;
   container-type:inline-size;
   overflow:hidden;
 }
+/* the plot box: the figure's percentages are of this, not of the plate,
+   so the inset is a margin the line never crosses */
 #channels .dv__ink{
-  position:absolute;inset:0;
+  position:absolute;
+  top:var(--plot-t);right:var(--plot-r);bottom:var(--plot-b);left:var(--plot-l);
   transition:opacity var(--d) var(--e-out);
 }
 #channels .dv__fig{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 #channels .dv__fig *{vector-effect:non-scaling-stroke}
 #channels .dv__line{fill:none;stroke:var(--gold);stroke-width:1;stroke-linejoin:round;stroke-linecap:round}
+/* the scale: a hairline down the plot's right edge and along its foot,
+   ticked outward into the inset -- eight and ten, no numbers */
+#channels .dv__ax{position:absolute;display:block;background:var(--line-2);pointer-events:none}
+#channels .dv__ax--y{right:0;top:0;bottom:0;width:1px}
+#channels .dv__ax--x{left:0;right:0;bottom:0;height:1px}
+#channels .dv__ax::after{content:"";position:absolute;pointer-events:none}
+#channels .dv__ax--y::after{
+  left:1px;top:0;bottom:0;width:var(--tick);
+  background:repeating-linear-gradient(180deg,var(--line-2) 0 1px,transparent 1px calc(100% / 8));
+}
+#channels .dv__ax--x::after{
+  left:0;right:0;top:1px;height:var(--tick);
+  background:repeating-linear-gradient(90deg,var(--line-2) 0 1px,transparent 1px calc(100% / 10));
+}
 /* the zones, placed in the figure's own percentages (the SVG is stretched
-   to the plate, so a percentage of the plate is a coordinate of the
-   drawing: y 82 of 520 is 15.8%). The band and the two levels run on to
-   the pane's right edge -- a level is drawn forward. */
+   to the plot, so a percentage of the plot is a coordinate of the drawing:
+   y 56 of 400 is 14%). The band and the two levels run forward to the
+   scale and stop there, the way a level is drawn. */
 #channels .dv__ob,#channels .dv__band,#channels .dv__lvl{position:absolute;display:block;pointer-events:none}
 #channels .dv__ob{
-  left:26.7%;top:72.7%;width:6%;height:5.8%;
+  left:21%;top:72%;width:7.3%;height:8%;
   border:1px solid var(--line-3);
   background:rgba(215,179,100,.07);
 }
 #channels .dv__band{
-  left:48%;right:0;top:43.5%;height:4.2%;
+  left:41%;right:0;top:39%;height:5%;
   border-top:1px solid var(--line-3);
   border-bottom:1px solid var(--line-3);
   background:rgba(215,179,100,.07);
 }
 #channels .dv__lvl{
-  left:50%;right:0;top:15.8%;height:1px;
+  left:51%;right:0;top:14%;height:1px;
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
 }
-#channels .dv__lvl--lo{left:56.7%;top:88%}
-/* the tags: the label voice, on the pane's right margin above the right
-   ends of the two levels, and under the orderblock's box; they scale a
-   little with the plate and never go under 9px */
+#channels .dv__lvl--lo{left:34%;top:92%}
+/* the tags: the label voice. Three sit above the right end of their
+   level, against the scale, in the corner the line never enters (it
+   sweeps the upper level left of the tag and stops short of the band's
+   right end); the orderblock's sits beside its box, level with it, and
+   the impulse leaves the box above it. They scale a little with the
+   plate and never go under 9px. */
 #channels .dv__tag{
   position:absolute;
   display:block;
   font-family:var(--f-display);
   font-style:normal;
-  font-size:clamp(9px,2cqw,var(--t-nano));
+  font-size:clamp(9px,2.1cqw,var(--t-nano));
   letter-spacing:var(--trk-caps);
   text-transform:uppercase;
   line-height:1;
@@ -244,9 +316,10 @@
   white-space:nowrap;
   pointer-events:none;
 }
-#channels .dv__tag--liq{right:var(--pane-x);top:15.8%;transform:translateY(calc(-100% - 6px))}
-#channels .dv__tag--fvg{right:var(--pane-x);top:43.5%;transform:translateY(calc(-100% - 6px))}
-#channels .dv__tag--ob{left:26.7%;top:78.5%;transform:translateY(5px)}
+#channels .dv__tag--liq{right:6px;top:14%;transform:translateY(calc(-100% - 7px))}
+#channels .dv__tag--fvg{right:6px;top:39%;transform:translateY(calc(-100% - 7px))}
+#channels .dv__tag--ses{right:6px;top:92%;transform:translateY(calc(-100% - 7px))}
+#channels .dv__tag--ob{left:28.3%;top:76%;margin-left:9px;transform:translateY(-50%)}
 
 /* Premium: the figure recedes; a lock and the one true sentence sit on
    it, clearing a mat of the pane's own colour the way a label sits on a
@@ -292,35 +365,37 @@
   font-family:var(--f-display);
   line-height:1.5;
 }
-#channels .dv__title{
+#channels .dv__cap{
   flex:0 0 auto;
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
   color:var(--ink-3);
 }
-#channels .dv__note{flex:1 1 20ch;min-width:0;font-size:var(--t-small);color:var(--ink-4);text-wrap:balance}
+#channels .dv__note{flex:1 1 20ch;min-width:0;max-width:52ch;font-size:var(--t-small);color:var(--ink-4);text-wrap:pretty}
 #channels .dv__call{position:relative;z-index:2;margin:clamp(16px,2.4vw,26px) 0 0}
 
 /* ---- the trace: the plate's own reveal --------------------------------
    Under .js, until motion.js marks it .is-in, the plate is bare: the
-   zones are drawn back to nothing at their left ends, the tags wait, and
-   the line is drawn back to nothing (pathLength 1, so the dash is the
-   whole path). In: the zones draw out of the left and the line draws
-   itself left to right over the slow settle while the rows of the list
-   settle beside it; the tags come last, once their levels are under
-   them. Never a transform, never opacity on the plate itself -- the
-   probe sees the plate at once; the motion is in the ink. */
+   scale and the zones are drawn back to nothing at their left ends (the
+   price scale at its top), the tags wait, and the line is drawn back to
+   nothing (pathLength 1, so the dash is the whole path). In: the scale
+   and the zones draw out and the line draws itself left to right over
+   the slow settle while the rows of the list settle beside it; the tags
+   come last, once their levels are under them. Never a transform, never
+   opacity on the plate itself -- the probe sees the plate at once; the
+   motion is in the ink. */
 .js #channels .reveal.trace{opacity:1;transform:none}
-.js #channels .reveal.trace .dv__ob,.js #channels .reveal.trace .dv__band,.js #channels .reveal.trace .dv__lvl{
+.js #channels .reveal.trace .dv__ob,.js #channels .reveal.trace .dv__band,.js #channels .reveal.trace .dv__lvl,.js #channels .reveal.trace .dv__ax--x{
   transform:scaleX(0);transform-origin:left center;
   transition:transform 1.6s var(--e-reveal) .35s;
 }
+.js #channels .reveal.trace .dv__ax--y{transform:scaleY(0);transform-origin:center top;transition:transform 1.6s var(--e-reveal) .35s}
 .js #channels .reveal.trace .dv__tag{opacity:0;transition:opacity var(--d-fade) var(--e-reveal) 1.1s}
 .js #channels .reveal.trace .dv__line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.9s var(--e-reveal)}
-.js #channels .reveal.trace.is-in .dv__ob,.js #channels .reveal.trace.is-in .dv__band,.js #channels .reveal.trace.is-in .dv__lvl{transform:none}
+.js #channels .reveal.trace.is-in .dv__ob,.js #channels .reveal.trace.is-in .dv__band,.js #channels .reveal.trace.is-in .dv__lvl,.js #channels .reveal.trace.is-in .dv__ax--x,.js #channels .reveal.trace.is-in .dv__ax--y{transform:none}
 .js #channels .reveal.trace.is-in .dv__tag{opacity:1}
 .js #channels .reveal.trace.is-in .dv__line{stroke-dashoffset:0}
 @media (prefers-reduced-motion:reduce){
-  .js #channels .reveal.trace .dv__ob,.js #channels .reveal.trace .dv__band,.js #channels .reveal.trace .dv__lvl{transform:none;transition:none}
+  .js #channels .reveal.trace .dv__ob,.js #channels .reveal.trace .dv__band,.js #channels .reveal.trace .dv__lvl,.js #channels .reveal.trace .dv__ax--x,.js #channels .reveal.trace .dv__ax--y{transform:none;transition:none}
   .js #channels .reveal.trace .dv__tag{opacity:1;transition:none}
   .js #channels .reveal.trace .dv__line{stroke-dashoffset:0;transition:none}
   #channels .dv__ch:not(.reveal),#channels .dv__hash,#channels .dv__n,#channels .dv__ink{transition:none}
@@ -328,17 +403,19 @@
 
 /* ---- a phone: the device stacks, one column -----------------------------
    The sidebar first at the column's full width (the list scrolls inside
-   only on a screen too short for it), then the pane under it with the
-   figure at a set proportion. */
+   only on a screen too short for it), then the pane under it: the title,
+   and the plate at a set proportion with the same inset. */
 @media (max-width:620px){
-  #channels .dv{--hd:44px;--pad-x:14px;--pane-x:14px}
+  #channels .dv{--hd:56px;--pad-x:14px;--pane-x:14px;--plot-t:26px;--plot-b:22px}
   #channels .dv__frame{flex-direction:column;max-height:none}
   #channels .dv__side{flex:0 1 auto;border-right:0;border-bottom:1px solid var(--line-2)}
   #channels .dv__list{max-height:min(540px,64vh);max-height:min(540px,64svh)}
-  #channels .dv__server{letter-spacing:var(--trk-caps)}
+  #channels .dv__server-t{letter-spacing:var(--trk-caps)}
   #channels .dv__pane{flex:0 0 auto}
-  #channels .dv__head{padding:0 var(--pane-x)}
-  #channels .dv__plate{flex:0 0 auto;aspect-ratio:600/440;min-height:0}
+  #channels .dv__title,#channels .dv__server{gap:4px}
+  #channels .dv__plate{flex:0 0 auto;aspect-ratio:7/6;min-height:0}
   #channels .dv__locked-in{gap:10px;padding:18px 20px 20px}
-  #channels .dv figcaption{margin-top:14px}
+  #channels .dv figcaption{display:block;margin-top:14px}
+  #channels .dv__cap{display:block;margin-bottom:3px}
+  #channels .dv__note{display:block;max-width:none}
 }

@@ -42,7 +42,7 @@
    rag, and the signature under them. */
 #founder{
   --n:clamp(84px,9.4vw,132px);              /* the numeral: a size the scale lacks           */
-  --q:clamp(24px,2.25vw,32px);              /* the words: a pull-quote in a value column    */
+  --q:clamp(24px,2.1vw,30px);               /* the words: a pull-quote in a value column    */
   --hang:.4em;                              /* the opening mark's advance in this face      */
   --lead-gap:clamp(10px,1.4vw,14px);        /* from the level's last dash to the words      */
 }
@@ -88,8 +88,8 @@
   line-height:1;
   letter-spacing:0;
   vertical-align:baseline;
-  position:relative;top:-.42em;
-  margin:0 0 0 -.02em;
+  position:relative;top:-.38em;
+  margin:0 0 0 -.04em;
   color:var(--ink-2);
 }
 /* the level: from the last figure across the gutter to a dash before the
@@ -99,7 +99,7 @@
   flex:1 1 auto;
   min-width:24px;
   height:1px;
-  margin:0 calc(-1 * var(--axis-gap) + .4 * var(--q) + var(--lead-gap)) 0 clamp(10px,1.4vw,14px);
+  margin:0 calc(-1 * var(--axis-gap) + .4 * var(--q) + var(--lead-gap)) 0 clamp(8px,1vw,10px);
   background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
   pointer-events:none;
 }
@@ -109,13 +109,13 @@
    under the baseline, so the label is pulled up to sit a few px under
    the level */
 #founder .ten__words{
-  margin:calc(9px - .265 * var(--n)) 0 0;
+  margin:calc(12px - .265 * var(--n)) 0 0;
   font-family:var(--f-display);
   font-size:var(--t-lead);
   font-weight:400;
   line-height:var(--lh-snug);
   letter-spacing:-.006em;
-  color:var(--ink-1);
+  color:var(--ink-2);
   text-wrap:balance;
 }
 /* the note: his own account of those years, at note size, in the
@@ -128,7 +128,7 @@
   letter-spacing:.01em;
   line-height:1.5;
   color:var(--ink-3);
-  text-wrap:pretty;
+  text-wrap:balance;
 }
 
 /* ---- the value: the words and the signature ------------------------------ */
@@ -195,8 +195,8 @@
     position:relative;top:4px;
     background:var(--line-3);
   }
-  #founder .ten__words{margin-top:calc(8px - .265 * var(--n))}
-  #founder .ten__sub{max-width:34ch}
+  #founder .ten__words{margin-top:calc(10px - .265 * var(--n))}
+  #founder .ten__sub{max-width:30ch}
   #founder .word{margin-top:clamp(30px,8vw,40px)}
   #founder .word blockquote{line-height:1.3}
   #founder .word .who{margin-top:clamp(16px,4.5vw,22px)}
