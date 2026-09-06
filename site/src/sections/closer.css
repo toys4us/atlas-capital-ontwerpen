@@ -180,9 +180,9 @@
    its own. */
 @media (max-width:619px){
   #closer{--fig-f:.4;--depth:calc(.8 * var(--D))}
-  #closer .end__tag{bottom:auto;top:calc(178 / 240 * 100% + 12px)}  /* 12px under the level */
+  #closer .end__tag{bottom:auto;top:calc(178 / 240 * 100% + 16px)}  /* 16px under the level, clear of the sweep */
   #closer .end__tag .br{display:block}
-  #closer .end__col{margin-top:calc(var(--depth) + 24px + clamp(26px,7vw,36px));max-width:none}  /* under the caption's two lines */
+  #closer .end__col{margin-top:calc(var(--depth) + 28px + clamp(26px,7vw,36px));max-width:none}  /* under the caption's two lines */
   #closer .subtitle{max-width:var(--measure-quote)}
 }
 

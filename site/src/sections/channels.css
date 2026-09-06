@@ -262,8 +262,10 @@
 /* a narrow pane (a tablet held upright): the plot keeps its proportion by
    taking more of the inset at the top and the foot, so the line is never
    steeper than it is on a desk */
-@container (max-width:460px){
-  #channels .dv__ink{top:58px;bottom:46px}
+@media (min-width:621px){
+  @container (max-width:500px){
+    #channels .dv__ink{top:58px;bottom:46px}
+  }
 }
 #channels .dv__fig{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 #channels .dv__fig *{vector-effect:non-scaling-stroke}

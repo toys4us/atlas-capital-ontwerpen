@@ -2,7 +2,7 @@
  "id": "founder",
  "title": "Founder",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -64,6 +64,21 @@
    "confidence": 0.72,
    "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/04-founder.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/founder.css.\n- The credit is now a proper level: \"10+\" hangs on the strip's left edge (the quote's line), set large (clamp 72–132px, ink-2 so it stays a step under the quote) with the plus as a small superior; one dashed gold hairline (3 on/5 off at .55, the hero's level) runs from the tag to the strip's right edge at the height of the figures; the numeral's ground covers the line, so the tag sits on it.\n- \"jaar actief in trading\" / \"years active in trading\" hang",
    "ts": "2026-09-05T23:55:34+00:00"
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 7.1,
+   "score_ref": 5.8,
+   "wowed": false,
+   "gap": "The founder region has no founder: a numeral and a quote signed only \"de oprichter\", with no portrait, name, or signature move, so the section is one beat long and reads as an interstitial. At the bar the \"10+\" would be the object (set at 300–400px, kerned so the \"+\" is a designed superior rather than a small glyph floating mid-x-height) or a portrait/handwritten mark would anchor the quote; also lift the dim sub-caption (\"winst, verlies...\") to legible contrast and stop the dotted leader running to the mobile edge where it leads to nothing.",
+   "motion": "Quiet fade-and-rise stagger per row with vertical rail labels and persistent clocks; coherent and restrained, though the mid-reveal frame shows the quote lines at uneven opacity that looks like a stagger step rather than a shaped ease.",
+   "verdict": "B wins on craft and restraint: hanging punctuation, hairline section labels, a numeral-plus-quote layout with a real measure, and no visible defects. A has more scale and swagger, but its founder block is a template component and its header/pinned-layer collisions on mobile and in scroll are disqualifying at this level.",
+   "confidence": 0.78,
+   "builder_note": "Rebuilt the founder block as one credit row on the reel's shared axis (base --axis-l/--axis-r), grid align-items:baseline: the numeral \"10+\" is the tag in the label column, the founder's quote is the value in the 3fr column, and the quote's first line stands on the numeral's baseline (measured: both at y=1517.6 @1440).\nThe dashed liquidity-line leader (3 on/5 off, the hero's .55 gold) now runs along the numeral's baseline from the plus across the gutter and stops one --lead-gap short of the quote's hung opening mark — it ends on the reel's value-column line (x=670, same as production's val",
+   "ts": "2026-09-06T00:15:09+00:00"
   }
  ]
 }

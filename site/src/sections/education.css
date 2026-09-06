@@ -117,7 +117,7 @@
 /* the gloss in the row: the sub-line voice, under the term on the term's
    left edge (a phone, or no script) */
 #education .row .sub{
-  flex:0 0 100%;
+  flex:1 1 100%;min-width:0;                  /* its own line, shrunk by its indent */
   margin:3px 0 0 calc(var(--n) + var(--g));
   font-family:var(--f-display);
   font-size:var(--t-small);

@@ -1203,13 +1203,17 @@ dl.pairs .cols{
    the tagline set large. From the right: a band -- a session drawn as a
    schema in hairlines of the one gold, four zones, one line (the SVG in
    the partial) -- that bleeds to the viewport's edge and has no left edge
-   drawn at all. The band is the title's own row: its top hairline runs on
-   the cap line of the first word, its bottom a descender and a little
-   under the third, and it starts only 1.5em in from the gutter, so half
-   or more of every word stands on it (P, D and U stand in the margin, the
-   rest of each word on the band). Not a corner touched by a descender: a
-   title in front of a plate, on purpose, the way a headline crosses the
-   picture on a spread.
+   drawn at all. The band is the title's own row, and the first word is
+   its shelf: the band's top edge is the baseline of "Proces.", so the word
+   stands on the band the way a label stands on a level in the figure, and
+   the top rule is not drawn under the word at all -- it starts a quarter
+   em after the full stop and runs from there to the edge of the page, the
+   way a level is drawn forward from its label. The band's bottom rule
+   sits a third of an em under the third word's descender; the band starts
+   1.5em in from the gutter, so the second and third words stand across
+   it (D and U in the margin, the rest of each word on the band). Nothing
+   touches a letter: a title in front of a plate, on purpose, the way a
+   headline crosses the picture on a spread.
 
    Everything that is read after the title hangs on the band's left edge,
    in one column, in the order it is read: the one line, then the call
@@ -1233,18 +1237,22 @@ dl.pairs .cols{
 
    Everything is locked to the type in em of --t-hero, so the relationships
    hold at every width and on a short laptop screen:
-     baselines   .703em, 1.643em, 2.583em (line pitch .94em)
-     cap line    baseline 1 - .715em = -.012em (Newsreader's cap height)
+     baselines   .701em, 1.641em, 2.581em from the title's box top
+                              (line pitch .94em; measured in Chromium at
+                              144, 158 and 121px, constant to .001em)
      descender   baseline 3 + .236em = 2.82em, the title's box bottom
-     band top    -.012em      the cap line
+     band top    .701em       the first baseline: "Proces." stands on it
      band bottom 3.15em       .33em under the descender: the line's range
                               (93-95% of the band) runs under the g
-     band left   1.50em       "Proces." (2.99em wide, hung -.06em) crosses
-                              by 1.43em, "Discipline." (4.37em) by 2.81em,
-                              "Uitvoering." (4.72em) by 3.16em; "Process."
-                              (3.38em) by 1.82em, "Execution." (4.50em) by
-                              2.94em. Constant in em, so constant at every
-                              width. The figure stretches to the frame
+     band left   1.50em       "Discipline." (4.37em wide, hung -.06em)
+                              crosses by 2.81em, "Uitvoering." (4.72em)
+                              by 3.16em; "Execution." (4.50em) by 2.94em.
+     top rule    from 3.20em  "Proces." ends 2.93em from the gutter, the
+                              rule starts .27em after the full stop; in
+                              English "Process." ends at 3.32em and the
+                              rule starts at 3.60em (--rule-x, per lang).
+                              Constant in em, so constant at every width.
+                              The figure stretches to the frame
                               (preserveAspectRatio none); its strokes and
                               its labels do not.
    --kick    height of the kicker line plus its gap, so the band's top can be
@@ -1255,17 +1263,23 @@ dl.pairs .cols{
              frame; a scrollbar's width of overshoot is clipped by .page)
    --edge    what the mat and the levels overhang the frame by on the
              right: the bleed on a desk, the gutter everywhere else
-   On load the mat comes up, the zones draw out of the left and the line
-   draws itself while the words rise out of their baselines; then the row
-   under the band arrives, the one line resolving out of a blur, the
-   caption after it, the call last. On scroll the title leads (-.05) and
-   the band lags a little (.04), so the two layers part and the front one
-   is seen to be in front; the column stays with the page. */
+   On load the mat comes up, the two rules and the zones draw out of the
+   left and the line draws itself -- slowly, a pen, over the two seconds
+   the words and the row under the band take to arrive (the one line
+   resolving out of a blur, the caption after it, the call last), so the
+   plate is still being drawn as the reader reaches the call. On scroll
+   the spread is not a slide: the title leads (-.09) and the band lags
+   (.05), so the first word lifts off its shelf and the two layers are
+   seen to be two; and the line goes on -- a tail past "now", drawn by
+   the scroll itself over the first third of a screen (a scroll-driven
+   animation, so it is exactly reversible; where the browser has none,
+   the line simply stops at now). The column stays with the page. */
 #hero{
   --kick:calc(16.5px + clamp(18px,2.4vw,32px));
   --plate-x:calc(var(--t-hero) * 1.5);
-  --plate-top:calc(var(--kick) + 1px);   /* measured: the cap top of the P */
-  --plate-h:calc(var(--t-hero) * 3.15);
+  --plate-top:calc(var(--kick) + var(--t-hero) * .701);   /* the first baseline */
+  --plate-h:calc(var(--t-hero) * 2.449);                  /* down to 3.15em */
+  --rule-x:calc(var(--t-hero) * 3.2);    /* the top rule starts after "Proces." */
   --under:calc(var(--t-hero) * .33);     /* band bottom below the title's box */
   --bleed:calc(var(--gutter) + max(0px,(100vw - 2 * var(--gutter) - var(--wide)) / 2));
   --edge:var(--gutter);
@@ -1277,6 +1291,7 @@ dl.pairs .cols{
   min-height:calc(100svh - var(--hdr-h));
   padding:clamp(16px,4vh,40px) var(--gutter) clamp(56px,10vh,96px);
 }
+:root[data-lang="en"] #hero{--rule-x:calc(var(--t-hero) * 3.6)}   /* after "Process." */
 #hero .card{
   position:relative;
   width:100%;max-width:var(--wide);margin:0 auto;
@@ -2140,7 +2155,7 @@ dl.pairs .cols{
 /* the gloss in the row: the sub-line voice, under the term on the term's
    left edge (a phone, or no script) */
 #education .row .sub{
-  flex:0 0 100%;
+  flex:1 1 100%;min-width:0;                  /* its own line, shrunk by its indent */
   margin:3px 0 0 calc(var(--n) + var(--g));
   font-family:var(--f-display);
   font-size:var(--t-small);
@@ -2657,8 +2672,10 @@ dl.pairs .cols{
 /* a narrow pane (a tablet held upright): the plot keeps its proportion by
    taking more of the inset at the top and the foot, so the line is never
    steeper than it is on a desk */
-@container (max-width:460px){
-  #channels .dv__ink{top:58px;bottom:46px}
+@media (min-width:621px){
+  @container (max-width:500px){
+    #channels .dv__ink{top:58px;bottom:46px}
+  }
 }
 #channels .dv__fig{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 #channels .dv__fig *{vector-effect:non-scaling-stroke}
@@ -4212,9 +4229,9 @@ dl.pairs .cols{
    its own. */
 @media (max-width:619px){
   #closer{--fig-f:.4;--depth:calc(.8 * var(--D))}
-  #closer .end__tag{bottom:auto;top:calc(178 / 240 * 100% + 12px)}  /* 12px under the level */
+  #closer .end__tag{bottom:auto;top:calc(178 / 240 * 100% + 16px)}  /* 16px under the level, clear of the sweep */
   #closer .end__tag .br{display:block}
-  #closer .end__col{margin-top:calc(var(--depth) + 24px + clamp(26px,7vw,36px));max-width:none}  /* under the caption's two lines */
+  #closer .end__col{margin-top:calc(var(--depth) + 28px + clamp(26px,7vw,36px));max-width:none}  /* under the caption's two lines */
   #closer .subtitle{max-width:var(--measure-quote)}
 }
 
