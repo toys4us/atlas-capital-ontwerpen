@@ -108,8 +108,7 @@
 .js #production .lvl.reveal.wipe{transition:clip-path 1.15s var(--e-out)}
 /* the value: base.css's own arrival, from half a row below instead of a
    whole one, so a settling value never crosses the row under it */
-.js #production .val.reveal{transform:translateY(14px)}
-.js #production .val.reveal.is-in{transform:none}
+#production .val{--reveal-y:14px}
 /* the address: in place, and slowly, so it is not there before the word is */
 .js #production .addr.reveal{transform:none;transition:opacity 1.1s var(--e-inout)}
 
@@ -202,6 +201,5 @@
 
 @media (prefers-reduced-motion:reduce){
   .js #production .lvl.reveal.wipe,.js #production .tag.reveal,.js #production .addr.reveal{transition:none}
-  .js #production .val.reveal{transform:none;transition:none}
   #production .addr a,#production .addr a::before,#production .addr a::after{transition:none}
 }

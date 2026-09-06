@@ -61,7 +61,7 @@
   column-gap:var(--g);
   width:calc(100% + 2 * var(--bleed));
   margin:0 calc(-1 * var(--bleed));
-  padding:8px var(--bleed) 9px;
+  padding:10px var(--bleed) 11px;
   border:0;border-radius:0;
   background:transparent;
   color:inherit;
@@ -364,7 +364,7 @@
   #education .syllabus{display:flex;flex-direction:column;--bleed:10px}
   #education .pane{order:-1;margin:0 0 clamp(22px,6vw,30px)}
   #education .plate{margin:0}
-  #education .row{padding:9px var(--bleed) 10px}
+  #education .row{padding:10px var(--bleed) 11px}
   #education .close{display:block;margin-top:clamp(36px,9vw,52px)}
   #education .close .cta{margin-top:clamp(18px,2.4vw,26px)}
 }

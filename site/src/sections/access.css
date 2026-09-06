@@ -1,111 +1,69 @@
-/* ===== access: two levels =====
-   The two ways in, set as two credits on the reel's one axis -- not two
-   columns of a price table, and not a chart. Each tier is a level, drawn
-   with the page's own furniture and nothing more: in the label column,
-   from the content edge (where the group's rule starts) to the axis, a
-   hairline on the baseline of the tier's word -- the line the word stands
-   on -- tagged at the gutter the way every level on this reel is tagged
-   (the ledger above tags its two years the same way). The tag column is
-   one width, so both levels end on one vertical line against the gutter.
+/* ===== access: two paths on one line =====
+   The two ways in, set on one line: time, drawn left to right across the
+   strip the way the spread draws a session. Left of now the line is
+   solid -- what has been reached -- and stops on a dot: that is now. Right
+   of the dot it runs on dashed, the liquidity line of the opening schema
+   (3 on, 5 off, as the spread and the ledger draw it): a level drawn
+   ahead, not yet run through. From the dot a hairline falls down the page
+   and fades: the column line the later path hangs on, so the two paths
+   have two column lines -- the content edge and the line of now -- and
+   nothing floats. The two runs are one line: the open path's run fills
+   its column to the line, the later path's starts on it.
 
-   The open tier is a solid hairline: a level that has been reached, and
-   its tag is a step brighter, because now is nearer than later. The tier
-   that opens later is the dashed liquidity line of the opening schema (3
-   on, 5 off, as the spread and the ledger draw it): a level drawn ahead,
-   not yet run through. Point at that row and the level draws itself
-   solid, from the left, the way every rule on the page draws. Point at
-   the open row and a band develops under its level -- the gap of the
-   spread, two rules and the faint gold, a scale and never an opacity.
+   Each path is one column set the same way: the tag in the label voice
+   above its run, the one word at title size under it (one voice for both;
+   what ranks them is the line, the dot and the call), then what the path
+   holds as a short scale -- two rows on hairlines, the thing named in the
+   serif, what is counted in mono at the right end of the row where a level
+   is tagged on a price scale, the names under it at note size -- and the
+   link. Both links go to the same server, so both carry the arrow of the
+   bar: the open path's is the one call (the paper, the long rule), the
+   other the quiet link a step dimmer, in the ink of a level drawn ahead.
+   Point at a path and its run answers: under the solid run a band
+   develops (the gap of the spread, two rules and the faint gold, a scale
+   and never an opacity); the dashed run draws itself solid, from the
+   left, the way every rule on the page draws.
 
-   Right of the axis, with every other value: the tier's one word at
-   statement size, in one voice for both (nothing here ranks the two; the
-   level, the tag and the call do), one line under it, the link. The open
-   tier carries the one call of the screen, the other the page's quiet
-   link, both on one rule length. No price, no day, no count that is not
-   in the sentence. The levels are lines, not data, so they carry no
-   caption. .roll::before is the strip's edge, so the block sits above
-   it (z:2). */
+   The grid: two columns split at --now, four rows (tag, run, word, body);
+   a path is display:contents, so its four blocks sit in the shared rows
+   and the two tags, the two runs and the two words share their lines. The
+   line of now is the column boundary; the columns keep --cgap clear of
+   it. Nothing here is a price, a day, or a count that is not in the
+   sentence; the line is a line, not data, so it carries no caption.
+   .roll::before is the strip's edge, so the block sits above it (z:2). */
 #access{
-  --edge:clamp(18px,4vw,40px);            /* the roll's padding: the strip's edge is this far left */
-  --tag:calc(4.5em + 14px);               /* the tag column, one width: both levels end on one line */
-  --rows:clamp(40px,5vw,64px);            /* between the two tiers */
-  --level:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+  --now:56%;                              /* where now falls on the line: the column boundary */
+  --cgap:clamp(20px,3vw,30px);            /* what each column keeps clear of the line       */
+  --dot:6px;
+  --mark:clamp(120px,14vw,200px);         /* how far the line of now falls before it fades  */
+  --word:clamp(42px,5vw,72px);            /* the tier's one word                             */
+  --dash:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+  --band:rgba(215,179,100,.07);
 }
 
-#access .levels{position:relative;z-index:2;margin:0}
-
-/* a tier is one credit row on the reel's axis, aligned on its baseline */
-#access .level{
+#access .paths{
+  position:relative;z-index:2;
   display:grid;
-  grid-template-columns:var(--axis-l) var(--axis-r);
-  column-gap:var(--axis-gap);
-  align-items:baseline;
-  min-width:0;
+  grid-template-columns:var(--now) calc(100% - var(--now));
+  grid-template-rows:auto auto auto auto;
+  align-items:start;
+  margin:clamp(6px,1vw,12px) 0 0;
 }
-#access .level + .level{margin-top:var(--rows)}
+#access .path{display:contents}
 
-/* the scale: the level and its tag on one baseline, the level taking
-   whatever the tag leaves, from the content edge to the tag column */
-#access .level__scale{
-  grid-column:1;grid-row:1;
-  display:flex;align-items:baseline;
-  min-width:0;
-  margin:0;
-  font-family:var(--f-display);
-  font-size:var(--t-micro);
-  line-height:1.5;
-}
-/* a box with no text takes its bottom edge as its baseline, so the
-   hairline lies on the tag's baseline -- and on the word's, across the
-   gutter. The gold's alpha is in the token, never an opacity, so a probe
-   sees the level as fully there. */
-#access .lvl{
-  position:relative;
-  flex:1 1 auto;
-  min-width:0;
-  height:1px;
-  align-self:baseline;
-  font-size:var(--t-micro);
-}
-#access .lvl--now{background:var(--line-3)}
-/* the band under the open level: the gap of the spread, folded flat
-   until the row is pointed at (or its link focused), then it develops
-   downward from the level */
-#access .lvl--now::after{
-  content:"";
-  position:absolute;left:0;right:0;top:1px;
-  height:13px;
-  background:rgba(215,179,100,.07);
-  border-bottom:1px solid var(--line-2);
-  transform:scaleY(0);transform-origin:top center;
-  transition:transform var(--d-slow) var(--e-out);
-  pointer-events:none;
-}
-/* the later level: the dash of the liquidity lines; the solid line over
-   it is drawn back to nothing and draws itself on the row's hover or the
-   link's focus */
-#access .lvl--later{background:var(--level)}
-#access .lvl--later::after{
-  content:"";
-  position:absolute;inset:0;
-  background:var(--line-4);
-  transform:scaleX(0);transform-origin:left center;
-  transition:transform var(--d-slow) var(--e-out);
-  pointer-events:none;
-}
-@media (hover:hover){
-  #access .level--now:hover .lvl--now::after{transform:none}
-  #access .level--later:hover .lvl--later::after{transform:none}
-}
-#access .level--now:focus-within .lvl--now::after{transform:none}
-#access .level--later:focus-within .lvl--later::after{transform:none}
+/* the four rows, and which column each path's blocks take */
+#access .path__tag{grid-row:1}
+#access .path__run{grid-row:2}
+#access .path__word{grid-row:3}
+#access .path__body{grid-row:4}
+#access .path--now .path__tag,#access .path--now .path__word,#access .path--now .path__body{grid-column:1;padding-right:var(--cgap)}
+#access .path--later .path__tag,#access .path--later .path__word,#access .path--later .path__body{grid-column:2;padding-left:var(--cgap)}
+#access .path--now .path__run{grid-column:1}
+#access .path--later .path__run{grid-column:2}
 
-/* the tag: the label voice, on the level's right end at the gutter */
-#access .level__tag{
-  flex:0 0 auto;
-  width:var(--tag);
-  padding-left:14px;
-  text-align:right;
+/* ---- the tag: the label voice, above the run's left end ---- */
+#access .path__tag{
+  margin:0 0 12px;
   font-family:var(--f-display);
   font-size:var(--t-micro);
   letter-spacing:var(--trk-caps);
@@ -114,58 +72,193 @@
   color:var(--ink-4);
   white-space:nowrap;
 }
-#access .level--now .level__tag{color:var(--ink-2)}
+#access .path--now .path__tag{color:var(--ink-2)}   /* now is nearer than later */
 
-/* the credit: the value column, at statement size, one voice for both */
-#access .level__body{grid-column:2;grid-row:1;min-width:0;margin:0}
-#access .level__value{
+/* ---- the line ----
+   A box with no text; the gold's alpha is in the token, never an opacity,
+   so a probe sees the line as fully there. The open run is solid and
+   carries the dot at its tip (a child, so while the run draws itself the
+   dot rides the pen); the later run is the dash. */
+#access .path__run{
+  position:relative;
+  display:block;
+  height:1px;
   margin:0;
+}
+#access .path--now .path__run{background:var(--line-4)}
+#access .path--later .path__run{background:var(--dash)}
+#access .path__dot{
+  position:absolute;
+  right:calc(-1 * var(--dot) / 2);
+  top:calc(50% - var(--dot) / 2);
+  width:var(--dot);height:var(--dot);
+  border-radius:50%;                      /* the one round thing on the page: a point, not a corner */
+  background:var(--gold);
+}
+/* the band under the open run: the gap of the spread, folded flat until
+   the path is pointed at (or its link focused), then it develops downward
+   from the line */
+#access .path--now .path__run::after{
+  content:"";
+  position:absolute;left:0;right:0;top:1px;
+  height:14px;
+  background:var(--band);
+  border-bottom:1px solid var(--line-2);
+  transform:scaleY(0);transform-origin:top center;
+  transition:transform var(--d-slow) var(--e-out);
+  pointer-events:none;
+}
+/* the solid line over the dash: drawn back to nothing, it draws itself
+   on the later path's hover or its link's focus */
+#access .path--later .path__run::after{
+  content:"";
+  position:absolute;inset:0;
+  background:var(--line-4);
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform var(--d-slow) var(--e-out);
+  pointer-events:none;
+}
+@media (hover:hover){
+  #access .path--now:hover .path__run::after{transform:none}
+  #access .path--later:hover .path__run::after{transform:none}
+}
+#access .path--now:focus-within .path__run::after{transform:none}
+#access .path--later:focus-within .path__run::after{transform:none}
+
+/* ---- the line of now ----
+   From the dot, down the column boundary, fading: placed in the later
+   run's grid area (an absolutely positioned grid item takes its area as
+   its containing block), so it costs the row no height. */
+#access .path__mark{
+  position:absolute;
+  grid-column:2;grid-row:2;
+  left:0;top:0;
+  width:1px;height:var(--mark);
+  background:linear-gradient(180deg,var(--line-3),rgba(215,179,100,0));
+  pointer-events:none;
+}
+
+/* ---- the word: title size, one voice for both ---- */
+#access .path__word{
+  margin:clamp(22px,3vw,36px) 0 0;
   font-family:var(--f-display);
-  font-size:var(--t-h2);
+  font-size:var(--word);
   font-weight:400;
-  font-style:normal;
-  line-height:var(--lh-tight);
-  letter-spacing:-.012em;
+  line-height:1;
+  letter-spacing:-.018em;
   color:var(--ink-1);
   text-wrap:balance;
 }
-#access .level__note{
-  margin:clamp(10px,1.4vw,14px) 0 0;
-  max-width:38ch;
-  font-size:var(--t-body);
+#access .path__word .mask{display:block}
+#access .path__word .mask > span{display:block}
+
+/* ---- the scale: two rows on hairlines ----
+   The thing named in the serif at credit size; what is counted in mono at
+   the right end of the row (a count, not an ordinal, so no leading zero);
+   the names under it at note size. A value that is not a count is set in
+   the label voice, where the mono would be. */
+#access .path__body{margin-top:clamp(24px,3.2vw,40px)}
+#access .rows{
+  list-style:none;margin:0;padding:0;
+  border-bottom:1px solid var(--line-2);
+}
+#access .row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  column-gap:16px;
+  align-items:baseline;
+  padding:clamp(12px,1.5vw,16px) 0 clamp(13px,1.6vw,17px);
+  border-top:1px solid var(--line-2);
+}
+#access .row__t{
+  grid-column:1;grid-row:1;
+  min-width:0;
+  font-family:var(--f-display);
+  font-size:clamp(19px,1.7vw,24px);
+  line-height:1.25;
+  letter-spacing:-.006em;
+  color:var(--ink-1);
+}
+#access .row__n{
+  grid-column:2;grid-row:1;
+  font-family:var(--f-mono);
+  font-weight:400;
+  font-size:var(--t-small);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:var(--trk-mono);
+  color:var(--ink-3);
+  text-align:right;
+}
+#access .row__v{
+  grid-column:2;grid-row:1;
+  font-family:var(--f-display);
+  font-size:var(--t-micro);
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
   line-height:1.5;
   color:var(--ink-3);
+  text-align:right;
+  white-space:nowrap;
+}
+#access .row__s{
+  grid-column:1 / -1;grid-row:2;
+  display:block;
+  margin-top:5px;
+  max-width:44ch;
+  font-family:var(--f-display);
+  font-size:var(--t-small);
+  line-height:1.55;
+  letter-spacing:0;
+  color:var(--ink-4);
   text-wrap:pretty;
 }
-/* the two links on one rule length: the quiet one takes the call's. The
-   line and the link sit under the word at the distances the Live block
-   above uses for the same three things. */
-#access .level__body .cta{--rule:clamp(22px,3vw,36px);margin-top:clamp(18px,2.6vw,28px)}
+/* a channel's name never breaks at its hyphen, and the dot between two
+   names stays with the name before it (a no-break space in the markup) */
+#access .ch{white-space:nowrap}
+
+/* ---- the links: one construction, two weights, both with the arrow ----
+   Both go to the server, so both carry the arrow of the bar; the quiet one
+   takes the call's rule length, and sits a step dimmer, in the ink of the
+   level drawn ahead, until it is pointed at. */
+#access .path__body .cta{--rule:clamp(22px,3vw,36px);margin-top:clamp(20px,2.6vw,30px)}
+#access .path--later .cta::after{display:block}
+#access .path--later .cta{color:var(--ink-2)}
+#access .path--later .cta::before,#access .path--later .cta::after{background:var(--line-4)}
+#access .path--later .cta:hover,#access .path--later .cta:focus-visible{color:var(--gold-hi)}
+#access .path--later .cta:hover::before,#access .path--later .cta:focus-visible::before,
+#access .path--later .cta:hover::after,#access .path--later .cta:focus-visible::after{background:var(--gold)}
+#access .path--later .cta:hover::after{transform:translate(2px,-2px)}
+
+/* ---- motion ----
+   The runs draw themselves (the page's .draw), the dot riding the open
+   run's tip; the line of now falls from the dot (a clip, never an
+   opacity); the words rise from under their line (the page's .mask); the
+   bodies settle. Under .js only, and only until motion.js has run. */
+.js #access .path__mark.reveal{
+  opacity:1;transform:none;
+  clip-path:inset(0 0 100% 0);
+  transition:clip-path calc(var(--d-reveal) * 1.1) var(--e-reveal);
+}
+.js #access .path__mark.reveal.is-in{clip-path:inset(0)}
 
 @media (prefers-reduced-motion:reduce){
-  #access .lvl--now::after,#access .lvl--later::after{transition:none}
+  #access .path--now .path__run::after,#access .path--later .path__run::after{transition:none}
+  .js #access .path__mark.reveal{clip-path:none;transition:none}
 }
 
-/* a phone: the credits centre, so each tier centres with them the way
-   the ledger's ticks do -- the tag between two halves of its level,
-   which run from one edge of the screen to the other (the strip has no
-   edges here), and the word, the line and the link centred under it.
-   The level is simply there (no draw: it is two halves); the hover
-   states go with the pointer. */
-@media (max-width:620px){
-  #access .level{display:block;text-align:center}
-  #access .level + .level{margin-top:clamp(40px,10vw,52px)}
-  #access .level__scale{
-    justify-content:center;
-    margin:0 calc(-1 * var(--edge));
-  }
-  #access .lvl{flex:1 1 0}
-  #access .level__scale::after{content:"";flex:1 1 0;height:1px;align-self:baseline}
-  #access .level--now .level__scale::after{background:var(--line-3)}
-  #access .level--later .level__scale::after{background:var(--level)}
-  #access .lvl--now::after,#access .lvl--later::after{display:none}
-  .js #access .lvl.draw{transform:none;transition:none}
-  #access .level__tag{width:auto;padding:0 16px;text-align:center}
-  #access .level__body{margin-top:clamp(10px,3vw,14px)}
-  #access .level__note{margin-left:auto;margin-right:auto;max-width:34ch}
+/* ---- narrower: the two paths stack, each under its own stretch of the
+   line, the open run ending on the dot at the column's edge, the later
+   run dashed from edge to edge; the line of now has no column to fall
+   down, so it is not drawn. Left-aligned, as the markets list is. ---- */
+@media (max-width:760px){
+  #access .paths{display:block}
+  #access .path{display:block}
+  #access .path + .path{margin-top:clamp(52px,12vw,72px)}
+  #access .path--now .path__tag,#access .path--now .path__word,#access .path--now .path__body{padding-right:0}
+  #access .path--later .path__tag,#access .path--later .path__word,#access .path--later .path__body{padding-left:0}
+  #access .path__dot{right:0}
+  #access .path__mark{display:none}
+  #access .path__word{margin-top:clamp(18px,4.5vw,28px)}
+  #access .path__body{margin-top:clamp(22px,5vw,32px)}
+  #access .row__s{max-width:none}
 }

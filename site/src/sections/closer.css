@@ -317,11 +317,11 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   footer .fnav a,footer .fnav a::before,footer .fnav a::after{transition:none}
 }
 
-/* where the risk line no longer fits one line beside the clock it wraps
-   as prose, at the full measure of its column (pretty: no line is one
-   word), and the two paragraphs stand a little further apart so each
-   still reads as its own line */
-@media (max-width:1023px){
+/* where the risk line no longer fits one line beside the clock (under
+   1100 it wraps) it wraps as prose, at the full measure of its column
+   (pretty: no line is one word), and the two paragraphs stand a little
+   further apart so each still reads as its own line */
+@media (max-width:1099px){
   footer .legal p + p{margin-top:8px}
 }
 /* a phone: the two lines run the whole column, a size under the note,
@@ -333,7 +333,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   footer .fnav{padding-top:0}             /* under the signature, not beside it */
   footer .fbase{display:block}
   footer .legal{max-width:none}
-  footer .legal p{font-size:13px;line-height:1.65;letter-spacing:.012em}
+  footer .legal p{font-size:12.75px;line-height:1.65;letter-spacing:0}
   footer .ftime{padding-top:0;margin-top:clamp(24px,6vw,32px)}
 }
 

@@ -2,7 +2,7 @@
  "id": "material",
  "title": "Material",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -34,6 +34,21 @@
    "confidence": 0.72,
    "timestamp": "2026-09-06T02:01:38",
    "note": "material — 08-material.html + material.css rebuilt around FAITHFUL VECTOR TRACES of the founder's seven charts (option 2 of the brief): every plate is an inline SVG whose viewBox is the original file's pixel grid; the candles (high/low/open/close/direction) are read off the pixels with a small pipeline (masks → candle segmentation by wick column → OHLC), the zones/levels/lines/labels measured on the file and redrawn in the site's vocabulary (gold hairline boxes at 7%, dashed 3/5 levels, one gold hairline for a drawn line, up candles in ink-2 / down in ink-4, labels in the serif caps voice, fi"
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 7.4,
+   "score_ref": 4.8,
+   "wowed": false,
+   "gap": "The chart annotations are where the editorial system falls apart at close range: in figure 03 \"FVG\" and \"SELLSIDE LIQUIDITY\" collide in the bottom-right corner, in 02 the Fibonacci levels (1.3414, 1.272, -0.272) are set at roughly 6px and the \"SELLSIDE LIQUIDITY\" label wraps against the frame edge, and the two abutting charts in 01 show a doubled seam where their borders meet. At the bar every label inside a chart is set at the same tracked small-cap size as the captions outside it, with leader lines rather than stacked text, and paired charts share a single hairline. On mobile those in-chart labels shrink to illegibility while the caption system stays perfect, which makes the mismatch obvious.",
+   "motion": "Restrained staged fades with charts clip-revealing from the left and rotated section labels riding the rail; nothing spectacular but nothing misfires, and the pacing respects the reading rhythm.",
+   "verdict": "B is a genuine editorial system, with numbered figures, dotted leaders, gold small caps against a serif measure, hairline rails, and charts that break the column with intent; its failures are micro-typographic inside the charts and fixable in an afternoon. A is a familiar dark-agency template whose one big idea (type over a small image) undercuts its own legibility, and whose mobile build has overlap bugs and dead space that no jury would forgive.",
+   "confidence": 0.88,
+   "timestamp": "2026-09-06T02:28:13",
+   "note": "material (08-material.html + material.css), wave 1 round 2 — closing the judge's gap:\n- The five plates are no longer one 760px column: on a desk (≥1100px) the wall is the page's wide column (inset 30px so its edge is the axis of the bar's wordmark name and clear of the rail label) and the hang is a sequence: 01 pair inside the strip → 02 offset left from the page edge, label beside it in the strip's column → 03 smaller, offset right, label on the left with its dashed level running across the gap to touch the frame → 04 the session edge-to-edge (~1256px), label printed on the mount inside th"
   }
  ]
 }

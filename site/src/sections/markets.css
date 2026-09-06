@@ -1,15 +1,25 @@
-/* ===== markets: the board as a price scale, then live =====
+/* ===== markets: the board as two price scales, then live =====
    Eight instruments with everything a desk board would show beside them
    left off, and drawn so that the leaving-off is the design and not a
-   gap. The board is a price scale: a vertical hairline of the gold on
-   the right, the height of the board, and every row is a level that runs
-   from the strip's left edge to that axis and ticks across it, with the
-   row's numeral on the scale after the tick -- so every row ends the same
-   way, in the mono, and the eight names sit like the levels of a scale.
-   The name is the serif at quote size; where the client gave a code (NQ,
-   ES, XAUUSD) it follows the name in the mono at caption size, the way
-   the server's address follows the word Discord on the first reel.
-   Nothing is put where a number would sit; the numerals count the rows.
+   gap. The board is two panels side by side, each a price scale: a
+   vertical hairline of the gold on the panel's right, the height of the
+   board, and every row a level that runs from the panel's left edge to
+   that scale and ticks across it. The name is the serif at quote size on
+   the left edge; against the scale, right-aligned in the one mono at
+   caption size, its code where the client gave one and the row's
+   numeral -- so the row has a word at each end and the rules enclose a
+   line, in a panel half the strip wide so the line is short. Two faces,
+   nowhere a third: the serif for what is read, the mono for what is
+   counted or quoted.
+
+   The groups are read as a board is read: Indices and Metalen on the top
+   line, Energie and Crypto under them, so the left panel holds Indices
+   over Energie and the right Metalen over Crypto -- four rows and two
+   tags each, and both panels end on the same rule. The markup is the
+   reading order (the numerals run 01-08 through it); a grid with dense
+   placement puts each term and description on its panel, and every cell
+   after the first line is one row tall, a group's tag standing at the
+   foot of its cell with the air above it.
 
    Two weights of rule, so the hierarchy is drawn and not only spaced:
    the rows on the faint hairline of the group rules, and each group a
@@ -18,57 +28,80 @@
    of the founder's numeral, and of a tag above its level on the plate.
 
    The plate's vocabulary as furniture and no more of it than this: the
-   rows are levels, the axis is the scale, and a row pointed at becomes
+   rows are levels, the two axes are scales, and a row pointed at becomes
    the gap band -- the gold at seven percent with a hairline along its top
    and its bottom, the zone of the plate -- its name in the paper, its
    code and numeral brought forward; the other rows step back. Arrival:
-   the axis draws itself top to bottom from the first beat while the rows
-   settle in sequence and each level draws itself to the scale in its
-   row's own slot. The caption hangs on the board's left edge in the
-   voice of every figure on the page: the figure's name in caps, its
+   the scales draw themselves top to bottom from the first beat while the
+   rows settle in reading order and each level draws itself to its scale
+   in its row's own slot. The caption hangs on the board's left edge in
+   the voice of every figure on the page: the figure's name in caps, its
    note in the serif.
 
    Live keeps the edge: one statement a size above the board, the word
    itself in the italic gold (the one accent of the screen), its one line
    under it, the call under that, all on the left edge -- so the whole
    piece has one line and nothing hangs off another. On a phone the
-   board is the same board, smaller, with its scale; Live stays on its
-   edge with it. */
+   board is one panel, the same construction at the column's width, the
+   groups one under the other. */
 #markets .board{
-  --scale:34px;                                /* the scale column: tick, air, numeral */
-  --tick:6px;                                  /* what a level crosses the axis by     */
-  --bleed:12px;                                /* the band past the text               */
-  --band:rgba(215,179,100,.07);                /* the fair value gap band              */
+  --row:clamp(54px,4.8vw,68px);                /* one row, one cell                     */
+  --gap:clamp(30px,5vw,56px);                  /* between the panels                    */
+  --tick:6px;                                  /* what a level crosses the scale by     */
+  --pad-r:11px;                                /* the numeral's clearance to the scale  */
+  --bleed:12px;                                /* the band past the text                */
+  --band:rgba(215,179,100,.07);                /* the fair value gap band               */
   --band-edge:rgba(215,179,100,.36);
-  --rule:var(--line-2);                        /* between rows                         */
-  --level:var(--line-4);                       /* a group's level                      */
+  --rule:var(--line-2);                        /* between rows                          */
+  --level:var(--line-4);                       /* a group's level                       */
+  --over:calc(1px + var(--tick));              /* a rule past the cell, across the scale */
   position:relative;z-index:2;
   margin:clamp(2px,.8vw,8px) 0 0;
 }
 #markets .board .reveal{--reveal-y:10px}       /* a row settles, it does not travel */
 #markets .board__sheet{position:relative}
-#markets .board__list{margin:0;padding:0}
 
-/* ---- the scale: a vertical hairline on the right, the board's height.
-   It hangs from the first level (the first tag's baseline, 9px into the
-   tag's line box) to the last row's rule. */
+/* ---- the grid: two panels, six lines. The first line is the two tags
+   (auto), every line after it one row. Each term and description names
+   its panel; dense placement gives it the first free line there. */
+#markets .board__list{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-rows:auto repeat(5,var(--row));
+  grid-auto-rows:var(--row);
+  grid-auto-flow:row dense;
+  column-gap:var(--gap);
+  margin:0;padding:0;
+  min-width:0;
+}
+#markets .board__list > :nth-child(-n+4),
+#markets .board__list > :nth-child(8),
+#markets .board__list > :nth-child(9){grid-column:1}
+#markets .board__list > :nth-child(n+5):nth-child(-n+7),
+#markets .board__list > :nth-child(n+10){grid-column:2}
+
+/* ---- the scales: one hairline at each panel's right edge, the board's
+   height, hanging from the first tags' baseline (9px into their line
+   box) to the last rule */
 #markets .board__axis{
   position:absolute;
   top:9px;bottom:0;
-  right:calc(var(--scale) - 1px);
   width:1px;
   background:var(--line-2);
   pointer-events:none;
 }
+#markets .board__axis--a{left:calc((100% - var(--gap)) / 2)}
+#markets .board__axis--b{left:100%}
 
-/* ---- a group: the tag at the left end, its level to the scale -------- */
+/* ---- a group: the tag at the left end, its level to the scale; the cell
+   is a row tall and the tag stands at its foot, the air above it ------- */
 #markets .board__grp{
+  align-self:end;
   display:flex;align-items:baseline;
   gap:clamp(10px,1.3vw,13px);
   margin:0;
-  padding:clamp(28px,3.8vw,48px) calc(var(--scale) - var(--tick)) 0 0;
+  min-width:0;
 }
-#markets .board__list > .board__grp:first-child{padding-top:0}
 #markets .board__tag{
   flex:0 0 auto;
   position:relative;top:-3px;                  /* the caps stand a hair above the line */
@@ -82,41 +115,43 @@
   white-space:nowrap;
 }
 /* the level: an empty flex item takes its bottom edge as its baseline,
-   so the rule runs on the tag's baseline, from the tag to the tick */
+   so the rule runs on the tag's baseline, from the tag across the scale */
 #markets .board__lvl{
   flex:1 1 auto;
   align-self:baseline;
   display:block;
   height:1px;
+  margin-right:calc(-1 * var(--over));
   background:var(--level);
   transform-origin:left center;
   pointer-events:none;
 }
 
-/* ---- a row: the name, its code, the numeral on the scale, one baseline */
+/* ---- a row: the name at the left edge; the code and the numeral
+   right-aligned against the scale; one baseline ------------------------ */
 #markets .board__row{
   position:relative;
   display:flex;align-items:baseline;
   gap:0;
   margin:0;
-  padding:clamp(9px,1.25vw,13px) 0 clamp(10px,1.35vw,14px);
+  padding:clamp(11px,1.1vw,14px) var(--pad-r) 0 0;
   min-width:0;
 }
 /* the level under the row: to the scale, and across it by the tick */
 #markets .board__row::after{
   content:"";
-  position:absolute;left:0;right:calc(var(--scale) - var(--tick));bottom:0;
+  position:absolute;left:0;right:calc(-1 * var(--over));bottom:0;
   height:1px;
   background:var(--rule);
   transform-origin:left center;
   pointer-events:none;
 }
-/* the band: a layer under the row, past the text by the bleed and short
-   of the scale, so its transition never touches the row's own */
+/* the band: a layer under the row, past the text by the bleed and up to
+   the scale, so its transition never touches the row's own */
 #markets .board__row::before{
   content:"";
   position:absolute;top:0;bottom:0;
-  left:calc(-1 * var(--bleed));right:var(--scale);
+  left:calc(-1 * var(--bleed));right:0;
   z-index:-1;
   background:rgba(215,179,100,0);
   box-shadow:inset 0 1px 0 rgba(215,179,100,0),inset 0 -1px 0 rgba(215,179,100,0);
@@ -131,34 +166,33 @@
   line-height:var(--lh-tight);
   letter-spacing:-.012em;
   color:var(--ink-1);
+  white-space:nowrap;
   transition:color var(--d) var(--e-out);
 }
-/* the code: the mono at caption size after the name, on its baseline */
-#markets .board__tick{
+/* the code and the numeral: the one mono, caption size, one column on
+   the scale -- the code in the reading ink, the numeral in the label grey */
+#markets .board__code,#markets .board__n{
   flex:0 0 auto;
-  margin-left:clamp(12px,1.6vw,18px);
   font-family:var(--f-mono);
   font-size:var(--t-caption);
   font-weight:400;
   letter-spacing:var(--trk-mono);
-  line-height:1;
-  color:var(--ink-2);
-  transition:color var(--d) var(--e-out);
-}
-/* the numeral: on the scale, just after the tick, the mono in the label grey */
-#markets .board__n{
-  flex:0 0 var(--scale);
-  margin-left:auto;
-  padding-left:calc(var(--tick) + 9px);
-  text-align:left;
-  font-family:var(--f-mono);
-  font-size:var(--t-caption);
-  letter-spacing:var(--trk-mono);
   font-variant-numeric:tabular-nums;
   line-height:1;
-  color:var(--ink-4);
+  white-space:nowrap;
   transition:color var(--d) var(--e-out);
 }
+#markets .board__code{
+  margin-left:auto;
+  padding-left:clamp(12px,1.6vw,18px);
+  color:var(--ink-2);
+}
+#markets .board__n{
+  margin-left:clamp(12px,1.4vw,16px);
+  min-width:2ch;text-align:right;
+  color:var(--ink-4);
+}
+#markets .board__name + .board__n{margin-left:auto;padding-left:clamp(12px,1.6vw,18px)}
 
 /* ---- the lit row, and the others a step back ---------------------------- */
 @media (hover:hover){
@@ -167,14 +201,14 @@
     box-shadow:inset 0 1px 0 var(--band-edge),inset 0 -1px 0 var(--band-edge);
   }
   #markets .board__row:hover .board__name{color:var(--paper)}
-  #markets .board__row:hover .board__tick{color:var(--ink-1)}
+  #markets .board__row:hover .board__code{color:var(--ink-1)}
   #markets .board__row:hover .board__n{color:var(--ink-2)}
   #markets .board__list:has(.board__row:hover) .board__row:not(:hover) .board__name{color:var(--ink-2)}
 }
 
 /* ---- arrival: the ink draws, never opacity, so a probe sees every rule
-   at once. The axis draws top to bottom from the first beat; each level
-   draws itself to the scale in its row's own slot of the stagger. */
+   at once. The scales draw top to bottom from the first beat; each level
+   draws itself to its scale in its row's own slot of the stagger. */
 .js #markets .board__axis.reveal{
   opacity:1;
   transform:scaleY(0);transform-origin:top center;
@@ -195,12 +229,11 @@
 }
 
 /* ---- the caption: the figure's name in caps, its note in the serif,
-   one row hung on the board's left edge, its measure ending at the axis */
+   one row hung on the board's left edge */
 #markets .board__cap{
   display:flex;flex-wrap:wrap;align-items:baseline;
   gap:2px clamp(14px,1.6vw,22px);
   margin-top:clamp(12px,1.6vw,16px);
-  padding-right:var(--scale);
   font-family:var(--f-display);
   line-height:1.5;
 }
@@ -248,16 +281,27 @@
 @media (prefers-reduced-motion:reduce){
   .js #markets .board__axis.reveal{transform:none;transition:none}
   .js #markets .board__row::after,.js #markets .board__grp .board__lvl{transform:none;transition:none}
-  #markets .board__row::before,#markets .board__name,#markets .board__tick,#markets .board__n{transition:none}
+  #markets .board__row::before,#markets .board__name,#markets .board__code,#markets .board__n{transition:none}
 }
 
-/* ---- a phone: the same board, smaller, with its scale ------------------ */
+/* ---- a phone: one panel at the column's width, the groups one under the
+   other in reading order, the same scale on the right --------------------- */
 @media (max-width:620px){
-  #markets .board{--scale:32px;--bleed:10px}
+  #markets .board{--row:56px;--bleed:10px;--pad-r:10px}
+  #markets .board__list{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-rows:auto;
+    grid-auto-rows:auto;
+    grid-auto-flow:row;
+    column-gap:0;
+  }
+  #markets .board__list > *{grid-column:1}
+  #markets .board__axis--a{display:none}
   #markets .board__grp{padding-top:clamp(24px,6.5vw,30px)}
-  #markets .board__row{padding:8px 0 9px}
-  #markets .board__tick{margin-left:10px}
-  #markets .board__cap{display:block;padding-right:0}
+  #markets .board__list > .board__grp:first-child{padding-top:0}
+  #markets .board__row{padding:9px var(--pad-r) 10px 0}
+  #markets .board__name{font-size:clamp(26px,7vw,30px)}
+  #markets .board__cap{display:block}
   #markets .board__title{display:block}
   #markets .board__note{display:block;margin-top:4px;max-width:none}
   #markets .live{margin-bottom:clamp(36px,9vw,48px)}

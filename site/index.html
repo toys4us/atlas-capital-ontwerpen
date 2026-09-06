@@ -1774,8 +1774,7 @@ dl.pairs .cols{
 .js #production .lvl.reveal.wipe{transition:clip-path 1.15s var(--e-out)}
 /* the value: base.css's own arrival, from half a row below instead of a
    whole one, so a settling value never crosses the row under it */
-.js #production .val.reveal{transform:translateY(14px)}
-.js #production .val.reveal.is-in{transform:none}
+#production .val{--reveal-y:14px}
 /* the address: in place, and slowly, so it is not there before the word is */
 .js #production .addr.reveal{transform:none;transition:opacity 1.1s var(--e-inout)}
 
@@ -1868,213 +1867,223 @@ dl.pairs .cols{
 
 @media (prefers-reduced-motion:reduce){
   .js #production .lvl.reveal.wipe,.js #production .tag.reveal,.js #production .addr.reveal{transition:none}
-  .js #production .val.reveal{transform:none;transition:none}
   #production .addr a,#production .addr a::before,#production .addr a::after{transition:none}
 }
 
 /* ---- section:founder ---- */
-/* ===== founder: one credit on the axis, the words as the value =====
-   One row on the reel's shared axis, set the way every credit on the
-   reel is set: the label column left of the gutter, the value column
-   right of it, one baseline. Here the label is a numeral and the value is
-   what the founder said.
+/* ===== founder: the numeral as the object, the words as the centre =====
+   Two beats on the column line. There is no portrait and no name, so the
+   numeral is the portrait: "10+" set at the size of a plate (a size the
+   scale lacks: a third of the column at 1440, two fifths of a phone),
+   flush left on the column line, in the serif with lining proportional
+   figures. The plus is a designed superior: a third of the figures' size,
+   its top on the cap line, kerned into the bowl of the 0, in the one gold
+   -- the accent of this screen, the sign that says "more than".
 
-   The numeral "10+" is the tag at the left end of a level. It is set
-   large in the serif with proportional lining figures (the 1 and the 0
-   close up) and the plus is not a superior: at half size, its bar on the
-   figures' midline, tucked into the bowl of the 0 by an optical kern, so
-   the three glyphs are one object and not two figures with a sign
-   floating after them. From the plus's right side the dashed hairline of
-   the opening plate's liquidity line -- 3 on, 5 off, the one gold --
-   runs along the numeral's baseline, across the gutter, and stops a dash
-   short of the words: the level ends where the value begins, on the
-   column line the whole reel shares, never at the edge of the page.
+   The numeral stands on a level: the dashed hairline of the opening
+   plate's liquidity line (3 on, 5 off, the one gold at line-3, the same
+   line production draws its leaders with) runs out of the plus along
+   the baseline and ends, one dash short, at what the numeral counts --
+   "jaar actief in trading", standing on the same baseline at credit
+   size, and under it, on its own left edge, his account of those years
+   at note size in the body grey. The level leads from the number to its
+   unit on every width; it never runs to an edge. One number, no
+   instrument, no date: a schema, not a chart.
 
-   The words stand on that baseline: the row aligns the two columns by
-   their first baselines, so the first line of the quote sits on the
-   numeral's foot and the level is the line they both stand on. Pull-quote
-   size, the measure the value column gives (thirty-odd characters), the
-   opening mark hung into the gutter so the first letter is on the column
-   line; the signature under the last line, on the same line, set the
-   way the page's links are set -- a short rule of the gold, then the
-   words, italic, at note size.
+   The second beat is the founder's own words: a short rule of the gold,
+   then the quote at pull-quote size, roman, on the column line at a
+   measure of forty-odd characters (six lines at 1440), the opening mark
+   hung so the first letter stands on the line; under the last line the
+   signature, set the way the page's links are set -- a rule of the gold,
+   then the words in italic at note size.
 
-   Under the numeral, on its own left edge, what it counts ("jaar actief
-   in trading", at the size of a line under a title) and his own account
-   of those years at note size, cut from his first sentence and never
-   rewritten. So one construction: numeral, level, words on one baseline;
-   label, note and signature hung under their own left edges. One number,
-   no instrument, no date.
-
-   Reveal, one sequence: the numeral rises out of its baseline, the level
+   Reveal, two sequences: the numeral rises out of its baseline, the level
    draws out of it towards the words (a wipe, so the dashes stay put), the
-   words settle as it arrives, then the label and the note under the
-   numeral, and last, slowly, the signature. On a phone the row stacks:
-   the numeral first, its level running out to the column's edge and
-   ending on a short vertical rule (the strip's edge, which the phone does
-   not draw, standing there before the line reaches it), the label and
-   the note under it, then the words at the phone's size, left, with a
-   rag, and the signature under them. */
+   words settle as it arrives and the note after them; then, when the
+   reader reaches it, the rule draws, the quote settles, and last, slowly,
+   the signature. On a phone the same two objects at the phone's size: the
+   numeral, its level, the unit on two lines beside it; the note under
+   the numeral across the column; the quote and the signature under it. */
 #founder{
-  --n:clamp(84px,9.4vw,132px);              /* the numeral: a size the scale lacks           */
-  --q:clamp(24px,2.1vw,30px);               /* the words: a pull-quote in a value column    */
-  --hang:.4em;                              /* the opening mark's advance in this face      */
-  --lead-gap:clamp(10px,1.4vw,14px);        /* from the level's last dash to the words      */
+  --n:clamp(150px,22.5vw,324px);            /* the numeral: a size the scale lacks         */
+  --q:var(--t-quote);                       /* the words: pull-quote size                  */
+  --hang:.4em;                              /* the opening mark's advance in this face     */
+  --lead-gap:clamp(12px,1.6vw,18px);        /* from the level's last dash to the unit      */
 }
 
-/* ---- the row: two columns on the axis, one baseline ---------------------- */
-#founder .role{
+/* ---- the object: numeral, level, what it counts ------------------------
+   a grid of three cells on one baseline: the numeral, the level (it takes
+   what the numeral and the unit leave), the unit. Baselines, so an empty
+   box's bottom edge -- the level -- sits on the numeral's foot and the
+   unit stands on it too. */
+#founder .ten{
   position:relative;z-index:2;
   display:grid;
-  grid-template-columns:var(--axis-l) var(--axis-r);
-  column-gap:var(--axis-gap);
+  grid-template-columns:auto minmax(36px,1fr) auto;
   align-items:baseline;
-  margin:0;                                 /* the group title's own margin is the air */
+  margin:clamp(2px,.6vw,8px) 0 0;
   text-align:left;
 }
-#founder .ten{grid-column:1;min-width:0;margin:0}
-#founder .word{grid-column:2;min-width:0;margin:0}
-
-/* ---- the tag: the numeral and its level --------------------------------- */
-/* a flex row so the level takes what the numeral leaves; baselines, so an
-   empty box's bottom edge -- the level -- sits on the numeral's baseline.
-   The 1 carries a left bearing, so the figures are pulled out a little to
-   sit optically on the column's edge with the label under them. */
-#founder .ten__row{
-  display:flex;align-items:baseline;
-  margin:0 0 0 -.03em;
-  font-family:var(--f-display);
+/* the mask clips the rise; its box is trimmed under the baseline so the
+   row ends where the unit's note does and not a descender-space lower */
+#founder .ten > .mask{
+  grid-column:1;grid-row:1;
+  display:block;
+  padding-bottom:.12em;margin-bottom:-.34em;
   font-size:var(--n);
-  font-weight:400;
   line-height:1;
-  letter-spacing:var(--trk-h1);
+}
+/* the 1 carries a left bearing: the figures are pulled out a little so
+   the stem sits optically on the column line */
+#founder .ten__num{
+  display:inline-block;
+  margin-left:-.035em;
+  white-space:nowrap;
+  font-family:var(--f-display);
+  font-weight:400;
+  letter-spacing:-.02em;
   font-variant-numeric:lining-nums proportional-nums;
+  font-feature-settings:"kern" 1;
   color:var(--ink-1);
 }
-#founder .ten__row .mask{flex:0 0 auto;padding-bottom:.12em;margin-bottom:-.12em}
-#founder .ten__num{display:inline-block;white-space:nowrap}
-/* the plus: half the figures' size, its bar on their midline (lining
-   figures are cap-high, .69em; the sign's bar sits .31em up its own
-   size), kerned into the bowl of the 0 -- a small sign that belongs to
-   the number, a step quieter than the figures */
+/* the plus: a third of the figures' size, its top on their cap line
+   (lining figures are cap-high, .69em; the sign's top sits .58em up its
+   own size, so it is raised by the difference), and pulled back into the
+   bowl of the 0, which curves away under it; in the gold */
 #founder .ten__plus{
   display:inline-block;
-  font-size:.5em;
+  font-size:.34em;
   line-height:1;
   letter-spacing:0;
   vertical-align:baseline;
-  position:relative;top:-.38em;
-  margin:0 0 0 -.04em;
-  color:var(--ink-2);
+  position:relative;top:-1.62em;
+  margin:0 0 0 -.14em;
+  color:var(--gold);
 }
-/* the level: from the last figure across the gutter to a dash before the
-   hung mark of the words. Its bottom edge is the baseline. */
+/* the level: out of the plus, along the baseline, to a dash before the
+   unit. Anchored right so a whole dash ends at the words. */
 #founder .ten__lvl{
+  grid-column:2;grid-row:1;
   display:block;
-  flex:1 1 auto;
-  min-width:24px;
   height:1px;
-  margin:0 calc(-1 * var(--axis-gap) + .4 * var(--q) + var(--lead-gap)) 0 clamp(8px,1vw,10px);
-  background:repeating-linear-gradient(90deg,rgba(215,179,100,.55) 0 3px,transparent 3px 8px);
+  margin:0 var(--lead-gap) 0 clamp(10px,1.2vw,14px);
+  background:linear-gradient(90deg,transparent 0 5px,var(--line-3) 5px 8px) right center/8px 1px repeat-x;
   pointer-events:none;
 }
-
-/* the label under the numeral: what it counts, at the size of the line
-   under a title, on the numeral's left edge; the row above ends .265em
-   under the baseline, so the label is pulled up to sit a few px under
-   the level */
+/* the unit and the note: one block whose first line stands on the
+   baseline, the note under it on the same edge */
+#founder .ten__what{
+  grid-column:3;grid-row:1;
+  display:block;
+  min-width:0;
+  max-width:26ch;
+}
 #founder .ten__words{
-  margin:calc(12px - .265 * var(--n)) 0 0;
+  display:block;
   font-family:var(--f-display);
-  font-size:var(--t-lead);
+  font-size:var(--t-h3);
   font-weight:400;
-  line-height:var(--lh-snug);
+  line-height:var(--lh-tight);
   letter-spacing:-.006em;
-  color:var(--ink-2);
+  color:var(--ink-1);
   text-wrap:balance;
 }
-/* the note: his own account of those years, at note size, in the
-   secondary grey, under the label on the same edge */
 #founder .ten__sub{
-  margin:clamp(6px,.8vw,9px) 0 0;
+  display:block;
+  margin:clamp(7px,.9vw,10px) 0 0;
   max-width:24ch;
   font-family:var(--f-display);
   font-size:var(--t-small);
   letter-spacing:.01em;
   line-height:1.5;
-  color:var(--ink-3);
-  text-wrap:balance;
+  color:var(--ink-2);
+  text-wrap:pretty;
 }
 
-/* ---- the value: the words and the signature ------------------------------ */
+/* ---- the words: rule, quote, signature ----------------------------------- */
+#founder .word{
+  position:relative;z-index:2;
+  margin:clamp(44px,6vw,80px) 0 0;
+  text-align:left;
+}
+#founder .word .hair{
+  display:block;
+  width:40px;height:1px;
+  margin:0 0 clamp(20px,2.6vw,30px);
+  background:var(--line-4);
+}
 #founder .word blockquote{
   margin:0;
+  max-width:29ch;
   font-family:var(--f-display);
   font-size:var(--q);
   font-weight:400;
-  line-height:1.32;
-  letter-spacing:-.01em;
+  line-height:1.3;
+  letter-spacing:-.012em;
   color:var(--ink-1);
 }
-/* the opening mark hangs into the gutter, so the first letter stands on
+/* the opening mark hangs into the margin, so the first letter stands on
    the column line; where the browser hangs punctuation itself, let it */
 #founder .word blockquote p{margin:0;text-indent:calc(-1 * var(--hang));text-wrap:pretty}
 @supports (hanging-punctuation:first){
   #founder .word blockquote p{text-indent:0;hanging-punctuation:first last}
 }
 #founder .word .nb{white-space:nowrap}       /* a hyphenated compound stays whole */
-/* the signature: a short rule of the gold, then the words in italic at
-   note size -- the construction of the page's links, signing a quotation */
+/* the signature: a rule of the gold, then the words in italic at note
+   size -- the construction of the page's links, signing a quotation */
 #founder .word .who{
-  display:flex;align-items:baseline;gap:12px;
-  margin:clamp(18px,2.4vw,26px) 0 0;
+  display:flex;align-items:center;gap:14px;
+  margin:clamp(20px,2.8vw,32px) 0 0;
+  padding:0;
   font-family:var(--f-display);
   font-style:italic;
-  font-size:var(--t-small);
+  font-size:clamp(15px,1.1vw,16.5px);
   letter-spacing:.01em;
   line-height:1.5;
-  color:var(--ink-3);
+  color:var(--muted);
 }
 #founder .word .who::before{
   content:"";
   flex:0 0 auto;
-  width:clamp(20px,2.4vw,28px);height:1px;
-  align-self:center;
+  width:clamp(24px,2.8vw,34px);height:1px;
   margin-top:.1em;                           /* the middle of the x-height, not of the box */
   background:var(--line-4);
 }
 
-/* ---- the sequence ----------------------------------------------------------
+/* ---- the sequences ---------------------------------------------------------
    the numeral rises through its baseline out of its mask; the level draws
    out of the numeral (a wipe: the dashes stay where they are), fast off
-   the figures and slow to arrive; the words settle in place as it does;
-   the signature comes last and slowly, so it is never there before the
-   words are */
+   the figures and slow to arrive; the unit settles as it does. The rule
+   of the words draws from the left; the signature comes last and slowly,
+   so it is never there before the words are. */
 .js #founder .mask > .ten__num.reveal{transform:translateY(120%);transition-duration:1.2s}
 .js #founder .mask > .ten__num.reveal.is-in{transform:none}
 .js #founder .ten__lvl.reveal.wipe{transition:clip-path 1.15s var(--e-out)}
 .js #founder .word > .who.reveal{transition-duration:calc(var(--d-reveal) * 1.2)}
 
-/* ---- a phone: the same credit, stacked --------------------------------- */
+/* ---- a phone: the same two objects at the phone's size -------------------
+   The numeral two fifths of the width; the unit beside it on two lines,
+   the level between them; the note under the numeral across the column,
+   pulled up into the numeral's descender space. */
 @media (max-width:620px){
-  #founder .role{display:block}
-  /* the level runs out of the numeral to the column's edge and ends on a
-     short vertical rule -- the strip's edge, standing there before the
-     line reaches it */
-  #founder .ten__lvl{margin-right:0}
-  #founder .ten__row::after{
-    content:"";
-    flex:0 0 auto;
-    width:1px;height:9px;
-    align-self:baseline;
-    position:relative;top:4px;
-    background:var(--line-3);
+  #founder{--n:clamp(140px,40vw,160px);--lead-gap:12px}
+  #founder .ten{grid-template-columns:auto minmax(28px,1fr) auto;margin-top:0}
+  #founder .ten > .mask{margin-bottom:-.12em}
+  #founder .ten__lvl{margin-left:10px}
+  #founder .ten__what{display:contents}
+  #founder .ten__words{grid-column:3;grid-row:1;max-width:11ch;font-size:clamp(18px,4.8vw,20px)}
+  /* the note under the numeral: pulled up into the descender space, to
+     a fixed distance under the baseline that clears the unit's second
+     line (the row's box ends .265em under the baseline) */
+  #founder .ten__sub{
+    grid-column:1 / -1;grid-row:2;
+    margin-top:calc(50px - .265 * var(--n));
+    max-width:30ch;
   }
-  #founder .ten__words{margin-top:calc(10px - .265 * var(--n))}
-  #founder .ten__sub{max-width:30ch}
-  #founder .word{margin-top:clamp(30px,8vw,40px)}
-  #founder .word blockquote{line-height:1.3}
-  #founder .word .who{margin-top:clamp(16px,4.5vw,22px)}
+  #founder .word{margin-top:clamp(36px,10vw,44px)}
+  #founder .word .hair{margin-bottom:18px}
+  #founder .word blockquote{max-width:none;line-height:1.3}
+  #founder .word .who{margin-top:20px}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -2146,7 +2155,7 @@ dl.pairs .cols{
   column-gap:var(--g);
   width:calc(100% + 2 * var(--bleed));
   margin:0 calc(-1 * var(--bleed));
-  padding:8px var(--bleed) 9px;
+  padding:10px var(--bleed) 11px;
   border:0;border-radius:0;
   background:transparent;
   color:inherit;
@@ -2449,7 +2458,7 @@ dl.pairs .cols{
   #education .syllabus{display:flex;flex-direction:column;--bleed:10px}
   #education .pane{order:-1;margin:0 0 clamp(22px,6vw,30px)}
   #education .plate{margin:0}
-  #education .row{padding:9px var(--bleed) 10px}
+  #education .row{padding:10px var(--bleed) 11px}
   #education .close{display:block;margin-top:clamp(36px,9vw,52px)}
   #education .close .cta{margin-top:clamp(18px,2.4vw,26px)}
 }
@@ -2886,18 +2895,28 @@ dl.pairs .cols{
 }
 
 /* ---- section:markets ---- */
-/* ===== markets: the board as a price scale, then live =====
+/* ===== markets: the board as two price scales, then live =====
    Eight instruments with everything a desk board would show beside them
    left off, and drawn so that the leaving-off is the design and not a
-   gap. The board is a price scale: a vertical hairline of the gold on
-   the right, the height of the board, and every row is a level that runs
-   from the strip's left edge to that axis and ticks across it, with the
-   row's numeral on the scale after the tick -- so every row ends the same
-   way, in the mono, and the eight names sit like the levels of a scale.
-   The name is the serif at quote size; where the client gave a code (NQ,
-   ES, XAUUSD) it follows the name in the mono at caption size, the way
-   the server's address follows the word Discord on the first reel.
-   Nothing is put where a number would sit; the numerals count the rows.
+   gap. The board is two panels side by side, each a price scale: a
+   vertical hairline of the gold on the panel's right, the height of the
+   board, and every row a level that runs from the panel's left edge to
+   that scale and ticks across it. The name is the serif at quote size on
+   the left edge; against the scale, right-aligned in the one mono at
+   caption size, its code where the client gave one and the row's
+   numeral -- so the row has a word at each end and the rules enclose a
+   line, in a panel half the strip wide so the line is short. Two faces,
+   nowhere a third: the serif for what is read, the mono for what is
+   counted or quoted.
+
+   The groups are read as a board is read: Indices and Metalen on the top
+   line, Energie and Crypto under them, so the left panel holds Indices
+   over Energie and the right Metalen over Crypto -- four rows and two
+   tags each, and both panels end on the same rule. The markup is the
+   reading order (the numerals run 01-08 through it); a grid with dense
+   placement puts each term and description on its panel, and every cell
+   after the first line is one row tall, a group's tag standing at the
+   foot of its cell with the air above it.
 
    Two weights of rule, so the hierarchy is drawn and not only spaced:
    the rows on the faint hairline of the group rules, and each group a
@@ -2906,57 +2925,80 @@ dl.pairs .cols{
    of the founder's numeral, and of a tag above its level on the plate.
 
    The plate's vocabulary as furniture and no more of it than this: the
-   rows are levels, the axis is the scale, and a row pointed at becomes
+   rows are levels, the two axes are scales, and a row pointed at becomes
    the gap band -- the gold at seven percent with a hairline along its top
    and its bottom, the zone of the plate -- its name in the paper, its
    code and numeral brought forward; the other rows step back. Arrival:
-   the axis draws itself top to bottom from the first beat while the rows
-   settle in sequence and each level draws itself to the scale in its
-   row's own slot. The caption hangs on the board's left edge in the
-   voice of every figure on the page: the figure's name in caps, its
+   the scales draw themselves top to bottom from the first beat while the
+   rows settle in reading order and each level draws itself to its scale
+   in its row's own slot. The caption hangs on the board's left edge in
+   the voice of every figure on the page: the figure's name in caps, its
    note in the serif.
 
    Live keeps the edge: one statement a size above the board, the word
    itself in the italic gold (the one accent of the screen), its one line
    under it, the call under that, all on the left edge -- so the whole
    piece has one line and nothing hangs off another. On a phone the
-   board is the same board, smaller, with its scale; Live stays on its
-   edge with it. */
+   board is one panel, the same construction at the column's width, the
+   groups one under the other. */
 #markets .board{
-  --scale:34px;                                /* the scale column: tick, air, numeral */
-  --tick:6px;                                  /* what a level crosses the axis by     */
-  --bleed:12px;                                /* the band past the text               */
-  --band:rgba(215,179,100,.07);                /* the fair value gap band              */
+  --row:clamp(54px,4.8vw,68px);                /* one row, one cell                     */
+  --gap:clamp(30px,5vw,56px);                  /* between the panels                    */
+  --tick:6px;                                  /* what a level crosses the scale by     */
+  --pad-r:11px;                                /* the numeral's clearance to the scale  */
+  --bleed:12px;                                /* the band past the text                */
+  --band:rgba(215,179,100,.07);                /* the fair value gap band               */
   --band-edge:rgba(215,179,100,.36);
-  --rule:var(--line-2);                        /* between rows                         */
-  --level:var(--line-4);                       /* a group's level                      */
+  --rule:var(--line-2);                        /* between rows                          */
+  --level:var(--line-4);                       /* a group's level                       */
+  --over:calc(1px + var(--tick));              /* a rule past the cell, across the scale */
   position:relative;z-index:2;
   margin:clamp(2px,.8vw,8px) 0 0;
 }
 #markets .board .reveal{--reveal-y:10px}       /* a row settles, it does not travel */
 #markets .board__sheet{position:relative}
-#markets .board__list{margin:0;padding:0}
 
-/* ---- the scale: a vertical hairline on the right, the board's height.
-   It hangs from the first level (the first tag's baseline, 9px into the
-   tag's line box) to the last row's rule. */
+/* ---- the grid: two panels, six lines. The first line is the two tags
+   (auto), every line after it one row. Each term and description names
+   its panel; dense placement gives it the first free line there. */
+#markets .board__list{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-rows:auto repeat(5,var(--row));
+  grid-auto-rows:var(--row);
+  grid-auto-flow:row dense;
+  column-gap:var(--gap);
+  margin:0;padding:0;
+  min-width:0;
+}
+#markets .board__list > :nth-child(-n+4),
+#markets .board__list > :nth-child(8),
+#markets .board__list > :nth-child(9){grid-column:1}
+#markets .board__list > :nth-child(n+5):nth-child(-n+7),
+#markets .board__list > :nth-child(n+10){grid-column:2}
+
+/* ---- the scales: one hairline at each panel's right edge, the board's
+   height, hanging from the first tags' baseline (9px into their line
+   box) to the last rule */
 #markets .board__axis{
   position:absolute;
   top:9px;bottom:0;
-  right:calc(var(--scale) - 1px);
   width:1px;
   background:var(--line-2);
   pointer-events:none;
 }
+#markets .board__axis--a{left:calc((100% - var(--gap)) / 2)}
+#markets .board__axis--b{left:100%}
 
-/* ---- a group: the tag at the left end, its level to the scale -------- */
+/* ---- a group: the tag at the left end, its level to the scale; the cell
+   is a row tall and the tag stands at its foot, the air above it ------- */
 #markets .board__grp{
+  align-self:end;
   display:flex;align-items:baseline;
   gap:clamp(10px,1.3vw,13px);
   margin:0;
-  padding:clamp(28px,3.8vw,48px) calc(var(--scale) - var(--tick)) 0 0;
+  min-width:0;
 }
-#markets .board__list > .board__grp:first-child{padding-top:0}
 #markets .board__tag{
   flex:0 0 auto;
   position:relative;top:-3px;                  /* the caps stand a hair above the line */
@@ -2970,41 +3012,43 @@ dl.pairs .cols{
   white-space:nowrap;
 }
 /* the level: an empty flex item takes its bottom edge as its baseline,
-   so the rule runs on the tag's baseline, from the tag to the tick */
+   so the rule runs on the tag's baseline, from the tag across the scale */
 #markets .board__lvl{
   flex:1 1 auto;
   align-self:baseline;
   display:block;
   height:1px;
+  margin-right:calc(-1 * var(--over));
   background:var(--level);
   transform-origin:left center;
   pointer-events:none;
 }
 
-/* ---- a row: the name, its code, the numeral on the scale, one baseline */
+/* ---- a row: the name at the left edge; the code and the numeral
+   right-aligned against the scale; one baseline ------------------------ */
 #markets .board__row{
   position:relative;
   display:flex;align-items:baseline;
   gap:0;
   margin:0;
-  padding:clamp(9px,1.25vw,13px) 0 clamp(10px,1.35vw,14px);
+  padding:clamp(11px,1.1vw,14px) var(--pad-r) 0 0;
   min-width:0;
 }
 /* the level under the row: to the scale, and across it by the tick */
 #markets .board__row::after{
   content:"";
-  position:absolute;left:0;right:calc(var(--scale) - var(--tick));bottom:0;
+  position:absolute;left:0;right:calc(-1 * var(--over));bottom:0;
   height:1px;
   background:var(--rule);
   transform-origin:left center;
   pointer-events:none;
 }
-/* the band: a layer under the row, past the text by the bleed and short
-   of the scale, so its transition never touches the row's own */
+/* the band: a layer under the row, past the text by the bleed and up to
+   the scale, so its transition never touches the row's own */
 #markets .board__row::before{
   content:"";
   position:absolute;top:0;bottom:0;
-  left:calc(-1 * var(--bleed));right:var(--scale);
+  left:calc(-1 * var(--bleed));right:0;
   z-index:-1;
   background:rgba(215,179,100,0);
   box-shadow:inset 0 1px 0 rgba(215,179,100,0),inset 0 -1px 0 rgba(215,179,100,0);
@@ -3019,34 +3063,33 @@ dl.pairs .cols{
   line-height:var(--lh-tight);
   letter-spacing:-.012em;
   color:var(--ink-1);
+  white-space:nowrap;
   transition:color var(--d) var(--e-out);
 }
-/* the code: the mono at caption size after the name, on its baseline */
-#markets .board__tick{
+/* the code and the numeral: the one mono, caption size, one column on
+   the scale -- the code in the reading ink, the numeral in the label grey */
+#markets .board__code,#markets .board__n{
   flex:0 0 auto;
-  margin-left:clamp(12px,1.6vw,18px);
   font-family:var(--f-mono);
   font-size:var(--t-caption);
   font-weight:400;
   letter-spacing:var(--trk-mono);
-  line-height:1;
-  color:var(--ink-2);
-  transition:color var(--d) var(--e-out);
-}
-/* the numeral: on the scale, just after the tick, the mono in the label grey */
-#markets .board__n{
-  flex:0 0 var(--scale);
-  margin-left:auto;
-  padding-left:calc(var(--tick) + 9px);
-  text-align:left;
-  font-family:var(--f-mono);
-  font-size:var(--t-caption);
-  letter-spacing:var(--trk-mono);
   font-variant-numeric:tabular-nums;
   line-height:1;
-  color:var(--ink-4);
+  white-space:nowrap;
   transition:color var(--d) var(--e-out);
 }
+#markets .board__code{
+  margin-left:auto;
+  padding-left:clamp(12px,1.6vw,18px);
+  color:var(--ink-2);
+}
+#markets .board__n{
+  margin-left:clamp(12px,1.4vw,16px);
+  min-width:2ch;text-align:right;
+  color:var(--ink-4);
+}
+#markets .board__name + .board__n{margin-left:auto;padding-left:clamp(12px,1.6vw,18px)}
 
 /* ---- the lit row, and the others a step back ---------------------------- */
 @media (hover:hover){
@@ -3055,14 +3098,14 @@ dl.pairs .cols{
     box-shadow:inset 0 1px 0 var(--band-edge),inset 0 -1px 0 var(--band-edge);
   }
   #markets .board__row:hover .board__name{color:var(--paper)}
-  #markets .board__row:hover .board__tick{color:var(--ink-1)}
+  #markets .board__row:hover .board__code{color:var(--ink-1)}
   #markets .board__row:hover .board__n{color:var(--ink-2)}
   #markets .board__list:has(.board__row:hover) .board__row:not(:hover) .board__name{color:var(--ink-2)}
 }
 
 /* ---- arrival: the ink draws, never opacity, so a probe sees every rule
-   at once. The axis draws top to bottom from the first beat; each level
-   draws itself to the scale in its row's own slot of the stagger. */
+   at once. The scales draw top to bottom from the first beat; each level
+   draws itself to its scale in its row's own slot of the stagger. */
 .js #markets .board__axis.reveal{
   opacity:1;
   transform:scaleY(0);transform-origin:top center;
@@ -3083,12 +3126,11 @@ dl.pairs .cols{
 }
 
 /* ---- the caption: the figure's name in caps, its note in the serif,
-   one row hung on the board's left edge, its measure ending at the axis */
+   one row hung on the board's left edge */
 #markets .board__cap{
   display:flex;flex-wrap:wrap;align-items:baseline;
   gap:2px clamp(14px,1.6vw,22px);
   margin-top:clamp(12px,1.6vw,16px);
-  padding-right:var(--scale);
   font-family:var(--f-display);
   line-height:1.5;
 }
@@ -3136,16 +3178,27 @@ dl.pairs .cols{
 @media (prefers-reduced-motion:reduce){
   .js #markets .board__axis.reveal{transform:none;transition:none}
   .js #markets .board__row::after,.js #markets .board__grp .board__lvl{transform:none;transition:none}
-  #markets .board__row::before,#markets .board__name,#markets .board__tick,#markets .board__n{transition:none}
+  #markets .board__row::before,#markets .board__name,#markets .board__code,#markets .board__n{transition:none}
 }
 
-/* ---- a phone: the same board, smaller, with its scale ------------------ */
+/* ---- a phone: one panel at the column's width, the groups one under the
+   other in reading order, the same scale on the right --------------------- */
 @media (max-width:620px){
-  #markets .board{--scale:32px;--bleed:10px}
+  #markets .board{--row:56px;--bleed:10px;--pad-r:10px}
+  #markets .board__list{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-rows:auto;
+    grid-auto-rows:auto;
+    grid-auto-flow:row;
+    column-gap:0;
+  }
+  #markets .board__list > *{grid-column:1}
+  #markets .board__axis--a{display:none}
   #markets .board__grp{padding-top:clamp(24px,6.5vw,30px)}
-  #markets .board__row{padding:8px 0 9px}
-  #markets .board__tick{margin-left:10px}
-  #markets .board__cap{display:block;padding-right:0}
+  #markets .board__list > .board__grp:first-child{padding-top:0}
+  #markets .board__row{padding:9px var(--pad-r) 10px 0}
+  #markets .board__name{font-size:clamp(26px,7vw,30px)}
+  #markets .board__cap{display:block}
   #markets .board__title{display:block}
   #markets .board__note{display:block;margin-top:4px;max-width:none}
   #markets .live{margin-bottom:clamp(36px,9vw,48px)}
@@ -3955,114 +4008,72 @@ dl.pairs .cols{
 }
 
 /* ---- section:access ---- */
-/* ===== access: two levels =====
-   The two ways in, set as two credits on the reel's one axis -- not two
-   columns of a price table, and not a chart. Each tier is a level, drawn
-   with the page's own furniture and nothing more: in the label column,
-   from the content edge (where the group's rule starts) to the axis, a
-   hairline on the baseline of the tier's word -- the line the word stands
-   on -- tagged at the gutter the way every level on this reel is tagged
-   (the ledger above tags its two years the same way). The tag column is
-   one width, so both levels end on one vertical line against the gutter.
+/* ===== access: two paths on one line =====
+   The two ways in, set on one line: time, drawn left to right across the
+   strip the way the spread draws a session. Left of now the line is
+   solid -- what has been reached -- and stops on a dot: that is now. Right
+   of the dot it runs on dashed, the liquidity line of the opening schema
+   (3 on, 5 off, as the spread and the ledger draw it): a level drawn
+   ahead, not yet run through. From the dot a hairline falls down the page
+   and fades: the column line the later path hangs on, so the two paths
+   have two column lines -- the content edge and the line of now -- and
+   nothing floats. The two runs are one line: the open path's run fills
+   its column to the line, the later path's starts on it.
 
-   The open tier is a solid hairline: a level that has been reached, and
-   its tag is a step brighter, because now is nearer than later. The tier
-   that opens later is the dashed liquidity line of the opening schema (3
-   on, 5 off, as the spread and the ledger draw it): a level drawn ahead,
-   not yet run through. Point at that row and the level draws itself
-   solid, from the left, the way every rule on the page draws. Point at
-   the open row and a band develops under its level -- the gap of the
-   spread, two rules and the faint gold, a scale and never an opacity.
+   Each path is one column set the same way: the tag in the label voice
+   above its run, the one word at title size under it (one voice for both;
+   what ranks them is the line, the dot and the call), then what the path
+   holds as a short scale -- two rows on hairlines, the thing named in the
+   serif, what is counted in mono at the right end of the row where a level
+   is tagged on a price scale, the names under it at note size -- and the
+   link. Both links go to the same server, so both carry the arrow of the
+   bar: the open path's is the one call (the paper, the long rule), the
+   other the quiet link a step dimmer, in the ink of a level drawn ahead.
+   Point at a path and its run answers: under the solid run a band
+   develops (the gap of the spread, two rules and the faint gold, a scale
+   and never an opacity); the dashed run draws itself solid, from the
+   left, the way every rule on the page draws.
 
-   Right of the axis, with every other value: the tier's one word at
-   statement size, in one voice for both (nothing here ranks the two; the
-   level, the tag and the call do), one line under it, the link. The open
-   tier carries the one call of the screen, the other the page's quiet
-   link, both on one rule length. No price, no day, no count that is not
-   in the sentence. The levels are lines, not data, so they carry no
-   caption. .roll::before is the strip's edge, so the block sits above
-   it (z:2). */
+   The grid: two columns split at --now, four rows (tag, run, word, body);
+   a path is display:contents, so its four blocks sit in the shared rows
+   and the two tags, the two runs and the two words share their lines. The
+   line of now is the column boundary; the columns keep --cgap clear of
+   it. Nothing here is a price, a day, or a count that is not in the
+   sentence; the line is a line, not data, so it carries no caption.
+   .roll::before is the strip's edge, so the block sits above it (z:2). */
 #access{
-  --edge:clamp(18px,4vw,40px);            /* the roll's padding: the strip's edge is this far left */
-  --tag:calc(4.5em + 14px);               /* the tag column, one width: both levels end on one line */
-  --rows:clamp(40px,5vw,64px);            /* between the two tiers */
-  --level:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+  --now:56%;                              /* where now falls on the line: the column boundary */
+  --cgap:clamp(20px,3vw,30px);            /* what each column keeps clear of the line       */
+  --dot:6px;
+  --mark:clamp(120px,14vw,200px);         /* how far the line of now falls before it fades  */
+  --word:clamp(42px,5vw,72px);            /* the tier's one word                             */
+  --dash:repeating-linear-gradient(90deg,var(--line-4) 0 3px,transparent 3px 8px);
+  --band:rgba(215,179,100,.07);
 }
 
-#access .levels{position:relative;z-index:2;margin:0}
-
-/* a tier is one credit row on the reel's axis, aligned on its baseline */
-#access .level{
+#access .paths{
+  position:relative;z-index:2;
   display:grid;
-  grid-template-columns:var(--axis-l) var(--axis-r);
-  column-gap:var(--axis-gap);
-  align-items:baseline;
-  min-width:0;
+  grid-template-columns:var(--now) calc(100% - var(--now));
+  grid-template-rows:auto auto auto auto;
+  align-items:start;
+  margin:clamp(6px,1vw,12px) 0 0;
 }
-#access .level + .level{margin-top:var(--rows)}
+#access .path{display:contents}
 
-/* the scale: the level and its tag on one baseline, the level taking
-   whatever the tag leaves, from the content edge to the tag column */
-#access .level__scale{
-  grid-column:1;grid-row:1;
-  display:flex;align-items:baseline;
-  min-width:0;
-  margin:0;
-  font-family:var(--f-display);
-  font-size:var(--t-micro);
-  line-height:1.5;
-}
-/* a box with no text takes its bottom edge as its baseline, so the
-   hairline lies on the tag's baseline -- and on the word's, across the
-   gutter. The gold's alpha is in the token, never an opacity, so a probe
-   sees the level as fully there. */
-#access .lvl{
-  position:relative;
-  flex:1 1 auto;
-  min-width:0;
-  height:1px;
-  align-self:baseline;
-  font-size:var(--t-micro);
-}
-#access .lvl--now{background:var(--line-3)}
-/* the band under the open level: the gap of the spread, folded flat
-   until the row is pointed at (or its link focused), then it develops
-   downward from the level */
-#access .lvl--now::after{
-  content:"";
-  position:absolute;left:0;right:0;top:1px;
-  height:13px;
-  background:rgba(215,179,100,.07);
-  border-bottom:1px solid var(--line-2);
-  transform:scaleY(0);transform-origin:top center;
-  transition:transform var(--d-slow) var(--e-out);
-  pointer-events:none;
-}
-/* the later level: the dash of the liquidity lines; the solid line over
-   it is drawn back to nothing and draws itself on the row's hover or the
-   link's focus */
-#access .lvl--later{background:var(--level)}
-#access .lvl--later::after{
-  content:"";
-  position:absolute;inset:0;
-  background:var(--line-4);
-  transform:scaleX(0);transform-origin:left center;
-  transition:transform var(--d-slow) var(--e-out);
-  pointer-events:none;
-}
-@media (hover:hover){
-  #access .level--now:hover .lvl--now::after{transform:none}
-  #access .level--later:hover .lvl--later::after{transform:none}
-}
-#access .level--now:focus-within .lvl--now::after{transform:none}
-#access .level--later:focus-within .lvl--later::after{transform:none}
+/* the four rows, and which column each path's blocks take */
+#access .path__tag{grid-row:1}
+#access .path__run{grid-row:2}
+#access .path__word{grid-row:3}
+#access .path__body{grid-row:4}
+#access .path--now .path__tag,#access .path--now .path__word,#access .path--now .path__body{grid-column:1;padding-right:var(--cgap)}
+#access .path--later .path__tag,#access .path--later .path__word,#access .path--later .path__body{grid-column:2;padding-left:var(--cgap)}
+#access .path--now .path__run{grid-column:1}
+#access .path--later .path__run{grid-column:2}
 
-/* the tag: the label voice, on the level's right end at the gutter */
-#access .level__tag{
-  flex:0 0 auto;
-  width:var(--tag);
-  padding-left:14px;
-  text-align:right;
+/* ---- the tag: the label voice, above the run's left end ---- */
+#access .path__tag{
+  margin:0 0 12px;
   font-family:var(--f-display);
   font-size:var(--t-micro);
   letter-spacing:var(--trk-caps);
@@ -4071,60 +4082,195 @@ dl.pairs .cols{
   color:var(--ink-4);
   white-space:nowrap;
 }
-#access .level--now .level__tag{color:var(--ink-2)}
+#access .path--now .path__tag{color:var(--ink-2)}   /* now is nearer than later */
 
-/* the credit: the value column, at statement size, one voice for both */
-#access .level__body{grid-column:2;grid-row:1;min-width:0;margin:0}
-#access .level__value{
+/* ---- the line ----
+   A box with no text; the gold's alpha is in the token, never an opacity,
+   so a probe sees the line as fully there. The open run is solid and
+   carries the dot at its tip (a child, so while the run draws itself the
+   dot rides the pen); the later run is the dash. */
+#access .path__run{
+  position:relative;
+  display:block;
+  height:1px;
   margin:0;
+}
+#access .path--now .path__run{background:var(--line-4)}
+#access .path--later .path__run{background:var(--dash)}
+#access .path__dot{
+  position:absolute;
+  right:calc(-1 * var(--dot) / 2);
+  top:calc(50% - var(--dot) / 2);
+  width:var(--dot);height:var(--dot);
+  border-radius:50%;                      /* the one round thing on the page: a point, not a corner */
+  background:var(--gold);
+}
+/* the band under the open run: the gap of the spread, folded flat until
+   the path is pointed at (or its link focused), then it develops downward
+   from the line */
+#access .path--now .path__run::after{
+  content:"";
+  position:absolute;left:0;right:0;top:1px;
+  height:14px;
+  background:var(--band);
+  border-bottom:1px solid var(--line-2);
+  transform:scaleY(0);transform-origin:top center;
+  transition:transform var(--d-slow) var(--e-out);
+  pointer-events:none;
+}
+/* the solid line over the dash: drawn back to nothing, it draws itself
+   on the later path's hover or its link's focus */
+#access .path--later .path__run::after{
+  content:"";
+  position:absolute;inset:0;
+  background:var(--line-4);
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform var(--d-slow) var(--e-out);
+  pointer-events:none;
+}
+@media (hover:hover){
+  #access .path--now:hover .path__run::after{transform:none}
+  #access .path--later:hover .path__run::after{transform:none}
+}
+#access .path--now:focus-within .path__run::after{transform:none}
+#access .path--later:focus-within .path__run::after{transform:none}
+
+/* ---- the line of now ----
+   From the dot, down the column boundary, fading: placed in the later
+   run's grid area (an absolutely positioned grid item takes its area as
+   its containing block), so it costs the row no height. */
+#access .path__mark{
+  position:absolute;
+  grid-column:2;grid-row:2;
+  left:0;top:0;
+  width:1px;height:var(--mark);
+  background:linear-gradient(180deg,var(--line-3),rgba(215,179,100,0));
+  pointer-events:none;
+}
+
+/* ---- the word: title size, one voice for both ---- */
+#access .path__word{
+  margin:clamp(22px,3vw,36px) 0 0;
   font-family:var(--f-display);
-  font-size:var(--t-h2);
+  font-size:var(--word);
   font-weight:400;
-  font-style:normal;
-  line-height:var(--lh-tight);
-  letter-spacing:-.012em;
+  line-height:1;
+  letter-spacing:-.018em;
   color:var(--ink-1);
   text-wrap:balance;
 }
-#access .level__note{
-  margin:clamp(10px,1.4vw,14px) 0 0;
-  max-width:38ch;
-  font-size:var(--t-body);
+#access .path__word .mask{display:block}
+#access .path__word .mask > span{display:block}
+
+/* ---- the scale: two rows on hairlines ----
+   The thing named in the serif at credit size; what is counted in mono at
+   the right end of the row (a count, not an ordinal, so no leading zero);
+   the names under it at note size. A value that is not a count is set in
+   the label voice, where the mono would be. */
+#access .path__body{margin-top:clamp(24px,3.2vw,40px)}
+#access .rows{
+  list-style:none;margin:0;padding:0;
+  border-bottom:1px solid var(--line-2);
+}
+#access .row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  column-gap:16px;
+  align-items:baseline;
+  padding:clamp(12px,1.5vw,16px) 0 clamp(13px,1.6vw,17px);
+  border-top:1px solid var(--line-2);
+}
+#access .row__t{
+  grid-column:1;grid-row:1;
+  min-width:0;
+  font-family:var(--f-display);
+  font-size:clamp(19px,1.7vw,24px);
+  line-height:1.25;
+  letter-spacing:-.006em;
+  color:var(--ink-1);
+}
+#access .row__n{
+  grid-column:2;grid-row:1;
+  font-family:var(--f-mono);
+  font-weight:400;
+  font-size:var(--t-small);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:var(--trk-mono);
+  color:var(--ink-3);
+  text-align:right;
+}
+#access .row__v{
+  grid-column:2;grid-row:1;
+  font-family:var(--f-display);
+  font-size:var(--t-micro);
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
   line-height:1.5;
   color:var(--ink-3);
+  text-align:right;
+  white-space:nowrap;
+}
+#access .row__s{
+  grid-column:1 / -1;grid-row:2;
+  display:block;
+  margin-top:5px;
+  max-width:44ch;
+  font-family:var(--f-display);
+  font-size:var(--t-small);
+  line-height:1.55;
+  letter-spacing:0;
+  color:var(--ink-4);
   text-wrap:pretty;
 }
-/* the two links on one rule length: the quiet one takes the call's. The
-   line and the link sit under the word at the distances the Live block
-   above uses for the same three things. */
-#access .level__body .cta{--rule:clamp(22px,3vw,36px);margin-top:clamp(18px,2.6vw,28px)}
+/* a channel's name never breaks at its hyphen, and the dot between two
+   names stays with the name before it (a no-break space in the markup) */
+#access .ch{white-space:nowrap}
+
+/* ---- the links: one construction, two weights, both with the arrow ----
+   Both go to the server, so both carry the arrow of the bar; the quiet one
+   takes the call's rule length, and sits a step dimmer, in the ink of the
+   level drawn ahead, until it is pointed at. */
+#access .path__body .cta{--rule:clamp(22px,3vw,36px);margin-top:clamp(20px,2.6vw,30px)}
+#access .path--later .cta::after{display:block}
+#access .path--later .cta{color:var(--ink-2)}
+#access .path--later .cta::before,#access .path--later .cta::after{background:var(--line-4)}
+#access .path--later .cta:hover,#access .path--later .cta:focus-visible{color:var(--gold-hi)}
+#access .path--later .cta:hover::before,#access .path--later .cta:focus-visible::before,
+#access .path--later .cta:hover::after,#access .path--later .cta:focus-visible::after{background:var(--gold)}
+#access .path--later .cta:hover::after{transform:translate(2px,-2px)}
+
+/* ---- motion ----
+   The runs draw themselves (the page's .draw), the dot riding the open
+   run's tip; the line of now falls from the dot (a clip, never an
+   opacity); the words rise from under their line (the page's .mask); the
+   bodies settle. Under .js only, and only until motion.js has run. */
+.js #access .path__mark.reveal{
+  opacity:1;transform:none;
+  clip-path:inset(0 0 100% 0);
+  transition:clip-path calc(var(--d-reveal) * 1.1) var(--e-reveal);
+}
+.js #access .path__mark.reveal.is-in{clip-path:inset(0)}
 
 @media (prefers-reduced-motion:reduce){
-  #access .lvl--now::after,#access .lvl--later::after{transition:none}
+  #access .path--now .path__run::after,#access .path--later .path__run::after{transition:none}
+  .js #access .path__mark.reveal{clip-path:none;transition:none}
 }
 
-/* a phone: the credits centre, so each tier centres with them the way
-   the ledger's ticks do -- the tag between two halves of its level,
-   which run from one edge of the screen to the other (the strip has no
-   edges here), and the word, the line and the link centred under it.
-   The level is simply there (no draw: it is two halves); the hover
-   states go with the pointer. */
-@media (max-width:620px){
-  #access .level{display:block;text-align:center}
-  #access .level + .level{margin-top:clamp(40px,10vw,52px)}
-  #access .level__scale{
-    justify-content:center;
-    margin:0 calc(-1 * var(--edge));
-  }
-  #access .lvl{flex:1 1 0}
-  #access .level__scale::after{content:"";flex:1 1 0;height:1px;align-self:baseline}
-  #access .level--now .level__scale::after{background:var(--line-3)}
-  #access .level--later .level__scale::after{background:var(--level)}
-  #access .lvl--now::after,#access .lvl--later::after{display:none}
-  .js #access .lvl.draw{transform:none;transition:none}
-  #access .level__tag{width:auto;padding:0 16px;text-align:center}
-  #access .level__body{margin-top:clamp(10px,3vw,14px)}
-  #access .level__note{margin-left:auto;margin-right:auto;max-width:34ch}
+/* ---- narrower: the two paths stack, each under its own stretch of the
+   line, the open run ending on the dot at the column's edge, the later
+   run dashed from edge to edge; the line of now has no column to fall
+   down, so it is not drawn. Left-aligned, as the markets list is. ---- */
+@media (max-width:760px){
+  #access .paths{display:block}
+  #access .path{display:block}
+  #access .path + .path{margin-top:clamp(52px,12vw,72px)}
+  #access .path--now .path__tag,#access .path--now .path__word,#access .path--now .path__body{padding-right:0}
+  #access .path--later .path__tag,#access .path--later .path__word,#access .path--later .path__body{padding-left:0}
+  #access .path__dot{right:0}
+  #access .path__mark{display:none}
+  #access .path__word{margin-top:clamp(18px,4.5vw,28px)}
+  #access .path__body{margin-top:clamp(22px,5vw,32px)}
+  #access .row__s{max-width:none}
 }
 
 /* ---- section:closer ---- */
@@ -4447,11 +4593,11 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   footer .fnav a,footer .fnav a::before,footer .fnav a::after{transition:none}
 }
 
-/* where the risk line no longer fits one line beside the clock it wraps
-   as prose, at the full measure of its column (pretty: no line is one
-   word), and the two paragraphs stand a little further apart so each
-   still reads as its own line */
-@media (max-width:1023px){
+/* where the risk line no longer fits one line beside the clock (under
+   1100 it wraps) it wraps as prose, at the full measure of its column
+   (pretty: no line is one word), and the two paragraphs stand a little
+   further apart so each still reads as its own line */
+@media (max-width:1099px){
   footer .legal p + p{margin-top:8px}
 }
 /* a phone: the two lines run the whole column, a size under the note,
@@ -4463,7 +4609,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   footer .fnav{padding-top:0}             /* under the signature, not beside it */
   footer .fbase{display:block}
   footer .legal{max-width:none}
-  footer .legal p{font-size:13px;line-height:1.65;letter-spacing:.012em}
+  footer .legal p{font-size:12.75px;line-height:1.65;letter-spacing:0}
   footer .ftime{padding-top:0;margin-top:clamp(24px,6vw,32px)}
 }
 
@@ -4763,41 +4909,46 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <section id="founder">
   <div class="grp"><h2><span lang="nl">Hoofdrol</span><span lang="en">Starring</span></h2></div>
 
-  <!-- One row on the reel's shared axis (base.css: --axis-l / --axis-r),
-       read as one credit. Left of the axis, in the label column, the
-       numeral "10+" is the tag of a level: from its right side the dashed
-       hairline of the opening plate's liquidity line runs along its
-       baseline across the gutter and ends where the words begin. Right of
-       the axis, in the value column, the founder's own words at pull-quote
-       size, their first line standing on that same baseline, and under
-       them the signature on a short rule of the gold. Under the numeral,
-       on its own left edge, what the numeral counts -- "jaar actief in
-       trading" -- and his own account of those years, cut from his first
-       sentence and not rewritten. One number, no instrument, no date: a
-       schema, not a chart. The plus is decoration for the eye; the words
-       carry the fact. NL as on the page; EN is the official text,
-       verbatim. The whole row is one reveal sequence. -->
-  <div class="role" data-stagger="120">
-    <div class="ten">
-      <p class="ten__row">
-        <span class="mask"><span class="ten__num reveal" data-at="0">10<span class="ten__plus" aria-hidden="true">+</span></span></span>
-        <i class="ten__lvl reveal wipe" data-at="160" aria-hidden="true"></i>
-      </p>
-      <p class="ten__words reveal" data-at="360"><span lang="nl">jaar actief in trading</span><span lang="en">years active in trading</span></p>
-      <p class="ten__sub reveal" data-at="480"><span lang="nl">winst, verlies, fouten, groei en vooral heel veel lessen</span><span lang="en">wins, losses, mistakes, growth, and a lot of lessons</span></p>
-    </div>
+  <!-- Two beats, both on the column line. There is no portrait and no
+       name, so the numeral is the portrait: "10+" set at the size of a
+       plate, flush left, the plus a designed superior tucked against the
+       0 with its top on the cap line. The numeral stands on a level -- the
+       dashed hairline of the opening plate's liquidity line -- that runs
+       out of the plus along the baseline and ends, a dash short, at what
+       the numeral counts: "jaar actief in trading", standing on the same
+       line at credit size, with his own account of those years under it
+       (cut from his first sentence, never rewritten). The level leads
+       from the number to its unit on every width; it never runs to an
+       edge. One number, no instrument, no date: a schema, not a chart.
 
-    <figure class="word">
-      <blockquote class="reveal" data-at="300"><p>
-        <span lang="nl">&#8220;Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten
-        zien hoe ik de markten dagelijks benader. Geen <span class="nb">snelle-rijk-verhalen</span>, maar echte setups,
-        educatie en een community die samen beter wil worden.&#8221;</span><span lang="en">&#8220;I built Atlas Capital to share that experience, bring traders together, and show how I
-        approach the markets on a daily basis. No <span class="nb">get-rich-quick</span> promises, just real setups,
-        education, and a community focused on improving together.&#8221;</span>
-      </p></blockquote>
-      <figcaption class="who reveal" data-at="900"><span lang="nl">de oprichter</span><span lang="en">the founder</span></figcaption>
-    </figure>
-  </div>
+       The second beat is the founder's own words: a short rule of the
+       gold, the quote at pull-quote size on the column line at a measure
+       of forty-odd characters, and the signature under the last line --
+       the page's link construction, a rule of the gold then the words in
+       italic. NL as on the page; EN is the official text, verbatim.
+       Each beat is its own reveal sequence, so the words come in when
+       the reader reaches them and not while the numeral is still
+       arriving. -->
+  <p class="ten" data-stagger="120">
+    <span class="mask"><span class="ten__num reveal" data-at="0">10<span class="ten__plus">+</span></span></span>
+    <i class="ten__lvl reveal wipe" data-at="140" aria-hidden="true"></i>
+    <span class="ten__what">
+      <span class="ten__words reveal" data-at="320"><span lang="nl">jaar actief in trading</span><span lang="en">years active in trading</span></span>
+      <span class="ten__sub reveal" data-at="420"><span lang="nl">winst, verlies, fouten, groei en vooral heel veel lessen</span><span lang="en">wins, losses, mistakes, growth, and a lot of lessons</span></span>
+    </span>
+  </p>
+
+  <figure class="word" data-stagger="140">
+    <i class="hair reveal draw" data-at="0" aria-hidden="true"></i>
+    <blockquote class="reveal" data-at="120"><p>
+      <span lang="nl">&#8220;Atlas Capital heb ik gebouwd om die ervaring te delen, traders samen te brengen en te laten
+      zien hoe ik de markten dagelijks benader. Geen <span class="nb">snelle-rijk-verhalen</span>, maar echte setups,
+      educatie en een community die samen beter wil worden.&#8221;</span><span lang="en">&#8220;I built Atlas Capital to share that experience, bring traders together, and show how I
+      approach the markets on a daily basis. No <span class="nb">get-rich-quick</span> promises, just real setups,
+      education, and a community focused on improving together.&#8221;</span>
+    </p></blockquote>
+    <figcaption class="who reveal" data-at="420"><span lang="nl">de oprichter</span><span lang="en">the founder</span></figcaption>
+  </figure>
 </section>
 <!-- /section:founder -->
 
@@ -5299,30 +5450,34 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <section id="markets">
   <div class="grp"><h2><span lang="nl">Markten</span><span lang="en">Markets</span></h2></div>
 
-  <!-- The board, drawn as a price scale. Eight instruments, one per row,
-       the name in the serif on the strip's left edge and, where the client
-       gave one, its code after the name in the mono, the way a role follows
-       a name. On the right a scale: a vertical hairline the height of the
-       board, and every row's rule runs to it and ticks across it, with the
-       row's numeral on the scale -- so every row ends the same way and the
-       eight sit like the levels of a price scale. The four groups are
-       levels of their own: the group's name is the tag at the left end and
-       a heavier rule of the gold runs from it to the scale, against the
-       faint rules between rows. No price, no change: the numerals count
-       the rows and nothing else, and the caption says so. A figure whose
-       content is a dl (the term is the group, the descriptions are its
-       instruments); the scale is decoration. -->
+  <!-- The board: two panels side by side, each a price scale. Eight
+       instruments in four groups, read as a board is read -- the two
+       upper groups, then the two lower: Indices and Metalen on the top
+       line, Energie and Crypto under them -- so the two panels hold four
+       rows each and end on one line. A row is the name in the serif on
+       the panel's left edge and, right-aligned against the panel's scale
+       in the one mono, its code where the client gave one (NQ, ES,
+       XAUUSD) and the row's numeral: so every row ends the same way, in
+       the same column, and the rules enclose a line of content. A group
+       is a level of its own: its name the tag at the left end and a
+       heavier rule of the gold running to the scale. No price, no
+       change: the numerals count the rows and nothing else, and the
+       caption says so. A figure whose content is a dl (the term is the
+       group, the descriptions its instruments); the two scales are
+       decoration. The markup is the reading order; markets.css places
+       each term and description on its panel. -->
   <figure class="board" data-stagger="70">
     <div class="board__sheet">
-      <i class="board__axis reveal" data-at="0" aria-hidden="true"></i>
+      <i class="board__axis board__axis--a reveal" data-at="0" aria-hidden="true"></i>
+      <i class="board__axis board__axis--b reveal" data-at="0" aria-hidden="true"></i>
       <dl class="board__list">
         <dt class="board__grp reveal"><span class="board__tag">Indices</span><i class="board__lvl" aria-hidden="true"></i></dt>
-        <dd class="board__row reveal"><span class="board__name">Nasdaq</span><b class="board__tick">NQ</b><span class="board__n" aria-hidden="true">01</span></dd>
-        <dd class="board__row reveal"><span class="board__name">S&amp;P&nbsp;500</span><b class="board__tick">ES</b><span class="board__n" aria-hidden="true">02</span></dd>
+        <dd class="board__row reveal"><span class="board__name">Nasdaq</span><span class="board__code">NQ</span><span class="board__n" aria-hidden="true">01</span></dd>
+        <dd class="board__row reveal"><span class="board__name">S&amp;P&nbsp;500</span><span class="board__code">ES</span><span class="board__n" aria-hidden="true">02</span></dd>
         <dd class="board__row reveal"><span class="board__name">Dow Jones</span><span class="board__n" aria-hidden="true">03</span></dd>
 
         <dt class="board__grp reveal"><span class="board__tag"><span lang="nl">Metalen</span><span lang="en">Metals</span></span><i class="board__lvl" aria-hidden="true"></i></dt>
-        <dd class="board__row reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><b class="board__tick">XAUUSD</b><span class="board__n" aria-hidden="true">04</span></dd>
+        <dd class="board__row reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><span class="board__code">XAUUSD</span><span class="board__n" aria-hidden="true">04</span></dd>
         <dd class="board__row reveal"><span class="board__name"><span lang="nl">Zilver</span><span lang="en">Silver</span></span><span class="board__n" aria-hidden="true">05</span></dd>
 
         <dt class="board__grp reveal"><span class="board__tag"><span lang="nl">Energie</span><span lang="en">Energy</span></span><i class="board__lvl" aria-hidden="true"></i></dt>
@@ -5886,7 +6041,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
           <li class="row">
             <span class="row__t"><span lang="nl">Negen open kanalen</span><span lang="en">Nine open channels</span></span>
             <b class="row__n">9</b>
-            <small class="row__s">#nq-chart-idee&euml;n &middot; #es-chart-idee&euml;n &middot; #bitcoin &middot; #altcoins &middot; #markt &middot; #vragen &middot; #algemeen &middot; #atlas-op-socials &middot; #ondersteuning</small>
+            <small class="row__s row__s--names"><span class="ch">#nq-chart-idee&euml;n</span>&nbsp;&middot; <span class="ch">#es-chart-idee&euml;n</span>&nbsp;&middot; <span class="ch">#bitcoin</span>&nbsp;&middot; <span class="ch">#altcoins</span>&nbsp;&middot; <span class="ch">#markt</span>&nbsp;&middot; <span class="ch">#vragen</span>&nbsp;&middot; <span class="ch">#algemeen</span>&nbsp;&middot; <span class="ch">#atlas-op-socials</span>&nbsp;&middot; <span class="ch">#ondersteuning</span></small>
           </li>
           <li class="row">
             <span class="row__t"><span lang="nl">De educatie</span><span lang="en">The teaching</span></span>
@@ -5908,7 +6063,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
           <li class="row">
             <span class="row__t"><span lang="nl">Zes kanalen erbij</span><span lang="en">Six more channels</span></span>
             <b class="row__n">6</b>
-            <small class="row__s">#trade-setups &middot; #marktupdates &middot; #indicatoren &middot; #sessie-opnames &middot; #chart-idee&euml;n &middot; #premium-chat</small>
+            <small class="row__s row__s--names"><span class="ch">#trade-setups</span>&nbsp;&middot; <span class="ch">#marktupdates</span>&nbsp;&middot; <span class="ch">#indicatoren</span>&nbsp;&middot; <span class="ch">#sessie-opnames</span>&nbsp;&middot; <span class="ch">#chart-idee&euml;n</span>&nbsp;&middot; <span class="ch">#premium-chat</span></small>
           </li>
           <li class="row">
             <span class="row__t"><span lang="nl">Prijs en datum</span><span lang="en">Price and date</span></span>

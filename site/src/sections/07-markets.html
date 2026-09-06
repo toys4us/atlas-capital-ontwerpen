@@ -1,30 +1,34 @@
 <section id="markets">
   <div class="grp"><h2><span lang="nl">Markten</span><span lang="en">Markets</span></h2></div>
 
-  <!-- The board, drawn as a price scale. Eight instruments, one per row,
-       the name in the serif on the strip's left edge and, where the client
-       gave one, its code after the name in the mono, the way a role follows
-       a name. On the right a scale: a vertical hairline the height of the
-       board, and every row's rule runs to it and ticks across it, with the
-       row's numeral on the scale -- so every row ends the same way and the
-       eight sit like the levels of a price scale. The four groups are
-       levels of their own: the group's name is the tag at the left end and
-       a heavier rule of the gold runs from it to the scale, against the
-       faint rules between rows. No price, no change: the numerals count
-       the rows and nothing else, and the caption says so. A figure whose
-       content is a dl (the term is the group, the descriptions are its
-       instruments); the scale is decoration. -->
+  <!-- The board: two panels side by side, each a price scale. Eight
+       instruments in four groups, read as a board is read -- the two
+       upper groups, then the two lower: Indices and Metalen on the top
+       line, Energie and Crypto under them -- so the two panels hold four
+       rows each and end on one line. A row is the name in the serif on
+       the panel's left edge and, right-aligned against the panel's scale
+       in the one mono, its code where the client gave one (NQ, ES,
+       XAUUSD) and the row's numeral: so every row ends the same way, in
+       the same column, and the rules enclose a line of content. A group
+       is a level of its own: its name the tag at the left end and a
+       heavier rule of the gold running to the scale. No price, no
+       change: the numerals count the rows and nothing else, and the
+       caption says so. A figure whose content is a dl (the term is the
+       group, the descriptions its instruments); the two scales are
+       decoration. The markup is the reading order; markets.css places
+       each term and description on its panel. -->
   <figure class="board" data-stagger="70">
     <div class="board__sheet">
-      <i class="board__axis reveal" data-at="0" aria-hidden="true"></i>
+      <i class="board__axis board__axis--a reveal" data-at="0" aria-hidden="true"></i>
+      <i class="board__axis board__axis--b reveal" data-at="0" aria-hidden="true"></i>
       <dl class="board__list">
         <dt class="board__grp reveal"><span class="board__tag">Indices</span><i class="board__lvl" aria-hidden="true"></i></dt>
-        <dd class="board__row reveal"><span class="board__name">Nasdaq</span><b class="board__tick">NQ</b><span class="board__n" aria-hidden="true">01</span></dd>
-        <dd class="board__row reveal"><span class="board__name">S&amp;P&nbsp;500</span><b class="board__tick">ES</b><span class="board__n" aria-hidden="true">02</span></dd>
+        <dd class="board__row reveal"><span class="board__name">Nasdaq</span><span class="board__code">NQ</span><span class="board__n" aria-hidden="true">01</span></dd>
+        <dd class="board__row reveal"><span class="board__name">S&amp;P&nbsp;500</span><span class="board__code">ES</span><span class="board__n" aria-hidden="true">02</span></dd>
         <dd class="board__row reveal"><span class="board__name">Dow Jones</span><span class="board__n" aria-hidden="true">03</span></dd>
 
         <dt class="board__grp reveal"><span class="board__tag"><span lang="nl">Metalen</span><span lang="en">Metals</span></span><i class="board__lvl" aria-hidden="true"></i></dt>
-        <dd class="board__row reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><b class="board__tick">XAUUSD</b><span class="board__n" aria-hidden="true">04</span></dd>
+        <dd class="board__row reveal"><span class="board__name"><span lang="nl">Goud</span><span lang="en">Gold</span></span><span class="board__code">XAUUSD</span><span class="board__n" aria-hidden="true">04</span></dd>
         <dd class="board__row reveal"><span class="board__name"><span lang="nl">Zilver</span><span lang="en">Silver</span></span><span class="board__n" aria-hidden="true">05</span></dd>
 
         <dt class="board__grp reveal"><span class="board__tag"><span lang="nl">Energie</span><span lang="en">Energy</span></span><i class="board__lvl" aria-hidden="true"></i></dt>
