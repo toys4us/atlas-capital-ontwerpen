@@ -183,111 +183,200 @@
   #trackrecord .ledger__axis::after{content:"";flex:1 1 auto;min-width:16px;height:1px;background:var(--line-3)}
 }
 
-/* ---------- the evidence -------------------------------------------------- */
-/* the caption of the wall, hung on its left edge: the title in the label
-   voice, the note in the serif at note size, one row -- as the spread
-   captions its plate */
-#trackrecord .proofs-hint{
-  position:relative;z-index:2;
-  display:flex;flex-wrap:wrap;align-items:baseline;
-  gap:2px clamp(14px,1.6vw,22px);
-  margin:clamp(52px,7vw,88px) 0 clamp(14px,1.8vw,20px);
+/* ---------- the exhibit -------------------------------------------------- */
+/* the head: the exhibit named in the label voice on the print's left
+   edge, and on its right edge, in the mono of everything counted, which
+   of the six is in the print */
+#trackrecord .exhibit{position:relative;z-index:2;margin:clamp(52px,7vw,88px) 0 0}
+#trackrecord .exhibit__head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:clamp(14px,1.6vw,22px);
+  margin:0 0 clamp(14px,1.8vw,20px);
   font-family:var(--f-display);
-  line-height:1.5;
-}
-#trackrecord .proofs-hint__t{
-  flex:0 0 auto;
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
+  line-height:1.5;
   color:var(--ink-1);
 }
-#trackrecord .proofs-hint__n{
-  flex:1 1 20ch;min-width:0;
-  font-size:var(--t-small);color:var(--ink-3);
-  text-wrap:pretty;
+#trackrecord .exhibit__count{
+  flex:0 0 auto;
+  display:inline-flex;align-items:baseline;gap:.55em;
+  font-family:var(--f-mono);font-weight:400;font-size:var(--t-caption);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:var(--trk-mono);text-transform:none;
+  color:var(--ink-4);
 }
-/* two to a row, as the wall above prints its pairs; the row of the two
-   square files is a pair of squares, the others 3:2, so a row is level */
-#trackrecord .proofs{
-  position:relative;z-index:2;
-  display:grid;
-  gap:clamp(26px,3.6vw,40px) clamp(12px,2vw,20px);
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  align-items:start;
-}
-#trackrecord .proofs figure{margin:0;min-width:0}
-/* the plate: the file at full value in its own colour, on one mat inside
-   one hairline of the gold. The whole figure is the hover target, so
-   pointing at a caption lights its plate: the mat warms to the gold of
-   the spread's zones -- the band, not the line -- and the frame comes up
-   a step. The hover transition waits until the reveal has run: an
-   id-scoped transition would outrank the .wipe's own and the plate would
-   snap on instead of printing on. */
-#trackrecord .tile{
+#trackrecord .exhibit__count b{font-weight:400;color:var(--ink-2)}
+
+/* the print: the file at full value in its own colour, on one mat inside
+   one hairline of the gold, the width of the strip, as the plates above
+   are hung. A link to the file, so the original is one tap away with or
+   without a script (with one, the tap opens the lightbox). Pointed at,
+   the mat warms to the gold of the spread's zones -- the band, not the
+   line -- and the frame comes up a step. The hover transition waits
+   until the reveal has run: an id-scoped transition would outrank the
+   .wipe's own and the print would snap on instead of printing on. When
+   a chip swaps the file, the print prints on again from the left (the
+   spread's wipe, as an animation so it can run more than once) and the
+   label under it settles into place. */
+#trackrecord .print{margin:0;min-width:0}
+#trackrecord .print__plate{
   display:block;width:100%;margin:0;padding:var(--inset);
   border:1px solid var(--line-2);
   background:var(--mat);
+  color:inherit;
+  text-decoration:none;
   cursor:zoom-in;
 }
-#trackrecord .tile:not(.reveal){transition:border-color var(--d) var(--e-out),background-color var(--d-slow) var(--e-out)}
+#trackrecord .print__plate:not(.reveal){transition:border-color var(--d) var(--e-out),background-color var(--d-slow) var(--e-out)}
+#trackrecord .print__plate.is-print{animation:tr-print calc(var(--d-reveal) * 1.1) var(--e-reveal) both}
+#trackrecord .print__cap.is-print{animation:tr-settle var(--d-reveal) var(--e-reveal) both}
+@keyframes tr-print{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+@keyframes tr-settle{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 #trackrecord .pic{display:block;position:relative;width:100%;aspect-ratio:3/2;overflow:hidden}
-#trackrecord .proofs .sq .pic{aspect-ratio:1/1}
 #trackrecord .pic img{
   display:block;width:100%;height:100%;
   object-fit:contain;
 }
 @media (hover:hover){
-  #trackrecord .proofs figure:hover .tile{border-color:var(--line-4);background:rgba(215,179,100,.09)}
-  #trackrecord .proofs figure:hover figcaption > b{color:var(--gold)}
+  #trackrecord .print:hover .print__plate{border-color:var(--line-4);background:rgba(215,179,100,.09)}
+  #trackrecord .print:hover .cap__n{color:var(--gold)}
+  #trackrecord .print:hover .cap__lv{opacity:.9}
 }
-#trackrecord .tile:focus-visible{outline:1px solid var(--gold);outline-offset:3px;border-color:var(--line-4);background:rgba(215,179,100,.09)}
-/* the caption as the plates are captioned: the number in mono, the firm
-   in the label voice, the note in the serif under it on the firm's line */
-#trackrecord .proofs figcaption,
-#trackrecord .zoom figcaption{
-  display:flex;gap:14px;align-items:baseline;
-  margin-top:clamp(10px,1.4vw,14px);
+#trackrecord .print__plate:focus-visible{outline:1px solid var(--gold);outline-offset:3px;border-color:var(--line-4);background:rgba(215,179,100,.09)}
+
+/* the label: a museum label, as the plates above are labelled -- the
+   number in mono, the firm in the label voice, from the firm a dashed
+   level (the liquidity line of the spread, same dash) to the document's
+   date, tagged at the level's end in mono the way a chart tags a level;
+   under the firm, on the firm's column line, what the document is; on
+   the print's right edge, where the tag ends, the page's link to the
+   untouched file. One label per file is in the markup; the one in hand
+   is shown. The note holds two lines of height, so the strip under it
+   stays where it is whichever label is up. */
+#trackrecord .print__cap{margin-top:clamp(12px,1.6vw,16px)}
+#trackrecord .cap{
+  display:grid;grid-template-columns:auto auto minmax(32px,1fr) auto;
+  column-gap:clamp(12px,1.8vw,20px);
+  align-items:baseline;
   font-family:var(--f-display);
-  font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
-  line-height:1.5;
 }
-#trackrecord .proofs figcaption > b,
-#trackrecord .zoom figcaption > b,
-#trackrecord .proofs-fn > b{
-  flex:0 0 auto;
+#trackrecord .cap[hidden]{display:none}
+#trackrecord .cap__n{
+  grid-column:1;grid-row:1;
   font-family:var(--f-mono);font-weight:400;font-size:var(--t-caption);
-  letter-spacing:var(--trk-mono);text-transform:none;
-  color:var(--ink-3);
+  letter-spacing:var(--trk-mono);
+  color:var(--ink-4);
   transition:color var(--d) var(--e-out);
 }
-#trackrecord .proofs figcaption > span,
-#trackrecord .zoom figcaption > span{min-width:0;color:var(--ink-1)}
-#trackrecord .proofs figcaption small,
-#trackrecord .zoom figcaption small{
-  display:block;margin-top:5px;
-  letter-spacing:0;text-transform:none;
-  font-size:var(--t-small);color:var(--ink-2);line-height:1.55;
-  text-wrap:pretty;
+#trackrecord .cap__firm{
+  grid-column:2;grid-row:1;min-width:0;
+  font-size:var(--t-micro);letter-spacing:var(--trk-caps);
+  text-transform:uppercase;line-height:1.5;
+  color:var(--ink-1);
+  white-space:nowrap;
 }
-/* the footnote: the one note a plate needs, under a rule that closes the
-   wall edge to edge, hung on the wall's left edge in the caption's own
-   voice -- the number of its plate in mono, the note in the serif */
-#trackrecord .proofs-fn{
-  position:relative;z-index:2;
-  display:flex;gap:14px;align-items:baseline;
-  margin:clamp(22px,3vw,34px) 0 0;
-  padding-top:clamp(14px,2vw,20px);
-  border-top:1px solid var(--line-2);
-  font-family:var(--f-display);
-  font-size:var(--t-small);
-  line-height:1.55;
+#trackrecord .cap__lv{
+  grid-column:3;grid-row:1;
+  display:block;height:1px;
+  align-self:baseline;
+  transform:translateY(-.34em);
+  font-size:var(--t-micro);
+  background:var(--level);
+  opacity:.8;
+  transition:opacity var(--d) var(--e-out);
+}
+#trackrecord .cap__date{
+  grid-column:4;grid-row:1;
+  font-family:var(--f-mono);font-weight:400;font-size:var(--t-caption);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:var(--trk-mono);
   color:var(--ink-2);
+  white-space:nowrap;
+}
+#trackrecord .cap__note{
+  grid-column:2/4;grid-row:2;
+  display:block;margin-top:6px;
+  min-height:calc(2 * 1.55em);
+  max-width:52ch;
+  font-size:var(--t-small);line-height:1.55;letter-spacing:0;
+  color:var(--ink-3);
   text-wrap:pretty;
 }
-#trackrecord .proofs-fn > span{min-width:0;max-width:56ch}
-@media (max-width:480px){
-  /* a phone: one plate per row, the width of the column, so a certificate
-     can be read where it stands and the caption has its own line */
-  #trackrecord .proofs{grid-template-columns:minmax(0,1fr);row-gap:clamp(30px,8vw,40px)}
+#trackrecord .cap__orig{grid-column:4;grid-row:2;justify-self:end;margin:0}
+
+/* the contact strip: the six files as chips on one hairline, in the
+   order of the rows, each the size of a stamp, its number under it in
+   mono. A chip is grey until it is pointed at; the one in the print is
+   in colour, its number in the gold, and a short rule of the gold sits
+   on the hairline under it -- the marker on a level -- and slides to
+   whichever chip is chosen. Pointed at, a chip's mat warms to the band
+   of the spread. */
+#trackrecord .strip{
+  list-style:none;margin:clamp(22px,3vw,34px) 0 0;padding:0;
+  display:flex;gap:clamp(8px,1.5vw,14px);
+  border-bottom:1px solid var(--line-2);
+}
+#trackrecord .strip li{flex:0 0 auto;min-width:0}
+#trackrecord .strip__chip{
+  position:relative;
+  display:block;
+  width:clamp(52px,7.2vw,96px);
+  padding:0 0 10px;
+  color:inherit;
+  text-decoration:none;
+}
+#trackrecord .strip__pic{
+  display:block;
+  aspect-ratio:3/2;
+  padding:3px;
+  border:1px solid var(--line-2);
+  background:var(--mat);
+  transition:border-color var(--d) var(--e-out),background-color var(--d) var(--e-out);
+}
+#trackrecord .strip__pic img{
+  display:block;width:100%;height:100%;
+  object-fit:contain;
+  filter:grayscale(1) brightness(.7);
+  transition:filter var(--d-slow) var(--e-out);
+}
+#trackrecord .strip__n{
+  display:block;margin-top:7px;
+  font-family:var(--f-mono);font-weight:400;font-size:var(--t-caption);
+  letter-spacing:var(--trk-mono);
+  line-height:1.2;
+  color:var(--ink-4);
+  transition:color var(--d) var(--e-out);
+}
+#trackrecord .strip__chip::after{
+  content:"";
+  position:absolute;left:0;right:0;bottom:-1px;height:1px;
+  background:var(--gold);
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform var(--d-slow) var(--e-out);
+}
+#trackrecord .strip__chip.is-cur::after{transform:none}
+#trackrecord .strip__chip.is-cur .strip__pic{border-color:var(--line-4)}
+#trackrecord .strip__chip.is-cur .strip__pic img{filter:none}
+#trackrecord .strip__chip.is-cur .strip__n{color:var(--gold)}
+@media (hover:hover){
+  #trackrecord .strip__chip:hover .strip__pic{border-color:var(--line-3);background:rgba(215,179,100,.09)}
+  #trackrecord .strip__chip:hover .strip__pic img{filter:none}
+  #trackrecord .strip__chip:hover .strip__n{color:var(--ink-2)}
+}
+#trackrecord .strip__chip:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+
+/* a narrow strip: the label's second way, so a firm that is long never
+   leaves a stub of level beside it -- the number, the level and the date
+   on one row, the firm under them, then the document, then the link, all
+   on the print's left edge */
+@media (max-width:719px){
+  #trackrecord .cap{grid-template-columns:auto minmax(32px,1fr) auto;column-gap:14px}
+  #trackrecord .cap__lv{grid-column:2;grid-row:1}
+  #trackrecord .cap__date{grid-column:3;grid-row:1}
+  #trackrecord .cap__firm{grid-column:1/-1;grid-row:2;margin-top:8px;white-space:normal}
+  #trackrecord .cap__note{grid-column:1/-1;grid-row:3;min-height:0;max-width:none}
+  #trackrecord .cap__orig{grid-column:1/-1;grid-row:4;justify-self:start;margin-top:4px}
+  #trackrecord .strip{gap:8px}
 }
 
 /* ---------- the caveat ---------------------------------------------------- */
@@ -368,6 +457,7 @@
 #trackrecord .zoom .close{margin:clamp(14px,2.4vh,24px) 0 0}
 
 @media (prefers-reduced-motion:reduce){
-  #trackrecord .tile,#trackrecord .proofs figcaption > b{transition:none}
+  #trackrecord .print__plate,#trackrecord .cap__n,#trackrecord .cap__lv,#trackrecord .strip__pic,#trackrecord .strip__pic img,#trackrecord .strip__n,#trackrecord .strip__chip::after{transition:none}
+  #trackrecord .print__plate.is-print,#trackrecord .print__cap.is-print{animation:none}
   #trackrecord .zoom[open],#trackrecord .zoom[open]::backdrop{animation:none}
 }

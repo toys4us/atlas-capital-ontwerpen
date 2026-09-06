@@ -1,42 +1,47 @@
-/* ===== education: the syllabus as a scale and a plate =====
-   Two things on the reel's two lines. On the strip's left edge, in the
-   label column, the index: ten terms one under the other, the count in
-   mono at the left the way a price scale is labelled, the term in the
-   serif a size under the credits -- a scale, not ten credits. On the axis,
-   in the value column, the plate: the one term that is lit, drawn as a
-   schema in the spread's own vocabulary (one hairline path of the gold, a
-   zone at seven percent with its two edges, a dashed level 3 on 5 off;
-   no price, no day, no outcome, and the corner says so), the term under
-   it at statement size -- the one large thing in the section -- and the
-   gloss under that in the serif at body size: what the word means, in
-   dictionary voice, never what the course does with it.
+/* ===== education: the syllabus as an index and a lemma =====
+   Three rows on the reel's two columns (base.css: --axis-l / --axis-r),
+   and nothing off them: the group title; the index left of the axis with
+   the lemma right of it; the close -- one line left, the one call right --
+   on one baseline under them.
 
-   The lit row is the fair value gap band of the figure: the gold at seven
+   The index: ten terms one under the other, the count in mono at the left
+   the way a price scale is labelled, a hairline between rows, the term in
+   the serif a size under the credits -- a scale, not ten credits. The lit
+   row is the fair value gap band of the opening figure: the gold at seven
    percent with a hairline along its top and its bottom, the count in the
    gold, the term in the paper; the other rows stand a step back while one
-   is pointed at. Point at a row (or tab to it, or tap it) and the band
-   moves to it and the plate redraws for it: the zones draw out of the
-   left, the line draws itself, the words come up under it. Leave the
-   index and the plate returns to the last row chosen. Nothing moves in
-   the index itself, so nothing on the page shifts.
+   is pointed at. Nothing moves in the index itself, so nothing shifts.
 
-   Arrival: the plate develops from the first beat of the stagger (its
-   line draws over the slow settle, as the spread's does) while the rows
-   settle in one after another. The close hangs on the strip's left edge
-   with the index: one line at credit size and the page's one call under
-   it, on the same line, with nothing drawn above them.
+   The lemma: the entry of the lit term, set the way a glossary sets one.
+   First the plate -- a mat with a hairline along its top and its bottom,
+   none down its sides, run a little past the column the way a level is
+   drawn forward -- and on it the term's own schema in the vocabulary of
+   the spread: one hairline path of the gold, zones at seven percent with
+   two edges, dashed levels 3 on 5 off, and where a term is defined by
+   candles (a gap, an orderblock) a few hairline candles; small caps tags
+   where a level is tagged, on the scale. No price, no day, no outcome,
+   and the corner says so. Under the plate, on the plate's left edge: the
+   count tied to the index (the same mono, the same gold), the term at
+   statement size in the display cut of the face with its tracking pulled
+   in, the definition at body size, and a rule-set of three hairlined
+   lines in the credit voice -- what else the term is called, what the
+   figure draws, which other entries it belongs with, each of those a link
+   to that entry. Two voices per block: the serif and the mono count.
 
-   Content and decoration: the index is the content (the gloss is in every
-   row; with a script on a desk it is read by a screen reader and shown on
-   the plate, on a phone it stays under its term). The pane is decoration,
-   aria-hidden; its figures that are not lit are not rendered. Without a
-   script the first plate stands and every gloss stays in its row. */
+   Arrival: the plate develops from the first beat of the stagger (the
+   zones draw out of the left, the line draws itself over the slow
+   settle, the candles print on, the tags come last) while the rows settle
+   in one after another. Pointed at, the band moves and the lemma redraws
+   for the new term, quickly; leave, and it returns to the last one
+   chosen. On a phone the lemma sits above the index, every row keeps its
+   gloss under its term, and a tap brings the lemma back into view. */
 #education .syllabus{
   --bleed:12px;                               /* the band and the plate past the text */
   --band:rgba(215,179,100,.07);               /* the fair value gap band              */
   --band-edge:rgba(215,179,100,.36);
   --n:24px;                                   /* the count's column                   */
   --g:clamp(10px,1.4vw,14px);                 /* count to term                        */
+  --lbl:clamp(96px,11vw,118px);               /* the rule-set's label column          */
   position:relative;z-index:2;
   display:grid;
   grid-template-columns:var(--axis-l) var(--axis-r);
@@ -44,17 +49,25 @@
   align-items:start;
   margin:clamp(6px,1.2vw,14px) 0 0;
 }
-#education .index{grid-column:1;grid-row:1;margin:0;min-width:0}
+#education .index{grid-column:1;grid-row:1;position:relative;margin:0;min-width:0}
 #education .pane{grid-column:2;grid-row:1;margin:0;min-width:0;--reveal-y:14px}
 
 /* ---- the index: ten levels on a scale ----------------------------------- */
 #education .row{
   --reveal-y:10px;                            /* a row settles, it does not travel */
+  appearance:none;-webkit-appearance:none;
   position:relative;isolation:isolate;
-  display:block;
+  display:flex;flex-wrap:wrap;align-items:baseline;
+  column-gap:var(--g);
+  width:calc(100% + 2 * var(--bleed));
   margin:0 calc(-1 * var(--bleed));
-  padding:7px var(--bleed) 8px;
-  cursor:default;
+  padding:8px var(--bleed) 9px;
+  border:0;border-radius:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  text-align:left;
+  cursor:pointer;
 }
 /* the band is a layer under the row, so its transition never touches the
    row's own (the reveal's) */
@@ -69,11 +82,16 @@
   background:var(--band);
   box-shadow:inset 0 1px 0 var(--band-edge),inset 0 -1px 0 var(--band-edge);
 }
-#education .row:focus-visible{outline-offset:3px}
-#education dt{
-  display:flex;align-items:baseline;gap:var(--g);
-  min-width:0;margin:0;
+/* the scale's hairlines: between the rows, and one under the last */
+#education .row + .row::after,#education .index::after{
+  content:"";
+  position:absolute;left:0;right:0;height:1px;
+  background:var(--line-1);
+  pointer-events:none;
 }
+#education .row + .row::after{top:0}
+#education .index::after{left:calc(-1 * var(--bleed));right:calc(-1 * var(--bleed));bottom:0}
+#education .row:focus-visible{outline-offset:2px}
 #education .num{
   flex:0 0 var(--n);
   font-family:var(--f-mono);
@@ -86,7 +104,7 @@
   transition:color var(--d) var(--e-out);
 }
 #education .term{
-  flex:1 1 auto;min-width:0;
+  flex:1 1 0;min-width:0;
   font-family:var(--f-display);
   font-size:clamp(18px,1.55vw,22px);
   font-weight:400;
@@ -98,7 +116,8 @@
 }
 /* the gloss in the row: the sub-line voice, under the term on the term's
    left edge (a phone, or no script) */
-#education dd{
+#education .row .sub{
+  flex:0 0 100%;
   margin:3px 0 0 calc(var(--n) + var(--g));
   font-family:var(--f-display);
   font-size:var(--t-small);
@@ -113,14 +132,15 @@
   #education .index:hover .row:not(.is-on) .term{color:var(--ink-3)}
 }
 
-/* ---- the plate: one figure at a time ------------------------------------ */
-#education .fig{display:none;margin:0}
+/* ---- the lemma: one entry at a time ------------------------------------- */
+#education .fig{display:none}
 #education .fig.is-on{display:block}
-/* a mat with a hairline along its top and its bottom, none down its sides,
-   as the spread's; it runs a little past the column, the way a level is
-   drawn forward */
+/* the plate: a mat with a hairline along its top and its bottom, none down
+   its sides, as the spread's; it runs a little past the column, the way a
+   level is drawn forward */
 #education .plate{
   position:relative;
+  container-type:inline-size;
   aspect-ratio:300/130;
   margin:0 calc(-1 * var(--bleed)) 0 0;
   background:var(--panel-lo);
@@ -133,55 +153,146 @@
 #education .ln--b{stroke-opacity:.42}
 #education .zn{fill:var(--gold);fill-opacity:.07;stroke:var(--gold);stroke-opacity:.36;stroke-width:1}
 #education .zn--lo{fill-opacity:.03;stroke-opacity:.16}
+#education .zn--fill{stroke:none}
 #education .lq{fill:none;stroke:var(--gold);stroke-opacity:.55;stroke-width:1;stroke-dasharray:3 5;stroke-linecap:butt}
-#education .hl{fill:none;stroke:var(--gold);stroke-opacity:.3;stroke-width:1}
-#education .hl--lo{stroke-opacity:.16}
-#education .nw{fill:none;stroke:var(--gold);stroke-opacity:.22;stroke-width:1}
+#education .hl{fill:none;stroke:var(--gold);stroke-opacity:.34;stroke-width:1}
+#education .hl--lo{stroke-opacity:.14}
+#education .hl--mid{stroke-opacity:.26}
+#education .hl--hi{stroke-opacity:.55}
+#education .nw{fill:none;stroke:var(--gold);stroke-opacity:.26;stroke-width:1}
 #education .br{fill:none;stroke:var(--gold);stroke-opacity:.34;stroke-width:1;stroke-dasharray:2 4;stroke-linecap:butt}
-/* the corner: the figure's number in mono and the one word that keeps the
-   drawing honest, in the label voice, where the spread hangs its tags */
+/* candles: hairline bodies, a filled body where the candle falls */
+#education .cd line{stroke:var(--gold);stroke-opacity:.5;stroke-width:1}
+#education .cd rect{fill:none;stroke:var(--gold);stroke-opacity:.55;stroke-width:1}
+#education .cd--dn rect{fill:var(--gold);fill-opacity:.2}
+/* the tags of the figure: the page's label voice, above the right end of
+   a level (or under it), sized from the plate and never under 9px */
+#education .lbl{
+  position:absolute;
+  display:block;
+  font-family:var(--f-display);
+  font-style:normal;
+  font-size:clamp(9px,2.4cqw,var(--t-nano));
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--ink-4);
+  white-space:nowrap;
+  pointer-events:none;
+}
+#education .lbl--up{transform:translateY(calc(-100% - 5px))}
+#education .lbl--dn{transform:translateY(5px)}
+/* the corner: the one word that keeps the drawing honest, where a plate
+   carries its title */
 #education .tag{
-  position:absolute;top:9px;right:12px;
-  display:flex;align-items:baseline;gap:.9em;
+  position:absolute;top:9px;left:12px;
   font-family:var(--f-display);
   font-style:normal;
   font-size:var(--t-nano);
   letter-spacing:var(--trk-caps);
   text-transform:uppercase;
   line-height:1;
-  color:var(--ink-4);
+  color:var(--ink-5);
   white-space:nowrap;
 }
-#education .tag b{font-family:var(--f-mono);font-weight:400;letter-spacing:var(--trk-mono);font-variant-numeric:tabular-nums}
-/* the caption: the term at statement size, the gloss at body size, both
-   on the plate's left edge */
-#education .fig figcaption{margin:clamp(14px,2vw,20px) 0 0}
+
+/* the entry under the plate, on the plate's left edge */
+#education .lemma{margin:clamp(14px,2vw,20px) 0 0}
+#education .eyebrow{
+  display:flex;align-items:baseline;gap:.55em;
+  margin:0;
+  font-family:var(--f-mono);
+  font-size:var(--t-caption);
+  letter-spacing:var(--trk-mono);
+  font-variant-numeric:tabular-nums;
+  line-height:1;
+  color:var(--ink-4);
+}
+#education .eyebrow .num{flex:0 0 auto;color:var(--gold)}
 #education .word{
-  display:block;
+  margin:clamp(6px,.9vw,9px) 0 0 -.02em;
   font-family:var(--f-display);
-  font-size:var(--t-h2);
+  font-size:clamp(27px,2.95vw,42px);
   font-weight:400;
-  line-height:1.08;
-  letter-spacing:-.012em;
+  line-height:1.05;
+  letter-spacing:-.022em;
+  font-variation-settings:"opsz" 72;         /* the display cut of the face */
   color:var(--ink-1);
   text-wrap:balance;
 }
-#education .gloss{
-  display:block;
-  margin-top:clamp(8px,1.2vw,12px);
-  max-width:36ch;
+#education .lemma .gloss{
+  margin:clamp(8px,1.2vw,12px) 0 0;
+  max-width:38ch;
   font-family:var(--f-display);
   font-size:var(--t-body);
   line-height:1.5;
   color:var(--ink-2);
   text-wrap:pretty;
 }
+/* the rule-set: label left in the credit voice, value right in the serif
+   at note size, a hairline over the first line and under each */
+#education .rules{margin:clamp(16px,2.2vw,22px) 0 0;border-top:1px solid var(--line-2)}
+#education .rules > div{
+  display:grid;
+  grid-template-columns:var(--lbl) minmax(0,1fr);
+  column-gap:clamp(12px,1.6vw,18px);
+  align-items:baseline;
+  padding:9px 0 10px;
+  border-bottom:1px solid var(--line-1);
+}
+#education .rules dt{
+  margin:0;
+  font-family:var(--f-display);
+  font-size:var(--t-micro);
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--ink-4);
+}
+#education .rules dd{
+  margin:0;min-width:0;
+  font-family:var(--f-display);
+  font-size:var(--t-small);
+  line-height:1.45;
+  letter-spacing:.01em;
+  color:var(--ink-2);
+  text-wrap:pretty;
+}
+/* "see also": the page's link, its count in the mono a step back */
+#education .xref{
+  appearance:none;-webkit-appearance:none;
+  display:inline;
+  margin:0;padding:0;border:0;
+  background:transparent;
+  font:inherit;
+  color:var(--ink-1);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:.22em;
+  text-decoration-color:var(--line-3);
+  cursor:pointer;
+  transition:color var(--d) var(--e-out),text-decoration-color var(--d) var(--e-out);
+}
+#education .xref:hover,#education .xref:focus-visible{color:var(--gold-hi);text-decoration-color:var(--gold)}
+#education .xref b{
+  display:inline-block;                       /* the underline stops at the count */
+  margin-right:.5em;
+  font-family:var(--f-mono);
+  font-weight:400;
+  font-size:var(--t-caption);
+  letter-spacing:var(--trk-mono);
+  font-variant-numeric:tabular-nums;
+  color:var(--ink-4);
+}
+#education .sep{margin:0 .6em;color:var(--ink-5)}
 
 /* ---- the plate draws itself: on arrival slowly, on a swap quickly ------ */
 @keyframes edu-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 @keyframes edu-grow{from{transform:scaleX(0)}to{transform:none}}
 @keyframes edu-rise{from{transform:scaleY(0)}to{transform:none}}
+@keyframes edu-wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 -2% 0 0)}}
 @keyframes edu-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes edu-tag{from{opacity:0}to{opacity:1}}
 .js #education .pane.is-in .fig.is-on .ln{
   stroke-dasharray:1;
   animation:edu-draw 1.7s var(--e-reveal) .15s both;
@@ -197,6 +308,8 @@
   transform-box:fill-box;transform-origin:center top;
   animation:edu-rise 1.1s var(--e-reveal) both;
 }
+.js #education .pane.is-in .fig.is-on .cds{animation:edu-wipe 1.6s var(--e-reveal) .1s both}
+.js #education .pane.is-in .fig.is-on .lbl{animation:edu-tag .5s var(--e-reveal) .7s both}
 .js #education .pane.is-live .fig.is-on{animation:edu-in .5s var(--e-reveal) both}
 .js #education .pane.is-live .fig.is-on .ln{animation-duration:1s;animation-delay:.05s}
 .js #education .pane.is-live .fig.is-on .zn,
@@ -204,16 +317,23 @@
 .js #education .pane.is-live .fig.is-on .hl,
 .js #education .pane.is-live .fig.is-on .br,
 .js #education .pane.is-live .fig.is-on .nw{animation-duration:.8s}
+.js #education .pane.is-live .fig.is-on .cds{animation-duration:.9s;animation-delay:0s}
+.js #education .pane.is-live .fig.is-on .lbl{animation-duration:.35s;animation-delay:.4s}
 
-/* ---- the close: one line and the call, on the strip's left edge --------- */
+/* ---- the close: the line where the index stands, the call where the
+   lemma stands, one baseline ---------------------------------------------- */
 #education .close{
   position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:var(--axis-l) var(--axis-r);
+  column-gap:var(--axis-gap);
+  align-items:baseline;
   margin:clamp(44px,6vw,72px) 0 0;
   text-align:left;
 }
 #education .close__line{
+  grid-column:1;
   margin:0;
-  max-width:30ch;
   font-family:var(--f-display);
   font-size:var(--t-h3);
   font-weight:400;
@@ -222,31 +342,29 @@
   color:var(--ink-1);
   text-wrap:balance;
 }
-#education .close .cta{margin:clamp(18px,2.4vw,26px) 0 0}
+#education .close .cta{grid-column:2;justify-self:start;margin:0}
 
-/* ---- a desk with a script: the gloss lives on the plate; in the row it
-   stays for a screen reader only -------------------------------------- */
+/* ---- a desk with a script: the gloss lives in the lemma; the row keeps
+   only the count and the term -------------------------------------------- */
 @media (min-width:621px){
-  .js #education .row dd{
-    position:absolute;width:1px;height:1px;margin:-1px;padding:0;
-    overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
-  }
+  .js #education .row .sub{display:none}
 }
 
 @media (prefers-reduced-motion:reduce){
   .js #education .pane .fig .ln{stroke-dasharray:none;animation:none}
   .js #education .pane .fig .zn,.js #education .pane .fig .lq,.js #education .pane .fig .hl,
-  .js #education .pane .fig .br,.js #education .pane .fig .nw,.js #education .pane .fig{animation:none}
-  #education .row::before,#education .num,#education .term{transition:none}
+  .js #education .pane .fig .br,.js #education .pane .fig .nw,.js #education .pane .fig .cds,
+  .js #education .pane .fig .lbl,.js #education .pane .fig{animation:none}
+  #education .row::before,#education .num,#education .term,#education .xref{transition:none}
 }
 
-/* ---- a phone: the plate above the index, every gloss under its term,
+/* ---- a phone: the lemma above the index, every gloss under its term,
    everything on one left edge ------------------------------------------ */
 @media (max-width:620px){
-  #education .syllabus{display:block;--bleed:10px}
-  #education .pane{margin:0 0 clamp(18px,5vw,26px)}
+  #education .syllabus{display:flex;flex-direction:column;--bleed:10px}
+  #education .pane{order:-1;margin:0 0 clamp(22px,6vw,30px)}
   #education .plate{margin:0}
-  #education .fig figcaption{display:none}
-  #education .row{padding:8px var(--bleed) 9px}
-  #education .close{margin-top:clamp(36px,9vw,52px)}
+  #education .row{padding:9px var(--bleed) 10px}
+  #education .close{display:block;margin-top:clamp(36px,9vw,52px)}
+  #education .close .cta{margin-top:clamp(18px,2.4vw,26px)}
 }

@@ -37,7 +37,7 @@
   --fig-f:.5;                            /* the chart's left edge, as a fraction of the card: the centre line */
   --bleed:calc(var(--gutter) + max(0px,(100vw - 2 * var(--gutter) - var(--wide)) / 2));
   position:relative;
-  padding:clamp(48px,7vw,104px) var(--gutter) clamp(40px,5.5vw,72px);
+  padding:clamp(48px,7vw,104px) var(--gutter) clamp(40px,5vw,64px);
 }
 #closer .card{
   position:relative;
@@ -142,7 +142,7 @@
 /* ---- what is read after the word ------------------------------------- */
 #closer .end__col{
   position:relative;z-index:2;
-  margin-top:clamp(36px,4.2vw,56px);
+  margin-top:clamp(44px,4.2vw,56px);
   max-width:calc(50% - var(--axis-gap)); /* the left half of the grid, up to the gap */
 }
 #closer .subtitle{
@@ -167,19 +167,22 @@
    non-scaling stroke, Chromium runs a pathLength dash the wrong way.)
    The insets are open above by the caption's height, and by two pixels
    below, so nothing on the box's edges is halved. */
-.js #closer .reveal.trace{opacity:1;transform:none;clip-path:inset(-40px 100% -2px 0);transition:clip-path 2.2s var(--e-reveal)}
-.js #closer .reveal.trace.is-in{clip-path:inset(-40px 0 -2px 0)}
+.js #closer .reveal.trace{opacity:1;transform:none;clip-path:inset(-40px 100% -40px 0);transition:clip-path 2.2s var(--e-reveal)}
+.js #closer .reveal.trace.is-in{clip-path:inset(-40px 0 -40px 0)}
 @media (prefers-reduced-motion:reduce){
   .js #closer .reveal.trace{clip-path:none;transition:none}
 }
 
 /* ---- a phone: the chart takes the right three fifths, the words wait
-   under it; the caption stacks in two short lines at the endpoint so it
-   is a label and not a line of its own ------------------------------- */
+   under it. The caption cannot sit above the endpoint here (in English
+   the word runs to that column), so it stacks in two short lines under
+   the level's right end, still on the axis -- a label, not a line of
+   its own. */
 @media (max-width:619px){
   #closer{--fig-f:.4;--depth:calc(.8 * var(--D))}
+  #closer .end__tag{bottom:auto;top:calc(178 / 240 * 100% + 12px)}  /* 12px under the level */
   #closer .end__tag .br{display:block}
-  #closer .end__col{margin-top:calc(var(--depth) + clamp(30px,8vw,44px));max-width:none}
+  #closer .end__col{margin-top:calc(var(--depth) + 24px + clamp(26px,7vw,36px));max-width:none}  /* under the caption's two lines */
   #closer .subtitle{max-width:var(--measure-quote)}
 }
 
@@ -314,15 +317,18 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   footer .fnav a,footer .fnav a::before,footer .fnav a::after{transition:none}
 }
 
+/* where the risk line no longer fits one measure beside the clock, each
+   sentence takes its own line, and a sentence that must wrap wraps
+   evenly -- no line is one word */
+@media (max-width:1023px){
+  footer .legal .s{display:block;text-wrap:balance}
+  footer .legal .past{text-wrap:balance}
+  footer .legal p + p{margin-top:8px}
+}
 @media (max-width:619px){
   footer .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
   footer .fsig{grid-column:1 / -1}
   footer .fnav{padding-top:0}             /* under the signature, not beside it */
   footer .fbase{display:block}
-  /* each sentence on its own line, and a sentence that must wrap wraps
-     evenly -- no line is one word */
-  footer .legal .s{display:block;text-wrap:balance}
-  footer .legal .past{text-wrap:balance}
-  footer .legal p + p{margin-top:8px}
   footer .ftime{padding-top:0;margin-top:clamp(24px,6vw,32px)}
 }

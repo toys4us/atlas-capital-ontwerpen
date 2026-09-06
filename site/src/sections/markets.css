@@ -169,7 +169,7 @@
   #markets .board__row:hover .board__name{color:var(--paper)}
   #markets .board__row:hover .board__tick{color:var(--ink-1)}
   #markets .board__row:hover .board__n{color:var(--ink-2)}
-  #markets .board__list:hover .board__row:not(:hover) .board__name{color:var(--ink-2)}
+  #markets .board__list:has(.board__row:hover) .board__row:not(:hover) .board__name{color:var(--ink-2)}
 }
 
 /* ---- arrival: the ink draws, never opacity, so a probe sees every rule

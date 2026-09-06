@@ -2,7 +2,7 @@
  "id": "access",
  "title": "Access",
  "wave": 1,
- "round": 1,
+ "round": 2,
  "status": "win",
  "history": [
   {
@@ -34,6 +34,21 @@
    "confidence": 0.85,
    "builder_note": "Files: E:/ClaudeCode_GUI/atlas-designs/site/src/sections/10-access.html, E:/ClaudeCode_GUI/atlas-designs/site/src/sections/access.css\n- Rebuilt \"Toegang\" as two levels on the reel's one axis, each level its own credit row (grid, not display:contents, so the row is a hover/focus unit); the level is drawn from the strip's edge to its tag on the axis, like the founder's credit.\n- The open level now carries the spread's path for real: an 84px figure, the hairline comes in low from the margin, climbs in two legs and holds the level to the \"Nu\" tag; on reveal the path draws itself (2.2s) and",
    "timestamp": "2026-09-06T01:57:19+02:00"
+  },
+  {
+   "wave": 1,
+   "round": 2,
+   "ref": "monolog",
+   "status": "win",
+   "score_ours": 7,
+   "score_ref": 6,
+   "wowed": false,
+   "gap": "The two tiers are thin, near-identical stacked modules (40px serif heading, two-line note, text link) with no price, no feature enumeration, and the whole left column from x300 to x570 is empty save one hairline, so on desktop the section reads as a well-set caption rather than a designed access moment. At the bar the tier names would carry real scale contrast against the caps labels, the NU/LATER timeline device would be extended into something that earns its width, and the link treatment would be consistent (KOM BINNEN gets an arrow, VOLG HET IN DE SERVER does not).",
+   "motion": "Staggered fade-up of Gratis then Premium with a gold progress hairline at the foot — restrained and correctly sequenced, if unremarkable.",
+   "verdict": "A has the louder idea (condensed grotesk slicing through a portrait image) but its craft fails at the basics: nav collisions, bleed-through on mobile, and a half-viewport dead zone under the logo grid. B is quieter and underbuilt as an access section, yet every hairline, label, and caps tracking is under control, and at SOTD level the site that makes no mistakes beats the site that makes visible ones.",
+   "confidence": 0.66,
+   "builder_note": "access (src/sections/10-access.html + access.css), wave 1 round 2:\n- Dropped the price-path SVG entirely (desktop and phone) — the \"stock squiggle\" the judge flagged; no plate, no --plate-h, no caption (nothing left that could be read as data, so none is needed; the caption's phone alignment problem goes with it).\n- The two tiers are now two credits on the reel's axis drawn only with the page's furniture: in the label column a level on the baseline of the tier's word (the line \"Gratis\"/\"Premium\" stands on), tagged NU / LATER at the gutter like the ledger's years; both levels end on on",
+   "timestamp": "2026-09-06T02:14:03+02:00"
   }
  ]
 }

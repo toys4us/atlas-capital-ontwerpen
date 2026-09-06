@@ -2021,45 +2021,50 @@ dl.pairs .cols{
 }
 
 /* ---- section:education ---- */
-/* ===== education: the syllabus as a scale and a plate =====
-   Two things on the reel's two lines. On the strip's left edge, in the
-   label column, the index: ten terms one under the other, the count in
-   mono at the left the way a price scale is labelled, the term in the
-   serif a size under the credits -- a scale, not ten credits. On the axis,
-   in the value column, the plate: the one term that is lit, drawn as a
-   schema in the spread's own vocabulary (one hairline path of the gold, a
-   zone at seven percent with its two edges, a dashed level 3 on 5 off;
-   no price, no day, no outcome, and the corner says so), the term under
-   it at statement size -- the one large thing in the section -- and the
-   gloss under that in the serif at body size: what the word means, in
-   dictionary voice, never what the course does with it.
+/* ===== education: the syllabus as an index and a lemma =====
+   Three rows on the reel's two columns (base.css: --axis-l / --axis-r),
+   and nothing off them: the group title; the index left of the axis with
+   the lemma right of it; the close -- one line left, the one call right --
+   on one baseline under them.
 
-   The lit row is the fair value gap band of the figure: the gold at seven
+   The index: ten terms one under the other, the count in mono at the left
+   the way a price scale is labelled, a hairline between rows, the term in
+   the serif a size under the credits -- a scale, not ten credits. The lit
+   row is the fair value gap band of the opening figure: the gold at seven
    percent with a hairline along its top and its bottom, the count in the
    gold, the term in the paper; the other rows stand a step back while one
-   is pointed at. Point at a row (or tab to it, or tap it) and the band
-   moves to it and the plate redraws for it: the zones draw out of the
-   left, the line draws itself, the words come up under it. Leave the
-   index and the plate returns to the last row chosen. Nothing moves in
-   the index itself, so nothing on the page shifts.
+   is pointed at. Nothing moves in the index itself, so nothing shifts.
 
-   Arrival: the plate develops from the first beat of the stagger (its
-   line draws over the slow settle, as the spread's does) while the rows
-   settle in one after another. The close hangs on the strip's left edge
-   with the index: one line at credit size and the page's one call under
-   it, on the same line, with nothing drawn above them.
+   The lemma: the entry of the lit term, set the way a glossary sets one.
+   First the plate -- a mat with a hairline along its top and its bottom,
+   none down its sides, run a little past the column the way a level is
+   drawn forward -- and on it the term's own schema in the vocabulary of
+   the spread: one hairline path of the gold, zones at seven percent with
+   two edges, dashed levels 3 on 5 off, and where a term is defined by
+   candles (a gap, an orderblock) a few hairline candles; small caps tags
+   where a level is tagged, on the scale. No price, no day, no outcome,
+   and the corner says so. Under the plate, on the plate's left edge: the
+   count tied to the index (the same mono, the same gold), the term at
+   statement size in the display cut of the face with its tracking pulled
+   in, the definition at body size, and a rule-set of three hairlined
+   lines in the credit voice -- what else the term is called, what the
+   figure draws, which other entries it belongs with, each of those a link
+   to that entry. Two voices per block: the serif and the mono count.
 
-   Content and decoration: the index is the content (the gloss is in every
-   row; with a script on a desk it is read by a screen reader and shown on
-   the plate, on a phone it stays under its term). The pane is decoration,
-   aria-hidden; its figures that are not lit are not rendered. Without a
-   script the first plate stands and every gloss stays in its row. */
+   Arrival: the plate develops from the first beat of the stagger (the
+   zones draw out of the left, the line draws itself over the slow
+   settle, the candles print on, the tags come last) while the rows settle
+   in one after another. Pointed at, the band moves and the lemma redraws
+   for the new term, quickly; leave, and it returns to the last one
+   chosen. On a phone the lemma sits above the index, every row keeps its
+   gloss under its term, and a tap brings the lemma back into view. */
 #education .syllabus{
   --bleed:12px;                               /* the band and the plate past the text */
   --band:rgba(215,179,100,.07);               /* the fair value gap band              */
   --band-edge:rgba(215,179,100,.36);
   --n:24px;                                   /* the count's column                   */
   --g:clamp(10px,1.4vw,14px);                 /* count to term                        */
+  --lbl:clamp(96px,11vw,118px);               /* the rule-set's label column          */
   position:relative;z-index:2;
   display:grid;
   grid-template-columns:var(--axis-l) var(--axis-r);
@@ -2067,17 +2072,25 @@ dl.pairs .cols{
   align-items:start;
   margin:clamp(6px,1.2vw,14px) 0 0;
 }
-#education .index{grid-column:1;grid-row:1;margin:0;min-width:0}
+#education .index{grid-column:1;grid-row:1;position:relative;margin:0;min-width:0}
 #education .pane{grid-column:2;grid-row:1;margin:0;min-width:0;--reveal-y:14px}
 
 /* ---- the index: ten levels on a scale ----------------------------------- */
 #education .row{
   --reveal-y:10px;                            /* a row settles, it does not travel */
+  appearance:none;-webkit-appearance:none;
   position:relative;isolation:isolate;
-  display:block;
+  display:flex;flex-wrap:wrap;align-items:baseline;
+  column-gap:var(--g);
+  width:calc(100% + 2 * var(--bleed));
   margin:0 calc(-1 * var(--bleed));
-  padding:7px var(--bleed) 8px;
-  cursor:default;
+  padding:8px var(--bleed) 9px;
+  border:0;border-radius:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  text-align:left;
+  cursor:pointer;
 }
 /* the band is a layer under the row, so its transition never touches the
    row's own (the reveal's) */
@@ -2092,11 +2105,16 @@ dl.pairs .cols{
   background:var(--band);
   box-shadow:inset 0 1px 0 var(--band-edge),inset 0 -1px 0 var(--band-edge);
 }
-#education .row:focus-visible{outline-offset:3px}
-#education dt{
-  display:flex;align-items:baseline;gap:var(--g);
-  min-width:0;margin:0;
+/* the scale's hairlines: between the rows, and one under the last */
+#education .row + .row::after,#education .index::after{
+  content:"";
+  position:absolute;left:0;right:0;height:1px;
+  background:var(--line-1);
+  pointer-events:none;
 }
+#education .row + .row::after{top:0}
+#education .index::after{left:calc(-1 * var(--bleed));right:calc(-1 * var(--bleed));bottom:0}
+#education .row:focus-visible{outline-offset:2px}
 #education .num{
   flex:0 0 var(--n);
   font-family:var(--f-mono);
@@ -2109,7 +2127,7 @@ dl.pairs .cols{
   transition:color var(--d) var(--e-out);
 }
 #education .term{
-  flex:1 1 auto;min-width:0;
+  flex:1 1 0;min-width:0;
   font-family:var(--f-display);
   font-size:clamp(18px,1.55vw,22px);
   font-weight:400;
@@ -2121,7 +2139,8 @@ dl.pairs .cols{
 }
 /* the gloss in the row: the sub-line voice, under the term on the term's
    left edge (a phone, or no script) */
-#education dd{
+#education .row .sub{
+  flex:0 0 100%;
   margin:3px 0 0 calc(var(--n) + var(--g));
   font-family:var(--f-display);
   font-size:var(--t-small);
@@ -2136,14 +2155,15 @@ dl.pairs .cols{
   #education .index:hover .row:not(.is-on) .term{color:var(--ink-3)}
 }
 
-/* ---- the plate: one figure at a time ------------------------------------ */
-#education .fig{display:none;margin:0}
+/* ---- the lemma: one entry at a time ------------------------------------- */
+#education .fig{display:none}
 #education .fig.is-on{display:block}
-/* a mat with a hairline along its top and its bottom, none down its sides,
-   as the spread's; it runs a little past the column, the way a level is
-   drawn forward */
+/* the plate: a mat with a hairline along its top and its bottom, none down
+   its sides, as the spread's; it runs a little past the column, the way a
+   level is drawn forward */
 #education .plate{
   position:relative;
+  container-type:inline-size;
   aspect-ratio:300/130;
   margin:0 calc(-1 * var(--bleed)) 0 0;
   background:var(--panel-lo);
@@ -2156,55 +2176,146 @@ dl.pairs .cols{
 #education .ln--b{stroke-opacity:.42}
 #education .zn{fill:var(--gold);fill-opacity:.07;stroke:var(--gold);stroke-opacity:.36;stroke-width:1}
 #education .zn--lo{fill-opacity:.03;stroke-opacity:.16}
+#education .zn--fill{stroke:none}
 #education .lq{fill:none;stroke:var(--gold);stroke-opacity:.55;stroke-width:1;stroke-dasharray:3 5;stroke-linecap:butt}
-#education .hl{fill:none;stroke:var(--gold);stroke-opacity:.3;stroke-width:1}
-#education .hl--lo{stroke-opacity:.16}
-#education .nw{fill:none;stroke:var(--gold);stroke-opacity:.22;stroke-width:1}
+#education .hl{fill:none;stroke:var(--gold);stroke-opacity:.34;stroke-width:1}
+#education .hl--lo{stroke-opacity:.14}
+#education .hl--mid{stroke-opacity:.26}
+#education .hl--hi{stroke-opacity:.55}
+#education .nw{fill:none;stroke:var(--gold);stroke-opacity:.26;stroke-width:1}
 #education .br{fill:none;stroke:var(--gold);stroke-opacity:.34;stroke-width:1;stroke-dasharray:2 4;stroke-linecap:butt}
-/* the corner: the figure's number in mono and the one word that keeps the
-   drawing honest, in the label voice, where the spread hangs its tags */
+/* candles: hairline bodies, a filled body where the candle falls */
+#education .cd line{stroke:var(--gold);stroke-opacity:.5;stroke-width:1}
+#education .cd rect{fill:none;stroke:var(--gold);stroke-opacity:.55;stroke-width:1}
+#education .cd--dn rect{fill:var(--gold);fill-opacity:.2}
+/* the tags of the figure: the page's label voice, above the right end of
+   a level (or under it), sized from the plate and never under 9px */
+#education .lbl{
+  position:absolute;
+  display:block;
+  font-family:var(--f-display);
+  font-style:normal;
+  font-size:clamp(9px,2.4cqw,var(--t-nano));
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1;
+  color:var(--ink-4);
+  white-space:nowrap;
+  pointer-events:none;
+}
+#education .lbl--up{transform:translateY(calc(-100% - 5px))}
+#education .lbl--dn{transform:translateY(5px)}
+/* the corner: the one word that keeps the drawing honest, where a plate
+   carries its title */
 #education .tag{
-  position:absolute;top:9px;right:12px;
-  display:flex;align-items:baseline;gap:.9em;
+  position:absolute;top:9px;left:12px;
   font-family:var(--f-display);
   font-style:normal;
   font-size:var(--t-nano);
   letter-spacing:var(--trk-caps);
   text-transform:uppercase;
   line-height:1;
-  color:var(--ink-4);
+  color:var(--ink-5);
   white-space:nowrap;
 }
-#education .tag b{font-family:var(--f-mono);font-weight:400;letter-spacing:var(--trk-mono);font-variant-numeric:tabular-nums}
-/* the caption: the term at statement size, the gloss at body size, both
-   on the plate's left edge */
-#education .fig figcaption{margin:clamp(14px,2vw,20px) 0 0}
+
+/* the entry under the plate, on the plate's left edge */
+#education .lemma{margin:clamp(14px,2vw,20px) 0 0}
+#education .eyebrow{
+  display:flex;align-items:baseline;gap:.55em;
+  margin:0;
+  font-family:var(--f-mono);
+  font-size:var(--t-caption);
+  letter-spacing:var(--trk-mono);
+  font-variant-numeric:tabular-nums;
+  line-height:1;
+  color:var(--ink-4);
+}
+#education .eyebrow .num{flex:0 0 auto;color:var(--gold)}
 #education .word{
-  display:block;
+  margin:clamp(6px,.9vw,9px) 0 0 -.02em;
   font-family:var(--f-display);
-  font-size:var(--t-h2);
+  font-size:clamp(27px,2.95vw,42px);
   font-weight:400;
-  line-height:1.08;
-  letter-spacing:-.012em;
+  line-height:1.05;
+  letter-spacing:-.022em;
+  font-variation-settings:"opsz" 72;         /* the display cut of the face */
   color:var(--ink-1);
   text-wrap:balance;
 }
-#education .gloss{
-  display:block;
-  margin-top:clamp(8px,1.2vw,12px);
-  max-width:36ch;
+#education .lemma .gloss{
+  margin:clamp(8px,1.2vw,12px) 0 0;
+  max-width:38ch;
   font-family:var(--f-display);
   font-size:var(--t-body);
   line-height:1.5;
   color:var(--ink-2);
   text-wrap:pretty;
 }
+/* the rule-set: label left in the credit voice, value right in the serif
+   at note size, a hairline over the first line and under each */
+#education .rules{margin:clamp(16px,2.2vw,22px) 0 0;border-top:1px solid var(--line-2)}
+#education .rules > div{
+  display:grid;
+  grid-template-columns:var(--lbl) minmax(0,1fr);
+  column-gap:clamp(12px,1.6vw,18px);
+  align-items:baseline;
+  padding:9px 0 10px;
+  border-bottom:1px solid var(--line-1);
+}
+#education .rules dt{
+  margin:0;
+  font-family:var(--f-display);
+  font-size:var(--t-micro);
+  letter-spacing:var(--trk-caps);
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--ink-4);
+}
+#education .rules dd{
+  margin:0;min-width:0;
+  font-family:var(--f-display);
+  font-size:var(--t-small);
+  line-height:1.45;
+  letter-spacing:.01em;
+  color:var(--ink-2);
+  text-wrap:pretty;
+}
+/* "see also": the page's link, its count in the mono a step back */
+#education .xref{
+  appearance:none;-webkit-appearance:none;
+  display:inline;
+  margin:0;padding:0;border:0;
+  background:transparent;
+  font:inherit;
+  color:var(--ink-1);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:.22em;
+  text-decoration-color:var(--line-3);
+  cursor:pointer;
+  transition:color var(--d) var(--e-out),text-decoration-color var(--d) var(--e-out);
+}
+#education .xref:hover,#education .xref:focus-visible{color:var(--gold-hi);text-decoration-color:var(--gold)}
+#education .xref b{
+  display:inline-block;                       /* the underline stops at the count */
+  margin-right:.5em;
+  font-family:var(--f-mono);
+  font-weight:400;
+  font-size:var(--t-caption);
+  letter-spacing:var(--trk-mono);
+  font-variant-numeric:tabular-nums;
+  color:var(--ink-4);
+}
+#education .sep{margin:0 .6em;color:var(--ink-5)}
 
 /* ---- the plate draws itself: on arrival slowly, on a swap quickly ------ */
 @keyframes edu-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 @keyframes edu-grow{from{transform:scaleX(0)}to{transform:none}}
 @keyframes edu-rise{from{transform:scaleY(0)}to{transform:none}}
+@keyframes edu-wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 -2% 0 0)}}
 @keyframes edu-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes edu-tag{from{opacity:0}to{opacity:1}}
 .js #education .pane.is-in .fig.is-on .ln{
   stroke-dasharray:1;
   animation:edu-draw 1.7s var(--e-reveal) .15s both;
@@ -2220,6 +2331,8 @@ dl.pairs .cols{
   transform-box:fill-box;transform-origin:center top;
   animation:edu-rise 1.1s var(--e-reveal) both;
 }
+.js #education .pane.is-in .fig.is-on .cds{animation:edu-wipe 1.6s var(--e-reveal) .1s both}
+.js #education .pane.is-in .fig.is-on .lbl{animation:edu-tag .5s var(--e-reveal) .7s both}
 .js #education .pane.is-live .fig.is-on{animation:edu-in .5s var(--e-reveal) both}
 .js #education .pane.is-live .fig.is-on .ln{animation-duration:1s;animation-delay:.05s}
 .js #education .pane.is-live .fig.is-on .zn,
@@ -2227,16 +2340,23 @@ dl.pairs .cols{
 .js #education .pane.is-live .fig.is-on .hl,
 .js #education .pane.is-live .fig.is-on .br,
 .js #education .pane.is-live .fig.is-on .nw{animation-duration:.8s}
+.js #education .pane.is-live .fig.is-on .cds{animation-duration:.9s;animation-delay:0s}
+.js #education .pane.is-live .fig.is-on .lbl{animation-duration:.35s;animation-delay:.4s}
 
-/* ---- the close: one line and the call, on the strip's left edge --------- */
+/* ---- the close: the line where the index stands, the call where the
+   lemma stands, one baseline ---------------------------------------------- */
 #education .close{
   position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:var(--axis-l) var(--axis-r);
+  column-gap:var(--axis-gap);
+  align-items:baseline;
   margin:clamp(44px,6vw,72px) 0 0;
   text-align:left;
 }
 #education .close__line{
+  grid-column:1;
   margin:0;
-  max-width:30ch;
   font-family:var(--f-display);
   font-size:var(--t-h3);
   font-weight:400;
@@ -2245,33 +2365,31 @@ dl.pairs .cols{
   color:var(--ink-1);
   text-wrap:balance;
 }
-#education .close .cta{margin:clamp(18px,2.4vw,26px) 0 0}
+#education .close .cta{grid-column:2;justify-self:start;margin:0}
 
-/* ---- a desk with a script: the gloss lives on the plate; in the row it
-   stays for a screen reader only -------------------------------------- */
+/* ---- a desk with a script: the gloss lives in the lemma; the row keeps
+   only the count and the term -------------------------------------------- */
 @media (min-width:621px){
-  .js #education .row dd{
-    position:absolute;width:1px;height:1px;margin:-1px;padding:0;
-    overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
-  }
+  .js #education .row .sub{display:none}
 }
 
 @media (prefers-reduced-motion:reduce){
   .js #education .pane .fig .ln{stroke-dasharray:none;animation:none}
   .js #education .pane .fig .zn,.js #education .pane .fig .lq,.js #education .pane .fig .hl,
-  .js #education .pane .fig .br,.js #education .pane .fig .nw,.js #education .pane .fig{animation:none}
-  #education .row::before,#education .num,#education .term{transition:none}
+  .js #education .pane .fig .br,.js #education .pane .fig .nw,.js #education .pane .fig .cds,
+  .js #education .pane .fig .lbl,.js #education .pane .fig{animation:none}
+  #education .row::before,#education .num,#education .term,#education .xref{transition:none}
 }
 
-/* ---- a phone: the plate above the index, every gloss under its term,
+/* ---- a phone: the lemma above the index, every gloss under its term,
    everything on one left edge ------------------------------------------ */
 @media (max-width:620px){
-  #education .syllabus{display:block;--bleed:10px}
-  #education .pane{margin:0 0 clamp(18px,5vw,26px)}
+  #education .syllabus{display:flex;flex-direction:column;--bleed:10px}
+  #education .pane{order:-1;margin:0 0 clamp(22px,6vw,30px)}
   #education .plate{margin:0}
-  #education .fig figcaption{display:none}
-  #education .row{padding:8px var(--bleed) 9px}
-  #education .close{margin-top:clamp(36px,9vw,52px)}
+  #education .row{padding:9px var(--bleed) 10px}
+  #education .close{display:block;margin-top:clamp(36px,9vw,52px)}
+  #education .close .cta{margin-top:clamp(18px,2.4vw,26px)}
 }
 
 /* ---- section:channels ---- */
@@ -2535,6 +2653,12 @@ dl.pairs .cols{
   position:absolute;
   top:var(--plot-t);right:var(--plot-r);bottom:var(--plot-b);left:var(--plot-l);
   transition:opacity var(--d) var(--e-out);
+}
+/* a narrow pane (a tablet held upright): the plot keeps its proportion by
+   taking more of the inset at the top and the foot, so the line is never
+   steeper than it is on a desk */
+@container (max-width:460px){
+  #channels .dv__ink{top:58px;bottom:46px}
 }
 #channels .dv__fig{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 #channels .dv__fig *{vector-effect:non-scaling-stroke}
@@ -2869,7 +2993,7 @@ dl.pairs .cols{
   #markets .board__row:hover .board__name{color:var(--paper)}
   #markets .board__row:hover .board__tick{color:var(--ink-1)}
   #markets .board__row:hover .board__n{color:var(--ink-2)}
-  #markets .board__list:hover .board__row:not(:hover) .board__name{color:var(--ink-2)}
+  #markets .board__list:has(.board__row:hover) .board__row:not(:hover) .board__name{color:var(--ink-2)}
 }
 
 /* ---- arrival: the ink draws, never opacity, so a probe sees every rule
@@ -2967,34 +3091,57 @@ dl.pairs .cols{
 
 /* ---- section:material ---- */
 /* ===== material: the plates =====
-   Five exhibits on one wall, one under the other, each the width of the
-   strip, so a chart is read the way a plate in a book is: alone, at the
-   size it needs. Every plate is a faithful trace of one of the founder's
-   own annotated charts -- the candles read off the file pixel by pixel,
-   the zones, levels, lines and labels measured on it -- and the file
-   itself opens untouched in the lightbox. The trace is what makes seven
-   screenshots one set:
-     - one frame: a hairline of the gold with a narrow mat inside it
-     - one height per row: a single is 2:1, a pair is two squares, and
-       every row of the wall is the same height
+   Five exhibits, hung as a sequence and not as a list. Every plate is a
+   faithful trace of one of the founder's own annotated charts -- the
+   candles read off the file pixel by pixel, the zones, levels, lines and
+   labels measured on it -- and the file itself opens untouched in the
+   lightbox. The trace is what makes seven screenshots one set:
+     - one frame: a hairline of the gold (a legible one, the strip's own
+       tone) with a narrow mat inside it
      - one ink for what the founder drew: the zones, the levels, the
        lines and their labels in the gold of the opening spread (a zone
        is a hairline box at seven percent, a level is dashed 3 on 5 off)
      - two greys for the price: up candles in the light ink, down candles
        in the label grey, so the price is the ground and the teaching is
        the accent
-   The label under a plate is a museum label: the figure number in mono,
-   the title in the label voice, and from the title a dashed level runs to
-   the plate's right edge -- the liquidity line of the opening schema, same
-   dash -- with the plate's provenance tagged at its end the way a chart
+
+   The hang, on a desk (>= 1100px): the wall is the page's wide column
+   (--wide, the width the spread and the bar share), and the plates come
+   forward off the strip and go back to it:
+     01  a pair, inside the strip, on the reel's column
+     02  offset left: from the page's left edge to past the middle, its
+         label beside it in the strip's column, hung on its top edge
+     03  offset right, smaller: the label in the strip's column on the
+         left, its level running out to touch the plate
+     04  full, edge to edge of the wide column -- the session as one map
+         -- its label printed on the mount inside the frame
+     05  a pair again, inside the strip: the sequence ends where it began
+   A plate that leaves the strip lies on it: its mat covers the strip's
+   edge and the edge continues below. Nothing that is read straddles an
+   edge: the labels beside a plate live inside the strip's column.
+   Below 1100px every plate sits in the strip, one under the other, the
+   label under it; on a phone a pair stacks.
+
+   The label is a museum label: the figure number in mono, the title in
+   the label voice, a dashed level -- the liquidity line of the opening
+   schema, same dash -- and the plate's provenance tagged where a chart
    tags a level. The note is the serif, under the title, on the title's
-   column line.
+   column line. Under a plate the five pieces sit in a row; beside a
+   plate they stack.
    .roll::before is the strip's edge, so the wall sits above it (z-index). */
-#material{--mat:var(--panel-lo);--inset:clamp(8px,1.2vw,12px)}
+#material{
+  --mat:var(--panel-lo);
+  --inset:clamp(8px,1.2vw,12px);
+  --frame:var(--line-3);                    /* the hairline of a plate: legible, once */
+  --frame-hi:var(--line-4);
+  --wallw:min(var(--wide),calc(100vw - 2 * var(--gutter)));
+  --capgap:clamp(32px,3.4vw,48px);          /* a plate to the label beside it */
+  --level:repeating-linear-gradient(90deg,var(--gold) 0 3px,transparent 3px 8px);
+}
 #material .lesson-lede{margin-bottom:clamp(10px,1.4vw,14px)}
 #material .wall__hint{
   position:relative;z-index:2;
-  margin:0 0 clamp(30px,4.4vw,48px);
+  margin:0 0 clamp(34px,4.8vw,56px);
   text-align:center;
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
   color:var(--ink-4);
@@ -3002,16 +3149,17 @@ dl.pairs .cols{
 }
 #material .wall{
   position:relative;z-index:2;
-  display:grid;gap:clamp(40px,5.6vw,68px);
+  display:grid;row-gap:clamp(48px,6.5vw,92px);
 }
 #material .plate{
   margin:0;
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  display:grid;grid-template-columns:minmax(0,1fr);
+  align-items:start;
   min-width:0;
 }
-#material .plate .tile,#material .plate figcaption{grid-column:1/-1}
-#material .plate--pair .tile{grid-column:auto}
+#material .plate--pair{grid-template-columns:repeat(2,minmax(0,1fr))}
 #material .plate--pair .tile + .tile{border-left:0}
+#material .plate--pair figcaption{grid-column:1/-1}
 
 /* the frame: a link to the file, so the original is one tap away with or
    without a script (with one, the tap opens the lightbox instead). Its
@@ -3021,7 +3169,7 @@ dl.pairs .cols{
    print is done. */
 #material .tile{
   display:block;width:100%;margin:0;padding:var(--inset);
-  border:1px solid var(--line-2);
+  border:1px solid var(--frame);
   background:var(--mat);
   color:inherit;
   text-decoration:none;
@@ -3034,6 +3182,25 @@ dl.pairs .cols{
   container-type:inline-size;               /* the tags size from the frame */
 }
 #material .plate--pair .frame{aspect-ratio:1/1}
+/* the singles keep the files' own proportions */
+#material .plate--left .frame{aspect-ratio:1239/581}
+#material .plate--right .frame{aspect-ratio:983/606}
+#material .plate--full .frame{aspect-ratio:1400/639}
+
+/* the full plate: the mount is the figure, so the label can be printed
+   on it inside the one hairline; the link is the chart alone */
+#material .plate--full{
+  padding:var(--inset);
+  border:1px solid var(--frame);
+  background:var(--mat);
+  transition:border-color var(--d) var(--e-out);
+}
+#material .plate--full .tile{border:0;padding:0;background:transparent}
+#material .plate--full figcaption{
+  margin-top:var(--inset);
+  padding-top:clamp(12px,1.5vw,16px);
+  border-top:1px solid var(--line-2);
+}
 
 /* the figure: the file's pixel grid is the viewBox, stretched to the
    frame (preserveAspectRatio none) with every stroke held at one pixel;
@@ -3061,12 +3228,16 @@ dl.pairs .cols{
 
 /* the founder's labels, in the page's label voice, placed in the file's
    own percentages so they stay with their zones at every width; what is
-   counted (the fibonacci ratios) is mono. They scale a little with the
-   plate so a phone's plate is not all label. */
+   counted (the fibonacci ratios) is mono. Each sits on a sliver of the
+   mat, the way the platform boxes its labels, so a label over a candle
+   is read and not overprinted. They scale a little with the plate so a
+   phone's plate is not all label. */
 #material .plate__tag{
   position:absolute;
   display:block;
   transform:translateY(-50%);
+  padding:1px 3px;margin:-1px -3px;        /* the sliver grows around the text; the text stays put */
+  background:var(--mat);
   font-family:var(--f-display);
   font-style:normal;
   font-size:clamp(8px,1.6cqw,var(--t-nano));
@@ -3076,11 +3247,11 @@ dl.pairs .cols{
   color:var(--ink-3);
   white-space:nowrap;
   pointer-events:none;
-  text-shadow:0 0 3px var(--mat),0 0 2px var(--mat);
 }
 #material .plate--pair .plate__tag{font-size:clamp(8px,2.4cqw,var(--t-nano))}
 #material .plate__tag--middle{transform:translate(-50%,-50%)}
 #material .plate__tag--end{transform:translate(-100%,-50%)}
+#material .plate__tag--two{line-height:1.2;text-align:right}   /* a long tag, set on two lines */
 #material .plate__tag--num{
   font-family:var(--f-mono);
   font-size:clamp(8px,1.3cqw,var(--t-nano));
@@ -3095,7 +3266,7 @@ dl.pairs .cols{
 /* pointed at: the frame warms, the ink of the annotations comes up */
 #material .tile .fig__zone,#material .tile .fig__level,#material .tile .fig__line,#material .tile .plate__tag{transition:opacity var(--d) var(--e-out),fill-opacity var(--d) var(--e-out),stroke-opacity var(--d) var(--e-out)}
 @media (hover:hover){
-  #material .plate:hover .tile{border-color:var(--line-4)}
+  #material .plate:hover .tile,#material .plate--full:hover{border-color:var(--frame-hi)}
   #material .plate:hover .fig__zone{fill-opacity:.11;stroke-opacity:.55}
   #material .plate:hover .fig__level--liq,#material .plate:hover .fig__level--eqh,#material .plate:hover .fig__level--msb{stroke-opacity:.9}
   #material .plate:hover .plate__tag--liq,#material .plate:hover .plate__tag--eqh,#material .plate:hover .plate__tag--smt,#material .plate:hover .plate__tag--trend{opacity:1}
@@ -3106,11 +3277,12 @@ dl.pairs .cols{
 #material .tile:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
 
 /* the label: a grid, so the same five pieces -- number, title, level,
-   provenance, note -- can sit two ways. On a desk: the number, the title,
-   the level and the provenance tag on one row, the note under the title
-   on the title's column line. On a phone (below): the number, the level
-   and the tag on one row, the title and the note under them, flush with
-   the plate, so a two-line title never leaves a stub of level beside it. */
+   provenance, note -- can sit two ways. Under a plate: the number, the
+   title, the level and the provenance tag on one row, the note under the
+   title on the title's column line. Beside a plate (and on a phone): the
+   number and the level on one row, the title and the note under them,
+   the provenance last -- so a two-line title never leaves a stub of level
+   beside it. */
 #material .plate figcaption{
   display:grid;grid-template-columns:auto auto minmax(32px,1fr) auto;
   column-gap:clamp(12px,1.8vw,20px);
@@ -3140,7 +3312,7 @@ dl.pairs .cols{
   align-self:baseline;
   transform:translateY(-.34em);
   font-size:var(--t-micro);
-  background:repeating-linear-gradient(90deg,var(--gold) 0 3px,transparent 3px 8px);
+  background:var(--level);
   opacity:.55;
   transition:opacity var(--d) var(--e-out);
 }
@@ -3161,30 +3333,61 @@ dl.pairs .cols{
   text-wrap:pretty;
 }
 
-/* a phone: a pair stacks, the second picture under the first with the
-   shared hairline between them, each at the proportion the files have
-   (four by three); a single takes a wider-than-tall frame that still
-   holds its labels. */
+/* ---- the hang: a desk ---------------------------------------------------
+   The wall's own width is the page's wide column; a plate that comes
+   forward is pulled past the strip's column by --out on the side it
+   leaves. 100cqw is the strip's column (the wall is the container), so
+   --out is one length wherever it is used. */
+@media (min-width:1100px){
+  #material .wall{container-type:inline-size;--out:calc((var(--wallw) - 100cqw) / 2)}
+  /* 02: the plate from the page's left edge, the label beside it on the right */
+  #material .plate--left{grid-template-columns:minmax(0,1fr) 264px;column-gap:var(--capgap)}
+  #material .plate--left .tile{grid-column:1;grid-row:1;width:auto;margin-left:calc(-1 * var(--out))}
+  #material .plate--left figcaption{grid-column:2;grid-row:1}
+  /* 03: smaller, from past the middle to the page's right edge, the label
+     on the left; its level runs across the gap to the plate's edge */
+  #material .plate--right{grid-template-columns:300px minmax(0,1fr);column-gap:var(--capgap)}
+  #material .plate--right .tile{grid-column:2;grid-row:1;width:auto;margin-right:calc(-1 * var(--out))}
+  #material .plate--right figcaption{grid-column:1;grid-row:1}
+  #material .plate--right .plate__level{margin-right:calc(-1 * var(--capgap))}
+  /* 04: edge to edge of the wide column */
+  #material .plate--full{width:auto;margin-left:calc(-1 * var(--out));margin-right:calc(-1 * var(--out))}
+  /* the label beside a plate: stacked, hung on the plate's top edge */
+  #material .plate--left figcaption,#material .plate--right figcaption{
+    grid-template-columns:auto minmax(32px,1fr);column-gap:14px;
+    margin-top:-3px;                          /* the number's cap on the frame's top line */
+  }
+  #material .plate--left figcaption > b,#material .plate--right figcaption > b{grid-column:1;grid-row:1}
+  #material .plate--left .plate__level,#material .plate--right .plate__level{grid-column:2;grid-row:1}
+  #material .plate--left .plate__title,#material .plate--right .plate__title{grid-column:1/-1;grid-row:2;margin-top:10px;max-width:24ch}
+  #material .plate--left figcaption small,#material .plate--right figcaption small{grid-column:1/-1;grid-row:3;margin-top:8px;max-width:34ch}
+  #material .plate--left .plate__after,#material .plate--right .plate__after{grid-column:1/-1;grid-row:4;margin-top:clamp(14px,1.6vw,20px)}
+}
+
+/* a narrow strip: the label's second way, so a title that wraps never
+   leaves a stub of level beside it */
 @media (max-width:719px){
-  /* a narrow strip: the label's second way, so a title that wraps never
-     leaves a stub of level beside it */
   #material .plate figcaption{grid-template-columns:auto minmax(32px,1fr) auto;column-gap:14px}
   #material .plate__level{grid-column:2;grid-row:1}
   #material .plate__after{grid-column:3;grid-row:1}
   #material .plate__title{grid-column:1/-1;grid-row:2;margin-top:8px}
   #material .plate figcaption small{grid-column:1/-1;grid-row:3}
 }
+/* a phone: a pair stacks, the second picture under the first with the
+   shared hairline between them, each at the proportion the files have
+   (four by three); a single takes a wider-than-tall frame that still
+   holds its labels. */
 @media (max-width:619px){
-  #material .plate{grid-template-columns:minmax(0,1fr)}
-  #material .plate--pair .tile{grid-column:1/-1}
-  #material .plate--pair .tile + .tile{border-left:1px solid var(--line-2);border-top:0}
-  #material .frame{aspect-ratio:16/10}
+  #material .wall{row-gap:clamp(40px,10vw,56px)}
+  #material .plate--pair{grid-template-columns:minmax(0,1fr)}
+  #material .plate--pair .tile + .tile{border-left:1px solid var(--frame);border-top:0}
+  #material .frame,#material .plate--left .frame,#material .plate--right .frame,#material .plate--full .frame{aspect-ratio:16/10}
   #material .plate--pair .frame{aspect-ratio:4/3}
   #material .plate__tag--trend{transform:translate(-50%,-50%) rotate(24deg)}
 }
 
 @media (prefers-reduced-motion:reduce){
-  #material .tile:not(.reveal),#material .plate__level,#material .plate figcaption > b,
+  #material .tile:not(.reveal),#material .plate--full,#material .plate__level,#material .plate figcaption > b,
   #material .tile .fig__zone,#material .tile .fig__level,#material .tile .fig__line,#material .tile .plate__tag{transition:none}
 }
 
@@ -3374,111 +3577,200 @@ dl.pairs .cols{
   #trackrecord .ledger__axis::after{content:"";flex:1 1 auto;min-width:16px;height:1px;background:var(--line-3)}
 }
 
-/* ---------- the evidence -------------------------------------------------- */
-/* the caption of the wall, hung on its left edge: the title in the label
-   voice, the note in the serif at note size, one row -- as the spread
-   captions its plate */
-#trackrecord .proofs-hint{
-  position:relative;z-index:2;
-  display:flex;flex-wrap:wrap;align-items:baseline;
-  gap:2px clamp(14px,1.6vw,22px);
-  margin:clamp(52px,7vw,88px) 0 clamp(14px,1.8vw,20px);
+/* ---------- the exhibit -------------------------------------------------- */
+/* the head: the exhibit named in the label voice on the print's left
+   edge, and on its right edge, in the mono of everything counted, which
+   of the six is in the print */
+#trackrecord .exhibit{position:relative;z-index:2;margin:clamp(52px,7vw,88px) 0 0}
+#trackrecord .exhibit__head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:clamp(14px,1.6vw,22px);
+  margin:0 0 clamp(14px,1.8vw,20px);
   font-family:var(--f-display);
-  line-height:1.5;
-}
-#trackrecord .proofs-hint__t{
-  flex:0 0 auto;
   font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
+  line-height:1.5;
   color:var(--ink-1);
 }
-#trackrecord .proofs-hint__n{
-  flex:1 1 20ch;min-width:0;
-  font-size:var(--t-small);color:var(--ink-3);
-  text-wrap:pretty;
+#trackrecord .exhibit__count{
+  flex:0 0 auto;
+  display:inline-flex;align-items:baseline;gap:.55em;
+  font-family:var(--f-mono);font-weight:400;font-size:var(--t-caption);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:var(--trk-mono);text-transform:none;
+  color:var(--ink-4);
 }
-/* two to a row, as the wall above prints its pairs; the row of the two
-   square files is a pair of squares, the others 3:2, so a row is level */
-#trackrecord .proofs{
-  position:relative;z-index:2;
-  display:grid;
-  gap:clamp(26px,3.6vw,40px) clamp(12px,2vw,20px);
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  align-items:start;
-}
-#trackrecord .proofs figure{margin:0;min-width:0}
-/* the plate: the file at full value in its own colour, on one mat inside
-   one hairline of the gold. The whole figure is the hover target, so
-   pointing at a caption lights its plate: the mat warms to the gold of
-   the spread's zones -- the band, not the line -- and the frame comes up
-   a step. The hover transition waits until the reveal has run: an
-   id-scoped transition would outrank the .wipe's own and the plate would
-   snap on instead of printing on. */
-#trackrecord .tile{
+#trackrecord .exhibit__count b{font-weight:400;color:var(--ink-2)}
+
+/* the print: the file at full value in its own colour, on one mat inside
+   one hairline of the gold, the width of the strip, as the plates above
+   are hung. A link to the file, so the original is one tap away with or
+   without a script (with one, the tap opens the lightbox). Pointed at,
+   the mat warms to the gold of the spread's zones -- the band, not the
+   line -- and the frame comes up a step. The hover transition waits
+   until the reveal has run: an id-scoped transition would outrank the
+   .wipe's own and the print would snap on instead of printing on. When
+   a chip swaps the file, the print prints on again from the left (the
+   spread's wipe, as an animation so it can run more than once) and the
+   label under it settles into place. */
+#trackrecord .print{margin:0;min-width:0}
+#trackrecord .print__plate{
   display:block;width:100%;margin:0;padding:var(--inset);
   border:1px solid var(--line-2);
   background:var(--mat);
+  color:inherit;
+  text-decoration:none;
   cursor:zoom-in;
 }
-#trackrecord .tile:not(.reveal){transition:border-color var(--d) var(--e-out),background-color var(--d-slow) var(--e-out)}
+#trackrecord .print__plate:not(.reveal){transition:border-color var(--d) var(--e-out),background-color var(--d-slow) var(--e-out)}
+#trackrecord .print__plate.is-print{animation:tr-print calc(var(--d-reveal) * 1.1) var(--e-reveal) both}
+#trackrecord .print__cap.is-print{animation:tr-settle var(--d-reveal) var(--e-reveal) both}
+@keyframes tr-print{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+@keyframes tr-settle{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 #trackrecord .pic{display:block;position:relative;width:100%;aspect-ratio:3/2;overflow:hidden}
-#trackrecord .proofs .sq .pic{aspect-ratio:1/1}
 #trackrecord .pic img{
   display:block;width:100%;height:100%;
   object-fit:contain;
 }
 @media (hover:hover){
-  #trackrecord .proofs figure:hover .tile{border-color:var(--line-4);background:rgba(215,179,100,.09)}
-  #trackrecord .proofs figure:hover figcaption > b{color:var(--gold)}
+  #trackrecord .print:hover .print__plate{border-color:var(--line-4);background:rgba(215,179,100,.09)}
+  #trackrecord .print:hover .cap__n{color:var(--gold)}
+  #trackrecord .print:hover .cap__lv{opacity:.9}
 }
-#trackrecord .tile:focus-visible{outline:1px solid var(--gold);outline-offset:3px;border-color:var(--line-4);background:rgba(215,179,100,.09)}
-/* the caption as the plates are captioned: the number in mono, the firm
-   in the label voice, the note in the serif under it on the firm's line */
-#trackrecord .proofs figcaption,
-#trackrecord .zoom figcaption{
-  display:flex;gap:14px;align-items:baseline;
-  margin-top:clamp(10px,1.4vw,14px);
+#trackrecord .print__plate:focus-visible{outline:1px solid var(--gold);outline-offset:3px;border-color:var(--line-4);background:rgba(215,179,100,.09)}
+
+/* the label: a museum label, as the plates above are labelled -- the
+   number in mono, the firm in the label voice, from the firm a dashed
+   level (the liquidity line of the spread, same dash) to the document's
+   date, tagged at the level's end in mono the way a chart tags a level;
+   under the firm, on the firm's column line, what the document is; on
+   the print's right edge, where the tag ends, the page's link to the
+   untouched file. One label per file is in the markup; the one in hand
+   is shown. The note holds two lines of height, so the strip under it
+   stays where it is whichever label is up. */
+#trackrecord .print__cap{margin-top:clamp(12px,1.6vw,16px)}
+#trackrecord .cap{
+  display:grid;grid-template-columns:auto auto minmax(32px,1fr) auto;
+  column-gap:clamp(12px,1.8vw,20px);
+  align-items:baseline;
   font-family:var(--f-display);
-  font-size:var(--t-micro);letter-spacing:var(--trk-caps);text-transform:uppercase;
-  line-height:1.5;
 }
-#trackrecord .proofs figcaption > b,
-#trackrecord .zoom figcaption > b,
-#trackrecord .proofs-fn > b{
-  flex:0 0 auto;
+#trackrecord .cap[hidden]{display:none}
+#trackrecord .cap__n{
+  grid-column:1;grid-row:1;
   font-family:var(--f-mono);font-weight:400;font-size:var(--t-caption);
-  letter-spacing:var(--trk-mono);text-transform:none;
-  color:var(--ink-3);
+  letter-spacing:var(--trk-mono);
+  color:var(--ink-4);
   transition:color var(--d) var(--e-out);
 }
-#trackrecord .proofs figcaption > span,
-#trackrecord .zoom figcaption > span{min-width:0;color:var(--ink-1)}
-#trackrecord .proofs figcaption small,
-#trackrecord .zoom figcaption small{
-  display:block;margin-top:5px;
-  letter-spacing:0;text-transform:none;
-  font-size:var(--t-small);color:var(--ink-2);line-height:1.55;
-  text-wrap:pretty;
+#trackrecord .cap__firm{
+  grid-column:2;grid-row:1;min-width:0;
+  font-size:var(--t-micro);letter-spacing:var(--trk-caps);
+  text-transform:uppercase;line-height:1.5;
+  color:var(--ink-1);
+  white-space:nowrap;
 }
-/* the footnote: the one note a plate needs, under a rule that closes the
-   wall edge to edge, hung on the wall's left edge in the caption's own
-   voice -- the number of its plate in mono, the note in the serif */
-#trackrecord .proofs-fn{
-  position:relative;z-index:2;
-  display:flex;gap:14px;align-items:baseline;
-  margin:clamp(22px,3vw,34px) 0 0;
-  padding-top:clamp(14px,2vw,20px);
-  border-top:1px solid var(--line-2);
-  font-family:var(--f-display);
-  font-size:var(--t-small);
-  line-height:1.55;
+#trackrecord .cap__lv{
+  grid-column:3;grid-row:1;
+  display:block;height:1px;
+  align-self:baseline;
+  transform:translateY(-.34em);
+  font-size:var(--t-micro);
+  background:var(--level);
+  opacity:.8;
+  transition:opacity var(--d) var(--e-out);
+}
+#trackrecord .cap__date{
+  grid-column:4;grid-row:1;
+  font-family:var(--f-mono);font-weight:400;font-size:var(--t-caption);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:var(--trk-mono);
   color:var(--ink-2);
+  white-space:nowrap;
+}
+#trackrecord .cap__note{
+  grid-column:2/4;grid-row:2;
+  display:block;margin-top:6px;
+  min-height:calc(2 * 1.55em);
+  max-width:52ch;
+  font-size:var(--t-small);line-height:1.55;letter-spacing:0;
+  color:var(--ink-3);
   text-wrap:pretty;
 }
-#trackrecord .proofs-fn > span{min-width:0;max-width:56ch}
-@media (max-width:480px){
-  /* a phone: one plate per row, the width of the column, so a certificate
-     can be read where it stands and the caption has its own line */
-  #trackrecord .proofs{grid-template-columns:minmax(0,1fr);row-gap:clamp(30px,8vw,40px)}
+#trackrecord .cap__orig{grid-column:4;grid-row:2;justify-self:end;margin:0}
+
+/* the contact strip: the six files as chips on one hairline, in the
+   order of the rows, each the size of a stamp, its number under it in
+   mono. A chip is grey until it is pointed at; the one in the print is
+   in colour, its number in the gold, and a short rule of the gold sits
+   on the hairline under it -- the marker on a level -- and slides to
+   whichever chip is chosen. Pointed at, a chip's mat warms to the band
+   of the spread. */
+#trackrecord .strip{
+  list-style:none;margin:clamp(22px,3vw,34px) 0 0;padding:0;
+  display:flex;gap:clamp(8px,1.5vw,14px);
+  border-bottom:1px solid var(--line-2);
+}
+#trackrecord .strip li{flex:0 0 auto;min-width:0}
+#trackrecord .strip__chip{
+  position:relative;
+  display:block;
+  width:clamp(52px,7.2vw,96px);
+  padding:0 0 10px;
+  color:inherit;
+  text-decoration:none;
+}
+#trackrecord .strip__pic{
+  display:block;
+  aspect-ratio:3/2;
+  padding:3px;
+  border:1px solid var(--line-2);
+  background:var(--mat);
+  transition:border-color var(--d) var(--e-out),background-color var(--d) var(--e-out);
+}
+#trackrecord .strip__pic img{
+  display:block;width:100%;height:100%;
+  object-fit:contain;
+  filter:grayscale(1) brightness(.7);
+  transition:filter var(--d-slow) var(--e-out);
+}
+#trackrecord .strip__n{
+  display:block;margin-top:7px;
+  font-family:var(--f-mono);font-weight:400;font-size:var(--t-caption);
+  letter-spacing:var(--trk-mono);
+  line-height:1.2;
+  color:var(--ink-4);
+  transition:color var(--d) var(--e-out);
+}
+#trackrecord .strip__chip::after{
+  content:"";
+  position:absolute;left:0;right:0;bottom:-1px;height:1px;
+  background:var(--gold);
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform var(--d-slow) var(--e-out);
+}
+#trackrecord .strip__chip.is-cur::after{transform:none}
+#trackrecord .strip__chip.is-cur .strip__pic{border-color:var(--line-4)}
+#trackrecord .strip__chip.is-cur .strip__pic img{filter:none}
+#trackrecord .strip__chip.is-cur .strip__n{color:var(--gold)}
+@media (hover:hover){
+  #trackrecord .strip__chip:hover .strip__pic{border-color:var(--line-3);background:rgba(215,179,100,.09)}
+  #trackrecord .strip__chip:hover .strip__pic img{filter:none}
+  #trackrecord .strip__chip:hover .strip__n{color:var(--ink-2)}
+}
+#trackrecord .strip__chip:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+
+/* a narrow strip: the label's second way, so a firm that is long never
+   leaves a stub of level beside it -- the number, the level and the date
+   on one row, the firm under them, then the document, then the link, all
+   on the print's left edge */
+@media (max-width:719px){
+  #trackrecord .cap{grid-template-columns:auto minmax(32px,1fr) auto;column-gap:14px}
+  #trackrecord .cap__lv{grid-column:2;grid-row:1}
+  #trackrecord .cap__date{grid-column:3;grid-row:1}
+  #trackrecord .cap__firm{grid-column:1/-1;grid-row:2;margin-top:8px;white-space:normal}
+  #trackrecord .cap__note{grid-column:1/-1;grid-row:3;min-height:0;max-width:none}
+  #trackrecord .cap__orig{grid-column:1/-1;grid-row:4;justify-self:start;margin-top:4px}
+  #trackrecord .strip{gap:8px}
 }
 
 /* ---------- the caveat ---------------------------------------------------- */
@@ -3559,7 +3851,8 @@ dl.pairs .cols{
 #trackrecord .zoom .close{margin:clamp(14px,2.4vh,24px) 0 0}
 
 @media (prefers-reduced-motion:reduce){
-  #trackrecord .tile,#trackrecord .proofs figcaption > b{transition:none}
+  #trackrecord .print__plate,#trackrecord .cap__n,#trackrecord .cap__lv,#trackrecord .strip__pic,#trackrecord .strip__pic img,#trackrecord .strip__n,#trackrecord .strip__chip::after{transition:none}
+  #trackrecord .print__plate.is-print,#trackrecord .print__cap.is-print{animation:none}
   #trackrecord .zoom[open],#trackrecord .zoom[open]::backdrop{animation:none}
 }
 
@@ -3776,7 +4069,7 @@ dl.pairs .cols{
   --fig-f:.5;                            /* the chart's left edge, as a fraction of the card: the centre line */
   --bleed:calc(var(--gutter) + max(0px,(100vw - 2 * var(--gutter) - var(--wide)) / 2));
   position:relative;
-  padding:clamp(48px,7vw,104px) var(--gutter) clamp(40px,5.5vw,72px);
+  padding:clamp(48px,7vw,104px) var(--gutter) clamp(40px,5vw,64px);
 }
 #closer .card{
   position:relative;
@@ -3881,7 +4174,7 @@ dl.pairs .cols{
 /* ---- what is read after the word ------------------------------------- */
 #closer .end__col{
   position:relative;z-index:2;
-  margin-top:clamp(36px,4.2vw,56px);
+  margin-top:clamp(44px,4.2vw,56px);
   max-width:calc(50% - var(--axis-gap)); /* the left half of the grid, up to the gap */
 }
 #closer .subtitle{
@@ -3906,19 +4199,22 @@ dl.pairs .cols{
    non-scaling stroke, Chromium runs a pathLength dash the wrong way.)
    The insets are open above by the caption's height, and by two pixels
    below, so nothing on the box's edges is halved. */
-.js #closer .reveal.trace{opacity:1;transform:none;clip-path:inset(-40px 100% -2px 0);transition:clip-path 2.2s var(--e-reveal)}
-.js #closer .reveal.trace.is-in{clip-path:inset(-40px 0 -2px 0)}
+.js #closer .reveal.trace{opacity:1;transform:none;clip-path:inset(-40px 100% -40px 0);transition:clip-path 2.2s var(--e-reveal)}
+.js #closer .reveal.trace.is-in{clip-path:inset(-40px 0 -40px 0)}
 @media (prefers-reduced-motion:reduce){
   .js #closer .reveal.trace{clip-path:none;transition:none}
 }
 
 /* ---- a phone: the chart takes the right three fifths, the words wait
-   under it; the caption stacks in two short lines at the endpoint so it
-   is a label and not a line of its own ------------------------------- */
+   under it. The caption cannot sit above the endpoint here (in English
+   the word runs to that column), so it stacks in two short lines under
+   the level's right end, still on the axis -- a label, not a line of
+   its own. */
 @media (max-width:619px){
   #closer{--fig-f:.4;--depth:calc(.8 * var(--D))}
+  #closer .end__tag{bottom:auto;top:calc(178 / 240 * 100% + 12px)}  /* 12px under the level */
   #closer .end__tag .br{display:block}
-  #closer .end__col{margin-top:calc(var(--depth) + clamp(30px,8vw,44px));max-width:none}
+  #closer .end__col{margin-top:calc(var(--depth) + 24px + clamp(26px,7vw,36px));max-width:none}  /* under the caption's two lines */
   #closer .subtitle{max-width:var(--measure-quote)}
 }
 
@@ -4053,16 +4349,19 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   footer .fnav a,footer .fnav a::before,footer .fnav a::after{transition:none}
 }
 
+/* where the risk line no longer fits one measure beside the clock, each
+   sentence takes its own line, and a sentence that must wrap wraps
+   evenly -- no line is one word */
+@media (max-width:1023px){
+  footer .legal .s{display:block;text-wrap:balance}
+  footer .legal .past{text-wrap:balance}
+  footer .legal p + p{margin-top:8px}
+}
 @media (max-width:619px){
   footer .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
   footer .fsig{grid-column:1 / -1}
   footer .fnav{padding-top:0}             /* under the signature, not beside it */
   footer .fbase{display:block}
-  /* each sentence on its own line, and a sentence that must wrap wraps
-     evenly -- no line is one word */
-  footer .legal .s{display:block;text-wrap:balance}
-  footer .legal .past{text-wrap:balance}
-  footer .legal p + p{margin-top:8px}
   footer .ftime{padding-top:0;margin-top:clamp(24px,6vw,32px)}
 }
 </style>
@@ -4076,30 +4375,20 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 </aside>
 <!-- section:header -->
 <header id="header">
-  <div class="inner">
+  <div class="inner reveal">
     <a class="wm" href="#hero" aria-label="Atlas Capital">
       <img class="wm__mark" src="assets/logo-mark.svg" alt="" width="420" height="342">
       <b>Atlas&nbsp;Capital</b>
     </a>
-    <!-- the one call, dead-centre of the bar, in one measured slot. The
-         word and its arrow are always there; the prefix -- the rule and the
-         verb -- is a grid track that is 0fr while another gold call is on
-         screen and 1fr when none is (motion.js toggles .solid), so the label
-         grows from the dash and the row either side of it re-centres in one
-         eased move. Nothing is reserved: at rest the slot is exactly the
-         width of the word. The prefix is never hidden from the reader, only
-         clipped for the eye, so the link's name is the full call whatever
-         its state. -->
-    <a class="cta" href="https://discord.gg/78Ff2GuSfW">
-      <span class="cta__pre"><i class="cta__rule" aria-hidden="true"></i><span class="cta__verb"><span lang="nl">Open de</span><span lang="en">Open the</span></span></span>
-      <span class="cta__word">Discord</span>
-    </a>
-    <!-- the contents line: two anchors either side of the call on a desk,
-         a drawer of levels under the bar everywhere else. Each row is a
-         level: the name, a hairline, and on the right gutter -- the axis of
-         the page, where the spread's labels sit -- the reel number, read
-         off the page's own group titles by the script below so it is
-         never typed twice; the tag is empty without it. -->
+    <!-- the contents line. On a desk the four anchors are set at the two
+         margins, two with the name and two with the switch, so nothing in
+         the bar pretends to be centred except the one thing that is (the
+         call); everywhere else they live in a drawer under the bar. Each
+         row of the drawer is a level: the name, a hairline, and on the
+         right gutter -- the axis of the page, where the spread's labels
+         sit -- the reel number, read off the page's own group titles by
+         the script below so it is never typed twice; the tag is empty
+         without it. -->
     <nav class="nav" id="hdr-nav" aria-label="Secties / Sections">
       <div class="lv lv--l">
         <a href="#educatie"><span class="lv__name"><span lang="nl">Educatie</span><span lang="en">Education</span></span><b class="n" aria-hidden="true"></b></a>
@@ -4122,6 +4411,14 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
         <a class="tk" href="https://www.tiktok.com/@atlascapitalbv">TikTok</a>
       </div>
     </nav>
+    <!-- the one call, dead-centre of the bar at every width from 620 up:
+         it is placed on the bar's axis, so the name and the switch can be
+         any width in either language and it does not move. One string,
+         one rule before it at one gap, the arrow after it; between the
+         quiet state and the call state nothing moves, only the colour.
+         On a phone the verb is kept for the reader and clipped for the
+         eye, so the link's name is the full call whatever its width. -->
+    <a class="cta" href="https://discord.gg/78Ff2GuSfW"><span class="cta__label"><span class="cta__verb"><span lang="nl">Open de</span><span lang="en">Open the</span></span> <span class="cta__word">Discord</span></span></a>
     <button class="menu" type="button" aria-expanded="false" aria-controls="hdr-nav">
       <span class="menu__open"><span lang="nl">Menu</span><span lang="en">Menu</span></span>
       <span class="menu__close"><span lang="nl">Sluiten</span><span lang="en">Close</span></span>
@@ -4138,7 +4435,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
     var W = window, root = document.documentElement;
     var nav = hdr.querySelector(".nav"), btn = hdr.querySelector(".menu");
     var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
-    var wide = W.matchMedia("(min-width: 1120px)");
+    var wide = W.matchMedia("(min-width: 1160px)");
     function pad(n){ return n < 10 ? "0" + n : "" + n; }
     /* which section each anchor leads to, and its reel number -- resolved
        once the rest of the page is parsed (this script runs before it) */
@@ -4376,218 +4673,277 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
 <section id="education">
   <div class="grp" id="educatie"><h2><span lang="nl">Educatie · 10 onderwerpen</span><span lang="en">Education · 10 topics</span></h2></div>
 
-  <!-- The syllabus as a scale and a plate. Left of the axis, in the label
-       column, the ten terms as an index: the count in mono, the term in
-       the serif, one under the other like the levels of a price scale.
-       Right of the axis, on the value column, one plate: the term that is
-       lit, drawn as a schema in the vocabulary of the opening figure (one
-       hairline path, a zone, a dashed level; no price, no day, no
-       outcome), the term itself under it at statement size and, under
-       that, what the word means -- in dictionary voice, never what the
-       course does with it. Point at a row, or move to it with the
-       keyboard, and it becomes the lit one: the band of the figure fills
-       behind it and the plate redraws for it; leave, and the plate goes
-       back to the last row chosen. The pane is decoration (aria-hidden):
-       the index carries the content, the gloss in each row is read by a
-       screen reader and shown on a phone, where the plate sits above the
-       index and every row keeps its gloss under the term. -->
+  <!-- The syllabus as an index and a lemma, on the reel's two columns.
+       Left of the axis, in the label column, the index: the ten terms one
+       under the other, the count in mono at the left the way a price
+       scale is labelled, a hairline between rows -- a scale, not ten
+       credits. Right of the axis, in the value column, the lemma of the
+       term that is lit: a plate drawn for that term in the vocabulary of
+       the opening figure (one hairline path, zones, dashed levels, a few
+       candles where the term is defined by candles; no price, no day, no
+       outcome, and the corner says so), then the entry under it the way a
+       glossary sets one: the count tied to the index, the term at
+       statement size, its definition in dictionary voice, and a rule-set
+       of three lines -- what else the term is called, what the figure
+       shows, which other entries it belongs with (each a link to that
+       entry). What a word means, never what the course does with it.
+
+       The index is a tablist and the lemmas are its panels: point at a
+       row (or tab to it, or tap it) and the band moves to it and the
+       panel redraws for it; leave, and it returns to the last row chosen.
+       The plate is decoration (aria-hidden; the "in the figure" line says
+       in words what it draws). On a phone the lemma of the chosen term
+       sits above the index and every row keeps its one-line gloss under
+       the term; a tap brings the lemma back into view. Without a script
+       the first lemma stands and every gloss stays in its row. -->
   <div class="syllabus" data-stagger="70">
-    <div class="pane reveal" data-at="0" aria-hidden="true">
-      <figure class="fig is-on">
-        <div class="plate">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <line class="lq" x1="48" y1="88" x2="600" y2="88"/>
-            <line class="lq" x1="48" y1="184" x2="600" y2="184"/>
-            <rect class="zn" x="276" y="56" width="80" height="32"/>
-            <path class="ln" pathLength="1" d="M0 140 36 128 68 152 104 120 140 144 172 112 200 132 232 100 260 124 292 84 316 64 336 72 356 96 380 116 408 100 436 136 464 120 496 148 524 132 552 160"/>
-          </svg>
-          <i class="tag"><b>01</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
-        <figcaption>
-          <span class="word"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span>
-          <span class="gloss"><span lang="nl">een uitbraak die in de range terugkeert</span><span lang="en">a breakout that returns into the range</span></span>
-        </figcaption>
-      </figure>
-      <figure class="fig">
-        <div class="plate">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <line class="lq" x1="208" y1="96" x2="420" y2="96"/>
-            <line class="lq" x1="208" y1="168" x2="420" y2="168"/>
-            <path class="ln ln--b" pathLength="1" d="M0 224 32 212 60 232 96 196 128 208 156 180 184 192 208 168 236 188 264 208 292 192 320 180 352 176 380 196 408 216 440 204 472 228 504 216 536 236"/>
-            <path class="ln" pathLength="1" d="M0 164 32 152 60 172 96 136 128 148 156 116 184 128 208 96 236 120 264 140 292 124 320 108 352 76 380 100 408 124 440 112 472 140 504 128 536 152"/>
-          </svg>
-          <i class="tag"><b>02</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
-        <figcaption>
-          <span class="word">SMT</span>
-          <span class="gloss"><span lang="nl">divergentie tussen twee verwante markten</span><span lang="en">divergence between two related markets</span></span>
-        </figcaption>
-      </figure>
-      <figure class="fig">
-        <div class="plate">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <rect class="zn" x="224" y="116" width="376" height="36"/>
-            <path class="ln" pathLength="1" d="M0 200 32 188 60 208 92 192 124 204 156 184 188 196 212 176 236 132 260 88 284 56 312 72 336 48 364 72 392 60 420 88 448 116 472 136 500 104 528 80 556 92"/>
-          </svg>
-          <i class="tag"><b>03</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
-        <figcaption>
-          <span class="word">FVG</span>
-          <span class="gloss"><span lang="nl">fair value gap: het gat dat een impuls achterlaat</span><span lang="en">fair value gap: the gap an impulse leaves behind</span></span>
-        </figcaption>
-      </figure>
-      <figure class="fig">
-        <div class="plate">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <rect class="zn" x="224" y="116" width="376" height="36"/>
-            <path class="ln" pathLength="1" d="M0 200 32 188 60 208 92 192 124 204 156 184 188 196 212 176 236 132 260 88 284 56 312 72 336 48 364 72 392 60 420 88 444 120 468 160 492 192 516 168 536 152 556 180 576 208"/>
-          </svg>
-          <i class="tag"><b>04</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
-        <figcaption>
-          <span class="word">IFVG</span>
-          <span class="gloss"><span lang="nl">inverse fair value gap: een doorbroken FVG</span><span lang="en">inverse fair value gap: a broken FVG</span></span>
-        </figcaption>
-      </figure>
-      <figure class="fig">
-        <div class="plate">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <rect class="zn zn--lo" x="248" y="168" width="352" height="32"/>
-            <rect class="zn" x="200" y="168" width="48" height="32"/>
-            <path class="ln" pathLength="1" d="M0 120 32 132 60 112 92 140 124 124 156 148 184 136 208 164 232 192 256 168 276 120 300 84 324 60 348 72 376 48 404 80 432 116 460 148 484 176 512 140 536 112 564 124"/>
-          </svg>
-          <i class="tag"><b>05</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
-        <figcaption>
-          <span class="word">Orderblocks</span>
-          <span class="gloss"><span lang="nl">de laatste tegengestelde candle v&oacute;&oacute;r een impuls</span><span lang="en">the last opposing candle before an impulse</span></span>
-        </figcaption>
-      </figure>
-      <figure class="fig">
-        <div class="plate">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <line class="hl hl--lo" x1="72" y1="224" x2="300" y2="44"/>
-            <line class="hl" x1="300" y1="112" x2="600" y2="112"/>
-            <line class="hl" x1="300" y1="134" x2="600" y2="134"/>
-            <line class="hl" x1="300" y1="156" x2="600" y2="156"/>
-            <line class="hl" x1="300" y1="186" x2="600" y2="186"/>
-            <path class="ln" pathLength="1" d="M0 208 24 220 48 200 72 224 96 196 120 208 144 172 168 184 196 144 220 156 244 112 268 124 300 44 324 68 348 100 372 124 396 148 420 140 444 160 472 132 500 104 528 116 556 88"/>
-          </svg>
-          <i class="tag"><b>06</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
-        <figcaption>
-          <span class="word">Fibonacci</span>
-          <span class="gloss"><span lang="nl">vaste verhoudingen tussen een low en een high</span><span lang="en">fixed ratios between a low and a high</span></span>
-        </figcaption>
-      </figure>
-      <figure class="fig">
-        <div class="plate">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <rect class="zn zn--lo" x="100" y="48" width="180" height="168"/>
-            <line class="lq" x1="148" y1="88" x2="600" y2="88"/>
-            <line class="lq" x1="220" y1="180" x2="600" y2="180"/>
-            <path class="ln" pathLength="1" d="M0 148 28 136 56 156 84 140 100 132 124 108 148 88 172 112 196 132 220 180 244 160 268 144 280 156 308 140 336 120 364 132 392 104 420 80 440 72 464 96 492 124 520 112 548 140"/>
-          </svg>
-          <i class="tag"><b>07</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
-        <figcaption>
-          <span class="word"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span>
-          <span class="gloss"><span lang="nl">de highs en lows die een sessie achterlaat</span><span lang="en">the highs and lows a session leaves behind</span></span>
-        </figcaption>
-      </figure>
-      <figure class="fig">
-        <div class="plate">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <line class="lq" x1="120" y1="80" x2="600" y2="80"/>
-            <line class="lq" x1="200" y1="196" x2="600" y2="196"/>
-            <path class="ln" pathLength="1" d="M0 140 28 128 52 152 80 120 112 100 140 84 168 108 196 148 220 192 248 160 276 116 300 84 324 112 352 156 380 192 408 164 436 128 464 100 488 68 508 80 532 112 556 136"/>
-          </svg>
-          <i class="tag"><b>08</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
-        <figcaption>
-          <span class="word"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span>
-          <span class="gloss"><span lang="nl">orders die boven highs en onder lows liggen</span><span lang="en">orders resting above highs and below lows</span></span>
-        </figcaption>
-      </figure>
-      <figure class="fig">
-        <div class="plate">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <rect class="zn zn--lo" x="260" y="60" width="240" height="80"/>
-            <rect class="zn" x="260" y="140" width="240" height="36"/>
-            <line class="hl" x1="260" y1="140" x2="500" y2="140"/>
-            <path class="ln" pathLength="1" d="M0 196 24 184 52 204 80 176 108 188 136 160 164 172 192 144 216 156 240 136 260 140"/>
-          </svg>
-          <i class="tag"><b>09</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
-        <figcaption>
-          <span class="word"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span>
-          <span class="gloss"><span lang="nl">positiegrootte en wat &eacute;&eacute;n trade mag kosten</span><span lang="en">position size and what one trade may cost</span></span>
-        </figcaption>
-      </figure>
-      <figure class="fig">
-        <div class="plate">
-          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
-            <line class="nw" x1="400" y1="36" x2="400" y2="224"/>
-            <path class="br" d="M400 132 444 116 488 104 532 88 580 72"/>
-            <path class="br" d="M400 132 444 148 488 168 532 180 580 196"/>
-            <path class="ln" pathLength="1" d="M0 160 24 148 52 172 80 140 108 152 136 120 164 132 192 104 216 116 244 92 268 108 296 80 320 96 348 124 372 112 400 132"/>
-          </svg>
-          <i class="tag"><b>10</b><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
-        </div>
-        <figcaption>
-          <span class="word"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span>
-          <span class="gloss"><span lang="nl">gedrag en emotie bij het beslissen</span><span lang="en">behaviour and emotion when deciding</span></span>
-        </figcaption>
-      </figure>
+    <div class="index" role="tablist" aria-orientation="vertical" aria-labelledby="educatie">
+      <button type="button" class="row reveal is-on" role="tab" id="edu-t01" aria-selected="true" aria-controls="edu-p01"><b class="num">01</b><span class="term"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span><span class="sub"><span lang="nl">een uitbraak die in de range terugkeert</span><span lang="en">a breakout that returns into the range</span></span></button>
+      <button type="button" class="row reveal" role="tab" id="edu-t02" aria-selected="false" aria-controls="edu-p02" tabindex="-1"><b class="num">02</b><span class="term">SMT</span><span class="sub"><span lang="nl">divergentie tussen twee verwante markten</span><span lang="en">divergence between two related markets</span></span></button>
+      <button type="button" class="row reveal" role="tab" id="edu-t03" aria-selected="false" aria-controls="edu-p03" tabindex="-1"><b class="num">03</b><span class="term">FVG</span><span class="sub"><span lang="nl">fair value gap: het gat dat een impuls achterlaat</span><span lang="en">fair value gap: the gap an impulse leaves behind</span></span></button>
+      <button type="button" class="row reveal" role="tab" id="edu-t04" aria-selected="false" aria-controls="edu-p04" tabindex="-1"><b class="num">04</b><span class="term">IFVG</span><span class="sub"><span lang="nl">inverse fair value gap: een doorbroken FVG die van rol wisselt</span><span lang="en">inverse fair value gap: a broken FVG that switches roles</span></span></button>
+      <button type="button" class="row reveal" role="tab" id="edu-t05" aria-selected="false" aria-controls="edu-p05" tabindex="-1"><b class="num">05</b><span class="term">Orderblocks</span><span class="sub"><span lang="nl">de laatste tegengestelde candle v&oacute;&oacute;r een impuls</span><span lang="en">the last opposing candle before an impulse</span></span></button>
+      <button type="button" class="row reveal" role="tab" id="edu-t06" aria-selected="false" aria-controls="edu-p06" tabindex="-1"><b class="num">06</b><span class="term">Fibonacci</span><span class="sub"><span lang="nl">vaste verhoudingen tussen een low en een high</span><span lang="en">fixed ratios between a low and a high</span></span></button>
+      <button type="button" class="row reveal" role="tab" id="edu-t07" aria-selected="false" aria-controls="edu-p07" tabindex="-1"><b class="num">07</b><span class="term"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span><span class="sub"><span lang="nl">de highs en lows die een sessie achterlaat</span><span lang="en">the highs and lows a session leaves behind</span></span></button>
+      <button type="button" class="row reveal" role="tab" id="edu-t08" aria-selected="false" aria-controls="edu-p08" tabindex="-1"><b class="num">08</b><span class="term"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span><span class="sub"><span lang="nl">orders die boven highs en onder lows liggen</span><span lang="en">orders resting above highs and below lows</span></span></button>
+      <button type="button" class="row reveal" role="tab" id="edu-t09" aria-selected="false" aria-controls="edu-p09" tabindex="-1"><b class="num">09</b><span class="term"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span><span class="sub"><span lang="nl">positiegrootte en wat &eacute;&eacute;n trade mag kosten</span><span lang="en">position size and what one trade may cost</span></span></button>
+      <button type="button" class="row reveal" role="tab" id="edu-t10" aria-selected="false" aria-controls="edu-p10" tabindex="-1"><b class="num">10</b><span class="term"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span><span class="sub"><span lang="nl">gedrag en emotie bij het beslissen</span><span lang="en">behaviour and emotion when deciding</span></span></button>
     </div>
 
-    <dl class="index">
-      <div class="row reveal is-on" tabindex="0">
-        <dt><b class="num">01</b><span class="term"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></span></dt>
-        <dd><span lang="nl">een uitbraak die in de range terugkeert</span><span lang="en">a breakout that returns into the range</span></dd>
+    <div class="pane reveal" data-at="0">
+      <div class="fig is-on" role="tabpanel" id="edu-p01" aria-labelledby="edu-t01">
+        <div class="plate" aria-hidden="true">
+          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
+            <line class="lq" x1="30" y1="84" x2="600" y2="84"/>
+            <line class="lq" x1="30" y1="176" x2="600" y2="176"/>
+            <rect class="zn zn--lo" x="332" y="52" width="64" height="32"/>
+            <path class="ln" pathLength="1" d="M0 140 24 128 48 152 76 118 104 146 132 112 160 150 188 106 214 138 240 112 266 154 292 120 318 100 340 76 358 52 372 60 386 84 402 110 424 132 448 116 470 150 496 128 522 156 548 138"/>
+          </svg>
+          <i class="lbl lbl--up" style="right:10px;top:32.3%">Range</i>
+          <i class="lbl lbl--dn" style="left:67.3%;top:28.5%"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></i>
+          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <div class="lemma">
+          <p class="eyebrow"><b class="num">01</b><span class="of">/ 10</span></p>
+          <h3 class="word"><span lang="nl">Deviatie</span><span lang="en">Deviation</span></h3>
+          <p class="gloss"><span lang="nl">een uitbraak die in de range terugkeert</span><span lang="en">a breakout that returns into the range</span></p>
+          <dl class="rules">
+            <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd>false breakout, sweep</dd></div>
+            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">twee niveaus van een range; de lijn breekt erboven uit en keert terug</span><span lang="en">the two levels of a range; the line breaks above them and comes back</span></dd></div>
+            <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="08"><b>08</b><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></button><span class="sep">&middot;</span><button type="button" class="xref" data-go="07"><b>07</b><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></button></dd></div>
+          </dl>
+        </div>
       </div>
-      <div class="row reveal" tabindex="0">
-        <dt><b class="num">02</b><span class="term">SMT</span></dt>
-        <dd><span lang="nl">divergentie tussen twee verwante markten</span><span lang="en">divergence between two related markets</span></dd>
+      <div class="fig" role="tabpanel" id="edu-p02" aria-labelledby="edu-t02">
+        <div class="plate" aria-hidden="true">
+          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
+            <line class="hl" x1="222" y1="85" x2="418" y2="58"/>
+            <line class="hl" x1="222" y1="177" x2="418" y2="198"/>
+            <path class="ln ln--b" pathLength="1" d="M0 214 28 202 56 222 84 194 112 212 140 188 168 202 196 188 230 178 258 200 284 220 300 214 328 206 356 200 384 198 400 196 422 212 446 228 470 218 496 234 522 224 548 240 570 234"/>
+            <path class="ln" pathLength="1" d="M0 124 28 110 56 132 84 100 112 122 140 92 168 114 196 96 230 84 258 104 284 124 300 118 328 98 356 78 384 70 400 60 422 82 446 104 470 96 496 118 522 108 548 128 570 122"/>
+          </svg>
+          <i class="lbl lbl--up" style="left:68.7%;top:20.0%"><span lang="nl">Hogere high</span><span lang="en">Higher high</span></i>
+          <i class="lbl lbl--up" style="left:68.7%;top:73.1%"><span lang="nl">Lagere high</span><span lang="en">Lower high</span></i>
+          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <div class="lemma">
+          <p class="eyebrow"><b class="num">02</b><span class="of">/ 10</span></p>
+          <h3 class="word">SMT</h3>
+          <p class="gloss"><span lang="nl">divergentie tussen twee verwante markten</span><span lang="en">divergence between two related markets</span></p>
+          <dl class="rules">
+            <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd><span lang="nl">smart money technique, SMT-divergentie</span><span lang="en">smart money technique, SMT divergence</span></dd></div>
+            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">twee verwante markten; de bovenste zet een hogere high, de onderste niet</span><span lang="en">two related markets; the upper sets a higher high, the lower does not</span></dd></div>
+            <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="08"><b>08</b><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></button></dd></div>
+          </dl>
+        </div>
       </div>
-      <div class="row reveal" tabindex="0">
-        <dt><b class="num">03</b><span class="term">FVG</span></dt>
-        <dd><span lang="nl">fair value gap: het gat dat een impuls achterlaat</span><span lang="en">fair value gap: the gap an impulse leaves behind</span></dd>
+      <div class="fig" role="tabpanel" id="edu-p03" aria-labelledby="edu-t03">
+        <div class="plate" aria-hidden="true">
+          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
+            <rect class="zn" x="232" y="92" width="368" height="40"/>
+            <g class="cds"><g class="cd cd--dn" transform="translate(48 0)"><line x1="0" y1="152" x2="0" y2="192"/><rect x="-7" y="160" width="14" height="24"/></g><g class="cd" transform="translate(80 0)"><line x1="0" y1="156" x2="0" y2="190"/><rect x="-7" y="164" width="14" height="18"/></g><g class="cd cd--dn" transform="translate(112 0)"><line x1="0" y1="150" x2="0" y2="188"/><rect x="-7" y="162" width="14" height="18"/></g><g class="cd" transform="translate(144 0)"><line x1="0" y1="154" x2="0" y2="194"/><rect x="-7" y="166" width="14" height="20"/></g><g class="cd cd--dn" transform="translate(176 0)"><line x1="0" y1="152" x2="0" y2="190"/><rect x="-7" y="164" width="14" height="18"/></g><g class="cd" transform="translate(208 0)"><line x1="0" y1="160" x2="0" y2="196"/><rect x="-7" y="172" width="14" height="18"/></g><g class="cd" transform="translate(246 0)"><line x1="0" y1="132" x2="0" y2="186"/><rect x="-7" y="140" width="14" height="38"/></g><g class="cd" transform="translate(282 0)"><line x1="0" y1="66" x2="0" y2="150"/><rect x="-7" y="72" width="14" height="74"/></g><g class="cd" transform="translate(318 0)"><line x1="0" y1="46" x2="0" y2="92"/><rect x="-7" y="52" width="14" height="36"/></g><g class="cd cd--dn" transform="translate(354 0)"><line x1="0" y1="44" x2="0" y2="78"/><rect x="-7" y="52" width="14" height="20"/></g><g class="cd cd--dn" transform="translate(390 0)"><line x1="0" y1="66" x2="0" y2="110"/><rect x="-7" y="70" width="14" height="34"/></g><g class="cd cd--dn" transform="translate(426 0)"><line x1="0" y1="100" x2="0" y2="138"/><rect x="-7" y="104" width="14" height="26"/></g><g class="cd" transform="translate(462 0)"><line x1="0" y1="92" x2="0" y2="134"/><rect x="-7" y="98" width="14" height="30"/></g><g class="cd" transform="translate(498 0)"><line x1="0" y1="58" x2="0" y2="104"/><rect x="-7" y="64" width="14" height="36"/></g><g class="cd" transform="translate(534 0)"><line x1="0" y1="36" x2="0" y2="72"/><rect x="-7" y="42" width="14" height="26"/></g></g>
+          </svg>
+          <i class="lbl lbl--up" style="right:10px;top:35.4%">FVG</i>
+          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <div class="lemma">
+          <p class="eyebrow"><b class="num">03</b><span class="of">/ 10</span></p>
+          <h3 class="word">FVG</h3>
+          <p class="gloss"><span lang="nl">fair value gap: het gat dat een impuls achterlaat</span><span lang="en">fair value gap: the gap an impulse leaves behind</span></p>
+          <dl class="rules">
+            <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd>imbalance</dd></div>
+            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">drie candles; het gat tussen de high van de eerste en de low van de derde</span><span lang="en">three candles; the gap between the first one's high and the third one's low</span></dd></div>
+            <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="04"><b>04</b>IFVG</button><span class="sep">&middot;</span><button type="button" class="xref" data-go="05"><b>05</b>Orderblocks</button></dd></div>
+          </dl>
+        </div>
       </div>
-      <div class="row reveal" tabindex="0">
-        <dt><b class="num">04</b><span class="term">IFVG</span></dt>
-        <dd><span lang="nl">inverse fair value gap: een doorbroken FVG</span><span lang="en">inverse fair value gap: a broken FVG</span></dd>
+      <div class="fig" role="tabpanel" id="edu-p04" aria-labelledby="edu-t04">
+        <div class="plate" aria-hidden="true">
+          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
+            <rect class="zn" x="232" y="92" width="368" height="40"/>
+            <g class="cds"><g class="cd cd--dn" transform="translate(48 0)"><line x1="0" y1="152" x2="0" y2="192"/><rect x="-7" y="160" width="14" height="24"/></g><g class="cd" transform="translate(80 0)"><line x1="0" y1="156" x2="0" y2="190"/><rect x="-7" y="164" width="14" height="18"/></g><g class="cd cd--dn" transform="translate(112 0)"><line x1="0" y1="150" x2="0" y2="188"/><rect x="-7" y="162" width="14" height="18"/></g><g class="cd" transform="translate(144 0)"><line x1="0" y1="154" x2="0" y2="194"/><rect x="-7" y="166" width="14" height="20"/></g><g class="cd cd--dn" transform="translate(176 0)"><line x1="0" y1="152" x2="0" y2="190"/><rect x="-7" y="164" width="14" height="18"/></g><g class="cd" transform="translate(208 0)"><line x1="0" y1="160" x2="0" y2="196"/><rect x="-7" y="172" width="14" height="18"/></g><g class="cd" transform="translate(246 0)"><line x1="0" y1="132" x2="0" y2="186"/><rect x="-7" y="140" width="14" height="38"/></g><g class="cd" transform="translate(282 0)"><line x1="0" y1="66" x2="0" y2="150"/><rect x="-7" y="72" width="14" height="74"/></g><g class="cd" transform="translate(318 0)"><line x1="0" y1="46" x2="0" y2="92"/><rect x="-7" y="52" width="14" height="36"/></g><g class="cd cd--dn" transform="translate(354 0)"><line x1="0" y1="44" x2="0" y2="84"/><rect x="-7" y="52" width="14" height="28"/></g><g class="cd cd--dn" transform="translate(390 0)"><line x1="0" y1="72" x2="0" y2="128"/><rect x="-7" y="76" width="14" height="48"/></g><g class="cd cd--dn" transform="translate(426 0)"><line x1="0" y1="116" x2="0" y2="178"/><rect x="-7" y="122" width="14" height="50"/></g><g class="cd cd--dn" transform="translate(462 0)"><line x1="0" y1="166" x2="0" y2="206"/><rect x="-7" y="170" width="14" height="30"/></g><g class="cd" transform="translate(498 0)"><line x1="0" y1="130" x2="0" y2="204"/><rect x="-7" y="138" width="14" height="60"/></g><g class="cd cd--dn" transform="translate(534 0)"><line x1="0" y1="136" x2="0" y2="214"/><rect x="-7" y="140" width="14" height="68"/></g></g>
+          </svg>
+          <i class="lbl lbl--up" style="right:10px;top:35.4%">IFVG</i>
+          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <div class="lemma">
+          <p class="eyebrow"><b class="num">04</b><span class="of">/ 10</span></p>
+          <h3 class="word">IFVG</h3>
+          <p class="gloss"><span lang="nl">inverse fair value gap: een doorbroken FVG die van rol wisselt</span><span lang="en">inverse fair value gap: a broken FVG that switches roles</span></p>
+          <dl class="rules">
+            <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd>inversion fair value gap</dd></div>
+            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">een FVG uit een stijging, daarna doorbroken en van onderen getest</span><span lang="en">an FVG from a rise, then broken through and tested from below</span></dd></div>
+            <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="03"><b>03</b>FVG</button></dd></div>
+          </dl>
+        </div>
       </div>
-      <div class="row reveal" tabindex="0">
-        <dt><b class="num">05</b><span class="term">Orderblocks</span></dt>
-        <dd><span lang="nl">de laatste tegengestelde candle v&oacute;&oacute;r een impuls</span><span lang="en">the last opposing candle before an impulse</span></dd>
+      <div class="fig" role="tabpanel" id="edu-p05" aria-labelledby="edu-t05">
+        <div class="plate" aria-hidden="true">
+          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
+            <rect class="zn" x="196" y="168" width="404" height="30"/>
+            <g class="cds"><g class="cd cd--dn" transform="translate(48 0)"><line x1="0" y1="118" x2="0" y2="158"/><rect x="-7" y="124" width="14" height="26"/></g><g class="cd" transform="translate(80 0)"><line x1="0" y1="128" x2="0" y2="164"/><rect x="-7" y="134" width="14" height="22"/></g><g class="cd cd--dn" transform="translate(112 0)"><line x1="0" y1="126" x2="0" y2="172"/><rect x="-7" y="132" width="14" height="34"/></g><g class="cd" transform="translate(144 0)"><line x1="0" y1="146" x2="0" y2="184"/><rect x="-7" y="152" width="14" height="26"/></g><g class="cd cd--dn" transform="translate(176 0)"><line x1="0" y1="150" x2="0" y2="192"/><rect x="-7" y="156" width="14" height="30"/></g><g class="cd cd--dn" transform="translate(210 0)"><line x1="0" y1="162" x2="0" y2="206"/><rect x="-7" y="168" width="14" height="30"/></g><g class="cd" transform="translate(246 0)"><line x1="0" y1="118" x2="0" y2="200"/><rect x="-7" y="124" width="14" height="72"/></g><g class="cd" transform="translate(282 0)"><line x1="0" y1="60" x2="0" y2="130"/><rect x="-7" y="66" width="14" height="60"/></g><g class="cd" transform="translate(318 0)"><line x1="0" y1="40" x2="0" y2="74"/><rect x="-7" y="46" width="14" height="24"/></g><g class="cd cd--dn" transform="translate(354 0)"><line x1="0" y1="44" x2="0" y2="96"/><rect x="-7" y="50" width="14" height="42"/></g><g class="cd cd--dn" transform="translate(390 0)"><line x1="0" y1="86" x2="0" y2="140"/><rect x="-7" y="90" width="14" height="46"/></g><g class="cd cd--dn" transform="translate(426 0)"><line x1="0" y1="130" x2="0" y2="176"/><rect x="-7" y="134" width="14" height="38"/></g><g class="cd" transform="translate(462 0)"><line x1="0" y1="158" x2="0" y2="196"/><rect x="-7" y="162" width="14" height="28"/></g><g class="cd" transform="translate(498 0)"><line x1="0" y1="116" x2="0" y2="166"/><rect x="-7" y="120" width="14" height="42"/></g><g class="cd" transform="translate(534 0)"><line x1="0" y1="80" x2="0" y2="124"/><rect x="-7" y="84" width="14" height="36"/></g></g>
+          </svg>
+          <i class="lbl lbl--dn" style="right:10px;top:76.2%">Orderblock</i>
+          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <div class="lemma">
+          <p class="eyebrow"><b class="num">05</b><span class="of">/ 10</span></p>
+          <h3 class="word">Orderblocks</h3>
+          <p class="gloss"><span lang="nl">de laatste tegengestelde candle v&oacute;&oacute;r een impuls</span><span lang="en">the last opposing candle before an impulse</span></p>
+          <dl class="rules">
+            <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd><span lang="nl">OB, bullish of bearish</span><span lang="en">OB, bullish or bearish</span></dd></div>
+            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">de laatste dalende candle v&oacute;&oacute;r de stijging, als zone vooruit getekend</span><span lang="en">the last falling candle before the rise, drawn forward as a zone</span></dd></div>
+            <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="03"><b>03</b>FVG</button><span class="sep">&middot;</span><button type="button" class="xref" data-go="08"><b>08</b><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></button></dd></div>
+          </dl>
+        </div>
       </div>
-      <div class="row reveal" tabindex="0">
-        <dt><b class="num">06</b><span class="term">Fibonacci</span></dt>
-        <dd><span lang="nl">vaste verhoudingen tussen een low en een high</span><span lang="en">fixed ratios between a low and a high</span></dd>
+      <div class="fig" role="tabpanel" id="edu-p06" aria-labelledby="edu-t06">
+        <div class="plate" aria-hidden="true">
+          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
+            <line class="hl hl--lo" x1="70" y1="222" x2="330" y2="46"/>
+            <line class="hl" x1="330" y1="46" x2="600" y2="46"/>
+            <line class="hl hl--lo" x1="330" y1="87" x2="600" y2="87"/>
+            <line class="hl hl--lo" x1="330" y1="113" x2="600" y2="113"/>
+            <line class="hl hl--lo" x1="330" y1="134" x2="600" y2="134"/>
+            <line class="hl hl--mid" x1="330" y1="155" x2="600" y2="155"/>
+            <line class="hl hl--lo" x1="330" y1="184" x2="600" y2="184"/>
+            <line class="hl" x1="330" y1="222" x2="600" y2="222"/>
+            <path class="ln" pathLength="1" d="M0 206 22 194 44 214 70 222 96 190 118 204 144 160 166 176 190 128 212 144 236 98 258 112 284 70 306 84 330 46 352 74 374 100 396 88 418 122 440 138 462 154 484 146 506 118 528 130 550 96 572 104"/>
+          </svg>
+          <i class="lbl lbl--up" style="right:10px;top:17.7%">High</i>
+          <i class="lbl lbl--dn" style="right:10px;top:85.4%">Low</i>
+          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <div class="lemma">
+          <p class="eyebrow"><b class="num">06</b><span class="of">/ 10</span></p>
+          <h3 class="word">Fibonacci</h3>
+          <p class="gloss"><span lang="nl">vaste verhoudingen tussen een low en een high</span><span lang="en">fixed ratios between a low and a high</span></p>
+          <dl class="rules">
+            <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd>fib, retracement</dd></div>
+            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">van low naar high; de niveaus liggen op de verhoudingen van de reeks</span><span lang="en">from low to high; the levels sit at the ratios of the sequence</span></dd></div>
+            <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="05"><b>05</b>Orderblocks</button></dd></div>
+          </dl>
+        </div>
       </div>
-      <div class="row reveal" tabindex="0">
-        <dt><b class="num">07</b><span class="term"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></span></dt>
-        <dd><span lang="nl">de highs en lows die een sessie achterlaat</span><span lang="en">the highs and lows a session leaves behind</span></dd>
+      <div class="fig" role="tabpanel" id="edu-p07" aria-labelledby="edu-t07">
+        <div class="plate" aria-hidden="true">
+          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
+            <rect class="zn zn--lo" x="80" y="36" width="190" height="190"/>
+            <line class="lq" x1="150" y1="96" x2="600" y2="96"/>
+            <line class="lq" x1="232" y1="188" x2="600" y2="188"/>
+            <path class="ln" pathLength="1" d="M0 150 24 138 48 160 80 146 104 118 126 134 150 96 172 112 194 148 212 176 232 188 250 162 270 150 296 128 320 144 344 110 368 92 392 80 416 92 440 118 464 100 488 132 512 152 536 140 560 164 580 156"/>
+          </svg>
+          <i class="lbl lbl--dn" style="left:14.7%;top:19.2%"><span lang="nl">Sessie</span><span lang="en">Session</span></i>
+          <i class="lbl lbl--up" style="right:10px;top:36.9%">High</i>
+          <i class="lbl lbl--dn" style="right:10px;top:72.3%">Low</i>
+          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <div class="lemma">
+          <p class="eyebrow"><b class="num">07</b><span class="of">/ 10</span></p>
+          <h3 class="word"><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></h3>
+          <p class="gloss"><span lang="nl">de highs en lows die een sessie achterlaat</span><span lang="en">the highs and lows a session leaves behind</span></p>
+          <dl class="rules">
+            <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd><span lang="nl">sessie-high en sessie-low</span><span lang="en">session high and session low</span></dd></div>
+            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">&eacute;&eacute;n sessie als venster; haar high en low lopen door als niveaus</span><span lang="en">one session as a window; its high and low run on as levels</span></dd></div>
+            <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="08"><b>08</b><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></button><span class="sep">&middot;</span><button type="button" class="xref" data-go="01"><b>01</b><span lang="nl">Deviatie</span><span lang="en">Deviation</span></button></dd></div>
+          </dl>
+        </div>
       </div>
-      <div class="row reveal" tabindex="0">
-        <dt><b class="num">08</b><span class="term"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></span></dt>
-        <dd><span lang="nl">orders die boven highs en onder lows liggen</span><span lang="en">orders resting above highs and below lows</span></dd>
+      <div class="fig" role="tabpanel" id="edu-p08" aria-labelledby="edu-t08">
+        <div class="plate" aria-hidden="true">
+          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
+            <line class="lq" x1="120" y1="78" x2="600" y2="78"/>
+            <line class="lq" x1="72" y1="182" x2="600" y2="182"/>
+            <path class="ln" pathLength="1" d="M0 150 22 136 44 158 68 140 92 182 116 120 140 78 164 118 188 182 212 124 236 78 260 126 284 182 308 120 332 78 356 112 380 92 404 58 424 74 448 104 472 130 496 118 520 150 544 138 568 166"/>
+          </svg>
+          <i class="lbl lbl--up" style="right:10px;top:30.0%">Buy-side</i>
+          <i class="lbl lbl--dn" style="right:10px;top:70.0%">Sell-side</i>
+          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <div class="lemma">
+          <p class="eyebrow"><b class="num">08</b><span class="of">/ 10</span></p>
+          <h3 class="word"><span lang="nl">Liquiditeit</span><span lang="en">Liquidity</span></h3>
+          <p class="gloss"><span lang="nl">orders die boven highs en onder lows liggen</span><span lang="en">orders resting above highs and below lows</span></p>
+          <dl class="rules">
+            <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd><span lang="nl">buy-side en sell-side liquiditeit</span><span lang="en">buy-side and sell-side liquidity</span></dd></div>
+            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">gelijke highs en gelijke lows, elk met een niveau erlangs; &eacute;&eacute;n sweep</span><span lang="en">equal highs and equal lows, each with a level alongside; one sweep</span></dd></div>
+            <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="07"><b>07</b><span lang="nl">Sessie-liquiditeit</span><span lang="en">Session liquidity</span></button><span class="sep">&middot;</span><button type="button" class="xref" data-go="01"><b>01</b><span lang="nl">Deviatie</span><span lang="en">Deviation</span></button></dd></div>
+          </dl>
+        </div>
       </div>
-      <div class="row reveal" tabindex="0">
-        <dt><b class="num">09</b><span class="term"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></span></dt>
-        <dd><span lang="nl">positiegrootte en wat &eacute;&eacute;n trade mag kosten</span><span lang="en">position size and what one trade may cost</span></dd>
+      <div class="fig" role="tabpanel" id="edu-p09" aria-labelledby="edu-t09">
+        <div class="plate" aria-hidden="true">
+          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
+            <rect class="zn zn--fill" x="264" y="130" width="336" height="46"/>
+            <line class="hl" x1="264" y1="64" x2="600" y2="64"/>
+            <line class="hl hl--hi" x1="264" y1="130" x2="600" y2="130"/>
+            <line class="lq" x1="264" y1="176" x2="600" y2="176"/>
+            <path class="ln" pathLength="1" d="M0 168 24 154 48 176 72 150 96 170 120 138 144 158 168 126 192 148 216 118 240 140 264 130"/>
+          </svg>
+          <i class="lbl lbl--up" style="right:10px;top:24.6%"><span lang="nl">Doel</span><span lang="en">Target</span></i>
+          <i class="lbl lbl--up" style="right:10px;top:50.0%">Entry</i>
+          <i class="lbl lbl--dn" style="right:10px;top:67.7%">Stop</i>
+          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <div class="lemma">
+          <p class="eyebrow"><b class="num">09</b><span class="of">/ 10</span></p>
+          <h3 class="word"><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></h3>
+          <p class="gloss"><span lang="nl">positiegrootte en wat &eacute;&eacute;n trade mag kosten</span><span lang="en">position size and what one trade may cost</span></p>
+          <dl class="rules">
+            <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd><span lang="nl">positiegrootte, stop-loss</span><span lang="en">position sizing, stop-loss</span></dd></div>
+            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">entry, stop en doel als drie niveaus; het risico is de afstand tot de stop</span><span lang="en">entry, stop and target as three levels; the risk is the distance to the stop</span></dd></div>
+            <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="10"><b>10</b><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></button></dd></div>
+          </dl>
+        </div>
       </div>
-      <div class="row reveal" tabindex="0">
-        <dt><b class="num">10</b><span class="term"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></span></dt>
-        <dd><span lang="nl">gedrag en emotie bij het beslissen</span><span lang="en">behaviour and emotion when deciding</span></dd>
+      <div class="fig" role="tabpanel" id="edu-p10" aria-labelledby="edu-t10">
+        <div class="plate" aria-hidden="true">
+          <svg viewBox="0 0 600 260" preserveAspectRatio="none" focusable="false">
+            <line class="nw" x1="400" y1="30" x2="400" y2="230"/>
+            <path class="br" d="M400 132 600 64"/>
+            <path class="br" d="M400 132 600 200"/>
+            <path class="ln" pathLength="1" d="M0 160 24 148 52 172 80 140 108 152 136 120 164 132 192 104 216 116 244 92 268 108 296 80 320 96 348 124 372 112 400 132"/>
+          </svg>
+          <i class="lbl lbl--dn" style="left:68.0%;top:13.8%"><span lang="nl">Nu</span><span lang="en">Now</span></i>
+          <i class="tag"><span lang="nl">schematisch</span><span lang="en">schematic</span></i>
+        </div>
+        <div class="lemma">
+          <p class="eyebrow"><b class="num">10</b><span class="of">/ 10</span></p>
+          <h3 class="word"><span lang="nl">Tradingpsychologie</span><span lang="en">Trading psychology</span></h3>
+          <p class="gloss"><span lang="nl">gedrag en emotie bij het beslissen</span><span lang="en">behaviour and emotion when deciding</span></p>
+          <dl class="rules">
+            <div><dt><span lang="nl">Ook</span><span lang="en">Also</span></dt><dd>mindset, discipline</dd></div>
+            <div><dt><span lang="nl">In de figuur</span><span lang="en">In the figure</span></dt><dd><span lang="nl">de lijn tot nu en twee mogelijke vervolgen; de beslissing valt op de streep</span><span lang="en">the line so far and two ways it could go; the decision is made at the line</span></dd></div>
+            <div><dt><span lang="nl">Zie ook</span><span lang="en">See also</span></dt><dd><button type="button" class="xref" data-go="09"><b>09</b><span lang="nl">Risicobeheer</span><span lang="en">Risk management</span></button></dd></div>
+          </dl>
+        </div>
       </div>
-    </dl>
+    </div>
   </div>
 
-  <!-- the close: one line and the call that answers it, on the strip's
-       left edge with the index -- the section's one action, in the paper
-       with the arrow, and nothing drawn above it -->
+  <!-- the close: one line and the call that answers it, on the same two
+       columns as the index and the lemma -- the line where the index
+       stands, the section's one call where the lemma stands, one baseline -->
   <div class="close" data-stagger="140">
     <p class="close__line reveal"><span lang="nl">De educatie staat in de server.</span><span lang="en">The teaching lives in the server.</span></p>
     <a class="cta solid reveal" href="https://discord.gg/78Ff2GuSfW"><span lang="nl">Kom erbij op Discord</span><span lang="en">Join us on Discord</span></a>
@@ -4596,10 +4952,11 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   <script>
   (function(){
     var s = document.getElementById("education"); if (!s) return;
-    var box = s.querySelector(".syllabus"), list = s.querySelector(".index"), pane = s.querySelector(".pane");
-    if (!box || !list || !pane) return;
+    var list = s.querySelector(".index"), pane = s.querySelector(".pane");
+    if (!list || !pane) return;
     var rows = list.querySelectorAll(".row"), figs = pane.querySelectorAll(".fig");
-    var pinned = 0, cur = 0, live = false;
+    var pinned = 0, cur = 0, live = false, mq = null;
+    try { mq = window.matchMedia("(max-width:620px)"); } catch(e){}
     function rowOf(t){ while (t && t !== list) { if (t.classList && t.classList.contains("row")) return t; t = t.parentNode; } return null; }
     function at(t){ var r = rowOf(t); return r ? Array.prototype.indexOf.call(rows, r) : -1; }
     /* the first pointer or key wakes the pane: from then on a swap fades in
@@ -4611,10 +4968,27 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       for (var k = 0; k < rows.length; k++) rows[k].classList.toggle("is-on", k === i);
       for (k = 0; k < figs.length; k++) figs[k].classList.toggle("is-on", k === i);
     }
+    function pin(i){
+      if (i < 0 || i >= rows.length) return;
+      pinned = i; set(i);
+      for (var k = 0; k < rows.length; k++) {
+        rows[k].setAttribute("aria-selected", k === i ? "true" : "false");
+        rows[k].setAttribute("tabindex", k === i ? "0" : "-1");
+      }
+    }
+    /* on a phone the lemma sits above the index: a tap brings it back */
+    function bring(){
+      if (!mq || !mq.matches) return;
+      var r = pane.getBoundingClientRect(), h = window.innerHeight || 0;
+      if (r.top >= 0 && r.bottom <= h) return;
+      var reduce = false;
+      try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e){}
+      try { pane.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); } catch(e){ pane.scrollIntoView(); }
+    }
     list.addEventListener("mouseover", function(e){ var i = at(e.target); if (i >= 0) { wake(); set(i); } });
     list.addEventListener("mouseleave", function(){ set(pinned); });
-    list.addEventListener("click", function(e){ var i = at(e.target); if (i >= 0) { wake(); pinned = i; set(i); } });
-    list.addEventListener("focusin", function(e){ var i = at(e.target); if (i >= 0) { wake(); pinned = i; set(i); } });
+    list.addEventListener("click", function(e){ var i = at(e.target); if (i >= 0) { wake(); pin(i); bring(); } });
+    list.addEventListener("focusin", function(e){ var i = at(e.target); if (i >= 0) { wake(); pin(i); } });
     list.addEventListener("keydown", function(e){
       var i = at(e.target); if (i < 0) return;
       var j = -1, k = e.key;
@@ -4624,6 +4998,14 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       else if (k === "End") j = rows.length - 1;
       if (j < 0 || j === i) return;
       e.preventDefault(); rows[j].focus();
+    });
+    /* "see also": the entry named is the next lemma */
+    pane.addEventListener("click", function(e){
+      var t = e.target;
+      while (t && t !== pane) { if (t.classList && t.classList.contains("xref")) break; t = t.parentNode; }
+      if (!t || t === pane) return;
+      var i = parseInt(t.getAttribute("data-go"), 10) - 1;
+      if (i >= 0 && i < rows.length) { wake(); pin(i); bring(); }
     });
   })();
   </script>
@@ -4831,17 +5213,21 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   </p>
   <p class="wall__hint reveal"><span lang="nl">Tik op een plaat voor het origineel</span><span lang="en">Tap a plate for the original</span></p>
 
-  <!-- Five plates, one wall. Every plate is a faithful trace of one of the
-       founder's own annotated charts: the candles are read off the file
-       pixel by pixel (high, low, open, close, direction), the zones, the
-       levels, the lines and the labels are measured on it, and nothing is
-       added -- no price, no date, no instrument, no entry. The trace is set
-       in the vocabulary of the opening spread (gold hairlines for what the
-       founder drew, two greys for the candles) so seven screenshots from
-       one platform become one set of plates; the file itself, untouched,
-       opens in the page's lightbox (#zoom, in the track record) on a tap,
-       and the link's href points at it, so the original is one tap away
-       with or without a script. Each plate is its own stagger: the picture
+  <!-- Five plates, one wall, hung as a sequence: a pair inside the strip,
+       a plate offset left with its label beside it, a smaller one offset
+       right, the session edge to edge of the wide column with its label
+       on the mount, and a pair again (the hang is material.css). Every
+       plate is a faithful trace of one of the founder's own annotated
+       charts: the candles are read off the file pixel by pixel (high,
+       low, open, close, direction), the zones, the levels, the lines and
+       the labels are measured on it, and nothing is added -- no price, no
+       date, no instrument, no entry. The trace is set in the vocabulary
+       of the opening spread (gold hairlines for what the founder drew,
+       two greys for the candles) so seven screenshots from one platform
+       become one set of plates; the file itself, untouched, opens in the
+       page's lightbox (#zoom, in the track record) on a tap, and the
+       link's href points at it, so the original is one tap away with or
+       without a script. Each plate is its own stagger: the picture
        prints on from the left (.wipe), then the label rises. -->
   <div class="wall">
     <figure class="plate plate--pair" data-stagger="140">
@@ -4890,7 +5276,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       </figcaption>
     </figure>
 
-    <figure class="plate" data-stagger="140">
+    <figure class="plate plate--left" data-stagger="140">
       <a class="tile reveal wipe" href="assets/charts/03.png" aria-labelledby="mt-02" aria-haspopup="dialog" data-n="02">
         <span class="frame">
           <svg class="fig" viewBox="0 0 1239 581" preserveAspectRatio="none" aria-hidden="true" focusable="false">
@@ -4914,15 +5300,15 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
           <path class="fig__body fig__body--up" d="M2 183h5v31h-5zM9 164h5v20h-5zM16 159h5v6h-5zM37 172h5v9h-5zM51 213h5v21h-5zM72 213h5v46h-5zM100 277h5v7h-5zM121 298h5v48h-5zM135 368h5v29h-5zM142 298h5v59h-5zM149 286h5v12h-5zM156 258h5v28h-5zM163 239h5v20h-5zM178 226h5v23h-5zM185 222h5v4h-5zM199 212h5v12h-5zM220 205h5v14h-5zM227 201h5v8h-5zM262 269h5v27h-5zM269 227h5v41h-5zM276 216h5v8h-5zM283 203h5v14h-5zM290 198h5v6h-5zM332 229h5v17h-5zM339 201h5v29h-5zM347 200.8h5v1.5h-5zM361 190h5v24h-5zM389 215h5v13h-5zM410 237h5v41h-5zM417 223h5v12h-5zM424 218h5v9h-5zM431 198h5v31h-5zM438 171h5v28h-5zM445 154h5v18h-5zM466 197h5v38h-5zM494 281h5v80h-5zM501 253h5v24h-5zM515 262h5v3h-5zM544 301h5v19h-5zM558 285h5v28h-5zM572 292h5v27h-5zM579 242h5v51h-5zM600 294h5v37h-5zM614 278h5v49h-5zM635 298h5v61h-5zM642 292h5v5h-5zM670 333h5v43h-5zM677 290h5v19h-5zM706 362h5v58h-5zM748 421h5v94h-5zM755 387h5v36h-5zM762 383h5v5h-5zM776 368h5v31h-5zM783 362h5v7h-5zM790 289h5v61h-5zM797 266h5v24h-5zM804 256h5v12h-5zM811 228h5v69h-5zM818 184h5v46h-5zM825 144h5v42h-5zM832 133h5v13h-5zM839 93h5v42h-5zM846 100h5v20h-5zM860 66h5v40h-5zM875 31h5v47h-5zM882 33h5v3h-5zM903 15h5v41h-5zM910 0h5v12h-5z"/>
           <path class="fig__body fig__body--dn" d="M23 165.8h5v1.5h-5zM30 167h5v19h-5zM44 172h5v58h-5zM58 211h5v49h-5zM65 258h5v11h-5zM79 213h5v8h-5zM86 219h5v6h-5zM93 224h5v61h-5zM107 278h5v27h-5zM114 304h5v44h-5zM128 297h5v104h-5zM171 240h5v10h-5zM192 221h5v3h-5zM206 210h5v6h-5zM213 214h5v5h-5zM234 216h5v56h-5zM241 268h5v15h-5zM248 255h5v4h-5zM255 256h5v44h-5zM297 197h5v3h-5zM304 198h5v14h-5zM311 211h5v8h-5zM318 218h5v28h-5zM325 240h5v10h-5zM354 201h5v14h-5zM368 188.8h5v1.5h-5zM375 188h5v7h-5zM382 194h5v32h-5zM396 213h5v6h-5zM403 241h5v37h-5zM452 153h5v33h-5zM459 183h5v40h-5zM473 196h5v51h-5zM480 250h5v30h-5zM487 287h5v73h-5zM508 253h5v13h-5zM523 261h5v54h-5zM530 311h5v9h-5zM537 317h5v4h-5zM551 300h5v13h-5zM565 290h5v29h-5zM586 250h5v41h-5zM593 291h5v9h-5zM607 293h5v34h-5zM621 276h5v17h-5zM628 291h5v42h-5zM649 292h5v9h-5zM656 301h5v43h-5zM663 343h5v27h-5zM684 291h5v48h-5zM692 335.8h5v1.5h-5zM699 335h5v49h-5zM713 360h5v3h-5zM720 360h5v7h-5zM727 365h5v66h-5zM734 429h5v70h-5zM741 505h5v11h-5zM769 383h5v11h-5zM853 100h5v7h-5zM868 69h5v15h-5zM889 33h5v25h-5zM896 56h5v6h-5zM917 -0.2h5v1.5h-5z"/>
           </svg>
-          <i class="plate__tag plate__tag--num plate__tag--end" style="left:99.8%;top:4.6%">1.3414</i>
-          <i class="plate__tag plate__tag--num plate__tag--end" style="left:99.8%;top:9.3%">1.272</i>
-          <i class="plate__tag plate__tag--num plate__tag--end" style="left:99.8%;top:21.5%">1</i>
-          <i class="plate__tag plate__tag--num plate__tag--end" style="left:99.8%;top:45.6%">0.5</i>
-          <i class="plate__tag plate__tag--num plate__tag--end" style="left:99.8%;top:69.7%">0</i>
-          <i class="plate__tag plate__tag--num plate__tag--end" style="left:99.8%;top:82.1%">-0.272</i>
-          <i class="plate__tag plate__tag--num plate__tag--end" style="left:99.8%;top:86.9%">-0.3414</i>
+          <i class="plate__tag plate__tag--num plate__tag--end" style="left:87.6%;top:4.6%">1.3414</i>
+          <i class="plate__tag plate__tag--num plate__tag--end" style="left:87.6%;top:9.3%">1.272</i>
+          <i class="plate__tag plate__tag--num plate__tag--end" style="left:87.6%;top:21.5%">1</i>
+          <i class="plate__tag plate__tag--num plate__tag--end" style="left:87.6%;top:45.6%">0.5</i>
+          <i class="plate__tag plate__tag--num plate__tag--end" style="left:87.6%;top:69.7%">0</i>
+          <i class="plate__tag plate__tag--num plate__tag--end" style="left:87.6%;top:82.1%">-0.272</i>
+          <i class="plate__tag plate__tag--num plate__tag--end" style="left:87.6%;top:86.9%">-0.3414</i>
           <i class="plate__tag plate__tag--eqh plate__tag--end" style="left:99.8%;top:26.5%">equal highs</i>
-          <i class="plate__tag plate__tag--liq plate__tag--end" style="left:99.8%;top:74.5%">Sellside liquidity</i>
+          <i class="plate__tag plate__tag--liq plate__tag--end plate__tag--two" style="left:99.8%;top:76.6%">Sellside<br>liquidity</i>
         </span>
       </a>
       <figcaption class="reveal">
@@ -4934,7 +5320,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       </figcaption>
     </figure>
 
-    <figure class="plate" data-stagger="140">
+    <figure class="plate plate--right" data-stagger="140">
       <a class="tile reveal wipe" href="assets/charts/04.png" aria-labelledby="mt-03" aria-haspopup="dialog" data-n="03">
         <span class="frame">
           <svg class="fig" viewBox="0 0 983 606" preserveAspectRatio="none" aria-hidden="true" focusable="false">
@@ -4951,8 +5337,8 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
           <path class="fig__body fig__body--dn" d="M7 238h5v21h-5zM19 212h5v11h-5zM26 222h5v172h-5zM38 280h5v25h-5zM51 276h5v23h-5zM70 216h5v11h-5zM77 223h5v38h-5zM115 91.8h5v1.5h-5zM121 93h5v26h-5zM134 100h5v79h-5zM147 154h5v65h-5zM153 218h5v14h-5zM166 157h5v10h-5zM172 165h5v7h-5zM179 171h5v83h-5zM191 244h5v38h-5zM198 281h5v59h-5zM211 271h5v142h-5zM249 193h5v13h-5zM268 167h5v4h-5zM281 152h5v8h-5zM287 158h5v6h-5zM306 160h5v76h-5zM312 232h5v20h-5zM319 213h5v5h-5zM325 215h5v60h-5zM363 135h5v3h-5zM370 135h5v19h-5zM376 154h5v10h-5zM383 162h5v39h-5zM389 193h5v14h-5zM414 139h5v20h-5zM427 123h5v2h-5zM434 122h5v9h-5zM440 130h5v44h-5zM453 157h5v7h-5zM459 194h5v51h-5zM504 74h5v45h-5zM510 115h5v55h-5zM523 133h5v70h-5zM529 207h5v42h-5zM536 257h5v100h-5zM555 211h5v17h-5zM567 222h5v73h-5zM574 291h5v11h-5zM580 299h5v4h-5zM593 275h5v18h-5zM606 261h5v39h-5zM625 227h5v36h-5zM631 262h5v12h-5zM644 266h5v46h-5zM657 242h5v24h-5zM663 263h5v57h-5zM682 265h5v11h-5zM688 276h5v58h-5zM695 333h5v38h-5zM714 263h5v65h-5zM720 324.8h5v1.5h-5zM727 323h5v67h-5zM739 357h5v3h-5zM746 357h5v9h-5zM752 364h5v89h-5zM759 452h5v94h-5zM765 556h5v15h-5zM790 388h5v16h-5zM867 2h5v9h-5z"/>
           </svg>
           <i class="plate__tag plate__tag--eqh plate__tag--end" style="left:99.9%;top:11.6%">equal highs</i>
-          <i class="plate__tag plate__tag--liq plate__tag--end" style="left:99.9%;top:74.4%">Sellside liquidity</i>
-          <i class="plate__tag plate__tag--tag plate__tag--end" style="left:77.1%;top:79.4%">FVG</i>
+          <i class="plate__tag plate__tag--liq plate__tag--end plate__tag--two" style="left:99.9%;top:76.2%">Sellside<br>liquidity</i>
+          <i class="plate__tag plate__tag--tag plate__tag--end" style="left:87.6%;top:77.2%">FVG</i>
           <i class="plate__tag plate__tag--trend plate__tag--middle" style="left:68.4%;top:32.3%">Trendline liquidity</i>
         </span>
       </a>
@@ -4965,7 +5351,7 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       </figcaption>
     </figure>
 
-    <figure class="plate" data-stagger="140">
+    <figure class="plate plate--full" data-stagger="140">
       <a class="tile reveal wipe" href="assets/charts/05.webp" aria-labelledby="mt-04" aria-haspopup="dialog" data-n="04">
         <span class="frame">
           <svg class="fig" viewBox="0 0 1400 639" preserveAspectRatio="none" aria-hidden="true" focusable="false">
@@ -5136,70 +5522,92 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
     <p class="ledger__axis ledger__axis--to" aria-hidden="true"><i class="ledger__rule reveal draw"></i><time class="reveal">2026</time></p>
   </div>
 
-  <!-- the evidence: the same six, in the same order, numbered as the rows
-       are, printed two to a row as the wall above prints its pairs -- at
-       full value, in their own colour, on one mat inside one hairline,
-       so a certificate reads as a document and not as decoration. Rows
-       03 and 04 are square files, so that row is a pair of squares; the
-       others are 3:2. A tap opens the untouched original. The one note a
-       certificate needs (02's ROI figure) is a footnote under the wall,
-       and travels with the plate into the lightbox, so the captions are
-       one line each and the rows land level. -->
-  <p class="proofs-hint">
-    <span class="proofs-hint__t"><span lang="nl">Zes certificaten, op datum</span><span lang="en">Six certificates, in date order</span></span>
-    <span class="proofs-hint__n"><span lang="nl">Tik op een certificaat voor het origineel.</span><span lang="en">Tap a certificate for the original.</span></span>
-  </p>
-  <div class="proofs" data-stagger="90">
-    <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/ftp-200k.webp" alt="Funded Trading Plus &mdash; Funded trading account" loading="lazy" decoding="async" width="880" height="622"></span></button>
-      <figcaption class="reveal"><b>01</b>
-        <span><span class="firm">Funded Trading Plus</span>
-          <small><span lang="nl">Funded trading account &middot; 10 juli 2023</span><span lang="en">Funded trading account &middot; 10 July 2023</span></small>
-        </span>
+  <!-- the exhibit: one artefact, not a gallery. One print -- the certificate
+       of the row in hand, at the width of the strip, in its own colour on
+       one mat inside one hairline -- with its museum label under it (the
+       row's number in mono, the firm in the label voice, a dashed level to
+       the document's date in the mono of everything counted, the document
+       named under the firm, and the page's link to the untouched file);
+       then the contact strip: the six files as small numbered chips on one
+       hairline, in the order of the rows, grey until they are pointed at,
+       the one in the print in colour with its number in the gold. A chip
+       puts its file in the print (and the label under it); the print, or
+       its link, opens the untouched original. Without a script every chip
+       and the print are links to the files themselves. The one note a
+       certificate needs (02's ROI figure) lives in 02's own label, and
+       travels with it into the lightbox. Every label is in the markup; only
+       the one in hand is shown. -->
+  <div class="exhibit" data-stagger="110">
+    <p class="exhibit__head reveal">
+      <span class="exhibit__t"><span lang="nl">Zes certificaten, op datum</span><span lang="en">Six certificates, in date order</span></span>
+      <span class="exhibit__count"><b class="exhibit__cur">01</b><span class="exhibit__of">/ 06</span></span>
+    </p>
+
+    <figure class="print">
+      <a class="print__plate reveal wipe" href="assets/proof/ftp-200k.webp" aria-haspopup="dialog">
+        <span class="pic"><img src="assets/proof/ftp-200k.webp" alt="Funded Trading Plus &mdash; Funded trading account" decoding="async" width="880" height="622"></span>
+      </a>
+      <figcaption class="print__cap reveal">
+        <div class="cap" data-n="01">
+          <b class="cap__n">01</b>
+          <span class="cap__firm">Funded Trading Plus</span>
+          <i class="cap__lv" aria-hidden="true"></i>
+          <span class="cap__date"><span lang="nl">10 jul 2023</span><span lang="en">10 Jul 2023</span></span>
+          <small class="cap__note"><span lang="nl">Funded trading account</span><span lang="en">Funded trading account</span></small>
+          <a class="cta cap__orig" href="assets/proof/ftp-200k.webp" aria-haspopup="dialog"><span lang="nl">Het origineel</span><span lang="en">The original</span></a>
+        </div>
+        <div class="cap" data-n="02" hidden>
+          <b class="cap__n">02</b>
+          <span class="cap__firm">FundingPips</span>
+          <i class="cap__lv" aria-hidden="true"></i>
+          <span class="cap__date"><span lang="nl">mei &ndash; jun 2024</span><span lang="en">May &ndash; Jun 2024</span></span>
+          <small class="cap__note"><span lang="nl">Performance rewards. Het ROI-cijfer onderaan is het rendement op de inschrijfkosten, niet op de rekening.</span><span lang="en">Performance rewards. The ROI figure at the foot is the return on the entry fee, not on the account.</span></small>
+          <a class="cta cap__orig" href="assets/proof/fpips-reward.webp" aria-haspopup="dialog"><span lang="nl">Het origineel</span><span lang="en">The original</span></a>
+        </div>
+        <div class="cap" data-n="03" hidden>
+          <b class="cap__n">03</b>
+          <span class="cap__firm">FTMO</span>
+          <i class="cap__lv" aria-hidden="true"></i>
+          <span class="cap__date"><span lang="nl">26 okt 2025</span><span lang="en">26 Oct 2025</span></span>
+          <small class="cap__note"><span lang="nl">Challenge behaald</span><span lang="en">Challenge passed</span></small>
+          <a class="cta cap__orig" href="assets/proof/ftmo-chal.webp" aria-haspopup="dialog"><span lang="nl">Het origineel</span><span lang="en">The original</span></a>
+        </div>
+        <div class="cap" data-n="04" hidden>
+          <b class="cap__n">04</b>
+          <span class="cap__firm">Topstep</span>
+          <i class="cap__lv" aria-hidden="true"></i>
+          <span class="cap__date"><span lang="nl">8 jan 2026</span><span lang="en">8 Jan 2026</span></span>
+          <small class="cap__note"><span lang="nl">Proof of Payout</span><span lang="en">Proof of Payout</span></small>
+          <a class="cta cap__orig" href="assets/proof/topstep-payout.webp" aria-haspopup="dialog"><span lang="nl">Het origineel</span><span lang="en">The original</span></a>
+        </div>
+        <div class="cap" data-n="05" hidden>
+          <b class="cap__n">05</b>
+          <span class="cap__firm">Lucid Trading</span>
+          <i class="cap__lv" aria-hidden="true"></i>
+          <span class="cap__date"><span lang="nl">7 aug 2026</span><span lang="en">7 Aug 2026</span></span>
+          <small class="cap__note"><span lang="nl">Payout certificate</span><span lang="en">Payout certificate</span></small>
+          <a class="cta cap__orig" href="assets/proof/lucid-payout.webp" aria-haspopup="dialog"><span lang="nl">Het origineel</span><span lang="en">The original</span></a>
+        </div>
+        <div class="cap" data-n="06" hidden>
+          <b class="cap__n">06</b>
+          <span class="cap__firm">FundedNext Futures</span>
+          <i class="cap__lv" aria-hidden="true"></i>
+          <span class="cap__date"><span lang="nl">14 aug 2026</span><span lang="en">14 Aug 2026</span></span>
+          <small class="cap__note"><span lang="nl">Rising Trader</span><span lang="en">Rising Trader</span></small>
+          <a class="cta cap__orig" href="assets/proof/fnext-rising.webp" aria-haspopup="dialog"><span lang="nl">Het origineel</span><span lang="en">The original</span></a>
+        </div>
       </figcaption>
     </figure>
-    <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/fpips-reward.webp" alt="FundingPips &mdash; Performance rewards" loading="lazy" decoding="async" width="900" height="606"></span></button>
-      <figcaption class="reveal"><b>02</b>
-        <span><span class="firm">FundingPips</span>
-          <small><span lang="nl">Performance rewards &middot; mei en juni 2024</span><span lang="en">Performance rewards &middot; May and June 2024</span></small>
-        </span>
-      </figcaption>
-    </figure>
-    <figure class="sq">
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/ftmo-chal.webp" alt="FTMO &mdash; Challenge passed" loading="lazy" decoding="async" width="760" height="760"></span></button>
-      <figcaption class="reveal"><b>03</b>
-        <span><span class="firm">FTMO</span>
-          <small><span lang="nl">Challenge behaald &middot; 26 oktober 2025</span><span lang="en">Challenge passed &middot; 26 October 2025</span></small>
-        </span>
-      </figcaption>
-    </figure>
-    <figure class="sq">
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/topstep-payout.webp" alt="Topstep &mdash; Proof of Payout" loading="lazy" decoding="async" width="760" height="760"></span></button>
-      <figcaption class="reveal"><b>04</b>
-        <span><span class="firm">Topstep</span>
-          <small><span lang="nl">Proof of Payout &middot; 8 januari 2026</span><span lang="en">Proof of Payout &middot; 8 January 2026</span></small>
-        </span>
-      </figcaption>
-    </figure>
-    <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/lucid-payout.webp" alt="Lucid Trading &mdash; Payout certificate" loading="lazy" decoding="async" width="880" height="621"></span></button>
-      <figcaption class="reveal"><b>05</b>
-        <span><span class="firm">Lucid Trading</span>
-          <small><span lang="nl">Payout certificate &middot; 7 augustus 2026</span><span lang="en">Payout certificate &middot; 7 August 2026</span></small>
-        </span>
-      </figcaption>
-    </figure>
-    <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/fnext-rising.webp" alt="FundedNext Futures &mdash; Rising Trader" loading="lazy" decoding="async" width="868" height="603"></span></button>
-      <figcaption class="reveal"><b>06</b>
-        <span><span class="firm">FundedNext Futures</span>
-          <small><span lang="nl">Rising Trader &middot; 14 augustus 2026</span><span lang="en">Rising Trader &middot; 14 August 2026</span></small>
-        </span>
-      </figcaption>
-    </figure>
+
+    <ol class="strip">
+      <li><a class="strip__chip reveal is-cur" href="assets/proof/ftp-200k.webp" data-n="01" aria-current="true"><span class="strip__pic"><img src="assets/proof/ftp-200k.webp" alt="Funded Trading Plus &mdash; Funded trading account" loading="lazy" decoding="async" width="880" height="622"></span><b class="strip__n">01</b></a></li>
+      <li><a class="strip__chip reveal" href="assets/proof/fpips-reward.webp" data-n="02"><span class="strip__pic"><img src="assets/proof/fpips-reward.webp" alt="FundingPips &mdash; Performance rewards" loading="lazy" decoding="async" width="900" height="606"></span><b class="strip__n">02</b></a></li>
+      <li><a class="strip__chip reveal" href="assets/proof/ftmo-chal.webp" data-n="03"><span class="strip__pic"><img src="assets/proof/ftmo-chal.webp" alt="FTMO &mdash; Challenge passed" loading="lazy" decoding="async" width="760" height="760"></span><b class="strip__n">03</b></a></li>
+      <li><a class="strip__chip reveal" href="assets/proof/topstep-payout.webp" data-n="04"><span class="strip__pic"><img src="assets/proof/topstep-payout.webp" alt="Topstep &mdash; Proof of Payout" loading="lazy" decoding="async" width="760" height="760"></span><b class="strip__n">04</b></a></li>
+      <li><a class="strip__chip reveal" href="assets/proof/lucid-payout.webp" data-n="05"><span class="strip__pic"><img src="assets/proof/lucid-payout.webp" alt="Lucid Trading &mdash; Payout certificate" loading="lazy" decoding="async" width="880" height="621"></span><b class="strip__n">05</b></a></li>
+      <li><a class="strip__chip reveal" href="assets/proof/fnext-rising.webp" data-n="06"><span class="strip__pic"><img src="assets/proof/fnext-rising.webp" alt="FundedNext Futures &mdash; Rising Trader" loading="lazy" decoding="async" width="868" height="603"></span><b class="strip__n">06</b></a></li>
+    </ol>
   </div>
-  <p class="proofs-fn reveal" data-for="02"><b>02</b><span><span lang="nl">Het ROI-cijfer onderaan is het rendement op de inschrijfkosten, niet op de rekening.</span><span lang="en">The ROI figure at the foot is the return on the entry fee, not on the account.</span></span></p>
 
   <!-- the caveat, set as the founder's quote is set: a label in the margin,
        a short rule, the words at lead size in the ink of a value. It is the
@@ -5220,7 +5628,9 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   </div>
 
   <!-- lightbox: the untouched original of a certificate, captioned as its
-       plate is captioned, and the one link of the page to close it -->
+       print is captioned, and the one link of the page to close it. The
+       plates of the material open here too (their own script fills the
+       same slots: the number, the name, the note). -->
   <dialog class="zoom" id="zoom" aria-labelledby="zoom-cap">
     <figure>
       <img src="data:," alt="">
@@ -5230,9 +5640,13 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
   </dialog>
   <script>
   (function(){
-    var d = document.getElementById("zoom"); if (!d || !d.showModal) return;
-    var im = d.querySelector("img"), num = d.querySelector("figcaption b"),
-        firm = d.querySelector("figcaption .firm"), note = d.querySelector("figcaption small");
+    var ex = document.querySelector("#trackrecord .exhibit"), d = document.getElementById("zoom");
+    if (!ex) return;
+    var plate = ex.querySelector(".print__plate"), im = plate && plate.querySelector("img");
+    var capBox = ex.querySelector(".print__cap"), caps = ex.querySelectorAll(".print__cap .cap");
+    var chips = ex.querySelectorAll(".strip__chip"), cur = ex.querySelector(".exhibit__cur");
+    var reduce = false;
+    try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e){}
     /* only the language on screen is read out of a pair: a copy with the
        other language's spans removed, then its text */
     function text(el){
@@ -5242,19 +5656,45 @@ footer .ftime time{font-size:var(--t-caption);color:var(--ink-4)}
       for (k = xs.length - 1; k >= 0; k--) if (xs[k].getAttribute("lang") !== lang) xs[k].parentNode.removeChild(xs[k]);
       return (c.textContent || "").replace(/\s+/g, " ").trim();
     }
-    document.addEventListener("click", function(e){
-      var t = e.target.closest("#trackrecord .tile");
-      if (t) {
-        var i = t.querySelector("img"), fc = t.parentNode.querySelector("figcaption");
-        var n = text(fc && fc.querySelector("b")), s = text(fc && fc.querySelector("small"));
-        var fn = document.querySelector('#trackrecord .proofs-fn[data-for="' + n + '"] > span');
-        im.src = i.src; im.alt = i.alt;
-        num.textContent = n;
-        firm.textContent = text(fc && fc.querySelector(".firm"));
-        note.textContent = fn ? s + ". " + text(fn) : s;
-        d.showModal(); return;
+    function replay(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+    /* a chip puts its file in the print: the picture, the link, the label
+       of that number, the counter; the print prints on again from the left */
+    function pick(chip){
+      var n = chip.getAttribute("data-n"), ci = chip.querySelector("img"), k;
+      if (!n || !plate || !im || !ci) return;
+      if (chip.classList.contains("is-cur")) return;
+      for (k = 0; k < chips.length; k++) {
+        var on = chips[k] === chip;
+        chips[k].classList.toggle("is-cur", on);
+        if (on) chips[k].setAttribute("aria-current", "true"); else chips[k].removeAttribute("aria-current");
       }
-      if (e.target === d || e.target.closest("#zoom .close")) d.close();
+      for (k = 0; k < caps.length; k++) caps[k].hidden = caps[k].getAttribute("data-n") !== n;
+      im.src = ci.getAttribute("src"); im.alt = ci.alt;
+      im.width = ci.width; im.height = ci.height;
+      plate.href = chip.href;
+      if (cur) cur.textContent = n;
+      if (!reduce) { replay(plate, "is-print"); if (capBox) replay(capBox, "is-print"); }
+    }
+    function open(){
+      if (!d || !d.showModal || d.open) return false;
+      var cap = null, k;
+      for (k = 0; k < caps.length; k++) if (!caps[k].hidden) cap = caps[k];
+      var zi = d.querySelector("img"), num = d.querySelector("figcaption b"),
+          firm = d.querySelector("figcaption .firm"), note = d.querySelector("figcaption small");
+      if (!zi) return false;
+      zi.src = plate.href; zi.alt = im.alt;
+      if (num) num.textContent = text(cap && cap.querySelector(".cap__n"));
+      if (firm) firm.textContent = text(cap && cap.querySelector(".cap__firm"));
+      if (note) note.textContent = text(cap && cap.querySelector(".cap__date")) + " · " + text(cap && cap.querySelector(".cap__note"));
+      d.showModal();
+      return true;
+    }
+    document.addEventListener("click", function(e){
+      var c = e.target.closest("#trackrecord .strip__chip");
+      if (c) { e.preventDefault(); pick(c); return; }
+      var t = e.target.closest("#trackrecord .print__plate, #trackrecord .cap__orig");
+      if (t) { if (open()) e.preventDefault(); return; }
+      if (d && (e.target === d || e.target.closest("#zoom .close"))) d.close();
     });
   })();
   </script>

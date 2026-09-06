@@ -47,70 +47,92 @@
     <p class="ledger__axis ledger__axis--to" aria-hidden="true"><i class="ledger__rule reveal draw"></i><time class="reveal">2026</time></p>
   </div>
 
-  <!-- the evidence: the same six, in the same order, numbered as the rows
-       are, printed two to a row as the wall above prints its pairs -- at
-       full value, in their own colour, on one mat inside one hairline,
-       so a certificate reads as a document and not as decoration. Rows
-       03 and 04 are square files, so that row is a pair of squares; the
-       others are 3:2. A tap opens the untouched original. The one note a
-       certificate needs (02's ROI figure) is a footnote under the wall,
-       and travels with the plate into the lightbox, so the captions are
-       one line each and the rows land level. -->
-  <p class="proofs-hint">
-    <span class="proofs-hint__t"><span lang="nl">Zes certificaten, op datum</span><span lang="en">Six certificates, in date order</span></span>
-    <span class="proofs-hint__n"><span lang="nl">Tik op een certificaat voor het origineel.</span><span lang="en">Tap a certificate for the original.</span></span>
-  </p>
-  <div class="proofs" data-stagger="90">
-    <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/ftp-200k.webp" alt="Funded Trading Plus &mdash; Funded trading account" loading="lazy" decoding="async" width="880" height="622"></span></button>
-      <figcaption class="reveal"><b>01</b>
-        <span><span class="firm">Funded Trading Plus</span>
-          <small><span lang="nl">Funded trading account &middot; 10 juli 2023</span><span lang="en">Funded trading account &middot; 10 July 2023</span></small>
-        </span>
+  <!-- the exhibit: one artefact, not a gallery. One print -- the certificate
+       of the row in hand, at the width of the strip, in its own colour on
+       one mat inside one hairline -- with its museum label under it (the
+       row's number in mono, the firm in the label voice, a dashed level to
+       the document's date in the mono of everything counted, the document
+       named under the firm, and the page's link to the untouched file);
+       then the contact strip: the six files as small numbered chips on one
+       hairline, in the order of the rows, grey until they are pointed at,
+       the one in the print in colour with its number in the gold. A chip
+       puts its file in the print (and the label under it); the print, or
+       its link, opens the untouched original. Without a script every chip
+       and the print are links to the files themselves. The one note a
+       certificate needs (02's ROI figure) lives in 02's own label, and
+       travels with it into the lightbox. Every label is in the markup; only
+       the one in hand is shown. -->
+  <div class="exhibit" data-stagger="110">
+    <p class="exhibit__head reveal">
+      <span class="exhibit__t"><span lang="nl">Zes certificaten, op datum</span><span lang="en">Six certificates, in date order</span></span>
+      <span class="exhibit__count"><b class="exhibit__cur">01</b><span class="exhibit__of">/ 06</span></span>
+    </p>
+
+    <figure class="print">
+      <a class="print__plate reveal wipe" href="assets/proof/ftp-200k.webp" aria-haspopup="dialog">
+        <span class="pic"><img src="assets/proof/ftp-200k.webp" alt="Funded Trading Plus &mdash; Funded trading account" decoding="async" width="880" height="622"></span>
+      </a>
+      <figcaption class="print__cap reveal">
+        <div class="cap" data-n="01">
+          <b class="cap__n">01</b>
+          <span class="cap__firm">Funded Trading Plus</span>
+          <i class="cap__lv" aria-hidden="true"></i>
+          <span class="cap__date"><span lang="nl">10 jul 2023</span><span lang="en">10 Jul 2023</span></span>
+          <small class="cap__note"><span lang="nl">Funded trading account</span><span lang="en">Funded trading account</span></small>
+          <a class="cta cap__orig" href="assets/proof/ftp-200k.webp" aria-haspopup="dialog"><span lang="nl">Het origineel</span><span lang="en">The original</span></a>
+        </div>
+        <div class="cap" data-n="02" hidden>
+          <b class="cap__n">02</b>
+          <span class="cap__firm">FundingPips</span>
+          <i class="cap__lv" aria-hidden="true"></i>
+          <span class="cap__date"><span lang="nl">mei &ndash; jun 2024</span><span lang="en">May &ndash; Jun 2024</span></span>
+          <small class="cap__note"><span lang="nl">Performance rewards. Het ROI-cijfer onderaan is het rendement op de inschrijfkosten, niet op de rekening.</span><span lang="en">Performance rewards. The ROI figure at the foot is the return on the entry fee, not on the account.</span></small>
+          <a class="cta cap__orig" href="assets/proof/fpips-reward.webp" aria-haspopup="dialog"><span lang="nl">Het origineel</span><span lang="en">The original</span></a>
+        </div>
+        <div class="cap" data-n="03" hidden>
+          <b class="cap__n">03</b>
+          <span class="cap__firm">FTMO</span>
+          <i class="cap__lv" aria-hidden="true"></i>
+          <span class="cap__date"><span lang="nl">26 okt 2025</span><span lang="en">26 Oct 2025</span></span>
+          <small class="cap__note"><span lang="nl">Challenge behaald</span><span lang="en">Challenge passed</span></small>
+          <a class="cta cap__orig" href="assets/proof/ftmo-chal.webp" aria-haspopup="dialog"><span lang="nl">Het origineel</span><span lang="en">The original</span></a>
+        </div>
+        <div class="cap" data-n="04" hidden>
+          <b class="cap__n">04</b>
+          <span class="cap__firm">Topstep</span>
+          <i class="cap__lv" aria-hidden="true"></i>
+          <span class="cap__date"><span lang="nl">8 jan 2026</span><span lang="en">8 Jan 2026</span></span>
+          <small class="cap__note"><span lang="nl">Proof of Payout</span><span lang="en">Proof of Payout</span></small>
+          <a class="cta cap__orig" href="assets/proof/topstep-payout.webp" aria-haspopup="dialog"><span lang="nl">Het origineel</span><span lang="en">The original</span></a>
+        </div>
+        <div class="cap" data-n="05" hidden>
+          <b class="cap__n">05</b>
+          <span class="cap__firm">Lucid Trading</span>
+          <i class="cap__lv" aria-hidden="true"></i>
+          <span class="cap__date"><span lang="nl">7 aug 2026</span><span lang="en">7 Aug 2026</span></span>
+          <small class="cap__note"><span lang="nl">Payout certificate</span><span lang="en">Payout certificate</span></small>
+          <a class="cta cap__orig" href="assets/proof/lucid-payout.webp" aria-haspopup="dialog"><span lang="nl">Het origineel</span><span lang="en">The original</span></a>
+        </div>
+        <div class="cap" data-n="06" hidden>
+          <b class="cap__n">06</b>
+          <span class="cap__firm">FundedNext Futures</span>
+          <i class="cap__lv" aria-hidden="true"></i>
+          <span class="cap__date"><span lang="nl">14 aug 2026</span><span lang="en">14 Aug 2026</span></span>
+          <small class="cap__note"><span lang="nl">Rising Trader</span><span lang="en">Rising Trader</span></small>
+          <a class="cta cap__orig" href="assets/proof/fnext-rising.webp" aria-haspopup="dialog"><span lang="nl">Het origineel</span><span lang="en">The original</span></a>
+        </div>
       </figcaption>
     </figure>
-    <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/fpips-reward.webp" alt="FundingPips &mdash; Performance rewards" loading="lazy" decoding="async" width="900" height="606"></span></button>
-      <figcaption class="reveal"><b>02</b>
-        <span><span class="firm">FundingPips</span>
-          <small><span lang="nl">Performance rewards &middot; mei en juni 2024</span><span lang="en">Performance rewards &middot; May and June 2024</span></small>
-        </span>
-      </figcaption>
-    </figure>
-    <figure class="sq">
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/ftmo-chal.webp" alt="FTMO &mdash; Challenge passed" loading="lazy" decoding="async" width="760" height="760"></span></button>
-      <figcaption class="reveal"><b>03</b>
-        <span><span class="firm">FTMO</span>
-          <small><span lang="nl">Challenge behaald &middot; 26 oktober 2025</span><span lang="en">Challenge passed &middot; 26 October 2025</span></small>
-        </span>
-      </figcaption>
-    </figure>
-    <figure class="sq">
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/topstep-payout.webp" alt="Topstep &mdash; Proof of Payout" loading="lazy" decoding="async" width="760" height="760"></span></button>
-      <figcaption class="reveal"><b>04</b>
-        <span><span class="firm">Topstep</span>
-          <small><span lang="nl">Proof of Payout &middot; 8 januari 2026</span><span lang="en">Proof of Payout &middot; 8 January 2026</span></small>
-        </span>
-      </figcaption>
-    </figure>
-    <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/lucid-payout.webp" alt="Lucid Trading &mdash; Payout certificate" loading="lazy" decoding="async" width="880" height="621"></span></button>
-      <figcaption class="reveal"><b>05</b>
-        <span><span class="firm">Lucid Trading</span>
-          <small><span lang="nl">Payout certificate &middot; 7 augustus 2026</span><span lang="en">Payout certificate &middot; 7 August 2026</span></small>
-        </span>
-      </figcaption>
-    </figure>
-    <figure>
-      <button type="button" class="tile reveal wipe" aria-haspopup="dialog"><span class="pic"><img src="assets/proof/fnext-rising.webp" alt="FundedNext Futures &mdash; Rising Trader" loading="lazy" decoding="async" width="868" height="603"></span></button>
-      <figcaption class="reveal"><b>06</b>
-        <span><span class="firm">FundedNext Futures</span>
-          <small><span lang="nl">Rising Trader &middot; 14 augustus 2026</span><span lang="en">Rising Trader &middot; 14 August 2026</span></small>
-        </span>
-      </figcaption>
-    </figure>
+
+    <ol class="strip">
+      <li><a class="strip__chip reveal is-cur" href="assets/proof/ftp-200k.webp" data-n="01" aria-current="true"><span class="strip__pic"><img src="assets/proof/ftp-200k.webp" alt="Funded Trading Plus &mdash; Funded trading account" loading="lazy" decoding="async" width="880" height="622"></span><b class="strip__n">01</b></a></li>
+      <li><a class="strip__chip reveal" href="assets/proof/fpips-reward.webp" data-n="02"><span class="strip__pic"><img src="assets/proof/fpips-reward.webp" alt="FundingPips &mdash; Performance rewards" loading="lazy" decoding="async" width="900" height="606"></span><b class="strip__n">02</b></a></li>
+      <li><a class="strip__chip reveal" href="assets/proof/ftmo-chal.webp" data-n="03"><span class="strip__pic"><img src="assets/proof/ftmo-chal.webp" alt="FTMO &mdash; Challenge passed" loading="lazy" decoding="async" width="760" height="760"></span><b class="strip__n">03</b></a></li>
+      <li><a class="strip__chip reveal" href="assets/proof/topstep-payout.webp" data-n="04"><span class="strip__pic"><img src="assets/proof/topstep-payout.webp" alt="Topstep &mdash; Proof of Payout" loading="lazy" decoding="async" width="760" height="760"></span><b class="strip__n">04</b></a></li>
+      <li><a class="strip__chip reveal" href="assets/proof/lucid-payout.webp" data-n="05"><span class="strip__pic"><img src="assets/proof/lucid-payout.webp" alt="Lucid Trading &mdash; Payout certificate" loading="lazy" decoding="async" width="880" height="621"></span><b class="strip__n">05</b></a></li>
+      <li><a class="strip__chip reveal" href="assets/proof/fnext-rising.webp" data-n="06"><span class="strip__pic"><img src="assets/proof/fnext-rising.webp" alt="FundedNext Futures &mdash; Rising Trader" loading="lazy" decoding="async" width="868" height="603"></span><b class="strip__n">06</b></a></li>
+    </ol>
   </div>
-  <p class="proofs-fn reveal" data-for="02"><b>02</b><span><span lang="nl">Het ROI-cijfer onderaan is het rendement op de inschrijfkosten, niet op de rekening.</span><span lang="en">The ROI figure at the foot is the return on the entry fee, not on the account.</span></span></p>
 
   <!-- the caveat, set as the founder's quote is set: a label in the margin,
        a short rule, the words at lead size in the ink of a value. It is the
@@ -131,7 +153,9 @@
   </div>
 
   <!-- lightbox: the untouched original of a certificate, captioned as its
-       plate is captioned, and the one link of the page to close it -->
+       print is captioned, and the one link of the page to close it. The
+       plates of the material open here too (their own script fills the
+       same slots: the number, the name, the note). -->
   <dialog class="zoom" id="zoom" aria-labelledby="zoom-cap">
     <figure>
       <img src="data:," alt="">
@@ -141,9 +165,13 @@
   </dialog>
   <script>
   (function(){
-    var d = document.getElementById("zoom"); if (!d || !d.showModal) return;
-    var im = d.querySelector("img"), num = d.querySelector("figcaption b"),
-        firm = d.querySelector("figcaption .firm"), note = d.querySelector("figcaption small");
+    var ex = document.querySelector("#trackrecord .exhibit"), d = document.getElementById("zoom");
+    if (!ex) return;
+    var plate = ex.querySelector(".print__plate"), im = plate && plate.querySelector("img");
+    var capBox = ex.querySelector(".print__cap"), caps = ex.querySelectorAll(".print__cap .cap");
+    var chips = ex.querySelectorAll(".strip__chip"), cur = ex.querySelector(".exhibit__cur");
+    var reduce = false;
+    try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e){}
     /* only the language on screen is read out of a pair: a copy with the
        other language's spans removed, then its text */
     function text(el){
@@ -153,19 +181,45 @@
       for (k = xs.length - 1; k >= 0; k--) if (xs[k].getAttribute("lang") !== lang) xs[k].parentNode.removeChild(xs[k]);
       return (c.textContent || "").replace(/\s+/g, " ").trim();
     }
-    document.addEventListener("click", function(e){
-      var t = e.target.closest("#trackrecord .tile");
-      if (t) {
-        var i = t.querySelector("img"), fc = t.parentNode.querySelector("figcaption");
-        var n = text(fc && fc.querySelector("b")), s = text(fc && fc.querySelector("small"));
-        var fn = document.querySelector('#trackrecord .proofs-fn[data-for="' + n + '"] > span');
-        im.src = i.src; im.alt = i.alt;
-        num.textContent = n;
-        firm.textContent = text(fc && fc.querySelector(".firm"));
-        note.textContent = fn ? s + ". " + text(fn) : s;
-        d.showModal(); return;
+    function replay(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+    /* a chip puts its file in the print: the picture, the link, the label
+       of that number, the counter; the print prints on again from the left */
+    function pick(chip){
+      var n = chip.getAttribute("data-n"), ci = chip.querySelector("img"), k;
+      if (!n || !plate || !im || !ci) return;
+      if (chip.classList.contains("is-cur")) return;
+      for (k = 0; k < chips.length; k++) {
+        var on = chips[k] === chip;
+        chips[k].classList.toggle("is-cur", on);
+        if (on) chips[k].setAttribute("aria-current", "true"); else chips[k].removeAttribute("aria-current");
       }
-      if (e.target === d || e.target.closest("#zoom .close")) d.close();
+      for (k = 0; k < caps.length; k++) caps[k].hidden = caps[k].getAttribute("data-n") !== n;
+      im.src = ci.getAttribute("src"); im.alt = ci.alt;
+      im.width = ci.width; im.height = ci.height;
+      plate.href = chip.href;
+      if (cur) cur.textContent = n;
+      if (!reduce) { replay(plate, "is-print"); if (capBox) replay(capBox, "is-print"); }
+    }
+    function open(){
+      if (!d || !d.showModal || d.open) return false;
+      var cap = null, k;
+      for (k = 0; k < caps.length; k++) if (!caps[k].hidden) cap = caps[k];
+      var zi = d.querySelector("img"), num = d.querySelector("figcaption b"),
+          firm = d.querySelector("figcaption .firm"), note = d.querySelector("figcaption small");
+      if (!zi) return false;
+      zi.src = plate.href; zi.alt = im.alt;
+      if (num) num.textContent = text(cap && cap.querySelector(".cap__n"));
+      if (firm) firm.textContent = text(cap && cap.querySelector(".cap__firm"));
+      if (note) note.textContent = text(cap && cap.querySelector(".cap__date")) + " · " + text(cap && cap.querySelector(".cap__note"));
+      d.showModal();
+      return true;
+    }
+    document.addEventListener("click", function(e){
+      var c = e.target.closest("#trackrecord .strip__chip");
+      if (c) { e.preventDefault(); pick(c); return; }
+      var t = e.target.closest("#trackrecord .print__plate, #trackrecord .cap__orig");
+      if (t) { if (open()) e.preventDefault(); return; }
+      if (d && (e.target === d || e.target.closest("#zoom .close"))) d.close();
     });
   })();
   </script>
