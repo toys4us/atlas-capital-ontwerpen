@@ -82,7 +82,6 @@
     auto(".roll .grp", "reveal card");
     auto(".roll .lesson-lede", "reveal");
     auto(".roll dl.pairs", null, ":scope > dt, :scope > dd", "reveal", 70);
-    auto(".roll .caveat", "reveal");
   }
 
   var all = document.querySelectorAll(".reveal");
