@@ -315,17 +315,23 @@
    on the hairline under it -- the marker on a level -- and slides to
    whichever chip is chosen. Pointed at, a chip's mat warms to the band
    of the spread. */
+/* Built for six, it now holds every certificate there is -- which is the
+   point the client made: the record is three years of this, not a handful.
+   So it wraps into rows and the volume is the message; a row that ran off
+   the side would hide most of it. */
 #trackrecord .strip{
-  list-style:none;margin:clamp(18px,2.4vw,28px) 0 0;padding:0;
-  display:flex;justify-content:space-between;gap:8px;
+  list-style:none;margin:clamp(18px,2.4vw,28px) 0 0;padding:0 0 clamp(10px,1.2vw,14px);
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(clamp(58px,7vw,84px),1fr));
+  gap:clamp(6px,.8vw,10px);
   border-bottom:1px solid var(--line-2);
 }
-#trackrecord .strip li{flex:0 0 auto;min-width:0}
+#trackrecord .strip li{min-width:0}
 #trackrecord .strip__chip{
   position:relative;
   display:block;
-  width:clamp(52px,7.2vw,96px);
-  padding:0 0 10px;
+  width:100%;
+  padding:0 0 8px;
   color:inherit;
   text-decoration:none;
 }

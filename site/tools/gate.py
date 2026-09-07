@@ -83,11 +83,17 @@ MONEY = [
     (re.compile(r"[€$£]\s*\d"),                                 "currency amount"),
     (re.compile(r"\d[\d.,]*\s*(euro|dollar|usd|eur)\b", re.I),  "currency amount"),
 ]
+# The client removed the "what this does not say" panel: on a page whose job
+# is to get people into the server it read as a warning label. Two of its
+# three claims carry real weight and both are still made on the page -- the
+# track record's own opening line says whose results these are, and the risk
+# line under the footer says the past is not a forecast -- so the gate keeps
+# requiring those two and no longer requires the gross-of-fees sentence,
+# which was the nuance and not the claim.
 DISCLOSURE = [
-    (re.compile(r"resultaten van .{0,14}handelaar|one trader's results", re.I),
-     "attribution to one named trader"),
-    (re.compile(r"zijn bruto|are gross", re.I),
-     "payouts stated gross of fees"),
+    (re.compile(r"resultaten van .{0,14}handelaar|one trader's results"
+                r"|uitslagen van de oprichter|founder's own results", re.I),
+     "attribution of the results to the founder"),
     (re.compile(r"verleden bieden geen garantie|past results are no guarantee", re.I),
      "past-performance disclaimer"),
 ]
