@@ -32,9 +32,10 @@
    lives in 02's own label. Nothing here is a chart: a level is a rule
    with a tag, and the tags are a date and a count.
 
-   The caveat: not small print. Set as the founder's quote is set -- the
-   label in the margin, a short rule, the words at lead size in the ink of
-   a value -- because it is the most important paragraph on the page.
+   There is no caveat panel: it was a grey wall headed with a negation on a
+   page whose job is to get people into the server. What it said that
+   mattered is said elsewhere -- the section's opening line names whose
+   results these are, the footer's risk line says the past is no forecast.
    .roll::before is the strip's edge, so every block sits above it (z:2). */
 #trackrecord{
   --mat:var(--panel-lo);
@@ -388,48 +389,7 @@
   #trackrecord .cap__orig{grid-column:1/-1;grid-row:4;justify-self:start;margin-top:4px}
 }
 
-/* ---------- the caveat ---------------------------------------------------- */
-#trackrecord .caveat{
-  position:relative;z-index:2;
-  display:grid;
-  grid-template-columns:var(--axis-l) var(--axis-r);
-  column-gap:var(--axis-gap);
-  row-gap:0;
-  align-items:start;
-  margin:clamp(56px,8vw,104px) 0 0;
-  text-align:left;
-}
-#trackrecord .caveat .hair{grid-column:2;grid-row:1;width:40px;margin:0 0 clamp(16px,2.2vw,24px)}
-#trackrecord{--t-caveat:clamp(17.5px,1.5vw,21.5px)}
-#trackrecord .caveat__label{
-  grid-column:1;grid-row:2;
-  padding-top:calc(var(--t-caveat) * .47 - 1px);   /* its baseline on the first line's */
-  text-align:right;
-  font-family:var(--f-display);
-  font-weight:400;
-  font-size:var(--t-micro);
-  letter-spacing:var(--trk-caps);
-  text-transform:uppercase;
-  line-height:1.5;
-  color:var(--ink-2);
-}
-#trackrecord .caveat__body{grid-column:2;grid-row:2;min-width:0;max-width:42ch}
-#trackrecord .caveat__body p{
-  margin:0;
-  font-family:var(--f-display);
-  font-size:var(--t-caveat);
-  line-height:1.45;
-  letter-spacing:-.004em;
-  color:var(--ink-1);
-  text-wrap:pretty;
-  hanging-punctuation:first last;
-}
-#trackrecord .caveat__body p + p{margin-top:.75em}
 @media (max-width:620px){
-  #trackrecord .caveat{display:block;max-width:34ch;margin-left:auto;margin-right:auto;text-align:center}
-  #trackrecord .caveat .hair{margin:0 auto clamp(16px,2.2vw,24px)}
-  #trackrecord .caveat__label{display:block;padding:0;margin-bottom:14px;text-align:center}
-  #trackrecord .caveat__body{max-width:none}
 }
 
 /* ---------- the original -------------------------------------------------- */
@@ -496,8 +456,6 @@
    open full size. Half that is still legible and the filmstrip still
    carries all six. */
 @media (min-width:900px){
-  /* the cap belongs on the picture, not on the figure: on the figure the
-     image overflowed it and printed over the filmstrip and the caveat */
   #trackrecord .print__plate .pic{display:block;height:clamp(260px,27vw,360px)}
   #trackrecord .print__plate .pic img{
     display:block;width:100%;height:100%;object-fit:contain;
